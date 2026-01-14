@@ -1,330 +1,72 @@
-<!DOCTYPE html>
-<html lang="th">
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>เปรียบเทียบแผนประกันสุขภาพ</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&family=Sarabun:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Sarabun', sans-serif;
-            background-color: #FDF2F8; /* Pink 50 */
-            transition: font-size 0.3s ease;
-        }
-        h1, h2, h3, h4, .font-title {
-            font-family: 'Kanit', sans-serif;
-        }
-        .gradient-bg {
-            background: linear-gradient(120deg, #FF6B6B 0%, #FF8E53 100%);
-        }
-        .card-hover {
-            transition: all 0.3s ease;
-        }
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        .sticky-controls {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 50;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 10px;
-            border-radius: 50px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            backdrop-filter: blur(5px);
-            border: 1px solid #fee2e2;
-        }
-        /* Table Styling */
-        .comparison-table tr:nth-child(even) {
-            background-color: #FFF7ED; /* Orange 50 */
-        }
-        .comparison-table tr:hover {
-            background-color: #FEF3C7; /* Amber 100 */
-        }
-        .highlight-cell {
-            background-color: #DCFCE7; /* Green 100 */
-            font-weight: bold;
-            color: #166534;
-        }
-    </style>
+<meta charset="utf-8">
+<title>eCommerce template By Adobe Dreamweaver</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../eCommerceAssets/styles/eCommerceStyle.css" rel="stylesheet" type="text/css">
+<!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.-->
+<script>var __adobewebfontsappname__="dreamweaver"</script><script src="http://use.edgefonts.net/montserrat:n4:default;source-sans-pro:n2:default.js" type="text/javascript"></script>
 </head>
-<body class="text-gray-700 antialiased pb-20 text-[16px]" id="mainBody">
 
-    <!-- Font Control Buttons -->
-    <div class="sticky-controls flex gap-2">
-        <button onclick="adjustFontSize(-1)" class="w-10 h-10 bg-gray-200 rounded-full hover:bg-gray-300 flex items-center justify-center text-gray-700 font-bold transition">
-            <i class="fa-solid fa-minus"></i>
-        </button>
-        <button onclick="resetFontSize()" class="w-10 h-10 bg-blue-100 rounded-full hover:bg-blue-200 flex items-center justify-center text-blue-700 font-bold transition">
-            <i class="fa-solid fa-text-height"></i>
-        </button>
-        <button onclick="adjustFontSize(1)" class="w-10 h-10 bg-orange-500 rounded-full hover:bg-orange-600 flex items-center justify-center text-white font-bold transition shadow-lg">
-            <i class="fa-solid fa-plus"></i>
-        </button>
+<body>
+<div id="mainWrapper">
+  <header> 
+    <!-- This is the header content. It contains Logo and links -->
+    
+    <div id="headerLinks"></div>
+  </header>
+  <section id="offer"> 
+    <!-- The offer section displays a banner text for promotions -->
+    <h2>ข้อมูลที่น่าสนใจเกี่ยวกับ การเงิน และ การประกัน&nbsp;</h2>
+    <p>คลิกที่เรื่องที่ต้องการเพื่อดูข้อมูลเพิ่มเติม&nbsp;&nbsp;</p>
+  </section>
+  <div id="content">
+    <section class="sidebar"> 
+      <!-- This adds a sidebar with 1 searchbox,2 menusets, each with 4 links -->
+      
+      <div id="menubar">
+        <nav class="menu">
+          <h2>
+            <!-- Title for menuset 1 -->
+            รายการ</h2>
+          <hr>
+          <ul>
+            <!-- List of links under menuset 1 -->
+            <li><a href="compare hsx2500 vs hsx3500.html" title="เปรียบเทียบ hsx2500 and hsx3500" target="new">เปรียบเทียบ hsx2500 and hsx3500</a></li>
+            <li><a href="#" title="Link">Link 2</a></li>
+            <li><a href="#" title="Link">Link 3</a></li>
+            <li class="notimp"><!-- notimp class is applied to remove this link from the tablet and phone views --><a href="#"  title="Link">Link 4</a></li>
+          </ul>
+        </nav>
+        <nav class="menu">
+          <h2>รายการ2</h2>
+          <h2>&nbsp; </h2>
+          <!-- Title for menuset 2 -->
+          <hr>
+          <ul>
+            <!--List of links under menuset 2 -->
+            <li><a href="#" title="Link">Link 1</a></li>
+            <li><a href="#" title="Link">Link 2</a></li>
+            <li><a href="#" title="Link">Link 3</a></li>
+            <li class="notimp"><!-- notimp class is applied to remove this link from the tablet and phone views --><a href="#" title="Link">Link 4</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+</div>
+  <footer> 
+    <!-- This is the footer with default 3 divs -->
+    <div>
+      <p>จัดทำขึ้นเพื่อเป็นการสรุปข้อมูลที่เป็นประโยชน์ในการนำเสนอให้ผู้ที่สนใจ&nbsp;</p>
     </div>
-
-    <!-- Header Section -->
-    <header class="gradient-bg text-white p-8 rounded-b-[3rem] shadow-xl mb-10 relative overflow-hidden">
-        <div class="absolute -top-10 -right-10 w-40 h-40 bg-white opacity-20 rounded-full blur-2xl"></div>
-        <div class="absolute top-20 -left-10 w-32 h-32 bg-yellow-300 opacity-20 rounded-full blur-xl"></div>
-        
-        <div class="container mx-auto relative z-10 text-center">
-            <div class="inline-block bg-white/20 backdrop-blur-md px-4 py-1 rounded-full text-sm font-medium mb-4 border border-white/30">
-                <i class="fa-solid fa-user-shield mr-2"></i> ข้อเสนอประกันสุขภาพ AIA Vitality
-            </div>
-            <h1 class="text-3xl md:text-5xl font-bold mb-2 text-shadow">เปรียบเทียบแผนความคุ้มครอง</h1>
-            <h2 class="text-xl md:text-2xl font-light opacity-90">ตัวอย่าง สำหรับ หญิง | อายุ 17 ปี ** เบี้ยสุขภาพจะปรับตามอายุได้**</h2>
-        </div>
-    </header>
-
-    <main class="container mx-auto px-4 max-w-6xl space-y-8">
-
-        <!-- 1. Executive Summary (Side by Side) -->
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
-            <!-- Badge for Recommended -->
-            <div class="absolute -top-4 right-10 md:right-1/4 z-10 hidden md:block">
-                <span class="bg-red-500 text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg transform rotate-6 border-2 border-white">
-                    <i class="fa-solid fa-thumbs-up mr-1"></i> แผนแนะนำ
-                </span>
-            </div>
-
-            <!-- Plan A: Option 2500 -->
-            <div class="bg-white rounded-3xl p-6 shadow-lg border-2 border-gray-100 card-hover flex flex-col">
-                <div class="border-b pb-4 mb-4 text-center">
-                    <h3 class="text-2xl font-bold text-gray-500">แผนประหยัด</h3>
-                    <p class="text-lg text-gray-400">H&S Extra Plan 2,500</p>
-                </div>
-                <div class="flex-grow space-y-3">
-                    <div class="flex justify-between items-center text-sm">
-                        <span>ประกันชีวิต (20ปี):</span>
-                        <span class="font-bold">2,128.50 บ.</span>
-                    </div>
-                    <div class="flex justify-between items-center text-sm">
-                        <span>โรคมะเร็ง (5แสน):</span>
-                        <span class="font-bold">696.65 บ.</span>
-                    </div>
-                    <div class="flex justify-between items-center text-sm">
-                        <span>ชดเชยรายได้ (HB):</span>
-                        <span class="font-bold">1,625.00 บ.</span>
-                    </div>
-                    <div class="flex justify-between items-center bg-gray-50 p-2 rounded-lg">
-                        <span class="text-blue-600 font-medium"><i class="fa-solid fa-file-medical mr-1"></i> สุขภาพ (2500):</span>
-                        <span class="font-bold text-blue-600">11,170.00 บ.</span>
-                    </div>
-                </div>
-                <div class="mt-6 bg-gray-100 rounded-2xl p-4 text-center">
-                    <p class="text-sm text-gray-500 mb-1">เบี้ยรวมต่อปี</p>
-                    <p class="text-3xl font-bold text-gray-700">15,620.15 <span class="text-sm">บาท</span></p>
-                </div>
-            </div>
-
-            <!-- Plan B: Option 3500 -->
-            <div class="bg-white rounded-3xl p-6 shadow-xl border-4 border-orange-400 card-hover flex flex-col relative overflow-hidden">
-                <div class="absolute top-0 right-0 bg-orange-400 text-white text-xs px-3 py-1 rounded-bl-xl font-bold">
-                    ความคุ้มครองสูงกว่า
-                </div>
-                <div class="border-b pb-4 mb-4 text-center">
-                    <h3 class="text-2xl font-bold text-orange-600">แผนจัดเต็ม (Standard)</h3>
-                    <p class="text-lg text-orange-400">H&S Extra Plan 3,500</p>
-                </div>
-                <div class="flex-grow space-y-3">
-                    <div class="flex justify-between items-center text-sm">
-                        <span>ประกันชีวิต (20ปี):</span>
-                        <span class="font-bold">2,128.50 บ.</span>
-                    </div>
-                    <div class="flex justify-between items-center text-sm">
-                        <span>โรคมะเร็ง (5แสน):</span>
-                        <span class="font-bold">696.65 บ.</span>
-                    </div>
-                    <div class="flex justify-between items-center text-sm">
-                        <span>ชดเชยรายได้ (HB):</span>
-                        <span class="font-bold">1,625.00 บ.</span>
-                    </div>
-                    <div class="flex justify-between items-center bg-orange-50 p-2 rounded-lg border border-orange-100">
-                        <span class="text-orange-600 font-medium"><i class="fa-solid fa-file-medical mr-1"></i> สุขภาพ (3500):</span>
-                        <span class="font-bold text-orange-600">15,190.00 บ.</span>
-                    </div>
-                </div>
-                <div class="mt-6 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-2xl p-4 text-center shadow-lg transform scale-105">
-                    <p class="text-sm text-orange-100 mb-1">เบี้ยรวมต่อปี</p>
-                    <p class="text-3xl font-bold">19,640.15 <span class="text-sm">บาท</span></p>
-                    <p class="text-xs mt-1 bg-white/20 inline-block px-2 rounded-lg">ต่างกันเพียง 4,020 บาท/ปี</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 2. Detailed Comparison Table (H&S Extra) -->
-        <section class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-200">
-            <div class="bg-blue-600 p-4 text-white flex justify-between items-center">
-                <h3 class="text-xl md:text-2xl font-bold"><i class="fa-solid fa-table-list mr-2"></i> เจาะลึกความคุ้มครองสุขภาพ (H&S Extra)</h3>
-                <span class="text-sm bg-white/20 px-3 py-1 rounded-full">New Standard</span>
-            </div>
-            
-            <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse comparison-table">
-                    <thead>
-                        <tr class="bg-gray-100 text-gray-600 text-sm md:text-base border-b-2 border-gray-300">
-                            <th class="p-4 w-1/2">รายการผลประโยชน์ (บาท)</th>
-                            <th class="p-4 w-1/4 text-center text-gray-500">แผน 2,500</th>
-                            <th class="p-4 w-1/4 text-center text-orange-600 font-bold bg-orange-50">แผน 3,500</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-100 text-sm md:text-base">
-                        <!-- หมวด 1 -->
-                        <tr>
-                            <td class="p-4 font-medium"><i class="fa-solid fa-bed mr-2 text-blue-400"></i> หมวด 1: ค่าห้อง/อาหาร/บริการ (สูงสุด 125 วัน)</td>
-                            <td class="p-4 text-center">2,500</td>
-                            <td class="p-4 text-center highlight-cell text-lg">3,500</td>
-                        </tr>
-                        <tr>
-                            <td class="p-4 pl-8 text-gray-500">- กรณี ICU (สูงสุด 30 วัน)</td>
-                            <td class="p-4 text-center">5,000</td>
-                            <td class="p-4 text-center font-bold text-orange-600">7,000</td>
-                        </tr>
-                        
-                        <!-- หมวด 2 -->
-                        <tr>
-                            <td class="p-4 font-medium"><i class="fa-solid fa-stethoscope mr-2 text-green-400"></i> หมวด 2: ค่าบริการทางการแพทย์ (เหมาจ่าย/ครั้ง)</td>
-                            <td class="p-4 text-center">20,000</td>
-                            <td class="p-4 text-center highlight-cell">25,000</td>
-                        </tr>
-                        <tr>
-                            <td class="p-4 pl-8 text-gray-500">- ค่ายากลับบ้าน (สูงสุด 7 วัน)</td>
-                            <td class="p-4 text-center">1,000</td>
-                            <td class="p-4 text-center font-bold">1,000</td>
-                        </tr>
-
-                        <!-- หมวด 3 -->
-                        <tr>
-                            <td class="p-4 font-medium"><i class="fa-solid fa-user-doctor mr-2 text-purple-400"></i> หมวด 3: ค่าแพทย์เยี่ยมไข้ (วันละ)</td>
-                            <td class="p-4 text-center">800</td>
-                            <td class="p-4 text-center highlight-cell">900</td>
-                        </tr>
-
-                        <!-- หมวด 4 -->
-                        <tr>
-                            <td class="p-4 font-medium"><i class="fa-solid fa-scissors mr-2 text-red-400"></i> หมวด 4: ค่าผ่าตัด/หัตถการ (ตามตาราง)</td>
-                            <td class="p-4 text-center text-xs">วงเงินสูงสุด 80,000</td>
-                            <td class="p-4 text-center text-xs font-bold text-orange-600">วงเงินสูงสุด 90,000</td>
-                        </tr>
-                        <tr>
-                            <td class="p-4 pl-8 text-gray-500">- ค่าห้องผ่าตัด + อุปกรณ์</td>
-                            <td class="p-4 text-center">12,000</td>
-                            <td class="p-4 text-center highlight-cell">13,000</td>
-                        </tr>
-                         <tr>
-                            <td class="p-4 pl-8 text-gray-500">- วิสัญญีแพทย์</td>
-                            <td class="p-4 text-center">8,000</td>
-                            <td class="p-4 text-center highlight-cell">9,000</td>
-                        </tr>
-
-                        <!-- หมวด 6 -->
-                        <tr>
-                            <td class="p-4 font-medium"><i class="fa-solid fa-flask mr-2 text-teal-400"></i> หมวด 6: ค่าตรวจวินิจฉัย (ก่อน/หลัง แอดมิท)</td>
-                            <td class="p-4 text-center">6,000</td>
-                            <td class="p-4 text-center highlight-cell">6,500</td>
-                        </tr>
-
-                        <!-- หมวด 7 -->
-                        <tr class="bg-yellow-50">
-                            <td class="p-4 font-medium text-yellow-800"><i class="fa-solid fa-truck-medical mr-2"></i> หมวด 7: อุบัติเหตุฉุกเฉิน (ภายใน 24 ชม.)</td>
-                            <td class="p-4 text-center font-bold text-yellow-700">5,000</td>
-                            <td class="p-4 text-center bg-yellow-100 font-bold text-yellow-900 border border-yellow-200 rounded-lg transform scale-105">7,000</td>
-                        </tr>
-
-                        <!-- หมวด 9-11 -->
-                        <tr>
-                            <td class="p-4 font-medium"><i class="fa-solid fa-ribbon mr-2 text-pink-400"></i> หมวด 9-11: ล้างไต / รังสี / เคมีบำบัด (ต่อปี)</td>
-                            <td class="p-4 text-center">35,000</td>
-                            <td class="p-4 text-center highlight-cell">40,000</td>
-                        </tr>
-
-                        <!-- หมวด 12-13 -->
-                         <tr>
-                            <td class="p-4 font-medium">หมวด 12: รถพยาบาล</td>
-                            <td class="p-4 text-center">5,000</td>
-                            <td class="p-4 text-center highlight-cell">5,500</td>
-                        </tr>
-                        <tr>
-                            <td class="p-4 font-medium">หมวด 13: ผ่าตัดเล็ก</td>
-                            <td class="p-4 text-center">8,000</td>
-                            <td class="p-4 text-center highlight-cell">9,000</td>
-                        </tr>
-
-                        <!-- OPD & Bonus -->
-                        <tr class="border-t-4 border-gray-200">
-                            <td class="p-4 font-bold text-blue-700"><i class="fa-solid fa-pills mr-2"></i> ผู้ป่วยนอก (OPD) ต่อปี</td>
-                            <td class="p-4 text-center font-bold text-blue-700">6,000</td>
-                            <td class="p-4 text-center bg-blue-50 font-bold text-blue-700">6,000</td>
-                        </tr>
-                        <tr class="bg-green-50">
-                            <td class="p-4 font-bold text-green-700"><i class="fa-solid fa-gift mr-2"></i> เงินคืนพิเศษ (No Claim Bonus)</td>
-                            <td class="p-4 text-center text-green-700">2,500</td>
-                            <td class="p-4 text-center bg-green-100 font-bold text-green-800 border border-green-200 rounded-lg">3,000</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- 3. Other Riders (Fixed for both) -->
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="bg-white rounded-2xl p-6 shadow-md border-l-4 border-pink-400">
-                <h3 class="font-bold text-pink-600 mb-2"><i class="fa-solid fa-heart-pulse mr-2"></i> สัญญาเพิ่มเติมโรคร้ายแรง (Care for Cancer)</h3>
-                <ul class="space-y-2 text-sm">
-                    <li class="flex justify-between"><span>ทุนประกัน:</span> <span class="font-bold">500,000 บาท</span></li>
-                    <li class="flex justify-between"><span>ชดเชยรายวัน (IPD มะเร็ง):</span> <span class="font-bold">2,000 บาท/วัน</span></li>
-                    <li class="flex justify-between"><span>ผู้ป่วยนอก (เคมี/รังสี):</span> <span class="font-bold">500 บาท/วัน</span></li>
-                    <li class="flex justify-between"><span>ตรวจ Scan (MRI/CT/PET):</span> <span class="font-bold">500 บาท/วัน</span></li>
-                </ul>
-            </div>
-            <div class="bg-white rounded-2xl p-6 shadow-md border-l-4 border-yellow-400">
-                <h3 class="font-bold text-yellow-600 mb-2"><i class="fa-solid fa-hospital-user mr-2"></i> สัญญาเพิ่มเติมชดเชยรายได้ (HB Extra)</h3>
-                <ul class="space-y-2 text-sm">
-                    <li class="flex justify-between"><span>ป่วยทั่วไป (IPD):</span> <span class="font-bold">500 บาท/วัน</span></li>
-                    <li class="flex justify-between"><span>ป่วยหนัก (ICU):</span> <span class="font-bold">1,500 บาท/วัน</span></li>
-                    <li class="flex justify-between"><span>ผ่าตัดใหญ่:</span> <span class="font-bold">2,500 บาท/ครั้ง</span></li>
-                    <li class="flex justify-between"><span>โรคร้ายแรงเฉียบพลัน:</span> <span class="font-bold">12,500 บาท</span></li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="text-center text-gray-500 text-sm mt-10 mb-4">
-            <p>ข้อมูลเปรียบเทียบจากเอกสารเสนอขาย ณ วันที่ 14/01/2026</p>
-            <p>กรุณาตรวจสอบรายละเอียดเงื่อนไขในเล่มกรมธรรม์อีกครั้ง</p>
-        </footer>
-
-    </main>
-
-    <script>
-        let currentFontSize = 16;
-        const mainBody = document.getElementById('mainBody');
-
-        function adjustFontSize(change) {
-            currentFontSize += change;
-            if (currentFontSize < 12) currentFontSize = 12;
-            if (currentFontSize > 24) currentFontSize = 24;
-            mainBody.style.fontSize = currentFontSize + 'px';
-            
-            // Adjust table text specifically if needed
-            const tableCells = document.querySelectorAll('td, th');
-            tableCells.forEach(cell => {
-                // Keep table slightly smaller relative to body to prevent breaking
-                // cell.style.fontSize = (currentFontSize - 1) + 'px'; 
-            });
-        }
-
-        function resetFontSize() {
-            currentFontSize = 16;
-            mainBody.style.fontSize = '16px';
-        }
-    </script>
+    <div> </div>
+    <div class="footerlinks">
+      <p><a href="#" title="Link">Link 1 </a></p>
+      <p><a href="#" title="Link">Link 2</a></p>
+      <p><a href="#" title="Link">Link 3</a></p>
+    </div>
+  </footer>
+</div>
 </body>
-
 </html>
-

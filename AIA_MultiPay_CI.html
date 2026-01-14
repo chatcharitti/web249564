@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exclusive Report: AIA Multi-Pay CI Plus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Sarabun:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #680018; /* Deep Burgundy Red */
+            --primary-light: #8E1B36;
+            --accent-color: #C5A059; /* Muted Gold */
+            --accent-light: #E5C580;
+            --dark-bg: #121212;
+            --card-bg: #FFFFFF;
+            --section-bg: #F9F8F4; /* Creamy White */
+            --text-color: #2C2C2C;
+        }
+
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: var(--section-bg);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        /* HEADER */
+        header {
+            background: radial-gradient(circle at center, #2a2a2a, #000000);
+            color: var(--white);
+            padding: 70px 40px;
+            text-align: center;
+            border-bottom: 4px solid var(--accent-color);
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 3.8rem;
+            margin: 0;
+            background: linear-gradient(to right, var(--accent-light), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        header p {
+            font-family: 'Sarabun', sans-serif;
+            color: #BBBBBB;
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            margin-top: 15px;
+            text-transform: uppercase;
+        }
+
+        /* SECTIONS */
+        .section {
+            padding: 60px 50px;
+        }
+
+        .section-dark {
+            background-color: #1A1A1A;
+            color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .section-dark .section-title h2 {
+            color: var(--accent-color);
+        }
+
+        .divider {
+            width: 60px;
+            height: 2px;
+            background-color: var(--accent-color);
+            margin: 0 auto;
+        }
+
+        /* EXAMPLE CASE 5M */
+        .premium-card {
+            border: 1px solid #E0E0E0;
+            padding: 40px;
+            position: relative;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .premium-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: var(--primary-color);
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, var(--primary-color), #400005);
+            color: white;
+            padding: 30px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .summary-title { font-size: 1.2rem; opacity: 0.9; }
+        .summary-amount { font-size: 2.5rem; font-family: 'Cormorant Garamond', serif; color: var(--accent-light); }
+
+        .benefit-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .benefit-item:last-child { border-bottom: none; }
+        .benefit-name { font-weight: 500; font-size: 1.1rem; color: #444; }
+        .benefit-value { font-weight: 700; color: var(--primary-color); font-size: 1.2rem; }
+
+        /* RELAPSED CI HIGHLIGHT */
+        .relapsed-box {
+            background-color: #FFF9E6; /* Light Gold BG */
+            border: 1px solid var(--accent-color);
+            padding: 30px;
+            margin-top: 30px;
+            position: relative;
+        }
+
+        .relapsed-badge {
+            background-color: var(--accent-color);
+            color: #000;
+            padding: 5px 15px;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 0.8rem;
+            position: absolute;
+            top: -12px;
+            left: 30px;
+        }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .icon-box p { font-weight: 600; color: var(--primary-color); margin-top: 10px; }
+
+        /* DISEASE TABLE */
+        .disease-container {
+            display: grid;
+            gap: 30px;
+        }
+
+        .group-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 20px;
+            font-family: 'Sarabun', sans-serif;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; background: white; }
+        th, td { padding: 12px 15px; border: 1px solid #eee; }
+        th { text-align: left; background-color: #f8f8f8; color: #555; width: 70%; }
+        td { text-align: center; color: var(--primary-color); font-weight: 600; }
+
+        /* Footer */
+        footer {
+            background-color: #000;
+            color: #666;
+            text-align: center;
+            padding: 40px;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5rem; }
+            .summary-box { flex-direction: column; text-align: center; gap: 10px; }
+            .icon-grid { grid-template-columns: 1fr; }
+            .benefit-item { flex-direction: column; align-items: flex-start; gap: 5px; }
+            .benefit-value { align-self: flex-end; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <p>The Ultimate Wealth Protection</p>
+            <h1>AIA Multi-Pay CI Plus</h1>
+            <p>โรคร้าย เจอ จ่าย หลายจบ... ครบถึงการดูแล</p>
+        </header>
+
+        <!-- Section 1: Example 5M -->
+        <div class="section">
+            <div class="section-title">
+                <h2>Elite Protection Case</h2>
+                <div class="divider"></div>
+                <p>ตัวอย่างความคุ้มครอง: ทุนประกันภัย 5,000,000 บาท</p>
+            </div>
+
+            <div class="premium-card">
+                <div class="summary-box">
+                    <div class="summary-title">SUM ASSURED (ทุนประกันภัยหลัก)</div>
+                    <div class="summary-amount">5,000,000 THB</div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-name">1. โรคร้ายแรงระดับต้น / ปานกลาง (Early/Intermediate CI) <br><small style="color:#888;">จ่าย 40% (เคลมได้สูงสุด 5 ครั้ง ต่างโรค)</small></div>
+                    <div class="benefit-value">2,000,000 THB / ครั้ง</div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-name">2. โรคร้ายแรงระดับรุนแรง (Severe CI) <br><small style="color:#888;">จ่าย 100% (เคลมได้สูงสุด 6 ครั้ง ต่างโรค)</small></div>
+                    <div class="benefit-value">5,000,000 THB / ครั้ง</div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-name">3. ภาวะวิกฤตที่มีผลต่อการดำรงชีวิต (MIB) <br><small style="color:#888;">เช่น เข้า ICU 5 วัน หรือ ผ่าตัดใหญ่ (จ่าย 100% ครั้งเดียว)</small></div>
+                    <div class="benefit-value">5,000,000 THB</div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-name">4. การดูแลต่อเนื่องจากโรคร้ายแรง (CCB) <br><small style="color:#888;">จ่ายเงินก้อน 10% + เงินรายเดือน 1.5% นาน 60 เดือน (รวม 100%)</small></div>
+                    <div class="benefit-value">5,000,000 THB</div>
+                </div>
+
+                <!-- RELAPSED CI SECTION -->
+                <div class="relapsed-box">
+                    <div class="relapsed-badge">Special Feature</div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid #D4AF37; padding-bottom:10px; margin-bottom:15px;">
+                        <h3 style="margin:0; color:var(--primary-color);">5. การกลับมาเป็นซ้ำ (Relapsed CI)</h3>
+                    </div>
+                    <p style="font-size: 0.95rem; color:#555;">คุ้มครองกรณีรักษาหายแล้ว แต่กลับมาเป็นซ้ำอีกครั้ง (จ่าย 100% ของทุนประกัน) สำหรับ 3 โรคร้ายแรงหลัก:</p>
+                    
+                    <div class="icon-grid">
+                        <div class="icon-box">
+                            <span style="font-size:2rem;">♋</span>
+                            <p>โรคมะเร็ง<br>ระยะลุกลาม</p>
+                        </div>
+                        <div class="icon-box">
+                            <span style="font-size:2rem;">❤️</span>
+                            <p>กล้ามเนื้อหัวใจ<br>ตายเฉียบพลัน</p>
+                        </div>
+                        <div class="icon-box">
+                            <span style="font-size:2rem;">🧠</span>
+                            <p>โรคหลอดเลือด<br>สมองแตก/อุดตัน</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background:#111; color:var(--accent-color); text-align:center; padding:20px; margin-top:30px; border-radius:4px;">
+                    <div style="font-size:1rem; text-transform:uppercase; letter-spacing:2px;">Maximum Total Benefit (1,000%)</div>
+                    <div style="font-size:2.8rem; font-family:'Cormorant Garamond', serif; line-height:1;">50,000,000 THB</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Full Disease List -->
+        <div class="section section-dark">
+            <div class="section-title">
+                <h2>Comprehensive Coverage List</h2>
+                <div class="divider"></div>
+                <p style="color:#ccc;">รายชื่อโรคที่คุ้มครองทั้งหมด แบ่งตามกลุ่มโรค</p>
+            </div>
+
+            <div class="disease-container">
+                <!-- Group 1 -->
+                <div>
+                    <div class="group-header">
+                        <span>Group 1: โรคมะเร็งและเนื้องอก</span>
+                        <span style="font-size:0.8rem; background:rgba(255,255,255,0.2); padding:2px 8px; border-radius:4px;">Cancer & Tumors</span>
+                    </div>
+                    <table>
+                        <tr><th>1. โรคมะเร็งระยะลุกลาม (Invasive Cancer) <span style="color:red; font-size:0.8em;">*Relapsed Covered</span></th><td>รุนแรง</td></tr>
+                        <tr><th>2. เนื้องอกในสมองชนิดไม่ใช่มะเร็ง</th><td>รุนแรง</td></tr>
+                        <tr><th>3. โรคมะเร็งระยะไม่ลุกลาม (Non-Invasive Cancer)</th><td>ต้น-กลาง</td></tr>
+                    </table>
+                </div>
+
+                <!-- Group 2 -->
+                <div>
+                    <div class="group-header">
+                        <span>Group 2: อวัยวะและระบบสำคัญ</span>
+                        <span style="font-size:0.8rem; background:rgba(255,255,255,0.2); padding:2px 8px; border-radius:4px;">Major Organs</span>
+                    </div>
+                    <table>
+                        <tr><th>4. ไตวายเรื้อรัง</th><td>รุนแรง</td></tr>
+                        <tr><th>5. การผ่าตัดเปลี่ยนอวัยวะหรือปลูกถ่ายไขกระดูก</th><td>รุนแรง</td></tr>
+                        <tr><th>6. โรคโลหิตจางจากไขกระดูกไม่สร้างเม็ดโลหิต</th><td>รุนแรง</td></tr>
+                        <tr><th>7. ตับวาย</th><td>รุนแรง</td></tr>
+                        <tr><th>8. ไตวาย (ระยะเริ่มต้น)</th><td>ต้น-กลาง</td></tr>
+                        <tr><th>9. การผ่าตัดตับ</th><td>ต้น-กลาง</td></tr>
+                        <tr><th>10. การผ่าตัดไตหนึ่งข้าง</th><td>ต้น-กลาง</td></tr>
+                    </table>
+                </div>
+
+                <!-- Group 3 -->
+                <div>
+                    <div class="group-header">
+                        <span>Group 3: ระบบไหลเวียนโลหิต</span>
+                        <span style="font-size:0.8rem; background:rgba(255,255,255,0.2); padding:2px 8px; border-radius:4px;">Heart & Circulatory</span>
+                    </div>
+                    <table>
+                        <tr><th>11. กล้ามเนื้อหัวใจตายเฉียบพลัน <span style="color:red; font-size:0.8em;">*Relapsed Covered</span></th><td>รุนแรง</td></tr>
+                        <tr><th>12. การผ่าตัดลิ้นหัวใจ</th><td>รุนแรง</td></tr>
+                        <tr><th>13. การผ่าตัดเส้นเลือดเลี้ยงกล้ามเนื้อหัวใจ</th><td>รุนแรง</td></tr>
+                        <tr><th>14. โรคหลอดเลือดแดงใหญ่โป่งพอง</th><td>รุนแรง</td></tr>
+                        <tr><th>15. โรคกล้ามเนื้อหัวใจ (Cardiomyopathy)</th><td>รุนแรง</td></tr>
+                        <tr><th>16. โรคแรงดันในหลอดเลือดแดงปอดสูง</th><td>รุนแรง</td></tr>
+                        <tr><th>17. การสวนหัวใจเพื่อรักษาหลอดเลือดหัวใจตีบ</th><td>ต้น-กลาง</td></tr>
+                        <tr><th>18. การใส่เครื่องกระตุ้นหัวใจ</th><td>ต้น-กลาง</td></tr>
+                        <tr><th>19. การผ่าตัดลอกเยื่อหุ้มหัวใจ</th><td>ต้น-กลาง</td></tr>
+                    </table>
+                </div>
+
+                <!-- Group 4 -->
+                <div>
+                    <div class="group-header">
+                        <span>Group 4: ระบบประสาท</span>
+                        <span style="font-size:0.8rem; background:rgba(255,255,255,0.2); padding:2px 8px; border-radius:4px;">Nervous System</span>
+                    </div>
+                    <table>
+                        <tr><th>20. โรคหลอดเลือดสมองแตกหรืออุดตัน <span style="color:red; font-size:0.8em;">*Relapsed Covered</span></th><td>รุนแรง</td></tr>
+                        <tr><th>21. ภาวะโคม่า</th><td>รุนแรง</td></tr>
+                        <tr><th>22. โรคสมองเสื่อมชนิดอัลไซเมอร์</th><td>รุนแรง</td></tr>
+                        <tr><th>23. โรคพาร์กินสัน</th><td>รุนแรง</td></tr>
+                        <tr><th>24. โรคเยื่อหุ้มสมองและไขสันหลังอักเสบจากแบคทีเรีย</th><td>รุนแรง</td></tr>
+                        <tr><th>25. สมองอักเสบจากเชื้อไวรัส</th><td>รุนแรง</td></tr>
+                        <tr><th>26. โรคระบบประสาทมัลติเพิล สะเคลอโรสิส</th><td>รุนแรง</td></tr>
+                        <tr><th>27. โรคของเซลล์ประสาทควบคุมการเคลื่อนไหว</th><td>รุนแรง</td></tr>
+                        <tr><th>28. โรคหลอดเลือดสมองโป่งพอง (รักษาโดยไม่ผ่าตัด)</th><td>ต้น-กลาง</td></tr>
+                        <tr><th>29. การผ่าตัดฝังท่อระบายในโพรงสมอง</th><td>ต้น-กลาง</td></tr>
+                    </table>
+                </div>
+
+                <!-- Group 5 & 6 -->
+                <div>
+                    <div class="group-header">
+                        <span>Group 5 & 6: อื่นๆ และ ผู้เยาว์</span>
+                        <span style="font-size:0.8rem; background:rgba(255,255,255,0.2); padding:2px 8px; border-radius:4px;">Others & Juvenile</span>
+                    </div>
+                    <table>
+                        <tr><th>30. แผลไหม้ฉกรรจ์</th><td>รุนแรง</td></tr>
+                        <tr><th>31. การสูญเสียสายตา / การสูญเสียแขนขา</th><td>รุนแรง</td></tr>
+                        <tr><th>32. การบาดเจ็บที่ศีรษะอย่างรุนแรง</th><td>รุนแรง</td></tr>
+                        <tr><th>33. โรคถุงน้ำในไต</th><td>รุนแรง</td></tr>
+                        <tr><th>34. โรคปอดระยะสุดท้าย</th><td>รุนแรง</td></tr>
+                        <tr><th>35. ภาวะตับอ่อนอักเสบที่กลับมาเป็นซ้ำ</th><td>รุนแรง</td></tr>
+                        <tr><th>36. โรคเท้าช้าง</th><td>รุนแรง</td></tr>
+                        <tr><th>37. โรคโปลิโอ</th><td>รุนแรง</td></tr>
+                        <tr><th>38. โรคกล้ามเนื้อเสื่อม</th><td>รุนแรง</td></tr>
+                        <tr><th>39. การสูญเสียการได้ยิน</th><td>รุนแรง</td></tr>
+                        <tr><th>40. ภาวะข้ออักเสบรูมาตอยด์ชนิดรุนแรง</th><td>รุนแรง</td></tr>
+                        <tr><th>41. โรคลูพัส / SLE</th><td>รุนแรง</td></tr>
+                        <tr><th>42. โรคอีโบล่า</th><td>รุนแรง</td></tr>
+                        <tr><th>43. โรคคาวาซากิ</th><td>ผู้เยาว์</td></tr>
+                        <tr><th>44. ไข้รูมาติกที่ทำให้หัวใจผิดปกติ</th><td>ผู้เยาว์</td></tr>
+                        <tr><th>45. โรคเบาหวานชนิดที่ 1</th><td>ผู้เยาว์</td></tr>
+                    </table>
+                </div>
+
+                <!-- Special Coverage -->
+                <div style="border: 2px solid var(--accent-color);">
+                    <div class="group-header" style="background: linear-gradient(to right, #C5A059, #AA8535);">
+                        <span>SPECIAL: AIA Total Care (จ่ายเพิ่ม 100% จากทุนหลัก)</span>
+                    </div>
+                    <table>
+                        <tr>
+                            <th style="background-color: #FFFDE7; color: #680018;">A. ภาวะวิกฤต MIB (ไม่ต้องรอชื่อโรค)</th>
+                            <td style="text-align: left; color: #333; font-weight: normal;">
+                                1. เข้า ICU ติดต่อกัน 5 วัน<br>
+                                2. การผ่าตัดใหญ่ (ใช้ยาสลบ/บล็อคหลัง)<br>
+                                3. ใช้เครื่องช่วยหายใจ (สอดท่อ/เจาะคอ)<br>
+                                4. ภาวะล้มเหลวของอวัยวะสำคัญ (หัวใจ, ปอด, ตับ, ไต, ตับอ่อน)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="background-color: #FFFDE7; color: #680018;">B. การดูแลต่อเนื่อง CCB (8 โรค)</th>
+                            <td style="text-align: left; color: #333; font-weight: normal;">
+                                1. อัลไซเมอร์ / 2. พาร์กินสัน / 3. เซลล์ประสาทควบคุมการเคลื่อนไหว<br>
+                                4. กล้ามเนื้อเสื่อม / 5. ข้ออักเสบรูมาตอยด์รุนแรง<br>
+                                6. บาดเจ็บศีรษะรุนแรง / 7. สูญเสียการดำรงชีพอิสระ / 8. ทุพพลภาพถาวรสิ้นเชิง
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 AIA Multi-Pay CI Plus. เอกสารนี้จัดทำขึ้นเพื่อความเข้าใจในผลิตภัณฑ์เท่านั้น เงื่อนไขเป็นไปตามกรมธรรม์</p>
+        </footer>
+    </div>
+
+</body>
+</html>

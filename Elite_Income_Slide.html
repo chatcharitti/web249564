@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIA Elite Income Prestige (Unit Linked) - Presentation (Blues)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #005f73;
+            --color-secondary: #0a9396;
+            --color-accent: #ee9b00;
+            --color-light: #94d2bd;
+            --color-bg: #f8f9fa;
+            --color-dark: #1f2937;
+            --color-card-bg: #ffffff;
+        }
+        body, html {
+            font-family: 'Sarabun', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-dark);
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Prevent body scroll */
+        }
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+        .slide {
+            width: 100%;
+            height: 100%;
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem 6rem; /* Padding for content area */
+            box-sizing: border-box;
+            background-color: var(--color-bg);
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .slide.active {
+            display: flex; /* Shown when active */
+        }
+        /* Special case for title slide */
+        .slide.title-slide {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            padding: 2rem;
+        }
+        .slide.end-slide {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+        }
+        .slide-content-wrapper {
+            width: 100%;
+            max-width: 1400px; /* Max width for content */
+            height: 100%;
+            max-height: 85vh; /* Max height before scrolling */
+            overflow-y: auto; /* SCROLLBAR FOR THIS SLIDE */
+            overflow-x: hidden;
+            padding: 2.5rem;
+            background: var(--color-card-bg);
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+        }
+        /* Hide scrollbar but allow scrolling */
+        .slide-content-wrapper::-webkit-scrollbar {
+            width: 8px;
+        }
+        .slide-content-wrapper::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        .slide-content-wrapper::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 10px;
+        }
+        .slide-content-wrapper::-webkit-scrollbar-thumb:hover {
+            background: #aaa;
+        }
+
+        .highlight-box {
+            background-color: var(--color-accent);
+            color: white;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+        .card-style {
+            background-color: var(--color-card-bg);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            color: var(--color-dark);
+            border: 1px solid #e5e7eb;
+        }
+        .text-primary { color: var(--color-primary); }
+        .table-primary th { background-color: var(--color-primary); color: white; }
+        .list-7-sources li { font-size: 1.125rem; font-weight: 600; color: var(--color-primary); }
+        .kpi-card { background-color: var(--color-accent); color: white; padding: 1.5rem; border-radius: 0.5rem; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .flow-arrow { font-size: 2rem; color: var(--color-accent); line-height: 1; }
+        
+        /* Chart Containers */
+        .chart-container { position: relative; width: 100%; max-width: 400px; margin: auto; height: 350px; }
+        .large-chart-container { position: relative; width: 100%; max-width: 900px; margin: auto; height: 500px; }
+        @media (max-width: 768px) {
+            .slide { padding: 4rem 1rem; }
+            .slide-content-wrapper { padding: 1.5rem; max-height: 90vh; }
+            .large-chart-container { height: 300px; }
+        }
+
+        /* Navigation */
+        .slide-nav {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            background-color: rgba(0, 0, 0, 0.3);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .slide-nav:hover { background-color: rgba(0, 0, 0, 0.6); }
+        .slide-nav#prev-slide { left: 1rem; }
+        .slide-nav#next-slide { right: 1rem; }
+        .slide-nav svg { width: 1.5rem; height: 1.5rem; }
+
+        /* Controls */
+        .slide-controls {
+            position: fixed;
+            bottom: 1rem;
+            z-index: 100;
+            display: flex;
+            gap: 1rem;
+            padding: 0.5rem;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        #slide-counter { left: 1rem; color: var(--color-dark); font-weight: 600; }
+        #fullscreen-btn { right: 1rem; background: none; border: none; cursor: pointer; color: var(--color-dark); }
+        #fullscreen-btn svg { width: 1.5rem; height: 1.5rem; }
+    </style>
+</head>
+<body>
+
+    <div id="presentation-container">
+
+        <!-- Slide 1: Title + Highlight -->
+        <div class="slide active title-slide">
+            <header class="text-center">
+                <h1 class="text-5xl md:text-6xl font-bold mb-4">AIA Elite Income Prestige (Unit Linked)</h1>
+                <p class="text-2xl md:text-3xl opacity-90">วางแผนอนาคตด้วย Smart Income และ Smooth Transfer</p>
+            </header>
+            <div class="highlight-box mt-12 max-w-5xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-extrabold leading-snug">
+                    ดีกว่าไหม! ถ้าวางแผนการเงิน<br class="hidden sm:block">
+                    แบบมีรายได้ประจำ โดยไม่ต้องดึงเงินต้นมาใช้<br class="hidden sm:block">
+                    และเป็นการส่งต่อความมั่งคั่งอย่างเป็นระบบด้วย
+                </h2>
+            </div>
+        </div>
+
+        <!-- Slide 2: Core Concepts -->
+        <div class="slide">
+            <div class="slide-content-wrapper">
+                <section id="core-concepts">
+                    <h2 class="text-3xl font-bold text-center mb-2 text-primary">2 แนวคิดหลักเพื่อความมั่งคั่งที่ยั่งยืน</h2>
+                    <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">
+                        ผลิตภัณฑ์นี้ถูกออกแบบมาเพื่อตอบโจทย์สำคัญ 2 ด้าน คือการสร้างกระแสเงินสดสำหรับใช้ชีวิต และการส่งต่อความมั่งคั่งอย่างราบรื่น
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
+                        <div class="card-style p-6 rounded-lg shadow-lg border-l-4 border-primary">
+                            <h3 class="text-2xl font-semibold mb-2 text-primary">💰 Smart Income</h3>
+                            <p>เปลี่ยนเงินก้อนให้เป็นกระแสเงินสดที่สม่ำเสมอในอนาคตผ่านกลไก Auto Redemption เหมาะสำหรับผู้ที่ต้องการรายได้ต่อเนื่องโดยไม่ต้องบริหารจัดการด้วยตนเอง</p>
+                        </div>
+                        <div class="card-style p-6 rounded-lg shadow-lg border-l-4 border-primary">
+                            <h3 class="text-2xl font-semibold mb-2 text-primary">👨‍👩‍👧‍👦 Smooth Transfer</h3>
+                            <p>วางแผนส่งต่อมรดกอย่างมีประสิทธิภาพ ด้วยการโอนถ่ายสินทรัพย์ผ่านประกันชีวิตให้แก่คนที่ใช่, ในเวลาที่เหมาะสม, และด้วยต้นทุนที่คุ้มค่าที่สุด</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Slide 3: Key Features -->
+        <div class="slide">
+            <div class="slide-content-wrapper">
+                <section id="key-features">
+                    <h2 class="text-3xl font-bold text-center mb-8 text-primary">คุณสมบัติผลิตภัณฑ์และโบนัสการเติบโต</h2>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <div class="card-style p-6 rounded-lg shadow-lg lg:col-span-1">
+                            <h3 class="text-2xl font-semibold mb-4 text-primary">คุณสมบัติหลัก</h3>
+                            <ul class="list-disc list-inside space-y-3 text-gray-700 text-lg">
+                                <li><span class="font-bold text-primary">อายุรับประกัน:</span> 15 วัน - 70 ปี</li>
+                                <li><span class="font-bold text-primary">ระยะเวลาชำระเบี้ย:</span> เพียง 5 ปี</li>
+                                <li><span class="font-bold text-primary">ความคุ้มครอง:</span> ตลอดชีพ (ถึงอายุ 99 ปี)</li>
+                                <li><span class="font-bold text-primary">เบี้ยประกันภัยหลักขั้นต่ำ:</span> 500,000 บาท/ปี</li>
+                                <li><span class="font-bold text-primary">ความคุ้มครองชีวิต:</span> สูงสุด 110% ของเบี้ยประกันหลักที่ชำระมาแล้วทั้งหมด</li>
+                            </ul>
+                        </div>
+                        <div class="card-style p-6 rounded-lg shadow-lg lg:col-span-2">
+                            <h3 class="text-2xl font-semibold mb-4 text-primary">โบนัสสำหรับการเติบโตหน่วยลงทุน (Performance Bonus)</h3>
+                            <div class="flex items-center space-x-4 mb-4">
+                                <div class="text-5xl text-primary">🌟</div>
+                                <div>
+                                    <p class="text-2xl font-bold text-primary">0.25% ต่อปี</p>
+                                    <p class="text-lg text-gray-700">ของมูลค่ารับซื้อคืนหน่วยลงทุนของเบี้ยประกันภัยหลัก</p>
+                                </div>
+                            </div>
+                            <h4 class="font-semibold text-primary mb-2 text-lg">เงื่อนไขการได้รับโบนัส:</h4>
+                            <ul class="list-disc list-inside ml-4 space-y-1 text-gray-700 text-lg">
+                                <li>มีการชำระเบี้ยประกันภัยหลักครบ 5 ปี</li>
+                                <li>กรมธรรม์มีผลบังคับอย่างน้อย 9 ปีกรมธรรม์</li>
+                                <li>ไม่เคยทำการลดจำนวนเบี้ยประกันภัยหลัก</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Slide 4: Investment Strategy (AIA-GAIF) -->
+        <div class="slide">
+            <div class="slide-content-wrapper">
+                <section id="investment-strategy">
+                    <h2 class="text-3xl font-bold text-center mb-8 text-primary">กลยุทธ์การลงทุนผ่าน AIA Global Active Income Fund (AIA-GAIF)</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div class="card-style p-6 rounded-lg shadow-lg">
+                            <h3 class="text-2xl font-semibold mb-4 text-center text-primary">สัดส่วนพอร์ตการลงทุน (SAA)</h3>
+                            <div class="chart-container">
+                                <canvas id="aiaGaifChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="text-gray-700 space-y-4 text-lg">
+                            <p>AIA-GAIF คือหัวใจสำคัญในการสร้างผลตอบแทน บริหารโดยทีมงานของ AIA และพันธมิตรผู้จัดการกองทุนระดับโลก</p>
+                            <ul class="list-disc list-inside space-y-2">
+                                <li><span class="font-bold text-primary">วัตถุประสงค์หลัก:</span> สร้างโอกาสรับผลตอบแทนรวมจากการลงทุนระยะยาว</li>
+                                <li><span class="font-bold text-primary">ลักษณะเด่น:</span> รับกระแสเงินสดสม่ำเสมอผ่าน Auto Redemption</li>
+                                <li><span class="font-bold text-primary">พันธมิตรผู้จัดการกองทุน:</span> Allianz Global Investors, Wellington Management, และ Franklin Templeton</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Slide 5: Fund Breakdown -->
+        <div class="slide">
+            <div class="slide-content-wrapper">
+                <section id="fund-breakdown">
+                    <h2 class="text-3xl font-bold text-center mb-8 text-primary">เจาะลึก 2 กองทุนหลัก</h2>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div class="card-style p-6 rounded-lg shadow-lg">
+                            <h3 class="text-2xl font-semibold mb-4 text-primary">1. Allianz Income and Growth</h3>
+                            <p class="mb-4">กองทุนนี้เน้นสร้างรายได้จากสินทรัพย์หลากหลายประเภททั่วโลกเพื่อสร้างกระแสเงินสดที่มั่นคง โดยมี <span class="text-xl font-bold text-accent">7 แหล่งรายรับสำคัญ:</span></p>
+                            <ol class="list-decimal list-inside space-y-2 text-gray-700 list-7-sources pl-4">
+                                <li>ดอกเบี้ยรับ จากตราสารหนี้ High-Yield</li>
+                                <li>ดอกเบี้ยรับ จากตราสารหนี้แปลงสภาพ</li>
+                                <li>เงินปันผล จากหุ้นปันผล</li>
+                                <li>รายได้ จาก Covered Call</li>
+                                <li>กำไร จากหุ้น</li>
+                                <li>กำไร จากตราสารหนี้ High-Yield</li>
+                                <li>กำไร จากตราสารหนี้แปลงสภาพ</li>
+                            </ol>
+                            <h4 class="text-xl font-bold text-primary mt-4 border-t pt-4">ผลการดำเนินงานย้อนหลัง (ข้อมูล ณ ส.ค. 2025)</h4>
+                            <div class="grid grid-cols-2 gap-4 mt-4">
+                                <div class="kpi-card !bg-primary !p-3">
+                                    <p class="text-4xl font-bold leading-none">153</p>
+                                    <p class="text-sm">เดือน<br>จ่ายปันผลต่อเนื่อง</p>
+                                </div>
+                                <div class="kpi-card !bg-primary !p-3">
+                                    <p class="text-4xl font-bold leading-none">8.8%</p>
+                                    <p class="text-sm">อัตราปันผล<br>เฉลี่ยตั้งแต่จัดตั้ง</p>
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-2">ที่มา: AIAIMT, Bloomberg, Data as of July 2025</p>
+                        </div>
+                        <div class="card-style p-6 rounded-lg shadow-lg">
+                            <h3 class="text-2xl font-semibold mb-4 text-center text-primary">2. AIA Equity Income</h3>
+                            <div class="chart-container mx-auto">
+                                <canvas id="aiaEquityChart"></canvas>
+                            </div>
+                            <p class="mt-4 text-center text-gray-700">บริหารโดย Wellington Management โดยเน้นสร้างรายได้สม่ำเสมอในทุกสภาวะตลาดผ่านหุ้นปันผลและ Covered Calls</p>
+                            <h4 class="text-xl font-bold text-primary mt-4 border-t pt-4">ผลการดำเนินงานย้อนหลัง (ข้อมูล ณ มิ.ย. 2025)</h4>
+                            <div class="grid grid-cols-2 gap-4 mt-4">
+                                <div class="kpi-card !bg-secondary !p-3">
+                                    <p class="text-4xl font-bold leading-none">18</p>
+                                    <p class="text-sm">ไตรมาส<br>จ่ายปันผลต่อเนื่อง</p>
+                                </div>
+                                <div class="kpi-card !bg-secondary !p-3">
+                                    <p class="text-4xl font-bold leading-none">10.5%</p>
+                                    <p class="text-sm">อัตราปันผล<br>เฉลี่ยตั้งแต่จัดตั้ง</p>
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-2">ที่มา: AIAIMT, Bloomberg, Data as of June 2025</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Slide 6: Infographic SAA -->
+        <div class="slide">
+            <div class="slide-content-wrapper">
+                <section id="infographic-saa">
+                    <h2 class="text-3xl font-bold text-center mb-6 text-primary">
+                        Infographic: พอร์ตการลงทุนเชิงกลยุทธ์ (Strategic Asset Allocation)
+                    </h2>
+                    <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">
+                        พอร์ต Allianz Income and Growth ภายใต้ AIA-GAIF มีการลงทุนเป็น 3 ส่วนสำคัญ เพื่อสร้างรายได้ประจำและ ทำให้พอร์ตเติบโตระยะยาว
+                    </p>
+                    <div class="text-center">
+                        <div class="relative w-full max-w-md mx-auto h-80 mb-6">
+                            <canvas id="saaChart"></canvas>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-left text-gray-700">
+                            <div>
+                                <h4 class="font-bold text-primary mb-1">1️⃣ ตราสารหนี้อัตราผลตอบแทนสูง</h4>
+                                <p>ให้ดอกเบี้ยสูงกว่าตลาด ใช้สร้างรายได้สม่ำเสมอทุกไตรมาส</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-secondary mb-1">2️⃣ ตราสารหนี้แปลงสภาพ</h4>
+                                <p>เพิ่มโอกาสรับกำไรจากหุ้น พร้อมได้ดอกเบี้ยและเงินต้นคงที่</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-accent mb-1">3️⃣ หุ้นสหรัฐฯ + Covered Call</h4>
+                                <p>สร้างรายได้จาก Premium ของสิทธิซื้อหุ้น ควบคู่กับการถือหุ้นจริง</p>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-6">ข้อมูลอ้างอิง: Allianz Global Investors, Data as of June 2025</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+        
+        <!-- Slide 7: 3 GAIF Strategies -->
+        <div class="slide">
+            <div class="slide-content-wrapper">
+                <section id="gaif-strategy">
+                    <h2 class="text-3xl font-bold text-center mb-8 text-primary">
+                        3 กลยุทธ์หลักของพอร์ต AIA Global Active Income Fund (AIA-GAIF)
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="card-style p-6 rounded-lg border-t-4 border-primary">
+                            <h3 class="text-2xl font-semibold mb-2 text-primary">1️⃣ High Yield Bonds</h3>
+                            <ul class="list-disc list-inside text-gray-700 space-y-2">
+                                <li>ดอกเบี้ยเฉลี่ยสูงกว่า Investment Grade</li>
+                                <li>ลงทุนในบริษัทเครดิต BB ถึง CCC</li>
+                                <li>สร้างรายได้ดอกเบี้ยประจำ</li>
+                                <li>เป็นแหล่งกระแสเงินสดหลักของ Auto Redemption</li>
+                            </ul>
+                        </div>
+                        <div class="card-style p-6 rounded-lg border-t-4 border-secondary">
+                            <h3 class="text-2xl font-semibold mb-2 text-secondary">2️⃣ Convertible Bonds</h3>
+                            <ul class="list-disc list-inside text-gray-700 space-y-2">
+                                <li>มีดอกเบี้ยประจำและสิทธิแปลงเป็นหุ้น</li>
+                                <li>รับทั้งรายได้และโอกาสเติบโต</li>
+                                <li>ลดความเสี่ยงขาลงของพอร์ต</li>
+                            </ul>
+                        </div>
+                        <div class="card-style p-6 rounded-lg border-t-4 border-accent">
+                            <h3 class="text-2xl font-semibold mb-2 text-accent">3️⃣ US Equity with Covered Call</h3>
+                            <ul class="list-disc list-inside text-gray-700 space-y-2">
+                                <li>ถือหุ้นจริงพร้อมขายสิทธิซื้อหุ้นล่วงหน้า (Call Option)</li>
+                                <li>สร้างรายได้เพิ่มจาก Premium</li>
+                                <li>รายได้สม่ำเสมอแม้ตลาดทรงตัว</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="text-center mt-10">
+                        <p class="text-lg font-semibold text-primary">
+                            💡 3 ตัวอย่างนี้เป็นส่วนหนึ่งที่ทำให้พอร์ตสามารถจ่าย Auto Redemption ได้ต่อเนื่องทุกไตรมาส
+                        </p>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Slide 8: Case Study -->
+        <div class="slide">
+            <div class="slide-content-wrapper">
+                <section id="case-study">
+                    <h2 class="text-3xl font-bold text-center mb-8 text-primary">กรณีศึกษา: มูลค่าที่เติบโตต่อเนื่อง (Case Study 3)</h2>
+                    <p class="text-center text-gray-600 max-w-4xl mx-auto mb-8">
+                        ตัวอย่างนักธุรกิจชายอายุ 60 ปี ชำระเบี้ยปีละ 5 ล้านบาท เป็นเวลา 5 ปี (รวม 25 ล้านบาท)
+                    </p>
+                    <div class="relative w-full max-w-4xl h-96 mx-auto large-chart-container">
+                        <canvas id="caseStudyChart"></canvas>
+                    </div>
+                    <p class="mt-6 text-center text-gray-700 text-sm">
+                        มูลค่ารับซื้อคืนหน่วยลงทุน (NAV) ณ อายุ 98 ปี ประมาณ 31.78 ล้านบาท
+                    </p>
+                </section>
+            </div>
+        </div>
+
+        <!-- Slide 9: Fees -->
+        <div class="slide">
+            <div class="slide-content-wrapper">
+                <section id="fees-comparison">
+                    <h2 class="text-3xl font-bold text-center mb-8 text-primary">โครงสร้างค่าธรรมเนียมกรมธรรม์</h2>
+                    <h3 class="text-2xl font-semibold mb-4 text-primary text-center">ค่าธรรมเนียมการบริหารกรมธรรม์และค่าธรรมเนียมการถอน</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                        <div>
+                            <h4 class="font-bold text-primary mb-2 text-xl">ค่าธรรมเนียมการบริหารกรมธรรม์ (Admin Fee)</h4>
+                            <table class="w-full text-left border-collapse table-primary">
+                                <thead> <tr> <th class="p-3 border">ปีกรมธรรม์</th> <th class="p-3 border">อัตรา (ต่อปี)</th> </tr> </thead>
+                                <tbody>
+                                    <tr class="bg-gray-50 text-gray-700 border">
+                                        <td class="p-3 border">1 - 9</td>
+                                        <td class="p-3 border font-semibold text-primary">2.4% ของมูลค่ารับซื้อคืน</td>
+                                    </tr>
+                                    <tr class="bg-gray-100 text-gray-700 border">
+                                        <td class="p-3 border">10 เป็นต้นไป</td>
+                                        <td class="p-3 border font-semibold">ไม่มี</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="mt-2 text-sm text-gray-600">หมายเหตุ: ค่าการประกันภัย (COI) ถูกหักรายเดือนตามตารางมรณะ</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-primary mb-2 text-xl">ค่าธรรมเนียมการถอน/เวนคืนกรมธรรม์</h4>
+                            <table class="w-full text-left border-collapse table-primary">
+                                <thead> <tr> <th class="p-3 border">ปีกรมธรรม์</th> <th class="p-3 border">% ของมูลค่ารับซื้อคืน (RP)</th> </tr> </thead>
+                                <tbody>
+                                    <tr class="bg-gray-50 text-gray-700 border"><td class="p-3 border">1</td><td class="p-3 border font-semibold">85%</td></tr>
+                                    <tr class="bg-gray-100 text-gray-700 border"><td class="p-3 border">5</td><td class="p-3 border font-semibold">45%</td></tr>
+                                    <tr class="bg-gray-50 text-gray-700 border"><td class="p-3 border">9</td><td class="p-3 border font-semibold">10%</td></tr>
+                                    <tr class="bg-gray-100 text-gray-700 border"><td class="p-3 border">10 เป็นต้นไป</td><td class="p-3 border font-semibold text-primary">0%</td></tr>
+                                </tbody>
+                            </table>
+                            <p class="mt-2 text-sm text-red-600 font-bold">คำเตือน: การถอนเงิน/เวนคืนก่อนกำหนด มีค่าธรรมเนียมสูงมาก (85% ในปีที่ 1)</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Slide 10: Process Flow -->
+        <div class="slide">
+            <div class="slide-content-wrapper">
+                <section id="process-flow">
+                    <h2 class="text-3xl font-bold text-center mb-12 text-primary">กระบวนการสร้างกระแสเงินสด</h2>
+                    <div class="flex flex-col md:flex-row items-center justify-between space-y-8 md:space-y-0 md:space-x-4">
+                        <div class="text-center">
+                            <div class="text-5xl text-primary">👨‍💼</div>
+                            <div class="font-bold mt-2 text-lg">ผู้ลงทุน</div>
+                        </div>
+                        <div class="flow-arrow hidden md:block">→</div>
+                        <div class="flow-arrow md:hidden transform rotate-90">→</div>
+                        <div class="text-center">
+                            <div class="text-5xl text-primary">🏢</div>
+                            <div class="font-bold mt-2 text-lg">กองทุน AIA-GAIF</div>
+                        </div>
+                        <div class="flow-arrow hidden md:block">→</div>
+                        <div class="flow-arrow md:hidden transform rotate-90">→</div>
+                        <div class="text-center">
+                            <div class="text-5xl text-primary">🌍</div>
+                            <div class="font-bold mt-2 text-lg">กระจายลงทุนทั่วโลก</div>
+                        </div>
+                        <div class="flow-arrow hidden md:block">→</div>
+                        <div class="flow-arrow md:hidden transform rotate-90">→</div>
+                        <div class="text-center">
+                            <div class="text-5xl text-primary">💵</div>
+                            <div class="font-bold mt-2 text-lg">รับรายได้</div>
+                        </div>
+                    </div>
+                    <div class="mt-12 text-center">
+                        <div class="kpi-card max-w-md mx-auto">
+                            <h3 class="text-2xl font-semibold mb-1">เป้าหมายกระแสเงินสด</h3>
+                            <p class="text-5xl font-bold text-white">3.0% - 4.5% ต่อปี</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Slide 11: 5 Reasons -->
+        <div class="slide">
+            <div class="slide-content-wrapper">
+                <section id="five-reasons">
+                    <h2 class="text-3xl font-bold text-center mb-8 text-primary">5 เหตุผลที่ควรเลือก AIA Elite Income Prestige</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                        <div class="card-style p-5 rounded-lg border-b-4 border-accent shadow-md text-center">
+                            <div class="text-3xl mb-3 text-primary">🎯</div>
+                            <h3 class="font-bold text-lg mb-1 text-primary">1. เครื่องมือสร้าง Passive Income ที่มั่นคง</h3>
+                            <p class="text-sm text-gray-700">ตอบโจทย์ผู้ที่ต้องการสร้างรายได้สม่ำเสมอและไม่ผันผวนเท่าการลงทุนในหุ้นโดยตรง</p>
+                        </div>
+                        <div class="card-style p-5 rounded-lg border-b-4 border-accent shadow-md text-center">
+                            <div class="text-3xl mb-3 text-primary">🤝</div>
+                            <h3 class="font-bold text-lg mb-1 text-primary">2. ลงทุนและความคุ้มครองในผลิตภัณฑ์เดียว</h3>
+                            <p class="text-sm text-gray-700">ได้รับทั้งผลตอบแทนจากการลงทุนและความคุ้มครองชีวิตในระยะยาว ลดความเสี่ยงเมื่อเกิดเหตุไม่คาดคิด</p>
+                        </div>
+                        <div class="card-style p-5 rounded-lg border-b-4 border-accent shadow-md text-center">
+                            <div class="text-3xl mb-3 text-primary">🆕</div>
+                            <h3 class="font-bold text-lg mb-1 text-primary">3. สร้างรายได้ตั้งแต่ปีแรกด้วย Auto Redemption</h3>
+                            <p class="text-sm text-gray-700">เป็น Unit Linked เจ้าแรกในไทยที่มีระบบ Auto Redemption ช่วยให้รับกระแสเงินสดได้ทันที ไม่ต้องรอครบสัญญา</p>
+                        </div>
+                        <div class="card-style p-5 rounded-lg border-b-4 border-accent shadow-md text-center">
+                            <div class="text-3xl mb-3 text-primary">🏦</div>
+                            <h3 class="font-bold text-lg mb-1 text-primary">4. ความมั่นคงจากบริษัทระดับโลก</h3>
+                            <p class="text-sm text-gray-700">AIA มีความแข็งแกร่งทางการเงินสูง และพันธมิตรการลงทุนเป็นกองทุนระดับโลกที่มีประสบการณ์ยาวนาน</p>
+                        </div>
+                        <div class="card-style p-5 rounded-lg border-b-4 border-accent shadow-md text-center">
+                            <div class="text-3xl mb-3 text-primary">🔄</div>
+                            <h3 class="font-bold text-lg mb-1 text-primary">5. ยืดหยุ่นในการวางแผนเกษียณและมรดก</h3>
+                            <p class="text-sm text-gray-700">สามารถปรับพอร์ตการลงทุนตามความเสี่ยงที่ยอมรับได้ และใช้เป็นแหล่งรายได้เสริมหลังเกษียณหรือส่งต่อเป็นมรดก</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Slide 12: Example Benefits -->
+        <div class="slide">
+            <div class="slide-content-wrapper">
+                <section id="example-benefits">
+                    <h2 class="text-3xl font-bold text-center mb-8 text-primary">ตัวอย่างผลประโยชน์ตามสมมติฐาน (เดิม)</h2>
+                    <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">สำหรับเพศชาย อายุ 60 ปี, ชำระเบี้ยประกัน 4 ล้านบาท/ปี เป็นเวลา 5 ปี (รวม 20 ล้านบาท)</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center mt-12">
+                        <div class="card-style p-6 rounded-lg shadow-lg">
+                            <h3 class="text-xl font-semibold text-primary mb-2">โอกาสสะสมมูลค่า (ณ อายุ 98 ปี)</h3>
+                            <p class="text-4xl font-bold text-primary">25,424,717 บาท</p>
+                            <p class="text-sm text-gray-500">(ที่ผลตอบแทน 2% ต่อปี)</p>
+                        </div>
+                        <div class="card-style p-6 rounded-lg shadow-lg">
+                            <h3 class="text-xl font-semibold text-primary mb-2">โอกาสรับรายได้ (ณ อายุ 98 ปี)</h3>
+                            <p class="text-4xl font-bold text-primary">25,116,224 บาท</p>
+                            <p class="text-sm text-gray-500">(ที่ผลตอบแทน 3% ต่อปี)</p>
+                        </div>
+                        <div class="card-style p-6 rounded-lg shadow-lg">
+                            <h3 class="text-xl font-semibold text-primary mb-2">โอกาสรับผลประโยชน์กรณีเสียชีวิต</h3>
+                            <p class="text-4xl font-bold text-primary">สูงสุด 27,424,717 บาท</p>
+                            <p class="text-sm text-gray-500">(ขั้นต่ำ 4.4 ล้านบาท)</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Slide 13: End Slide (Footer) -->
+        <div class="slide end-slide">
+            <footer class="text-center">
+                <p class="text-2xl">ข้อมูลนี้เพื่อการนำเสนอเบื้องต้นเท่านั้น</p>
+                <p class="text-2xl mb-4">ผู้ลงทุนควรศึกษาข้อมูลผลิตภัณฑ์ก่อนตัดสินใจลงทุน</p>
+                <p class="text-lg text-gray-200 mt-8">AIA Investments | Allianz Global Investors | Updated: June 2025</p>
+                <p class="text-lg text-gray-200 mt-2">Tone: Brilliant Blues (High Contrast)</p>
+            </footer>
+        </div>
+
+    </div> <!-- End Presentation Container -->
+
+    <!-- Navigation Arrows -->
+    <button id="prev-slide" class="slide-nav">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+        </svg>
+    </button>
+    <button id="next-slide" class="slide-nav">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+        </svg>
+    </button>
+
+    <!-- Controls -->
+    <div id="slide-counter" class="slide-controls">1 / 13</div>
+    <button id="fullscreen-btn" class="slide-controls">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75v4.5m0-4.5h-4.5m4.5 0L15 9M20.25 20.25v-4.5m0 4.5h-4.5m4.5 0L15 15" />
+        </svg>
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            const totalSlides = slides.length;
+            const counter = document.getElementById('slide-counter');
+            const prevBtn = document.getElementById('prev-slide');
+            const nextBtn = document.getElementById('next-slide');
+            const fullscreenBtn = document.getElementById('fullscreen-btn');
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+                counter.textContent = `${index + 1} / ${totalSlides}`;
+            }
+
+            function next() {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                showSlide(currentSlide);
+            }
+
+            function prev() {
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                showSlide(currentSlide);
+            }
+
+            function toggleFullScreen() {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen();
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    }
+                }
+            }
+
+            prevBtn.addEventListener('click', prev);
+            nextBtn.addEventListener('click', next);
+            fullscreenBtn.addEventListener('click', toggleFullScreen);
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' || e.key === 'PageDown') {
+                    next();
+                } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                    prev();
+                } else if (e.key === 'f') {
+                    toggleFullScreen();
+                }
+            });
+
+            showSlide(currentSlide); // Show first slide
+
+            // Chart Drawing
+            // Chart: Infographic Circle (3engine)
+            new Chart(document.getElementById('saaChart').getContext('2d'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['ตราสารหนี้อัตราผลตอบแทนสูง', 'ตราสารหนี้แปลงสภาพ', 'หุ้นสหรัฐฯ + Covered Call'],
+                    datasets: [{ data: [33, 33, 34], backgroundColor: ['#005f73', '#ee9b00', '#0a9396'], borderWidth: 2, borderColor: '#fff' }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: '#333', font: { size: 13 } } } }, cutout: '65%' }
+            });
+            
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                return Array.isArray(label) ? label.join(' ') : label;
+            };
+
+            // Chart: AIA GAIF SAA (v1)
+            new Chart(document.getElementById('aiaGaifChart').getContext('2d'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Allianz Income and Growth', 'AIA Equity Income'],
+                    datasets: [{ label: 'สัดส่วนพอร์ต', data: [90, 10], backgroundColor: ['#005f73', '#ee9b00'], borderColor: '#ffffff', borderWidth: 2 }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: '#4b5563' } }, tooltip: { callbacks: { title: tooltipTitleCallback } } } }
+            });
+
+            // Chart: AIA Equity Income (v1)
+            new Chart(document.getElementById('aiaEquityChart').getContext('2d'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['หุ้นโลกปันผลและรวมรายรับ', 'หุ้นโลกปันผลไม่รวมรายรับ'],
+                    datasets: [{ label: 'สัดส่วนพอร์ต', data: [59.5, 39.6], backgroundColor: ['#0a9396', '#94d2bd'], borderColor: '#ffffff', borderWidth: 2 }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: '#4b5563' } }, tooltip: { callbacks: { title: tooltipTitleCallback } } } }
+            });
+
+            // Chart: Case Study (merged, use v1 labels for more detail)
+            new Chart(document.getElementById('caseStudyChart').getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: ['60 (ปีที่ 1)', '70 (ปีที่ 10)', '80', '90', '98 (สิ้นสุด)'],
+                    datasets: [{
+                        label: 'มูลค่ารับซื้อคืนหน่วยลงทุน (ล้านบาท)',
+                        data: [4.97, 24.78, 29.24, 32.36, 31.78], 
+                        backgroundColor: 'rgba(0, 95, 115, 0.4)', borderColor: '#005f73', borderWidth: 3, fill: true, tension: 0.4,
+                        pointBackgroundColor: '#ee9b00', pointBorderColor: '#fff', pointRadius: 6, pointHoverRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'มูลค่า (ล้านบาท)', color: '#005f73' },
+                            ticks: { callback: (value) => value.toFixed(1) + 'M', color: '#4b5563' },
+                            grid: { color: 'rgba(0, 0, 0, 0.05)' }
+                        },
+                        x: {
+                            title: { display: true, text: 'อายุ (ปี)', color: '#005f73' },
+                            ticks: { color: '#4b5563' },
+                            grid: { color: 'rgba(0, 0, 0, 0.05)' }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: true, labels: { color: '#4b5563' } },
+                        tooltip: { callbacks: { title: tooltipTitleCallback, label: (context) => context.dataset.label + ': ' + context.parsed.y + ' ล้านบาท' } }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

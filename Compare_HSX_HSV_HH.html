@@ -3,243 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AIA Plan Comparison Tool</title>
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS -->
+    <title>AIA Ultimate Comparison (13 Categories)</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Noto Sans Thai', sans-serif; }
-        /* Custom Scrollbar for better UX */
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-        }
-        .scrollbar-hide {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
+        body { font-family: 'Sarabun', sans-serif; }
+        .sticky-col { position: sticky; left: 0; z-index: 20; background-color: white; }
+        .sub-text { font-size: 0.75rem; color: #64748b; margin-top: 2px; }
+        tr:hover td { background-color: #fffbeb; transition: 0.2s; }
     </style>
 </head>
-<body class="bg-slate-50 min-h-screen text-slate-800">
+<body class="bg-gray-100 min-h-screen text-slate-800">
 
-    <div class="max-w-[1400px] mx-auto bg-white shadow-xl border border-gray-200 md:my-6 md:rounded-xl overflow-hidden">
+    <div class="max-w-[1600px] mx-auto bg-white shadow-xl border border-gray-200 md:my-6 md:rounded-xl overflow-hidden">
         
         <!-- Header -->
-        <div class="bg-gradient-to-r from-slate-800 to-slate-900 p-4 md:p-6 text-white text-center shadow-md relative">
-            <h1 class="text-xl md:text-3xl font-bold flex items-center justify-center gap-2">
-               <i data-lucide="file-text" class="text-yellow-400 w-6 h-6 md:w-8 md:h-8"></i>
-               ตารางเปรียบเทียบ AIA
-            </h1>
-            <p class="text-slate-300 mt-1 text-xs md:text-sm opacity-90">ข้อมูลจาก Compare HSX HSV HH (Blank)</p>
+        <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 p-5 text-white shadow-lg relative">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="bg-red-600 p-2 rounded-lg">
+                        <i data-lucide="shield-check" class="text-white w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl md:text-2xl font-bold">ตารางเปรียบเทียบผลประโยชน์ (13 หมวดมาตรฐาน)</h1>
+                        <p class="text-slate-400 text-xs mt-1">ข้อมูลอ้างอิง: ตาราง HSX HSV HH และ New Health Standard</p>
+                    </div>
+                </div>
+                <div class="text-right hidden md:block">
+                     <span class="bg-white/10 px-3 py-1 rounded text-xs border border-white/20">ฉบับสมบูรณ์ (Full Detail)</span>
+                </div>
+            </div>
         </div>
 
-        <!-- Mobile Controls (Visible only on mobile) -->
-        <div id="mobile-controls" class="md:hidden p-4 bg-white border-b-4 border-slate-100 sticky top-0 z-30 shadow-sm">
-            <div class="text-sm font-bold text-gray-700 mb-3 flex items-center gap-2">
-                <i data-lucide="activity" class="text-blue-500 w-4 h-4"></i> เลือกแผนเพื่อเปรียบเทียบ
-            </div>
+        <!-- Mobile Controls -->
+        <div class="md:hidden p-4 bg-white border-b-4 border-slate-100 sticky top-0 z-30 shadow-md">
             <div class="grid grid-cols-2 gap-3">
-                <!-- Col 1 Control -->
-                <div class="rounded-lg border border-gray-200 p-3 bg-slate-50 relative">
-                    <div class="absolute top-0 right-0 bg-blue-500 text-white text-[10px] px-2 py-0.5 rounded-bl-lg rounded-tr-lg font-bold">A</div>
-                    <div class="text-xs text-gray-500 mb-1 font-semibold">แผนซ้าย</div>
-                    <select id="mobile-type-col1" class="w-full p-1.5 rounded border border-gray-300 text-xs mb-2 bg-white" onchange="updatePlan('col1', this.value, 0)">
-                        <option value="HSX">H&S Extra</option>
-                        <option value="HSV">Health Saver</option>
-                        <option value="HH">Health Happy</option>
-                    </select>
-                    <select id="mobile-idx-col1" class="w-full p-1.5 rounded border border-gray-300 text-xs bg-white" onchange="updatePlanIdx('col1', this.value)">
-                        <!-- Options populated by JS -->
-                    </select>
+                <div class="bg-emerald-50 p-2 rounded border border-emerald-100">
+                    <div class="text-[10px] text-emerald-800 font-bold mb-1">PLAN A (ซ้าย)</div>
+                    <select id="mobile-type-col1" class="w-full text-xs p-1 mb-1 rounded border-gray-300" onchange="updatePlan('col1', this.value, 0)"></select>
+                    <select id="mobile-idx-col1" class="w-full text-xs p-1 rounded border-gray-300" onchange="updatePlanIdx('col1', this.value)"></select>
                 </div>
-                <!-- Col 2 Control -->
-                <div class="rounded-lg border border-gray-200 p-3 bg-slate-50 relative">
-                    <div class="absolute top-0 right-0 bg-purple-500 text-white text-[10px] px-2 py-0.5 rounded-bl-lg rounded-tr-lg font-bold">B</div>
-                    <div class="text-xs text-gray-500 mb-1 font-semibold">แผนกลาง</div>
-                    <select id="mobile-type-col2" class="w-full p-1.5 rounded border border-gray-300 text-xs mb-2 bg-white" onchange="updatePlan('col2', this.value, 0)">
-                        <option value="HSX">H&S Extra</option>
-                        <option value="HSV">Health Saver</option>
-                        <option value="HH">Health Happy</option>
-                    </select>
-                    <select id="mobile-idx-col2" class="w-full p-1.5 rounded border border-gray-300 text-xs bg-white" onchange="updatePlanIdx('col2', this.value)">
-                        <!-- Options populated by JS -->
-                    </select>
+                <div class="bg-blue-50 p-2 rounded border border-blue-100">
+                    <div class="text-[10px] text-blue-800 font-bold mb-1">PLAN B (กลาง)</div>
+                    <select id="mobile-type-col2" class="w-full text-xs p-1 mb-1 rounded border-gray-300" onchange="updatePlan('col2', this.value, 0)"></select>
+                    <select id="mobile-idx-col2" class="w-full text-xs p-1 rounded border-gray-300" onchange="updatePlanIdx('col2', this.value)"></select>
                 </div>
             </div>
-            <div class="mt-2 text-[10px] text-center text-gray-400">*เลื่อนตารางด้านล่างเพื่อดูรายละเอียด</div>
         </div>
 
-        <!-- Table Container -->
+        <!-- Table -->
         <div class="overflow-x-auto">
-            <table class="w-full min-w-[900px] border-collapse text-sm md:text-base">
+            <table class="w-full min-w-[1100px] border-collapse text-sm">
                 <thead>
                     <tr>
-                        <!-- Label Column Header -->
-                        <th class="p-4 w-[25%] bg-white text-left sticky left-0 z-20 border-r border-gray-200 shadow-[4px_0_8px_-4px_rgba(0,0,0,0.1)] align-bottom pb-6">
-                            <span class="hidden md:block text-gray-400 text-xs font-normal mb-1">เลือกแผนเพื่อเปรียบเทียบ</span>
-                            <div class="text-lg md:text-xl font-bold text-gray-800">รายการความคุ้มครอง</div>
+                        <th class="p-4 w-[30%] text-left sticky-col border-r border-gray-200 shadow-sm align-bottom bg-gray-50">
+                            <span class="hidden md:block text-gray-400 text-xs font-normal mb-1">เลือกแผนประกันเพื่อเปรียบเทียบ</span>
+                            <div class="text-lg font-bold text-gray-800">รายการความคุ้มครอง</div>
                         </th>
-                        
-                        <!-- Column 1 Header -->
-                        <th id="header-col1" class="p-4 w-[25%] align-top border-b-4 transition-colors duration-300">
-                            <!-- Content injected by JS -->
-                        </th>
-
-                        <!-- Column 2 Header -->
-                        <th id="header-col2" class="p-4 w-[25%] align-top border-b-4 transition-colors duration-300">
-                             <!-- Content injected by JS -->
-                        </th>
-
-                        <!-- Column 3 Header -->
-                        <th id="header-col3" class="p-4 w-[25%] align-top border-b-4 transition-colors duration-300">
-                             <!-- Content injected by JS -->
-                        </th>
+                        <th id="header-col1" class="p-4 w-[23%] align-top border-b-4 transition-all"></th>
+                        <th id="header-col2" class="p-4 w-[23%] align-top border-b-4 transition-all"></th>
+                        <th id="header-col3" class="p-4 w-[23%] align-top border-b-4 transition-all hidden md:table-cell"></th>
                     </tr>
                 </thead>
-                <tbody id="table-body" class="divide-y divide-gray-100">
-                    <!-- Rows injected by JS -->
-                </tbody>
+                <tbody id="table-body" class="divide-y divide-gray-100"></tbody>
             </table>
         </div>
-
-        <!-- Footer Note -->
-        <div class="bg-white p-4 border-t border-gray-200">
-            <div class="flex items-start gap-2 text-xs text-gray-500 bg-gray-50 p-3 rounded-lg border border-gray-100">
-                <i data-lucide="alert-circle" class="w-4 h-4 mt-0.5 text-gray-400 flex-shrink-0"></i>
+        
+        <!-- Legend/Footer -->
+        <div class="bg-slate-50 p-6 border-t border-gray-200">
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-gray-600">
                 <div>
-                    <span class="font-bold">หมายเหตุ:</span> 
-                    <ul class="list-disc ml-4 mt-1 space-y-1">
-                        <li>HSX (H&S Extra) เป็นแบบแยกค่าใช้จ่ายรายหมวด ส่วนเกินจากวงเงินผู้เอาประกันภัยรับผิดชอบเอง</li>
-                        <li>HSV (Health Saver) หมวด 3-6 และ 12 เป็นวงเงินใช้ร่วมกันแบบเหมาจ่ายภายใต้วงเงินแผน</li>
-                        <li>โรคร้ายแรง (CI) ของ Health Saver และ Health Happy จะเบิ้ลวงเงินให้เป็น 2 เท่าในปีที่ตรวจเจอและต่อเนื่องไปอีก 3 ปีกรมธรรม์</li>
-                        <li>ข้อมูลนี้เป็นการสรุปเพื่อความเข้าใจเบื้องต้น โปรดศึกษารายละเอียดข้อยกเว้นในเล่มกรมธรรม์ฉบับสมบูรณ์</li>
+                    <strong class="text-gray-800 block mb-2">📌 เงื่อนไขวงเงิน (Health Saver):</strong>
+                    <ul class="list-disc ml-4 space-y-1">
+                        <li><strong>หมวด 1, 2, 8-11, 13:</strong> มีวงเงินแยกเฉพาะของตัวเอง หรือจ่ายตามจริงภายใต้วงเงินรวม (แล้วแต่แผน)</li>
+                        <li><strong>หมวด 3-6 และ 12:</strong> ใช้วงเงินร่วมกัน (Grouped Limit) ภายใต้วงเงินเหมาจ่ายของแผน</li>
                     </ul>
                 </div>
-            </div>
+                <div>
+                    <strong class="text-gray-800 block mb-2">💡 สัญลักษณ์ในตาราง:</strong>
+                    <div class="flex gap-4 mt-1">
+                        <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-pink-600"></span> เหมาจ่ายตามจริง</span>
+                        <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-sky-600"></span> เหมาจ่ายในวงเงิน</span>
+                        <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-600"></span> วงเงินจำกัดต่อครั้ง</span>
+                    </div>
+                </div>
+             </div>
         </div>
-
     </div>
 
-    <!-- Scripts -->
     <script>
-        // --- DATA ---
+        // --- DATA ENGINE ---
         const plansData = {
             HSX: {
-                name: "AIA H&S Extra (HSX)",
-                subtitle: "ค่ารักษาแบบแยกรายหมวด + มี OPD",
-                color: "bg-emerald-50 border-emerald-200 text-emerald-900",
-                headerColor: "bg-emerald-100",
-                accentColor: "text-emerald-700",
+                name: "AIA H&S Extra",
+                subtitle: "แยกจ่ายรายหมวด + OPD",
+                theme: "emerald",
+                headerColor: "bg-emerald-50 border-emerald-400",
+                limitType: "วงเงินต่อครั้ง",
                 options: [
-                    { id: "hsx_2000", name: "แผน 2000", cat1_room: "2,000", cat1_icu: "4,000", cat2_med: "20,000", cat3_surg: "80,000", cat4_doc: "800", cat5_day_surg: "80,000", cat6_diag: "5,000", cat7_acc: "4,000", cat8_rehab: "2,000", cat9_kidney: "15,000", cat10_cancer: "15,000", cat11_amb: "2,000", cat12_minor: "8,000", cat13_opd: "4,000 /ปี", ci: "ไม่คุ้มครอง", ncb: "2,000", death: "10,000", limit_confinement: "จำกัดวงเงินต่อครั้ง", limit_annual: "ไม่จำกัดวงเงินต่อปี" },
-                    { id: "hsx_2500", name: "แผน 2500", cat1_room: "2,500", cat1_icu: "5,000", cat2_med: "25,000", cat3_surg: "100,000", cat4_doc: "1,000", cat5_day_surg: "100,000", cat6_diag: "7,500", cat7_acc: "5,000", cat8_rehab: "2,500", cat9_kidney: "20,000", cat10_cancer: "20,000", cat11_amb: "3,000", cat12_minor: "10,000", cat13_opd: "5,000 /ปี", ci: "ไม่คุ้มครอง", ncb: "2,500", death: "10,000", limit_confinement: "จำกัดวงเงินต่อครั้ง", limit_annual: "ไม่จำกัดวงเงินต่อปี" },
-                    { id: "hsx_5500", name: "แผน 5500", cat1_room: "5,500", cat1_icu: "11,000", cat2_med: "45,000", cat3_surg: "140,000", cat4_doc: "2,000", cat5_day_surg: "140,000", cat6_diag: "15,000", cat7_acc: "7,000", cat8_rehab: "4,500", cat9_kidney: "30,000", cat10_cancer: "30,000", cat11_amb: "5,000", cat12_minor: "14,000", cat13_opd: "9,000 /ปี", ci: "ไม่คุ้มครอง", ncb: "4,000", death: "10,000", limit_confinement: "จำกัดวงเงินต่อครั้ง", limit_annual: "ไม่จำกัดวงเงินต่อปี" }
+                    { id: "hsx_1500", name: "แผน 1500", cat1:"1,500", cat2:"20,000", cat3:"60,000", cat4:"800", cat5:"60,000", cat6:"4,000", cat7:"3,000", cat8:"1,500", cat9:"10,000", cat10:"10,000", cat11:"2,000", cat12:"4,000", cat13:"3,000/ปี", ci:"-", ncb:"1,500", death:"10,000", annual:"ไม่จำกัด" },
+                    { id: "hsx_2000", name: "แผน 2000", cat1:"2,000", cat2:"20,000", cat3:"80,000", cat4:"800", cat5:"80,000", cat6:"5,000", cat7:"4,000", cat8:"2,000", cat9:"15,000", cat10:"15,000", cat11:"2,000", cat12:"5,000", cat13:"4,000/ปี", ci:"-", ncb:"2,000", death:"10,000", annual:"ไม่จำกัด" },
+                    { id: "hsx_2500", name: "แผน 2500", cat1:"2,500", cat2:"25,000", cat3:"100,000", cat4:"1,000", cat5:"100,000", cat6:"7,500", cat7:"5,000", cat8:"2,500", cat9:"20,000", cat10:"20,000", cat11:"3,000", cat12:"6,000", cat13:"5,000/ปี", ci:"-", ncb:"2,500", death:"10,000", annual:"ไม่จำกัด" },
+                    { id: "hsx_3500", name: "แผน 3500", cat1:"3,500", cat2:"35,000", cat3:"120,000", cat4:"1,200", cat5:"120,000", cat6:"10,000", cat7:"6,000", cat8:"3,500", cat9:"25,000", cat10:"25,000", cat11:"4,000", cat12:"7,000", cat13:"7,000/ปี", ci:"-", ncb:"3,500", death:"10,000", annual:"ไม่จำกัด" },
+                    { id: "hsx_4500", name: "แผน 4500", cat1:"4,500", cat2:"40,000", cat3:"130,000", cat4:"1,500", cat5:"130,000", cat6:"12,500", cat7:"6,500", cat8:"4,000", cat9:"30,000", cat10:"30,000", cat11:"5,000", cat12:"8,000", cat13:"8,000/ปี", ci:"-", ncb:"3,500", death:"10,000", annual:"ไม่จำกัด" },
+                    { id: "hsx_5500", name: "แผน 5500", cat1:"5,500", cat2:"45,000", cat3:"140,000", cat4:"2,000", cat5:"140,000", cat6:"15,000", cat7:"7,000", cat8:"4,500", cat9:"30,000", cat10:"30,000", cat11:"5,000", cat12:"9,000", cat13:"9,000/ปี", ci:"-", ncb:"4,000", death:"10,000", annual:"ไม่จำกัด" },
+                    { id: "hsx_6500", name: "แผน 6500", cat1:"6,500", cat2:"50,000", cat3:"150,000", cat4:"2,500", cat5:"150,000", cat6:"17,500", cat7:"7,500", cat8:"5,000", cat9:"30,000", cat10:"30,000", cat11:"5,000", cat12:"10,000", cat13:"10,000/ปี", ci:"-", ncb:"4,000", death:"10,000", annual:"ไม่จำกัด" }
                 ]
             },
             HSV: {
-                name: "AIA Health Saver (HSV)",
-                subtitle: "เหมาจ่ายเริ่มต้น (เบิ้ล CI 2 เท่า)",
-                color: "bg-sky-50 border-sky-200 text-sky-900",
-                headerColor: "bg-sky-100",
-                accentColor: "text-sky-700",
+                name: "AIA Health Saver",
+                subtitle: "เหมาจ่ายเริ่มต้น + เบิ้ล CI",
+                theme: "blue",
+                headerColor: "bg-sky-50 border-sky-400",
+                limitType: "เหมาจ่ายรายปี",
                 options: [
-                    { id: "hsv_300k", name: "แผน 3 แสน", cat1_room: "2,000", cat1_icu: "12,000", cat2_med: "เหมาจ่าย (3แสน)", cat3_surg: "เหมาจ่ายร่วม", cat4_doc: "1,000", cat5_day_surg: "เหมาจ่ายร่วม", cat6_diag: "เหมาจ่ายร่วม", cat7_acc: "5,000", cat8_rehab: "2,000", cat9_kidney: "15,000", cat10_cancer: "15,000", cat11_amb: "3,000", cat12_minor: "เหมาจ่ายร่วม", cat13_opd: "ไม่คุ้มครอง", ci: "2 เท่า (6 แสน)", ncb: "ไม่มี", death: "10,000", limit_confinement: "เหมาจ่ายหมวด 3-6,12", limit_annual: "สูงสุด 300,000 ต่อปี" },
-                    { id: "hsv_400k", name: "แผน 4 แสน", cat1_room: "3,000", cat1_icu: "18,000", cat2_med: "เหมาจ่าย (4แสน)", cat3_surg: "เหมาจ่ายร่วม", cat4_doc: "1,200", cat5_day_surg: "เหมาจ่ายร่วม", cat6_diag: "เหมาจ่ายร่วม", cat7_acc: "6,000", cat8_rehab: "2,500", cat9_kidney: "20,000", cat10_cancer: "20,000", cat11_amb: "4,000", cat12_minor: "เหมาจ่ายร่วม", cat13_opd: "1,000/ครั้ง (30ครั้ง/ปี)", ci: "2 เท่า (8 แสน)", ncb: "ไม่มี", death: "10,000", limit_confinement: "เหมาจ่ายหมวด 3-6,12", limit_annual: "สูงสุด 400,000 ต่อปี" },
-                    { id: "hsv_500k", name: "แผน 5 แสน", cat1_room: "4,000", cat1_icu: "24,000", cat2_med: "เหมาจ่าย (5แสน)", cat3_surg: "เหมาจ่ายร่วม", cat4_doc: "1,500", cat5_day_surg: "เหมาจ่ายร่วม", cat6_diag: "เหมาจ่ายร่วม", cat7_acc: "7,000", cat8_rehab: "3,000", cat9_kidney: "25,000", cat10_cancer: "25,000", cat11_amb: "5,000", cat12_minor: "เหมาจ่ายร่วม", cat13_opd: "1,500/ครั้ง (30ครั้ง/ปี)", ci: "2 เท่า (1 ล้าน)", ncb: "ไม่มี", death: "10,000", limit_confinement: "เหมาจ่ายหมวด 3-6,12", limit_annual: "สูงสุด 500,000 ต่อปี" }
+                    { id: "hsv_200k", name: "แผน 2 แสน", cat1:"1,500", cat2:"2แสน", cat3:"ร่วม", cat4:"800", cat5:"ร่วม", cat6:"ร่วม", cat7:"4,000", cat8:"1,500", cat9:"10,000", cat10:"10,000", cat11:"3,000", cat12:"ร่วม", cat13:"-", ci:"2 เท่า (4 แสน)", ncb:"-", death:"10,000", annual:"200,000" },
+                    { id: "hsv_300k", name: "แผน 3 แสน", cat1:"2,000", cat2:"3แสน", cat3:"ร่วม", cat4:"1,000", cat5:"ร่วม", cat6:"ร่วม", cat7:"5,000", cat8:"2,000", cat9:"15,000", cat10:"15,000", cat11:"3,000", cat12:"ร่วม", cat13:"-", ci:"2 เท่า (6 แสน)", ncb:"-", death:"10,000", annual:"300,000" },
+                    { id: "hsv_400k", name: "แผน 4 แสน", cat1:"3,000", cat2:"4แสน", cat3:"ร่วม", cat4:"1,200", cat5:"ร่วม", cat6:"ร่วม", cat7:"6,000", cat8:"2,500", cat9:"20,000", cat10:"20,000", cat11:"4,000", cat12:"ร่วม", cat13:"1,000/ครั้ง", ci:"2 เท่า (8 แสน)", ncb:"-", death:"10,000", annual:"400,000" },
+                    { id: "hsv_500k", name: "แผน 5 แสน", cat1:"4,000", cat2:"5แสน", cat3:"ร่วม", cat4:"1,500", cat5:"ร่วม", cat6:"ร่วม", cat7:"7,000", cat8:"3,000", cat9:"25,000", cat10:"25,000", cat11:"5,000", cat12:"ร่วม", cat13:"1,500/ครั้ง", ci:"2 เท่า (1 ล้าน)", ncb:"-", death:"10,000", annual:"500,000" }
                 ]
             },
             HH: {
-                name: "AIA Health Happy (HH)",
-                subtitle: "เหมาจ่ายปลดล็อควงเงิน",
-                color: "bg-pink-50 border-pink-200 text-pink-900",
-                headerColor: "bg-pink-100",
-                accentColor: "text-pink-700",
+                name: "AIA Health Happy",
+                subtitle: "เหมาจ่ายปลดล็อค",
+                theme: "pink",
+                headerColor: "bg-pink-50 border-pink-400",
+                limitType: "เหมาจ่ายรายปี",
                 options: [
-                    { id: "hh_1m", name: "แผน 1 ล้าน", cat1_room: "1,500", cat1_icu: "เหมาจ่าย", cat2_med: "เหมาจ่าย", cat3_surg: "เหมาจ่าย", cat4_doc: "เหมาจ่าย", cat5_day_surg: "เหมาจ่าย", cat6_diag: "เหมาจ่าย", cat7_acc: "เหมาจ่าย", cat8_rehab: "เหมาจ่าย", cat9_kidney: "เหมาจ่าย", cat10_cancer: "เหมาจ่าย", cat11_amb: "เหมาจ่าย", cat12_minor: "เหมาจ่าย", cat13_opd: "ไม่คุ้มครอง", ci: "2 เท่า (2 ล้าน)", ncb: "ไม่มี", death: "10,000", limit_confinement: "เหมาจ่ายตามจริง", limit_annual: "สูงสุด 1 ล้านบาท/ปี" },
-                    { id: "hh_5m", name: "แผน 5 ล้าน", cat1_room: "3,000", cat1_icu: "เหมาจ่าย", cat2_med: "เหมาจ่าย", cat3_surg: "เหมาจ่าย", cat4_doc: "เหมาจ่าย", cat5_day_surg: "เหมาจ่าย", cat6_diag: "เหมาจ่าย", cat7_acc: "เหมาจ่าย", cat8_rehab: "เหมาจ่าย", cat9_kidney: "เหมาจ่าย", cat10_cancer: "เหมาจ่าย", cat11_amb: "เหมาจ่าย", cat12_minor: "เหมาจ่าย", cat13_opd: "ไม่คุ้มครอง", ci: "2 เท่า (10 ล้าน)", ncb: "ไม่มี", death: "10,000", limit_confinement: "เหมาจ่ายตามจริง", limit_annual: "สูงสุด 5 ล้านบาท/ปี" },
-                    { id: "hh_25m", name: "แผน 25 ล้าน", cat1_room: "9,000", cat1_icu: "เหมาจ่าย", cat2_med: "เหมาจ่าย", cat3_surg: "เหมาจ่าย", cat4_doc: "เหมาจ่าย", cat5_day_surg: "เหมาจ่าย", cat6_diag: "เหมาจ่าย", cat7_acc: "เหมาจ่าย", cat8_rehab: "เหมาจ่าย", cat9_kidney: "เหมาจ่าย", cat10_cancer: "เหมาจ่าย", cat11_amb: "เหมาจ่าย", cat12_minor: "เหมาจ่าย", cat13_opd: "2,000/ครั้ง (30ครั้ง/ปี)", ci: "2 เท่า (50 ล้าน)", ncb: "ไม่มี", death: "10,000", limit_confinement: "เหมาจ่ายตามจริง", limit_annual: "สูงสุด 25 ล้านบาท/ปี" }
+                    { id: "hh_1m", name: "แผน 1 ล้าน", cat1:"1,500", cat2:"เหมาจ่าย", cat3:"เหมาจ่าย", cat4:"เหมาจ่าย", cat5:"เหมาจ่าย", cat6:"เหมาจ่าย", cat7:"เหมาจ่าย", cat8:"เหมาจ่าย", cat9:"เหมาจ่าย", cat10:"เหมาจ่าย", cat11:"เหมาจ่าย", cat12:"เหมาจ่าย", cat13:"-", ci:"2 เท่า (2 ล้าน)", ncb:"-", death:"10,000", annual:"1 ล้าน" },
+                    { id: "hh_5m", name: "แผน 5 ล้าน", cat1:"3,000", cat2:"เหมาจ่าย", cat3:"เหมาจ่าย", cat4:"เหมาจ่าย", cat5:"เหมาจ่าย", cat6:"เหมาจ่าย", cat7:"เหมาจ่าย", cat8:"เหมาจ่าย", cat9:"เหมาจ่าย", cat10:"เหมาจ่าย", cat11:"เหมาจ่าย", cat12:"เหมาจ่าย", cat13:"-", ci:"2 เท่า (10 ล้าน)", ncb:"-", death:"10,000", annual:"5 ล้าน" },
+                    { id: "hh_15m", name: "แผน 15 ล้าน", cat1:"6,000", cat2:"เหมาจ่าย", cat3:"เหมาจ่าย", cat4:"เหมาจ่าย", cat5:"เหมาจ่าย", cat6:"เหมาจ่าย", cat7:"เหมาจ่าย", cat8:"เหมาจ่าย", cat9:"เหมาจ่าย", cat10:"เหมาจ่าย", cat11:"เหมาจ่าย", cat12:"เหมาจ่าย", cat13:"-", ci:"2 เท่า (30 ล้าน)", ncb:"-", death:"10,000", annual:"15 ล้าน" },
+                    { id: "hh_25m", name: "แผน 25 ล้าน", cat1:"9,000", cat2:"เหมาจ่าย", cat3:"เหมาจ่าย", cat4:"เหมาจ่าย", cat5:"เหมาจ่าย", cat6:"เหมาจ่าย", cat7:"เหมาจ่าย", cat8:"เหมาจ่าย", cat9:"เหมาจ่าย", cat10:"เหมาจ่าย", cat11:"เหมาจ่าย", cat12:"เหมาจ่าย", cat13:"2,000/ครั้ง", ci:"2 เท่า (50 ล้าน)", ncb:"-", death:"10,000", annual:"25 ล้าน" }
                 ]
             }
         };
 
-        // --- STATE ---
         let state = {
-            col1: { type: 'HSX', index: 1 },
+            col1: { type: 'HSX', index: 2 },
             col2: { type: 'HSV', index: 1 },
             col3: { type: 'HH', index: 1 }
         };
 
-        // --- FUNCTIONS ---
+        // --- RENDER FUNCTIONS ---
         
-        function getPlanData(colKey) {
-            const { type, index } = state[colKey];
-            const typeData = plansData[type];
-            const planDetail = typeData.options[index];
-            return { ...planDetail, ...typeData };
-        }
-
-        function renderCell(value) {
-            if (value === "เหมาจ่าย" || value === "เหมาจ่ายตามจริง") 
-                return `<span class="font-bold text-pink-600">เหมาจ่ายตามจริง</span>`;
-            if (value === "เหมาจ่ายร่วม" || value.includes("เหมาจ่าย (")) 
-                return `<span class="text-sky-600 font-medium">เหมาจ่ายในวงเงิน</span>`;
-            if (value === "ไม่คุ้มครอง") 
-                return `<span class="text-gray-300">-</span>`;
-            return `<span class="text-gray-800">${value}</span>`;
-        }
-
         function updatePlan(col, type, index) {
-            state[col] = { type, index };
+            state[col] = { type, index: parseInt(index) };
             renderAll();
         }
-
         function updatePlanIdx(col, index) {
             state[col].index = parseInt(index);
             renderAll();
         }
 
-        function renderDropdown(colKey, currentType, currentIndex, isMobile = false) {
-            const idPrefix = isMobile ? 'mobile' : 'desktop';
-            // Need to update the <select> values in DOM if they exist
-            // However, re-rendering whole header handles desktop. 
-            // Mobile controls are static in HTML, need to update their values.
+        function getPlanData(colKey) {
+            const { type, index } = state[colKey];
+            return { ...plansData[type], ...plansData[type].options[index] };
+        }
+
+        function renderCell(val, isRoom = false) {
+            if (val === "เหมาจ่าย") return `<span class="font-bold text-pink-600">เหมาจ่ายตามจริง</span>`;
+            if (val === "ร่วม" || val.includes("แสน") || val.includes("เหมาจ่าย (")) return `<span class="font-medium text-sky-600">${val === "ร่วม" ? "เหมาจ่ายในวงเงิน" : val}</span>`;
+            if (val === "-") return `<span class="text-gray-300">-</span>`;
+            return `<span class="text-gray-800 ${isRoom ? 'font-bold text-lg' : ''}">${val}</span>`;
+        }
+
+        function renderDropdowns(colKey, isMobile) {
+            const currentType = state[colKey].type;
+            const currentIndex = state[colKey].index;
             
+            // Generate Options
+            const typeOpts = Object.keys(plansData).map(key => `<option value="${key}" ${key === currentType ? 'selected' : ''}>${plansData[key].name}</option>`).join('');
+            const planOpts = plansData[currentType].options.map((opt, i) => `<option value="${i}" ${i === currentIndex ? 'selected' : ''}>${opt.name}</option>`).join('');
+
             if (isMobile) {
-                const typeSelect = document.getElementById(`mobile-type-${colKey}`);
-                if (typeSelect) typeSelect.value = currentType;
-
-                const idxSelect = document.getElementById(`mobile-idx-${colKey}`);
-                if (idxSelect) {
-                    idxSelect.innerHTML = plansData[currentType].options.map((opt, i) => 
-                        `<option value="${i}" ${i === currentIndex ? 'selected' : ''}>${opt.name}</option>`
-                    ).join('');
-                }
+                document.getElementById(`mobile-type-${colKey}`).innerHTML = typeOpts;
+                document.getElementById(`mobile-idx-${colKey}`).innerHTML = planOpts;
             } else {
-                // Return HTML string for Desktop Header Dropdown
-                const typeOptions = Object.keys(plansData).map(key => 
-                    `<option value="${key}" ${key === currentType ? 'selected' : ''}>${plansData[key].name.split('(')[0].trim()}</option>`
-                ).join('');
-                
-                const planOptions = plansData[currentType].options.map((opt, i) => 
-                    `<option value="${i}" ${i === currentIndex ? 'selected' : ''}>${opt.name}</option>`
-                ).join('');
-
                 return `
-                    <div class="space-y-2 mt-2 hidden md:block">
-                        <select class="w-full p-2 rounded border border-gray-300 text-sm font-semibold bg-white/70 focus:ring-2 focus:ring-blue-400 outline-none"
-                                onchange="updatePlan('${colKey}', this.value, 0)">
-                            ${typeOptions}
-                        </select>
-                        <select class="w-full p-2 rounded border border-gray-300 text-sm bg-white/90 focus:ring-2 focus:ring-blue-400 outline-none shadow-sm"
-                                onchange="updatePlanIdx('${colKey}', this.value)">
-                            ${planOptions}
-                        </select>
+                    <div class="mt-2 space-y-1">
+                        <select class="w-full text-xs font-bold p-1 rounded border-gray-200 bg-white/60" onchange="updatePlan('${colKey}', this.value, 0)">${typeOpts}</select>
+                        <select class="w-full text-xs p-1 rounded border-gray-200 bg-white shadow-sm" onchange="updatePlanIdx('${colKey}', this.value)">${planOpts}</select>
                     </div>
                 `;
             }
@@ -247,151 +191,111 @@
 
         function renderHeader(colKey) {
             const data = getPlanData(colKey);
-            const headerCell = document.getElementById(`header-${colKey}`);
-            
-            // Apply Classes
-            headerCell.className = `p-4 w-[25%] align-top border-b-4 transition-colors duration-300 ${data.headerColor.replace('bg-', 'border-').replace('100', '300')} ${data.headerColor}`;
-            
-            // Content
-            headerCell.innerHTML = `
-                <div class="flex flex-col gap-2">
-                    <div>
-                        <div class="text-lg font-bold ${data.accentColor}">${data.name}</div>
-                        <div class="text-xs text-gray-600 font-normal">${data.subtitle}</div>
-                    </div>
-                    ${renderDropdown(colKey, state[colKey].type, state[colKey].index, false)}
+            const el = document.getElementById(`header-${colKey}`);
+            if(!el) return;
+
+            el.className = `p-4 w-[23%] align-top border-b-4 ${data.headerColor} ${colKey === 'col3' ? 'hidden md:table-cell' : ''}`;
+            el.innerHTML = `
+                <div class="flex flex-col gap-1">
+                    <div class="text-lg font-bold text-gray-800">${data.name}</div>
+                    <div class="text-xs text-gray-500">${data.subtitle}</div>
+                    <div class="mt-1"><span class="text-[10px] font-bold bg-white/50 px-2 py-0.5 rounded border border-gray-300">สูงสุด: ${data.annual}</span></div>
+                    ${renderDropdowns(colKey, false)}
                 </div>
             `;
         }
 
-        function createRowHtml(label, iconName, key, note = "") {
-            const c1 = getPlanData('col1');
-            const c2 = getPlanData('col2');
-            const c3 = getPlanData('col3');
+        function createRow(label, key, icon, sub = "") {
+            const d1 = getPlanData('col1');
+            const d2 = getPlanData('col2');
+            const d3 = getPlanData('col3');
             
             return `
-                <tr class="hover:bg-gray-50 transition-colors">
-                    <td class="p-3 pl-4 md:pl-6 sticky left-0 bg-white border-r border-gray-200 font-medium text-gray-700 shadow-[4px_0_8px_-4px_rgba(0,0,0,0.05)]">
-                        <div class="flex items-center gap-2">
-                            ${iconName ? `<i data-lucide="${iconName}" class="text-blue-500 w-4 h-4 shrink-0"></i>` : ''}
-                            ${label}
+                <tr class="group">
+                    <td class="p-3 pl-4 border-r border-gray-100 bg-white sticky-col">
+                        <div class="flex items-center gap-2 font-medium text-gray-700">
+                            ${icon ? `<i data-lucide="${icon}" class="w-4 h-4 text-slate-400"></i>` : ''} ${label}
                         </div>
-                        ${note ? `<div class="text-xs text-gray-400 ml-6 hidden md:block">${note}</div>` : ''}
+                        ${sub ? `<div class="text-[10px] text-gray-400 ml-6">${sub}</div>` : ''}
                     </td>
-                    <td class="p-3 text-center text-gray-800">${renderCell(c1[key])}</td>
-                    <td class="p-3 text-center text-gray-800">${renderCell(c2[key])}</td>
-                    <td class="p-3 text-center text-gray-800">${renderCell(c3[key])}</td>
+                    <td class="p-3 text-center border-l border-gray-100">${renderCell(d1[key], key.includes('cat1'))}</td>
+                    <td class="p-3 text-center border-l border-gray-100">${renderCell(d2[key], key.includes('cat1'))}</td>
+                    <td class="p-3 text-center border-l border-gray-100 hidden md:table-cell">${renderCell(d3[key], key.includes('cat1'))}</td>
                 </tr>
             `;
         }
         
-        function createSectionHeader(title) {
-             return `<tr class="bg-gray-100 border-y border-gray-200"><td colSpan="4" class="py-2 px-4 font-bold text-gray-700 text-sm tracking-wide">${title}</td></tr>`;
+        function createSection(title) {
+            return `<tr class="bg-gray-100"><td colspan="4" class="py-2 px-4 text-xs font-bold text-gray-600 uppercase tracking-wide">${title}</td></tr>`;
         }
 
         function renderBody() {
-            const tbody = document.getElementById('table-body');
-            let html = '';
-
-            // Section 1
-            html += createSectionHeader("1. ผลประโยชน์กรณีผู้ป่วยใน (IPD)");
-            html += createRowHtml("ค่าห้อง ค่าอาหาร (ต่อวัน)", "heart", "cat1_room", "สูงสุด 125 วัน หรือ 365 วัน");
-            html += createRowHtml("ค่าห้อง ICU (ต่อวัน)", "activity", "cat1_icu");
-            html += createRowHtml("หมวด 2: บริการทางการแพทย์", "stethoscope", "cat2_med", "ค่ายา, เวชภัณฑ์, เลือด");
-            html += createRowHtml("หมวด 3: ผ่าตัด/หัตถการ", null, "cat3_surg");
-            html += createRowHtml("หมวด 4: เยี่ยมไข้ (ต่อวัน)", null, "cat4_doc");
-            html += createRowHtml("หมวด 5: ผ่าตัดใหญ่ไม่ต้องนอน", null, "cat5_day_surg");
-
-            // Section 2
-            html += createSectionHeader("2. ผลประโยชน์ค่ารักษาพยาบาลอื่นๆ");
-            html += createRowHtml("หมวด 6: ตรวจวินิจฉัย", null, "cat6_diag");
-            html += createRowHtml("หมวด 7: อุบัติเหตุฉุกเฉิน", "zap", "cat7_acc");
-            html += createRowHtml("หมวด 8: เวชศาสตร์ฟื้นฟู", null, "cat8_rehab");
-            html += createRowHtml("หมวด 9: ล้างไต", null, "cat9_kidney");
-            html += createRowHtml("หมวด 10: รักษามะเร็ง", null, "cat10_cancer");
-            html += createRowHtml("หมวด 11: รถพยาบาล", "truck", "cat11_amb");
-            html += createRowHtml("หมวด 12: ผ่าตัดเล็ก", null, "cat12_minor");
+            let html = "";
             
-            // OPD
-            const c1 = getPlanData('col1'), c2 = getPlanData('col2'), c3 = getPlanData('col3');
-            const opdRow = `
-                <tr class="hover:bg-orange-50 transition-colors bg-orange-50/30 border-t border-orange-100">
-                    <td class="p-3 pl-4 md:pl-6 sticky left-0 bg-white border-r border-gray-200 font-medium text-gray-700 shadow-[4px_0_8px_-4px_rgba(0,0,0,0.05)]">
-                       <div class="flex items-center gap-2"><i data-lucide="user-plus" class="text-orange-500 w-4 h-4 shrink-0"></i>หมวด 13: ผู้ป่วยนอก (OPD)</div>
-                    </td>
-                    ${[c1, c2, c3].map(c => `<td class="p-3 text-center">${c.cat13_opd === "ไม่คุ้มครอง" ? '<span class="text-gray-300">-</span>' : `<span class="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-xs md:text-sm font-bold border border-orange-200 shadow-sm whitespace-nowrap">${c.cat13_opd}</span>`}</td>`).join('')}
-                </tr>
-            `;
-            html += opdRow;
+            // 1. IPD (หมวด 1-5)
+            html += createSection("1. ผลประโยชน์ผู้ป่วยใน (IPD)");
+            html += createRow("หมวด 1: ค่าห้อง (ต่อวัน)", "cat1", "bed", "สูงสุด 125 หรือ 365 วัน");
+            html += createRow("ค่าห้อง ICU (ต่อวัน)", "cat1", "activity", "สูงสุดตามวงเงิน (HSX/HSV) หรือ เหมาจ่าย (HH)");
+            html += createRow("หมวด 2: บริการทางการแพทย์", "cat2", "stethoscope", "ค่ายา, เลือด, พยาบาล");
+            html += createRow("หมวด 3: ค่าแพทย์ผ่าตัด", "cat3", "scissors");
+            html += createRow("หมวด 4: เยี่ยมไข้ (ต่อวัน)", "cat4", "user-check");
+            html += createRow("หมวด 5: ผ่าตัดใหญ่ไม่ต้องนอน", "cat5", "sun", "Day Surgery");
 
-            // Section 3
-            html += createSectionHeader("3. ผลประโยชน์เพิ่มเติมพิเศษ");
-            
-            // CI Double
+            // 2. หมวด 6-13
+            html += createSection("2. ค่ารักษาพยาบาลอื่นๆ (หมวด 6-13)");
+            html += createRow("หมวด 6: ตรวจวินิจฉัย", "cat6", "microscope", "ก่อน/หลัง แอดมิท");
+            html += createRow("หมวด 7: อุบัติเหตุฉุกเฉิน", "cat7", "zap", "ภายใน 24 ชม.");
+            html += createRow("หมวด 8: เวชศาสตร์ฟื้นฟู", "cat8", "person-standing");
+            html += createRow("หมวด 9: ล้างไต", "cat9", "droplet");
+            html += createRow("หมวด 10: รักษามะเร็ง", "cat10", "biohazard", "เคมีบำบัด / รังสีรักษา");
+            html += createRow("หมวด 11: รถพยาบาล", "cat11", "ambulance");
+            html += createRow("หมวด 12: ผ่าตัดเล็ก", "cat12", "pen-tool", "Minor Surgery");
+            html += createRow("หมวด 13: ผู้ป่วยนอก (OPD)", "cat13", "users", "รักษาทั่วไป ไม่ต้องแอดมิท");
+
+            // 3. Special Benefits
+            html += createSection("3. ผลประโยชน์เพิ่มเติมพิเศษ");
             html += `
-                <tr class="hover:bg-red-50 transition-colors">
-                    <td class="p-3 pl-4 md:pl-6 sticky left-0 bg-white border-r border-gray-200 font-medium text-gray-700 shadow-[4px_0_8px_-4px_rgba(0,0,0,0.05)]">
-                       <div class="flex items-center gap-2"><i data-lucide="shield" class="text-red-500 w-4 h-4 shrink-0"></i>เบิ้ลความคุ้มครองโรคร้ายแรง</div>
-                       <div class="text-xs text-gray-400 ml-6 hidden md:block">ปีที่เป็น + 3 ปีต่อเนื่อง</div>
+                <tr class="group hover:bg-red-50">
+                    <td class="p-3 pl-4 border-r border-gray-100 bg-white sticky-col">
+                        <div class="flex items-center gap-2 font-medium text-gray-700"><i data-lucide="shield-alert" class="w-4 h-4 text-red-500"></i> โรคร้ายแรง (CI Double)</div>
+                        <div class="text-[10px] text-gray-400 ml-6">เบิ้ลวงเงิน 2 เท่า (4 ปีกรมธรรม์)</div>
                     </td>
-                    ${[c1, c2, c3].map(c => `<td class="p-3 text-center text-sm">${c.ci === "ไม่คุ้มครอง" ? '-' : `<span class="text-red-600 font-bold bg-red-50 px-2 py-1 rounded border border-red-100">${c.ci}</span>`}</td>`).join('')}
+                    ${['col1','col2','col3'].map(c => {
+                        const d = getPlanData(c);
+                        const hide = c === 'col3' ? 'hidden md:table-cell' : '';
+                        return `<td class="p-3 text-center border-l border-gray-100 ${hide}">${d.ci === '-' ? '-' : `<span class="bg-red-100 text-red-700 px-2 py-0.5 rounded text-xs font-bold border border-red-200">${d.ci}</span>`}</td>`;
+                    }).join('')}
                 </tr>
             `;
-
-            // NCB
-             html += `
-                <tr class="hover:bg-emerald-50 transition-colors">
-                    <td class="p-3 pl-4 md:pl-6 sticky left-0 bg-white border-r border-gray-200 font-medium text-gray-700 shadow-[4px_0_8px_-4px_rgba(0,0,0,0.05)]">
-                       <div class="flex items-center gap-2"><i data-lucide="dollar-sign" class="text-emerald-500 w-4 h-4 shrink-0"></i>เงินคืนพิเศษ (No Claim)</div>
-                    </td>
-                    ${[c1, c2, c3].map(c => `<td class="p-3 text-center text-emerald-700 font-bold">${c.ncb === "ไม่มี" ? '<span class="text-gray-400 font-normal">ไม่มี</span>' : c.ncb}</td>`).join('')}
-                </tr>
-            `;
-            
-            // Death
-             html += `
-                <tr class="bg-slate-800 text-white border-t-2 border-slate-600">
-                    <td class="p-3 pl-4 md:pl-6 sticky left-0 bg-slate-800 border-r border-slate-700 font-medium shadow-[4px_0_8px_-4px_rgba(0,0,0,0.1)]">
-                       กรณีเสียชีวิต
-                       <div class="text-xs text-slate-400 font-light">ทุนประกันชีวิตหลัก</div>
-                    </td>
-                    ${[c1, c2, c3].map(c => `<td class="p-3 text-center font-bold text-lg">${c.death}</td>`).join('')}
-                </tr>
-            `;
-
-            // Section 4 Limits
-            html += createSectionHeader("4. เงื่อนไขการจำกัดวงเงิน");
-            html += createRowHtml("วงเงินต่อการรักษา", null, "limit_confinement");
+            html += createRow("เงินคืนพิเศษ (No Claim Bonus)", "ncb", "piggy-bank");
             html += `
-                <tr class="hover:bg-gray-50 transition-colors">
-                    <td class="p-3 pl-4 md:pl-6 sticky left-0 bg-white border-r border-gray-200 font-medium text-gray-700 shadow-[4px_0_8px_-4px_rgba(0,0,0,0.05)]">
-                        วงเงินสูงสุดต่อปี
+                <tr class="bg-slate-800 text-white border-t-4 border-slate-600">
+                    <td class="p-3 pl-4 border-r border-slate-700 bg-slate-800 sticky-col">
+                        <div class="flex items-center gap-2 font-medium"><i data-lucide="heart" class="w-4 h-4 text-rose-400"></i> กรณีเสียชีวิต</div>
+                        <div class="text-[10px] text-slate-400 ml-6">ทุนประกันชีวิตหลัก</div>
                     </td>
-                    ${[c1, c2, c3].map(c => `<td class="p-3 text-center text-sm font-bold text-gray-800">${c.limit_annual}</td>`).join('')}
+                    ${['col1','col2','col3'].map(c => {
+                         const d = getPlanData(c);
+                         const hide = c === 'col3' ? 'hidden md:table-cell' : '';
+                         return `<td class="p-3 text-center border-l border-slate-700 font-bold ${hide}">${d.death}</td>`;
+                    }).join('')}
                 </tr>
             `;
 
-            tbody.innerHTML = html;
+            document.getElementById('table-body').innerHTML = html;
         }
 
         function renderAll() {
             renderHeader('col1');
             renderHeader('col2');
             renderHeader('col3');
-            
-            // Sync mobile dropdowns
-            renderDropdown('col1', state.col1.type, state.col1.index, true);
-            renderDropdown('col2', state.col2.type, state.col2.index, true);
-            
+            renderDropdowns('col1', true);
+            renderDropdowns('col2', true);
             renderBody();
             lucide.createIcons();
         }
 
-        // Init
-        document.addEventListener('DOMContentLoaded', () => {
-            renderAll();
-        });
-
+        document.addEventListener('DOMContentLoaded', renderAll);
     </script>
 </body>
 </html>

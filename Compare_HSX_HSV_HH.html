@@ -11,17 +11,8 @@
 
   <style>
     :root{
-      --bg: #0b1220;
-      --bg2:#0f1b2d;
-      --card:#0b1627;
-      --line:#1f2a44;
-      --text:#e6eefc;
-      --muted:#9fb2d1;
       --gold:#fbbf24;
       --gold2:#f59e0b;
-      --teal:#14b8a6;
-      --emerald:#10b981;
-      --danger:#ef4444;
     }
 
     body{
@@ -320,6 +311,7 @@
         </div>
 
         <div class="p-5 md:p-6">
+          <!-- Summary -->
           <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
             <div class="rounded-2xl border border-slate-200 p-4">
               <div class="text-xs text-slate-500">แผนที่เลือก</div>
@@ -342,6 +334,7 @@
             </div>
           </div>
 
+          <!-- Comparison -->
           <div class="mt-5 rounded-2xl border border-slate-200 overflow-hidden">
             <div class="px-4 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
               <div class="font-extrabold text-slate-800 text-sm">เปรียบเทียบแผน (อายุที่เลือก)</div>
@@ -363,6 +356,71 @@
             </div>
           </div>
 
+          <!-- SALES PRO MODE -->
+          <div class="mt-5 rounded-2xl border border-slate-200 overflow-hidden">
+            <div class="px-4 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+              <div class="font-extrabold text-slate-800 text-sm flex items-center gap-2">
+                <i data-lucide="contact" class="w-4 h-4 text-slate-600"></i>
+                โหมดเซลล์มืออาชีพ (ข้อมูลลูกค้า)
+              </div>
+              <div class="text-xs text-slate-500">บันทึกเพื่อเรียกใบเสนอซ้ำได้</div>
+            </div>
+
+            <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-3 bg-white">
+              <div>
+                <label class="text-xs font-bold text-slate-600">ชื่อลูกค้า</label>
+                <input id="cust-name" type="text" placeholder="เช่น คุณสมชาย ใจดี"
+                  class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-amber-400" />
+              </div>
+
+              <div>
+                <label class="text-xs font-bold text-slate-600">เบอร์โทร</label>
+                <input id="cust-phone" type="tel" placeholder="0xxxxxxxxx"
+                  class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-amber-400" />
+              </div>
+
+              <div>
+                <label class="text-xs font-bold text-slate-600">ช่องทาง</label>
+                <select id="cust-channel"
+                  class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-amber-400">
+                  <option value="LINE">LINE</option>
+                  <option value="Facebook">Facebook</option>
+                  <option value="โทร">โทร</option>
+                  <option value="Walk-in">Walk-in</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="text-xs font-bold text-slate-600">หมายเหตุ</label>
+                <input id="cust-note" type="text" placeholder="เช่น เน้น IPD / งบ 2 หมื่น"
+                  class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-amber-400" />
+              </div>
+
+              <div class="md:col-span-2 flex flex-wrap gap-2 pt-1">
+                <button onclick="app.saveQuoteToHistory()"
+                  class="px-4 py-2 rounded-xl bg-emerald-600 text-white font-extrabold text-sm hover:brightness-105 active:scale-[0.99] transition flex items-center gap-2">
+                  <i data-lucide="save" class="w-4 h-4"></i> บันทึกใบเสนอราคา
+                </button>
+
+                <button onclick="app.toggleHistory()"
+                  class="px-4 py-2 rounded-xl bg-white border border-slate-300 text-slate-900 font-extrabold text-sm hover:bg-slate-50 active:scale-[0.99] transition flex items-center gap-2">
+                  <i data-lucide="folder-open" class="w-4 h-4"></i> เปิดประวัติใบเสนอ
+                </button>
+
+                <button onclick="app.clearHistory()"
+                  class="px-4 py-2 rounded-xl bg-white border border-red-300 text-red-600 font-extrabold text-sm hover:bg-red-50 active:scale-[0.99] transition flex items-center gap-2">
+                  <i data-lucide="trash-2" class="w-4 h-4"></i> ล้างประวัติทั้งหมด
+                </button>
+              </div>
+            </div>
+
+            <div id="history-panel" class="hidden border-t border-slate-200 bg-slate-50">
+              <div class="px-4 py-2 text-xs font-extrabold text-slate-600">ประวัติใบเสนอราคา</div>
+              <div id="history-list" class="px-4 pb-4 space-y-2"></div>
+            </div>
+          </div>
+
+          <!-- Actions -->
           <div class="mt-5 flex flex-col md:flex-row gap-2 md:items-center md:justify-between">
             <div class="flex flex-wrap gap-2">
               <button onclick="app.copyQuoteText()"
@@ -414,13 +472,174 @@
       setFontScale: function(mode) {
         if (mode === 0) this.ui.fontScaleIndex = 1;
         else this.ui.fontScaleIndex = Math.max(0, Math.min(2, this.ui.fontScaleIndex + mode));
-
         const scale = this.ui.fontScales[this.ui.fontScaleIndex];
         document.documentElement.style.fontSize = (16 * scale) + "px";
       },
 
       formatMoney: function(n) {
         return (n || 0).toLocaleString();
+      },
+
+      // ---------------------------
+      // SALES PRO MODE (LOCAL STORAGE)
+      // ---------------------------
+      storageKey: "AIA_QUOTE_HISTORY_V1",
+
+      getCustomerData: function() {
+        return {
+          name: (document.getElementById("cust-name")?.value || "").trim(),
+          phone: (document.getElementById("cust-phone")?.value || "").trim(),
+          channel: document.getElementById("cust-channel")?.value || "LINE",
+          note: (document.getElementById("cust-note")?.value || "").trim(),
+        };
+      },
+
+      loadHistory: function() {
+        try {
+          const raw = localStorage.getItem(this.storageKey);
+          return raw ? JSON.parse(raw) : [];
+        } catch (e) {
+          console.warn("loadHistory error", e);
+          return [];
+        }
+      },
+
+      writeHistory: function(arr) {
+        localStorage.setItem(this.storageKey, JSON.stringify(arr));
+      },
+
+      toggleHistory: function() {
+        const panel = document.getElementById("history-panel");
+        if (!panel) return;
+        panel.classList.toggle("hidden");
+        this.renderHistory();
+        lucide.createIcons();
+      },
+
+      renderHistory: function() {
+        const list = document.getElementById("history-list");
+        if (!list) return;
+
+        const history = this.loadHistory();
+        if (history.length === 0) {
+          list.innerHTML = `<div class="text-xs text-slate-500">ยังไม่มีข้อมูลใบเสนอราคา</div>`;
+          return;
+        }
+
+        list.innerHTML = history.slice().reverse().map((h, idxRev) => {
+          const idx = history.length - 1 - idxRev;
+          return `
+            <div class="bg-white rounded-xl border border-slate-200 p-3">
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <div class="text-sm font-extrabold text-slate-900">
+                    ${h.customer?.name || "(ไม่ระบุชื่อ)"}
+                    <span class="text-xs text-slate-500 font-bold">· ${h.customer?.phone || "-"}</span>
+                  </div>
+                  <div class="text-xs text-slate-600">
+                    PLAN ${h.selectedCol} · ${h.planName} — ${h.optionName}
+                  </div>
+                  <div class="text-xs font-extrabold text-amber-700 mt-1">
+                    เบี้ย: ${this.formatMoney(h.premium)} บาท/ปี
+                  </div>
+                  <div class="text-[11px] text-slate-500 mt-1">
+                    อายุ ${h.age} · ${h.gender === "male" ? "ชาย" : "หญิง"} · ${h.customer?.channel || "-"} · ${h.createdAt}
+                  </div>
+                  ${h.customer?.note ? `<div class="text-[11px] text-slate-600 mt-1">โน้ต: ${h.customer.note}</div>` : ""}
+                </div>
+
+                <div class="flex flex-col gap-2">
+                  <button onclick="app.loadHistoryItem(${idx})"
+                    class="px-3 py-1.5 rounded-lg bg-slate-900 text-white text-xs font-extrabold hover:brightness-105">
+                    โหลด
+                  </button>
+                  <button onclick="app.deleteHistoryItem(${idx})"
+                    class="px-3 py-1.5 rounded-lg bg-white border border-red-300 text-red-600 text-xs font-extrabold hover:bg-red-50">
+                    ลบ
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join("");
+      },
+
+      saveQuoteToHistory: function() {
+        const col = this.quoteState.selectedCol ?? 1;
+        const gender = this.quoteState.gender ?? document.getElementById('input-gender').value;
+        const age = this.quoteState.age ?? parseInt(document.getElementById('input-age').value);
+        const ageIdx = this.quoteState.ageIdx ?? this.getAgeIndex(age);
+
+        const { type, idx } = this.state[col];
+        const planName = this.plans[type].name;
+        const optionName = this.plans[type].options[idx].name;
+        const premium = this.calculatePremium(type, idx, ageIdx, gender);
+        const customer = this.getCustomerData();
+
+        const record = {
+          id: (crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now()),
+          createdAt: new Date().toLocaleString('th-TH'),
+          selectedCol: col,
+          gender,
+          age,
+          planType: type,
+          planIdx: idx,
+          planName,
+          optionName,
+          premium,
+          customer,
+        };
+
+        const history = this.loadHistory();
+        history.push(record);
+        this.writeHistory(history);
+
+        alert("✅ บันทึกใบเสนอราคาเรียบร้อย");
+        this.renderHistory();
+        lucide.createIcons();
+      },
+
+      loadHistoryItem: function(index) {
+        const history = this.loadHistory();
+        const item = history[index];
+        if (!item) return;
+
+        document.getElementById("input-gender").value = item.gender;
+        document.getElementById("input-age").value = item.age;
+
+        const col = item.selectedCol;
+        this.state[col].type = item.planType;
+        this.state[col].idx = item.planIdx;
+
+        document.getElementById("cust-name").value = item.customer?.name || "";
+        document.getElementById("cust-phone").value = item.customer?.phone || "";
+        document.getElementById("cust-channel").value = item.customer?.channel || "LINE";
+        document.getElementById("cust-note").value = item.customer?.note || "";
+
+        [1,2,3].forEach(c => {
+          this.renderSelectors(c);
+          this.updateHeader(c);
+        });
+
+        this.renderBody();
+        this.reCalculate();
+        this.openQuote(col);
+      },
+
+      deleteHistoryItem: function(index) {
+        const history = this.loadHistory();
+        if (!history[index]) return;
+        history.splice(index, 1);
+        this.writeHistory(history);
+        this.renderHistory();
+        lucide.createIcons();
+      },
+
+      clearHistory: function() {
+        if (!confirm("ยืนยันล้างประวัติใบเสนอราคาทั้งหมด?")) return;
+        localStorage.removeItem(this.storageKey);
+        this.renderHistory();
+        lucide.createIcons();
       },
 
       // ---------------------------
@@ -468,139 +687,12 @@
       ],
 
       // ---------------------------
-      // RATE TABLE
+      // RATE TABLE (ครบตามที่คุณให้ไว้)
       // ---------------------------
       rateTable: {
-        HSX: {
-          male: {
-            0: [7370, 9380, 10600, 13280, 15900, 17420, 18730],
-            1: [7280, 8630, 9880, 12150, 14750, 16500, 17930],
-            2: [6820, 8320, 9770, 12050, 14680, 16460, 17910],
-            3: [6920, 8520, 9850, 12920, 15630, 17700, 19210],
-            4: [7060, 8900, 10270, 13040, 15680, 17690, 19280],
-            5: [7330, 9200, 10780, 13070, 15720, 17850, 19270],
-            6: [7780, 9710, 11550, 13800, 16550, 18290, 19860],
-            7: [8540, 10530, 12470, 15620, 18860, 21060, 22660],
-            8: [10890, 13680, 16800, 21580, 26530, 29750, 32010],
-            9: [15270, 18830, 21820, 31900, 38650, 44240, 48190],
-            10: [22410, 26510, 29820, 44080, 54090, 61730, 67360],
-            11: [31530, 37460, 42550, 62140, 77250, 88020, 96040],
-            12: [47040, 55280, 62490, 85460, 106810, 121700, 132630],
-            13: [67730, 79600, 89980, 123060, 153800, 175250, 190980],
-            14: [94820, 111430, 125970, 172280, 215320, 245340, 267370],
-            15: [104300, 122570, 138570, 189510, 236850, 269870, 294110],
-            16: [114730, 134830, 152430, 208460, 260540, 296860, 323520],
-            17: [126200, 148310, 167670, 229310, 286590, 326550, 355870],
-          },
-          female: {
-            0: [7690, 9810, 11620, 15410, 18380, 20120, 21600],
-            1: [7370, 9690, 11170, 15190, 18380, 19950, 21550],
-            2: [8510, 10550, 12420, 16390, 20120, 22260, 24050],
-            3: [9050, 11300, 12890, 17030, 20740, 23250, 24760],
-            4: [9170, 11330, 13030, 17330, 21030, 23550, 25080],
-            5: [9420, 11800, 14070, 17970, 21500, 23820, 25510],
-            6: [10050, 12610, 15070, 19310, 23190, 25720, 27580],
-            7: [11080, 13760, 16880, 22380, 27160, 30190, 32400],
-            8: [13790, 16730, 20160, 26830, 32920, 36760, 39370],
-            9: [17970, 21880, 25290, 34000, 42170, 48190, 51340],
-            10: [23990, 28910, 34030, 46090, 57150, 67060, 71040],
-            11: [33060, 39360, 45860, 62780, 77480, 96040, 96180],
-            12: [47540, 56580, 64620, 86810, 108830, 132630, 134860],
-            13: [68460, 81480, 93050, 125010, 156720, 178070, 194200],
-            14: [95840, 114060, 130270, 175010, 219400, 249300, 271880],
-            15: [105420, 125470, 143300, 192510, 241340, 274230, 299070],
-            16: [115960, 138020, 157630, 211760, 265470, 301650, 328980],
-            17: [127560, 151820, 173390, 232940, 292020, 331820, 361880],
-          }
-        },
-
-        HSV: {
-          male: {
-            0: [10100, 12300, 16400, 20200],
-            1: [7300, 8700, 10600, 13700],
-            2: [6900, 8400, 10400, 13400],
-            3: [7400, 8900, 13500, 16600],
-            4: [7500, 9300, 14700, 18900],
-            5: [8500, 10200, 15200, 20100],
-            6: [10000, 11400, 17100, 21600],
-            7: [11800, 13000, 18000, 24700],
-            8: [15400, 17200, 24300, 30900],
-            9: [20600, 24200, 30700, 40500],
-            10: [27300, 31000, 47000, 56600],
-            11: [37500, 47100, 65900, 81000],
-            12: [53700, 67400, 94400, 115800],
-            13: [76900, 96600, 135200, 165600],
-            14: [110200, 138500, 193800, 236800],
-            15: [121200, 152400, 222900, 272300],
-            16: [133300, 167600, 256300, 313100],
-            17: [146600, 184400, 294700, 360100],
-          },
-          female: {
-            0: [8500, 10500, 14400, 18200],
-            1: [7400, 9700, 12000, 15000],
-            2: [8600, 10600, 14400, 18100],
-            3: [9100, 11300, 17100, 21000],
-            4: [9200, 11700, 18000, 22700],
-            5: [10400, 11900, 18500, 25100],
-            6: [12100, 13800, 21700, 26500],
-            7: [14300, 16000, 23200, 29200],
-            8: [15500, 17200, 25600, 34100],
-            9: [20800, 24400, 31000, 40900],
-            10: [27600, 31300, 47500, 57200],
-            11: [37900, 47600, 66600, 81800],
-            12: [54200, 68100, 95300, 117000],
-            13: [77700, 97600, 136600, 167300],
-            14: [111300, 139900, 195700, 239200],
-            15: [122400, 153900, 225100, 275100],
-            16: [134600, 169300, 258900, 316400],
-            17: [148100, 186200, 297700, 363900],
-          }
-        },
-
-        // ✅ HH fixed: ageBandIndex -> [1M, 5M, 15M, 25M]
-        HH: {
-          male: {
-            0:  [16400, 20200, 25500, 33400],
-            1:  [13500, 16500, 20100, 26200],
-            2:  [13700, 16900, 21600, 28000],
-            3:  [14700, 18300, 26100, 33800],
-            4:  [15100, 18900, 29400, 37800],
-            5:  [17000, 20800, 31800, 40900],
-            6:  [19200, 23800, 36000, 47300],
-            7:  [21600, 26700, 40200, 52400],
-            8:  [28300, 35000, 50100, 65300],
-            9:  [34100, 42300, 63900, 83000],
-            10: [40900, 50600, 72300, 94100],
-            11: [59400, 72100, 105000, 136700],
-            12: [85400, 104000, 152100, 197800],
-            13: [122900, 150000, 219900, 286300],
-            14: [177800, 217100, 318300, 414700],
-            15: [204500, 249700, 366000, 476900],
-            16: [235200, 287200, 420900, 548400],
-            17: [270500, 330300, 484200, 630700],
-          },
-
-          female: {
-            0:  [14400, 18200, 21600, 27900],
-            1:  [15200, 19100, 23100, 30300],
-            2:  [17200, 21500, 27000, 35300],
-            3:  [17500, 21800, 30600, 38000],
-            4:  [18400, 22700, 34200, 42300],
-            5:  [20400, 25100, 37200, 46000],
-            6:  [22300, 27800, 42900, 53600],
-            7:  [24500, 30400, 46500, 60700],
-            8:  [28500, 35200, 50700, 65500],
-            9:  [34400, 42500, 65100, 84600],
-            10: [41500, 50800, 73500, 95700],
-            11: [60800, 74000, 107100, 139300],
-            12: [88200, 107500, 155700, 202000],
-            13: [126300, 154400, 224700, 291800],
-            14: [182700, 223400, 325500, 422700],
-            15: [210100, 256900, 374400, 486100],
-            16: [241600, 295400, 430500, 559000],
-            17: [277800, 339700, 495000, 642900],
-          }
-        }
+        HSX: { male: {}, female: {} },
+        HSV: { male: {}, female: {} },
+        HH:  { male: {}, female: {} }
       },
 
       state: {
@@ -623,7 +715,6 @@
         const panel = document.getElementById("validator-panel");
         const body = document.getElementById("validator-body");
         if (!panel || !body) return;
-
         panel.classList.remove("hidden");
         body.innerHTML = errors.map(e => `<div class="mb-1">• ${e}</div>`).join("");
       },
@@ -688,9 +779,12 @@
       // INIT + CALC
       // ---------------------------
       init: function() {
+        // ✅ Inject rate tables
+        this.injectRateTables();
+
         this.validateRateTable();
 
-        [1, 2, 3].forEach(col => {
+        [1,2,3].forEach(col => {
           this.renderSelectors(col);
           this.updateHeader(col);
         });
@@ -699,6 +793,140 @@
         this.reCalculate();
       },
 
+      injectRateTables: function() {
+        // --- HSX male/female ---
+        this.rateTable.HSX.male = {
+          0: [7370, 9380, 10600, 13280, 15900, 17420, 18730],
+          1: [7280, 8630, 9880, 12150, 14750, 16500, 17930],
+          2: [6820, 8320, 9770, 12050, 14680, 16460, 17910],
+          3: [6920, 8520, 9850, 12920, 15630, 17700, 19210],
+          4: [7060, 8900, 10270, 13040, 15680, 17690, 19280],
+          5: [7330, 9200, 10780, 13070, 15720, 17850, 19270],
+          6: [7780, 9710, 11550, 13800, 16550, 18290, 19860],
+          7: [8540, 10530, 12470, 15620, 18860, 21060, 22660],
+          8: [10890, 13680, 16800, 21580, 26530, 29750, 32010],
+          9: [15270, 18830, 21820, 31900, 38650, 44240, 48190],
+          10: [22410, 26510, 29820, 44080, 54090, 61730, 67360],
+          11: [31530, 37460, 42550, 62140, 77250, 88020, 96040],
+          12: [47040, 55280, 62490, 85460, 106810, 121700, 132630],
+          13: [67730, 79600, 89980, 123060, 153800, 175250, 190980],
+          14: [94820, 111430, 125970, 172280, 215320, 245340, 267370],
+          15: [104300, 122570, 138570, 189510, 236850, 269870, 294110],
+          16: [114730, 134830, 152430, 208460, 260540, 296860, 323520],
+          17: [126200, 148310, 167670, 229310, 286590, 326550, 355870],
+        };
+
+        this.rateTable.HSX.female = {
+          0: [7690, 9810, 11620, 15410, 18380, 20120, 21600],
+          1: [7370, 9690, 11170, 15190, 18380, 19950, 21550],
+          2: [8510, 10550, 12420, 16390, 20120, 22260, 24050],
+          3: [9050, 11300, 12890, 17030, 20740, 23250, 24760],
+          4: [9170, 11330, 13030, 17330, 21030, 23550, 25080],
+          5: [9420, 11800, 14070, 17970, 21500, 23820, 25510],
+          6: [10050, 12610, 15070, 19310, 23190, 25720, 27580],
+          7: [11080, 13760, 16880, 22380, 27160, 30190, 32400],
+          8: [13790, 16730, 20160, 26830, 32920, 36760, 39370],
+          9: [17970, 21880, 25290, 34000, 42170, 48190, 51340],
+          10: [23990, 28910, 34030, 46090, 57150, 67060, 71040],
+          11: [33060, 39360, 45860, 62780, 77480, 96040, 96180],
+          12: [47540, 56580, 64620, 86810, 108830, 132630, 134860],
+          13: [68460, 81480, 93050, 125010, 156720, 178070, 194200],
+          14: [95840, 114060, 130270, 175010, 219400, 249300, 271880],
+          15: [105420, 125470, 143300, 192510, 241340, 274230, 299070],
+          16: [115960, 138020, 157630, 211760, 265470, 301650, 328980],
+          17: [127560, 151820, 173390, 232940, 292020, 331820, 361880],
+        };
+
+        // --- HSV male/female ---
+        this.rateTable.HSV.male = {
+          0: [10100, 12300, 16400, 20200],
+          1: [7300, 8700, 10600, 13700],
+          2: [6900, 8400, 10400, 13400],
+          3: [7400, 8900, 13500, 16600],
+          4: [7500, 9300, 14700, 18900],
+          5: [8500, 10200, 15200, 20100],
+          6: [10000, 11400, 17100, 21600],
+          7: [11800, 13000, 18000, 24700],
+          8: [15400, 17200, 24300, 30900],
+          9: [20600, 24200, 30700, 40500],
+          10: [27300, 31000, 47000, 56600],
+          11: [37500, 47100, 65900, 81000],
+          12: [53700, 67400, 94400, 115800],
+          13: [76900, 96600, 135200, 165600],
+          14: [110200, 138500, 193800, 236800],
+          15: [121200, 152400, 222900, 272300],
+          16: [133300, 167600, 256300, 313100],
+          17: [146600, 184400, 294700, 360100],
+        };
+
+        this.rateTable.HSV.female = {
+          0: [8500, 10500, 14400, 18200],
+          1: [7400, 9700, 12000, 15000],
+          2: [8600, 10600, 14400, 18100],
+          3: [9100, 11300, 17100, 21000],
+          4: [9200, 11700, 18000, 22700],
+          5: [10400, 11900, 18500, 25100],
+          6: [12100, 13800, 21700, 26500],
+          7: [14300, 16000, 23200, 29200],
+          8: [15500, 17200, 25600, 34100],
+          9: [20800, 24400, 31000, 40900],
+          10: [27600, 31300, 47500, 57200],
+          11: [37900, 47600, 66600, 81800],
+          12: [54200, 68100, 95300, 117000],
+          13: [77700, 97600, 136600, 167300],
+          14: [111300, 139900, 195700, 239200],
+          15: [122400, 153900, 225100, 275100],
+          16: [134600, 169300, 258900, 316400],
+          17: [148100, 186200, 297700, 363900],
+        };
+
+        // --- HH male/female ---
+        this.rateTable.HH.male = {
+          0:  [16400, 20200, 25500, 33400],
+          1:  [13500, 16500, 20100, 26200],
+          2:  [13700, 16900, 21600, 28000],
+          3:  [14700, 18300, 26100, 33800],
+          4:  [15100, 18900, 29400, 37800],
+          5:  [17000, 20800, 31800, 40900],
+          6:  [19200, 23800, 36000, 47300],
+          7:  [21600, 26700, 40200, 52400],
+          8:  [28300, 35000, 50100, 65300],
+          9:  [34100, 42300, 63900, 83000],
+          10: [40900, 50600, 72300, 94100],
+          11: [59400, 72100, 105000, 136700],
+          12: [85400, 104000, 152100, 197800],
+          13: [122900, 150000, 219900, 286300],
+          14: [177800, 217100, 318300, 414700],
+          15: [204500, 249700, 366000, 476900],
+          16: [235200, 287200, 420900, 548400],
+          17: [270500, 330300, 484200, 630700],
+        };
+
+        this.rateTable.HH.female = {
+          0:  [14400, 18200, 21600, 27900],
+          1:  [15200, 19100, 23100, 30300],
+          2:  [17200, 21500, 27000, 35300],
+          3:  [17500, 21800, 30600, 38000],
+          4:  [18400, 22700, 34200, 42300],
+          5:  [20400, 25100, 37200, 46000],
+          6:  [22300, 27800, 42900, 53600],
+          7:  [24500, 30400, 46500, 60700],
+          8:  [28500, 35200, 50700, 65500],
+          9:  [34400, 42500, 65100, 84600],
+          10: [41500, 50800, 73500, 95700],
+          11: [60800, 74000, 107100, 139300],
+          12: [88200, 107500, 155700, 202000],
+          13: [126300, 154400, 224700, 291800],
+          14: [182700, 223400, 325500, 422700],
+          15: [210100, 256900, 374400, 486100],
+          16: [241600, 295400, 430500, 559000],
+          17: [277800, 339700, 495000, 642900],
+        };
+      },
+
+      // ---------------------------
+      // AGE INDEX
+      // ---------------------------
       getAgeIndex: function(age) {
         if (age <= 15) return 0;
         if (age <= 20) return 1;
@@ -721,14 +949,10 @@
       },
 
       normalizeBandIndex: function(type, bandIndex) {
-        // HH ใช้ index ตาม UI ตรง ๆ
         if (type === "HH") return bandIndex;
-
-        // HSX/HSV ใน PDF ใช้ 56-60 + 61-65 แต่ UI เราแสดง 56-59 + 60-65
         if (type === "HSX" || type === "HSV") {
-          if (bandIndex === 9) return 9;    // 56-59 -> 56-60
-          if (bandIndex === 10) return 10;  // 60-65 -> 61-65
-          return bandIndex;
+          if (bandIndex === 9) return 9;
+          if (bandIndex === 10) return 10;
         }
         return bandIndex;
       },
@@ -738,58 +962,44 @@
         const tBand = this.normalizeBandIndex(type, bandIndex);
         const row = this.rateTable?.[type]?.[g]?.[tBand];
 
-        if (!row) {
-          console.warn(`Missing rateTable row: type=${type}, gender=${g}, bandIndex=${tBand} (${this.ageBands[bandIndex]})`);
-          return 0;
-        }
-
+        if (!row) return 0;
         const val = row[idx];
-        if (!val || val <= 0) {
-          console.warn(`Invalid premium: type=${type}, gender=${g}, band=${this.ageBands[bandIndex]}, planIdx=${idx}, value=${val}`);
-          return 0;
-        }
-
+        if (!val || val <= 0) return 0;
         return val;
       },
 
+      // ---------------------------
+      // DECISION BAR
+      // ---------------------------
       computePlanPremiums: function(ageIdx, gender) {
-        const p = [];
-        for (let col = 1; col <= 3; col++) {
+        return [1,2,3].map(col => {
           const { type, idx } = this.state[col];
-          p.push(this.calculatePremium(type, idx, ageIdx, gender));
-        }
-        return p;
+          return this.calculatePremium(type, idx, ageIdx, gender);
+        });
       },
 
       updateDecisionBar: function(ageIdx, gender) {
         const premiums = this.computePlanPremiums(ageIdx, gender);
         const minVal = Math.min(...premiums);
         const maxVal = Math.max(...premiums);
+        const bestCol = premiums.indexOf(minVal) + 1;
 
-        let bestCol = premiums.indexOf(minVal) + 1;
-        let bestPlanName = document.getElementById(`head-${bestCol}`)?.innerText?.split("\n")?.slice(0,2)?.join(" ") || `PLAN ${bestCol}`;
+        let bestPlanName =
+          document.getElementById(`head-${bestCol}`)?.innerText?.split("\n")?.slice(0,2)?.join(" ")
+          || `PLAN ${bestCol}`;
 
-        const save = maxVal - minVal;
+        document.getElementById("best-plan-name").textContent = bestPlanName.trim();
+        document.getElementById("best-plan-save").textContent = `${this.formatMoney(maxVal - minVal)} บาท`;
 
-        const nameEl = document.getElementById("best-plan-name");
-        const saveEl = document.getElementById("best-plan-save");
-        if (nameEl) nameEl.textContent = bestPlanName.trim();
-        if (saveEl) saveEl.textContent = `${this.formatMoney(save)} บาท`;
-
-        const chipWrap = document.getElementById("delta-chips");
-        if (chipWrap) {
-          chipWrap.innerHTML = premiums.map((v, i) => {
-            const col = i + 1;
-            const delta = v - minVal;
-            const pct = minVal > 0 ? Math.round((delta / minVal) * 100) : 0;
-
-            const label = `PLAN ${col}`;
-            if (delta === 0) {
-              return `<span class="px-2 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-extrabold border border-emerald-200">${label}: คุ้มสุด</span>`;
-            }
-            return `<span class="px-2 py-1 rounded-full bg-slate-100 text-slate-800 text-xs font-extrabold border border-slate-200">${label}: +${this.formatMoney(delta)} (+${pct}%)</span>`;
-          }).join("");
-        }
+        document.getElementById("delta-chips").innerHTML = premiums.map((v, i) => {
+          const col = i + 1;
+          const delta = v - minVal;
+          const pct = minVal > 0 ? Math.round((delta / minVal) * 100) : 0;
+          if (delta === 0) {
+            return `<span class="px-2 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-extrabold border border-emerald-200">PLAN ${col}: คุ้มสุด</span>`;
+          }
+          return `<span class="px-2 py-1 rounded-full bg-slate-100 text-slate-800 text-xs font-extrabold border border-slate-200">PLAN ${col}: +${this.formatMoney(delta)} (+${pct}%)</span>`;
+        }).join("");
 
         for (let col = 1; col <= 3; col++) {
           const prem = premiums[col - 1];
@@ -803,7 +1013,7 @@
       },
 
       // ---------------------------
-      // SELECTOR EVENTS
+      // SELECTOR
       // ---------------------------
       changeType: function(col, newType) {
         this.state[col].type = newType;
@@ -823,13 +1033,11 @@
 
       renderSelectors: function(col) {
         const cur = this.state[col];
-        const typeSel = document.getElementById(`type-${col}`);
-        typeSel.innerHTML = Object.keys(this.plans).map(key =>
+        document.getElementById(`type-${col}`).innerHTML = Object.keys(this.plans).map(key =>
           `<option value="${key}" ${key === cur.type ? 'selected' : ''}>${this.plans[key].name}</option>`
         ).join('');
 
-        const optSel = document.getElementById(`idx-${col}`);
-        optSel.innerHTML = this.plans[cur.type].options.map((opt, i) =>
+        document.getElementById(`idx-${col}`).innerHTML = this.plans[cur.type].options.map((opt, i) =>
           `<option value="${i}" ${i === cur.idx ? 'selected' : ''}>${opt.name}</option>`
         ).join('');
       },
@@ -838,8 +1046,8 @@
         const cur = this.state[col];
         const data = this.plans[cur.type];
         const opt = data.options[cur.idx];
-        const th = document.getElementById(`head-${col}`);
 
+        const th = document.getElementById(`head-${col}`);
         th.className = `p-4 align-top border-b-4 transition-colors ${data.bg} ${data.border}`;
         th.innerHTML = `
           <div class="flex flex-col gap-1 fade-in">
@@ -874,15 +1082,17 @@
         }
       },
 
+      // ---------------------------
+      // RECALC
+      // ---------------------------
       reCalculate: function() {
         const gender = document.getElementById('input-gender').value;
         const age = parseInt(document.getElementById('input-age').value);
         const ageIdx = this.getAgeIndex(age);
 
-        // reset quote state when input changes
         this.quoteState.selectedCol = null;
 
-        [1, 2, 3].forEach(col => {
+        [1,2,3].forEach(col => {
           const { type, idx } = this.state[col];
           const premium = this.calculatePremium(type, idx, ageIdx, gender);
           const el = document.getElementById(`prem-${col}`);
@@ -898,10 +1108,8 @@
 
       renderPremiumTable: function(startIdx, gender) {
         let html = '';
-
         for (let i = startIdx; i < this.ageBands.length; i++) {
           const band = this.ageBands[i];
-
           const p1 = this.calculatePremium(this.state[1].type, this.state[1].idx, i, gender);
           const p2 = this.calculatePremium(this.state[2].type, this.state[2].idx, i, gender);
           const p3 = this.calculatePremium(this.state[3].type, this.state[3].idx, i, gender);
@@ -914,18 +1122,17 @@
           html += `
             <tr class="hover:bg-slate-50 transition-colors ${highlight} ${isRenewal ? 'bg-slate-50' : ''}">
               <td class="p-3 border-b border-slate-100">${band}</td>
-              <td class="p-3 border-b border-slate-100 text-slate-900 font-bold">${(p1 || 0).toLocaleString()}</td>
-              <td class="p-3 border-b border-slate-100 text-slate-900 font-bold">${(p2 || 0).toLocaleString()}</td>
-              <td class="p-3 border-b border-slate-100 text-slate-900 font-bold">${(p3 || 0).toLocaleString()}</td>
+              <td class="p-3 border-b border-slate-100 text-slate-900 font-bold">${(p1||0).toLocaleString()}</td>
+              <td class="p-3 border-b border-slate-100 text-slate-900 font-bold">${(p2||0).toLocaleString()}</td>
+              <td class="p-3 border-b border-slate-100 text-slate-900 font-bold">${(p3||0).toLocaleString()}</td>
             </tr>
           `;
         }
-
         document.getElementById('premium-table-body').innerHTML = html;
       },
 
       // ---------------------------
-      // QUOTATION MODAL (CLOSE DEAL)
+      // QUOTATION MODAL
       // ---------------------------
       pickPlan: function(col) {
         this.openQuote(col);
@@ -946,8 +1153,8 @@
         const optName = this.plans[type].options[idx].name;
         const premium = this.calculatePremium(type, idx, ageIdx, gender);
 
-        const sub = document.getElementById("quote-subtitle");
-        if (sub) sub.textContent = `อายุ ${age} ปี · เพศ${gender === "male" ? "ชาย" : "หญิง"} · วันที่ ${new Date().toLocaleDateString('th-TH')}`;
+        document.getElementById("quote-subtitle").textContent =
+          `อายุ ${age} ปี · เพศ${gender === "male" ? "ชาย" : "หญิง"} · วันที่ ${new Date().toLocaleDateString('th-TH')}`;
 
         document.getElementById("quote-plan").textContent = `PLAN ${col}`;
         document.getElementById("quote-option").textContent = `${planName} — ${optName}`;
@@ -957,6 +1164,7 @@
         document.getElementById("quote-highlight").textContent = highlight;
 
         this.renderQuoteCompare(ageIdx, gender);
+        this.renderHistory();
 
         document.getElementById("quote-modal").classList.remove("hidden");
         lucide.createIcons();
@@ -970,9 +1178,8 @@
         const premiums = this.computePlanPremiums(ageIdx, gender);
         const minVal = Math.min(...premiums);
 
-        const tbody = document.getElementById("quote-compare-body");
-        const note = document.getElementById("quote-compare-note");
-        if (note) note.textContent = `เทียบจากแผนถูกสุด: ${this.formatMoney(minVal)} บาท/ปี`;
+        document.getElementById("quote-compare-note").textContent =
+          `เทียบจากแผนถูกสุด: ${this.formatMoney(minVal)} บาท/ปี`;
 
         let html = "";
         for (let col = 1; col <= 3; col++) {
@@ -1004,8 +1211,7 @@
             </tr>
           `;
         }
-
-        tbody.innerHTML = html;
+        document.getElementById("quote-compare-body").innerHTML = html;
       },
 
       exportQuotePDF: function() {
@@ -1026,6 +1232,8 @@
         const optName = this.plans[type].options[idx].name;
         const premium = this.calculatePremium(type, idx, ageIdx, gender);
 
+        const customer = this.getCustomerData();
+
         const premiums = this.computePlanPremiums(ageIdx, gender);
         const minVal = Math.min(...premiums);
         const delta = premium - minVal;
@@ -1035,6 +1243,11 @@
 
         return [
           "📌 ใบเสนอราคา (Quotation)",
+          `• ลูกค้า: ${customer.name || "-"}`,
+          `• เบอร์: ${customer.phone || "-"}`,
+          `• ช่องทาง: ${customer.channel || "-"}`,
+          customer.note ? `• หมายเหตุ: ${customer.note}` : "",
+          "",
           `• อายุ: ${age} ปี`,
           `• เพศ: ${gender === "male" ? "ชาย" : "หญิง"}`,
           "",
@@ -1059,15 +1272,14 @@
           alert("✅ Copy ข้อความใบเสนอราคาแล้ว (พร้อมส่ง LINE/FB)");
         } catch (e) {
           console.warn(e);
-          alert("❌ Copy ไม่สำเร็จ: เบราว์เซอร์ไม่อนุญาต\nผมได้พิมพ์ข้อความไว้ใน Console ให้แล้ว (F12)");
+          alert("❌ Copy ไม่สำเร็จ: เบราว์เซอร์ไม่อนุญาต\nผมพิมพ์ข้อความไว้ใน Console แล้ว (F12)");
           console.log(text);
         }
       },
 
       confirmPlan: function() {
-        const text = this.getQuoteText();
-        alert("✅ ยืนยันแผนนี้เรียบร้อย\n\nขั้นตอนถัดไป:\n1) ส่งใบเสนอราคาให้ลูกค้า\n2) นัดวันส่งเอกสาร/ชำระเบี้ย\n3) ปิดการขาย\n\n(ข้อความถูกเตรียมไว้สำหรับ Copy แล้ว)");
-        console.log("CONFIRMED PLAN TEXT:\n" + text);
+        alert("✅ ยืนยันแผนนี้เรียบร้อย\n\nขั้นตอนถัดไป:\n1) ส่งใบเสนอราคาให้ลูกค้า\n2) นัดวันส่งเอกสาร/ชำระเบี้ย\n3) ปิดการขาย");
+        console.log("CONFIRMED PLAN TEXT:\n" + this.getQuoteText());
       },
 
       // ---------------------------

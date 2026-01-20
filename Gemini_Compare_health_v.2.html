@@ -66,7 +66,7 @@
 
         <div class="glass p-2 rounded-xl flex flex-wrap items-center gap-3 w-full xl:w-auto no-print justify-center">
           
-          <!-- Font Controls (New) -->
+          <!-- Font Controls -->
           <div class="flex flex-col items-center">
              <label class="text-[9px] text-slate-400 uppercase font-bold">ขนาดตัวอักษร</label>
              <div class="flex gap-1">
@@ -166,45 +166,8 @@
     </div>
   </div>
 
-  <!-- SECTION 2: CHART -->
-  <div class="bg-white rounded-2xl p-5 shadow-xl mb-6 border border-slate-200 page-break">
-    <div class="flex items-center gap-2 mb-4">
-      <div class="bg-indigo-100 p-1.5 rounded text-indigo-700"><i data-lucide="trending-up" class="w-5 h-5"></i></div>
-      <h3 class="font-bold text-slate-800">แนวโน้มเบี้ยประกันในอนาคต (Premium Trend)</h3>
-    </div>
-    <div class="relative h-[300px] w-full" id="chart-container">
-      <canvas id="premiumChart"></canvas>
-    </div>
-  </div>
-
-  <!-- SECTION 3: PREMIUM TABLE (PROJECTION) - ADDED BACK -->
-  <div class="bg-slate-800 rounded-2xl overflow-hidden shadow-2xl border border-slate-700 mb-8 page-break">
-    <div class="p-4 bg-slate-900 border-b border-slate-700 flex justify-between items-center">
-      <div class="flex items-center gap-2">
-        <i data-lucide="table" class="w-5 h-5 text-indigo-400"></i>
-        <h3 class="font-bold text-white">ตารางเบี้ยประกันต่อเนื่อง (ตามช่วงอายุ)</h3>
-      </div>
-      <span class="text-[10px] text-slate-400">ข้อมูลจาก Rate Table มาตรฐาน</span>
-    </div>
-    <div class="overflow-x-auto">
-        <table class="w-full text-sm text-slate-300">
-            <thead class="bg-slate-900/50 text-slate-400 font-bold uppercase text-[10px] tracking-wider">
-               <tr>
-                  <th class="p-3 text-left pl-6 sticky-col bg-slate-900 z-40">Age Band</th>
-                  <th class="p-3 text-center bg-emerald-900/10 border-l border-slate-700/50" id="pt-head-1">Plan A</th>
-                  <th class="p-3 text-center bg-amber-900/10 border-l border-slate-700/50" id="pt-head-2">Plan B</th>
-                  <th class="p-3 text-center bg-rose-900/10 border-l border-slate-700/50" id="pt-head-3">Plan C</th>
-               </tr>
-            </thead>
-            <tbody id="premium-table-body" class="divide-y divide-slate-700/50">
-                <!-- JS will populate -->
-            </tbody>
-         </table>
-    </div>
-  </div>
-
-  <!-- SECTION 4: BENEFIT COMPARISON TABLE -->
-  <div class="bg-slate-800 rounded-2xl overflow-hidden shadow-2xl border border-slate-700 page-break">
+  <!-- SECTION 2: BENEFIT COMPARISON TABLE (MOVED UP) -->
+  <div class="bg-slate-800 rounded-2xl overflow-hidden shadow-2xl border border-slate-700 mb-6 page-break">
     <div class="p-4 bg-gradient-to-r from-slate-900 to-slate-800 border-b border-slate-600">
       <div class="flex items-center gap-3">
         <div class="bg-indigo-500 p-2 rounded-lg text-white"><i data-lucide="list-checks" class="w-5 h-5"></i></div>
@@ -229,6 +192,43 @@
           <!-- JS will populate -->
         </tbody>
       </table>
+    </div>
+  </div>
+
+  <!-- SECTION 3: CHART -->
+  <div class="bg-white rounded-2xl p-5 shadow-xl mb-6 border border-slate-200 page-break">
+    <div class="flex items-center gap-2 mb-4">
+      <div class="bg-indigo-100 p-1.5 rounded text-indigo-700"><i data-lucide="trending-up" class="w-5 h-5"></i></div>
+      <h3 class="font-bold text-slate-800">แนวโน้มเบี้ยประกันในอนาคต (Premium Trend)</h3>
+    </div>
+    <div class="relative h-[300px] w-full" id="chart-container">
+      <canvas id="premiumChart"></canvas>
+    </div>
+  </div>
+
+  <!-- SECTION 4: PREMIUM TABLE (PROJECTION) -->
+  <div class="bg-slate-800 rounded-2xl overflow-hidden shadow-2xl border border-slate-700 mb-8 page-break">
+    <div class="p-4 bg-slate-900 border-b border-slate-700 flex justify-between items-center">
+      <div class="flex items-center gap-2">
+        <i data-lucide="table" class="w-5 h-5 text-indigo-400"></i>
+        <h3 class="font-bold text-white">ตารางเบี้ยประกันต่อเนื่อง (ตามช่วงอายุ)</h3>
+      </div>
+      <span class="text-[10px] text-slate-400">ข้อมูลจาก Rate Table มาตรฐาน</span>
+    </div>
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm text-slate-300">
+            <thead class="bg-slate-900/50 text-slate-400 font-bold uppercase text-[10px] tracking-wider">
+               <tr>
+                  <th class="p-3 text-left pl-6 sticky-col bg-slate-900 z-40">Age Band</th>
+                  <th class="p-3 text-center bg-emerald-900/10 border-l border-slate-700/50" id="pt-head-1">Plan A</th>
+                  <th class="p-3 text-center bg-amber-900/10 border-l border-slate-700/50" id="pt-head-2">Plan B</th>
+                  <th class="p-3 text-center bg-rose-900/10 border-l border-slate-700/50" id="pt-head-3">Plan C</th>
+               </tr>
+            </thead>
+            <tbody id="premium-table-body" class="divide-y divide-slate-700/50">
+                <!-- JS will populate -->
+            </tbody>
+         </table>
     </div>
   </div>
 

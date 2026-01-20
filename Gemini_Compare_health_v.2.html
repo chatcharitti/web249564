@@ -47,7 +47,7 @@
   </style>
 </head>
 
-<body class="pb-12">
+<body class="pb-12 transition-all duration-200">
 <div class="max-w-[1600px] mx-auto px-4 py-6">
 
   <!-- HEADER -->
@@ -64,7 +64,20 @@
           </div>
         </div>
 
-        <div class="glass p-2 rounded-xl flex items-center gap-3 w-full xl:w-auto no-print justify-center">
+        <div class="glass p-2 rounded-xl flex flex-wrap items-center gap-3 w-full xl:w-auto no-print justify-center">
+          
+          <!-- Font Controls (New) -->
+          <div class="flex flex-col items-center">
+             <label class="text-[9px] text-slate-400 uppercase font-bold">ขนาดตัวอักษร</label>
+             <div class="flex gap-1">
+                 <button onclick="app.adjustFontSize(-1)" class="bg-slate-800 hover:bg-slate-700 text-white p-1.5 rounded-lg border border-slate-600 transition" title="ลดขนาด"><i data-lucide="minus" class="w-3 h-3"></i></button>
+                 <button onclick="app.adjustFontSize(0)" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-2 py-1 rounded-lg border border-slate-600 text-[10px] font-bold uppercase transition" title="ขนาดปกติ">Reset</button>
+                 <button onclick="app.adjustFontSize(1)" class="bg-slate-800 hover:bg-slate-700 text-white p-1.5 rounded-lg border border-slate-600 transition" title="เพิ่มขนาด"><i data-lucide="plus" class="w-3 h-3"></i></button>
+             </div>
+          </div>
+
+          <div class="h-8 w-px bg-slate-700 mx-1"></div>
+
           <div class="flex flex-col">
              <label class="text-[9px] text-slate-400 uppercase font-bold">เพศ</label>
              <select id="input-gender" onchange="app.reCalculate()" class="bg-slate-800 border border-slate-600 text-white text-sm rounded-lg px-3 py-1 outline-none">
@@ -401,6 +414,27 @@ const app = {
         if (age <= 90) return 15;
         if (age <= 95) return 16;
         return 17;
+    },
+
+    // --- New Font Adjustment Logic ---
+    adjustFontSize(delta) {
+        const root = document.documentElement;
+        if (delta === 0) {
+            root.style.fontSize = ''; // Reset to default (usually 16px)
+            return;
+        }
+        // Get current size, default to 16 if not set inline
+        const currentStyle = window.getComputedStyle(root).fontSize;
+        const currentSize = parseFloat(currentStyle);
+        
+        // Calculate new size
+        let newSize = currentSize + delta;
+        
+        // Clamp between reasonable min/max (e.g., 12px to 24px)
+        if (newSize < 12) newSize = 12;
+        if (newSize > 24) newSize = 24;
+        
+        root.style.fontSize = `${newSize}px`;
     },
 
     init() {

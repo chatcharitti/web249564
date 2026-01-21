@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AIA Health Solution 2025: Fully Functional</title>
+  <title>AIA Health Solution 2025: Detailed Benefits</title>
 
   <!-- Libraries -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -64,7 +64,7 @@
           </div>
           <div>
             <h1 class="text-2xl font-bold text-slate-800 tracking-tight">AIA Health Solution <span class="text-amber-600">2025</span></h1>
-            <p class="text-xs text-slate-500 font-medium">Life (20PLN) + Health + Riders (Fixed)</p>
+            <p class="text-xs text-slate-500 font-medium">Life (20PLN) + Health (Detail) + Riders</p>
           </div>
         </div>
 
@@ -123,7 +123,7 @@
         <div class="flex flex-col gap-1 items-end">
             <div class="flex items-center gap-3 bg-white p-3 rounded-xl border border-blue-100 shadow-sm">
                 <label class="text-sm font-bold text-slate-600">ระบุทุนประกันหลัก:</label>
-                <input type="number" id="main-sum" value="100000" step="10000" onchange="app.validateMainSum()" 
+                <input type="number" id="main-sum" value="150000" step="10000" onchange="app.validateMainSum()" 
                        class="font-bold text-blue-700 text-right bg-slate-50 border border-slate-300 rounded-lg px-3 py-1 w-40 focus:ring-2 focus:ring-blue-400 outline-none">
                 <span class="text-xs text-slate-400">บาท</span>
             </div>
@@ -358,6 +358,40 @@ const APP_DATA = {
         ]}
     },
 
+    // NEW DETAILED MAPPING FOR BENEFITS
+    PLAN_DETAILS: {
+        HS: {
+            "1000": { limit: "แยกรายหมวด", room: "1,000", med: "16,000", doc: "550", surg: "40,000", opd: "-" },
+            "1600": { limit: "แยกรายหมวด", room: "1,600", med: "20,000", doc: "750", surg: "50,000", opd: "-" },
+            "2200": { limit: "แยกรายหมวด", room: "2,200", med: "20,000", doc: "850", surg: "60,000", opd: "-" },
+            "2800": { limit: "แยกรายหมวด", room: "2,800", med: "25,000", doc: "900", surg: "70,000", opd: "-" },
+            "3400": { limit: "แยกรายหมวด", room: "3,400", med: "20,000", doc: "800", surg: "80,000", opd: "-" },
+            "4000": { limit: "แยกรายหมวด", room: "4,000", med: "25,000", doc: "1,000", surg: "90,000", opd: "-" },
+            "5000": { limit: "แยกรายหมวด", room: "5,000", med: "25,000", doc: "1,200", surg: "100,000", opd: "-" }
+        },
+        HSX: {
+            "1500": { limit: "300,000", room: "1,500", med: "20,000+", doc: "600", surg: "90,000+", opd: "-" },
+            "2000": { limit: "300,000", room: "2,000", med: "25,000+", doc: "800", surg: "100,000+", opd: "-" },
+            "2500": { limit: "400,000", room: "2,500", med: "25,000+", doc: "900", surg: "110,000+", opd: "-" },
+            "3500": { limit: "400,000", room: "3,500", med: "30,000+", doc: "1,000", surg: "120,000+", opd: "-" },
+            "4500": { limit: "500,000", room: "4,500", med: "30,000+", doc: "1,200", surg: "130,000+", opd: "-" },
+            "5500": { limit: "500,000", room: "5,500", med: "35,000+", doc: "1,500", surg: "140,000+", opd: "-" },
+            "6500": { limit: "600,000", room: "6,500", med: "40,000+", doc: "2,000", surg: "150,000+", opd: "-" }
+        },
+        HSV: {
+            "200k": { limit: "200,000", room: "1,500", med: "เหมาจ่าย", doc: "เหมาจ่าย", surg: "เหมาจ่าย", opd: "-" },
+            "300k": { limit: "300,000", room: "2,000", med: "เหมาจ่าย", doc: "เหมาจ่าย", surg: "เหมาจ่าย", opd: "-" },
+            "400k": { limit: "400,000", room: "3,000", med: "เหมาจ่าย", doc: "เหมาจ่าย", surg: "เหมาจ่าย", opd: "1,000 (30/ปี)" },
+            "500k": { limit: "500,000", room: "4,000", med: "เหมาจ่าย", doc: "เหมาจ่าย", surg: "เหมาจ่าย", opd: "1,500 (30/ปี)" }
+        },
+        HH: {
+            "1m": { limit: "1,000,000", room: "1,500", med: "เหมาจ่าย", doc: "เหมาจ่าย", surg: "เหมาจ่าย", opd: "-" },
+            "5m": { limit: "5,000,000", room: "3,000", med: "เหมาจ่าย", doc: "เหมาจ่าย", surg: "เหมาจ่าย", opd: "-" },
+            "15m": { limit: "15,000,000", room: "6,000", med: "เหมาจ่าย", doc: "เหมาจ่าย", surg: "เหมาจ่าย", opd: "-" },
+            "25m": { limit: "25,000,000", room: "9,000", med: "เหมาจ่าย", doc: "เหมาจ่าย", surg: "เหมาจ่าย", opd: "2,000 (30/ปี)" }
+        }
+    },
+
     riders: {
         hbExtra: {
             male: { "16-20":360, "21-35":210, "36-40":230, "41-45":250, "46-50":290, "51-55":350, "56-60":420, "61-65":510, "66-70":710, "71-75":910 },
@@ -432,7 +466,6 @@ const APP_DATA = {
         }
     },
 
-    benefits: { "HS_1600": {max:"แยกรายหมวด", r1:"1,600"} }, 
     AGE_BANDS: ["11-15","16-20","21-25","26-30","31-35","36-40","41-45","46-50","51-55","56-60","61-65","66-70"]
 };
 
@@ -765,17 +798,37 @@ const app = {
         const formatMoney = (val) => val > 0 ? val.toLocaleString() : "-";
         const sel = this.state.currentSelection;
         
+        const getData = (id) => {
+            const { type, idx } = this.state[id];
+            const opt = APP_DATA.plans[type].options[idx];
+            // Lookup key for details
+            let lookupKey = opt.k;
+            // Fallback for HSX if mapping key doesn't match direct
+            if(type === 'HSX' && !APP_DATA.PLAN_DETAILS.HSX[lookupKey]) {
+                // Try to find closest or default
+                // For this demo, let's assume keys match. 
+            }
+            return APP_DATA.PLAN_DETAILS[type] ? APP_DATA.PLAN_DETAILS[type][lookupKey] : null;
+        };
+
+        const renderRow = (label, field) => {
+            let cells = "";
+            [1,2,3].forEach(id => {
+                const data = getData(id);
+                const val = data ? data[field] : "-";
+                cells += `<td class="text-center p-3 border-l border-slate-100 text-slate-600">${val}</td>`;
+            });
+            return `<tr class="border-b border-slate-100 hover:bg-slate-50"><td class="p-3 font-medium text-slate-700 bg-white sticky-col z-20 border-r border-slate-200">${label}</td>${cells}</tr>`;
+        };
+
         let html = `
             <tr class="sub-header"><td colspan="4">1. ความคุ้มครองสุขภาพหลัก (Health Plan)</td></tr>
-            <tr class="border-b"><td class="p-3">ค่าห้อง (Room & Board)</td>
-                ${[1,2,3].map(id => {
-                    const {type, idx} = this.state[id];
-                    return `<td class="text-center">${type==='HS'? APP_DATA.plans[type].options[idx].k : (type==='HH'?'6,000+':'ตามจริง')}</td>`
-                }).join('')}
-            </tr>
-            <tr class="border-b"><td class="p-3">ค่ารักษาพยาบาล (Hospital Service)</td>
-                ${[1,2,3].map(id => `<td class="text-center">ตามจริง/เหมาจ่าย</td>`).join('')}
-            </tr>
+            ${renderRow("วงเงินความคุ้มครองสูงสุด", "limit")}
+            ${renderRow("ค่าห้อง (Room & Board)", "room")}
+            ${renderRow("ค่ารักษาพยาบาล (Hospital Service)", "med")}
+            ${renderRow("ค่าแพทย์ตรวจรักษา (Doctor Fee)", "doc")}
+            ${renderRow("ค่าหัตถการ/ผ่าตัด (Surgery)", "surg")}
+            ${renderRow("วงเงิน OPD", "opd")}
             
             <tr class="sub-header"><td colspan="4">2. ชดเชยรายได้ (HB Extra)</td></tr>
             <tr class="border-b"><td class="p-3">ชดเชยรายวัน (IPD)</td>

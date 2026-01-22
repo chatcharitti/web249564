@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report compare MTL D-Health Plus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #e67e22;
+            --bg-color: #f9f9f9;
+            --table-header-bg: #ecf0f1;
+            --border-color: #bdc3c7;
+            --success-color: #27ae60;
+            --danger-color: #c0392b;
+        }
+        
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            font-size: 16px; /* Base font size for JS adjustment */
+            transition: font-size 0.2s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-radius: 8px;
+        }
+
+        /* Controls Section */
+        .controls {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            background-color: white;
+            cursor: pointer;
+            border-radius: 4px;
+            font-family: 'Sarabun', sans-serif;
+            font-weight: 600;
+            transition: all 0.2s;
+            color: var(--secondary-color);
+        }
+
+        .btn:hover {
+            background-color: #f1f2f6;
+            border-color: var(--secondary-color);
+        }
+
+        .btn-primary {
+            background-color: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-color);
+        }
+
+        h1 {
+            font-weight: 700;
+            font-size: 1.75em; /* Relative unit */
+            margin-bottom: 10px;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        h2 {
+            font-weight: 700;
+            font-size: 1.4em; /* Relative unit */
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+            border-left: 5px solid var(--accent-color);
+            padding-left: 10px;
+        }
+
+        .meta-info {
+            font-size: 0.9em; /* Relative unit */
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 0.95em; /* Relative unit */
+            page-break-inside: auto;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+
+        th {
+            background-color: var(--table-header-bg);
+            font-weight: 700;
+            color: var(--secondary-color);
+            text-transform: uppercase;
+        }
+
+        tr {
+            page-break-inside: avoid;
+            page-break-after: auto;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fcfcfc;
+        }
+        
+        tr:hover {
+            background-color: #f1f2f6;
+        }
+
+        .highlight {
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .badge-green { background-color: #e8f8f5; color: #27ae60; border: 1px solid #a9dfbf; }
+        .badge-red { background-color: #fdedec; color: #c0392b; border: 1px solid #fadbd8; }
+        .badge-blue { background-color: #ebf5fb; color: #2980b9; border: 1px solid #a9cce3; }
+        .badge-yellow { background-color: #fef9e7; color: #d4ac0d; border: 1px solid #f9e79f; }
+
+        .analysis-section {
+            background-color: #fdfefe;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 30px;
+            page-break-inside: avoid;
+        }
+
+        .analysis-title {
+            font-weight: 700;
+            font-size: 1.15em;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .analysis-title::before {
+            content: "💡";
+            margin-right: 10px;
+        }
+
+        .decision-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 6px;
+            transition: transform 0.2s;
+            page-break-inside: avoid;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            font-weight: 700;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .footer {
+            margin-top: 50px;
+            font-size: 0.8em;
+            color: #95a5a6;
+            text-align: center;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        
+        .price-tag {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        
+        .sub-text {
+            font-size: 0.85em;
+            color: #7f8c8d;
+        }
+
+        /* PRINT STYLES */
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+                margin: 0;
+                font-size: 12pt; /* Optimize for print reading */
+                -webkit-print-color-adjust: exact !important; /* Force background colors */
+                print-color-adjust: exact !important;
+            }
+
+            .container {
+                width: 100%;
+                max-width: 100%;
+                box-shadow: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .no-print, .controls {
+                display: none !important;
+            }
+
+            .card {
+                box-shadow: none;
+                border: 1px solid #ccc;
+                break-inside: avoid;
+            }
+
+            h1 {
+                font-size: 20pt;
+                color: black;
+            }
+
+            table {
+                font-size: 10pt;
+                width: 100%;
+            }
+
+            th {
+                background-color: #ecf0f1 !important; /* Force header color */
+                color: black;
+            }
+
+            /* Ensure badges print with color */
+            .badge-green { background-color: #e8f8f5 !important; border: 1px solid #ccc !important; }
+            .badge-red { background-color: #fdedec !important; border: 1px solid #ccc !important; }
+            .badge-blue { background-color: #ebf5fb !important; border: 1px solid #ccc !important; }
+            
+            a {
+                text-decoration: none;
+                color: black;
+            }
+
+            .decision-matrix {
+                display: block; /* Stack cards for print */
+            }
+            
+            .card {
+                margin-bottom: 15px;
+            }
+
+            /* Footer at bottom of last page */
+            .footer {
+                margin-top: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            th, td { padding: 10px; font-size: 0.9em; }
+            .container { padding: 15px; }
+            h1 { font-size: 1.5em; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="controls no-print">
+        <button class="btn" onclick="adjustFontSize(-1)">A- ย่อตัวอักษร</button>
+        <button class="btn" onclick="adjustFontSize(1)">A+ ขยายตัวอักษร</button>
+        <button class="btn btn-primary" onclick="window.print()">🖨 พิมพ์รายงาน / Save PDF</button>
+    </div>
+
+    <h1>รายงานวิเคราะห์เปรียบเทียบข้อเสนอประกันสุขภาพ MTL D-Health Plus</h1>
+    <div class="meta-info">
+        <strong>ผู้มุ่งหวัง:</strong> อายุ 52 ปี เพศหญิง<br>
+        <strong>แบบประกัน:</strong> เมืองไทย สมาร์ท โพรเทคชั่น + D Health Plus<br>
+        <strong>วันที่วิเคราะห์:</strong> 22 มกราคม 2026
+  </div>
+
+    <h2>1. ภาพรวมเปรียบเทียบ (Overview)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 20%;">หัวข้อเปรียบเทียบ</th>
+                <th style="width: 26%;">ทางเลือกที่ 1 (ไฟล์ 508)</th>
+                <th style="width: 26%;">ทางเลือกที่ 2 (ไฟล์ 485)</th>
+                <th style="width: 28%;">ทางเลือกที่ 3 (ไฟล์ 469)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>แผนหลัก (Life)</strong></td>
+                <td>Smart Protection 90/90<br><span class="badge badge-blue">ส่งยาว คุ้มครองยาว</span></td>
+                <td>Smart Protection 90/90<br><span class="badge badge-blue">ส่งยาว คุ้มครองยาว</span></td>
+                <td>Smart Protection 99/20<br><span class="badge badge-green">ส่งสั้น 20 ปี คุ้มครองยาว</span></td>
+            </tr>
+             <tr>
+                <td><strong>แผนสุขภาพ (Health)</strong></td>
+                <td>D Health Plus<br><strong>แผน 5 ล้านบาท</strong></td>
+                <td>D Health Plus<br><strong>แผน 1 ล้านบาท</strong></td>
+                <td>D Health Plus<br><strong>แผน 1 ล้านบาท</strong></td>
+            </tr>
+            <tr>
+                <td><strong>ความรับผิดส่วนแรก<br>(Deductible)</strong></td>
+                <td><span class="badge badge-red">30,000 บาท/ครั้ง</span><br><span class="sub-text">ต้องจ่ายเองก่อน</span></td>
+                <td><span class="badge badge-red">20,000 บาท/ครั้ง</span><br><span class="sub-text">ต้องจ่ายเองก่อน</span></td>
+                <td><span class="badge badge-green">0 บาท (ไม่มี)</span><br><span class="sub-text">เคลมได้ตั้งแต่บาทแรก</span></td>
+            </tr>
+            <tr>
+                <td><strong>เบี้ยรวมปีแรก</strong></td>
+                <td><span class="price-tag">30,242 บาท</span><br><span class="badge badge-green">ถูกที่สุด</span></td>
+                <td><span class="price-tag">31,798 บาท</span></td>
+                <td><span class="price-tag">49,419 บาท</span><br><span class="badge badge-red">สูงที่สุด</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>2. ตารางเจาะลึกผลประโยชน์ (Detailed Coverage Breakdown)</h2>
+    <p class="sub-text">*ผลประโยชน์จ่ายตามจริง แต่ไม่เกินวงเงินสูงสุดต่อครั้ง</p>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 25%;">หมวดผลประโยชน์</th>
+                <th>ทางเลือกที่ 1 (508)<br>D Health Plus 5M (D30k)</th>
+                <th>ทางเลือกที่ 2 (485)<br>D Health Plus 1M (D20k)</th>
+                <th>ทางเลือกที่ 3 (469)<br>D Health Plus 1M (No D)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="background-color: #eaf2f8;">
+                <td colspan="4"><strong>วงเงินความคุ้มครอง (IPD)</strong></td>
+            </tr>
+            <tr>
+                <td><strong>วงเงินเหมาจ่ายต่อครั้ง</strong></td>
+                <td><span class="highlight" style="font-size:1.1em;">5,000,000 บาท</span></td>
+                <td>1,000,000 บาท</td>
+                <td>1,000,000 บาท</td>
+            </tr>
+            <tr>
+                <td><strong>ค่าห้อง/อาหาร/บริการ</strong><br>(หมวด 1)</td>
+                <td>จ่ายตามจริง<br><span class="sub-text">(ไม่เกินค่าห้องเดี่ยวมาตรฐาน)</span></td>
+                <td>จ่ายตามจริง<br><span class="sub-text">(ไม่เกินค่าห้องเดี่ยวมาตรฐาน)</span></td>
+                <td>จ่ายตามจริง<br><span class="sub-text">(ไม่เกินค่าห้องเดี่ยวมาตรฐาน)</span></td>
+            </tr>
+            <tr>
+                <td><strong>ค่าห้อง ICU</strong><br>(หมวด 1.2)</td>
+                <td>จ่ายตามจริง<br>(สูงสุด 60 วัน)</td>
+                <td>จ่ายตามจริง<br>(สูงสุด 60 วัน)</td>
+                <td>จ่ายตามจริง<br>(สูงสุด 60 วัน)</td>
+            </tr>
+            
+            <tr style="background-color: #eaf2f8;">
+                <td colspan="4"><strong>ค่ารักษาพยาบาล (Treatment)</strong></td>
+            </tr>
+            <tr>
+                <td><strong>ค่าบริการทางการแพทย์</strong><br>ค่ายา/เวชภัณฑ์/ตรวจวินิจฉัย<br>(หมวด 2)</td>
+                <td><span class="badge badge-green">เหมาจ่ายตามจริง</span><br>(ในวงเงิน 5 ล้าน)</td>
+                <td><span class="badge badge-green">เหมาจ่ายตามจริง</span><br>(ในวงเงิน 1 ล้าน)</td>
+                <td><span class="badge badge-green">เหมาจ่ายตามจริง</span><br>(ในวงเงิน 1 ล้าน)</td>
+            </tr>
+            <tr>
+                <td><strong>ค่ายาและเวชภัณฑ์กลับบ้าน</strong><br>(หมวด 2.4)</td>
+                <td>ไม่เกิน 20,000 บาท<br>(สูงสุด 7 วัน)</td>
+                <td>ไม่เกิน 20,000 บาท<br>(สูงสุด 7 วัน)</td>
+                <td>ไม่เกิน 20,000 บาท<br>(สูงสุด 7 วัน)</td>
+            </tr>
+            <tr>
+                <td><strong>ค่าแพทย์ตรวจรักษา / ผ่าตัด</strong><br>(หมวด 3, 4)</td>
+                <td><span class="badge badge-green">เหมาจ่ายตามจริง</span></td>
+                <td><span class="badge badge-green">เหมาจ่ายตามจริง</span></td>
+                <td><span class="badge badge-green">เหมาจ่ายตามจริง</span></td>
+            </tr>
+             <tr>
+                <td><strong>การผ่าตัดใหญ่ไม่ต้องนอน รพ.</strong><br>(Day Surgery - หมวด 5)</td>
+                <td><span class="badge badge-green">เหมาจ่ายตามจริง</span></td>
+                <td><span class="badge badge-green">เหมาจ่ายตามจริง</span></td>
+                <td><span class="badge badge-green">เหมาจ่ายตามจริง</span></td>
+            </tr>
+
+            <tr style="background-color: #eaf2f8;">
+                <td colspan="4"><strong>บริการผู้ป่วยนอก (OPD Related)</strong></td>
+            </tr>
+            <tr>
+                <td><strong>ตรวจวินิจฉัยก่อน/หลัง Admit</strong><br>(หมวด 6)</td>
+                <td>จ่ายตามจริง<br>(ภายใน 30 วัน)</td>
+                <td>จ่ายตามจริง<br>(ภายใน 30 วัน)</td>
+                <td>จ่ายตามจริง<br>(ภายใน 30 วัน)</td>
+            </tr>
+            <tr>
+                <td><strong>รักษาพยาบาลอุบัติเหตุฉุกเฉิน</strong><br>(หมวด 7 - ภายใน 24 ชม.)</td>
+                <td>จ่ายตามจริง</td>
+                <td>จ่ายตามจริง</td>
+                <td>จ่ายตามจริง</td>
+            </tr>
+            <tr>
+                <td><strong>เวชศาสตร์ฟื้นฟู</strong><br>(หมวด 8 - หลัง Admit)</td>
+                <td>จ่ายตามจริง</td>
+                <td>จ่ายตามจริง</td>
+                <td>จ่ายตามจริง</td>
+            </tr>
+            <tr>
+                <td><strong>ล้างไต / รังสี / เคมีบำบัด</strong><br>(หมวด 9, 10, 11 - ผู้ป่วยนอก)</td>
+                <td><span class="badge badge-red">ไม่คุ้มครอง</span><br><span class="sub-text">(คุ้มครองเฉพาะถ้า Admit)</span></td>
+                <td><span class="badge badge-red">ไม่คุ้มครอง</span><br><span class="sub-text">(คุ้มครองเฉพาะถ้า Admit)</span></td>
+                <td><span class="badge badge-red">ไม่คุ้มครอง</span><br><span class="sub-text">(คุ้มครองเฉพาะถ้า Admit)</span></td>
+            </tr>
+
+            <tr style="background-color: #fef9e7;">
+                <td colspan="4"><strong>เงื่อนไขพิเศษ & สัญญาเพิ่มเติม</strong></td>
+            </tr>
+            <tr>
+                <td><strong>ความรับผิดส่วนแรก</strong><br>(ต้องจ่ายเองต่อครั้ง)</td>
+                <td><strong style="color:#c0392b;">30,000 บาท</strong></td>
+                <td><strong style="color:#c0392b;">20,000 บาท</strong></td>
+                <td><strong style="color:#27ae60;">0 บาท</strong></td>
+            </tr>
+            <tr>
+                <td><strong>ประกันอุบัติเหตุ (PA)</strong></td>
+                <td>100,000 บาท</td>
+                <td>100,000 บาท</td>
+                <td>100,000 บาท</td>
+            </tr>
+             <tr>
+                <td><strong>คุ้มครองโรคมะเร็ง (Pure Cancer)</strong><br>(เงินก้อน เจอ-จ่าย-จบ)</td>
+                <td>-</td>
+                <td>-</td>
+                <td><span class="highlight">300,000 บาท</span><br><span class="sub-text">(ระยะไม่ลุกลาม 45,000)</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="analysis-section">
+        <div class="analysis-title">บทวิเคราะห์และข้อแนะนำ (Final Recommendations)</div>
+        
+        <p>จากการเปรียบเทียบรายละเอียดทุกหมวด พบความแตกต่างสำคัญดังนี้:</p>
+        
+        <ul>
+            <li><strong>ทางเลือกที่ 1 (ไฟล์ 508):</strong> เป็นแผนที่ <strong>"คุ้มค่าที่สุดในระยะยาว"</strong> สำหรับโรคร้ายแรง เพราะให้วงเงินสูงถึง 5 ล้านบาท ซึ่งรองรับค่าผ่าตัดโรคหัวใจหรือสมองได้ครอบคลุมกว่า แม้จะมี Deductible 30,000 บาท แต่เบี้ยถูกที่สุดใน 3 แผน</li>
+            <li><strong>ทางเลือกที่ 2 (ไฟล์ 485):</strong> <strong>"ไม่แนะนำ"</strong> เนื่องจากลด Deductible ลงมาเพียง 10,000 บาท แต่เสียโอกาสวงเงินความคุ้มครองไปถึง 4 ล้านบาท และค่าเบี้ยกลับแพงกว่าทางเลือกที่ 1</li>
+            <li><strong>ทางเลือกที่ 3 (ไฟล์ 469):</strong> <strong>"เจ็บป่วยเล็กน้อยก็เบิกได้หมด"</strong> เพราะไม่มี Deductible และได้สัญญาหลักที่ชำระเบี้ยเพียง 20 ปี (สบายตอนเกษียณ) พร้อมความคุ้มครองมะเร็งรับเงินก้อนอีก 300,000 บาท แลกกับเบี้ยที่สูงกว่าปีละเกือบ 20,000 บาท</li>
+        </ul>
+
+        <div class="decision-matrix">
+            <div class="card" style="border-top: 4px solid #e67e22;">
+                <div class="card-header">📌 สูตรการตัดสินใจ</div>
+                <p>
+                1. ถ้ามีประกันกลุ่ม/ประกันสังคม: <strong>เลือกทางเลือกที่ 1</strong> (ประหยัดเบี้ย + วงเงินสูง)<br>
+                2. ถ้าไม่มีสวัสดิการเลย + งบถึง: <strong>เลือกทางเลือกที่ 3</strong> (สบายใจ เคลมได้ทุกบาท + มีเงินก้อนมะเร็ง)<br>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        เอกสารวิเคราะห์นี้จัดทำขึ้นเพื่อประกอบการตัดสินใจเบื้องต้นจากข้อมูลในไฟล์ PDF เท่านั้น<br>
+        ข้อมูลเรื่อง "ล้างไต/รังสี/เคมีบำบัด" อ้างอิงตามตารางผลประโยชน์ในหน้าเอกสารที่ระบุว่า "ไม่คุ้มครอง" ในฐานะผู้ป่วยนอก (OPD)
+    </div>
+</div>
+
+<script>
+    let currentFontSize = 16;
+    
+    function adjustFontSize(change) {
+        currentFontSize += change;
+        if(currentFontSize < 12) currentFontSize = 12;
+        if(currentFontSize > 24) currentFontSize = 24;
+        
+        document.body.style.fontSize = currentFontSize + 'px';
+    }
+</script>
+
+</body>
+</html>

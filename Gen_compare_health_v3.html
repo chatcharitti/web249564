@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AIA Health Solution: Premium & Benefits (Light Theme)</title>
+  
+  <!-- SEO Metadata -->
+  <meta name="description" content="เปรียบเทียบแผนประกันสุขภาพ AIA 2025 คำนวณเบี้ยประกัน แสดงผลประโยชน์ครบ 13 หมวด เปรียบเทียบเบี้ยรายปีและแนวโน้มเบี้ยในอนาคต">
+  <meta name="keywords" content="AIA, ประกันสุขภาพ, เปรียบเทียบประกัน, เบี้ยประกัน, Health Solution, HS, HS Extra">
+  <meta property="og:title" content="AIA Health Solution 2025 - เปรียบเทียบเบี้ยประกันและผลประโยชน์">
+  <meta property="og:description" content="เครื่องมือเปรียบเทียบแผนประกันสุขภาพ AIA แบบละเอียด">
+  
+  <!-- PWA -->
+  <meta name="theme-color" content="#f59e0b">
+
+  <!-- Libraries -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* Base Styles */
+    body { font-family: 'Sarabun', sans-serif; background: #f8fafc; color: #334155; }
+    
+    /* Accessibility - Skip to content */
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+    .sr-only:focus { position: fixed; top: 4px; left: 4px; width: auto; height: auto; padding: 8px; background: white; clip: auto; z-index: 1000; }
+    
+    /* Premium Gradients */
+    .bg-premium-gold { background: linear-gradient(135deg, #b45309 0%, #d97706 50%, #f59e0b 100%); }
+    .bg-premium-navy { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+    .text-premium-gold { color: #b45309; }
+
+    /* Layout Utilities */
+    .sticky-header { position: sticky; top: 0; z-index: 50; }
+    .sticky-col { position: sticky; left: 0; z-index: 30; background-color: #f8fafc; border-right: 1px solid #e2e8f0; }
+    .sticky-top-col { position: sticky; top: 0; z-index: 35; }
+
+    /* Glass Effect (Light Mode) */
+    .glass { background: rgba(255,255,255,0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.6); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
+    .card { background: white; border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .sticky-col { position: relative !important; }
+      .table-cell-center { padding: 0.5rem !important; font-size: 0.75rem; }
+      #chart-container { height: 250px !important; }
+      .sticky-header .flex-col { flex-direction: column !important; }
+      .sticky-header .gap-4 { gap: 1rem !important; }
+      .hide-on-mobile { display: none; }
+    }
+
+    /* Print Styles */
+    @media print {
+      body { background: white !important; color: black !important; -webkit-print-color-adjust: exact; }
+      .no-print { display: none !important; }
+      .sticky-header { position: relative !important; top: auto !important; }
+      .glass, .card { box-shadow: none !important; border: 1px solid #ddd !important; background: white !important; color: black !important; }
+      .sticky-col { background: white !important; border-right: 1px solid #ddd !important; }
+      #chart-container { height: 300px !important; page-break-inside: avoid; }
+      .page-break { page-break-before: always; }
+      th, td { border-color: #ccc !important; color: black !important; }
+      .bg-premium-gold { background: #eee !important; color: black !important; border-bottom: 1px solid #000; }
+      .text-white { color: black !important; }
+    }
+
+    /* Custom Table */
+    .table-cell-center { text-align: center; vertical-align: middle; padding: 0.75rem; }
+    .highlight-green { color: #059669; font-weight: 800; background-color: #ecfdf5; border-radius: 6px; }
+    tr:hover td { background-color: #f1f5f9; }
+    
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    
+    /* Loading Animation */
+    .spinner { animation: spin 1s linear infinite; }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+
+<body class="pb-12 transition-all duration-200">
+
+<!-- Skip to Content Link (Accessibility) -->
+<a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 bg-white p-2 rounded shadow-lg z-[100]">
+  ข้ามไปยังเนื้อหาหลัก
+</a>
+
+<!-- Loading Overlay -->
+<div id="loading" class="hidden fixed inset-0 bg-white/80 z-[100] flex items-center justify-center">
+  <div class="spinner rounded-full h-12 w-12 border-b-2 border-amber-600"></div>
+</div>
+
+<!-- Error Alert -->
+<div id="error-alert" class="hidden fixed top-4 right-4 z-[100] max-w-sm transition-all duration-300"></div>
+
+<!-- Success Alert -->
+<div id="success-alert" class="hidden fixed top-4 right-4 z-[100] max-w-sm transition-all duration-300"></div>
+
+<!-- GOLD BANNER HIGHLIGHT -->
+<div class="bg-premium-gold text-white text-center py-3 px-6 shadow-md relative z-[60]">
+  <div class="flex items-center justify-center gap-2 text-sm md:text-base font-bold tracking-wide">
+    <i data-lucide="shield-check" class="w-5 h-5 text-white/90"></i>
+    <span><strong>"วางแผนค่ารักษาพยาบาล เพื่อปกป้องเงินออมของคุณ ตั้งแต่วันนี้"</strong></span>
+  </div>
+</div>
+
+<div class="max-w-[1600px] mx-auto px-4 py-6">
+
+  <!-- HEADER -->
+  <div class="sticky-header mb-6 z-50">
+    <div class="bg-white/90 backdrop-blur-xl border border-slate-200 rounded-2xl shadow-xl p-4">
+      <div class="flex flex-col xl:flex-row justify-between items-center gap-4">
+        <div class="flex items-center gap-4 w-full xl:w-auto">
+          <div class="bg-gradient-to-br from-blue-900 to-slate-800 p-3 rounded-xl shadow-lg">
+            <i data-lucide="activity" class="w-8 h-8 text-white"></i>
+          </div>
+          <div>
+            <h1 class="text-2xl font-bold text-slate-800 tracking-tight">AIA Health Solution <span class="text-amber-600">2025 - ก่อนเปลี่ยนแปลง</span></h1>
+            <p class="text-xs text-slate-500 font-medium">Professional Rate Table & Benefit Comparison</p>
+          </div>
+        </div>
+
+        <div class="bg-slate-50 border border-slate-200 p-2 rounded-xl flex flex-wrap items-center gap-3 w-full xl:w-auto no-print justify-center shadow-inner">
+          
+          <!-- Font Controls -->
+          <div class="flex flex-col items-center">
+             <label class="text-[9px] text-slate-400 uppercase font-bold">ขนาดตัวอักษร</label>
+             <div class="flex gap-1">
+                 <button onclick="app.adjustFontSize(-1)" 
+                         aria-label="ลดขนาดตัวอักษร"
+                         tabindex="0"
+                         class="bg-white hover:bg-slate-100 text-slate-600 p-1.5 rounded-lg border border-slate-300 shadow-sm transition focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    <i data-lucide="minus" class="w-3 h-3"></i>
+                 </button>
+                 <button onclick="app.adjustFontSize(0)" 
+                         aria-label="รีเซตขนาดตัวอักษร"
+                         tabindex="0"
+                         class="bg-white hover:bg-slate-100 text-slate-600 px-2 py-1 rounded-lg border border-slate-300 shadow-sm text-[10px] font-bold uppercase transition focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    Reset
+                 </button>
+                 <button onclick="app.adjustFontSize(1)" 
+                         aria-label="เพิ่มขนาดตัวอักษร"
+                         tabindex="0"
+                         class="bg-white hover:bg-slate-100 text-slate-600 p-1.5 rounded-lg border border-slate-300 shadow-sm transition focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    <i data-lucide="plus" class="w-3 h-3"></i>
+                 </button>
+             </div>
+          </div>
+
+          <div class="h-8 w-px bg-slate-300 mx-1"></div>
+
+          <div class="flex flex-col">
+             <label class="text-[9px] text-slate-400 uppercase font-bold">เพศ</label>
+             <select id="input-gender" onchange="app.reCalculate()" 
+                     aria-label="เลือกเพศ"
+                     class="bg-white border border-slate-300 text-slate-700 text-sm rounded-lg px-3 py-1 outline-none shadow-sm focus:border-amber-500 focus:ring-1 focus:ring-amber-500 cursor-pointer">
+                <option value="male">ชาย 👨🏻</option>
+                <option value="female">หญิง 👩🏻</option>
+             </select>
+          </div>
+          <div class="flex flex-col">
+            <label class="text-[9px] text-slate-400 uppercase font-bold">อายุ (ปี)</label>
+            <div class="flex items-center bg-white border border-slate-300 rounded-lg shadow-sm">
+                <button onclick="app.adjustAge(-1)" 
+                        aria-label="ลดอายุ"
+                        tabindex="0"
+                        class="px-2 text-slate-500 hover:text-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-500 rounded">
+                    <i data-lucide="minus" class="w-3 h-3"></i>
+                </button>
+                <input type="number" id="input-age" value="35" onchange="app.reCalculate()" 
+                       aria-label="อายุ"
+                       min="11" max="98"
+                       class="bg-transparent text-center text-slate-800 font-bold w-10 text-sm outline-none">
+                <button onclick="app.adjustAge(1)" 
+                        aria-label="เพิ่มอายุ"
+                        tabindex="0"
+                        class="px-2 text-slate-500 hover:text-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-500 rounded">
+                    <i data-lucide="plus" class="w-3 h-3"></i>
+                </button>
+            </div>
+          </div>
+          
+          <div class="h-8 w-px bg-slate-300 mx-1"></div>
+          
+          <!-- Language Selector (สำหรับอนาคต) -->
+          <div class="flex flex-col hide-on-mobile">
+             <label class="text-[9px] text-slate-400 uppercase font-bold">ภาษา</label>
+             <select class="bg-white border border-slate-300 text-slate-700 text-sm rounded-lg px-2 py-1 outline-none shadow-sm">
+                <option value="th">ไทย</option>
+                <option value="en" disabled>English (Soon)</option>
+             </select>
+          </div>
+          
+          <div class="h-8 w-px bg-slate-300 mx-1 hide-on-mobile"></div>
+
+          <div class="flex flex-wrap gap-2">
+            <button onclick="app.saveComparison()" 
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex gap-2 items-center text-sm font-bold shadow-md transition no-print">
+              <i data-lucide="bookmark" class="w-4 h-4"></i> <span class="hide-on-mobile">บันทึก</span>
+            </button>
+            
+            <button onclick="app.exportCSV()" 
+                    class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex gap-2 items-center text-sm font-bold shadow-md transition no-print">
+              <i data-lucide="download" class="w-4 h-4"></i> <span class="hide-on-mobile">CSV</span>
+            </button>
+            
+            <button onclick="window.print()" 
+                    class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg flex gap-2 items-center text-sm font-bold shadow-md transition">
+              <i data-lucide="printer" class="w-4 h-4"></i> <span class="hide-on-mobile">พิมพ์ / PDF</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main id="main-content">
+    <!-- PLAN SELECTION -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 no-print">
+      <!-- Plan A -->
+      <div class="card p-4 border-t-4 border-emerald-500 relative">
+        <div class="text-emerald-600 font-bold text-xs uppercase mb-2 tracking-wider">Plan Option A</div>
+        <div class="flex flex-col gap-2">
+          <select id="type-1" onchange="app.changeType(1,this.value)" 
+                  aria-label="เลือกประเภทแผนประกัน A"
+                  class="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-lg text-sm p-2 outline-none focus:border-emerald-500"></select>
+          <select id="idx-1" onchange="app.changeOption(1,this.value)" 
+                  aria-label="เลือกรายละเอียดแผนประกัน A"
+                  class="w-full bg-white border border-slate-200 text-slate-700 rounded-lg text-sm p-2 outline-none shadow-sm"></select>
+        </div>
+      </div>
+      <!-- Plan B -->
+      <div class="card p-4 border-t-4 border-amber-500 relative">
+        <div class="text-amber-600 font-bold text-xs uppercase mb-2 tracking-wider">Plan Option B</div>
+        <div class="flex flex-col gap-2">
+          <select id="type-2" onchange="app.changeType(2,this.value)" 
+                  aria-label="เลือกประเภทแผนประกัน B"
+                  class="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-lg text-sm p-2 outline-none focus:border-amber-500"></select>
+          <select id="idx-2" onchange="app.changeOption(2,this.value)" 
+                  aria-label="เลือกรายละเอียดแผนประกัน B"
+                  class="w-full bg-white border border-slate-200 text-slate-700 rounded-lg text-sm p-2 outline-none shadow-sm"></select>
+        </div>
+      </div>
+      <!-- Plan C -->
+      <div class="card p-4 border-t-4 border-rose-500 relative">
+        <div class="text-rose-600 font-bold text-xs uppercase mb-2 tracking-wider">Plan Option C</div>
+        <div class="flex flex-col gap-2">
+          <select id="type-3" onchange="app.changeType(3,this.value)" 
+                  aria-label="เลือกประเภทแผนประกัน C"
+                  class="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-lg text-sm p-2 outline-none focus:border-rose-500"></select>
+          <select id="idx-3" onchange="app.changeOption(3,this.value)" 
+                  aria-label="เลือกรายละเอียดแผนประกัน C"
+                  class="w-full bg-white border border-slate-200 text-slate-700 rounded-lg text-sm p-2 outline-none shadow-sm"></select>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 1: PREMIUM SUMMARY -->
+    <div class="card overflow-hidden mb-6">
+      <div class="overflow-x-auto">
+        <table class="w-full min-w-[800px]">
+          <thead>
+            <tr class="bg-slate-50 border-b border-slate-200 text-slate-600">
+              <th class="p-6 text-left w-[25%]">
+                <span class="text-lg font-black block text-slate-800">สรุปเบี้ยประกันปีแรก</span>
+                <span class="text-xs font-normal text-slate-500">คำนวณที่อายุ <span id="disp-age" class="font-bold text-amber-600">35</span> ปี</span>
+              </th>
+              <th class="p-6 w-[25%] bg-emerald-50 text-left border-l border-emerald-100"><div id="head-1"></div></th>
+              <th class="p-6 w-[25%] bg-amber-50 text-left border-l border-amber-100"><div id="head-2"></div></th>
+              <th class="p-6 w-[25%] bg-rose-50 text-left border-l border-rose-100"><div id="head-3"></div></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-6 border-b border-slate-100 font-bold text-slate-600 align-top">
+                  <div class="flex items-center gap-2 mb-1">
+                      <i data-lucide="coins" class="w-5 h-5 text-slate-400"></i>
+                      <span>เบี้ยรายปี (บาท)</span>
+                  </div>
+                  <div class="text-[10px] font-normal text-slate-400 pl-7">*เบี้ยนี้รวมภาษีมูลค่าเพิ่มและอากรแสตมป์แล้ว</div>
+              </td>
+              <td class="p-6 text-right bg-white border-l border-slate-100 border-b align-top">
+                  <div id="prem-1" class="text-3xl font-black text-emerald-600 tracking-tight">-</div>
+              </td>
+              <td class="p-6 text-right bg-white border-l border-slate-100 border-b align-top">
+                  <div id="prem-2" class="text-3xl font-black text-amber-600 tracking-tight">-</div>
+              </td>
+              <td class="p-6 text-right bg-white border-l border-slate-100 border-b align-top">
+                  <div id="prem-3" class="text-3xl font-black text-rose-600 tracking-tight">-</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SECTION 2: BENEFIT COMPARISON TABLE (High Priority) -->
+    <div class="card overflow-hidden mb-6 page-break">
+      <div class="p-4 bg-premium-navy text-white flex justify-between items-center">
+        <div class="flex items-center gap-3">
+          <div class="bg-white/10 p-2 rounded-lg backdrop-blur-sm"><i data-lucide="list-checks" class="w-5 h-5 text-amber-400"></i></div>
+          <div>
+            <h2 class="text-lg font-bold">ตารางเปรียบเทียบผลประโยชน์ (Benefits)</h2>
+            <p class="text-xs text-slate-300">สรุปความคุ้มครองสำคัญ 13 หมวดมาตรฐาน</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm text-slate-600">
+          <thead class="text-slate-700 font-bold text-xs uppercase tracking-wider bg-slate-50 border-b border-slate-200">
+            <tr>
+              <th class="p-4 text-left w-[30%] sticky-col sticky-top-col z-40 shadow-sm border-r border-slate-200">รายการผลประโยชน์</th>
+              <th class="p-4 text-center w-[23%] bg-emerald-50 border-r border-emerald-100 sticky-top-col" id="ben-head-1">Plan A</th>
+              <th class="p-4 text-center w-[23%] bg-amber-50 border-r border-amber-100 sticky-top-col" id="ben-head-2">Plan B</th>
+              <th class="p-4 text-center w-[23%] bg-rose-50 sticky-top-col" id="ben-head-3">Plan C</th>
+            </tr>
+          </thead>
+          <tbody id="benefit-body" class="divide-y divide-slate-100">
+            <!-- JS will populate -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SECTION 3: CHART -->
+    <div class="card p-6 mb-6 page-break">
+      <div class="flex items-center gap-2 mb-4">
+        <div class="bg-blue-50 p-2 rounded-full text-blue-700"><i data-lucide="trending-up" class="w-5 h-5"></i></div>
+        <div>
+            <h3 class="font-bold text-slate-800 text-lg">แนวโน้มเบี้ยประกันในอนาคต (Premium Trend)</h3>
+            <p class="text-xs text-slate-500">กราฟแสดงการปรับเพิ่มของเบี้ยตามช่วงอายุ</p>
+        </div>
+      </div>
+      <div class="relative h-[300px] w-full" id="chart-container">
+        <canvas id="premiumChart"></canvas>
+      </div>
+    </div>
+
+    <!-- SECTION 4: PREMIUM TABLE (PROJECTION) -->
+    <div class="card overflow-hidden mb-10 page-break">
+      <div class="p-4 bg-slate-800 text-white flex justify-between items-center border-b border-slate-700">
+        <div class="flex items-center gap-2">
+          <i data-lucide="table" class="w-5 h-5 text-slate-400"></i>
+          <h3 class="font-bold">ตารางเบี้ยประกันต่อเนื่อง (Premium Projection)</h3>
+        </div>
+        <span class="text-[10px] text-slate-400 bg-white/10 px-2 py-1 rounded">Rate Table มาตรฐาน</span>
+      </div>
+      <div class="overflow-x-auto">
+          <table class="w-full text-sm text-slate-600">
+              <thead class="bg-slate-50 text-slate-500 font-bold uppercase text-[10px] tracking-wider border-b border-slate-200">
+                 <tr>
+                    <th class="p-3 text-left pl-6 sticky-col bg-slate-50 z-40 border-r border-slate-200">Age Band</th>
+                    <th class="p-3 text-center border-l border-slate-200" id="pt-head-1">Plan A</th>
+                    <th class="p-3 text-center border-l border-slate-200" id="pt-head-2">Plan B</th>
+                    <th class="p-3 text-center border-l border-slate-200" id="pt-head-3">Plan C</th>
+                 </tr>
+              </thead>
+              <tbody id="premium-table-body" class="divide-y divide-slate-100">
+                  <!-- JS will populate -->
+              </tbody>
+           </table>
+      </div>
+    </div>
+
+    <div class="mt-8 text-center pb-12 border-t border-slate-200 pt-6">
+      <p class="text-xs text-slate-400">เอกสารนี้จัดทำโดยระบบอัตโนมัติ เพื่อความเข้าใจเพิ่มเติมเท่านั้น ไม่ใช่สัญญากรมธรรม์</p>
+      <p class="text-[15px] text-slate-300 mt-1">เงื่อนไขความคุ้มครองฉบับสมบูรณ์โปรดอ้างอิงตามกรมธรรม์ประกันภัยของบริษัท AIA</p>
+      <p class="text-[15px] text-slate-300 mt-1">&nbsp;</p>
+      <a href="Gen-calculate-premium.html" class="inline-block bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105">
+        คำนวณเบี้ยเต็มแผน
+      </a>
+    </div>
+  </main>
+
+</div>
+
+<script>
+// Premium Calculation Cache
+const premiumCache = new Map();
+
+const APP_DATA = {
+    // 1. Plan Config
+    plans: {
+        HS: { name: "HS (New Std)", color: "emerald", options: [
+            {name:"แผน 1000", k:"1000", limit:"แยกหมวด"}, {name:"แผน 1600", k:"1600", limit:"แยกหมวด"},
+            {name:"แผน 2200", k:"2200", limit:"แยกหมวด"}, {name:"แผน 2800", k:"2800", limit:"แยกหมวด"},
+            {name:"แผน 3400", k:"3400", limit:"แยกหมวด"}, {name:"แผน 4000", k:"4000", limit:"แยกหมวด"},
+            {name:"แผน 5000", k:"5000", limit:"แยกหมวด"}
+        ]},
+        HSX: { name: "HS Extra", color: "amber", options: [
+            {name:"แผน 1500", k:"1500", limit:"เหมาบางส่วน"}, {name:"แผน 2000", k:"2000", limit:"เหมาบางส่วน"},
+            {name:"แผน 2500", k:"2500", limit:"เหมาบางส่วน"}, {name:"แผน 3500", k:"3500", limit:"เหมาบางส่วน"},
+            {name:"แผน 4500", k:"4500", limit:"เหมาบางส่วน"}, {name:"แผน 5500", k:"5500", limit:"เหมาบางส่วน"},
+            {name:"แผน 6500", k:"6500", limit:"เหมาบางส่วน"}
+        ]},
+        HSV: { name: "Health Saver", color: "indigo", options: [
+            {name:"แผน 200k", k:"200k", limit:"200,000"}, {name:"แผน 300k", k:"300k", limit:"300,000"},
+            {name:"แผน 400k", k:"400k", limit:"400,000"}, {name:"แผน 500k", k:"500k", limit:"500,000"}
+        ]},
+        HH: { name: "Health Happy", color: "rose", options: [
+            {name:"แผน 1 ล้าน", k:"1m", limit:"1 ล้าน"}, {name:"แผน 5 ล้าน", k:"5m", limit:"5 ล้าน"},
+            {name:"แผน 15 ล้าน", k:"15m", limit:"15 ล้าน"}, {name:"แผน 25 ล้าน", k:"25m", limit:"25 ล้าน"}
+        ]}
+    },
+
+    // 2. Official Rate Table
+    rateTable: {
+        HS: { male: {}, female: {} }, // Built dynamically
+        HSX: { male: {"1500":[7370,7280,6820,6920,7060,7330,7780,8540,10890,15270,22410,31530,47040,67730,94820,104300,114730,126200],"2000":[9380,8630,8320,8520,8900,9200,9710,10530,13680,18830,26510,37460,55280,79600,111430,122570,134830,148310],"2500":[10600,9880,9770,9850,10270,10780,11550,12470,16800,21820,29820,42550,62490,89980,125970,138570,152430,167670],"3500":[13280,12150,12050,12920,13040,13070,13800,15620,21580,31900,44080,62140,85460,123060,172280,189510,208460,229310],"4500":[15900,14750,14680,15630,15680,15720,16550,18860,26530,38650,54090,77250,106810,153800,215320,236850,260540,286590],"5500":[17420,16500,16460,17700,17690,17850,18290,21060,29750,44240,61730,88020,121700,175250,245340,269870,296860,326550],"6500":[18730,17930,17910,19210,19280,19270,19860,22660,32010,48190,67360,96040,132630,190980,267370,294110,323520,355870]}, female: {"1500":[7690,7370,8510,9050,9170,9420,10050,11080,13790,17970,23990,33060,47540,68460,95840,105420,115960,127560],"2000":[9810,9690,10550,11300,11330,11800,12610,13760,16730,21880,28910,39360,56580,81480,114060,125470,138020,151820],"2500":[11620,11170,12420,12890,13030,14070,15070,16880,20160,25290,34030,45860,64620,93050,130270,143300,157630,173390],"3500":[15410,15190,16390,17030,17330,17970,19310,22380,26830,34000,46090,62780,86810,125010,175010,192510,211760,232940],"4500":[18380,18380,20120,20740,21030,21500,23190,27160,32920,42170,57150,77480,108830,156720,219400,241340,265470,292020],"5500":[20120,19950,22260,23250,23550,23820,25720,30190,36760,48190,67060,96040,132630,178070,249300,274230,301650,331820],"6500":[21600,21550,24050,24760,25080,25510,27580,32400,39370,51340,71040,96180,134860,194200,271880,299070,328980,361880]} },
+        HSV: { male: {"200k":[10100,7300,6900,7400,7500,8500,10000,11800,15400,20600,27300,37500,53700,76900,110200,121200,133300,146600],"300k":[12300,8700,8400,8900,9300,10200,11400,13000,17200,24200,31000,47100,67400,96600,138500,152400,167600,184400],"400k":[16400,10600,10400,13500,14700,15200,17100,18000,24300,30700,47000,65000,94400,135200,193800,222900,256300,294700],"500k":[20200,13700,13400,16600,18900,20100,21600,24700,30900,40500,56600,81000,115800,165600,236800,272300,313100,360100]}, female: {"200k":[8500,7400,8600,9100,9200,10400,12100,14300,15500,20800,27600,37900,54200,77700,111300,122400,134600,148100],"300k":[10500,9700,10600,11300,11700,11900,13800,16000,17200,24400,31300,47600,68100,97600,139900,153900,169300,186200],"400k":[14100,12000,14400,17100,18000,18500,21700,23200,25600,31000,47500,66600,95300,136600,195700,225100,258900,297700],"500k":[18200,15000,18100,21000,22700,25100,26500,29200,34100,40900,57200,81800,117000,167300,239200,275100,316400,363900]} },
+        HH: { male: {"1m":[16400,13500,13700,14700,15100,17000,19200,21600,28300,34100,40900,59400,85400,122900,177800,204500,235200,270500],"5m":[20200,16500,16900,18300,18900,20800,23800,26700,35000,42300,50600,72100,104000,150000,217100,249700,287200,330300],"15m":[25500,20100,21600,26100,29400,31800,36000,40200,50100,63900,72300,105000,152100,219900,318300,366000,420900,484200],"25m":[33400,26200,28000,33800,37800,40900,47300,52400,65300,83000,94100,136700,197800,286300,414700,476900,548400,630700]}, female: {"1m":[14400,15200,17200,17500,18400,20400,22300,24500,28500,34400,41500,60800,88200,126300,182700,210100,241600,277800],"5m":[18200,19100,21500,21800,22700,25100,27800,30400,35200,42500,50800,74000,107500,154400,223400,256900,295400,339700],"15m":[21600,23100,27000,30600,34200,37200,42900,46500,50700,65100,73500,107100,155700,224700,325500,374400,430500,495000],"25m":[27900,30300,35300,38000,42300,46000,53600,60700,65500,84600,95700,139300,202000,291800,422700,486100,559000,642900]} }
+    },
+
+    // 3. Benefit Data (Corrected)
+    benefits: {
+        "HS_1000": {max:"แยกรายหมวด", r1:"1,000", r2:"16,000", r3:"550", r4:"40,000", r5:"จ่ายตามจริง", r6:"4,500", r7:"3,000", r8:"ไม่คุ้มครอง", r9:"ไม่คุ้มครอง", r10:"15,000", r11:"ไม่คุ้มครอง", r12:"3,000", r13:"4,500", d:"10,000", opd:"-"},
+        "HS_1600": {max:"แยกรายหมวด", r1:"1,600", r2:"20,000", r3:"750", r4:"50,000", r5:"จ่ายตามจริง", r6:"5,000", r7:"4,000", r8:"ไม่คุ้มครอง", r9:"ไม่คุ้มครอง", r10:"20,000", r11:"ไม่คุ้มครอง", r12:"3,500", r13:"5,000", d:"10,000", opd:"-"},
+        "HS_2200": {max:"แยกรายหมวด", r1:"2,200", r2:"20,000", r3:"850", r4:"60,000", r5:"จ่ายตามจริง", r6:"5,500", r7:"5,000", r8:"ไม่คุ้มครอง", r9:"ไม่คุ้มครอง", r10:"25,000", r11:"ไม่คุ้มครอง", r12:"4,500", r13:"6,500", d:"10,000", opd:"-"},
+        "HS_2800": {max:"แยกรายหมวด", r1:"2,800", r2:"25,000", r3:"900", r4:"70,000", r5:"จ่ายตามจริง", r6:"6,500", r7:"5,500", r8:"ไม่คุ้มครอง", r9:"ไม่คุ้มครอง", r10:"30,000", r11:"ไม่คุ้มครอง", r12:"5,000", r13:"6,000", d:"10,000", opd:"-"},
+        "HS_3400": {max:"แยกรายหมวด", r1:"3,400", r2:"20,000", r3:"800", r4:"80,000", r5:"จ่ายตามจริง", r6:"6,000", r7:"6,500", r8:"ไม่คุ้มครอง", r9:"ไม่คุ้มครอง", r10:"35,000", r11:"ไม่คุ้มครอง", r12:"4,000", r13:"5,500", d:"10,000", opd:"-"},
+        "HS_4000": {max:"แยกรายหมวด", r1:"4,000", r2:"25,000", r3:"1,000", r4:"90,000", r5:"จ่ายตามจริง", r6:"7,000", r7:"7,000", r8:"ไม่คุ้มครอง", r9:"ไม่คุ้มครอง", r10:"40,000", r11:"ไม่คุ้มครอง", r12:"5,500", r13:"7,000", d:"10,000", opd:"-"},
+        "HS_5000": {max:"แยกรายหมวด", r1:"5,000", r2:"25,000", r3:"1,200", r4:"100,000", r5:"จ่ายตามจริง", r6:"8,000", r7:"8,000", r8:"ไม่คุ้มครอง", r9:"ไม่คุ้มครอง", r10:"50,000", r11:"ไม่คุ้มครอง", r12:"6,000", r13:"8,000", d:"10,000", opd:"-"},
+
+        "HSX_1500": {max:"แยกรายหมวด", r1:"1,500", r2:"30,000", r3:"600", r4:"90,000", r5:"จ่ายตามจริง", r6:"5,000", r7:"3,000", r8:"ไม่คุ้มครอง", r9:"ไม่คุ้มครอง", r10:"20,000", r11:"ไม่คุ้มครอง", r12:"4,000", r13:"5,000", d:"10,000", opd:"3,000"},
+        "HSX_2000": {max:"แยกรายหมวด", r1:"2,000", r2:"25,000", r3:"800", r4:"100,000", r5:"จ่ายตามจริง", r6:"5,500", r7:"4,000", r8:"ไม่คุ้มครอง", r9:"ไม่คุ้มครอง", r10:"25,000", r11:"ไม่คุ้มครอง", r12:"4,500", r13:"6,000", d:"10,000", opd:"4,000"},
+        "HSX_2500": {max:"แยกรายหมวด", r1:"2,500", r2:"20,000", r3:"900", r4:"50,000", r5:"จ่ายตามจริง", r6:"6,000", r7:"5,000", r8:"ไม่คุ้มครอง", r9:"ไม่คุ้มครอง", r10:"35,000", r11:"ไม่คุ้มครอง", r12:"5,000", r13:"8,000", d:"10,000", opd:"5,000"},
+        "HSX_3500": {max:"แยกรายหมวด", r1:"3,500", r2:"25,000", r3:"1,000", r4:"70,000", r5:"จ่ายตามจริง", r6:"7,000", r7:"6,000", r8:"ไม่คุ้มครอง", r9:"ไม่คุ้มครอง", r10:"45,000", r11:"ไม่คุ้มครอง", r12:"6,000", r13:"9,000", d:"10,000", opd:"7,000"},
+        "HSX_4500": {max:"แยกรายหมวด", r1:"4,500", r2:"30,000", r3:"1,200", r4:"90,000", r5:"จ่ายตามจริง", r6:"8,000", r7:"7,000", r8:"ไม่คุ้มครอง", r9:"ไม่คุ้มครอง", r10:"55,000", r11:"ไม่คุ้มครอง", r12:"7,000", r13:"10,000", d:"10,000", opd:"9,000"},
+        "HSX_5500": {max:"แยกรายหมวด", r1:"5,500", r2:"35,000", r3:"1,500", r4:"110,000", r5:"จ่ายตามจริง", r6:"9,000", r7:"8,000", r8:"ไม่คุ้มครอง", r9:"ไม่คุ้มครอง", r10:"65,000", r11:"ไม่คุ้มครอง", r12:"8,000", r13:"11,000", d:"10,000", opd:"10,000"},
+        "HSX_6500": {max:"แยกรายหมวด", r1:"6,500", r2:"40,000", r3:"2,000", r4:"130,000", r5:"จ่ายตามจริง", r6:"10,000", r7:"9,000", r8:"ไม่คุ้มครอง", r9:"ไม่คุ้มครอง", r10:"75,000", r11:"ไม่คุ้มครอง", r12:"9,000", r13:"12,000", d:"10,000", opd:"12,000"},
+
+        "HSV_200k": {max:"200,000", r1:"1,500", r2:"25,000", r3:"เหมาจ่ายตามจริง", r4:"เหมาจ่ายตามจริง", r5:"เหมาจ่ายตามจริง", r6:"เหมาจ่ายตามจริง", r7:"7,000", r8:"ไม่คุ้มครอง", r9:"เหมาจ่ายร่วม", r10:"เหมาจ่ายร่วม", r11:"เหมาจ่ายร่วม", r12:"เหมาจ่ายตามจริง", r13:"10,000", d:"10,000", opd:"-"},
+        "HSV_300k": {max:"300,000", r1:"2,000", r2:"35,000", r3:"เหมาจ่ายตามจริง", r4:"เหมาจ่ายตามจริง", r5:"เหมาจ่ายตามจริง", r6:"เหมาจ่ายตามจริง", r7:"8,000", r8:"ไม่คุ้มครอง", r9:"เหมาจ่ายร่วม", r10:"เหมาจ่ายร่วม", r11:"เหมาจ่ายร่วม", r12:"เหมาจ่ายตามจริง", r13:"15,000", d:"10,000", opd:"-"},
+        "HSV_400k": {max:"400,000", r1:"3,000", r2:"40,000", r3:"เหมาจ่ายตามจริง", r4:"เหมาจ่ายตามจริง", r5:"เหมาจ่ายตามจริง", r6:"เหมาจ่ายตามจริง", r7:"10,000", r8:"ไม่คุ้มครอง", r9:"เหมาจ่ายร่วม", r10:"เหมาจ่ายร่วม", r11:"เหมาจ่ายร่วม", r12:"เหมาจ่ายตามจริง", r13:"20,000", d:"10,000", opd:"1,000 (30/ปี)"},
+        "HSV_500k": {max:"500,000", r1:"4,000", r2:"50,000", r3:"เหมาจ่ายตามจริง", r4:"เหมาจ่ายตามจริง", r5:"เหมาจ่ายตามจริง", r6:"เหมาจ่ายตามจริง", r7:"9,000", r8:"ไม่คุ้มครอง", r9:"เหมาจ่ายร่วม", r10:"เหมาจ่ายร่วม", r11:"เหมาจ่ายร่วม", r12:"เหมาจ่ายตามจริง", r13:"25,000", d:"10,000", opd:"1,500 (30/ปี)"},
+
+        "HH_1m": {max:"1,000,000", r1:"1,500", r2:"เหมาจ่ายตามจริง", r3:"1,000", r4:"เหมาจ่ายตามจริง", r5:"เหมาจ่ายตามจริง", r6:"เหมาจ่ายตามจริง", r7:"เหมาจ่ายตามจริง", r8:"เหมาจ่ายตามจริง", r9:"เหมาจ่ายตามจริง", r10:"เหมาจ่ายตามจริง", r11:"เหมาจ่ายตามจริง", r12:"เหมาจ่ายตามจริง", r13:"เหมาจ่ายตามจริง", d:"10,000", opd:"-"},
+        "HH_5m": {max:"5,000,000", r1:"3,000", r2:"เหมาจ่ายตามจริง", r3:"2,000", r4:"เหจจ่ายตามจริง", r5:"เหมาจ่ายตามจริง", r6:"เหมาจ่ายตามจริง", r7:"เหมาจ่ายตามจริง", r8:"เหมาจ่ายตามจริง", r9:"เหมาจ่ายตามจริง", r10:"เหมาจ่ายตามจริง", r11:"เหมาจ่ายตามจริง", r12:"เหมาจ่ายตามจริง", r13:"เหมาจ่ายตามจริง", d:"10,000", opd:"-"},
+        "HH_15m": {max:"15,000,000", r1:"6,000", r2:"เหมาจ่ายตามจริง", r3:"4,000", r4:"เหมาจ่ายตามจริง", r5:"เหมาจ่ายตามจริง", r6:"เหมาจ่ายตามจริง", r7:"เหมาจ่ายตามจริง", r8:"เหมาจ่ายตามจริง", r9:"เหมาจ่ายตามจริง", r10:"เหมาจ่ายตามจริง", r11:"เหมาจ่ายตามจริง", r12:"เหมาจ่ายตามจริง", r13:"เหมาจ่ายตามจริง", d:"10,000", opd:"-"},
+        "HH_25m": {max:"25,000,000", r1:"9,000", r2:"เหมาจ่ายตามจริง", r3:"6,000", r4:"เหมาจ่ายตามจริง", r5:"เหมาจ่ายตามจริง", r6:"เหมาจ่ายตามจริง", r7:"เหมาจ่ายตามจริง", r8:"เหมาจ่ายตามจริง", r9:"เหมาจ่ายตามจริง", r10:"เหมาจ่ายตามจริง", r11:"เหมาจ่ายตามจริง", r12:"เหมาจ่ายตามจริง", r13:"เหมาจ่ายตามจริง", d:"10,000", opd:"2,000 (30/ปี)"}
+    },
+
+    AGE_BANDS: [
+        "11-15","16-20","21-25","26-30","31-35",
+        "36-40","41-45","46-50","51-55",
+        "56-60","61-65","66-70","71-75",
+        "76-80","81-85","86-90","91-95","96-98"
+    ]
+};
+
+const app = {
+    state: {
+        1: { type: "HS", idx: 2 },
+        2: { type: "HSV", idx: 2 },
+        3: { type: "HH", idx: 1 },
+        chart: null,
+        calculateTimeout: null
+    },
+
+    expandHSRow(r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15) {
+        return [
+            r1, r1,
+            r2, r2, r2,
+            r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15
+        ];
+    },
+
+    buildHSRateTables() {
+        const m = [
+            [4030,5400,6160,6790,8160,9520,11960], [3560,4760,5390,6020,7310,8500,10590], [4200,5640,6270,7000,8330,9940,12370],
+            [4550,6120,6820,7630,9180,10760,13400], [4900,6600,7370,8190,9860,11500,14170], [6240,8400,9460,10360,12410,14780,17710],
+            [8110,10960,12320,13510,16490,19400,23220], [10710,14240,16170,17850,21590,25160,30980], [15930,21200,24090,27090,32640,37760,45620],
+            [24870,33200,37730,42280,50830,59140,72330], [39230,52440,59510,66710,80240,93480,115200], [54920,73400,83270,93380,112370,130880,161280],
+            [60410,80740,91610,102750,123670,143970,177410], [66450,88810,100760,112990,135990,158370,195150], [73100,97690,110840,124310,149590,174210,214670]
+        ];
+        const f = [
+            [4030,5400,6160,6790,8160,9520,11960], [4600,6200,7040,7700,9350,10960,13630], [5460,7200,8140,9030,10880,12700,15650],
+            [5920,7800,8800,9800,11730,13740,16980], [6420,8520,9570,10500,12750,14820,18420], [8120,10800,12210,13580,16320,18860,23690],
+            [10540,14120,15730,17570,21250,25000,30740], [13810,18520,20900,23240,27710,32700,40290], [20330,27560,31020,34860,41990,48200,60460],
+            [31930,43160,48730,54670,65790,75940,95250], [50560,68200,77110,86310,103870,120480,151110], [70780,95480,107910,120820,145350,168680,211550],
+            [77860,105030,118710,132920,159890,185550,232710], [85650,115530,130570,146220,175940,204110,255980], [94220,127080,143640,160850,193470,224520,281580]
+        ];
+
+        const plans = ["1000","1600","2200","2800","3400","4000","5000"];
+        const mEx = this.expandHSRow(...m);
+        const fEx = this.expandHSRow(...f);
+
+        plans.forEach((k, idx) => {
+            APP_DATA.rateTable.HS.male[k] = mEx.map(r => r[idx]);
+            APP_DATA.rateTable.HS.female[k] = fEx.map(r => r[idx]);
+        });
+    },
+
+    getPremiumWithCache(type, key, sex, bandIdx) {
+        const cacheKey = `${type}-${key}-${sex}-${bandIdx}`;
+        if (premiumCache.has(cacheKey)) {
+            return premiumCache.get(cacheKey);
+        }
+        
+        const rates = APP_DATA.rateTable[type]?.[sex]?.[key];
+        const premium = rates ? (rates[bandIdx] || 0) : 0;
+        premiumCache.set(cacheKey, premium);
+        return premium;
+    },
+
+    getBandIndex(age, type) {
+        if (type === "HH") {
+            if (age <= 59) return this.getBandIndexSTD(age); 
+            if (age <= 65) return 10;
+            return this.getBandIndexSTD(age); 
+        }
+        return this.getBandIndexSTD(age);
+    },
+
+    getBandIndexSTD(age) {
+        if (age < 11) return 0;
+        if (age <= 15) return 0;
+        if (age <= 20) return 1;
+        if (age <= 25) return 2;
+        if (age <= 30) return 3;
+        if (age <= 35) return 4;
+        if (age <= 40) return 5;
+        if (age <= 45) return 6;
+        if (age <= 50) return 7;
+        if (age <= 55) return 8;
+        if (age <= 60) return 9;
+        if (age <= 65) return 10;
+        if (age <= 70) return 11;
+        if (age <= 75) return 12;
+        if (age <= 80) return 13;
+        if (age <= 85) return 14;
+        if (age <= 90) return 15;
+        if (age <= 95) return 16;
+        return 17;
+    },
+
+    adjustFontSize(delta) {
+        const root = document.documentElement;
+        if (delta === 0) { 
+            root.style.fontSize = ''; 
+            this.showSuccess('รีเซตขนาดตัวอักษรเรียบร้อย');
+            return; 
+        }
+        const currentSize = parseFloat(window.getComputedStyle(root).fontSize);
+        let newSize = currentSize + delta;
+        if (newSize < 12) newSize = 12; 
+        if (newSize > 24) newSize = 24;
+        root.style.fontSize = `${newSize}px`;
+    },
+
+    init() {
+        this.buildHSRateTables();
+        [1,2,3].forEach(id => {
+            this.renderSelectors(id);
+            this.updateHeader(id);
+        });
+        this.reCalculate();
+        lucide.createIcons();
+        
+        // Analytics tracking (simulated)
+        this.trackEvent('page_view', 'comparison_tool');
+    },
+
+    adjustAge(d) {
+        let v = parseInt(document.getElementById('input-age').value) + d;
+        if(v < 11) v = 11; 
+        if(v > 98) v = 98;
+        document.getElementById('input-age').value = v;
+        this.reCalculate();
+        this.trackEvent('age_adjust', v.toString());
+    },
+
+    renderSelectors(id) {
+        const cur = this.state[id];
+        const typeSel = document.getElementById(`type-${id}`);
+        const idxSel = document.getElementById(`idx-${id}`);
+        typeSel.innerHTML = Object.keys(APP_DATA.plans).map(k => 
+            `<option value="${k}" ${k===cur.type?'selected':''}>${APP_DATA.plans[k].name}</option>`
+        ).join("");
+        idxSel.innerHTML = APP_DATA.plans[cur.type].options.map((o,i) => 
+            `<option value="${i}" ${i===cur.idx?'selected':''}>${o.name}</option>`
+        ).join("");
+    },
+
+    changeType(id, v) { 
+        this.state[id].type = v; 
+        this.state[id].idx = 0; 
+        this.renderSelectors(id); 
+        this.reCalculate();
+        this.trackEvent('plan_type_change', v);
+    },
+    
+    changeOption(id, v) { 
+        this.state[id].idx = parseInt(v); 
+        this.reCalculate();
+        this.trackEvent('plan_option_change', `${this.state[id].type}-${v}`);
+    },
+
+    updateHeader(id) {
+        const { type, idx } = this.state[id];
+        const p = APP_DATA.plans[type];
+        const o = p.options[idx];
+        
+        // Premium Summary Header
+        document.getElementById(`head-${id}`).innerHTML = `
+            <div class="text-[10px] text-slate-500 uppercase font-bold tracking-wider">${p.name}</div>
+            <div class="text-sm font-black text-slate-800">${o.name}</div>
+            <div class="inline-block bg-${p.color}-100 text-${p.color}-700 text-[10px] px-2 py-0.5 rounded-full font-bold mt-1 border border-${p.color}-200">${o.limit}</div>
+        `;
+        
+        // Benefit Header
+        document.getElementById(`ben-head-${id}`).innerHTML = `
+            <div class="text-[10px] uppercase text-slate-500 font-bold">${p.name}</div>
+            <div class="font-black text-slate-800 text-sm">${o.name}</div>
+        `;
+        
+        // Projection Header
+        document.getElementById(`pt-head-${id}`).innerHTML = `
+            <div class="text-[10px] uppercase text-slate-400 font-bold">${p.name}</div>
+            <div class="font-bold text-slate-700 text-xs">${o.name}</div>
+        `;
+    },
+
+    reCalculate() {
+        clearTimeout(this.state.calculateTimeout);
+        
+        this.state.calculateTimeout = setTimeout(() => {
+            try {
+                this.showLoading(true);
+                
+                const sex = document.getElementById('input-gender').value;
+                const age = parseInt(document.getElementById('input-age').value);
+                document.getElementById('disp-age').innerText = age;
+                
+                this.updateHeader(1); 
+                this.updateHeader(2); 
+                this.updateHeader(3);
+
+                const currentBandIdx = this.getBandIndexSTD(age); 
+
+                // 1. Current Premium
+                [1,2,3].forEach(id => {
+                    const { type, idx } = this.state[id];
+                    const opt = APP_DATA.plans[type].options[idx];
+                    const band = this.getBandIndex(age, type);
+                    const prem = this.getPremiumWithCache(type, opt.k, sex, band);
+                    const el = document.getElementById(`prem-${id}`);
+                    el.innerText = prem > 0 ? prem.toLocaleString() : "-";
+                });
+
+                // 2. Premium Projection Table & Chart
+                let tableHtml = "";
+                const chartData = { 
+                    labels: APP_DATA.AGE_BANDS, 
+                    datasets: [] 
+                };
+                const colors = ['#10b981', '#f59e0b', '#f43f5e'];
+                const fullRates = [[], [], []];
+
+                [1,2,3].forEach((id, i) => {
+                    const { type, idx } = this.state[id];
+                    const opt = APP_DATA.plans[type].options[idx];
+                    
+                    APP_DATA.AGE_BANDS.forEach((bandStr) => {
+                        const startAge = parseInt(bandStr.split("-")[0]);
+                        const specificBandIdx = this.getBandIndex(startAge, type);
+                        const val = this.getPremiumWithCache(type, opt.k, sex, specificBandIdx);
+                        fullRates[i].push(val);
+                    });
+
+                    chartData.datasets.push({
+                        label: opt.name,
+                        data: fullRates[i],
+                        borderColor: colors[i],
+                        backgroundColor: colors[i] + '20',
+                        borderWidth: 2,
+                        pointRadius: 3,
+                        pointBackgroundColor: '#fff',
+                        pointBorderWidth: 2,
+                        tension: 0.3
+                    });
+                });
+
+                APP_DATA.AGE_BANDS.forEach((band, i) => {
+                    const isCurrent = i === currentBandIdx;
+                    const rowClass = isCurrent ? "bg-blue-50 border-l-4 border-blue-500 font-bold" : "hover:bg-slate-50";
+                    const bandCellClass = isCurrent ? "bg-blue-100 text-blue-800" : "bg-white text-slate-600";
+                    
+                    tableHtml += `
+                        <tr class="${rowClass} border-b border-slate-100 transition-colors">
+                            <td class="p-3 pl-6 text-left sticky-col z-30 ${bandCellClass} border-r border-slate-200 shadow-sm">${band}</td>
+                            <td class="p-3 text-center border-l border-slate-100 ${isCurrent?'text-emerald-600':'text-slate-600'}">${fullRates[0][i].toLocaleString()}</td>
+                            <td class="p-3 text-center border-l border-slate-100 ${isCurrent?'text-amber-600':'text-slate-600'}">${fullRates[1][i].toLocaleString()}</td>
+                            <td class="p-3 text-center border-l border-slate-100 ${isCurrent?'text-rose-600':'text-slate-600'}">${fullRates[2][i].toLocaleString()}</td>
+                        </tr>
+                    `;
+                });
+                document.getElementById('premium-table-body').innerHTML = tableHtml;
+
+                // Update Chart
+                if(this.state.chart) {
+                    this.state.chart.data = chartData;
+                    this.state.chart.update();
+                } else {
+                    this.state.chart = new Chart(document.getElementById('premiumChart'), {
+                        type: 'line', 
+                        data: chartData,
+                        options: { 
+                            responsive: true, 
+                            maintainAspectRatio: false, 
+                            plugins: { 
+                                legend: {
+                                    position:'bottom', 
+                                    labels: {
+                                        usePointStyle: true, 
+                                        boxWidth: 8,
+                                        font: {
+                                            family: "'Sarabun', sans-serif"
+                                        }
+                                    }
+                                },
+                                tooltip: { 
+                                    mode: 'index', 
+                                    intersect: false, 
+                                    backgroundColor: 'rgba(255,255,255,0.9)', 
+                                    titleColor:'#1e293b', 
+                                    bodyColor:'#334155', 
+                                    borderColor:'#e2e8f0', 
+                                    borderWidth:1 
+                                } 
+                            },
+                            scales: {
+                                y: { 
+                                    beginAtZero: true, 
+                                    grid: { color: '#f1f5f9' }, 
+                                    ticks: {
+                                        color: '#94a3b8',
+                                        callback: function(value) {
+                                            return value.toLocaleString();
+                                        }
+                                    } 
+                                },
+                                x: { 
+                                    grid: { display: false }, 
+                                    ticks: {color: '#94a3b8'} 
+                                }
+                            }
+                        }
+                    });
+                }
+
+                // Render Benefits Table with requestAnimationFrame for performance
+                requestAnimationFrame(() => {
+                    this.renderBenefitTable();
+                });
+
+                this.trackEvent('calculation', `age_${age}_${sex}`);
+
+            } catch (error) {
+                console.error('Calculation error:', error);
+                this.showError('เกิดข้อผิดพลาดในการคำนวณ กรุณาลองใหม่');
+            } finally {
+                this.showLoading(false);
+            }
+        }, 150); // Debounce 150ms
+    },
+
+    renderBenefitTable() {
+        const cats = [
+            { id: "max", name: "วงเงินสูงสุดต่อรอบปีกรมธรรม์", icon: "shield" },
+            { id: "r1", name: "1. ค่าห้อง ค่าอาหาร (ต่อวัน)", icon: "bed" },
+            { id: "r2", name: "2. ค่าบริการทางการแพทย์ (ต่อการรักษาเป็นผู้ป่วยในครั้งใดครั้งหนึ่ง /แต่ HH ต่อปีกรมธรรม์)", icon: "stethoscope" },
+            { id: "r3", name: "3. ค่าแพทย์ตรวจรักษา (ต่อวัน)", icon: "user-round-check" },
+            { id: "r4", name: "4. ค่าผ่าตัดและหัตถการ", icon: "scalpel" },
+            { id: "r5", name: "5. ผ่าตัดใหญ่ไม่ต้องนอน (Day Surgery)", icon: "activity" },
+            { id: "r6", name: "6. ตรวจวินิจฉัยก่อน/หลัง แอดมิท", icon: "file-search" },
+            { id: "r7", name: "7. อุบัติเหตุฉุกเฉิน (ภายใน 24 ชม.)", icon: "ambulance" },
+            { id: "r8", name: "8. เวชศาสตร์ฟื้นฟู (ต่อรอบปีกรมธรรม์)", icon: "heart-handshake" },
+            { id: "r9", name: "9. ล้างไต (ต่อรอบปีกรมธรรม์)", icon: "droplets" },
+            { id: "r10", name: "10. รังสีรักษา/มะเร็ง (ต่อรอบปีกรมธรรม์)", icon: "zap" },
+            { id: "r11", name: "11. เคมีบำบัด/Targeted Therapy (ต่อรอบปีกรมธรรม์)", icon: "flask-conical" },
+            { id: "r12", name: "12. รถพยาบาลฉุกเฉิน", icon: "truck" },
+            { id: "r13", name: "13. ผ่าตัดเล็ก", icon: "scissors" },
+            { id: "opd", name: "OPD (ผู้ป่วยนอก)", icon: "users" },
+            { id: "d", name: "เงินชดเชยกรณีเสียชีวิต", icon: "heart-crack" },
+        ];
+
+        let html = "";
+        cats.forEach(c => {
+            const rowHtml = [1,2,3].map(id => {
+                const { type, idx } = this.state[id];
+                const opt = APP_DATA.plans[type].options[idx];
+                const key = `${type}_${opt.k}`;
+                const val = APP_DATA.benefits[key] ? APP_DATA.benefits[key][c.id] : "-";
+                
+                const isHighlight = val && (val.includes("เหมา") || val.includes("ตามจริง"));
+                const cls = isHighlight ? "highlight-green" : "text-slate-500";
+                
+                return `<td class="table-cell-center border-r border-slate-100 ${cls}">${val}</td>`;
+            }).join("");
+
+            html += `
+                <tr class="border-b border-slate-100 group hover:bg-slate-50 transition">
+                    <td class="p-4 text-slate-700 font-medium border-r border-slate-200 bg-white sticky-col z-20 flex items-center gap-3 group-hover:bg-slate-50 shadow-sm">
+                        <div class="bg-indigo-50 p-1.5 rounded text-indigo-600"><i data-lucide="${c.icon}" class="w-4 h-4"></i></div>
+                        ${c.name}
+                    </td>
+                    ${rowHtml}
+                </tr>
+            `;
+        });
+        document.getElementById('benefit-body').innerHTML = html;
+        lucide.createIcons();
+    },
+
+    // UI Helper Functions
+    showLoading(show) {
+        const loader = document.getElementById('loading');
+        if (show) {
+            loader.classList.remove('hidden');
+        } else {
+            loader.classList.add('hidden');
+        }
+    },
+
+    showError(message) {
+        const el = document.getElementById('error-alert');
+        el.innerHTML = `
+            <div class="bg-red-50 border border-red-200 rounded-lg p-4 shadow-lg">
+                <div class="flex items-center gap-2 text-red-700">
+                    <i data-lucide="alert-circle" class="w-5 h-5"></i>
+                    <div>
+                        <strong class="font-bold">ผิดพลาด!</strong>
+                        <p class="text-sm">${message}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+        el.classList.remove('hidden');
+        lucide.createIcons();
+        
+        setTimeout(() => {
+            el.classList.add('hidden');
+        }, 5000);
+    },
+
+    showSuccess(message) {
+        const el = document.getElementById('success-alert');
+        el.innerHTML = `
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4 shadow-lg">
+                <div class="flex items-center gap-2 text-green-700">
+                    <i data-lucide="check-circle" class="w-5 h-5"></i>
+                    <div>
+                        <strong class="font-bold">สำเร็จ!</strong>
+                        <p class="text-sm">${message}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+        el.classList.remove('hidden');
+        lucide.createIcons();
+        
+        setTimeout(() => {
+            el.classList.add('hidden');
+        }, 3000);
+    },
+
+    // Save Comparison Function
+    saveComparison() {
+        try {
+            const comparison = {
+                timestamp: new Date().toISOString(),
+                age: document.getElementById('input-age').value,
+                gender: document.getElementById('input-gender').value,
+                plans: [1,2,3].map(id => ({
+                    type: this.state[id].type,
+                    idx: this.state[id].idx,
+                    name: APP_DATA.plans[this.state[id].type].options[this.state[id].idx].name
+                })),
+                premiums: [1,2,3].map(id => document.getElementById(`prem-${id}`).innerText)
+            };
+            
+            const saved = JSON.parse(localStorage.getItem('aia_comparisons') || '[]');
+            saved.push(comparison);
+            
+            // Keep only last 5 comparisons
+            const trimmed = saved.slice(-5);
+            localStorage.setItem('aia_comparisons', JSON.stringify(trimmed));
+            
+            this.showSuccess('บันทึกการเปรียบเทียบเรียบร้อยแล้ว (เก็บล่าสุด 5 รายการ)');
+            this.trackEvent('save_comparison', comparison.plans.map(p => p.name).join(','));
+            
+        } catch (error) {
+            console.error('Save error:', error);
+            this.showError('ไม่สามารถบันทึกการเปรียบเทียบได้');
+        }
+    },
+
+    // Export CSV Function
+    exportCSV() {
+        try {
+            const age = document.getElementById('input-age').value;
+            const gender = document.getElementById('input-gender').value;
+            
+            let csv = "อายุ,เพศ,แผน,เบี้ยประกัน,เวลา\n";
+            
+            [1,2,3].forEach(id => {
+                const { type, idx } = this.state[id];
+                const plan = APP_DATA.plans[type];
+                const opt = plan.options[idx];
+                const premium = document.getElementById(`prem-${id}`).innerText;
+                
+                csv += `${age},${gender === 'male' ? 'ชาย' : 'หญิง'},${opt.name},${premium},${new Date().toLocaleString()}\n`;
+            });
+            
+            // Add benefit summary
+            csv += "\nรายการผลประโยชน์,Plan A,Plan B,Plan C\n";
+            const cats = ["วงเงินสูงสุด", "ค่าห้อง/อาหาร", "ค่าบริการแพทย์"];
+            cats.forEach((cat, i) => {
+                const row = [1,2,3].map(id => {
+                    const { type, idx } = this.state[id];
+                    const opt = APP_DATA.plans[type].options[idx];
+                    const key = `${type}_${opt.k}`;
+                    return APP_DATA.benefits[key] ? APP_DATA.benefits[key][i === 0 ? 'max' : i === 1 ? 'r1' : 'r2'] : "-";
+                });
+                csv += `${cat},${row.join(",")}\n`;
+            });
+            
+            const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `aia-comparison-${new Date().toISOString().slice(0,10)}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            this.showSuccess('ส่งออกไฟล์ CSV เรียบร้อยแล้ว');
+            this.trackEvent('export_csv', 'comparison');
+            
+        } catch (error) {
+            console.error('Export error:', error);
+            this.showError('ไม่สามารถส่งออกไฟล์ CSV ได้');
+        }
+    },
+
+    // Analytics Tracking (Simulated)
+    trackEvent(action, label) {
+        // In a real app, you would integrate with Google Analytics, etc.
+        console.log(`[Analytics] Event: ${action}, Label: ${label}`);
+        
+        // Example Google Analytics integration (uncomment and add your GA ID)
+        /*
+        if (typeof gtag !== 'undefined') {
+            gtag('event', action, {
+                'event_category': 'AIA Comparison',
+                'event_label': label
+            });
+        }
+        */
+    }
+};
+
+// Initialize on DOM ready
+document.addEventListener("DOMContentLoaded", () => {
+    app.init();
+    
+    // Service Worker registration for PWA (optional)
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js').catch(err => {
+                console.log('ServiceWorker registration failed: ', err);
+            });
+        });
+    }
+    
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+        // Ctrl/Cmd + P for print
+        if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+            e.preventDefault();
+            window.print();
+        }
+        // Plus/Minus for age adjustment
+        if (e.key === '+' || e.key === '=') {
+            e.preventDefault();
+            app.adjustAge(1);
+        }
+        if (e.key === '-' || e.key === '_') {
+            e.preventDefault();
+            app.adjustAge(-1);
+        }
+    });
+});
+
+// Simple Unit Tests (for development)
+if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    const testSuite = {
+        testPremiumCalculation() {
+            const result = app.getPremiumWithCache('HS', '1000', 'male', 4);
+            return result > 0 && result < 100000;
+        },
+        
+        testAgeBandCalculation() {
+            const band1 = app.getBandIndexSTD(35);
+            const band2 = app.getBandIndexSTD(65);
+            return band1 === 4 && band2 === 10;
+        },
+        
+        runAllTests() {
+            const tests = [
+                this.testPremiumCalculation(),
+                this.testAgeBandCalculation()
+            ];
+            const allPassed = tests.every(test => test === true);
+            console.log(`[Tests] ${allPassed ? 'All tests passed' : 'Some tests failed'}`);
+            return allPassed;
+        }
+    };
+    
+    // Run tests in development
+    testSuite.runAllTests();
+}
+</script>
+
+</body>
+</html>

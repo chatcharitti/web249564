@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Pension Strategy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Sarabun', sans-serif; background-color: #fafaf9; color: #44403c; } /* Stone-50 bg, Stone-700 text */
+        h1, h2, h3, h4 { font-family: 'Sarabun', sans-serif; }
+        
+        .serif-font { font-family: 'Playfair Display', serif; }
+
+        .chart-container { 
+            position: relative; 
+            width: 100%; 
+            height: 350px; 
+            max-height: 400px;
+            margin: 0 auto;
+        }
+
+        /* Premium Pyramid CSS */
+        .pyramid-level {
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            transition: all 0.4s ease;
+            position: relative;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .pyramid-level:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2); }
+        
+        /* Gradient Pyramid Colors */
+        .p-base { width: 90%; height: 60px; background: linear-gradient(90deg, #1e293b, #334155); clip-path: polygon(0% 100%, 100% 100%, 95% 0%, 5% 0%); } /* Slate 800 */
+        .p-mid { width: 70%; height: 60px; background: linear-gradient(90deg, #64748b, #94a3b8); clip-path: polygon(0% 100%, 100% 100%, 90% 0%, 10% 0%); } /* Slate 500 */
+        .p-top { width: 50%; height: 60px; background: linear-gradient(90deg, #cbd5e1, #e2e8f0); color: #334155; clip-path: polygon(0% 100%, 100% 100%, 80% 0%, 20% 0%); } /* Slate 300 */
+        .p-peak { width: 30%; height: 40px; background: linear-gradient(90deg, #d97706, #f59e0b); color: white; clip-path: polygon(0% 100%, 100% 100%, 50% 0%); } /* Amber 600 */
+        
+        .premium-card { 
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+            border: 1px solid #f5f5f4;
+        }
+
+        .icon-circle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 9999px;
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            color: #d97706;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(217, 119, 6, 0.1);
+        }
+    </style>
+    <!-- 
+        Theme: Minimal Luxury
+        Primary: Midnight Navy (#1e293b)
+        Accent: Champagne Gold (#d97706)
+        Background: Warm Stone (#fafaf9)
+        Font: Sarabun + Playfair Display (Headers)
+        NO SVG USED. NO MERMAID USED.
+    -->
+</head>
+<body class="bg-stone-50 text-stone-700 antialiased selection:bg-amber-100 selection:text-amber-900">
+
+    <!-- Hero Header -->
+    <header class="relative overflow-hidden bg-slate-900 text-white pt-20 pb-24 px-6 shadow-2xl">
+        <!-- Abstract Decoration using pure CSS (no SVG) -->
+        <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-slate-800 rounded-full opacity-50 blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 -mb-10 -ml-10 w-48 h-48 bg-amber-900 rounded-full opacity-20 blur-2xl"></div>
+
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <p class="text-amber-400 font-medium tracking-widest uppercase text-sm mb-4">Financial Wisdom</p>
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight serif-font">
+            ประกันชีวิต แบบบำนาญ&nbsp; </h1>
+            <h2 class="text-xl md:text-2xl font-light text-slate-300 max-w-2xl mx-auto leading-relaxed"> ศิลปะแห่งการวางแผนเกษียณ เปลี่ยนความกังวลให้เป็น&nbsp;</h2>
+            <h2 class="text-xl md:text-2xl font-light text-slate-300 max-w-2xl mx-auto leading-relaxed"><span class="text-white font-medium border-b border-amber-500"><strong>ความมั่งคั่งที่ยั่งยืน</strong></span> </h2>
+<div class="mt-12 flex justify-center gap-6">
+        <div class="flex items-center gap-2 bg-slate-800/50 backdrop-blur-sm px-6 py-3 rounded-full border border-slate-700">
+                    <span class="text-amber-400">●</span>
+                    <span class="text-sm text-slate-200">ลดหย่อนภาษี 200k</span>
+                </div>
+                <div class="flex items-center gap-2 bg-slate-800/50 backdrop-blur-sm px-6 py-3 rounded-full border border-slate-700">
+                    <span class="text-amber-400">●</span>
+                    <span class="text-sm text-slate-200">การันตีรายได้</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-6 -mt-16 space-y-20 pb-20 relative z-20">
+
+        <!-- Section 1: Introduction Cards -->
+        <section>
+            <div class="premium-card p-8 md:p-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold text-slate-900 mb-6 serif-font"> Longevity Hedge Strategy</h3>
+                        <p class="text-stone-600 leading-8 mb-6 text-lg">
+                            ประกันบำนาญไม่ใช่เพียงการออม แต่คือเครื่องมือทางการเงินระดับสูงที่ออกแบบมาเพื่อปิดความเสี่ยง <strong>"อายุยืนเกินเงินที่มี"</strong> โดยทำหน้าที่แปลงเงินสดในปัจจุบัน ให้กลายเป็นรายได้ที่แน่นอนในอนาคต เสมือนท่านมีกองทุนส่วนตัวที่ดูแลท่านไปตลอดชีวิต
+                        </p>
+                        <div class="inline-flex items-center gap-3 text-amber-700 font-medium bg-amber-50 px-4 py-2 rounded-lg">
+                            <span>💡 New Mindset:</span>
+                            <span class="text-stone-700 font-normal">มองหา "ความแน่นอน" (Certainty) ไม่ใช่แค่ผลตอบแทน</span>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 gap-4">
+                        <!-- Icon Box 1 -->
+                        <div class="flex items-center gap-4 p-4 rounded-xl hover:bg-stone-50 transition border border-transparent hover:border-stone-100">
+                            <div class="icon-circle flex-shrink-0">🛡️</div>
+                            <div>
+                                <h4 class="font-bold text-slate-900">Tax Optimization</h4>
+                                <p class="text-sm text-stone-500">เปลี่ยนภาษีเป็นเงินออม สูงสุด 300,000 บาท*</p>
+                            </div>
+                        </div>
+                        <!-- Icon Box 2 -->
+                        <div class="flex items-center gap-4 p-4 rounded-xl hover:bg-stone-50 transition border border-transparent hover:border-stone-100">
+                            <div class="icon-circle flex-shrink-0">💎</div>
+                            <div>
+                                <h4 class="font-bold text-slate-900">Guaranteed Income</h4>
+                                <p class="text-sm text-stone-500">รายได้แน่นอน ไม่ผันผวนตามเศรษฐกิจ</p>
+                            </div>
+                        </div>
+                        <!-- Icon Box 3 -->
+                        <div class="flex items-center gap-4 p-4 rounded-xl hover:bg-stone-50 transition border border-transparent hover:border-stone-100">
+                            <div class="icon-circle flex-shrink-0">⚓</div>
+                            <div>
+                                <h4 class="font-bold text-slate-900">Forced Discipline</h4>
+                                <p class="text-sm text-stone-500">วินัยการออมระยะยาวเพื่ออนาคตที่มั่นคง</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Tax Chart -->
+        <section>
+            <div class="text-center mb-10">
+                <h3 class="text-3xl font-bold text-slate-900 mb-3 serif-font">1. The Immediate Return (Tax)</h3>
+                <p class="text-stone-500 max-w-2xl mx-auto text-lg">
+                    ผลตอบแทนก้อนแรกที่ได้รับทันทีคือ "เงินภาษีที่ประหยัดได้" ยิ่งฐานภาษีสูง ผลตอบแทนส่วนนี้ยิ่งคุ้มค่าเสมือนได้รับส่วนลดเงินสดทันที
+                </p>
+            </div>
+
+            <div class="premium-card p-8 bg-white">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-2">
+                        <div class="chart-container">
+                            <canvas id="taxChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="flex flex-col justify-center space-y-6 lg:border-l lg:border-stone-100 lg:pl-8">
+                        <div>
+                            <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Strategic Note</span>
+                            <h4 class="text-xl font-bold text-slate-900 mt-2 mb-3">Maximize Your Rights</h4>
+                            <p class="text-stone-600 text-sm leading-relaxed">
+                                ควรใช้สิทธิ์ประกันชีวิตทั่วไป (General Life) 100,000 บาทแรกให้เต็มก่อน จากนั้นจึงใช้ประกันบำนาญ (Pension) เติมเต็มอีก 200,000 บาท เพื่อใช้ประโยชน์จากโครงสร้างภาษีให้คุ้มค่าที่สุด
+                            </p>
+                        </div>
+                        <div class="bg-slate-900 text-white p-5 rounded-xl text-center">
+                            <p class="text-slate-400 text-xs uppercase mb-1">Total Deduction Cap</p>
+                            <p class="text-3xl font-bold text-amber-400">300,000 <span class="text-sm text-white">บาท</span></p>
+                            <p class="text-xs text-slate-500 mt-2">(General + Pension)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Pyramid -->
+        <section>
+            <div class="text-center mb-10">
+                <h3 class="text-3xl font-bold text-slate-900 mb-3 serif-font">2. The Portfolio Foundation</h3>
+                <p class="text-stone-500 max-w-2xl mx-auto text-lg">
+                    ในพอร์ตการลงทุนที่สมบูรณ์ ประกันบำนาญทำหน้าที่เป็น "รากฐาน" (Base Layer) ที่มั่นคงที่สุด เพื่อรองรับความเสี่ยงจากการลงทุนประเภทอื่น
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <!-- Pyramid Visual -->
+                <div class="flex flex-col items-center justify-center py-8">
+                    <div class="p-peak pyramid-level">
+                        <span class="text-xs drop-shadow-md">Alternative / Speculative</span>
+                    </div>
+                    <div class="p-top pyramid-level">
+                        <span class="text-xs drop-shadow-md text-slate-700">Equities / Stocks</span>
+                    </div>
+                    <div class="p-mid pyramid-level">
+                        <span class="text-sm drop-shadow-md text-white">Bonds / Mixed Funds</span>
+                    </div>
+                    <div class="p-base pyramid-level relative">
+                        <span class="text-lg drop-shadow-md text-white z-10">Pension Insurance</span>
+                        <!-- Highlight marker -->
+                        <div class="absolute -right-4 w-2 h-2 bg-amber-500 rounded-full animate-ping"></div>
+                    </div>
+                    <div class="mt-6 text-center">
+                        <span class="inline-block border border-slate-200 bg-white rounded-full px-4 py-2 text-xs text-slate-500 font-semibold shadow-sm">
+                            The "Safe Haven" Layer
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Text Content -->
+                <div class="space-y-6">
+                     <div class="flex gap-4">
+                        <div class="w-12 h-12 rounded-lg bg-slate-100 flex items-center justify-center text-xl flex-shrink-0">🏛️</div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-lg">Stability Amidst Chaos</h4>
+                            <p class="text-stone-600 text-sm mt-2 leading-relaxed">
+                                เมื่อตลาดหุ้นผันผวนหรือเกิดวิกฤตเศรษฐกิจ พอร์ตส่วนบนของพีระมิดอาจได้รับผลกระทบ แต่ "ฐานล่าง" นี้จะยังคงทำงานและส่งมอบเงินคืนตามสัญญาอย่างไม่ขาดตกบกพร่อง
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-12 h-12 rounded-lg bg-amber-50 flex items-center justify-center text-xl flex-shrink-0">♾️</div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-lg">Lifetime Cashflow</h4>
+                            <p class="text-stone-600 text-sm mt-2 leading-relaxed">
+                                ปิดจุดอ่อนของการเกษียณด้วยเงินก้อน (Lump Sum) ซึ่งเสี่ยงต่อการใช้หมดก่อนเวลา ประกันบำนาญเปลี่ยนโจทย์เป็นการรับเงินรายงวดที่ต่อเนื่องยาวนาน
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Simulation Chart -->
+        <section>
+            <div class="premium-card p-8 md:p-12 bg-gradient-to-br from-slate-900 to-slate-800 text-white">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-8 border-b border-slate-700 pb-6">
+                    <div>
+                         <h3 class="text-2xl font-bold mb-2 text-white serif-font">3. Wealth Simulation</h3>
+                         <p class="text-slate-400 text-sm">เปรียบเทียบกระแสเงินสด: ความเสี่ยง vs ความมั่นคง</p>
+                    </div>
+                    <div class="flex gap-4 mt-4 md:mt-0">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-red-400"></span>
+                            <span class="text-xs text-slate-300">เงินก้อน (เสี่ยงหมด)</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                            <span class="text-xs text-slate-300">บำนาญ (เพิ่มพูน)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="cashflowChart"></canvas>
+                </div>
+
+                <div class="mt-8 bg-slate-800/50 rounded-xl p-4 flex items-start gap-4 border border-slate-700">
+                    <div class="text-2xl">🧐</div>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        <strong class="text-white">Insight:</strong> กราฟเส้นสีแดงแสดงให้เห็นว่าหากบริหารเงินก้อนผิดพลาด เงินอาจหมดที่อายุ 80+ แต่เส้นสีทอง (บำนาญ) จะยังคงจ่ายเงินให้ท่านต่อเนื่อง สร้างความอุ่นใจ (Peace of Mind) ที่ประเมินค่าไม่ได้
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center pt-8 pb-4">
+            <div class="inline-block p-1 rounded-full bg-gradient-to-r from-slate-200 to-slate-100 mb-6">
+                <div class="bg-white rounded-full px-8 py-4 shadow-sm">
+                    <p class="text-slate-900 font-semibold text-lg">"The best time to plant a tree was 20 years ago. The second best time is now."</p>
+                </div>
+            </div>
+            <p class="text-stone-400 text-sm">© Financial Planning Infographic Design</p>
+        </footer>
+
+    </main>
+
+    <!-- JavaScript Configuration -->
+    <script>
+        // Utility for label wrapping
+        function wrapLabels(labels, maxChars) {
+            return labels.map(label => {
+                if (label.length <= maxChars) return label;
+                const words = label.split(' ');
+                const lines = [];
+                let currentLine = words[0];
+                for (let i = 1; i < words.length; i++) {
+                    if ((currentLine + " " + words[i]).length < maxChars) {
+                        currentLine += " " + words[i];
+                    } else {
+                        lines.push(currentLine);
+                        currentLine = words[i];
+                    }
+                }
+                lines.push(currentLine);
+                return lines;
+            });
+        }
+
+        // Global Chart Defaults for Premium Look
+        Chart.defaults.font.family = "'Sarabun', sans-serif";
+        Chart.defaults.color = '#64748b';
+        Chart.defaults.scale.grid.color = '#f1f5f9';
+
+        const commonTooltipOptions = {
+            backgroundColor: 'rgba(30, 41, 59, 0.9)', // Slate 900
+            titleColor: '#fbbf24', // Amber 400
+            bodyColor: '#fff',
+            padding: 12,
+            cornerRadius: 8,
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    return Array.isArray(label) ? label.join(' ') : label;
+                }
+            }
+        };
+
+        // --- Chart 1: Tax Optimization (Bar Chart) ---
+        const taxCtx = document.getElementById('taxChart').getContext('2d');
+        const taxLabels = ['ฐาน 10%', 'ฐาน 15%', 'ฐาน 20%', 'ฐาน 25%', 'ฐาน 30%', 'ฐาน 35%'];
+        const investmentAmount = 200000;
+        const taxData = [0.10, 0.15, 0.20, 0.25, 0.30, 0.35].map(rate => investmentAmount * rate);
+
+        new Chart(taxCtx, {
+            type: 'bar',
+            data: {
+                labels: wrapLabels(taxLabels, 10),
+                datasets: [{
+                    label: 'เงินคืนภาษี (Tax Saving)',
+                    data: taxData,
+                    backgroundColor: '#1e293b', // Slate 800
+                    hoverBackgroundColor: '#d97706', // Amber 600
+                    borderRadius: 4,
+                    barPercentage: 0.6,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: commonTooltipOptions,
+                    title: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { borderDash: [4, 4] },
+                        title: { display: true, text: 'จำนวนเงินคืน (บาท)' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // --- Chart 2: Cash Flow (Line Chart) ---
+        const cashflowCtx = document.getElementById('cashflowChart').getContext('2d');
+        const ages = Array.from({length: 31}, (_, i) => 60 + i);
+        
+        let currentLumpSum = 3000000;
+        const lumpSumData = ages.map(age => {
+            let val = currentLumpSum;
+            currentLumpSum -= 120000;
+            if (currentLumpSum < 0) currentLumpSum = 0;
+            return val;
+        });
+
+        let cumulativePension = 0;
+        const annualPension = 120000;
+        const pensionData = ages.map(age => {
+            cumulativePension += annualPension;
+            return cumulativePension;
+        });
+
+        new Chart(cashflowCtx, {
+            type: 'line',
+            data: {
+                labels: ages,
+                datasets: [
+                    {
+                        label: 'เงินก้อน (เสี่ยงหมด)',
+                        data: lumpSumData,
+                        borderColor: '#f87171', // Red 400
+                        backgroundColor: 'transparent',
+                        borderWidth: 2,
+                        pointRadius: 0,
+                        tension: 0.4,
+                        borderDash: [5, 5]
+                    },
+                    {
+                        label: 'เงินบำนาญ (รับต่อเนื่อง)',
+                        data: pensionData,
+                        borderColor: '#fbbf24', // Amber 400 (Gold)
+                        backgroundColor: 'rgba(251, 191, 36, 0.1)',
+                        borderWidth: 3,
+                        pointRadius: 0,
+                        tension: 0.4,
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                plugins: {
+                    legend: { display: false }, // Custom legend used in HTML
+                    tooltip: commonTooltipOptions,
+                },
+                scales: {
+                    y: {
+                        grid: { color: '#334155' }, // Dark grid
+                        ticks: { color: '#94a3b8' },
+                        title: { display: true, text: 'มูลค่า (บาท)', color: '#94a3b8' }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#94a3b8' },
+                        title: { display: true, text: 'อายุ (ปี)', color: '#94a3b8' }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

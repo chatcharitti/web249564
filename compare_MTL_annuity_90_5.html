@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รายงานวิเคราะห์กรมธรรม์ (ฉบับสมบูรณ์)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #fafaf9; /* Stone 50 */
+            color: #44403c; /* Stone 700 */
+        }
+        .premium-card {
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
+            border: 1px solid #f5f5f4;
+            transition: transform 0.3s ease;
+        }
+        .premium-card:hover {
+            transform: translateY(-2px);
+        }
+        .text-gold { color: #d97706; }
+        .bg-gold-light { background-color: #fffbeb; }
+        .border-gold { border-color: #fcd34d; }
+        .section-icon {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            color: #d97706;
+            padding: 12px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(217, 119, 6, 0.1);
+        }
+        .table-header {
+            background-color: #f5f5f4;
+            color: #57534e;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .negative-val { color: #ef4444; }
+        .positive-val { color: #22c55e; font-weight: 700; }
+        
+        /* Custom Scrollbar for the long table */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f4;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d6d3d1; 
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #a8a29e; 
+        }
+        .step-up-row {
+            background-color: #fffbeb; /* Light yellow highlight for step-up years */
+            border-left: 4px solid #d97706;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-12 min-h-screen">
+
+    <!-- Header -->
+    <header class="max-w-6xl mx-auto mb-12 text-center">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-stone-200 shadow-sm mb-6">
+            <i data-lucide="shield-check" class="w-5 h-5 text-gold"></i>
+            <span class="text-stone-500 font-medium"><strong>เฟล็กซี่ รีไทร์ 90/5 ดี 60</strong></span>
+        </div>
+        <h1 class="text-3xl md:text-5xl font-bold text-stone-800 mb-4 leading-tight">
+            รายงานวิเคราะห์กรมธรรม์และจุดคุ้มทุน
+        </h1>
+        <p class="text-xl text-stone-500 font-light">
+      วิเคราะห์เชิงลึกสำหรับ เพศชาย อายุ 53 ปี </p>
+    </header>
+
+    <main class="max-w-6xl mx-auto space-y-16">
+
+        <!-- Section 1: Executive Summary -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Plan 1 -->
+            <div class="premium-card p-8">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="section-icon"><i data-lucide="file-text" class="w-6 h-6"></i></div>
+                    <div>
+                        <h2 class="text-xl font-bold text-stone-800">แผนฉบับที่ 1</h2>
+                        <p class="text-stone-500">ทุน 75,000</p>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex justify-between text-lg"><span class="text-stone-500">เบี้ยต่อปี</span><span class="font-bold">53,228</span></div>
+                    <div class="flex justify-between text-lg"><span class="text-stone-500">เบี้ยรวม (5 ปี)</span><span class="font-bold">266,141</span></div>
+                </div>
+            </div>
+
+            <!-- Plan 2 -->
+            <div class="premium-card p-8 border-2 border-gold relative">
+                <div class="absolute top-4 right-4 bg-gold-light text-gold px-3 py-1 rounded-full text-xs font-bold border border-gold">Recommended</div>
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="section-icon"><i data-lucide="crown" class="w-6 h-6"></i></div>
+                    <div>
+                        <h2 class="text-xl font-bold text-stone-800">แผนฉบับที่ 2</h2>
+                        <p class="text-stone-500">ทุน 100,000</p>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex justify-between text-lg"><span class="text-stone-500">เบี้ยต่อปี</span><span class="font-bold text-gold">70,971</span></div>
+                    <div class="flex justify-between text-lg"><span class="text-stone-500">เบี้ยรวม (5 ปี)</span><span class="font-bold text-gold">354,855</span></div>
+                </div>
+            </div>
+      </section>
+
+        <!-- Section 2: Payment Schedule (Moved Up) -->
+        <section class="premium-card p-6 md:p-10">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="bg-indigo-50 p-3 rounded-xl text-indigo-600">
+                    <i data-lucide="calendar-check" class="w-6 h-6"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-stone-800">ตารางการชำระเบี้ย (Payment Schedule)</h2>
+            </div>
+            
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="table-header text-sm">
+                        <th class="p-4 rounded-l-lg">งวดปีที่</th>
+                        <th class="p-4 text-right">แผน 1 (75k)</th>
+                        <th class="p-4 text-right rounded-r-lg text-gold">แผน 2 (100k)</th>
+                    </tr>
+                </thead>
+                <tbody class="text-lg">
+                    <tr class="border-b border-stone-50"><td class="p-4 font-medium">ปีที่ 1</td><td class="p-4 text-right">53,228.25</td><td class="p-4 text-right font-bold text-gold">70,971.00</td></tr>
+                    <tr class="border-b border-stone-50"><td class="p-4 font-medium">ปีที่ 2</td><td class="p-4 text-right">53,228.25</td><td class="p-4 text-right font-bold text-gold">70,971.00</td></tr>
+                    <tr class="border-b border-stone-50"><td class="p-4 font-medium">ปีที่ 3</td><td class="p-4 text-right">53,228.25</td><td class="p-4 text-right font-bold text-gold">70,971.00</td></tr>
+                    <tr class="border-b border-stone-50"><td class="p-4 font-medium">ปีที่ 4</td><td class="p-4 text-right">53,228.25</td><td class="p-4 text-right font-bold text-gold">70,971.00</td></tr>
+                    <tr class="border-b border-stone-50"><td class="p-4 font-medium">ปีที่ 5</td><td class="p-4 text-right">53,228.25</td><td class="p-4 text-right font-bold text-gold">70,971.00</td></tr>
+                </tbody>
+                <tfoot class="bg-stone-50 font-bold">
+                    <tr><td class="p-4">รวม 5 ปี</td><td class="p-4 text-right text-stone-700">266,141.25</td><td class="p-4 text-right text-gold text-xl">354,855.00</td></tr>
+                </tfoot>
+            </table>
+        </section>
+
+        <!-- Section 3: Detailed Pension Schedule -->
+        <section class="premium-card p-6 md:p-10">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="bg-amber-50 p-3 rounded-xl text-amber-600">
+                    <i data-lucide="list-video" class="w-8 h-8"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-stone-800">ตารางรับเงินบำนาญรายปี (Year-by-Year Schedule)</h2>
+            </div>
+            
+            <p class="text-lg text-stone-500 mb-6">
+                แสดงยอดเงินที่ท่านจะได้รับโอนเข้าบัญชีในแต่ละปี ตั้งแต่อายุ 60 จนถึง 90 ปี
+            </p>
+
+            <div class="border rounded-xl overflow-hidden bg-white shadow-inner">
+                <div class="max-h-[500px] overflow-y-auto custom-scrollbar">
+                    <table class="w-full text-left border-collapse relative">
+                        <thead class="sticky top-0 z-10 shadow-sm">
+                            <tr class="bg-stone-100 text-stone-600 text-sm font-bold uppercase tracking-wide">
+                                <th class="p-4 w-1/4">อายุ (ปี)</th>
+                                <th class="p-4 text-center w-1/4">อัตรา (%)</th>
+                                <th class="p-4 text-right w-1/4 text-stone-500">แผน 1 (75k)</th>
+                                <th class="p-4 text-right w-1/4 text-gold">แผน 2 (100k)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pension-rows" class="text-lg text-stone-700">
+                            <!-- Rows will be generated by JS below for precision and compactness -->
+                        </tbody>
+                        <tfoot class="sticky bottom-0 bg-stone-100 font-bold border-t-2 border-stone-200">
+                            <tr>
+                                <td class="p-4">รวมรับตลอดสัญญา</td>
+                                <td class="p-4 text-center">522%</td>
+                                <td class="p-4 text-right text-stone-600">391,500</td>
+                                <td class="p-4 text-right text-gold text-2xl">522,000</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Surrender Value & Tax Analysis (Moved to Bottom) -->
+        <section class="premium-card p-6 md:p-10">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="bg-rose-50 p-3 rounded-xl text-rose-600">
+                        <i data-lucide="pie-chart" class="w-8 h-8"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl md:text-3xl font-bold text-stone-800">วิเคราะห์มูลค่าเวนคืน & จุดคุ้มทุน</h2>
+                        <p class="text-stone-500 mt-1">กรณีต้องการหยุดส่งและถอนเงินออกก่อนกำหนด (สำหรับแผน 2 ทุน 100,000)</p>
+                    </div>
+                </div>
+                
+                <div class="flex gap-2 text-sm bg-stone-50 p-2 rounded-lg">
+                    <span class="px-2 py-1 rounded bg-white border shadow-sm">ฐาน 10%</span>
+                    <span class="px-2 py-1 rounded bg-white border shadow-sm">ฐาน 15%</span>
+                    <span class="px-2 py-1 rounded bg-white border shadow-sm text-gold font-bold">ฐาน 20%</span>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse min-w-[800px]">
+                    <thead>
+                        <tr class="table-header text-sm">
+                            <th class="p-4 rounded-tl-xl">สิ้นปีที่ / อายุ</th>
+                            <th class="p-4 text-right">เบี้ยสะสม<br>(จ่ายจริง)</th>
+                            <th class="p-4 text-right text-stone-600 bg-stone-100">ภาษีที่คืน<br>(สะสม 10%)</th>
+                            <th class="p-4 text-right text-stone-600 bg-stone-100">ภาษีที่คืน<br>(สะสม 15%)</th>
+                            <th class="p-4 text-right text-gold bg-amber-50 border-b-2 border-gold">ภาษีที่คืน<br>(สะสม 20%)</th>
+                            <th class="p-4 text-right text-rose-600">มูลค่าเวนคืน<br>(ถอนได้จริง)</th>
+                            <th class="p-4 text-right rounded-tr-xl">กำไร/ขาดทุน<br><span class="text-xs font-normal">(เทียบฐาน 20%)</span></th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-base text-stone-600">
+                        <tr class="border-b border-stone-50 hover:bg-stone-50 transition"><td class="p-4 font-bold">ปีที่ 1 (54 ปี)</td><td class="p-4 text-right">70,971</td><td class="p-4 text-right bg-stone-50">7,097</td><td class="p-4 text-right bg-stone-50">10,646</td><td class="p-4 text-right bg-amber-50/50 font-medium text-gold">14,194</td><td class="p-4 text-right font-bold text-rose-600">16,300</td><td class="p-4 text-right negative-val">-40,477</td></tr>
+                        <tr class="border-b border-stone-50 hover:bg-stone-50 transition"><td class="p-4 font-bold">ปีที่ 2 (55 ปี)</td><td class="p-4 text-right">141,942</td><td class="p-4 text-right bg-stone-50">14,194</td><td class="p-4 text-right bg-stone-50">21,291</td><td class="p-4 text-right bg-amber-50/50 font-medium text-gold">28,388</td><td class="p-4 text-right font-bold text-rose-600">57,600</td><td class="p-4 text-right negative-val">-55,954</td></tr>
+                        <tr class="border-b border-stone-50 hover:bg-stone-50 transition"><td class="p-4 font-bold">ปีที่ 3 (56 ปี)</td><td class="p-4 text-right">212,913</td><td class="p-4 text-right bg-stone-50">21,291</td><td class="p-4 text-right bg-stone-50">31,937</td><td class="p-4 text-right bg-amber-50/50 font-medium text-gold">42,583</td><td class="p-4 text-right font-bold text-rose-600">141,700</td><td class="p-4 text-right negative-val">-28,630</td></tr>
+                        <tr class="border-b border-stone-50 hover:bg-stone-50 transition"><td class="p-4 font-bold">ปีที่ 4 (57 ปี)</td><td class="p-4 text-right">283,884</td><td class="p-4 text-right bg-stone-50">28,388</td><td class="p-4 text-right bg-stone-50">42,583</td><td class="p-4 text-right bg-amber-50/50 font-medium text-gold">56,777</td><td class="p-4 text-right font-bold text-rose-600">216,200</td><td class="p-4 text-right negative-val">-10,907</td></tr>
+                        <tr class="border-b-2 border-stone-200 bg-stone-50"><td class="p-4 font-bold text-stone-800">ปีที่ 5 (58 ปี)</td><td class="p-4 text-right font-bold">354,855</td><td class="p-4 text-right font-bold">35,486</td><td class="p-4 text-right font-bold">53,228</td><td class="p-4 text-right font-bold text-gold bg-amber-100/50">70,971</td><td class="p-4 text-right font-bold text-rose-600 text-lg">304,400</td><td class="p-4 text-right font-bold positive-val">+20,516</td></tr>
+                        <tr class="bg-white"><td class="p-4 font-bold text-stone-800">อายุ 59 ปี</td><td class="p-4 text-right text-stone-400">(หยุดจ่าย)</td><td class="p-4 text-right text-stone-400">-</td><td class="p-4 text-right text-stone-400">-</td><td class="p-4 text-right text-stone-400 bg-amber-50/20">-</td><td class="p-4 text-right font-bold text-rose-600 text-lg">309,800</td><td class="p-4 text-right font-bold positive-val">+25,916</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-green-50 p-5 rounded-xl border border-green-100">
+                    <h3 class="font-bold text-green-800 flex items-center gap-2">
+                        <i data-lucide="check-circle" class="w-5 h-5"></i> จุดคุ้มทุน (Break-even Point)
+                    </h3>
+                    <p class="text-green-700 mt-2 text-sm leading-relaxed">
+                        หากท่านมีฐานภาษี <strong>20%</strong> จุดคุ้มทุนจะเกิดขึ้นในปีที่ 5 (กำไรประมาณ 20,516 บาท)
+                    </p>
+                </div>
+
+                <div class="bg-rose-50 p-5 rounded-xl border border-rose-100">
+                    <h3 class="font-bold text-rose-800 flex items-center gap-2">
+                        <i data-lucide="alert-triangle" class="w-5 h-5"></i> คำเตือนจากกรมสรรพากร
+                    </h3>
+                    <p class="text-rose-700 mt-2 text-sm leading-relaxed">
+                        หากเวนคืนกรมธรรม์ <strong>ก่อนอายุ 55 ปี หรือ ก่อนชำระเบี้ยครบ 5 ปี</strong> ท่านจะถือว่า <strong>"ผิดเงื่อนไขภาษี"</strong>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Strategic Note -->
+          <div class="mt-8 bg-blue-50 p-8 rounded-2xl border-2 border-blue-100 shadow-sm">
+                <h3 class="font-bold text-2xl text-blue-900 flex items-center gap-3 mb-4">
+                    <i data-lucide="compass" class="w-8 h-8 text-blue-600"></i> ข้อแนะนำเชิงกลยุทธ์ (Strategic Insight)
+                </h3>
+                <div class="text-blue-800 text-lg leading-relaxed space-y-4 font-medium">
+                    <p>การแสดงข้อมูลมูลค่าเวนคืนเงินสดและเงินคืนทางภาษีมีไว้เพื่อเป็นข้อมูลสำหรับวางแผนสภาพคล่อง</p>
+                    <p><strong>ข้อควรระวัง:</strong> โดยเฉพาะมูลค่าเวนคืน หากต้องการถอนเงินต้องดำเนินการ <u>ก่อนเริ่มรับเงินบำนาญงวดแรก</u> เท่านั้น เพราะเมื่อเริ่มรับบำนาญแล้ว จะไม่สามารถเวนคืนกรมธรรม์ได้อีก</p>
+                    <p class="pt-2">
+                        อย่างไรก็ตาม การวางแผนรับเงินบำนาญรายงวดระยะยาวด้วยประกันบำนาญ เป็นเสมือนการสร้าง 
+                        <span class="inline-block bg-yellow-300 text-blue-950 px-3 py-1 rounded-lg shadow-sm border-b-4 border-yellow-500 font-bold transform -rotate-1 mx-1 text-xl">
+                            "เบาะรองรับทางการเงิน"
+                        </span> 
+                        ที่มั่นคง ซึ่งทำให้ท่านทราบแน่ชัดว่าปีไหน ช่วงไหน จะมีรายได้เข้ามาอย่างแน่นอน เพื่อความอุ่นใจในวัยเกษียณ
+                    </p>
+                </div>
+            </div>
+        </section>
+
+</main>
+
+    <footer class="text-center mt-12 mb-8 text-stone-400 text-sm font-light">
+        <p>รายงานฉบับสมบูรณ์ | สร้างเมื่อ: 24 มกราคม 2026 เพื่อประกอบการวางแผนบำนาญ</p>
+		<p><strong>รายงานนี้ไม่ใช่สัญญากรมธรรม์ ซึ่งรายละเอียดต่างๆ จะอยู่ในกรมธรรม์ของท่านอย่างครบถ้วน</strong></p>
+    </footer>
+
+<script>
+        lucide.createIcons();
+
+        // Generate Pension Table Rows
+        const tbody = document.getElementById('pension-rows');
+        const plan1Base = 75000;
+        const plan2Base = 100000;
+        let html = '';
+
+        for (let age = 60; age <= 90; age++) {
+            let rate = 0;
+            if (age <= 70) rate = 0.12;
+            else if (age <= 75) rate = 0.15;
+            else if (age <= 80) rate = 0.18;
+            else if (age <= 85) rate = 0.21;
+            else rate = 0.24;
+
+            const plan1Amount = plan1Base * rate;
+            const plan2Amount = plan2Base * rate;
+            
+            // Check if this year is a "Step Up" year (rate increase)
+            const isStepUp = [71, 76, 81, 86].includes(age);
+            const rowClass = isStepUp ? 'step-up-row border-b border-amber-200' : 'border-b border-stone-50 hover:bg-stone-50';
+            const rateBadge = isStepUp ? `<span class="bg-amber-100 text-amber-800 px-2 py-1 rounded-full text-xs font-bold">ปรับเพิ่ม ${Math.round(rate*100)}%</span>` : `${Math.round(rate*100)}%`;
+
+            html += `
+                <tr class="${rowClass} transition">
+                    <td class="p-4 pl-6 font-medium text-stone-600">อายุ ${age} ปี</td>
+                    <td class="p-4 text-center text-stone-400">${rateBadge}</td>
+                    <td class="p-4 text-right font-medium text-stone-500">${plan1Amount.toLocaleString()}</td>
+                    <td class="p-4 text-right font-bold text-gold text-lg">${plan2Amount.toLocaleString()}</td>
+                </tr>
+            `;
+        }
+        tbody.innerHTML = html;
+    </script>
+</body>
+</html>

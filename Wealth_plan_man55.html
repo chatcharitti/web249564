@@ -5,8 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AIA Strategic Wealth Report</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Import Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <style>
+        /* Base Root Font Size for REM calculation */
+        html {
+            font-size: 16px; /* Default base size */
+            transition: font-size 0.3s ease; /* Smooth transition */
+        }
         body {
             font-family: 'Sarabun', sans-serif;
             background-color: #f9fafb;
@@ -44,85 +51,109 @@
 <body class="antialiased">
 
     <!-- Header Section -->
-    <header class="bg-gradient-premium text-white py-16 px-4 relative overflow-hidden">
+    <header class="bg-gradient-premium text-white py-8 px-4 relative overflow-hidden">
         <div class="absolute top-0 left-0 w-full h-2 bg-[#C5A059]"></div>
-        <div class="max-w-7xl mx-auto text-center relative z-10">
-            <h1 class="text-3xl md:text-5xl font-bold tracking-tight mb-3 gold-text serif uppercase">Strategic Wealth & Income Plan</h1>
-            <p class="text-lg text-gray-300 font-light tracking-wide mb-6">รายงานการวางแผนภาษีและการสร้างรายได้เกษียณอายุ (Tax & Passive Income Optimization)</p>
-            <div class="inline-block border border-[#C5A059] px-6 py-1 rounded-full">
-                <span class="text-[#C5A059] uppercase tracking-widest font-bold">สำหรับ คุณสามารถ เพศชาย อายุ55 ปี</span>
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center relative z-10 gap-6">
+            
+            <div class="text-center md:text-left">
+                <h1 class="text-2xl md:text-4xl font-bold tracking-tight mb-2 gold-text serif uppercase">Strategic Wealth & Income Plan</h1>
+                <p class="text-sm md:text-base text-gray-300 font-light tracking-wide">รายงานการวางแผนภาษีและการสร้างรายได้เกษียณอายุ (Tax & Passive Income Optimization)</p>
+                <div class="mt-4 inline-block border border-[#C5A059] px-4 py-1 rounded-full">
+                    <span class="text-[#C5A059] uppercase tracking-widest font-bold text-xs md:text-sm">สำหรับ คุณสามารถ เพศชาย อายุ 55 ปี</span>
+                </div>
             </div>
+
+            <!-- Font Controls (Improved UI & Functionality) -->
+            <div class="flex flex-col items-center md:items-end bg-white/10 p-3 rounded-xl backdrop-blur-sm border border-white/10">
+                 <label class="text-[10px] text-gray-300 uppercase font-bold mb-1"><i data-lucide="type" class="inline w-3 h-3 mr-1"></i>ปรับขนาดอักษร</label>
+                 <div class="flex gap-2">
+                     <button onclick="app.adjustFontSize(-1)" class="bg-white hover:bg-slate-200 text-slate-700 w-8 h-8 flex items-center justify-center rounded-lg shadow-sm transition active:scale-95" title="ลดขนาด">
+                        <i data-lucide="minus" class="w-4 h-4"></i>
+                     </button>
+                     <button onclick="app.adjustFontSize(0)" class="bg-[#C5A059] hover:bg-[#b08d48] text-white px-3 py-1 rounded-lg shadow-sm text-xs font-bold uppercase transition active:scale-95" title="ขนาดปกติ">
+                        Reset
+                     </button>
+                     <button onclick="app.adjustFontSize(1)" class="bg-white hover:bg-slate-200 text-slate-700 w-8 h-8 flex items-center justify-center rounded-lg shadow-sm transition active:scale-95" title="เพิ่มขนาด">
+                        <i data-lucide="plus" class="w-4 h-4"></i>
+                     </button>
+                 </div>
+            </div>
+
         </div>
     </header>
 
     <!-- Executive Summary Dashboard -->
-    <section class="max-w-7xl mx-auto -mt-10 px-4 sm:px-6 lg:px-8 relative z-20 mb-16">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <section class="max-w-7xl mx-auto -mt-8 px-4 sm:px-6 lg:px-8 relative z-20 mb-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <!-- Card 1 -->
-            <div class="bg-white p-8 rounded-xl premium-shadow border-t-4 border-gold text-center">
+            <div class="bg-white p-6 rounded-xl premium-shadow border-t-4 border-gold text-center">
                 <div class="text-gray-400 text-xs uppercase tracking-widest mb-2 font-semibold">Total Tax Deduction</div>
-                <div class="text-4xl font-bold gold-text serif">300,000</div>
-                <div class="text-gray-600 mt-2 text-sm">บาท/ปี (ใช้สิทธิ์เต็มจำนวน)</div>
+                <div class="text-3xl font-bold gold-text serif">300,000</div>
+                <div class="text-gray-600 mt-2 text-xs md:text-sm">บาท/ปี (ใช้สิทธิ์เต็มจำนวน)</div>
             </div>
             <!-- Card 2 -->
-            <div class="bg-white p-8 rounded-xl premium-shadow border-t-4 border-gray-800 text-center">
+            <div class="bg-white p-6 rounded-xl premium-shadow border-t-4 border-gray-800 text-center">
                 <div class="text-gray-400 text-xs uppercase tracking-widest mb-2 font-semibold">Annual Allocation</div>
-                <div class="text-4xl font-bold text-gray-800 serif">801,050</div>
-                <div class="text-gray-600 mt-2 text-sm">บาท/ปี (ระยะ 5 ปีแรก)</div>
+                <div class="text-3xl font-bold text-gray-800 serif">801,050</div>
+                <div class="text-gray-600 mt-2 text-xs md:text-sm">บาท/ปี (ระยะ 5 ปีแรก)</div>
             </div>
             <!-- Card 3 -->
-            <div class="bg-white p-8 rounded-xl premium-shadow border-t-4 border-gold text-center">
+            <div class="bg-white p-6 rounded-xl premium-shadow border-t-4 border-gold text-center">
                 <div class="text-gray-400 text-xs uppercase tracking-widest mb-2 font-semibold">Total Estimated Return</div>
-                <div class="text-4xl font-bold gold-text serif">~6.5M+</div>
-                <div class="text-gray-600 mt-2 text-sm">รับรวมตลอดสัญญา (เงินคืน + บำนาญ + พอร์ต)</div>
+                <div class="text-3xl font-bold gold-text serif">~6.5M+</div>
+                <div class="text-gray-600 mt-2 text-xs md:text-sm">รับรวมตลอดสัญญา (เงินคืน + บำนาญ + พอร์ต)</div>
             </div>
         </div>
     </section>
-<!--Explan first secction -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <div class="bg-blue-900 text-white rounded-xl p-8 border-t-4 border-[#C5A059] shadow-2xl">
-<h3 class="text-2xl font-bold serif mb-4 text bg-gradient-premium">แนวคิดต่อยอดเงินครบสัญญา&nbsp;&nbsp;</h3>
-            <p class="text-gray-300 leading-relaxed text-lg">
-          สินค้าทางการเงินที่แนะนำจะเป็น ประกันชีวิต (AIA Protection65) ประกันบำนาญ (AIA Annuity Fix) ประกันควบการลงทุน (AIA Elite Income Prestige Unitlinked) </p>
-            <ul class="mt-4 space-y-3">
+
+    <!-- Concept Explanation Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+        <div class="bg-gray-900 text-white rounded-xl p-6 md:p-8 border-l-4 border-[#C5A059] shadow-2xl">
+            <h3 class="text-xl md:text-2xl font-bold serif mb-4 gold-text flex items-center">
+                <i data-lucide="lightbulb" class="mr-2 w-6 h-6"></i> แนวคิดต่อยอดเงินครบสัญญา
+            </h3>
+            <p class="text-gray-300 leading-relaxed text-base mb-4">
+                สินค้าทางการเงินที่แนะนำจะเป็น ประกันชีวิต (AIA Protection 65) ประกันบำนาญ (AIA Annuity Fix) และประกันควบการลงทุน (AIA Elite Income Prestige Unit Linked) เพื่อตอบโจทย์ครบทุกมิติ
+            </p>
+            <ul class="space-y-4">
                 <li class="flex items-start">
-                    <span class="text-[#C5A059] mr-3 mt-1">✓</span>
-                    <span class="text-gray-200"><strong>AIA Protection65 :</strong> เพื่อใช้สิทธิภาษี แสนแรก และมีจุดเด่นที่มีเงินคืนทุกปีแบบเพิ่มขี้นเป็นset เหมาะกับการวางแผนบำนาญที่หากฉุกเฉินช่วงรับเงินรายงวดสามารถปิดบัญชีเวนคืนได้</span>
-              </li>
-                <li class="flex items-start">
-                    <span class="text-[#C5A059] mr-3 mt-1">✓</span>
-                    <span class="text-gray-200"><strong>AIA Annuity Fix :</strong> ใช้สิทธิ์ลดหย่อนภาษีประกันบำนาญ สองแสน จุดเด่นที่ส่งเบี้ยสั้นเงินบำนาญคงที่ แต่ช่วงรับเงินงวดเวนคืนไม่ได้ จึงมีProtect65 เผื่อไว้กรณืจะถอน</span>
+                    <i data-lucide="check-circle-2" class="text-[#C5A059] w-5 h-5 mr-3 mt-1 flex-shrink-0"></i>
+                    <span class="text-gray-200 text-sm md:text-base"><strong>AIA Protection 65 :</strong> เพื่อใช้สิทธิลดหย่อนภาษี 100,000 บาทแรก จุดเด่นคือมีเงินคืนทุกปีแบบเพิ่มขึ้นเป็นขั้นบันได เหมาะสำหรับวางแผนมรดกและมีสภาพคล่องหากจำเป็นต้องเวนคืน</span>
                 </li>
                 <li class="flex items-start">
-                    <span class="text-[#C5A059] mr-3 mt-1">✓</span>
-                    <span class="text-gray-200"><strong>AIA Elite Income prestige :</strong> สำหรับสร้างรายได้ประจำ (Passive Income)เพื่อกระแสเงินสดต่อเนื่องทุกไตรมาสจากการ Auto Redemption และตั้งแต่ปีที่ 10 จะมีความยืดหยุนสูง สามารถถอนได้โดยไม่มีค่าธรรมเนียม</span>
-              </li>
-          </ul>
-      </div>
+                    <i data-lucide="check-circle-2" class="text-[#C5A059] w-5 h-5 mr-3 mt-1 flex-shrink-0"></i>
+                    <span class="text-gray-200 text-sm md:text-base"><strong>AIA Annuity Fix :</strong> ใช้สิทธิ์ลดหย่อนภาษีประกันบำนาญ 200,000 บาทหลัง จุดเด่นคือส่งเบี้ยสั้น การันตีเงินบำนาญคงที่ สร้างความมั่นคงขั้นพื้นฐาน</span>
+                </li>
+                <li class="flex items-start">
+                    <i data-lucide="check-circle-2" class="text-[#C5A059] w-5 h-5 mr-3 mt-1 flex-shrink-0"></i>
+                    <span class="text-gray-200 text-sm md:text-base"><strong>AIA Elite Income Prestige :</strong> สำหรับสร้างรายได้ประจำ (Passive Income) เพื่อกระแสเงินสดต่อเนื่องทุกไตรมาสจากการ Auto Redemption และมีความยืดหยุ่นสูงตั้งแต่ปีที่ 10 เป็นต้นไป</span>
+                </li>
+            </ul>
+        </div>
     </section>
 
     <!-- Portfolio Composition & Product Schedules -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-        <div class="text-center mb-12">
-<h2 class="text-3xl font-bold text-gray-900 serif">Product Details &amp; Benefit Illustrations</h2>
-<p class="text-gray-500 mt-2">ตารางผลประโยชน์รายสัญญาอย่างละเอียด (Updated Data)</p>
-      </div>
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <div class="text-center mb-10">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900 serif">Product Details & Benefit Illustrations</h2>
+            <p class="text-gray-500 mt-2">ตารางผลประโยชน์รายสัญญาอย่างละเอียด (Updated Data)</p>
+        </div>
         
         <div class="space-y-12">
             
-            <!-- Product 1: Protection 65 (Corrected Data from DOCX) -->
+            <!-- Product 1: Protection 65 -->
             <div class="bg-white rounded-2xl premium-shadow overflow-hidden">
                 <div class="bg-gray-900 px-6 py-4 flex justify-between items-center border-l-8 border-gold">
-                    <h3 class="text-xl font-bold text-white serif">1. AIA Protection 65 (Non-Par)</h3>
+                    <h3 class="text-lg md:text-xl font-bold text-white serif">1. AIA Protection 65 (Non-Par)</h3>
                     <div class="text-right">
                          <span class="bg-[#C5A059] text-gray-900 text-xs font-bold px-3 py-1 rounded-full">Tax 100k</span>
-                         <p class="text-gray-400 text-xs mt-1">ชำระเบี้ย 10 ปี | คุ้มครองถึงอายุ 99</p>
+                         <p class="text-gray-400 text-xs mt-1">ชำระเบี้ย 10 ปี | คุ้มครองถึง 99</p>
                     </div>
                 </div>
-                <div class="p-6">
+                <div class="p-4 md:p-6">
                     <p class="text-gray-600 mb-6 text-sm">เน้นสร้างหลักประกันและใช้สิทธิ์ลดหย่อนภาษี 100,000 บาทแรก <b>พร้อมรับเงินคืนรายงวดแบบขั้นบันได (Step-Up Cash Back)</b> เริ่มตั้งแต่ปีที่ 10</p>
                     <div class="overflow-x-auto">
-                        <table class="min-w-full text-sm text-center">
+                        <table class="min-w-full text-sm text-center whitespace-nowrap md:whitespace-normal">
                             <thead class="sub-table-header">
                                 <tr>
                                     <th class="px-4 py-3">สิ้นปีกรมธรรม์</th>
@@ -211,15 +242,15 @@
             <!-- Product 2: Annuity Fix -->
             <div class="bg-white rounded-2xl premium-shadow overflow-hidden">
                 <div class="bg-gray-800 px-6 py-4 flex justify-between items-center border-l-8 border-gold">
-                    <h3 class="text-xl font-bold text-white serif">2. AIA Annuity Fix</h3>
+                    <h3 class="text-lg md:text-xl font-bold text-white serif">2. AIA Annuity Fix</h3>
                     <div class="text-right">
                         <span class="bg-[#C5A059] text-gray-900 text-xs font-bold px-3 py-1 rounded-full">Pension Tax 200k</span>
                     </div>
                 </div>
-                <div class="p-6">
+                <div class="p-4 md:p-6">
                     <p class="text-gray-600 mb-6 text-sm">การันตีรายได้บำนาญแน่นอนทุกปีตั้งแต่อายุ 60 ถึง 85 ปี พร้อมเงินก้อนใหญ่เมื่อครบสัญญา</p>
                     <div class="overflow-x-auto">
-                        <table class="min-w-full text-sm text-center">
+                        <table class="min-w-full text-sm text-center whitespace-nowrap md:whitespace-normal">
                             <thead class="sub-table-header">
                                 <tr>
                                     <th class="px-4 py-3">ช่วงอายุ</th>
@@ -257,17 +288,17 @@
             <div class="bg-white rounded-2xl premium-shadow overflow-hidden border-2 border-[#C5A059]">
                 <div class="bg-gray-900 px-6 py-4 flex justify-between items-center">
                     <div>
-                        <h3 class="text-xl font-bold text-white serif">3. AIA Elite Income Prestige</h3>
+                        <h3 class="text-lg md:text-xl font-bold text-white serif">3. AIA Elite Income Prestige</h3>
                         <p class="text-gray-400 text-xs">Scenario: Return 2% | Auto Redemption 3%</p>
                     </div>
                     <span class="bg-[#C5A059] text-gray-900 text-xs font-bold px-3 py-1 rounded-full">Unit Linked</span>
                 </div>
-                <div class="p-6">
+                <div class="p-4 md:p-6">
                     <p class="text-gray-600 mb-6 text-sm">
                         แผนสร้างรายได้ประจำโดยการขายคืนหน่วยลงทุนอัตโนมัติ (Auto Redemption) 3% ทุกไตรมาส เริ่มตั้งแต่ปีแรก
                     </p>
                     <div class="overflow-x-auto">
-                        <table class="min-w-full text-sm text-center">
+                        <table class="min-w-full text-sm text-center whitespace-nowrap md:whitespace-normal">
                             <thead class="sub-table-header">
                                 <tr>
                                     <th class="px-4 py-3">ปีที่</th>
@@ -300,12 +331,19 @@
                         
                         <!-- Important Note for Elite Income -->
                         <div class="mt-4 p-4 bg-yellow-50 border-l-4 border-[#C5A059] text-sm text-gray-700">
-                          <p> <span class="font-bold text-[#C5A059]">หมายเหตุการรับเงิน (Important Note):</span> การจ่ายเงินรายงวดเป็นลักษณะการ <strong>ขายคืนหน่วยลงทุนอัตโนมัติ (Auto Redemption) ทุกไตรมาส</strong> โดยเริ่มดำเนินการ <strong>ตั้งแต่ปีแรกที่ชำระเบี้ย</strong> เพื่อสร้างกระแสเงินสดกลับคืนทันที </p>
-</div>
-						<!-- Hyperlink to Elite Income detail-->
-                      <div class="mt-1 p-4 bg-red-100 border-l-4 border-[#C5A059] text-bold text-blue-700">
-                        <h3> <strong> <a href="Retire_with_Elite_Income_prestige.html" title="คลิกดูรายละเอียด AIA Elite Income Prestige Unitlinked" target="new" > ข้อมูลเพิ่มเติมเกี่ยวกับ : &nbsp;AIA Elite Income Prestige Unitlinked คลิกเพื่อดูเพิ่มเติม</a></strong></h3>
-                    </div>
+                          <p> <span class="font-bold text-[#C5A059]"><i data-lucide="alert-circle" class="inline w-4 h-4 mr-1"></i>หมายเหตุการรับเงิน (Important Note):</span> การจ่ายเงินรายงวดเป็นลักษณะการ <strong>ขายคืนหน่วยลงทุนอัตโนมัติ (Auto Redemption) ทุกไตรมาส</strong> โดยเริ่มดำเนินการ <strong>ตั้งแต่ปีแรกที่ชำระเบี้ย</strong> เพื่อสร้างกระแสเงินสดกลับคืนทันที </p>
+                        </div>
+                        <!-- Hyperlink to Elite Income detail-->
+                        <div class="mt-2 p-4 bg-blue-50 border-l-4 border-blue-500 text-blue-700 rounded-r-lg shadow-sm hover:bg-blue-100 transition">
+                            <h3 class="flex items-center text-sm md:text-base">
+                                <i data-lucide="external-link" class="w-5 h-5 mr-2"></i>
+                                <strong>
+                                    <a href="Retire_with_Elite_Income_prestige.html" title="คลิกดูรายละเอียด AIA Elite Income Prestige Unitlinked" target="new" class="underline decoration-blue-300 hover:decoration-blue-700">
+                                        ข้อมูลเพิ่มเติมเกี่ยวกับ : AIA Elite Income Prestige Unitlinked คลิกเพื่อดูเพิ่มเติม
+                                    </a>
+                                </strong>
+                            </h3>
+                        </div>
                 </div>
             </div>
 
@@ -314,12 +352,12 @@
 
     <!-- Detailed Cash Flow Timeline (Fully Updated) -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-        <h2 class="text-3xl font-bold text-gray-900 mb-2 serif text-center">Detailed Cash Flow Timeline</h2>
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2 serif text-center">Detailed Cash Flow Timeline</h2>
         <p class="text-center text-gray-500 mb-8">ตารางแสดงกระแสเงินสดรายปี แยกรายรับ-รายจ่าย รายสินค้า ตั้งแต่เริ่มสัญญาจนถึงอายุ 75 ปี</p>
         
         <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
             <div class="overflow-x-auto">
-                <table class="min-w-full text-sm text-center">
+                <table class="min-w-full text-sm text-center whitespace-nowrap md:whitespace-normal">
                     <thead>
                         <tr class="bg-gray-900 text-white">
                             <th rowspan="2" class="py-4 px-2 border-r border-gray-700 col-w-sm">ปีที่</th>
@@ -642,25 +680,27 @@
     <!-- Executive Conclusion -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <div class="bg-gray-800 text-white rounded-xl p-8 border-t-4 border-[#C5A059] shadow-2xl">
-<h3 class="text-2xl font-bold serif mb-4 gold-text">บทสรุปผู้บริหาร (Executive Conclusion)</h3>
+            <h3 class="text-xl md:text-2xl font-bold serif mb-4 gold-text flex items-center">
+                <i data-lucide="clipboard-check" class="mr-2 w-6 h-6"></i> บทสรุปผู้บริหาร (Executive Conclusion)
+            </h3>
             <p class="text-gray-300 leading-relaxed text-lg">
                 รายงานนี้แสดงให้เห็นแนวทางการสร้างการเติบโตของเงินคืนครบสัญญาจำนวน 5.1 ล้าน เพื่อให้เกิดประโยชน์สูงสุดในการวางแผนเกษียณ สิทธิลดหย่อนภาษี และการสร้างรายได้ประจำ
             </p>
             <ul class="mt-4 space-y-3">
                 <li class="flex items-start">
-                    <span class="text-[#C5A059] mr-3 mt-1">✓</span>
+                    <i data-lucide="check" class="text-[#C5A059] w-5 h-5 mr-3 mt-1 flex-shrink-0"></i>
                     <span class="text-gray-200"><strong>แผนเกษียณ (Retirement):</strong> การันตีเงินบำนาญและเงินคืนที่แน่นอนเพื่อความมั่นคงในระยะยาว</span>
                 </li>
                 <li class="flex items-start">
-                    <span class="text-[#C5A059] mr-3 mt-1">✓</span>
+                    <i data-lucide="check" class="text-[#C5A059] w-5 h-5 mr-3 mt-1 flex-shrink-0"></i>
                     <span class="text-gray-200"><strong>ภาษี (Tax):</strong> ใช้สิทธิ์ลดหย่อนภาษีเต็มเพดาน 300,000 บาท ช่วยประหยัดภาษีได้จริงทุกปี</span>
                 </li>
                 <li class="flex items-start">
-                    <span class="text-[#C5A059] mr-3 mt-1">✓</span>
+                    <i data-lucide="check" class="text-[#C5A059] w-5 h-5 mr-3 mt-1 flex-shrink-0"></i>
                     <span class="text-gray-200"><strong>รายได้ประจำ (Passive Income):</strong> สร้างกระแสเงินสดต่อเนื่องทุกไตรมาสทันทีจาก Auto Redemption</span>
-              </li>
-          </ul>
-      </div>
+                </li>
+            </ul>
+        </div>
     </section>
 
     <!-- Footer -->
@@ -673,6 +713,57 @@
             </p>
         </div>
     </footer>
+
+    <!-- App Logic Script -->
+    <script>
+        // Font Size Adjustment Logic
+        const app = {
+            baseSize: 16,
+            currentStep: 0,
+            
+            adjustFontSize: function(step) {
+                if (step === 0) {
+                    this.currentStep = 0;
+                } else {
+                    this.currentStep += step;
+                }
+                
+                // Limit range (Prevent too small or too large)
+                if (this.currentStep < -2) this.currentStep = -2;
+                if (this.currentStep > 6) this.currentStep = 6;
+
+                const newSize = this.baseSize + this.currentStep;
+                
+                // Adjust Root Font Size (rem units will scale accordingly)
+                document.documentElement.style.fontSize = newSize + 'px';
+                
+                // Save preference
+                localStorage.setItem('aia_report_fontsize', this.currentStep);
+            },
+            
+            init: function() {
+                // Load saved preference
+                const savedStep = localStorage.getItem('aia_report_fontsize');
+                if (savedStep) {
+                    this.currentStep = parseInt(savedStep);
+                    this.adjustFontSize(0); // Apply without changing step, just re-calc
+                    // Correction: adjustFontSize(0) resets it. Let's fix logic.
+                    const newSize = this.baseSize + this.currentStep;
+                    document.documentElement.style.fontSize = newSize + 'px';
+
+
+                }
+                
+                // Initialize Lucide Icons
+                lucide.createIcons();
+            }
+        };
+
+        // Run initialization when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            app.init();
+        });
+    </script>
 
 </body>
 </html>

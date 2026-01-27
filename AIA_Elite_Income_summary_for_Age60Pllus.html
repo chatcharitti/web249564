@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIA Elite Income Prestige - Wealth Life Balance</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Prompt', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        'elite-gold': '#B8860B', /* Darker Gold for contrast on light bg */
+                        'elite-gold-light': '#F9F1D8',
+                        'elite-bg': '#FDFCF8', /* Ivory White */
+                        'elite-card': '#FFFFFF',
+                        'elite-text-main': '#1F2937', /* Dark Slate */
+                        'elite-text-muted': '#6B7280', /* Gray */
+                        'elite-accent': '#FFFBF0',
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'gold-gradient': 'linear-gradient(135deg, #FFFBF0 0%, #FFFFFF 100%)',
+                    },
+                    boxShadow: {
+                        'gold-glow': '0 10px 40px -10px rgba(184, 134, 11, 0.15)',
+                        'card-soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #FDFCF8;
+            color: #1F2937;
+        }
+        .text-gradient-gold {
+            background: linear-gradient(to right, #B8860B, #D4AF37, #B8860B);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(184, 134, 11, 0.15);
+            box-shadow: 0 4px 15px rgba(184, 134, 11, 0.05);
+        }
+        .glass-panel:hover {
+            border-color: rgba(184, 134, 11, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(184, 134, 11, 0.1);
+        }
+        .section-pattern {
+            background-image: radial-gradient(#B8860B 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+            opacity: 0.05;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-2 md:p-6 bg-[#FDFCF8]">
+
+    <div class="max-w-4xl mx-auto bg-white shadow-gold-glow rounded-xl overflow-hidden border-t-8 border-elite-gold ring-1 ring-gray-100">
+        
+        <!-- Hero Section -->
+        <header class="relative p-8 md:p-12 text-center overflow-hidden bg-gold-gradient">
+            <!-- Background Elements -->
+            <div class="absolute top-0 left-0 w-full h-full section-pattern"></div>
+            <i class="fa-solid fa-chart-line absolute top-10 left-10 text-9xl text-elite-gold opacity-5"></i>
+            <i class="fa-solid fa-coins absolute bottom-10 right-10 text-9xl text-elite-gold opacity-5"></i>
+            
+            <div class="relative z-10">
+                <div class="inline-block px-6 py-1.5 border border-elite-gold rounded-full bg-white text-elite-gold text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">Unit Linked Strategy</div>
+                <h1 class="text-4xl md:text-5xl font-serif font-bold text-elite-text-main mb-2">AIA Elite Income Prestige</h1>
+                <h2 class="text-2xl md:text-3xl text-gradient-gold font-light mb-6">Wealth - Life - Balance</h2>
+                <p class="text-elite-text-muted max-w-2xl mx-auto text-lg">
+                    นวัตกรรมประกันชีวิตควบการลงทุน ที่เปลี่ยน "เงินเก็บ" เป็น "กระแสเงินสด" และ "มรดก" ในเวลาเดียวกัน
+                </p>
+            </div>
+        </header>
+
+        <!-- Key Features Grid -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-4 px-6 md:px-12 mb-10 -mt-6 relative z-20">
+            <!-- Feature 1 -->
+            <div class="glass-panel p-6 rounded-xl text-center transition-all duration-300">
+                <div class="w-14 h-14 mx-auto bg-elite-gold-light rounded-full flex items-center justify-center mb-4 text-elite-gold shadow-sm">
+                    <span class="text-2xl font-bold">5</span>
+                </div>
+                <h3 class="text-elite-text-main font-bold mb-2">ชำระเบี้ยสั้น</h3>
+                <p class="text-sm text-elite-text-muted">จ่ายเบี้ยฯ เพียง 5 ปี คุ้มครองยาวถึงอายุ 99 ปี บริหารสภาพคล่องได้ง่าย</p>
+            </div>
+            
+            <!-- Feature 2 -->
+            <div class="glass-panel p-6 rounded-xl text-center transition-all duration-300 relative overflow-hidden">
+                <div class="absolute -right-8 -top-8 bg-elite-gold/5 w-24 h-24 rounded-full blur-xl"></div>
+                <div class="w-14 h-14 mx-auto bg-elite-gold-light rounded-full flex items-center justify-center mb-4 text-elite-gold shadow-sm">
+                    <i class="fa-solid fa-percent text-xl"></i>
+                </div>
+                <h3 class="text-elite-text-main font-bold mb-2">0% ค่าดำเนินการ</h3>
+                <p class="text-sm text-elite-text-muted">ไม่มีค่าใช้จ่ายดำเนินการสำหรับเบี้ยประกันหลัก เงินลงทุนทำงานเต็มเม็ดเต็มหน่วย</p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="glass-panel p-6 rounded-xl text-center transition-all duration-300">
+                <div class="w-14 h-14 mx-auto bg-elite-gold-light rounded-full flex items-center justify-center mb-4 text-elite-gold shadow-sm">
+                    <i class="fa-solid fa-globe text-xl"></i>
+                </div>
+                <h3 class="text-elite-text-main font-bold mb-2">ลงทุนระดับโลก</h3>
+                <p class="text-sm text-elite-text-muted">เข้าถึงกองทุน AIA-GAIF บริหารโดย Wellington Management ผู้เชี่ยวชาญระดับโลก</p>
+            </div>
+        </section>
+
+        <!-- Deep Dive: AIA-GAIF vs Stocks -->
+        <section class="bg-[#FAFAFA] py-10 px-6 md:px-12 border-y border-gray-100">
+            <div class="flex flex-col md:flex-row items-center gap-8">
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-bold text-elite-text-main mb-4">
+                        ทำไม <span class="text-elite-gold">AIA-GAIF</span> ถึงปลอดภัยกว่าซื้อหุ้นเอง?
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start p-3 rounded-lg hover:bg-white hover:shadow-sm transition-all">
+                            <i class="fa-solid fa-check-circle text-elite-gold mt-1 mr-3 text-lg"></i>
+                            <div>
+                                <strong class="text-elite-text-main">Global Multi-Asset</strong>
+                                <p class="text-sm text-elite-text-muted">กระจายความเสี่ยงทั่วโลก ไม่กระจุกตัวแค่หุ้นไทยหรืออุตสาหกรรมเดียว</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start p-3 rounded-lg hover:bg-white hover:shadow-sm transition-all">
+                            <i class="fa-solid fa-check-circle text-elite-gold mt-1 mr-3 text-lg"></i>
+                            <div>
+                                <strong class="text-elite-text-main">Active Management</strong>
+                                <p class="text-sm text-elite-text-muted">บริหารโดย Wellington Management ปรับพอร์ตตามสภาวะตลาดแทนคุณ</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start p-3 rounded-lg hover:bg-white hover:shadow-sm transition-all">
+                            <i class="fa-solid fa-check-circle text-elite-gold mt-1 mr-3 text-lg"></i>
+                            <div>
+                                <strong class="text-elite-text-main">Auto-Redemption</strong>
+                                <p class="text-sm text-elite-text-muted">รับกระแสเงินสดอัตโนมัติ (ขายคืนหน่วยลงทุน) สม่ำเสมอ ไม่ต้องกังวลจังหวะซื้อขาย</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="md:w-1/2 bg-white p-8 rounded-2xl border border-gray-100 shadow-card-soft">
+                    <div class="text-center mb-6">
+                        <span class="text-xs uppercase tracking-widest text-elite-gold font-bold">Investment Model</span>
+                    </div>
+                    <div class="flex justify-center items-end h-32 gap-6 mb-4">
+                        <!-- Bonds -->
+                        <div class="w-16 h-[40%] bg-gradient-to-t from-[#E0E0E0] to-[#F5F5F5] rounded-t-lg relative group border border-b-0 border-gray-200">
+                            <span class="absolute -top-6 left-0 w-full text-center text-xs font-bold text-elite-text-muted">Bonds</span>
+                        </div>
+                        <!-- Stocks -->
+                        <div class="w-16 h-[70%] bg-gradient-to-t from-elite-gold to-[#F3E5AB] rounded-t-lg relative group shadow-lg">
+                            <span class="absolute -top-6 left-0 w-full text-center text-xs font-bold text-elite-gold">Stocks</span>
+                        </div>
+                        <!-- Others -->
+                        <div class="w-16 h-[50%] bg-gradient-to-t from-[#A0A0A0] to-[#D0D0D0] rounded-t-lg relative group border border-b-0 border-gray-300">
+                            <span class="absolute -top-6 left-0 w-full text-center text-xs font-bold text-elite-text-muted">Others</span>
+                        </div>
+                    </div>
+                    <p class="text-center text-xs text-elite-text-muted italic border-t border-gray-100 pt-3">การกระจายสินทรัพย์เพื่อลดความผันผวนและสร้างรายได้สม่ำเสมอ</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Silver Age Strategy Section -->
+        <section class="py-12 px-6 md:px-12 relative bg-white overflow-hidden">
+            <!-- Decorative Gold Circle -->
+            <div class="absolute -right-20 -top-20 w-64 h-64 rounded-full bg-elite-gold opacity-5"></div>
+            <div class="absolute -left-20 -bottom-20 w-80 h-80 rounded-full bg-elite-gold opacity-5"></div>
+            
+            <div class="relative z-10">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold text-elite-text-main mb-2">The Perfect Plan for <span class="text-elite-gold text-4xl border-b-2 border-elite-gold pb-1">Age 60+</span></h2>
+                    <p class="text-elite-text-muted mt-4">ทำไมแผนนี้ถึงเป็นการวางแผนมรดกที่ดีที่สุด?</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Benefit 1: Passive Income -->
+                    <div class="flex gap-4 p-4 rounded-xl hover:bg-elite-bg transition-colors border border-transparent hover:border-elite-gold-light">
+                        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-elite-gold text-white flex items-center justify-center font-bold text-xl shadow-md">1</div>
+                        <div>
+                            <h4 class="text-xl font-bold text-elite-text-main mb-2">Passive Income คือ "ของขวัญ"</h4>
+                            <p class="text-elite-text-muted text-sm leading-relaxed">
+                                เปลี่ยนเงินก้อนนิ่งๆ เป็นกระแสเงินสดรายงวด (Auto-Redemption) ให้คุณนำไปใช้กินเที่ยว หรือดูแลสุขภาพ ได้อย่างสบายใจ <br>
+                                <span class="text-elite-gold font-semibold text-xs italic mt-1 block">"ถ้าได้มาก็คือกำไรชีวิต ถ้าไม่ได้ใช้ก็ทบต้นเป็นมรดก"</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Benefit 2: 110% Guarantee -->
+                    <div class="flex gap-4 p-4 rounded-xl hover:bg-elite-bg transition-colors border border-transparent hover:border-elite-gold-light">
+                        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-elite-gold text-white flex items-center justify-center font-bold text-xl shadow-md">2</div>
+                        <div>
+                            <h4 class="text-xl font-bold text-elite-text-main mb-2">Safety Net: การันตี 110%</h4>
+                            <p class="text-elite-text-muted text-sm leading-relaxed">
+                                ไม่ว่ากองทุนจะติดลบแค่ไหน หากเสียชีวิต บริษัทการันตีจ่ายมรดกขั้นต่ำ <strong class="text-elite-gold">110% ของเบี้ยที่จ่าย</strong> (หักถอน) ปิดประตูขาดทุน 100%
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Benefit 3: Estate Planning -->
+                    <div class="flex gap-4 p-4 rounded-xl hover:bg-elite-bg transition-colors border border-transparent hover:border-elite-gold-light">
+                        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-elite-gold text-white flex items-center justify-center font-bold text-xl shadow-md">3</div>
+                        <div>
+                            <h4 class="text-xl font-bold text-elite-text-main mb-2">Fast-Track Inheritance</h4>
+                            <p class="text-elite-text-muted text-sm leading-relaxed">
+                                ส่งต่อทรัพย์สินถึงมือทายาทโดย <strong class="text-elite-gold">ไม่ต้องรอศาลสั่ง (No Probate)</strong> รวดเร็ว เป็นส่วนตัว และระบุผู้รับได้ชัดเจน
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Benefit 4: No Health Check -->
+                    <div class="flex gap-4 p-4 rounded-xl hover:bg-elite-bg transition-colors border border-transparent hover:border-elite-gold-light">
+                        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-elite-gold text-white flex items-center justify-center font-bold text-xl shadow-md">4</div>
+                        <div>
+                            <h4 class="text-xl font-bold text-elite-text-main mb-2">No Health Blockers</h4>
+                            <p class="text-elite-text-muted text-sm leading-relaxed">
+                                ลดความกังวลเรื่องประวัติสุขภาพ ด้วยเงื่อนไขการรับประกันที่ยืดหยุ่นกว่าประกันชีวิตทั่วไป (GIO) ทำให้วัย 60+ เข้าถึงการวางแผนมรดกได้ง่ายขึ้น
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-elite-gold py-8 text-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-white opacity-10 section-pattern"></div>
+            <div class="relative z-10">
+                <h3 class="text-white font-bold text-lg mb-2 tracking-wider">AIA ELITE INCOME PRESTIGE</h3>
+                <p class="text-white text-sm px-4 opacity-90 font-light">
+                    "อิสระทางการเงินในวันนี้ มรดกที่มั่นคงในวันหน้า"
+                </p>
+                <div class="mt-6 text-[10px] text-white/70 px-8 max-w-2xl mx-auto">
+                    *ผู้ซื้อควรทำความเข้าใจในรายละเอียด ความคุ้มครองและเงื่อนไขก่อนตัดสินใจทำประกันภัยทุกครั้ง | ผลการดำเนินงานในอดีต มิได้เป็นสิ่งยืนยันถึงผลการดำเนินงานในอนาคต
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>

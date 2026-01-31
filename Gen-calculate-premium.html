@@ -407,6 +407,9 @@
 // --- DATA CONFIGURATION ---
 const APP_DATA = {
     plans: {
+        NONE: { name: "ไม่เลือก (None)", color: "slate", options: [
+            {name:"-", k:"none", limit:"-"}
+        ]},
         HS: { name: "HS (New Std)", color: "emerald", options: [
             {name:"แผน 1000", k:"1000", limit:"แยกหมวด"}, {name:"แผน 1600", k:"1600", limit:"แยกหมวด"},
             {name:"แผน 2200", k:"2200", limit:"แยกหมวด"}, {name:"แผน 2800", k:"2800", limit:"แยกหมวด"},
@@ -430,6 +433,9 @@ const APP_DATA = {
     },
 
     PLAN_DETAILS: {
+        NONE: {
+            "none": { limit: "-", room: "-", med: "-", doc: "-", surg: "-", opd: "-" }
+        },
         HS: {
             "1000": { limit: "แยกรายหมวด", room: "1,000", med: "16,000", doc: "550", surg: "40,000", opd: "-" },
             "1600": { limit: "แยกรายหมวด", room: "1,600", med: "20,000", doc: "750", surg: "50,000", opd: "-" },
@@ -446,6 +452,7 @@ const APP_DATA = {
             "3500": { limit: "400,000", room: "3,500", med: "30,000+", doc: "1,000", surg: "120,000+", opd: "-" },
             "4500": { limit: "500,000", room: "4,500", med: "30,000+", doc: "1,200", surg: "130,000+", opd: "-" },
             "5500": { limit: "500,000", room: "5,500", med: "35,000+", doc: "1,500", surg: "140,000+", opd: "-" },
+
             "6500": { limit: "600,000", room: "6,500", med: "40,000+", doc: "2,000", surg: "150,000+", opd: "-" }
         },
         HSV: {
@@ -1098,6 +1105,37 @@ const app = {
         const formatMoney = (val) => val > 0 ? val.toLocaleString() : "-";
         const sel = this.state.currentSelection;
         
+        // --- NEW: Main Plan Logic ---
+        const mainPlanType = document.getElementById('main-plan-select').value;
+        const mainSum = parseInt(document.getElementById('main-sum').value) || 0;
+        
+        let mainPlanRows = "";
+        
+        if (mainPlanType === 'CIProCare') {
+            const early = mainSum * 0.4;
+            const severe = mainSum;
+            const mib = mainSum;
+            const ccb = mainSum;
+            const total = mainSum * 10; // 1000%
+            
+            const cell = (val) => `<td class="text-center p-3 border-l border-slate-100 text-slate-700 font-semibold">${formatMoney(val)}</td>`;
+            const row = (label, val) => `<tr class="border-b border-slate-100 hover:bg-slate-50"><td class="p-3 font-medium text-slate-700 bg-white sticky-col z-20 border-r border-slate-200">${label}</td>${cell(val)}${cell(val)}${cell(val)}</tr>`;
+
+            mainPlanRows += row("ความคุ้มครองชีวิต (Death)", mainSum);
+            mainPlanRows += row("โรคร้ายแรงระดับต้น (40%)", early);
+            mainPlanRows += row("โรคร้ายแรงระดับรุนแรง (100%)", severe);
+            mainPlanRows += row("ภาวะวิกฤต MIB (100%)", mib);
+            mainPlanRows += row("ดูแลต่อเนื่อง CCB (100%)", ccb);
+            mainPlanRows += row("วงเงินความคุ้มครองสูงสุด (1000%)", total);
+        } else {
+            // 20PLN
+            const cell = (val) => `<td class="text-center p-3 border-l border-slate-100 text-slate-700 font-semibold">${formatMoney(val)}</td>`;
+            const row = (label, val) => `<tr class="border-b border-slate-100 hover:bg-slate-50"><td class="p-3 font-medium text-slate-700 bg-white sticky-col z-20 border-r border-slate-200">${label}</td>${cell(val)}${cell(val)}${cell(val)}</tr>`;
+            
+            mainPlanRows += row("ความคุ้มครองชีวิต (Death)", mainSum);
+        }
+        // ---------------------------
+        
         const getData = (id) => {
             const { type, idx } = this.state[id];
             const opt = APP_DATA.plans[type].options[idx];
@@ -1117,7 +1155,10 @@ const app = {
         };
 
         let html = `
-            <tr class="sub-header"><td colspan="4">1. ความคุ้มครองสุขภาพหลัก (Health Plan)</td></tr>
+            <tr class="sub-header bg-blue-100/50 text-blue-800"><td colspan="4">1. ความคุ้มครองหลัก (Main Plan Coverage) : ${mainPlanType === 'CIProCare' ? 'AIA CI ProCare' : '20 Pay Life'}</td></tr>
+            ${mainPlanRows}
+
+            <tr class="sub-header"><td colspan="4">2. ความคุ้มครองสุขภาพหลัก (Health Plan)</td></tr>
             ${renderRow("วงเงินความคุ้มครองสูงสุด", "limit")}
             ${renderRow("ค่าห้อง (Room & Board)", "room")}
             ${renderRow("ค่ารักษาพยาบาล (Hospital Service)", "med")}
@@ -1125,7 +1166,7 @@ const app = {
             ${renderRow("ค่าหัตถการ/ผ่าตัด (Surgery)", "surg")}
             ${renderRow("วงเงิน OPD", "opd")}
             
-            <tr class="sub-header"><td colspan="4">2. ชดเชยรายได้ (HB Extra)</td></tr>
+            <tr class="sub-header"><td colspan="4">3. ชดเชยรายได้ (HB Extra)</td></tr>
             <tr class="border-b"><td class="p-3">ชดเชยรายวัน (IPD)</td>
                 ${[1,2,3].map(id => `<td class="text-center font-bold text-amber-700">${formatMoney(sel[id].hb)}</td>`).join('')}
             </tr>
@@ -1139,7 +1180,7 @@ const app = {
                 ${[1,2,3].map(id => `<td class="text-center text-slate-500">${formatMoney(sel[id].hb * 25)}</td>`).join('')}
             </tr>
 
-            <tr class="sub-header"><td colspan="4">3. Health Cancer (เจอ จ่าย จบ)</td></tr>
+            <tr class="sub-header"><td colspan="4">4. Health Cancer (เจอ จ่าย จบ)</td></tr>
             <tr class="border-b bg-rose-50/30"><td class="p-3 font-bold text-rose-800">เสียชีวิตจากมะเร็ง (Death)</td>
                 ${[1,2,3].map(id => `<td class="text-center font-black text-rose-700">${formatMoney(sel[id].hc)}</td>`).join('')}
             </tr>
@@ -1150,7 +1191,7 @@ const app = {
                 }).join('')}
             </tr>
 
-            <tr class="sub-header"><td colspan="4">4. Care for Cancer (ดูแลค่ารักษา)</td></tr>
+            <tr class="sub-header"><td colspan="4">5. Care for Cancer (ดูแลค่ารักษา)</td></tr>
             <tr class="border-b bg-rose-50/30"><td class="p-3 font-bold text-rose-800">เสียชีวิตจากมะเร็ง (Death)</td>
                 ${[1,2,3].map(id => `<td class="text-center font-black text-rose-700">${formatMoney(sel[id].cfc)}</td>`).join('')}
             </tr>

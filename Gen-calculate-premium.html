@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AIA Health Solution 2025: Detailed Benefits</title>
+  <title>AIA Health Solution + CI ProCare Calculator</title>
 
   <!-- Libraries -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -14,6 +14,7 @@
   <style>
     body { font-family: 'Sarabun', sans-serif; background: #f8fafc; color: #334155; }
     .bg-premium-gold { background: linear-gradient(135deg, #b45309 0%, #d97706 50%, #f59e0b 100%); }
+    .bg-ci-pro { background: linear-gradient(135deg, #be123c 0%, #e11d48 50%, #f43f5e 100%); }
     .sticky-header { position: sticky; top: 0; z-index: 50; }
     .sticky-col { position: sticky; left: 0; z-index: 30; background-color: #f8fafc; border-right: 1px solid #e2e8f0; }
     
@@ -29,7 +30,7 @@
       .card { box-shadow: none !important; border: 1px solid #ddd !important; }
       #chart-container { height: 300px !important; page-break-inside: avoid; }
       .page-break { page-break-before: always; }
-      .bg-premium-gold { background: #eee !important; color: black !important; border-bottom: 1px solid #000; }
+      .bg-premium-gold, .bg-ci-pro { background: #eee !important; color: black !important; border-bottom: 1px solid #000; }
       .text-white { color: black !important; }
     }
 
@@ -38,13 +39,16 @@
     
     .btn-calculate { transition: all 0.3s; }
     .btn-calculate:active { transform: scale(0.95); }
+    
+    .vitality-badge { border: 1px solid #ddd; padding: 2px 8px; border-radius: 12px; font-size: 10px; font-weight: bold; cursor: pointer; }
+    .vitality-badge.active { background-color: #be123c; color: white; border-color: #be123c; }
   </style>
 </head>
 
 <body class="pb-12 transition-all duration-200">
 
 <!-- BANNER -->
-<div class="bg-premium-gold text-white text-center py-2 px-4 shadow-md relative z-[60]">
+<div class="bg-premium-gold text-white text-center py-2 px-4 shadow-md relative z-[60]" id="top-banner">
   <div class="flex items-center justify-center gap-2 text-sm md:text-base font-bold tracking-wide">
     <i data-lucide="shield-check" class="w-5 h-5 text-white/90"></i>
     <span>"วางแผนค่ารักษาพยาบาล เพื่อปกป้องเงินออมของคุณ ตั้งแต่วันนี้"</span>
@@ -64,7 +68,7 @@
           </div>
           <div>
             <h1 class="text-2xl font-bold text-slate-800 tracking-tight">AIA Health Solution <span class="text-amber-600">2025</span></h1>
-            <p class="text-xs text-slate-500 font-medium">Life (20PLN) + Health (Detail) + Riders</p>
+            <p class="text-xs text-slate-500 font-medium">Life (20PLN / CI ProCare) + Health (Detail) + Riders</p>
           </div>
         </div>
 
@@ -110,21 +114,27 @@
     </div>
   </div>
 
-  <!-- MAIN INSURANCE (20PLN) -->
-  <div class="card p-5 mb-6 border-l-4 border-blue-600 bg-blue-50/30">
+  <!-- MAIN INSURANCE CARD -->
+  <div class="card p-5 mb-6 border-l-4 transition-colors duration-300" id="main-plan-card">
     <div class="flex flex-col md:flex-row items-center justify-between gap-4">
         <div class="flex items-center gap-3">
-            <div class="bg-blue-100 p-2 rounded-lg text-blue-700"><i data-lucide="book-heart" class="w-6 h-6"></i></div>
+            <div class="p-2 rounded-lg text-white transition-colors duration-300" id="main-icon-container">
+                <i data-lucide="shield" class="w-6 h-6"></i>
+            </div>
             <div>
-                <h2 class="text-lg font-bold text-slate-800">สัญญาประกันชีวิตหลัก (20PLN)</h2>
-                <p class="text-xs text-slate-500">20 Pay Life Non Par (ชำระเบี้ย 20 ปี คุ้มครอง 99 ปี)</p>
+                <label class="text-[10px] uppercase font-bold text-slate-400">แบบประกันชีวิตหลัก (Main Plan)</label>
+                <select id="main-plan-select" onchange="app.changeMainPlan()" class="block w-full text-lg font-bold text-slate-800 bg-transparent border-b border-slate-300 focus:border-amber-500 outline-none cursor-pointer">
+                    <option value="20PLN">20 Pay Life (Non Par)</option>
+                    <option value="CIProCare">AIA CI ProCare (20/99)</option>
+                </select>
+                <p class="text-xs text-slate-500 mt-1" id="main-plan-desc">ชำระเบี้ย 20 ปี คุ้มครองตลอดชีพ</p>
             </div>
         </div>
         <div class="flex flex-col gap-1 items-end">
-            <div class="flex items-center gap-3 bg-white p-3 rounded-xl border border-blue-100 shadow-sm">
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
                 <label class="text-sm font-bold text-slate-600">ระบุทุนประกันหลัก:</label>
-                <input type="number" id="main-sum" value="150000" step="10000" onchange="app.validateMainSum()" 
-                       class="font-bold text-blue-700 text-right bg-slate-50 border border-slate-300 rounded-lg px-3 py-1 w-40 focus:ring-2 focus:ring-blue-400 outline-none">
+                <input type="number" id="main-sum" value="1000000" step="10000" onchange="app.validateMainSum()" 
+                       class="font-bold text-slate-800 text-right bg-slate-50 border border-slate-300 rounded-lg px-3 py-1 w-40 focus:ring-2 focus:ring-blue-400 outline-none">
                 <span class="text-xs text-slate-400">บาท</span>
             </div>
             <div id="discount-msg" class="text-[10px] text-green-600 font-bold px-2 hidden"></div>
@@ -238,8 +248,8 @@
           </tr>
         </thead>
         <tbody class="text-sm text-slate-700">
-          <tr class="border-b border-slate-100">
-            <td class="p-4 font-bold text-blue-800">1. เบี้ยประกันชีวิตหลัก (20PLN) <br><span class="text-xs font-normal text-slate-400" id="main-plan-desc">ทุน 100,000</span></td>
+          <tr class="border-b border-slate-100 bg-blue-50/20">
+            <td class="p-4 font-bold text-blue-800">1. <span id="summary-main-name">เบี้ยประกันชีวิตหลัก (20PLN)</span> <br><span class="text-xs font-normal text-slate-400" id="summary-main-sum">ทุน 100,000</span></td>
             <td class="p-4 text-right border-l border-slate-100 font-bold" id="main-prem-1">-</td>
             <td class="p-4 text-right border-l border-slate-100 font-bold" id="main-prem-2">-</td>
             <td class="p-4 text-right border-l border-slate-100 font-bold" id="main-prem-3">-</td>
@@ -281,7 +291,7 @@
 
   <!-- BENEFIT TABLE -->
   <div class="card overflow-hidden mb-6 page-break">
-    <div class="p-4 bg-premium-navy text-white flex justify-between items-center">
+    <div class="p-4 bg-slate-800 text-white flex justify-between items-center">
         <h2 class="text-lg font-bold flex items-center gap-2"><i data-lucide="list-checks" class="w-5 h-5 text-amber-400"></i> ตารางเปรียบเทียบผลประโยชน์ (Benefits)</h2>
     </div>
     <div class="overflow-x-auto">
@@ -307,6 +317,67 @@
     </div>
     <div class="relative h-[300px] w-full" id="chart-container">
       <canvas id="premiumChart"></canvas>
+    </div>
+  </div>
+
+  <!-- AIA Vitality & ROI Analysis -->
+  <div class="card p-6 mb-6 page-break border-t-4 border-red-500">
+    <div class="flex items-center gap-2 mb-4 text-red-600">
+        <div class="bg-red-50 p-2 rounded-full"><i data-lucide="coins" class="w-6 h-6"></i></div>
+        <h2 class="text-lg font-bold">AIA Vitality & ROI Analysis (วิเคราะห์ความคุ้มค่า)</h2>
+    </div>
+
+    <!-- Vitality -->
+    <div class="bg-slate-50 rounded-xl p-4 mb-6 border border-slate-200">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-3">
+            <div>
+                <h3 class="font-bold text-slate-700">ประมาณการเงินคืน AIA Vitality (สูงสุด 20 ปี)</h3>
+                <p class="text-xs text-slate-500">รับเงินคืนทุก 3 ปี (ปีที่ 3, 6, 9, 12, 15, 18, 20)</p>
+                <p class="text-[10px] text-red-500 mt-1 font-bold">*ตัวอย่างการคำนวณสำหรับแบบ AIA CI Procare (เบี้ยต่อปี) เท่านั้น ทั้งนี้โบนัสจะขึ้นกับสถานะ Vitality แต่ละปี ตามเงื่อนไขบริษัทฯ</p>
+            </div>
+            <div class="flex gap-2" id="vitality-status-selector">
+                <div class="vitality-badge" onclick="app.setVitalityStatus(0)">Bronze (0%)</div>
+                <div class="vitality-badge" onclick="app.setVitalityStatus(1)">Silver (1%)</div>
+                <div class="vitality-badge" onclick="app.setVitalityStatus(4)">Gold (4%)</div>
+                <div class="vitality-badge active" onclick="app.setVitalityStatus(9)">Platinum (9%)</div>
+            </div>
+        </div>
+        <div class="grid grid-cols-3 gap-4 text-center">
+            <div class="bg-white p-3 rounded-lg shadow-sm border border-slate-200">
+                <div class="text-xs text-slate-400">เงินคืนต่อปี (เฉลี่ย)</div>
+                <div class="text-lg font-bold text-red-600" id="vitality-annual">-</div>
+            </div>
+            <div class="bg-white p-3 rounded-lg shadow-sm border border-slate-200">
+                <div class="text-xs text-slate-400">รับเงินก้อนทุก 3 ปี</div>
+                <div class="text-lg font-bold text-red-600" id="vitality-batch">-</div>
+            </div>
+            <div class="bg-white p-3 rounded-lg shadow-sm border border-slate-200">
+                <div class="text-xs text-slate-400">รวมรับตลอดสัญญา (20 ปี)</div>
+                <div class="text-2xl font-black text-red-600" id="vitality-total">-</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CSV Table -->
+    <div>
+        <h3 class="font-bold text-slate-700 mb-3 flex items-center gap-2"><i data-lucide="calculator" class="w-4 h-4"></i> ตารางมูลค่าเวนคืนกรมธรรม์ (Cash Surrender Value)</h3>
+        <p class="text-xs text-slate-500 mb-2">*กรุณากรอกมูลค่าเวนคืนตามตารางในใบเสนอขาย (CV) เพื่อคำนวณผลตอบแทน</p>
+        
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="bg-slate-100 text-slate-600 border-b border-slate-200">
+                        <th class="p-3 text-left">สิ้นปีกรมธรรม์ที่</th>
+                        <th class="p-3 text-right">เบี้ยฯ สะสม (ทุนหลัก)</th>
+                        <th class="p-3 text-right text-blue-700">มูลค่าเวนคืน (CV) <span class="text-[10px] text-slate-400 font-normal">(แก้ไขได้)</span></th>
+                        <th class="p-3 text-right">กำไร / ขาดทุน</th>
+                    </tr>
+                </thead>
+                <tbody id="roi-table-body">
+                    <!-- Javascript will populate this -->
+                </tbody>
+            </table>
+        </div>
     </div>
   </div>
 
@@ -358,7 +429,6 @@ const APP_DATA = {
         ]}
     },
 
-    // NEW DETAILED MAPPING FOR BENEFITS
     PLAN_DETAILS: {
         HS: {
             "1000": { limit: "แยกรายหมวด", room: "1,000", med: "16,000", doc: "550", surg: "40,000", opd: "-" },
@@ -407,13 +477,73 @@ const APP_DATA = {
         }
     },
 
-    // 20PLN Official Rates
     rate20PLN: {
-        male: { 0:14, 10:16, 20:19.51, 30:19.5, 35:22.3, 40:29.41, 50:39.21, 56:47.05, 60:55.77, 65:69.89, 70:78.11 },
-        female: { 0:12, 10:13, 20:15.26, 30:16.11, 35:19.0, 40:25.34, 50:34.32, 56:39.29, 60:46.43, 65:60.88, 70:67.07 }
+        male: { 
+            0: 12.76, 1: 12.81, 2: 12.98, 3: 13.15, 4: 13.33, 5: 13.53, 
+            6: 13.73, 7: 13.95, 8: 14.18, 9: 14.42, 10: 14.68, 
+            11: 14.96, 12: 15.23, 13: 15.52, 14: 15.80, 15: 16.09, 
+            16: 16.38, 17: 16.67, 18: 16.97, 19: 17.27, 20: 17.58, 
+            21: 17.90, 22: 18.23, 23: 18.57, 24: 18.93, 25: 19.31, 
+            26: 19.70, 27: 20.12, 28: 20.56, 29: 21.02, 30: 21.50, 
+            31: 22.01, 32: 22.55, 33: 23.11, 34: 23.69, 35: 24.30, 
+            36: 24.94, 37: 25.61, 38: 26.31, 39: 27.04, 40: 27.80, 
+            41: 28.60, 42: 29.44, 43: 30.32, 44: 31.24, 45: 32.20, 
+            46: 33.22, 47: 34.28, 48: 35.40, 49: 36.57, 50: 37.81, 
+            51: 39.13, 52: 40.51, 53: 41.99, 54: 43.56, 55: 45.25, 
+            56: 47.05, 57: 48.99, 58: 51.08, 59: 53.33, 60: 55.77, 
+            61: 58.42, 62: 61.29, 63: 64.19, 64: 66.96, 65: 69.89, 
+            66: 71.99, 67: 73.80, 68: 75.13, 69: 76.40, 70: 78.11 
+        },
+        female: { 
+            0: 11.47, 1: 11.47, 2: 11.51, 3: 11.58, 4: 11.68, 5: 11.80, 
+            6: 11.94, 7: 12.10, 8: 12.27, 9: 12.45, 10: 12.66, 
+            11: 12.87, 12: 13.09, 13: 13.32, 14: 13.56, 15: 13.76, 
+            16: 13.97, 17: 14.19, 18: 14.41, 19: 14.65, 20: 14.90, 
+            21: 15.15, 22: 15.43, 23: 15.71, 24: 16.00, 25: 16.31, 
+            26: 16.64, 27: 16.98, 28: 17.34, 29: 17.72, 30: 18.11, 
+            31: 18.53, 32: 18.96, 33: 19.42, 34: 19.90, 35: 20.40, 
+            36: 20.93, 37: 21.48, 38: 22.06, 39: 22.67, 40: 23.30, 
+            41: 23.96, 42: 24.66, 43: 25.39, 44: 26.15, 45: 26.95, 
+            46: 27.79, 47: 28.68, 48: 29.61, 49: 30.59, 50: 31.62, 
+            51: 32.72, 52: 33.88, 53: 35.11, 54: 36.41, 55: 37.81, 
+            56: 39.29, 57: 40.89, 58: 42.60, 59: 44.44, 60: 46.43, 
+            61: 48.59, 62: 50.93, 63: 53.49, 64: 56.27, 65: 59.32, 
+            66: 61.90, 67: 63.61, 68: 64.71, 69: 66.13, 70: 67.07 
+        }
     },
 
-    // HEALTH RATES
+    // EXTRACTED CI PROCARE RATES (0-60 Years)
+    rateCIProCare: {
+        male: { 
+            0:35.52, 1:36.42, 2:37.35, 3:38.33, 4:39.35, 5:40.40, 
+            6:41.50, 7:42.65, 8:43.85, 9:45.09, 10:46.38,
+            11:47.69, 12:49.05, 13:50.43, 14:51.85, 15:53.32,
+            16:54.80, 17:56.33, 18:57.95, 19:59.61, 20:61.33,
+            21:63.13, 22:65.02, 23:66.96, 24:68.98, 25:71.08,
+            26:73.25, 27:75.49, 28:77.85, 29:80.33, 30:82.91,
+            31:85.58, 32:88.37, 33:91.31, 34:94.41, 35:97.69,
+            36:100.42, 37:103.30, 38:106.36, 39:109.61, 40:113.06,
+            41:116.63, 42:120.27, 43:123.98, 44:127.85, 45:131.87,
+            46:138.39, 47:145.41, 48:153.00, 49:161.15, 50:169.88,
+            51:181.53, 52:193.94, 53:203.43, 54:215.19, 55:227.20,
+            56:242.30, 57:256.40, 58:272.20, 59:289.98, 60:310.00
+        },
+        female: {
+            0:30.63, 1:31.25, 2:31.90, 3:32.58, 4:33.31, 5:34.04,
+            6:34.81, 7:35.61, 8:36.43, 9:37.29, 10:38.18,
+            11:39.28, 12:40.42, 13:41.60, 14:42.82, 15:44.06,
+            16:45.34, 17:46.47, 18:47.68, 19:48.94, 20:50.26,
+            21:51.60, 22:53.00, 23:54.43, 24:55.91, 25:57.45,
+            26:59.06, 27:60.73, 28:62.46, 29:64.26, 30:66.12,
+            31:68.24, 32:70.43, 33:72.68, 34:75.03, 35:77.45,
+            36:79.56, 37:81.77, 38:84.09, 39:86.55, 40:89.15,
+            41:92.06, 42:95.08, 43:98.21, 44:101.46, 45:104.83,
+            46:108.89, 47:113.18, 48:117.73, 49:122.52, 50:127.60,
+            51:133.54, 52:137.38, 53:140.76, 54:148.79, 55:157.91,
+            56:167.49, 57:176.83, 58:186.68, 59:197.12, 60:210.60
+        }
+    },
+
     rateTable: {
         HS: { male: {}, female: {} },
         HSX: {
@@ -479,7 +609,8 @@ const app = {
             1: { hb:0, hc:0, cfc:0 },
             2: { hb:0, hc:0, cfc:0 },
             3: { hb:0, hc:0, cfc:0 }
-        }
+        },
+        currentVitalityStatus: 9 // Default Platinum
     },
 
     // --- UTILS ---
@@ -502,44 +633,114 @@ const app = {
 
     lookupRate20PLN(age, gender) {
         const table = APP_DATA.rate20PLN[gender];
-        const ages = Object.keys(table).map(Number).sort((a,b)=>a-b);
+        // Age 0 usually means < 1 year (15 days), so map 0 to 0 key in our table
+        if (age < 0) return 0;
+        if (age > 70) return table[70]; // Cap at 70 per table
+        return table[age] || 0;
+    },
+
+    lookupRateCIProCare(age, gender) {
+        const table = APP_DATA.rateCIProCare[gender];
+        // Direct lookup since we mapped 0-60
         if (table[age]) return table[age];
-        for (let i = 0; i < ages.length - 1; i++) {
-            if (age >= ages[i] && age <= ages[i+1]) {
-                const x1 = ages[i];
-                const x2 = ages[i+1];
-                const y1 = table[x1];
-                const y2 = table[x2];
-                return y1 + (y2 - y1) * (age - x1) / (x2 - x1);
-            }
-        }
-        return table[ages[ages.length-1]];
+        
+        // If age > 60, use 60 (or handle error, since CI ProCare entry max is 60)
+        if (age > 60) return table[60];
+
+        return 0;
     },
 
     calculateMainPremium(sum, age, gender) {
-        const baseRate = this.lookupRate20PLN(age, gender);
+        const planType = document.getElementById('main-plan-select').value;
+        let finalRate = 0;
         let discount = 0;
-        if (sum >= 600000) discount = 2;
-        else if (sum >= 250000) discount = 1;
-        let finalRate = Math.max(0, baseRate - discount);
+        let baseRate = 0;
+
+        if (planType === '20PLN') {
+            baseRate = this.lookupRate20PLN(age, gender);
+            // Discount Logic for 20PLN
+            if (sum >= 600000) discount = 2;
+            else if (sum >= 250000) discount = 1;
+            else discount = 0;
+            
+            finalRate = Math.max(0, baseRate - discount);
+
+        } else if (planType === 'CIProCare') {
+            baseRate = this.lookupRateCIProCare(age, gender);
+            
+            // CI ProCare Discount Logic (Page 18)
+            if (sum >= 5000000) discount = 3.00;
+            else if (sum >= 1000000) discount = 2.25;
+            else if (sum >= 800000) discount = 1.50;
+            else if (sum >= 500000) discount = 0.75;
+            else discount = 0;
+
+            finalRate = Math.max(0, baseRate - discount);
+        }
+
         return Math.round((sum / 1000) * finalRate);
     },
 
     validateMainSum() {
         const input = document.getElementById('main-sum');
         let val = parseInt(input.value);
-        if (val > 9999999) val = 9999999;
+        if (val > 99999999) val = 99999999;
         if (val < 0) val = 0;
         input.value = val;
         
+        const planType = document.getElementById('main-plan-select').value;
         const discMsg = document.getElementById('discount-msg');
-        if (val >= 250000) {
-            discMsg.classList.remove('hidden');
-            discMsg.innerText = val >= 600000 ? "ได้รับส่วนลดเบี้ย 2 บาท/พัน" : "ได้รับส่วนลดเบี้ย 1 บาท/พัน";
-        } else {
-            discMsg.classList.add('hidden');
+
+        if (planType === '20PLN') {
+            if (val >= 250000) {
+                discMsg.classList.remove('hidden');
+                discMsg.innerText = val >= 600000 ? "ได้รับส่วนลดเบี้ย 2 บาท/พัน" : "ได้รับส่วนลดเบี้ย 1 บาท/พัน";
+            } else {
+                discMsg.classList.add('hidden');
+            }
+        } else if (planType === 'CIProCare') {
+             if (val >= 500000) {
+                discMsg.classList.remove('hidden');
+                let rate = 0;
+                if (val >= 5000000) rate = 3.00;
+                else if (val >= 1000000) rate = 2.25;
+                else if (val >= 800000) rate = 1.50;
+                else rate = 0.75;
+                discMsg.innerText = `ได้รับส่วนลดเบี้ย ${rate.toFixed(2)} บาท/พัน`;
+             } else {
+                 discMsg.classList.add('hidden');
+             }
         }
+
         this.calculate();
+    },
+
+    changeMainPlan() {
+        const planType = document.getElementById('main-plan-select').value;
+        const card = document.getElementById('main-plan-card');
+        const icon = document.getElementById('main-icon-container');
+        const desc = document.getElementById('main-plan-desc');
+        const banner = document.getElementById('top-banner');
+
+        if (planType === 'CIProCare') {
+            card.classList.remove('border-l-4', 'border-blue-600', 'bg-blue-50/30');
+            card.classList.add('border-l-4', 'border-rose-500', 'bg-rose-50/30');
+            icon.classList.remove('bg-blue-100', 'text-blue-700');
+            icon.classList.add('bg-rose-100', 'text-rose-700');
+            desc.innerText = "คุ้มครองชีวิตและโรคร้ายแรงครบวงจร (Multi-Pay)";
+            banner.classList.remove('bg-premium-gold');
+            banner.classList.add('bg-ci-pro');
+        } else {
+            card.classList.remove('border-l-4', 'border-rose-500', 'bg-rose-50/30');
+            card.classList.add('border-l-4', 'border-blue-600', 'bg-blue-50/30');
+            icon.classList.remove('bg-rose-100', 'text-rose-700');
+            icon.classList.add('bg-blue-100', 'text-blue-700');
+            desc.innerText = "ชำระเบี้ย 20 ปี คุ้มครองตลอดชีพ";
+            banner.classList.remove('bg-ci-pro');
+            banner.classList.add('bg-premium-gold');
+        }
+        
+        this.validateMainSum();
     },
 
     getRiderRate(riderType, age, gender) {
@@ -598,7 +799,9 @@ const app = {
             this.initSelectors(id);
             this.updateHeader(id);
         });
-        this.validateMainSum();
+        
+        this.buildROITable(); // Initialize ROI Table
+        this.changeMainPlan(); // Sets default
         this.calculate(); 
         lucide.createIcons();
     },
@@ -644,13 +847,13 @@ const app = {
         this.state[id].idx = 0; 
         this.renderOptionSelector(id); 
         this.updateHeader(id);
-        this.calculate(); // Auto calculate on change
+        this.calculate(); 
     },
     
     changeOption(id, v) { 
         this.state[id].idx = parseInt(v);
         this.updateHeader(id);
-        this.calculate(); // Auto calculate on change
+        this.calculate(); 
     },
 
     updateHeader(id) {
@@ -697,13 +900,108 @@ const app = {
         r.style.fontSize = (s+d) + 'px';
     },
 
+    // --- Vitality & ROI Section ---
+    setVitalityStatus(statusPercent) {
+        this.state.currentVitalityStatus = statusPercent;
+        // Update UI badges
+        document.querySelectorAll('.vitality-badge').forEach(el => {
+            el.classList.remove('active');
+            if (el.textContent.includes(`(${statusPercent}%)`)) {
+                el.classList.add('active');
+            }
+        });
+        this.calculateVitality();
+    },
+
+    calculateVitality() {
+        // Get base main premium (before discount if possible, but using calculated is fine for approx)
+        // Note: Vitality bonus is on "Standard Premium". 
+        // For approximation, we use the calculated main premium.
+        const sex = document.getElementById('input-gender').value;
+        const age = parseInt(document.getElementById('input-age').value);
+        const mainSum = parseInt(document.getElementById('main-sum').value) || 0;
+        const mainPrem = this.calculateMainPremium(mainSum, age, sex);
+
+        const rate = this.state.currentVitalityStatus / 100;
+        const annualBonus = mainPrem * rate;
+        
+        // Paid every 3 years: Year 3, 6, 9, 12, 15, 18 (6 times)
+        // And year 20 (pays for remaining 2 years: 19, 20)
+        // Total Bonus Factor = 20 years worth of bonus
+        
+        const totalBonus = annualBonus * 20;
+        const batchPayment = annualBonus * 3; // Approx for display
+
+        document.getElementById('vitality-annual').textContent = Math.round(annualBonus).toLocaleString() + " บ.";
+        document.getElementById('vitality-batch').textContent = Math.round(batchPayment).toLocaleString() + " บ.";
+        document.getElementById('vitality-total').textContent = Math.round(totalBonus).toLocaleString() + " บ.";
+    },
+
+    buildROITable() {
+        const years = [20, 25, 30, 40];
+        const tbody = document.getElementById('roi-table-body');
+        tbody.innerHTML = '';
+
+        years.forEach(year => {
+            const tr = document.createElement('tr');
+            tr.className = "border-b border-slate-100";
+            tr.innerHTML = `
+                <td class="p-3">ปีที่ ${year} (อายุ <span id="age-at-${year}">-</span>)</td>
+                <td class="p-3 text-right text-slate-500" id="cum-prem-${year}">-</td>
+                <td class="p-3 text-right"><input type="number" class="w-24 text-right bg-blue-50 border border-blue-200 rounded px-2 py-1 text-blue-700 font-bold outline-none focus:ring-1 focus:ring-blue-400" value="0" onchange="app.calculateROI()" id="csv-input-${year}"></td>
+                <td class="p-3 text-right font-bold" id="profit-${year}">-</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    },
+
+    calculateROI() {
+        const sex = document.getElementById('input-gender').value;
+        const age = parseInt(document.getElementById('input-age').value);
+        const mainSum = parseInt(document.getElementById('main-sum').value) || 0;
+        const mainPrem = this.calculateMainPremium(mainSum, age, sex);
+        
+        // Main plan paid for 20 years
+        const totalMainPremPaid = mainPrem * 20;
+
+        const years = [20, 25, 30, 40];
+        years.forEach(year => {
+            // Update Age column
+            document.getElementById(`age-at-${year}`).textContent = age + year;
+
+            // Cumulative Premium (Capped at 20 years payment)
+            // Show only Main Plan premium accumulation as CSV relates to Main Plan
+            document.getElementById(`cum-prem-${year}`).textContent = totalMainPremPaid.toLocaleString();
+
+            // Get CSV Input
+            const csvVal = parseInt(document.getElementById(`csv-input-${year}`).value) || 0;
+            
+            // Calc Profit
+            const profit = csvVal - totalMainPremPaid;
+            const profitEl = document.getElementById(`profit-${year}`);
+            profitEl.textContent = profit.toLocaleString();
+            
+            if (profit >= 0) {
+                profitEl.className = "p-3 text-right font-bold text-green-600";
+                profitEl.innerHTML += " <span class='text-xs'>▲</span>";
+            } else {
+                profitEl.className = "p-3 text-right font-bold text-red-500";
+            }
+        });
+    },
+
     calculate() {
         const sex = document.getElementById('input-gender').value;
         const age = parseInt(document.getElementById('input-age').value);
         const mainSum = parseInt(document.getElementById('main-sum').value) || 0;
+        const planType = document.getElementById('main-plan-select').value;
         
         const mainPrem = this.calculateMainPremium(mainSum, age, sex);
-        document.getElementById('main-plan-desc').innerText = `ทุน ${mainSum.toLocaleString()}`;
+        
+        // Update summary text
+        const mainPlanName = planType === 'CIProCare' ? 'AIA CI ProCare' : '20 Pay Life (Non Par)';
+        document.getElementById('summary-main-name').innerText = `เบี้ย ${mainPlanName}`;
+        document.getElementById('summary-main-sum').innerText = `ทุน ${mainSum.toLocaleString()}`;
 
         const chartData = { labels: APP_DATA.AGE_BANDS, datasets: [] };
         const colors = ['#10b981', '#f59e0b', '#f43f5e'];
@@ -792,6 +1090,8 @@ const app = {
         document.getElementById('premium-table-body').innerHTML = tableHtml;
 
         this.renderBenefitTable();
+        this.calculateVitality(); // Update Vitality Calculation
+        this.calculateROI(); // Update ROI Calculation
     },
 
     renderBenefitTable() {
@@ -803,11 +1103,6 @@ const app = {
             const opt = APP_DATA.plans[type].options[idx];
             // Lookup key for details
             let lookupKey = opt.k;
-            // Fallback for HSX if mapping key doesn't match direct
-            if(type === 'HSX' && !APP_DATA.PLAN_DETAILS.HSX[lookupKey]) {
-                // Try to find closest or default
-                // For this demo, let's assume keys match. 
-            }
             return APP_DATA.PLAN_DETAILS[type] ? APP_DATA.PLAN_DETAILS[type][lookupKey] : null;
         };
 

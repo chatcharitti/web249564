@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="th" style="font-size: 100%;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIA CI ProCare - 1,000% Protection Analysis</title>
+    <!-- Google Fonts: Kanit -->
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        aiaRed: '#D31145',
+                        aiaRedDark: '#A50E36',
+                        premiumGray: '#F8F9FA',
+                        textDark: '#333333',
+                        textLight: '#666666',
+                        gold: '#C5A059'
+                    },
+                    fontFamily: {
+                        sans: ['Kanit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Kanit', sans-serif;
+            background-color: #f0f2f5;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+        }
+        .section-icon {
+            background: linear-gradient(135deg, #FFF0F3 0%, #FFE4E8 100%);
+            color: #D31145;
+        }
+        .disease-list li {
+            position: relative;
+            padding-left: 1.25rem;
+            margin-bottom: 0.25rem;
+        }
+        .disease-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #D31145;
+            font-weight: bold;
+        }
+        /* Floating Controls Transition */
+        .font-control-btn {
+            transition: all 0.2s ease;
+        }
+        .font-control-btn:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body class="text-textDark antialiased">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="bg-aiaRed text-white font-bold px-3 py-1 rounded text-xl">AIA</div>
+                <span class="text-xl font-semibold text-textDark">CI ProCare</span>
+            </div>
+            <div class="hidden md:flex gap-4 text-sm font-medium text-textLight">
+                <span>20/99 Protection</span>
+                <span>•</span>
+                <span class="text-aiaRed">Multi-Pay 1,000%</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section (Page 1 & Iceberg Concept) -->
+    <header class="bg-white pb-12 pt-8 rounded-b-[3rem] shadow-sm relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-red-50 rounded-full blur-3xl opacity-50 -mr-20 -mt-20"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+            <div class="inline-block px-4 py-1 bg-red-50 text-aiaRed rounded-full text-sm font-semibold mb-4 border border-red-100">
+                ประกันชีวิตและโรคร้ายแรงตลอดชีพ
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">
+                ความคุ้มครองที่ <span class="text-aiaRed">สมบูรณ์แบบที่สุด</span><br>
+                ดูแลคุณตั้งแต่ยอดภูเขาน้ำแข็ง...จนถึงส่วนที่ลึกที่สุด
+            </h1>
+            <p class="text-lg text-textLight max-w-2xl mx-auto mb-8">
+                ชำระเบี้ยประกันภัยคงที่ 20 ปี คุ้มครองยาวนานถึงอายุ 99 ปี (20/99) <br>
+                ปิดความเสี่ยงค่าใช้จ่ายแฝงที่คุณอาจมองไม่เห็น
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-left max-w-3xl mx-auto">
+                <div class="glass-card p-4 rounded-xl flex items-center gap-3 bg-white">
+                    <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-aiaRed">
+                        <i class="fa-solid fa-shield-heart"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-textLight">ความคุ้มครอง</p>
+                        <p class="font-bold text-aiaRed">สูงสุด 1,000%</p>
+                    </div>
+                </div>
+                <div class="glass-card p-4 rounded-xl flex items-center gap-3 bg-white">
+                    <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-aiaRed">
+                        <i class="fa-solid fa-bed-pulse"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-textLight">ครอบคลุม</p>
+                        <p class="font-bold text-aiaRed">ICU & Long Term</p>
+                    </div>
+                </div>
+                <div class="glass-card p-4 rounded-xl flex items-center gap-3 bg-white">
+                    <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-aiaRed">
+                        <i class="fa-solid fa-arrows-rotate"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-textLight">พิเศษ</p>
+                        <p class="font-bold text-aiaRed">เคลมซ้ำได้ (Relapsed)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-4xl mx-auto px-4 py-12 space-y-12">
+
+        <!-- Section: CI Benefit (Page 3) -->
+        <section class="glass-card rounded-2xl p-6 md:p-8 bg-white">
+            <div class="flex items-start justify-between mb-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-textDark mb-1">1. ความคุ้มครองโรคร้ายแรง</h2>
+                    <p class="text-textLight">ดูแลทุกระยะ ตั้งแต่เริ่มต้น จนถึงรุนแรง</p>
+                </div>
+                <div class="section-icon w-12 h-12 rounded-xl flex items-center justify-center text-xl">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Early Stage -->
+                <div class="bg-premiumGray rounded-xl p-5 border border-gray-100">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-semibold text-textDark">ระดับต้น - ปานกลาง</span>
+                        <span class="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded">เคลมได้ 5 ครั้ง</span>
+                    </div>
+                    <div class="text-3xl font-bold text-aiaRed mb-2">40%</div>
+                    <p class="text-sm text-textLight">ของจำนวนเงินเอาประกันภัย ต่อครั้ง (ต่างโรค)</p>
+                </div>
+
+                <!-- Severe Stage -->
+                <div class="bg-red-50 rounded-xl p-5 border border-red-100 relative overflow-hidden">
+                    <div class="absolute right-0 top-0 w-16 h-16 bg-aiaRed opacity-5 rounded-bl-full"></div>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-semibold text-aiaRed">ระดับรุนแรง</span>
+                        <span class="bg-white text-aiaRed border border-red-200 text-xs px-2 py-1 rounded">เคลมได้ 6 ครั้ง</span>
+                    </div>
+                    <div class="text-3xl font-bold text-aiaRed mb-2">100%</div>
+                    <p class="text-sm text-textLight">ของจำนวนเงินเอาประกันภัย ต่อครั้ง (ต่างกลุ่มโรค)</p>
+                </div>
+            </div>
+            <div class="mt-4 p-3 bg-yellow-50 rounded-lg border border-yellow-100 flex items-center gap-3">
+                <i class="fa-solid fa-circle-info text-gold"></i>
+                <p class="text-sm text-gray-700">รวมวงเงินโรคร้ายแรงสูงสุดไม่เกิน <span class="font-bold">800%</span></p>
+            </div>
+        </section>
+
+        <!-- Section: MIB Benefit (Page 4) -->
+        <section class="glass-card rounded-2xl p-6 md:p-8 bg-white">
+            <div class="flex items-start justify-between mb-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-textDark mb-1">2. ภาวะวิกฤต (MIB)</h2>
+                    <p class="text-textLight">Major Impact Benefit - คุ้มครองเมื่อเข้า ICU</p>
+                </div>
+                <div class="section-icon w-12 h-12 rounded-xl flex items-center justify-center text-xl">
+                    <i class="fa-solid fa-hospital-user"></i>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center gap-6">
+                <div class="flex-1">
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check-circle text-aiaRed mt-1"></i>
+                            <span class="text-textDark">เข้ารักษาตัวในห้องวิกฤต <strong>(ICU)</strong> ติดต่อกันอย่างน้อย <strong>5 วัน</strong></span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check-circle text-aiaRed mt-1"></i>
+                            <span class="text-textDark">สาเหตุจาก: ผ่าตัดใหญ่, ใช้เครื่องช่วยหายใจ หรือ อวัยวะสำคัญล้มเหลว</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="w-full md:w-auto bg-aiaRed text-white p-6 rounded-2xl text-center shadow-lg shadow-red-200 min-w-[200px]">
+                    <p class="text-sm opacity-90 mb-1">รับทันที</p>
+                    <div class="text-4xl font-bold">100%</div>
+                    <p class="text-xs opacity-80 mt-1">ของทุนประกัน</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: CCB Benefit (Page 5) -->
+        <section class="glass-card rounded-2xl p-6 md:p-8 bg-white border-l-4 border-l-gold">
+            <div class="flex items-start justify-between mb-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-textDark mb-1">3. การดูแลต่อเนื่อง (CCB)</h2>
+                    <p class="text-textLight">Continuing Care Benefit - สำหรับ 8 โรคเรื้อรัง (เช่น อัลไซเมอร์, พาร์กินสัน)</p>
+                </div>
+                <div class="section-icon w-12 h-12 rounded-xl flex items-center justify-center text-xl bg-yellow-50 text-gold">
+                    <i class="fa-solid fa-user-nurse"></i>
+                </div>
+            </div>
+
+            <div class="bg-premiumGray rounded-xl p-6">
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm text-gold font-bold">1</div>
+                        <div>
+                            <p class="text-xs text-textLight">เงินก้อนแรก</p>
+                            <p class="text-xl font-bold text-textDark">10%</p>
+                        </div>
+                    </div>
+                    <div class="hidden md:block text-gray-300"><i class="fa-solid fa-plus"></i></div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm text-gold font-bold">2</div>
+                        <div>
+                            <p class="text-xs text-textLight">รายเดือน (60 เดือน)</p>
+                            <p class="text-xl font-bold text-textDark">1.5% <span class="text-sm font-normal text-textLight">/ เดือน</span></p>
+                        </div>
+                    </div>
+                </div>
+                <hr class="border-gray-200 my-4">
+                <div class="flex justify-between items-center">
+                    <span class="font-medium text-textLight">รวมผลประโยชน์ส่วนนี้</span>
+                    <span class="text-2xl font-bold text-gold">100%</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Relapsed CI (Page 6) -->
+        <section class="glass-card rounded-2xl p-6 md:p-8 bg-white">
+            <div class="flex items-start justify-between mb-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-textDark mb-1">4. การกลับมาเป็นซ้ำ (Relapsed CI)</h2>
+                    <p class="text-textLight">เป็นแล้ว หายแล้ว กลับมาเป็นใหม่ ก็ยังคุ้มครอง</p>
+                </div>
+                <div class="section-icon w-12 h-12 rounded-xl flex items-center justify-center text-xl">
+                    <i class="fa-solid fa-rotate-right"></i>
+                </div>
+            </div>
+
+            <div class="bg-red-50 p-6 rounded-xl border border-red-100 text-center mb-4">
+                <p class="text-lg font-semibold text-aiaRed mb-2">รับเพิ่มอีก 100% ของทุนประกัน</p>
+                <p class="text-sm text-textLight">สำหรับ 3 โรคร้ายแรงยอดฮิต</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="text-center p-4 bg-white rounded-lg shadow-sm border border-gray-100">
+                    <i class="fa-solid fa-ribbon text-pink-500 text-2xl mb-2"></i>
+                    <p class="font-medium text-sm">โรคมะเร็ง<br>ระยะลุกลาม</p>
+                    <p class="text-xs text-gray-400 mt-1">(เว้น 2 ปี)</p>
+                </div>
+                <div class="text-center p-4 bg-white rounded-lg shadow-sm border border-gray-100">
+                    <i class="fa-solid fa-heart-crack text-red-500 text-2xl mb-2"></i>
+                    <p class="font-medium text-sm">กล้ามเนื้อหัวใจ<br>ตายเฉียบพลัน</p>
+                    <p class="text-xs text-gray-400 mt-1">(เว้น 1 ปี)</p>
+                </div>
+                <div class="text-center p-4 bg-white rounded-lg shadow-sm border border-gray-100">
+                    <i class="fa-solid fa-brain text-orange-500 text-2xl mb-2"></i>
+                    <p class="font-medium text-sm">โรคหลอดเลือด<br>สมองแตก/อุดตัน</p>
+                    <p class="text-xs text-gray-400 mt-1">(เว้น 1 ปี)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Waiver & Death (Page 7) -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Waiver -->
+            <div class="glass-card rounded-2xl p-6 bg-white">
+                <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600 mb-4">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                </div>
+                <h3 class="font-bold text-lg mb-2">ยกเว้นเบี้ยประกันภัย</h3>
+                <p class="text-sm text-textLight">
+                    ไม่ต้องจ่ายเบี้ยต่อทันที เมื่อได้รับผลประโยชน์:
+                    <ul class="list-disc list-inside mt-2 text-xs text-gray-500 space-y-1">
+                        <li>โรคร้ายแรงระดับรุนแรง</li>
+                        <li>ภาวะวิกฤต (MIB)</li>
+                        <li>การดูแลต่อเนื่อง (CCB)</li>
+                    </ul>
+                </p>
+            </div>
+            
+            <!-- Death Benefit -->
+            <div class="glass-card rounded-2xl p-6 bg-white">
+                <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 mb-4">
+                    <i class="fa-solid fa-star-of-life"></i>
+                </div>
+                <h3 class="font-bold text-lg mb-2">กรณีเสียชีวิต</h3>
+                <p class="text-sm text-textLight mb-2">
+                    รับ 100% ของจำนวนเงินเอาประกันภัย
+                </p>
+                <div class="text-xs bg-gray-100 p-2 rounded text-gray-500">
+                    *หักด้วยผลประโยชน์โรคร้ายแรง/MIB/CCB ที่บริษัทจ่ายไปแล้ว (ถ้ามี)
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Summary 1000% (Page 9) -->
+        <section class="bg-gradient-to-br from-aiaRed to-aiaRedDark rounded-3xl p-8 text-white text-center shadow-xl shadow-red-200">
+            <h2 class="text-2xl font-bold mb-6">สรุปผลประโยชน์สูงสุด 1,000%</h2>
+            
+            <div class="flex flex-col md:flex-row justify-center items-center gap-4 text-white/90">
+                <div class="bg-white/10 p-4 rounded-xl backdrop-blur-sm w-full md:w-auto">
+                    <div class="text-3xl font-bold">800%</div>
+                    <div class="text-xs">โรคร้ายแรง</div>
+                </div>
+                <div class="text-xl"><i class="fa-solid fa-plus"></i></div>
+                <div class="bg-white/10 p-4 rounded-xl backdrop-blur-sm w-full md:w-auto">
+                    <div class="text-3xl font-bold">100%</div>
+                    <div class="text-xs">วิกฤต (MIB)</div>
+                </div>
+                <div class="text-xl"><i class="fa-solid fa-plus"></i></div>
+                <div class="bg-white/10 p-4 rounded-xl backdrop-blur-sm w-full md:w-auto">
+                    <div class="text-3xl font-bold">100%</div>
+                    <div class="text-xs">ดูแลต่อเนื่อง (CCB)<br>หรือ Relapsed CI</div>
+                </div>
+            </div>
+            
+            <div class="mt-8 pt-6 border-t border-white/20">
+                <p class="text-lg">รวมเป็นความคุ้มครองสูงสุด</p>
+                <p class="text-5xl font-bold mt-2 text-white drop-shadow-md">1,000%</p>
+            </div>
+        </section>
+
+        <!-- Vitality Bonus (Page 8) -->
+        <section class="text-center py-6">
+            <div class="inline-flex items-center gap-2 bg-white px-6 py-3 rounded-full shadow-sm border border-gray-200">
+                <span class="text-aiaRed font-bold">AIA Vitality</span>
+                <span class="text-gray-400">|</span>
+                <span class="text-sm text-textDark">รับเงินคืนสูงสุด 5-9% ทุก 3 ปี (ถ้าไม่มีเคลม)</span>
+            </div>
+        </section>
+
+        <!-- Detailed Diseases List -->
+        <section class="glass-card rounded-2xl p-6 md:p-8 bg-white">
+            <div class="flex items-start justify-between mb-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-textDark mb-1">รายละเอียดโรคที่คุ้มครอง</h2>
+                    <p class="text-textLight">ครอบคลุม 6 กลุ่มโรค (รวม 62 โรค/การรักษา)</p>
+                </div>
+                <div class="section-icon w-12 h-12 rounded-xl flex items-center justify-center text-xl">
+                    <i class="fa-solid fa-list-check"></i>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Group 1 -->
+                <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                    <h4 class="font-bold text-aiaRed mb-3 pb-2 border-b border-gray-200">กลุ่ม 1: โรคมะเร็งและเนื้องอก</h4>
+                    <div class="mb-3">
+                        <p class="text-xs font-semibold text-textLight mb-1 bg-gray-200 inline-block px-2 py-0.5 rounded">ระดับต้น - ปานกลาง</p>
+                        <ul class="disease-list text-xs text-textDark">
+                            <li>โรคมะเร็งระยะไม่ลุกลาม</li>
+                            <li>การผ่าตัดเนื้องอกต่อมใต้สมองออก</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="text-xs font-semibold text-white mb-1 bg-aiaRed inline-block px-2 py-0.5 rounded">ระดับรุนแรง</p>
+                        <ul class="disease-list text-xs text-textDark">
+                            <li>โรคมะเร็งระยะลุกลาม</li>
+                            <li>เนื้องอกในสมองชนิดที่ไม่ใช่มะเร็ง</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Group 2 -->
+                <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                    <h4 class="font-bold text-aiaRed mb-3 pb-2 border-b border-gray-200">กลุ่ม 2: หัวใจ การหายใจ และโลหิต</h4>
+                    <div class="mb-3">
+                        <p class="text-xs font-semibold text-textLight mb-1 bg-gray-200 inline-block px-2 py-0.5 rounded">ระดับต้น - ปานกลาง</p>
+                        <ul class="disease-list text-xs text-textDark">
+                            <li>สวนหลอดเลือดหัวใจรักษตีบ</li>
+                            <li>ผ่าตัดลอกเยื่อหุ้มหัวใจ</li>
+                            <li>รักษาโรคลิ้นหัวใจด้วยการสวน</li>
+                            <li>รักษาหลอดเลือดแดงใหญ่ (สวน)</li>
+                            <li>ใส่เครื่องกรองลิ่มเลือดในดำใหญ่</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="text-xs font-semibold text-white mb-1 bg-aiaRed inline-block px-2 py-0.5 rounded">ระดับรุนแรง</p>
+                        <ul class="disease-list text-xs text-textDark">
+                            <li>กล้ามเนื้อหัวใจตายเฉียบพลัน</li>
+                            <li>ผ่าตัดเส้นเลือดเลี้ยงกล้ามเนื้อหัวใจ</li>
+                            <li>โรคกล้ามเนื้อหัวใจ</li>
+                            <li>ผ่าตัดลิ้นหัวใจ (เปิดหัวใจ)</li>
+                            <li>ผ่าตัดเส้นเลือดแดงใหญ่เอออร์ต้า</li>
+                            <li>แรงดันในหลอดเลือดปอดสูงปฐมภูมิ</li>
+                            <li>โรคปอดอุดกั้นเรื้อรังรุนแรง/ระยะสุดท้าย</li>
+                            <li>โลหิตจางจากไขกระดูกไม่สร้างเม็ดโลหิต</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Group 3 -->
+                <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                    <h4 class="font-bold text-aiaRed mb-3 pb-2 border-b border-gray-200">กลุ่ม 3: หลอดเลือดสมอง/ระบบประสาท</h4>
+                    <div class="mb-3">
+                        <p class="text-xs font-semibold text-textLight mb-1 bg-gray-200 inline-block px-2 py-0.5 rounded">ระดับต้น - ปานกลาง</p>
+                        <ul class="disease-list text-xs text-textDark">
+                            <li>ผ่าตัดลอกหลอดเลือดแดงคาโรติด</li>
+                            <li>รักษาหลอดเลือดสมอง (ใส่สายสวนคอ)</li>
+                            <li>หลอดเลือดสมองโป่งพอง (ขดลวด)</li>
+                            <li>ผ่าตัดฝังท่อระบายในโพรงสมอง</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="text-xs font-semibold text-white mb-1 bg-aiaRed inline-block px-2 py-0.5 rounded">ระดับรุนแรง</p>
+                        <ul class="disease-list text-xs text-textDark">
+                            <li>โรคหลอดเลือดสมองแตกหรืออุดตัน</li>
+                            <li>หลอดเลือดสมองโป่งพอง (ผ่าตัด)</li>
+                            <li>ภาวะโคม่า</li>
+                            <li>สมองเสื่อมชนิดอัลไซเมอร์</li>
+                            <li>เยื่อหุ้มสมอง/ไขสันหลังอักเสบ (แบคทีเรีย)</li>
+                            <li>สมองอักเสบจากเชื้อไวรัส</li>
+                            <li>โรคพาร์กินสัน</li>
+                            <li>มัลติเพิล สเคอโรสิส</li>
+                            <li>โรคเซลล์ประสาทควบคุมการเคลื่อนไหว</li>
+                            <li>ภาวะอะแพลลิก</li>
+                            <li>อัมพาตของกล้ามเนื้อแขนหรือขา</li>
+                            <li>โรคโปลิโอ</li>
+                            <li>โรคกล้ามเนื้อเสื่อม</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Group 4 -->
+                <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                    <h4 class="font-bold text-aiaRed mb-3 pb-2 border-b border-gray-200">กลุ่ม 4: อวัยวะและระบบสำคัญ</h4>
+                    <div class="mb-3">
+                        <p class="text-xs font-semibold text-textLight mb-1 bg-gray-200 inline-block px-2 py-0.5 rounded">ระดับต้น - ปานกลาง</p>
+                        <ul class="disease-list text-xs text-textDark">
+                            <li>ผ่าตัดตับออกหนึ่งกลีบ</li>
+                            <li>ผ่าตัดไตออกหนึ่งข้าง</li>
+                            <li>ผ่าตัดปอดออกหนึ่งข้าง</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="text-xs font-semibold text-white mb-1 bg-aiaRed inline-block px-2 py-0.5 rounded">ระดับรุนแรง</p>
+                        <ul class="disease-list text-xs text-textDark">
+                            <li>ตับวาย</li>
+                            <li>ไตวายเรื้อรัง</li>
+                            <li>โรคลำไส้อักเสบเป็นแผลรุนแรง</li>
+                            <li>ผ่าตัดเปลี่ยนอวัยวะ/ปลูกถ่ายไขกระดูก</li>
+                            <li>ไวรัสตับอักเสบขั้นรุนแรง</li>
+                            <li>ตับอ่อนอักเสบกลับเป็นซ้ำและเรื้อรัง</li>
+                            <li>ไตอักเสบลูปูส</li>
+                            <li>ข้ออักเสบรูมาตอยด์ชนิดรุนแรง</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Group 5 -->
+                <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                    <h4 class="font-bold text-aiaRed mb-3 pb-2 border-b border-gray-200">กลุ่ม 5: ติดเชื้อ บาดเจ็บ ทุพพลภาพ</h4>
+                    <div class="mb-3">
+                        <p class="text-xs font-semibold text-textLight mb-1 bg-gray-200 inline-block px-2 py-0.5 rounded">ระดับต้น - ปานกลาง</p>
+                        <ul class="disease-list text-xs text-textDark">
+                            <li>แผลไหม้ชนิดรุนแรงน้อย</li>
+                            <li>ผ่าตัดเลือดคั่งใต้เยื่อหุ้มสมอง (อุบัติเหตุ)</li>
+                            <li>สูญเสียแขน/ขา/ตา หนึ่งข้าง</li>
+                            <li>เบาหวานขึ้นจอประสาทตา</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="text-xs font-semibold text-white mb-1 bg-aiaRed inline-block px-2 py-0.5 rounded">ระดับรุนแรง</p>
+                        <ul class="disease-list text-xs text-textDark">
+                            <li>แผลไหม้ฉกรรจ์</li>
+                            <li>การบาดเจ็บที่ศีรษะอย่างรุนแรง</li>
+                            <li>การสูญเสียการดำรงชีพอย่างอิสระ</li>
+                            <li>การทุพพลภาพถาวรสิ้นเชิง</li>
+                            <li>ตาบอด</li>
+                            <li>การฉีกขาดของรากประสาทต้นแขน</li>
+                            <li>การสูญเสียความสามารถในการพูด</li>
+                            <li>โรคเนื้อเยื่ออักเสบติดเชื้อ/ตาย</li>
+                            <li>โรคเท้าช้าง</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Group 6 -->
+                <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                    <h4 class="font-bold text-aiaRed mb-3 pb-2 border-b border-gray-200">กลุ่ม 6: โรคร้ายแรงในผู้เยาว์</h4>
+                    <div class="mb-3">
+                        <p class="text-xs text-textLight italic">*คุ้มครองช่วงอายุ 15 วัน - 16 ปี</p>
+                    </div>
+                    <div>
+                        <p class="text-xs font-semibold text-white mb-1 bg-aiaRed inline-block px-2 py-0.5 rounded">ระดับรุนแรง</p>
+                        <ul class="disease-list text-xs text-textDark">
+                            <li>โรคไข้รูมาติกที่ทำให้หัวใจผิดปกติ</li>
+                            <li>โรคคาวาซากิที่แทรกซ้อนหัวใจ</li>
+                            <li>โรคเบาหวานชนิดที่หนึ่ง</li>
+                            <li>โรคน้ำไขสันหลังคั่งในโพรงสมอง</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Compliance / Important Notes -->
+        <section class="mt-8 p-6 bg-gray-100 rounded-xl text-xs text-gray-500 space-y-2">
+            <h4 class="font-bold text-gray-700 mb-2"><i class="fa-solid fa-circle-exclamation mr-1"></i> เงื่อนไขสำคัญที่ควรทราบ</h4>
+            <ul class="list-disc list-inside space-y-1">
+                <li><strong>ระยะเวลารอคอย (Waiting Period):</strong> 60 วัน สำหรับโรคร้ายแรงทั่วไป</li>
+                <li><strong>ระยะเวลาห้ามเคลม (No Claim Period):</strong> หากเคลมโรครุนแรงไปแล้ว ต้องเว้นช่วง 1 ปี ถึงจะเคลมโรครุนแรงกลุ่มอื่นได้</li>
+                <li><strong>การหักลบทุนประกัน:</strong> กรณีเสียชีวิต เงินที่จะได้รับจะถูกหักด้วยยอดเคลมโรคร้ายแรง/MIB/CCB ที่เคยจ่ายไปแล้ว</li>
+                <li>ผู้ซื้อควรทำความเข้าใจในรายละเอียด ความคุ้มครองและเงื่อนไขก่อนตัดสินใจทำประกันภัยทุกครั้ง</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer class="bg-white py-8 mt-12 border-t border-gray-100">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <p class="text-aiaRed font-bold text-lg mb-1"><a href="Gen-calculate-premium.html">AIA CI ProCare .. คลิกเพื่อคำนวณเบี้ย</a></p>
+            <p class="text-gray-400 text-sm">ดูแลครบ... จบทุกความกังวล</p>
+        </div>
+    </footer>
+
+    <!-- Font Size Controls -->
+    <div class="fixed bottom-8 right-8 flex flex-col gap-3 z-50 print:hidden">
+        <button onclick="changeFontSize(1)" class="w-12 h-12 bg-white rounded-full shadow-lg border border-gray-200 text-aiaRed hover:bg-red-50 flex items-center justify-center font-control-btn transition-transform hover:scale-110" title="เพิ่มขนาดตัวอักษร">
+            <i class="fa-solid fa-plus text-xl"></i>
+        </button>
+        <button onclick="changeFontSize(-1)" class="w-12 h-12 bg-white rounded-full shadow-lg border border-gray-200 text-textLight hover:bg-gray-50 flex items-center justify-center font-control-btn transition-transform hover:scale-110" title="ลดขนาดตัวอักษร">
+            <i class="fa-solid fa-minus text-xl"></i>
+        </button>
+    </div>
+
+    <script>
+        let currentSize = 100;
+        
+        function changeFontSize(direction) {
+            // Adjust size by 5% each click
+            currentSize += (direction * 5);
+            
+            // Limit range between 80% and 150%
+            if (currentSize < 80) currentSize = 80;
+            if (currentSize > 150) currentSize = 150;
+            
+            // Apply to root element
+            document.documentElement.style.fontSize = currentSize + '%';
+        }
+    </script>
+</body>
+</html>

@@ -1,67 +1,226 @@
 <!doctype html>
-<html>
+<html lang="th">
 <head>
-<meta charset="utf-8">
-<title>eCommerce template By Adobe Dreamweaver</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="../eCommerceAssets/styles/eCommerceStyle.css" rel="stylesheet" type="text/css">
-<!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.-->
-<script>var __adobewebfontsappname__="dreamweaver"</script><script src="http://use.edgefonts.net/montserrat:n4:default;source-sans-pro:n2:default.js" type="text/javascript"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Financial & Insurance Knowledge Hub</title>
+    
+    <!-- Google Fonts: Prompt for Thai Modern Look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configuration for Tailwind to use Prompt font -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Prompt', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9', // Sky blue for freshness
+                            600: '#0284c7',
+                            800: '#075985', // Deep blue for trust
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar for premium feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
 </head>
 
-<body>
-<div id="mainWrapper">
-  <header> 
-    <!-- This is the header content. It contains Logo and links -->
-    
-    <div id="headerLinks"></div>
-  </header>
-  <section id="offer"> 
-    <!-- The offer section displays a banner text for promotions -->
-    <h2>ข้อมูลที่น่าสนใจเกี่ยวกับ การเงิน และ การประกัน&nbsp;</h2>
-    <p>คลิกที่เรื่องที่ต้องการเพื่อดูข้อมูลเพิ่มเติม&nbsp;&nbsp;</p>
-  </section>
-<div id="content">
-    <section class="sidebar"> 
-      <!-- This adds a sidebar with 1 searchbox,2 menusets, each with 4 links -->
-      
-      <div id="menubar">
-        <nav class="menu">
-          <h2><br>
-          </h2>
-          <h2>
-            <!-- Title for menuset 1 -->
-            รายการ</h2>
-<hr>
-          <ul>
-            <!-- List of links under menuset 1 -->
+<body class="bg-slate-50 text-slate-700 antialiased min-h-screen flex flex-col font-sans">
+
+    <!-- Header / Navbar -->
+    <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <!-- Simple Logo Icon -->
+                    <div class="w-8 h-8 bg-gradient-to-br from-brand-500 to-brand-800 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-md">
+                        F
+                    </div>
+                    <span class="font-bold text-xl tracking-tight text-slate-800">Finance<span class="text-brand-600">Hub</span></span>
+                </div>
+                <!-- Optional: Right side menu (can be added later) -->
+                <div class="hidden md:block">
+                    <span class="text-xs font-medium text-slate-400 uppercase tracking-wider">Knowledge Base</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative overflow-hidden bg-white">
+        <div class="absolute inset-0">
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-50 to-slate-50 opacity-90"></div>
+            <!-- Decorative abstract shape -->
+            <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-brand-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
+            <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+        </div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
+                ข้อมูลที่น่าสนใจเกี่ยวกับ <br class="hidden md:inline" />
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-brand-400">
+                    การเงิน และ การประกัน
+                </span>
+            </h1>
+            <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-500 font-light">
+                รวบรวมข้อมูลเปรียบเทียบแบบประกัน แผนเกษียณอายุ และความรู้ทางการเงิน <br class="hidden sm:inline">เพื่อการวางแผนอนาคตที่มั่นคงของคุณ
+            </p>
             
-            <li><a href="compare hsx2500 vs hsx3500.html" title="เปรียบเทียบ hsx2500 and hsx3500" target="new">เปรียบเทียบ hsx2500 and hsx3500</a></li>
-            <li><a href="AIA_MultiPay_CI.html" title="AIA MultiPay CI" target="new">AIA MultiPay CI</a></li>
-            <li><a href="Retire_with_Elite_Income_prestige.html" title="Retire_with_Elite_Income_prestige" target="new">Retire_with_Elite_Income_prestige</a></li>
-            <li class="notimp">
-              <!-- notimp class is applied to remove this link from the tablet and phone views -->
-              <a href="Elite_Income_Slide.html" title="Elite_Income_Slide">Elite_Income_Slide style</a></li>
-            <li class="notimp"><a href="Gemini_Compare_health_v.2.html" title="Compare_health_แบบ2" target="new">Compare_health_v.2</a>&nbsp;</li>
-            <a href="AIA_CI_Procare.html" title="AIA CI Procare" target="new">CI Procare</a>
-<li class="notimp"><a href="Compare_MTL D-Health Plus-v.1.html">compare MTL&nbsp;</a></li>
-            <li class="notimp"><a href="Idea-for-Start-Retirement-Plan.html">ทำไมต้องเริ่มวงแผนการเงิน&nbsp;</a></li>
-<li class="notimp">&nbsp;</li>
-<a href="Plan_with_Elite_Income.html" title="Plan with Elite Income Prestige" target="new">Plan with Elite Income Prestige
-<br>
-</a>
-          </ul>
-        </nav>
-</div>
-    </section>
-</div>
-  <footer> 
-    <!-- This is the footer with default 3 divs -->
-    <div>
-      <p>จัดทำขึ้นเพื่อเป็นการสรุปข้อมูลที่เป็นประโยชน์ในการนำเสนอให้ผู้ที่สนใจ&nbsp;</p>
-    </div>
-    <div> </div>
-</footer>
-</div>
+            <div class="mt-8 flex justify-center gap-4">
+                <a href="#content" class="px-6 py-3 rounded-full bg-slate-900 text-white font-medium hover:bg-slate-800 transition-colors shadow-lg shadow-slate-200">
+                    ดูรายการทั้งหมด
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Content Section -->
+    <main id="content" class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
+        
+        <div class="flex items-center gap-4 mb-8">
+            <div class="h-8 w-1 bg-brand-500 rounded-full"></div>
+            <h2 class="text-2xl font-bold text-slate-800">รายการแนะนำ (Featured Resources)</h2>
+        </div>
+
+        <!-- Grid Layout -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- Card 1: HSX Comparison -->
+            <a href="compare hsx2500 vs hsx3500.html" target="_blank" class="group relative bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-4 text-brand-600 group-hover:bg-brand-600 group-hover:text-white transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" /></svg>
+                </div>
+                <h3 class="text-lg font-semibold text-slate-800 mb-2 group-hover:text-brand-600">เปรียบเทียบ HSX2500 vs HSX3500</h3>
+                <p class="text-sm text-slate-500 line-clamp-2">ข้อมูลเปรียบเทียบรายละเอียดและความคุ้มครองระหว่างสองแผนประกันสุขภาพยอดนิยม</p>
+                <div class="mt-4 flex items-center text-sm font-medium text-brand-500 opacity-0 group-hover:opacity-100 transition-opacity">
+                    อ่านเพิ่มเติม <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                </div>
+            </a>
+
+            <!-- Card 2: AIA MultiPay CI -->
+            <a href="AIA_MultiPay_CI.html" target="_blank" class="group relative bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <div class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center mb-4 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                </div>
+                <h3 class="text-lg font-semibold text-slate-800 mb-2 group-hover:text-emerald-600">AIA MultiPay CI</h3>
+                <p class="text-sm text-slate-500 line-clamp-2">คุ้มครองโรคร้ายแรงแบบเจอ จ่าย จบ และเคลมได้หลายครั้ง ข้อมูลเจาะลึกที่คุณต้องรู้</p>
+            </a>
+
+            <!-- Card 3: Retire with Elite Income -->
+            <a href="Retire_with_Elite_Income_prestige.html" target="_blank" class="group relative bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <div class="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center mb-4 text-amber-600 group-hover:bg-amber-600 group-hover:text-white transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                </div>
+                <h3 class="text-lg font-semibold text-slate-800 mb-2 group-hover:text-amber-600">Retire with Elite Income Prestige</h3>
+                <p class="text-sm text-slate-500 line-clamp-2">วางแผนเกษียณอย่างมีระดับ สร้างกระแสเงินสดที่มั่นคงหลังเกษียณ</p>
+            </a>
+
+            <!-- Card 4: CI Procare -->
+            <a href="AIA_CI_Procare.html" target="_blank" class="group relative bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                 <div class="w-12 h-12 bg-rose-50 rounded-xl flex items-center justify-center mb-4 text-rose-600 group-hover:bg-rose-600 group-hover:text-white transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+                </div>
+                <h3 class="text-lg font-semibold text-slate-800 mb-2 group-hover:text-rose-600">AIA CI Procare</h3>
+                <p class="text-sm text-slate-500 line-clamp-2">ดูแลระดับโปร ป้องกันความเสี่ยงจากโรคร้ายแรง ครอบคลุมทุกระยะ</p>
+            </a>
+
+            <!-- Card 5: Compare Health V.2 -->
+            <a href="Gemini_Compare_health_v.2.html" target="_blank" class="group relative bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <div class="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center mb-4 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                </div>
+                <h3 class="text-lg font-semibold text-slate-800 mb-2 group-hover:text-indigo-600">Compare Health (V.2)</h3>
+                <p class="text-sm text-slate-500 line-clamp-2">ตารางเปรียบเทียบประกันสุขภาพฉบับปรับปรุงใหม่</p>
+            </a>
+
+            <!-- Card 6: Plan with Elite Income -->
+            <a href="Plan_with_Elite_Income.html" target="_blank" class="group relative bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                 <div class="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center mb-4 text-purple-600 group-hover:bg-purple-600 group-hover:text-white transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>
+                </div>
+                <h3 class="text-lg font-semibold text-slate-800 mb-2 group-hover:text-purple-600">Plan with Elite Income</h3>
+                <p class="text-sm text-slate-500 line-clamp-2">เจาะลึกแผนการเงิน Elite Income เพื่อผลตอบแทนสูงสุด</p>
+            </a>
+
+        </div>
+
+        <!-- Secondary List / Other Links -->
+        <div class="mt-12 pt-10 border-t border-slate-200">
+            <h4 class="text-lg font-semibold text-slate-600 mb-6">ข้อมูลอื่นๆ (Additional Resources)</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+                <a href="Compare_MTL D-Health Plus-v.1.html" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white hover:shadow-md transition-all text-slate-600 hover:text-brand-600">
+                    <svg class="w-5 h-5 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                    <span>Compare MTL D-Health Plus</span>
+                </a>
+
+                <a href="Idea-for-Start-Retirement-Plan.html" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white hover:shadow-md transition-all text-slate-600 hover:text-brand-600">
+                    <svg class="w-5 h-5 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                    <span>ทำไมต้องเริ่มวางแผนการเงิน</span>
+                </a>
+
+                 <a href="Elite_Income_Slide.html" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white hover:shadow-md transition-all text-slate-600 hover:text-brand-600">
+                    <svg class="w-5 h-5 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    <span>Elite Income Slide Style</span>
+                </a>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-slate-500 text-sm">
+                    &copy; 2024 Financial Hub. จัดทำขึ้นเพื่อเป็นการสรุปข้อมูลที่เป็นประโยชน์ในการนำเสนอให้ผู้ที่สนใจ
+                </p>
+                <div class="flex gap-4">
+                    <!-- Social or contact placeholders if needed -->
+                    <span class="w-2 h-2 rounded-full bg-slate-300"></span>
+                    <span class="w-2 h-2 rounded-full bg-slate-300"></span>
+                    <span class="w-2 h-2 rounded-full bg-slate-300"></span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>

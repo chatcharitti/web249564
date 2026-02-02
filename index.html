@@ -264,6 +264,37 @@
             </div>
         </div>
     </footer>
+    <!-- Font Size Controls -->
+    <div class="fixed bottom-8 right-8 flex flex-col gap-3 z-50 print:hidden">
+        <button onclick="changeFontSize(1)" class="w-12 h-12 bg-white rounded-full shadow-lg border border-gray-200 text-brand-600 hover:bg-blue-50 flex items-center justify-center font-control-btn transition-transform hover:scale-110" title="เพิ่มขนาดตัวอักษร">
+            <!-- Replaced FontAwesome with SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+        </button>
+        <button onclick="changeFontSize(-1)" class="w-12 h-12 bg-white rounded-full shadow-lg border border-gray-200 text-slate-500 hover:bg-gray-50 flex items-center justify-center font-control-btn transition-transform hover:scale-110" title="ลดขนาดตัวอักษร">
+            <!-- Replaced FontAwesome with SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        let currentSize = 100;
+        
+        function changeFontSize(direction) {
+            // Adjust size by 5% each click
+            currentSize += (direction * 5);
+            
+            // Limit range between 80% and 150%
+            if (currentSize < 80) currentSize = 80;
+            if (currentSize > 150) currentSize = 150;
+            
+            // Apply to root element
+            document.documentElement.style.fontSize = currentSize + '%';
+        }
+    </script>
 
 </body>
 </html>

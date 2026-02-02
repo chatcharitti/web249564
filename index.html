@@ -58,11 +58,6 @@
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
-        
-        /* Smooth transition for font size changes */
-        html {
-            transition: font-size 0.2s ease-in-out;
-        }
     </style>
 </head>
 
@@ -77,20 +72,11 @@
                     <div class="w-8 h-8 bg-gradient-to-br from-brand-500 to-brand-800 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-md">
                         F
                     </div>
-                    <span class="font-bold text-xl tracking-tight text-slate-800">Finance<span class="text-brand-600">Hub</span></span>
+                    <span class="font-bold text-xl tracking-tight text-slate-800">Finance<span class="text-brand-600"> Hub</span> <span class="text-rose-600"> : Partner With Your Wealth </span></span>
                 </div>
-                
-                <!-- Font Size Controls (New Feature) -->
-                <div class="flex items-center gap-2 bg-slate-100 rounded-full px-3 py-1 border border-slate-200">
-                    <button onclick="changeFontSize('small')" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-white text-slate-500 hover:text-brand-600 transition-all text-xs font-bold" title="ลดขนาดอักษร">
-                        A-
-                    </button>
-                    <button onclick="changeFontSize('normal')" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-white text-slate-600 hover:text-brand-600 transition-all text-sm font-bold" title="ขนาดปกติ">
-                        A
-                    </button>
-                    <button onclick="changeFontSize('large')" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-white text-slate-700 hover:text-brand-600 transition-all text-lg font-bold" title="เพิ่มขนาดอักษร">
-                        A+
-                    </button>
+                <!-- Optional: Right side menu (can be added later) -->
+                <div class="hidden md:block">
+                    <span class="text-xs font-medium text-slate-400 uppercase tracking-wider">Knowledge Base</span>
                 </div>
             </div>
         </div>
@@ -106,9 +92,9 @@
         </div>
 
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 text-center">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4 leading-tight">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
                 ข้อมูลที่น่าสนใจเกี่ยวกับ <br class="hidden md:inline" />
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-brand-400">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-rose-300">
                     การเงิน และ การประกัน
                 </span>
             </h1>
@@ -192,6 +178,18 @@
                 <p class="text-sm text-slate-500 line-clamp-2">เจาะลึกแผนการเงิน Elite Income เพื่อผลตอบแทนสูงสุด</p>
             </a>
 
+			<a href="#" class="group relative bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-dashed border-slate-300">
+                <div class="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center mb-4 text-slate-400 group-hover:bg-brand-600 group-hover:text-white transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg>
+                </div>
+                <h3 class="text-lg font-semibold text-slate-800 mb-2 group-hover:text-brand-600">ใส่ชื่อหัวข้อใหม่ที่นี่ (New Topic)</h3>
+                <p class="text-sm text-slate-500 line-clamp-2">ใส่คำอธิบายสั้นๆ เกี่ยวกับเนื้อหา...</p>
+                <div class="mt-4 flex items-center text-sm font-medium text-brand-500 opacity-0 group-hover:opacity-100 transition-opacity">
+                    อ่านเพิ่มเติม <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                </div>
+            </a>
+
+			
             <!-- ========================================== -->
             <!--   FUTURE TOPIC TEMPLATE (COPY & PASTE)     -->
             <!--   วิธีใช้: ลบ <!-- และ --> เพื่อเปิดใช้งาน      -->
@@ -231,6 +229,11 @@
                     <span>Elite Income Slide Style</span>
                 </a>
 
+                <a href="Inheritance_Tax_Death_Duty_2558.html" class="flex items-center gap-3 p-3 rounded-lg hover:bg-white hover:shadow-md transition-all text-slate-600 hover:text-brand-600 border border-dashed border-slate-200">
+                    <svg class="w-5 h-5 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    <span> สรุป พรบ. ภาษีมรดก 2558</span>
+                </a>
+				
                 <!-- ========================================== -->
                 <!--   FUTURE LINK TEMPLATE (COPY & PASTE)      -->
                 <!-- ========================================== -->
@@ -251,8 +254,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div class="flex flex-col md:flex-row justify-between items-center gap-4">
                 <p class="text-slate-500 text-sm">
-                    &copy; 2024 Financial Hub. จัดทำขึ้นเพื่อเป็นการสรุปข้อมูลที่เป็นประโยชน์ในการนำเสนอให้ผู้ที่สนใจ
-                </p>
+                &copy; 2026 Financial Hub. จัดทำขึ้นเพื่อเป็นการสรุปข้อมูลที่เป็นประโยชน์ในการนำเสนอให้ผู้ที่สนใจ</p>
                 <div class="flex gap-4">
                     <!-- Social or contact placeholders if needed -->
                     <span class="w-2 h-2 rounded-full bg-slate-300"></span>
@@ -263,21 +265,5 @@
         </div>
     </footer>
 
-    <!-- Script for Font Resizing -->
-    <script>
-        function changeFontSize(size) {
-            const html = document.documentElement;
-            // Tailwind default base size is roughly 16px (100%)
-            if (size === 'small') {
-                html.style.fontSize = '90%'; // approx 14.4px base
-            } else if (size === 'normal') {
-                html.style.fontSize = '100%'; // 16px base
-            } else if (size === 'large') {
-                html.style.fontSize = '115%'; // approx 18.4px base
-            }
-        }
-    </script>
 </body>
 </html>
-
-

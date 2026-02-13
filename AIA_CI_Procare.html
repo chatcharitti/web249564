@@ -96,6 +96,7 @@
                 break-inside: avoid;
                 padding-top: 1rem;
                 padding-bottom: 1rem;
+                display: block !important;
             }
             .print-avoid-break {
                 page-break-inside: avoid;
@@ -409,12 +410,75 @@
             </div>
         </section>
 
-        <!-- Vitality Bonus (Page 8) -->
-        <section class="text-center py-6 print-avoid-break">
-            <div class="inline-flex items-center gap-2 bg-white px-6 py-3 rounded-full shadow-sm border border-gray-200">
-                <span class="text-aiaRed font-bold">AIA Vitality</span>
-                <span class="text-gray-400">|</span>
-                <span class="text-sm text-textDark">รับเงินคืนสูงสุด 5-9% ทุก 3 ปี (ถ้าไม่มีเคลม)</span>
+        <!-- Updated Vitality Bonus (Page 8) -->
+        <section class="glass-card rounded-2xl p-6 md:p-8 bg-white print-section">
+            <div class="flex items-start justify-between mb-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-textDark mb-1">AIA Vitality</h2>
+                    <p class="text-textLight">โครงการสุขภาพที่ให้คุณมากกว่าความคุ้มครอง</p>
+                </div>
+                <div class="section-icon w-12 h-12 rounded-xl flex items-center justify-center text-xl bg-red-50 text-aiaRed">
+                    <i class="fa-solid fa-person-running"></i>
+                </div>
+            </div>
+
+            <!-- Vitality Status & Bonus Table for CI ProCare -->
+            <div class="mb-6">
+                <h3 class="font-bold text-lg mb-3 text-aiaRed">สิทธิพิเศษสำหรับ AIA CI ProCare: "Healthy Bonus"</h3>
+                <p class="text-sm text-textLight mb-4">รับเงินคืนโบนัสสุขภาพทุก 3 ปี ตามสถานะเอไอเอ ไวทัลลิตี้ ของปีนั้นๆ (สูงสุด 9%)</p>
+                
+                <div class="grid grid-cols-4 gap-2 text-center">
+                    <!-- Bronze -->
+                    <div class="p-3 rounded-lg bg-orange-50 border border-orange-100">
+                        <div class="text-xs font-semibold text-orange-800">Bronze</div>
+                        <div class="text-xl font-bold text-orange-600">0%</div>
+                    </div>
+                    <!-- Silver -->
+                    <div class="p-3 rounded-lg bg-gray-50 border border-gray-200">
+                        <div class="text-xs font-semibold text-gray-500">Silver</div>
+                        <div class="text-xl font-bold text-gray-400">1%</div>
+                    </div>
+                    <!-- Gold -->
+                    <div class="p-3 rounded-lg bg-yellow-50 border border-yellow-100">
+                        <div class="text-xs font-semibold text-yellow-600">Gold</div>
+                        <div class="text-xl font-bold text-yellow-500">4%</div>
+                    </div>
+                    <!-- Platinum -->
+                    <div class="p-3 rounded-lg bg-blue-50 border border-blue-100 relative overflow-hidden shadow-inner">
+                        <div class="absolute top-0 right-0 w-4 h-4 bg-aiaRed transform rotate-45 translate-x-2 -translate-y-2"></div>
+                        <div class="text-xs font-semibold text-blue-800">Platinum</div>
+                        <div class="text-2xl font-bold text-aiaRed">9%</div>
+                    </div>
+                </div>
+                <div class="mt-2 text-[10px] text-gray-400 text-right">* คำนวณจากเบี้ยประกันภัยมาตรฐาน</div>
+            </div>
+
+            <!-- How to Earn Points -->
+            <div class="border-t border-gray-100 pt-4">
+                <h4 class="font-bold text-gray-700 mb-3 text-sm">วิธีสะสมคะแนนเพื่อเลื่อนสถานะ</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="flex gap-3 items-start p-2 rounded-lg hover:bg-gray-50 transition-colors">
+                        <div class="w-8 h-8 rounded-full bg-red-100 flex-shrink-0 flex items-center justify-center text-aiaRed text-xs"><i class="fa-solid fa-clipboard-check"></i></div>
+                        <div>
+                            <p class="text-xs font-bold text-textDark">1. รู้จักสุขภาพ</p>
+                            <p class="text-[10px] text-textLight">ทำแบบประเมินออนไลน์ (อาหาร, ความเครียด), ตรวจสุขภาพประจำปี (สูงสุด 6,000 คะแนน)</p>
+                        </div>
+                    </div>
+                     <div class="flex gap-3 items-start p-2 rounded-lg hover:bg-gray-50 transition-colors">
+                        <div class="w-8 h-8 rounded-full bg-red-100 flex-shrink-0 flex items-center justify-center text-aiaRed text-xs"><i class="fa-solid fa-person-walking"></i></div>
+                        <div>
+                            <p class="text-xs font-bold text-textDark">2. ดูแลสุขภาพ</p>
+                            <p class="text-[10px] text-textLight">ออกกำลังกาย (สูงสุด 15,000 คะแนน), ฉีดวัคซีน, นอนหลับให้เพียงพอ</p>
+                        </div>
+                    </div>
+                     <div class="flex gap-3 items-start p-2 rounded-lg hover:bg-gray-50 transition-colors">
+                        <div class="w-8 h-8 rounded-full bg-red-100 flex-shrink-0 flex items-center justify-center text-aiaRed text-xs"><i class="fa-solid fa-gift"></i></div>
+                        <div>
+                            <p class="text-xs font-bold text-textDark">3. รับรางวัล</p>
+                            <p class="text-[10px] text-textLight">ส่วนลดเบี้ยประกัน, ส่วนลดพาร์ทเนอร์ (ตั๋วหนัง, อาหาร, ท่องเที่ยว)</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTL - D Health Plus & Care Plus Analysis</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mtl: {
+                            main: '#E6007E',   /* Official MTL Pink */
+                            light: '#FF4DA6',
+                            pale: '#FFF0F5',
+                            dark: '#B3005E',
+                            text: '#374151'
+                        }
+                    },
+                    fontFamily: {
+                        head: ['Kanit', 'sans-serif'],
+                        body: ['Sarabun', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Sarabun', sans-serif; background-color: #FAFAFA; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Kanit', sans-serif; }
+        .gradient-text {
+            background: linear-gradient(to right, #E6007E, #FF4DA6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .premium-shadow {
+            box-shadow: 0 20px 40px -10px rgba(230, 0, 126, 0.15);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body class="text-gray-700 antialiased selection:bg-mtl-light selection:text-white">
+
+    <!-- Header / Navbar -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-pink-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-mtl-main flex items-center justify-center text-white font-bold font-head text-lg shadow-lg">
+                        mtl
+                    </div>
+                    <div>
+                        <h1 class="text-mtl-main font-bold font-head text-xl leading-none">Muang Thai Life</h1>
+                        <p class="text-gray-400 text-xs font-body">Healthy Now Analysis Report</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-8 font-head font-medium text-gray-500">
+                    <a href="#reality" class="hover:text-mtl-main transition">ค่ารักษาจริง</a>
+                    <a href="#dhealth" class="hover:text-mtl-main transition">D Health Plus</a>
+                    <a href="#careplus" class="hover:text-mtl-main transition">Care Plus (Cancer)</a>
+                </div>
+                <a href="#" class="px-6 py-2 rounded-full bg-gradient-to-r from-mtl-main to-mtl-light text-white font-head font-medium shadow-lg hover:shadow-xl transition transform hover:-translate-y-0.5">
+                    ติดต่อตัวแทน
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-gradient-to-b from-pink-50 to-white overflow-hidden">
+        <!-- Decoration blobs -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
+        <div class="absolute top-0 left-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <span class="inline-block py-1 px-3 rounded-full bg-pink-100 text-mtl-main text-sm font-bold font-head mb-6 tracking-wide">
+                HEALTHY NOW REPORT
+            </span>
+            <h1 class="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight font-head">
+                สุขภาพเรื่องใหญ่ <br>
+                <span class="gradient-text">วงเงินต้องใหญ่กว่า</span>
+            </h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-10 font-light leading-relaxed">
+                วิเคราะห์เจาะลึกค่ารักษาพยาบาลจริง เทียบกับความคุ้มครองระดับพรีเมี่ยม <br>
+                ที่จะทำให้คุณก้าวข้ามขีดจำกัดทางการเงินในวันที่วิกฤตที่สุด
+            </p>
+            
+            <!-- Key Highlight Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mt-12">
+                <div class="glass-card p-6 rounded-2xl shadow-sm text-center border-t-4 border-mtl-main">
+                    <p class="text-gray-500 text-sm mb-1">วงเงินเหมาจ่ายต่อครั้ง</p>
+                    <p class="text-4xl font-bold text-gray-800 font-head">5 ล้านบาท</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl shadow-sm text-center border-t-4 border-mtl-main">
+                    <p class="text-gray-500 text-sm mb-1">ค่าห้องพักรักษาตัว</p>
+                    <p class="text-2xl font-bold text-gray-800 font-head mt-2">ห้องเดี่ยวมาตรฐาน</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl shadow-sm text-center border-t-4 border-mtl-main">
+                    <p class="text-gray-500 text-sm mb-1">เสริมความคุ้มครองโรคร้าย</p>
+                    <p class="text-3xl font-bold text-gray-800 font-head text-mtl-main">Care Plus</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Part 1: The Reality (Medical Bills Analysis) -->
+    <section id="reality" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 font-head">ความจริงของค่ารักษาพยาบาล</h2>
+                <p class="text-gray-500 mt-4 text-lg">ข้อมูลจากบิลค่ารักษาจริง (Proof of Concept)</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                <!-- Left: Bills Showcase -->
+                <div class="space-y-6">
+                    <!-- Bill 1 -->
+                    <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 flex items-center justify-between hover:shadow-xl transition">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 text-xl">
+                                <i class="fa-solid fa-bone"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 font-head text-lg">ผ่าตัดเอ็นข้อเท้า</h4>
+                                <p class="text-sm text-gray-500">รพ.กรุงเทพ เชียงใหม่ (3 วัน)</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-2xl font-bold text-mtl-main font-head">336,284 ฿</p>
+                        </div>
+                    </div>
+
+                    <!-- Bill 2 -->
+                    <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 flex items-center justify-between hover:shadow-xl transition transform scale-105 ring-2 ring-pink-100">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center text-red-600 text-xl">
+                                <i class="fa-solid fa-heart-pulse"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 font-head text-lg">ผ่าตัดบายพาสหัวใจ</h4>
+                                <p class="text-sm text-gray-500">รพ.บำรุงราษฎร์ (9 วัน)</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-2xl font-bold text-mtl-main font-head">1,265,578 ฿</p>
+                        </div>
+                    </div>
+
+                    <!-- Bill 3 -->
+                    <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 flex items-center justify-between hover:shadow-xl transition">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-xl">
+                                <i class="fa-solid fa-baby"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 font-head text-lg">RSV (เด็ก)</h4>
+                                <p class="text-sm text-gray-500">รพ.วิภาวดี (10 วัน)</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-xl font-bold text-gray-600 font-head line-through decoration-red-500">208,946 ฿</p>
+                            <p class="text-sm text-red-500 font-bold">ส่วนเกินจ่ายเอง 150,946 ฿</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Analysis Text -->
+                <div class="bg-mtl-pale p-8 rounded-3xl border border-pink-100">
+                    <h3 class="text-2xl font-bold text-mtl-dark font-head mb-6">วิเคราะห์ความเสี่ยงทางการเงิน</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-exclamation text-mtl-main mt-1"></i>
+                            <p><strong>โรคทั่วไปก็แพงได้:</strong> เพียงแค่ป่วยด้วยโรคติดเชื้อทั่วไปอย่าง RSV ในเด็ก หรือผ่าตัดเล็ก ค่ารักษาสามารถพุ่งสูงถึงหลักแสนบาทได้ง่ายดาย</p>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-exclamation text-mtl-main mt-1"></i>
+                            <p><strong>โรคร้ายแรงค่าใช้จ่ายมหาศาล:</strong> การผ่าตัดใหญ่ เช่น บายพาสหัวใจ มีค่าใช้จ่ายทะลุ 1.2 ล้านบาท หากวงเงินประกันมีจำกัดเพียงหลักแสน คุณต้องแบกรับหนี้สินส่วนเกินทันที</p>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-circle-exclamation text-mtl-main mt-1"></i>
+                            <p><strong>Targeted Therapy คือตัวแปรสำคัญ:</strong> ยามะเร็งแบบพุ่งเป้า (Targeted Therapy) เช่น Tagrisso มีราคาสูงถึง 50,000 บาท/กล่อง (ทานได้ 1 เดือน) และมักเป็นยากิน (OPD) ซึ่งประกันแบบเก่าไม่คุ้มครอง</p>
+                        </li>
+                    </ul>
+                    
+                    <div class="mt-8 bg-white p-4 rounded-xl shadow-inner text-center">
+                        <p class="text-gray-500 text-sm">ยอดเคลมรวมที่เกิดขึ้นจริงในระบบ (จากภาพ)</p>
+                        <p class="text-4xl font-bold text-mtl-main font-head mt-2">4,968,840.02 บาท</p>
+                        <p class="text-xs text-gray-400 mt-1">ข้อมูล ณ วันที่ 19 ม.ค. 2568</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Part 2: D Health Plus Analysis -->
+    <section id="dhealth" class="py-20 bg-gray-900 text-white relative overflow-hidden">
+        <!-- Background elements -->
+        <div class="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+        <div class="absolute -right-20 top-20 w-80 h-80 bg-mtl-main rounded-full blur-[100px] opacity-20"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-mtl-light font-bold tracking-widest uppercase text-sm">The Solution</span>
+                <h2 class="text-4xl md:text-5xl font-bold mt-2 font-head">D Health Plus</h2>
+                <p class="text-gray-400 mt-4 text-xl font-light">เข้าใจง่าย... จ่ายเต็มแม็กซ์</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- Highlight 1: 5 Million Limit -->
+                <div class="bg-gray-800 p-8 rounded-3xl border border-gray-700 hover:border-mtl-main transition duration-300 group">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-mtl-main to-pink-600 flex items-center justify-center mb-6 shadow-lg shadow-pink-900/50 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-shield-halved text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold font-head mb-4 text-white group-hover:text-mtl-light transition">วงเงิน 5 ล้านบาท <br><span class="text-gray-400 text-lg font-normal">ต่อการรักษาครั้งใดครั้งหนึ่ง</span></h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        ไม่ใช่แค่วงเงินต่อปี แต่คือวงเงิน <strong>"ต่อครั้ง ต่อโรค"</strong> หมดกังวลเรื่องการรักษาที่ต่อเนื่องและยาวนาน ไม่ว่าจะผ่าตัดเล็กหรือผ่าตัดใหญ่ วงเงิน 5 ล้านบาทครอบคลุมเทคโนโลยีการรักษาที่ทันสมัยที่สุด
+                    </p>
+                </div>
+
+                <!-- Highlight 2: Standard Single Room -->
+                <div class="bg-gray-800 p-8 rounded-3xl border border-gray-700 hover:border-mtl-main transition duration-300 group">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-mtl-main to-pink-600 flex items-center justify-center mb-6 shadow-lg shadow-pink-900/50 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-bed-pulse text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold font-head mb-4 text-white group-hover:text-mtl-light transition">ค่าห้องเดี่ยวมาตรฐาน <br><span class="text-gray-400 text-lg font-normal">จ่ายตามจริง</span></h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        จุดแข็งที่สุดของแผนนี้คือ <strong>"ไม่จำกัดวงเงินค่าห้องเป็นตัวเลข"</strong> (เช่น ไม่ล็อกที่ 4,000 หรือ 8,000 บาท) แต่จ่ายตามราคาจริงของ <strong>"ห้องเดี่ยวมาตรฐาน"</strong> ของโรงพยาบาลนั้นๆ
+                    </p>
+                    <div class="mt-4 bg-gray-900/50 p-3 rounded-lg border border-gray-600 text-sm text-gray-400">
+                        <i class="fa-solid fa-check text-green-400 mr-2"></i> รพ.บำรุงราษฎร์ (11,000++ บ.) = <span class="text-green-400 font-bold">จ่ายเต็ม</span><br>
+                        <i class="fa-solid fa-check text-green-400 mr-2"></i> รพ.กรุงเทพ (10,000++ บ.) = <span class="text-green-400 font-bold">จ่ายเต็ม</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Part 3: The Gap & Care Plus Solution -->
+    <section id="careplus" class="py-24 bg-gradient-to-b from-white to-pink-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
+                
+                <!-- Problem Statement -->
+                <div class="lg:w-1/2">
+                    <span class="text-red-500 font-bold tracking-wide uppercase text-sm mb-2 block"><i class="fa-solid fa-triangle-exclamation mr-2"></i> จุดที่ต้องระวัง</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 font-head mb-6">กับดักของผู้ป่วยนอก (OPD)</h2>
+                    
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-red-500 mb-6">
+                        <p class="text-gray-600 mb-4">
+                            วิวัฒนาการทางการแพทย์เปลี่ยนไป การรักษามะเร็งปัจจุบันมักใช้ <strong>Targeted Therapy (ยาพุ่งเป้า)</strong> ซึ่งส่วนใหญ่เป็น "ยาเม็ด" ที่รับกลับไปทานที่บ้าน (OPD)
+                        </p>
+                        <div class="flex items-center justify-between bg-red-50 p-4 rounded-xl">
+                            <span class="font-bold text-gray-800">ค่ายาต่อเดือน</span>
+                            <span class="text-2xl font-bold text-red-600 font-head">50,000 - 200,000 ฿</span>
+                        </div>
+                        <p class="text-xs text-red-400 mt-2">*ประกันสุขภาพทั่วไปคุ้มครองเฉพาะนอน รพ. (IPD) เท่านั้น</p>
+                    </div>
+
+                    <p class="text-gray-600">
+                        หากกรมธรรม์ของคุณไม่มีความคุ้มครอง OPD สำหรับโรคร้ายแรง คุณอาจต้องจ่ายค่ายาหลักแสนต่อเดือนด้วยตัวเอง หรือจำใจเลือกยา Copy ที่ประสิทธิภาพต่ำกว่า
+                    </p>
+                </div>
+
+                <!-- Care Plus Solution -->
+                <div class="lg:w-1/2 relative">
+                    <!-- Decor element -->
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-yellow-200 rounded-full mix-blend-multiply filter blur-2xl opacity-50"></div>
+                    
+                    <div class="bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-gray-100 relative z-10">
+                        <div class="bg-mtl-main p-6 text-white text-center">
+                            <h3 class="text-2xl font-bold font-head">Care Plus</h3>
+                            <p class="opacity-90">จิ๊กซอว์ชิ้นสำคัญที่ขาดไม่ได้</p>
+                        </div>
+                        <div class="p-8">
+                            <h4 class="text-xl font-bold text-gray-800 font-head mb-4 text-center">คุ้มครองค่ารักษาพยาบาล <br>ตามหมวด 9 - 11</h4>
+                            
+                            <div class="space-y-4">
+                                <!-- Cat 9 -->
+                                <div class="flex items-start gap-4 p-4 rounded-xl bg-pink-50 border border-pink-100">
+                                    <div class="w-10 h-10 rounded-full bg-mtl-light text-white flex items-center justify-center shrink-0">9</div>
+                                    <div>
+                                        <strong class="text-mtl-dark block text-lg font-head">โรคมะเร็ง</strong>
+                                        <p class="text-sm text-gray-600">ครอบคลุมทั้ง IPD และ OPD (เคมีบำบัด, รังสีรักษา, <span class="text-mtl-main font-bold">Targeted Therapy</span>, Immunotherapy)</p>
+                                    </div>
+                                </div>
+
+                                <!-- Cat 10 -->
+                                <div class="flex items-start gap-4 p-4 rounded-xl bg-blue-50 border border-blue-100">
+                                    <div class="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center shrink-0">10</div>
+                                    <div>
+                                        <strong class="text-blue-800 block text-lg font-head">ไตวายเรื้อรัง</strong>
+                                        <p class="text-sm text-gray-600">คุ้มครองการล้างไตผ่านทางเส้นเลือด และการล้างไตผ่านทางช่องท้อง</p>
+                                    </div>
+                                </div>
+
+                                <!-- Cat 11 -->
+                                <div class="flex items-start gap-4 p-4 rounded-xl bg-purple-50 border border-purple-100">
+                                    <div class="w-10 h-10 rounded-full bg-purple-500 text-white flex items-center justify-center shrink-0">11</div>
+                                    <div>
+                                        <strong class="text-purple-800 block text-lg font-head">โรคร้ายแรงระยะวิกฤต</strong>
+                                        <p class="text-sm text-gray-600">ครอบคลุมค่ารักษาพยาบาลสำหรับโรคร้ายแรงตามที่กำหนด</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-8 text-center">
+                                <span class="inline-block px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-bold">
+                                    <i class="fa-solid fa-check mr-1"></i> วงเงิน 5 ล้านบาท ต่อปี (แยกต่างหาก)
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conclusion CTA -->
+    <section class="py-20 bg-white border-t border-gray-100">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-gray-900 font-head mb-6">สรุปความคุ้มครองที่สมบูรณ์แบบ</h2>
+            <div class="flex flex-col md:flex-row justify-center items-center gap-4 text-xl font-head text-gray-700 mb-10">
+                <div class="px-6 py-3 bg-gray-100 rounded-full">D Health Plus (IPD)</div>
+                <div class="text-mtl-main"><i class="fa-solid fa-plus text-2xl"></i></div>
+                <div class="px-6 py-3 bg-pink-100 text-mtl-main rounded-full border border-pink-200 shadow-sm">Care Plus (OPD Cancer/Kidney)</div>
+            </div>
+            <p class="text-gray-500 mb-8 font-light">
+                เพื่อให้คุณเข้าถึงนวัตกรรมการรักษาที่ดีที่สุด โดยไม่ต้องกังวลเรื่องค่าใช้จ่าย ไม่ว่าจะเป็นการนอนโรงพยาบาล หรือการรับยามุ่งเป้ากลับบ้าน
+            </p>
+            <button class="bg-mtl-main hover:bg-mtl-dark text-white text-xl font-bold font-head py-4 px-10 rounded-full shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1">
+                ปรึกษาวางแผนความคุ้มครอง
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-50 py-10 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="w-12 h-12 rounded-full bg-mtl-main flex items-center justify-center text-white font-bold font-head text-lg mx-auto mb-4">mtl</div>
+            <p class="text-gray-500 font-head text-sm">Muang Thai Life Assurance PCL.</p>
+            <p class="text-gray-400 text-xs mt-2 font-body">
+                *เงื่อนไขความคุ้มครองเป็นไปตามที่ระบุในกรมธรรม์ โปรดศึกษารายละเอียดก่อนตัดสินใจทำประกัน
+            </p>
+            <div class="mt-6 text-gray-300 text-xs">
+                Generated Report based on supplied PDF data
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

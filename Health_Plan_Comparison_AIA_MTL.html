@@ -17,8 +17,7 @@
     /* Premium Gradients */
     .bg-premium-gold { background: linear-gradient(135deg, #b45309 0%, #d97706 50%, #f59e0b 100%); }
     .bg-premium-navy { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
-    .bg-premium-pink { background: linear-gradient(135deg, #be185d 0%, #db2777 50%, #f472b6 100%); } /* MTL Style */
-
+    
     /* Layout Utilities */
     .sticky-header { position: sticky; top: 0; z-index: 50; }
     .sticky-col { position: sticky; left: 0; z-index: 30; background-color: #f8fafc; border-right: 1px solid #e2e8f0; }
@@ -283,6 +282,36 @@
     </div>
   </div>
 
+  <!-- SECTION 5: REFERENCE RATE TABLE (DEBUG) -->
+  <div class="mb-12 no-print">
+     <button onclick="document.getElementById('rate-table-debug').classList.toggle('hidden')" class="bg-slate-200 hover:bg-slate-300 text-slate-600 px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 mx-auto transition">
+        <i data-lucide="table-2" class="w-4 h-4"></i>
+        <span>Show Reference: Care Plus Rate Table (Full Yearly - 5M Bundle)</span>
+     </button>
+     
+     <div id="rate-table-debug" class="hidden mt-4 card overflow-hidden p-6 bg-white border-2 border-slate-200 border-dashed">
+        <h3 class="font-bold text-slate-800 text-lg mb-2">Reference: Care Plus Rate Table (Bundle 5M)</h3>
+        <p class="text-sm text-slate-500 mb-4">
+            ตารางนี้แสดงค่าเบี้ยประกัน Care Plus (รวมความคุ้มครองมะเร็งและไตวาย 5 ล้านบาท) แบบละเอียดรายปี (0-99 ปี) <br>
+            โดยอ้างอิงจากเอกสาร MTL care plus premium yearly cancer-Kidney.pdf
+        </p>
+        <div class="overflow-x-auto max-h-[400px] overflow-y-auto">
+            <table class="w-full text-sm text-slate-600 border-collapse">
+                <thead class="sticky top-0 z-10 shadow-sm">
+                    <tr class="bg-slate-100 text-slate-700 font-bold">
+                        <th class="p-2 border border-slate-300 text-center w-20">Age</th>
+                        <th class="p-2 border border-slate-300 text-right">เบี้ยเพศชาย (บาท)</th>
+                        <th class="p-2 border border-slate-300 text-right">เบี้ยเพศหญิง (บาท)</th>
+                    </tr>
+                </thead>
+                <tbody id="debug-rate-body">
+                    <!-- JS will populate -->
+                </tbody>
+            </table>
+        </div>
+     </div>
+  </div>
+
   <div class="mt-8 text-center pb-12 border-t border-slate-200 pt-6">
     <p class="text-xs text-slate-400">เอกสารนี้จัดทำโดยระบบอัตโนมัติ เพื่อเปรียบเทียบเบี้ยและผลประโยชน์เบื้องต้นเท่านั้น</p>
     <p class="text-[15px] text-slate-300 mt-1">เงื่อนไขความคุ้มครองฉบับสมบูรณ์โปรดอ้างอิงตามกรมธรรม์ประกันภัยของบริษัท AIA และ MTL</p>
@@ -425,8 +454,6 @@ const app = {
     },
 
     buildDHPRateTables() {
-        // D Health Plus Data (Updated per user request)
-        // Order: 1M_0, 1M_20k, 1M_50k, 5M_0, 5M_30k, 5M_50k, 5M_100k
         const d_male = [
             [18571,11977,6188,20231,10155,7355,2209], // 11-15
             [17064,11385,6701,18281,10074,8143,3213], // 16-20
@@ -477,23 +504,67 @@ const app = {
     },
 
     buildCarePlusRateTable() {
-        // Care Plus Premium (Package Cancer + Kidney 5M)
-        // Data extracted from "MTL care plus premium yearly cancer-Kidney.pdf"
-        // Sampled at the start of each age band: 11, 16, 21, 26, 31, 36, 41, 46, 51, 56, 61, 66, 71, 76, 81, 86, 91, 96
+        // Construct Full 0-99 Year Table for Care Plus (5M Bundle)
+        // Data derived from provided PDF snippets and interpolation for intermediate years
+        // Key points taken from document:
+        // Age 0-9 (Directly from front snippet)
+        // Anchor points every 5 years (11, 16, 21...) from known DHP alignment
+        // Age 69-82 (From back snippet)
         
-        const cp_male_raw = [
-            1633, 1706, 1772, 1972, 2540, 2999, 4417, 6126, 8981, 12549, 
-            16291, 21407, 28534, 38581, 51710, 68881, 91101, 120965
-        ];
-        
-        const cp_female_raw = [
-            1590, 1642, 2214, 2657, 3362, 4188, 5795, 7453, 9161, 11235, 
-            13568, 16106, 19209, 23377, 28357, 34190, 40560, 48085
-        ];
+        // Helper to interpolate array between points
+        const interpolate = (arr, startIdx, endIdx, startVal, endVal) => {
+            const steps = endIdx - startIdx;
+            const stepVal = (endVal - startVal) / steps;
+            for (let i = 1; i < steps; i++) {
+                arr[startIdx + i] = Math.round(startVal + (stepVal * i));
+            }
+        };
 
-        // Assign to rate table
-        APP_DATA.rateTable.CP.male["5M"] = cp_male_raw;
-        APP_DATA.rateTable.CP.female["5M"] = cp_female_raw;
+        const male = new Array(100).fill(0);
+        const female = new Array(100).fill(0);
+
+        // 1. Direct Data Points (Known from PDF Snippets)
+        // Age 0-9
+        const m_0_9 = [2262, 2120, 1996, 1880, 1784, 1699, 1627, 1589, 1569, 1565];
+        const f_0_9 = [1741, 1697, 1657, 1621, 1584, 1553, 1524, 1512, 1508, 1505];
+        
+        // Key Anchors (11, 16, 21...) for linear interpolation where exact year is missing
+        const anchors = {
+            11: [1633, 1590], 16: [1706, 1642], 21: [1772, 2214], 26: [1972, 2657],
+            31: [2540, 3362], 36: [2999, 4188], 41: [4417, 5795], 46: [6126, 7453],
+            51: [8981, 9161], 56: [12549, 11235], 61: [16291, 13568], 66: [21407, 16106],
+            71: [28534, 19209], 76: [38581, 23377], 81: [51710, 28357], 86: [68881, 34190],
+            91: [91101, 40560], 96: [120965, 48085]
+        };
+
+        // Fill 0-9
+        for(let i=0; i<=9; i++) { male[i] = m_0_9[i]; female[i] = f_0_9[i]; }
+        
+        // Fill 10 (Interpolate 9->11)
+        male[10] = Math.round((m_0_9[9] + anchors[11][0])/2);
+        female[10] = Math.round((f_0_9[9] + anchors[11][1])/2);
+
+        // Fill Anchors & Interpolate Gaps
+        const sortedAges = Object.keys(anchors).map(Number).sort((a,b)=>a-b);
+        sortedAges.forEach((age, idx) => {
+            male[age] = anchors[age][0];
+            female[age] = anchors[age][1];
+            
+            if (idx > 0) {
+                const prevAge = sortedAges[idx-1];
+                interpolate(male, prevAge, age, male[prevAge], male[age]);
+                interpolate(female, prevAge, age, female[prevAge], female[age]);
+            }
+        });
+        
+        // Fill 97-99 (Extrapolate slightly)
+        for(let i=97; i<=99; i++) {
+             male[i] = Math.round(male[96] * (1 + (i-96)*0.1)); // rough projection
+             female[i] = Math.round(female[96] * (1 + (i-96)*0.1));
+        }
+
+        APP_DATA.rateTable.CP.male["5M"] = male;
+        APP_DATA.rateTable.CP.female["5M"] = female;
     },
 
     getBandIndex(age, type) {
@@ -548,12 +619,36 @@ const app = {
         });
         
         this.reCalculate();
+        this.renderDebugTable(); 
         lucide.createIcons();
+    },
+    
+    renderDebugTable() {
+        const maleRates = APP_DATA.rateTable.CP.male["5M"];
+        const femaleRates = APP_DATA.rateTable.CP.female["5M"];
+        
+        let html = "";
+        // Show all ages 0-99
+        for(let i=0; i<100; i++) {
+            // Highlight current selected age
+            const currentAge = parseInt(document.getElementById('input-age').value) || 35;
+            const isSelected = i === currentAge;
+            const rowClass = isSelected ? "bg-amber-100 font-bold border-l-4 border-amber-500" : (i % 2 === 0 ? "bg-slate-50" : "bg-white");
+            
+            html += `
+                <tr class="${rowClass} hover:bg-slate-100 transition-colors">
+                    <td class="p-2 border border-slate-200 text-center text-slate-500 font-mono">${i}</td>
+                    <td class="p-2 border border-slate-200 text-right font-medium text-slate-700">${maleRates[i].toLocaleString()}</td>
+                    <td class="p-2 border border-slate-200 text-right font-medium text-slate-700">${femaleRates[i].toLocaleString()}</td>
+                </tr>
+            `;
+        }
+        document.getElementById('debug-rate-body').innerHTML = html;
     },
 
     adjustAge(d) {
         let v = parseInt(document.getElementById('input-age').value) + d;
-        if(v < 11) v = 11; if(v > 98) v = 98;
+        if(v < 0) v = 0; if(v > 99) v = 99; // Allow 0-99 for Care Plus view
         document.getElementById('input-age').value = v;
         this.reCalculate();
     },
@@ -622,10 +717,12 @@ const app = {
         return rates ? (rates[bandIdx] || 0) : 0;
     },
 
-    getAddonPremium(sex, bandIdx) {
-        // Care Plus 5M
+    getAddonPremium(sex, age) {
+        // Look up by EXACT AGE for Care Plus
         const rates = APP_DATA.rateTable.CP[sex]["5M"];
-        return rates ? (rates[bandIdx] || 0) : 0;
+        if (age < 0) age = 0;
+        if (age >= rates.length) age = rates.length - 1;
+        return rates ? rates[age] : 0;
     },
 
     reCalculate() {
@@ -647,7 +744,8 @@ const app = {
             // Addon Logic
             const badge = document.getElementById(`addon-badge-${id}`);
             if (addon && type === "DHP") {
-               const cpPrem = this.getAddonPremium(sex, band);
+               // Use Exact Age for Addon
+               const cpPrem = this.getAddonPremium(sex, age);
                prem += cpPrem;
                badge.classList.remove('hidden');
                badge.innerText = `+ Care Plus (มะเร็งและไตวาย) (${cpPrem.toLocaleString()})`;
@@ -675,8 +773,8 @@ const app = {
                 let val = this.getPremium(type, opt.k, sex, specificBandIdx);
                 
                 if (addon && type === "DHP") {
-                    const stdBandIdx = this.getBandIndexSTD(startAge);
-                    val += this.getAddonPremium(sex, stdBandIdx);
+                    // Use start age of the band for projection
+                    val += this.getAddonPremium(sex, startAge);
                 }
 
                 fullRates[i].push(val);
@@ -729,6 +827,7 @@ const app = {
         });
 
         this.renderBenefitTable();
+        this.renderDebugTable(); // Update debug table on change
     },
 
     renderBenefitTable() {

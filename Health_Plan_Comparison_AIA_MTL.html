@@ -27,18 +27,105 @@
     .glass { background: rgba(255,255,255,0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.6); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
     .card { background: white; border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); }
 
-    /* Print Styles */
+    /* --- PRINT STYLES (A4 OPTIMIZED) --- */
     @media print {
-      body { background: white !important; color: black !important; -webkit-print-color-adjust: exact; }
-      .no-print { display: none !important; }
-      .sticky-header { position: relative !important; top: auto !important; }
-      .glass, .card { box-shadow: none !important; border: 1px solid #ddd !important; background: white !important; color: black !important; }
-      .sticky-col { background: white !important; border-right: 1px solid #ddd !important; }
-      #chart-container { height: 300px !important; page-break-inside: avoid; }
+      @page { 
+        size: A4; 
+        margin: 5mm 10mm; /* Top/Bottom 5mm, Left/Right 10mm */
+      }
+      
+      body { 
+        background: white !important; 
+        color: black !important; 
+        -webkit-print-color-adjust: exact; 
+        print-color-adjust: exact;
+        font-size: 9pt !important; /* Reduce font size for print */
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      /* Hide Interface Elements */
+      .no-print, .no-print * { display: none !important; }
+      button { display: none !important; } /* Double ensure buttons are hidden */
+
+      /* Layout Resets */
+      .max-w-\[1600px\], .container, .w-full { 
+        max-width: 100% !important; 
+        width: 100% !important; 
+        padding: 0 !important; 
+        margin: 0 !important; 
+      }
+      
+      /* Header Simplification */
+      .sticky-header { 
+        position: static !important; 
+        margin-bottom: 10px !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+      }
+      .sticky-header .bg-white\/90 {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+      }
+      
+      /* Card Simplification */
+      .card { 
+        box-shadow: none !important; 
+        border: 1px solid #ccc !important; 
+        background: white !important; 
+        border-radius: 0 !important;
+        margin-bottom: 15px !important;
+        break-inside: avoid;
+      }
+      
+      /* Table Optimizations */
+      table { width: 100% !important; border-collapse: collapse; table-layout: fixed; }
+      th, td { 
+        border: 1px solid #ccc !important; 
+        padding: 4px 6px !important; /* Tighter padding */
+        font-size: 8pt !important;
+        color: black !important;
+      }
+      thead { display: table-header-group; } /* Repeat header on new page */
+      tr { break-inside: avoid; page-break-inside: avoid; } /* Don't cut rows */
+      
+      /* Sticky Columns Unset */
+      .sticky-col, .sticky-top-col {
+        position: static !important;
+        background: transparent !important;
+        border-color: #ccc !important;
+        box-shadow: none !important;
+      }
+
+      /* Specific Element Adjustments */
+      #chart-container { 
+        height: 220px !important; /* Smaller chart for print */
+        page-break-inside: avoid; 
+        border: 1px solid #eee;
+      }
+      
+      .bg-premium-gold { 
+        background: #eee !important; 
+        color: black !important; 
+        border-bottom: 1px solid #000;
+        text-shadow: none !important;
+      }
+      .bg-premium-navy {
+        background: #333 !important;
+        color: white !important;
+      }
+      
+      /* Remove background colors from cells to save ink, use borders instead */
+      .bg-emerald-50, .bg-amber-50, .bg-rose-50, .bg-blue-50 {
+        background-color: transparent !important;
+      }
+      
+      /* Force Page Breaks */
       .page-break { page-break-before: always; }
-      th, td { border-color: #ccc !important; color: black !important; }
-      .bg-premium-gold { background: #eee !important; color: black !important; border-bottom: 1px solid #000; }
-      .text-white { color: black !important; }
     }
 
     /* Custom Table */
@@ -834,7 +921,7 @@ const app = {
         const cats = [
             { id: "max", name: "วงเงินสูงสุดต่อรอบปีกรมธรรม์", icon: "shield" },
             { id: "r1", name: "1. ค่าห้อง ค่าอาหาร (ต่อวัน)", icon: "bed" },
-            { id: "r2", name: "2. ค่าบริการทางการแพทย์ (ต่อการรักษาเป็นผู้ป่วยในครั้งใดครั้งหนึ่ง /แต่ Health Happy จำกัดต่อปีกรมธรรม์ ตามวงเงินเหมาจ่าย)", icon: "stethoscope" },
+            { id: "r2", name: "2. ค่าบริการทางการแพทย์ (ต่อการรักษาเป็นผู้ป่วยในครั้งใดครั้งหนึ่ง //แต่ Health Happy จำกัดต่อปีกรมธรรม์ ตามวงเงินเหมาจ่าย)", icon: "stethoscope" },
             { id: "r3", name: "3. ค่าแพทย์ตรวจรักษา (ต่อวัน)", icon: "user-round-check" },
             { id: "r4", name: "4. ค่าผ่าตัดและหัตถการ", icon: "scalpel" },
             { id: "r5", name: "5. ผ่าตัดใหญ่ไม่ต้องนอน (Day Surgery)", icon: "activity" },

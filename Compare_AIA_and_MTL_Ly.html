@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รายงานเปรียบเทียบความคุ้มครองและเบี้ยประกันภัย - คุณญาณิศา ลิ้มเจริญ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-mtl: #d31145; /* MTL Pink/Red */
+            --primary-aia: #d30f1e; /* AIA Red */
+            --gold: #bfa15f;
+            --text-dark: #2d3436;
+            --text-light: #636e72;
+            --bg-body: #fdfdfd;
+            --bg-card: #ffffff;
+            --border-light: #eee;
+            --success-bg: #e6fffa;
+            --success-text: #276749;
+        }
+
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        /* Section Styling */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-top: 50px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 30px;
+            background: linear-gradient(to bottom, var(--gold), #e0c385);
+            margin-right: 15px;
+            border-radius: 3px;
+        }
+
+        /* Card/Table Container */
+        .card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            overflow: hidden;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-light);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 18px 20px;
+            vertical-align: top;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        thead th {
+            background-color: #fafafa;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Premium Table Specifics */
+        .premium-table th { background-color: #fff; border-bottom: 2px solid var(--gold); }
+        .premium-table td { vertical-align: middle; }
+        .price-text { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 1.1em; }
+        .total-row { background-color: #fcfcfc; font-weight: 700; font-size: 1.2em; color: var(--text-dark); border-top: 2px solid var(--border-light); }
+        
+        /* Comparison Table Columns */
+        .col-topic { width: 30%; color: var(--text-light); font-weight: 500; }
+        .col-mtl { width: 35%; color: var(--primary-mtl); font-weight: 600; background-color: rgba(211, 17, 69, 0.02); }
+        .col-aia { width: 35%; color: var(--primary-aia); font-weight: 600; background-color: rgba(211, 15, 30, 0.02); }
+
+        .category-header {
+            background-color: #f4f4f4;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-align: left;
+            padding-left: 20px;
+        }
+
+        /* Highlighting */
+        .highlight-text {
+            color: #d35400; 
+            font-weight: 700;
+            font-size: 0.9em;
+            display: block;
+            margin-top: 5px;
+        }
+        
+        .rider-note {
+            background-color: #fff8e1;
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: #b7791f;
+            font-size: 0.85em;
+            display: inline-block;
+            margin-top: 5px;
+            border: 1px solid #f6e05e;
+        }
+
+        /* Rider Section Grid */
+        .rider-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .rider-card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid var(--border-light);
+        }
+
+        .rider-head-mtl { border-top: 4px solid var(--primary-mtl); }
+        .rider-head-aia { border-top: 4px solid var(--primary-aia); }
+
+        .benefit-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 15px;
+        }
+
+        .benefit-list li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .benefit-list li::before {
+            content: '•';
+            color: var(--gold);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        .footer-note {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #a0aec0;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        @media (max-width: 768px) {
+            .rider-grid { grid-template-columns: 1fr; }
+            th, td { display: block; width: 100%; box-sizing: border-box; }
+            .col-topic { background: #f0f0f0; color: #000; }
+            .premium-table td { text-align: right; padding-left: 50%; position: relative; }
+            .premium-table td::before { content: attr(data-label); position: absolute; left: 15px; font-weight: 600; text-align: left; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>รายงานเปรียบเทียบข้อเสนอประกันภัย</h1>
+            <div class="subtitle">คุณญาณิศา ลิ้มเจริญ</div>
+        </header>
+
+        <!-- Premium Breakdown Section -->
+        <div class="section-title">1. รายละเอียดเบี้ยประกันภัย (Premium Breakdown)</div>
+        <div class="card">
+            <table class="premium-table">
+                <thead>
+                    <tr>
+                        <th style="text-align:left;">รายการ (Items)</th>
+                        <th style="color: var(--primary-mtl); text-align:right;">MTL: Muang Thai Life</th>
+                        <th style="color: var(--primary-aia); text-align:right;">AIA: AIA Thailand</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-label="รายการ">
+                            <strong>สัญญาประกันชีวิตหลัก (Base Plan)</strong><br>
+                            <span style="font-size:0.85em; color:#666;">MTL: 200,000 บาท (99/20) | AIA: 150,000 บาท (20 Pay Life)</span>
+                        </td>
+                        <td data-label="MTL" style="text-align:right;">3,646.00 บาท</td>
+                        <td data-label="AIA" style="text-align:right;">2,446.50 บาท</td>
+                    </tr>
+                    <tr>
+                        <td data-label="รายการ">
+                            <strong>สัญญาเพิ่มเติมสุขภาพ (Main Health Rider)</strong><br>
+                            <span style="font-size:0.85em; color:#666;">D Health Plus (5M) vs Health Happy (5M)</span>
+                        </td>
+                        <td data-label="MTL" style="text-align:right;">21,909.00 บาท</td>
+                        <td data-label="AIA" style="text-align:right;">21,500.00 บาท</td>
+                    </tr>
+                    <tr>
+                        <td data-label="รายการ">
+                            <strong>สัญญาเพิ่มเติมโรคร้ายแรง/ชดเชย (Supplementary)</strong><br>
+                            <span style="font-size:0.85em; color:#666;">MTL: Care Plus | AIA: Care for Cancer + HB Extra</span>
+                        </td>
+                        <td data-label="MTL" style="text-align:right;">
+                            2,657.00 บาท<br>
+                            <span style="font-size:0.8em; color:var(--primary-mtl);">(Care Plus)</span>
+                        </td>
+                        <td data-label="AIA" style="text-align:right;">
+                            912.50 บาท <span style="font-size:0.8em; color:#666;">(Care for Cancer)</span><br>
+                            + 1,400.00 บาท <span style="font-size:0.8em; color:#666;">(HB Extra)</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td data-label="รายการ">
+                            <strong>สัญญาเพิ่มเติมอุบัติเหตุ (Accident)</strong>
+                        </td>
+                        <td data-label="MTL" style="text-align:right;">250.00 บาท</td>
+                        <td data-label="AIA" style="text-align:right;">-</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td data-label="รายการ" style="text-align:left;">รวมเบี้ยประกันภัยต่อปี (Total Premium)</td>
+                        <td data-label="MTL" style="text-align:right; color: var(--primary-mtl);">28,462.00 บาท</td>
+                        <td data-label="AIA" style="text-align:right; color: var(--primary-aia);">26,259.00 บาท</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Main Comparison Table -->
+        <div class="section-title">2. เปรียบเทียบผลประโยชน์ความคุ้มครองสุขภาพ 13 หมวด</div>
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="col-topic">รายการผลประโยชน์</th>
+                        <th class="col-mtl">MTL: D Health Plus<br><span style="font-size:0.8em; font-weight:400; color:#333;">(Plan 5 ล้านบาท)</span></th>
+                        <th class="col-aia">AIA: Health Happy<br><span style="font-size:0.8em; font-weight:400; color:#333;">(Plan 5 ล้านบาท)</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="3" class="category-header">1. ผลประโยชน์กรณีผู้ป่วยใน (IPD)</td>
+                    </tr>
+                    <tr>
+                        <td class="col-topic">หมวดที่ 1: ค่าห้อง และค่าอาหาร ค่าบริการใน รพ.</td>
+                        <td>
+                            จ่ายตามจริง<br>
+                            <span class="highlight-text">เฉพาะค่าห้องเดี่ยวมาตรฐาน (Standard Single Room)</span>
+                        </td>
+                        <td>
+                            3,000 บาท ต่อวัน<br>
+                            <span style="font-size:0.85em; color:#7f8c8d;">(สูงสุด 365 วัน)</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-topic">หมวดที่ 2: ค่าบริการทางการแพทย์เพื่อการตรวจวินิจฉัยหรือบำบัดรักษา</td>
+                        <td>
+                            จ่ายตามจริง<br>
+                            <span class="highlight-text">* การเบิกต่อครั้ง ต่อโรค</span>
+                        </td>
+                        <td>
+                            จ่ายตามจริง
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-topic">หมวดที่ 3: ค่าผู้ประกอบวิชาชีพเวชกรรม (แพทย์) ตรวจรักษา</td>
+                        <td>จ่ายตามจริง (สูงสุด 180 วัน)</td>
+                        <td>2,000 บาท ต่อวัน (สูงสุด 365 วัน)</td>
+                    </tr>
+
+                    <tr>
+                        <td class="col-topic">หมวดที่ 4: ค่ารักษาพยาบาลโดยการผ่าตัด (ศัลยกรรม) และหัตถการ</td>
+                        <td>จ่ายตามจริง</td>
+                        <td>จ่ายตามจริง</td>
+                    </tr>
+                    <tr>
+                        <td class="col-topic">หมวดที่ 5: การผ่าตัดใหญ่ที่ไม่ต้องเข้าพักรักษาตัวเป็นผู้ป่วยใน (Day Surgery)</td>
+                        <td>จ่ายตามจริง</td>
+                        <td>จ่ายตามจริง</td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="3" class="category-header">2. ผลประโยชน์กรณีไม่ต้องเข้าพักรักษาตัวเป็นผู้ป่วยใน (OPD)</td>
+                    </tr>
+                    <tr>
+                        <td class="col-topic">หมวดที่ 6: ค่าบริการทางการแพทย์ตรวจวินิจฉัย (ก่อน-หลัง แอดมิท)</td>
+                        <td>
+                            จ่ายตามจริง<br>
+                            (ภายใน 30 วัน ก่อนและหลัง)
+                        </td>
+                        <td>
+                            จ่ายตามจริง<br>
+                            (ภายใน 30 วัน ก่อนและหลัง)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-topic">หมวดที่ 7: ค่ารักษาพยาบาลการบาดเจ็บ กรณีผู้ป่วยนอก (อุบัติเหตุฉุกเฉิน 24 ชม.)</td>
+                        <td>จ่ายตามจริง</td>
+                        <td>จ่ายตามจริง</td>
+                    </tr>
+                    <tr>
+                        <td class="col-topic">หมวดที่ 8: ค่าเวชศาสตร์ฟื้นฟู หลังการเข้าพักรักษาตัวเป็นผู้ป่วยใน</td>
+                        <td>จ่ายตามจริง</td>
+                        <td>จ่ายตามจริง (สูงสุด 2 ครั้งต่อรอบปีกรมธรรม์)</td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="3" class="category-header">3. การรักษาโรคร้ายแรงและไตวายเรื้อรัง</td>
+                    </tr>
+                    <tr>
+                        <td class="col-topic">หมวดที่ 9: ค่าบริการทางการแพทย์เพื่อการบำบัดรักษาโรคไตวายเรื้อรัง (ล้างไต)</td>
+                        <td>
+                            <span style="color:#aaa; text-decoration: line-through;">ไม่คุ้มครองในสัญญาหลัก</span><br>
+                            <span class="rider-note">สัญญา Care Plus จะคุ้มครองส่วนนี้</span>
+                        </td>
+                        <td>ไม่คุ้มครอง</td>
+                    </tr>
+                    <tr>
+                        <td class="col-topic">หมวดที่ 10: ค่าบริการทางการแพทย์เพื่อการบำบัดรักษาโรคมะเร็ง (รังสีรักษา)</td>
+                        <td>
+                            <span style="color:#aaa; text-decoration: line-through;">ไม่คุ้มครองในสัญญาหลัก</span><br>
+                            <span class="rider-note">สัญญา Care Plus จะคุ้มครองส่วนนี้</span>
+                        </td>
+                        <td>จ่ายตามจริง</td>
+                    </tr>
+                    <tr>
+                        <td class="col-topic">หมวดที่ 11: ค่าบริการทางการแพทย์เพื่อการบำบัดรักษาโรคมะเร็ง (เคมีบำบัด)</td>
+                        <td>
+                            <span style="color:#aaa; text-decoration: line-through;">ไม่คุ้มครองในสัญญาหลัก</span><br>
+                            <span class="rider-note">สัญญา Care Plus จะคุ้มครองส่วนนี้</span>
+                        </td>
+                        <td>จ่ายตามจริง</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="3" class="category-header">4. ผลประโยชน์อื่นๆ</td>
+                    </tr>
+                    <tr>
+                        <td class="col-topic">หมวดที่ 12: ค่าบริการรถพยาบาลฉุกเฉิน</td>
+                        <td>จ่ายตามจริง</td>
+                        <td>จ่ายตามจริง</td>
+                    </tr>
+                    <tr>
+                        <td class="col-topic">หมวดที่ 13: ค่ารักษาพยาบาล โดยการผ่าตัดเล็ก</td>
+                        <td>จ่ายตามจริง</td>
+                        <td>จ่ายตามจริง</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Rider Details Section -->
+        <div class="section-title">3. เจาะลึกรายละเอียดสัญญาเพิ่มเติม (Riders Detail)</div>
+        <div class="rider-grid">
+            
+            <!-- MTL Care Plus -->
+            <div class="rider-card rider-head-mtl">
+                <h3 style="color: var(--primary-mtl); margin-top:0;">MTL: Care Plus (Cancer & Kidney)</h3>
+                <p style="font-weight: 500; color: #555;">สัญญาเพิ่มเติมที่ช่วยปิดช่องโหว่หมวด 9, 10, 11 ของสัญญาหลัก</p>
+                <div style="background: #fff5f5; padding: 10px; border-radius: 6px; margin-bottom: 15px;">
+                    <strong>ความคุ้มครอง:</strong> เน้นวงเงินรักษา (Treatment Base)<br>
+                    <strong>วงเงิน:</strong> 5,000,000 บาท ต่อโรคมะเร็ง และ 5,000,000 บาท ต่อโรคไตวายเรื้อรัง
+                </div>
+                <ul class="benefit-list">
+                    <li><strong>ไตวายเรื้อรัง:</strong> คุ้มครองการล้างไตผ่านเส้นเลือด, ล้างไตทางช่องท้อง, ปลูกถ่ายไต และการผ่าตัดเส้นฟอกไต</li>
+                    <li><strong>โรคมะเร็ง:</strong> ครอบคลุมการรักษาทั้ง IPD และ OPD (ผู้ป่วยในและนอก)</li>
+                    <li><strong>วิธีการรักษามะเร็งที่ครอบคลุม:</strong>
+                        <ul style="padding-left: 20px; font-size: 0.9em; color: #666; margin-top: 5px;">
+                            <li>รังสีรักษา (Radiotherapy)</li>
+                            <li>เคมีบำบัด (Chemotherapy)</li>
+                            <li>ฮอร์โมนบำบัด (Hormonal Therapy)</li>
+                            <li>ภูมิคุ้มกันบำบัด (Immunotherapy)</li>
+                            <li>การรักษาแบบออกฤทธิ์จำเพาะเจาะจง (Targeted Therapy)</li>
+                            <li>การปลูกถ่าย Stem Cell</li>
+                        </ul>
+                    </li>
+                    <li><strong>ค่ารักษาทางจิตเวช:</strong> จ่ายตามจริง (ไม่เกิน 1% ของวงเงิน) หากเกิดภาวะเครียดจากการรักษาโรคร้ายแรง</li>
+                </ul>
+            </div>
+
+            <!-- AIA Care for Cancer & HB Extra -->
+            <div class="rider-card rider-head-aia">
+                <h3 style="color: var(--primary-aia); margin-top:0;">AIA: Care for Cancer & HB Extra</h3>
+                <p style="font-weight: 500; color: #555;">สัญญาเพิ่มเติมเน้นเงินก้อนและเงินชดเชย (Cash Benefit)</p>
+                
+                <!-- AIA Care for Cancer -->
+                <div style="margin-bottom: 25px;">
+                    <h4 style="margin: 10px 0; color: #333; text-decoration: underline;">1. AIA Care for Cancer</h4>
+                    <div style="background: #fff5f5; padding: 10px; border-radius: 6px;">
+                        <strong>รูปแบบ:</strong> จ่ายเงินก้อน (Lump Sum Cash) / ชดเชย<br>
+                        <strong>วงเงิน:</strong> 500,000 บาท
+                    </div>
+                    <ul class="benefit-list">
+                        <li><strong>เสียชีวิตจากมะเร็ง:</strong> รับ 100% (500,000 บาท)</li>
+                        <li><strong>ชดเชยรายวัน (IPD มะเร็ง):</strong> 2,000 บาท/วัน</li>
+                        <li><strong>ชดเชยรายวัน (OPD เคมี/รังสี):</strong> 500 บาท/วัน (สูงสุด 1,000 วัน)</li>
+                        <li><strong>ตรวจ MRI/CT/PET Scan:</strong> จ่าย 500 บาท/วัน (สูงสุด 2 ครั้ง/ปี)</li>
+                    </ul>
+                </div>
+
+                <!-- AIA HB Extra -->
+                <div>
+                    <h4 style="margin: 10px 0; color: #333; text-decoration: underline;">2. AIA HB Extra (ชดเชยรายได้)</h4>
+                    <ul class="benefit-list">
+                        <li><strong>นอน รพ. ปกติ (IPD):</strong> 500 บาท/วัน</li>
+                        <li><strong>นอน ICU:</strong> 1,500 บาท/วัน</li>
+                        <li><strong>ผ่าตัดใหญ่:</strong> รับเงินก้อน 2,500 บาท</li>
+                        <li><strong>โรคร้ายแรงเฉียบพลัน 13 โรค (เช่น หัวใจ, สโตรก):</strong> รับเงินก้อนเพิ่ม 12,500 บาท (จ่ายครั้งเดียว)</li>
+                        <li><strong>ค่ายากลับบ้าน:</strong> 500 บาท/ครั้ง</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-note">
+            เอกสารนี้จัดทำขึ้นเพื่อเปรียบเทียบข้อมูลจากไฟล์ PDF ที่ได้รับ ข้อมูลบางส่วนเป็นการสรุปสาระสำคัญ<br>โปรดอ้างอิงข้อความฉบับเต็มในกรมธรรม์ประกันภัยเป็นหลัก
+        </div>
+    </div>
+
+</body>
+</html>

@@ -69,6 +69,13 @@
         .detail-table th { background-color: #f1f4f8; color: var(--primary-color); font-weight: bold; border-bottom: 2px solid var(--primary-color); }
         .detail-table tr:nth-child(even) { background-color: #f9f9f9; }
         .sub-header { background-color: #e3e3e3; font-weight: bold; color: #333; }
+        
+        /* Vitality Table Styling */
+        .vitality-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 18px; }
+        .vitality-table th { text-align: center; background-color: #fff3e0; color: #d84315; border-bottom: 2px solid #ff9800; padding: 12px; }
+        .vitality-table td { text-align: center; padding: 12px; border-bottom: 1px solid #ddd; }
+        .vitality-table tr:nth-child(even) { background-color: #f9f9f9; }
+        .vitality-row-header { text-align: left !important; font-weight: bold; background-color: #fafafa; }
 
         .summary-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 18px; }
         .summary-table th, .summary-table td { padding: 15px; text-align: left; border-bottom: 1px solid #ddd; }
@@ -89,7 +96,7 @@
         /* Print Settings */
         @media print {
             .no-print { display: none !important; }
-            body { background-color: white; }
+            body { background-color: white; padding: 0; }
             .report-container { box-shadow: none; padding: 0; max-width: 100%; margin: 0; }
             .page-break { page-break-before: always; }
         }
@@ -187,7 +194,7 @@
         <div class="report-header">
             <h1 class="report-h1">รายงานสรุปข้อเสนอประกันภัย</h1>
             <div class="client-info-box">
-                <p><strong>พิเศษสำหรับ:</strong> <span id="out-name">-</span></p>
+                <p><strong>ผู้มุ่งหวัง:</strong> <span id="out-name">-</span></p>
                 <p><strong>อายุ:</strong> <span id="out-age">-</span> ปี (เพศ<span id="out-gender">-</span>)</p>
                 <p><strong>วันที่จัดทำ:</strong> <span id="out-date">-</span></p>
             </div>
@@ -265,8 +272,64 @@
             <span class="price-highlight">เบี้ยประกันภัย: <span id="out-hb-prem">0</span> บาท/ปี</span>
         </div>
 
+        <!-- 5. สิทธิประโยชน์ Vitality Bonus -->
+        <div class="report-section" id="sec-vitality" style="border-color: #ff9800;">
+            <h2 class="report-h2" style="color: #e65100;">5. สิทธิประโยชน์ AIA Vitality Bonus</h2>
+            <p>ส่วนลดเบี้ยประกันภัยในปีต่ออายุ คำนวณตามสถานะสมาชิก AIA Vitality และประวัติการเคลมสินไหม</p>
+            
+            <div id="vitality-cfc">
+                <h3 style="margin-top: 25px; font-weight: bold; font-size: 22px;">5.1 สัญญาเพิ่มเติมโรคร้ายแรง (AIA Care for Cancer)</h3>
+                <table class="vitality-table">
+                    <tr>
+                        <th style="text-align: left;">สถานะสมาชิก</th>
+                        <th>Bronze</th>
+                        <th>Silver</th>
+                        <th>Gold</th>
+                        <th>Platinum</th>
+                    </tr>
+                    <tr>
+                        <td class="vitality-row-header">ส่วนลดเบี้ยฯ ปีต่ออายุ</td>
+                        <td>0%</td>
+                        <td>2%</td>
+                        <td>10%</td>
+                        <td>20%</td>
+                    </tr>
+                </table>
+                <p style="font-size: 16px; color: #777; margin-top: 10px;">*เงื่อนไข: ต้องไม่เคยได้รับผลประโยชน์ใดๆ จากสัญญาโรคร้ายแรงฉบับนั้น</p>
+            </div>
+
+            <div id="vitality-health">
+                <h3 style="margin-top: 30px; font-weight: bold; font-size: 22px;">5.2 สัญญาเพิ่มเติมสุขภาพและชดเชย (Health Happy, HB Extra)</h3>
+                <table class="vitality-table">
+                    <tr>
+                        <th style="text-align: left;">เงื่อนไขการเคลม / สถานะ</th>
+                        <th>Bronze</th>
+                        <th>Silver</th>
+                        <th>Gold</th>
+                        <th>Platinum</th>
+                    </tr>
+                    <tr>
+                        <td class="vitality-row-header">กรณี <u>ไม่มี</u> การเคลมผู้ป่วยใน</td>
+                        <td>0%</td>
+                        <td>1%</td>
+                        <td>5%</td>
+                        <td>15%</td>
+                    </tr>
+                    <tr>
+                        <td class="vitality-row-header">กรณี <u>มี</u> การเคลมผู้ป่วยใน</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>2%</td>
+                        <td>5%</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
         <!-- สรุปเบี้ย -->
-        <h2 class="report-h2" style="margin-top: 50px;">สรุปเบี้ยประกันภัยรวม ปีแรก</h2>
+        <h2 class="report-h2" style="margin-top: 30px;">สรุปเบี้ยประกันภัยรวม ปีแรก</h2>
         <table class="summary-table">
             <thead>
                 <tr><th style="width: 50%;">รายการ</th><th style="width: 25%;">ทุน/วงเงิน</th><th style="width: 25%; text-align: right;">เบี้ยประกัน (บาท)</th></tr>
@@ -279,8 +342,6 @@
                 <tr class="total-row"><td colspan="2">รวมเบี้ยประกันภัยทั้งสิ้นต่อปี</td><td style="text-align: right;" id="sum-total-prem">0</td></tr>
             </tbody>
         </table>
-
-        <div class="page-break"></div>
 
         <!-- ตารางเบี้ยล่วงหน้า -->
         <div class="report-section" style="background-color: #f8fbff; border-color: var(--primary-color); margin-top: 40px;">
@@ -473,9 +534,13 @@ function updateReport() {
         document.getElementById('out-cfc-ipd').textContent = formatMoney((cfcSum/100000) * 2000);
         document.getElementById('out-cfc-opd').textContent = formatMoney((cfcSum/100000) * 500);
         document.getElementById('out-cfc-prem').textContent = formatMoney(pCFC);
+        // Show Vitality CFC section
+        document.getElementById('vitality-cfc').style.display = 'block';
     } else {
         document.getElementById('sec-cfc').style.display = 'none';
         document.getElementById('row-sum-cfc').style.display = 'none';
+        // Hide Vitality CFC section
+        document.getElementById('vitality-cfc').style.display = 'none';
     }
 
     // HB Extra
@@ -572,4 +637,5 @@ document.addEventListener('DOMContentLoaded', updateReport);
 </script>
 </body>
 </html>
+
 

@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIA Health Protection Generator</title>
+    <!-- นำเข้า Tailwind CSS สำหรับส่วนจัดการ Form และ Layout -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- นำเข้าฟอนต์ Sarabun -->
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #0056b3; 
+            --accent-color: #d31145;  
+            --bg-color: #f4f7f6;      
+            --card-bg: #ffffff;       
+            --text-color: #333333;    
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        /* Report Styles (คงรูปแบบเดิมที่เน้นตัวใหญ่อ่านง่าย) */
+        .report-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            font-size: 20px;
+            line-height: 1.8;
+        }
+
+        .report-header {
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+
+        .report-h1 { font-size: 36px; color: var(--primary-color); margin: 0 0 15px 0; font-weight: 700; }
+        .report-h2 { font-size: 28px; color: var(--primary-color); border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-top: 0; }
+        .report-h3 { font-size: 24px; color: var(--text-color); margin-bottom: 15px; font-weight: bold; }
+
+        .client-info-box {
+            background-color: #eef5fa;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 6px solid var(--primary-color);
+            font-size: 22px;
+        }
+
+        .report-section {
+            margin-bottom: 50px;
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+        }
+
+        .price-highlight { font-size: 26px; font-weight: bold; color: var(--accent-color); display: block; margin-top: 25px; text-align: right; }
+
+        .detail-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 18px; }
+        .detail-table th, .detail-table td { padding: 15px; text-align: left; border-bottom: 1px solid #ddd; vertical-align: top; }
+        .detail-table th { background-color: #f1f4f8; color: var(--primary-color); font-weight: bold; border-bottom: 2px solid var(--primary-color); }
+        .detail-table tr:nth-child(even) { background-color: #f9f9f9; }
+        .sub-header { background-color: #e3e3e3; font-weight: bold; color: #333; }
+
+        .summary-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 18px; }
+        .summary-table th, .summary-table td { padding: 15px; text-align: left; border-bottom: 1px solid #ddd; }
+        .summary-table th { background-color: var(--primary-color); color: white; font-weight: 600; }
+        .summary-table .total-row td { font-weight: bold; font-size: 24px; background-color: #eef5fa; color: var(--accent-color); }
+
+        .projection-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 18px; }
+        .projection-table th, .projection-table td { padding: 15px; border-bottom: 1px solid #ddd; text-align: right;}
+        .projection-table th { background-color: #f1f4f8; color: var(--primary-color); font-weight: bold; border-bottom: 2px solid var(--primary-color); font-size: 16px;}
+        .projection-table th:first-child, .projection-table td:first-child { text-align: center; }
+        .projection-table td:first-child { font-weight: bold; background-color: #f9f9f9; }
+        .projection-table tr:nth-child(even) { background-color: #f9f9f9; }
+
+        .badge { display: inline-block; padding: 5px 12px; border-radius: 20px; font-size: 16px; font-weight: bold; color: white; vertical-align: middle; margin-left: 10px; }
+        .badge-tax { background-color: #28a745; }
+        .badge-vitality { background-color: #ff9800; }
+
+        /* Print Settings */
+        @media print {
+            .no-print { display: none !important; }
+            body { background-color: white; }
+            .report-container { box-shadow: none; padding: 0; max-width: 100%; margin: 0; }
+            .page-break { page-break-before: always; }
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <!-- Control Panel (ฟอร์มกรอกข้อมูล) -->
+    <div class="max-w-5xl mx-auto bg-white rounded-xl shadow-lg p-6 mb-8 border border-gray-200 no-print">
+        <div class="flex justify-between items-center mb-6 border-b pb-4">
+            <h2 class="text-2xl font-bold text-blue-800">เครื่องมือสร้างข้อเสนอ (AIA Health Solution)</h2>
+            <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-bold shadow transition flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
+                พิมพ์รายงาน (PDF)
+            </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- ข้อมูลลูกค้า -->
+            <div class="col-span-1 lg:col-span-2 bg-gray-50 p-4 rounded-lg border">
+                <h3 class="font-bold text-gray-700 mb-3">1. ข้อมูลผู้มุ่งหวัง</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="col-span-2">
+                        <label class="block text-sm text-gray-600 mb-1">ชื่อ-นามสกุล</label>
+                        <input type="text" id="inp-name" value="น.ส. ญาณิศา ลิ้มเจริญ" class="w-full border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none" oninput="updateReport()">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-600 mb-1">เพศ</label>
+                        <select id="inp-gender" class="w-full border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none" onchange="updateReport()">
+                            <option value="female" selected>หญิง</option>
+                            <option value="male">ชาย</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-600 mb-1">อายุ (ปี)</label>
+                        <input type="number" id="inp-age" value="25" min="1" max="70" class="w-full border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none" oninput="updateReport()">
+                    </div>
+                </div>
+            </div>
+
+            <!-- ทุนประกันหลัก -->
+            <div class="col-span-1 lg:col-span-2 bg-blue-50 p-4 rounded-lg border border-blue-100">
+                <h3 class="font-bold text-blue-800 mb-3">2. ประกันชีวิตหลัก (20PLN)</h3>
+                <div>
+                    <label class="block text-sm text-gray-600 mb-1">ทุนประกันชีวิต (บาท)</label>
+                    <input type="number" id="inp-main-sum" value="150000" step="10000" class="w-full border p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none text-lg font-bold" oninput="updateReport()">
+                    <p class="text-xs text-gray-500 mt-1">*รับส่วนลด 1 บาท/พัน (ทุน 2.5แสน) หรือ 2 บาท/พัน (ทุน 6แสน)</p>
+                </div>
+            </div>
+
+            <!-- สัญญาเพิ่มเติม -->
+            <div class="col-span-1 lg:col-span-4 bg-red-50 p-4 rounded-lg border border-red-100">
+                <h3 class="font-bold text-red-800 mb-3">3. สัญญาเพิ่มเติม (อนุสัญญา)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <label class="block text-sm text-gray-600 mb-1">AIA Health Happy (เหมาจ่าย)</label>
+                        <select id="inp-hh-plan" class="w-full border p-2 rounded focus:ring-2 focus:ring-red-400 outline-none font-bold" onchange="updateReport()">
+                            <option value="1m">แผน 1 ล้านบาท (ค่าห้อง 1,500)</option>
+                            <option value="5m" selected>แผน 5 ล้านบาท (ค่าห้อง 3,000)</option>
+                            <option value="15m">แผน 15 ล้านบาท (ค่าห้อง 6,000)</option>
+                            <option value="25m">แผน 25 ล้านบาท (ค่าห้อง 9,000)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-600 mb-1">Care for Cancer (มะเร็ง)</label>
+                        <select id="inp-cfc-sum" class="w-full border p-2 rounded focus:ring-2 focus:ring-red-400 outline-none" onchange="updateReport()">
+                            <option value="0">ไม่เลือก</option>
+                            <option value="100000">100,000 บาท</option>
+                            <option value="200000">200,000 บาท</option>
+                            <option value="300000">300,000 บาท</option>
+                            <option value="500000" selected>500,000 บาท</option>
+                            <option value="1000000">1,000,000 บาท</option>
+                            <option value="2000000">2,000,000 บาท</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-600 mb-1">HB Extra (ชดเชยรายวัน)</label>
+                        <select id="inp-hb-sum" class="w-full border p-2 rounded focus:ring-2 focus:ring-red-400 outline-none" onchange="updateReport()">
+                            <option value="0">ไม่เลือก</option>
+                            <option value="500" selected>วันละ 500 บาท</option>
+                            <option value="1000">วันละ 1,000 บาท</option>
+                            <option value="1500">วันละ 1,500 บาท</option>
+                            <option value="2000">วันละ 2,000 บาท</option>
+                            <option value="3000">วันละ 3,000 บาท</option>
+                            <option value="5000">วันละ 5,000 บาท</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ส่วนของ Report (จะถูกอัปเดตด้วย JavaScript) -->
+    <div class="report-container" id="report-output">
+        <div class="report-header">
+            <h1 class="report-h1">รายงานสรุปข้อเสนอประกันภัย</h1>
+            <div class="client-info-box">
+                <p><strong>ผู้มุ่งหวัง:</strong> <span id="out-name">-</span></p>
+                <p><strong>อายุ:</strong> <span id="out-age">-</span> ปี (เพศ<span id="out-gender">-</span>)</p>
+                <p><strong>วันที่จัดทำ:</strong> <span id="out-date">-</span></p>
+            </div>
+        </div>
+
+        <!-- 1. ประกันหลัก -->
+        <div class="report-section">
+            <h2 class="report-h2">1. สัญญาหลัก: ความคุ้มครองชีวิต <span class="badge badge-tax">ลดหย่อนภาษีได้</span></h2>
+            <h3 class="report-h3">เอไอเอ ตลอดชีพ ชำระเบี้ยฯ 20 ปี (ไม่มีเงินปันผล) - 20PLN</h3>
+            <table class="detail-table">
+                <tr><th style="width: 40%;">รายการ</th><th style="width: 60%;">รายละเอียด</th></tr>
+                <tr><td><strong>ทุนประกันชีวิต</strong></td><td><span id="out-main-sum">0</span> บาท (คุ้มครองถึงอายุ 99 ปี)</td></tr>
+                <tr><td><strong>ระยะเวลาชำระเบี้ย</strong></td><td>20 ปี (เบี้ยคงที่ตลอดสัญญา)</td></tr>
+                <tr><td><strong>ผลประโยชน์</strong></td><td>เสียชีวิตทุกกรณี หรือ อยู่ครบสัญญา รับ <span id="out-main-sum2">0</span> บาท</td></tr>
+                <tr><td><strong>สัญญาแนบท้าย (ฟรี)</strong></td><td>ยกเว้นการชำระเบี้ยฯ หากทุพพลภาพถาวรสิ้นเชิง (WP)</td></tr>
+            </table>
+            <span class="price-highlight">เบี้ยประกันภัย: <span id="out-main-prem">0</span> บาท/ปี</span>
+        </div>
+
+        <!-- 2. สุขภาพ -->
+        <div class="report-section">
+            <h2 class="report-h2">2. ประกันสุขภาพ (เหมาจ่าย) <span class="badge badge-vitality">Vitality</span> <span class="badge badge-tax">ลดหย่อนภาษีได้</span></h2>
+            <h3 class="report-h3">AIA Health Happy (<span id="out-hh-name">แผน 5 ล้านบาท</span>)</h3>
+            <p><strong>วงเงินความคุ้มครองสูงสุด:</strong> <span id="out-hh-limit">5,000,000</span> บาท ต่อรอบปีกรมธรรม์</p>
+            <table class="detail-table">
+                <tr><th style="width: 70%;">รายการผลประโยชน์หลัก</th><th style="width: 30%;">ความคุ้มครอง</th></tr>
+                <tr class="sub-header"><td colspan="2">ส่วนที่ 1: ผลประโยชน์กรณีผู้ป่วยใน (IPD)</td></tr>
+                <tr>
+                    <td>1. ค่าห้อง และค่าอาหาร ค่าบริการในโรงพยาบาล<br><span style="font-size: 0.85em; color: #666;">*กรณี ICU จ่ายตามจริง สูงสุด 365 วัน</span></td>
+                    <td><strong id="out-hh-room">3,000</strong> <strong>บาท/วัน</strong></td>
+                </tr>
+                <tr><td>2. ค่าบริการทางการแพทย์ (ค่ายา, น้ำเกลือ, เลือด)</td><td>จ่ายตามจริง</td></tr>
+                <tr><td>3. ค่าแพทย์ตรวจรักษา (Doctor Fee)</td><td>จ่ายตามจริง</td></tr>
+                <tr><td>4. ค่ารักษาพยาบาลโดยการผ่าตัด (ศัลยกรรม)</td><td>จ่ายตามจริง</td></tr>
+                <tr class="sub-header"><td colspan="2">ส่วนที่ 2: ผลประโยชน์กรณีไม่ต้องเข้าพักรักษาตัวเป็นผู้ป่วยใน</td></tr>
+                <tr><td>ค่าบริการทางการแพทย์ตรวจวินิจฉัย (ก่อน-หลัง แอดมิท)</td><td>จ่ายตามจริง</td></tr>
+                <tr><td>ค่ารักษาพยาบาลอุบัติเหตุฉุกเฉิน (ภายใน 24 ชม.)</td><td>จ่ายตามจริง</td></tr>
+                <tr><td>ค่าบำบัดรักษาโรคไตวายเรื้อรัง (ล้างไต) และ มะเร็ง (รังสี/เคมี)</td><td>จ่ายตามจริง</td></tr>
+                <tr id="row-hh-opd" style="display:none;"><td>ค่ารักษาพยาบาลผู้ป่วยนอก (OPD)</td><td><strong id="out-hh-opd">0</strong> บาท/ครั้ง (สูงสุด 30 ครั้ง/ปี)</td></tr>
+                <tr class="sub-header"><td colspan="2">ผลประโยชน์พิเศษ</td></tr>
+                <tr>
+                    <td><strong>ผลประโยชน์สูงสุดเพิ่มเป็น 2 เท่า</strong><br><span style="font-size: 0.85em; color: #666;">กรณีเจ็บป่วยด้วยโรคร้ายแรงครั้งแรก (ต่อเนื่อง 4 ปีกรมธรรม์)</span></td>
+                    <td>คุ้มครอง</td>
+                </tr>
+            </table>
+            <span class="price-highlight">เบี้ยประกันภัย: <span id="out-hh-prem">0</span> บาท/ปี</span>
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- 3. โรคร้ายแรง -->
+        <div class="report-section" id="sec-cfc">
+            <h2 class="report-h2">3. ประกันโรคร้ายแรง (มะเร็ง) <span class="badge badge-vitality">Vitality</span></h2>
+            <h3 class="report-h3">AIA Care for Cancer</h3>
+            <table class="detail-table">
+                <tr><th style="width: 40%;">ความคุ้มครอง</th><th style="width: 60%;">วงเงิน / เงื่อนไข</th></tr>
+                <tr><td><strong>ทุนประกันมะเร็ง (เจอ-จ่าย-จบ)</strong></td><td><span id="out-cfc-sum">0</span> บาท (ทุกระยะ)</td></tr>
+                <tr><td><strong>ชดเชยรายวัน (ผู้ป่วยใน)</strong></td><td><span id="out-cfc-ipd">0</span> บาท/วัน</td></tr>
+                <tr><td><strong>ชดเชย (ผู้ป่วยนอก เคมี/รังสีบำบัด)</strong></td><td><span id="out-cfc-opd">0</span> บาท/วัน</td></tr>
+            </table>
+            <span class="price-highlight">เบี้ยประกันภัย: <span id="out-cfc-prem">0</span> บาท/ปี</span>
+        </div>
+
+        <!-- 4. ชดเชยรายได้ -->
+        <div class="report-section" id="sec-hb">
+            <h2 class="report-h2">4. ชดเชยรายได้ (HB Extra) <span class="badge badge-vitality">Vitality</span></h2>
+            <h3 class="report-h3">AIA HB Extra (แผน <span id="out-hb-plan">500</span>)</h3>
+            <table class="detail-table">
+                <tr><th style="width: 40%;">กรณีเข้ารักษาตัว</th><th style="width: 60%;">เงินชดเชย</th></tr>
+                <tr><td><strong>ผู้ป่วยในทั่วไป</strong></td><td><span id="out-hb-ipd">0</span> บาท/วัน</td></tr>
+                <tr><td><strong>ผู้ป่วยหนัก (ICU)</strong></td><td><span id="out-hb-icu">0</span> บาท/วัน (3 เท่า)</td></tr>
+                <tr><td><strong>ผ่าตัด (วางยาสลบ/บล็อกหลัง)</strong></td><td>รับเงินก้อน <span id="out-hb-surg">0</span> บาท (5 เท่า)</td></tr>
+                <tr><td><strong>โรคร้ายแรงเฉียบพลัน 13 โรค</strong></td><td>รับเงินก้อน <span id="out-hb-ci">0</span> บาท (25 เท่า)</td></tr>
+            </table>
+            <span class="price-highlight">เบี้ยประกันภัย: <span id="out-hb-prem">0</span> บาท/ปี</span>
+        </div>
+
+        <!-- สรุปเบี้ย -->
+        <h2 class="report-h2" style="margin-top: 50px;">สรุปเบี้ยประกันภัยรวม ปีแรก</h2>
+        <table class="summary-table">
+            <thead>
+                <tr><th style="width: 50%;">รายการ</th><th style="width: 25%;">ทุน/วงเงิน</th><th style="width: 25%; text-align: right;">เบี้ยประกัน (บาท)</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>1. ประกันชีวิตหลัก (20PLN)</td><td><span id="sum-main-sum">0</span></td><td style="text-align: right;" id="sum-main-prem">0</td></tr>
+                <tr><td>2. AIA Health Happy</td><td><span id="sum-hh-limit">0</span></td><td style="text-align: right;" id="sum-hh-prem">0</td></tr>
+                <tr id="row-sum-cfc"><td>3. AIA Care for Cancer</td><td><span id="sum-cfc-sum">0</span></td><td style="text-align: right;" id="sum-cfc-prem">0</td></tr>
+                <tr id="row-sum-hb"><td>4. AIA HB Extra</td><td>วันละ <span id="sum-hb-sum">0</span></td><td style="text-align: right;" id="sum-hb-prem">0</td></tr>
+                <tr class="total-row"><td colspan="2">รวมเบี้ยประกันภัยทั้งสิ้นต่อปี</td><td style="text-align: right;" id="sum-total-prem">0</td></tr>
+            </tbody>
+        </table>
+
+        <div class="page-break"></div>
+
+        <!-- ตารางเบี้ยล่วงหน้า -->
+        <div class="report-section" style="background-color: #f8fbff; border-color: var(--primary-color); margin-top: 40px;">
+            <h2 class="report-h2">ตารางประมาณการเบี้ยประกันภัยตามช่วงอายุ</h2>
+            <p>แสดงการปรับเพิ่มของเบี้ยประกันภัยตามช่วงอายุ (ก่อนหักส่วนลด Vitality Bonus)</p>
+            <div style="overflow-x: auto;">
+                <table class="projection-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 12%;">ช่วงอายุ</th>
+                            <th style="width: 15%;">ประกันหลัก<br><span style="font-size: 13px; font-weight: normal; color: #888;">(20PLN)</span></th>
+                            <th style="width: 17%;">Health Happy<br><span style="font-size: 13px; font-weight: normal; color: #888;" id="proj-hh-desc"></span></th>
+                            <th style="width: 17%;" id="th-proj-cfc">Care for Cancer<br><span style="font-size: 13px; font-weight: normal; color: #888;" id="proj-cfc-desc"></span></th>
+                            <th style="width: 15%;" id="th-proj-hb">HB Extra<br><span style="font-size: 13px; font-weight: normal; color: #888;" id="proj-hb-desc"></span></th>
+                            <th style="width: 24%; background-color: var(--accent-color); color: white;">รวมเบี้ย (บาท/ปี)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="projection-tbody">
+                        <!-- Dynamic Rows -->
+                    </tbody>
+                </table>
+            </div>
+            <p style="font-size: 14px; color: #777; margin-top: 15px;">
+                * หมายเหตุ: ประกันหลักชำระเบี้ยคงที่ 20 ปี หลังจากนั้นคุ้มครองต่อเนื่องถึงอายุ 99 ปีโดยไม่ต้องชำระเบี้ยส่วนนี้ สัญญาเพิ่มเติมอื่นๆ จะปรับเบี้ยตามช่วงอายุ (Age Band)
+            </p>
+        </div>
+
+    </div>
+
+<script>
+// ==========================================
+// DATA & RATES (Extracted from provided code)
+// ==========================================
+const RATE_20PLN = {
+    male: { 
+        0: 12.76, 1: 12.81, 2: 12.98, 3: 13.15, 4: 13.33, 5: 13.53, 6: 13.73, 7: 13.95, 8: 14.18, 9: 14.42, 10: 14.68, 
+        11: 14.96, 12: 15.23, 13: 15.52, 14: 15.80, 15: 16.09, 16: 16.38, 17: 16.67, 18: 16.97, 19: 17.27, 20: 17.58, 
+        21: 17.90, 22: 18.23, 23: 18.57, 24: 18.93, 25: 19.31, 26: 19.70, 27: 20.12, 28: 20.56, 29: 21.02, 30: 21.50, 
+        31: 22.01, 32: 22.55, 33: 23.11, 34: 23.69, 35: 24.30, 36: 24.94, 37: 25.61, 38: 26.31, 39: 27.04, 40: 27.80, 
+        41: 28.60, 42: 29.44, 43: 30.32, 44: 31.24, 45: 32.20, 46: 33.22, 47: 34.28, 48: 35.40, 49: 36.57, 50: 37.81, 
+        51: 39.13, 52: 40.51, 53: 41.99, 54: 43.56, 55: 45.25, 56: 47.05, 57: 48.99, 58: 51.08, 59: 53.33, 60: 55.77, 
+        61: 58.42, 62: 61.29, 63: 64.19, 64: 66.96, 65: 69.89, 66: 71.99, 67: 73.80, 68: 75.13, 69: 76.40, 70: 78.11 
+    },
+    female: { 
+        0: 11.47, 1: 11.47, 2: 11.51, 3: 11.58, 4: 11.68, 5: 11.80, 6: 11.94, 7: 12.10, 8: 12.27, 9: 12.45, 10: 12.66, 
+        11: 12.87, 12: 13.09, 13: 13.32, 14: 13.56, 15: 13.76, 16: 13.97, 17: 14.19, 18: 14.41, 19: 14.65, 20: 14.90, 
+        21: 15.15, 22: 15.43, 23: 15.71, 24: 16.00, 25: 16.31, 26: 16.64, 27: 16.98, 28: 17.34, 29: 17.72, 30: 18.11, 
+        31: 18.53, 32: 18.96, 33: 19.42, 34: 19.90, 35: 20.40, 36: 20.93, 37: 21.48, 38: 22.06, 39: 22.67, 40: 23.30, 
+        41: 23.96, 42: 24.66, 43: 25.39, 44: 26.15, 45: 26.95, 46: 27.79, 47: 28.68, 48: 29.61, 49: 30.59, 50: 31.62, 
+        51: 32.72, 52: 33.88, 53: 35.11, 54: 36.41, 55: 37.81, 56: 39.29, 57: 40.89, 58: 42.60, 59: 44.44, 60: 46.43, 
+        61: 48.59, 62: 50.93, 63: 53.49, 64: 56.27, 65: 59.32, 66: 61.90, 67: 63.61, 68: 64.71, 69: 66.13, 70: 67.07 
+    }
+};
+
+const RATE_HH = {
+    male: {
+        "1m":[16400,13500,13700,14700,15100,17000,19200,21600,28300,34100,40900,59400],
+        "5m":[20200,16500,16900,18300,18900,20800,23800,26700,35000,42300,50600,72100],
+        "15m":[25500,20100,21600,26100,29400,31800,36000,40200,50100,63900,72300,105000],
+        "25m":[33400,26200,28000,33800,37800,40900,47300,52400,65300,83000,94100,136700]
+    },
+    female: {
+        "1m":[14400,15200,17200,17500,18400,20400,22300,24500,28500,34400,41500,60800],
+        "5m":[18200,19100,21500,21800,22700,25100,27800,30400,35200,42500,50800,74000],
+        "15m":[21600,23100,27000,30600,34200,37200,42900,46500,50700,65100,73500,107100],
+        "25m":[27900,30300,35300,38000,42300,46000,53600,60700,65500,84600,95700,139300]
+    }
+};
+
+const RATE_CFC = {
+    male: { "0-15":119.51, "16-20":135.16, "21-25":155.84, "26-30":189.26, "31-35":253.51, "36-40":386.81, "41-45":512.13, "46-50":800.92, "51-55":1282.87, "56-60":1869.36, "61-65":2876.04, "66-70":4676.21 },
+    female: { "0-15":119.51, "16-20":139.33, "21-25":182.50, "26-30":253.40, "31-35":375.68, "36-40":462.17, "41-45":669.69, "46-50":921.10, "51-55":1247.10, "56-60":1774.95, "61-65":2115.73, "66-70":3143.33 }
+};
+
+const RATE_HB = {
+    male: { "16-20":360, "21-35":210, "36-40":230, "41-45":250, "46-50":290, "51-55":350, "56-60":420, "61-65":510, "66-70":710, "71-75":910 },
+    female: { "16-20":325, "21-35":280, "36-40":290, "41-45":320, "46-50":370, "51-55":400, "56-60":460, "61-65":490, "66-70":600, "71-75":710 }
+};
+
+const HH_DETAILS = {
+    "1m": { name: "แผน 1 ล้านบาท", limit: "1,000,000", room: "1,500", opd: 0 },
+    "5m": { name: "แผน 5 ล้านบาท", limit: "5,000,000", room: "3,000", opd: 0 },
+    "15m": { name: "แผน 15 ล้านบาท", limit: "15,000,000", room: "6,000", opd: 0 },
+    "25m": { name: "แผน 25 ล้านบาท", limit: "25,000,000", room: "9,000", opd: "2,000" }
+};
+
+const AGE_BANDS = ["11-15","16-20","21-25","26-30","31-35","36-40","41-45","46-50","51-55","56-60","61-65","66-70"];
+
+// ==========================================
+// CALCULATION LOGIC
+// ==========================================
+function getBandIndex(age) {
+    if (age >= 11 && age <= 15) return 0;
+    if (age >= 16 && age <= 20) return 1;
+    if (age >= 21 && age <= 25) return 2;
+    if (age >= 26 && age <= 30) return 3;
+    if (age >= 31 && age <= 35) return 4;
+    if (age >= 36 && age <= 40) return 5;
+    if (age >= 41 && age <= 45) return 6;
+    if (age >= 46 && age <= 50) return 7;
+    if (age >= 51 && age <= 55) return 8;
+    if (age >= 56 && age <= 60) return 9;
+    if (age >= 61 && age <= 65) return 10;
+    if (age >= 66 && age <= 70) return 11;
+    return 0; 
+}
+
+function getRiderRate(type, age, gender) {
+    const table = type === 'CFC' ? RATE_CFC[gender] : RATE_HB[gender];
+    for (const [range, rate] of Object.entries(table)) {
+        const parts = range.split('-');
+        const min = parseInt(parts[0]);
+        const max = parts.length > 1 ? parseInt(parts[1]) : 99;
+        if (age >= min && age <= max) return rate;
+    }
+    return 0; 
+}
+
+function formatMoney(num) {
+    return num.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 2});
+}
+
+function calcMain(sum, age, gender) {
+    let base = RATE_20PLN[gender][age] || 0;
+    let discount = 0;
+    if (sum >= 600000) discount = 2;
+    else if (sum >= 250000) discount = 1;
+    let finalRate = Math.max(0, base - discount);
+    return (sum / 1000) * finalRate;
+}
+
+// ==========================================
+// UPDATE DOM FUNCTION
+// ==========================================
+function updateReport() {
+    // 1. Get Values
+    const name = document.getElementById('inp-name').value || '-';
+    const gender = document.getElementById('inp-gender').value;
+    const genderTh = gender === 'male' ? 'ชาย' : 'หญิง';
+    const age = parseInt(document.getElementById('inp-age').value) || 0;
+    const mainSum = parseInt(document.getElementById('inp-main-sum').value) || 0;
+    const hhPlan = document.getElementById('inp-hh-plan').value;
+    const cfcSum = parseInt(document.getElementById('inp-cfc-sum').value) || 0;
+    const hbSum = parseInt(document.getElementById('inp-hb-sum').value) || 0;
+
+    // Date
+    const today = new Date();
+    const dateStr = `${today.getDate().toString().padStart(2,'0')}/${(today.getMonth()+1).toString().padStart(2,'0')}/${today.getFullYear()}`;
+
+    // 2. Calculate Current Premiums
+    const pMain = calcMain(mainSum, age, gender);
+    
+    const bandIdx = getBandIndex(age);
+    const pHH = RATE_HH[gender][hhPlan][bandIdx] || 0;
+    
+    const pCFC = (cfcSum / 100000) * getRiderRate('CFC', age, gender);
+    const pHB = (hbSum / 100) * getRiderRate('HB', age, gender);
+
+    const pTotal = pMain + pHH + pCFC + pHB;
+
+    // 3. Update Text & Info in DOM
+    document.getElementById('out-name').textContent = name;
+    document.getElementById('out-age').textContent = age;
+    document.getElementById('out-gender').textContent = genderTh;
+    document.getElementById('out-date').textContent = dateStr;
+
+    // Main
+    document.getElementById('out-main-sum').textContent = formatMoney(mainSum);
+    document.getElementById('out-main-sum2').textContent = formatMoney(mainSum);
+    document.getElementById('out-main-prem').textContent = formatMoney(pMain);
+
+    // Health Happy
+    const hh = HH_DETAILS[hhPlan];
+    document.getElementById('out-hh-name').textContent = hh.name;
+    document.getElementById('out-hh-limit').textContent = hh.limit;
+    document.getElementById('out-hh-room').textContent = formatMoney(parseInt(hh.room.replace(/,/g, '')));
+    document.getElementById('out-hh-prem').textContent = formatMoney(pHH);
+    if(hh.opd !== 0) {
+        document.getElementById('row-hh-opd').style.display = 'table-row';
+        document.getElementById('out-hh-opd').textContent = hh.opd;
+    } else {
+        document.getElementById('row-hh-opd').style.display = 'none';
+    }
+
+    // Care for Cancer
+    if(cfcSum > 0) {
+        document.getElementById('sec-cfc').style.display = 'block';
+        document.getElementById('row-sum-cfc').style.display = 'table-row';
+        document.getElementById('out-cfc-sum').textContent = formatMoney(cfcSum);
+        document.getElementById('out-cfc-ipd').textContent = formatMoney((cfcSum/100000) * 2000);
+        document.getElementById('out-cfc-opd').textContent = formatMoney((cfcSum/100000) * 500);
+        document.getElementById('out-cfc-prem').textContent = formatMoney(pCFC);
+    } else {
+        document.getElementById('sec-cfc').style.display = 'none';
+        document.getElementById('row-sum-cfc').style.display = 'none';
+    }
+
+    // HB Extra
+    if(hbSum > 0) {
+        document.getElementById('sec-hb').style.display = 'block';
+        document.getElementById('row-sum-hb').style.display = 'table-row';
+        document.getElementById('out-hb-plan').textContent = formatMoney(hbSum);
+        document.getElementById('out-hb-ipd').textContent = formatMoney(hbSum);
+        document.getElementById('out-hb-icu').textContent = formatMoney(hbSum * 3);
+        document.getElementById('out-hb-surg').textContent = formatMoney(hbSum * 5);
+        document.getElementById('out-hb-ci').textContent = formatMoney(hbSum * 25);
+        document.getElementById('out-hb-prem').textContent = formatMoney(pHB);
+    } else {
+        document.getElementById('sec-hb').style.display = 'none';
+        document.getElementById('row-sum-hb').style.display = 'none';
+    }
+
+    // Summary Table
+    document.getElementById('sum-main-sum').textContent = formatMoney(mainSum);
+    document.getElementById('sum-main-prem').textContent = formatMoney(pMain);
+    
+    document.getElementById('sum-hh-limit').textContent = `${(parseInt(hh.limit.replace(/,/g, ''))/1000000)} ล้านบาท`;
+    document.getElementById('sum-hh-prem').textContent = formatMoney(pHH);
+
+    document.getElementById('sum-cfc-sum').textContent = formatMoney(cfcSum);
+    document.getElementById('sum-cfc-prem').textContent = formatMoney(pCFC);
+
+    document.getElementById('sum-hb-sum').textContent = formatMoney(hbSum);
+    document.getElementById('sum-hb-prem').textContent = formatMoney(pHB);
+
+    document.getElementById('sum-total-prem').textContent = formatMoney(pTotal);
+
+    // 4. Update Projection Table Header Descriptions
+    document.getElementById('proj-hh-desc').textContent = `(${hh.name})`;
+    document.getElementById('proj-cfc-desc').textContent = cfcSum > 0 ? `(ทุน ${(cfcSum/100000)} แสน)` : '';
+    document.getElementById('proj-hb-desc').textContent = hbSum > 0 ? `(แผน ${hbSum})` : '';
+
+    // Generate Projection Rows
+    const tbody = document.getElementById('projection-tbody');
+    tbody.innerHTML = '';
+    
+    const startIdx = getBandIndex(age);
+    
+    // Hide columns if rider is 0
+    document.getElementById('th-proj-cfc').style.display = cfcSum > 0 ? 'table-cell' : 'none';
+    document.getElementById('th-proj-hb').style.display = hbSum > 0 ? 'table-cell' : 'none';
+
+    for(let i = startIdx; i < AGE_BANDS.length; i++) {
+        const bandStr = AGE_BANDS[i];
+        const bandStartAge = parseInt(bandStr.split('-')[0]);
+        
+        // Premium Main: Pay for 20 years from start age.
+        // If the band's start age is >= (input age + 20), payment is done.
+        let rowMain = 0;
+        let mainDesc = "";
+        if (bandStartAge < (age + 20)) {
+            rowMain = pMain; // Still paying
+        } else {
+            mainDesc = `<br><span style="font-size: 12px; color: #888;">(ครบชำระ)</span>`;
+        }
+
+        const rowHH = RATE_HH[gender][hhPlan][i] || 0;
+        const rowCFC = cfcSum > 0 ? (cfcSum / 100000) * getRiderRate('CFC', bandStartAge, gender) : 0;
+        const rowHB = hbSum > 0 ? (hbSum / 100) * getRiderRate('HB', bandStartAge, gender) : 0;
+        
+        const rowTotal = rowMain + rowHH + rowCFC + rowHB;
+
+        const isCompletePayment = (rowMain === 0);
+        
+        let tr = document.createElement('tr');
+        if(isCompletePayment && bandStartAge >= (age + 20) && bandStartAge < (age + 25)) {
+             tr.style.backgroundColor = '#fff4f4'; // Highlight the row where payment stops
+        }
+
+        let html = `
+            <td>${bandStr}</td>
+            <td>${rowMain > 0 ? formatMoney(rowMain) : '-'}${mainDesc}</td>
+            <td>${formatMoney(rowHH)}</td>
+        `;
+
+        if(cfcSum > 0) html += `<td>${formatMoney(rowCFC)}</td>`;
+        if(hbSum > 0) html += `<td>${formatMoney(rowHB)}</td>`;
+
+        html += `<td style="color: var(--accent-color); font-weight: bold; font-size: 22px;">${formatMoney(rowTotal)}</td>`;
+        
+        tr.innerHTML = html;
+        tbody.appendChild(tr);
+    }
+}
+
+// Initial Call
+document.addEventListener('DOMContentLoaded', updateReport);
+
+</script>
+</body>
+</html>
+

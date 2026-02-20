@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AIA Health Protection Generator</title>
+    <title>AIA Health Protection Generator (Lifetime Projection)</title>
     <!-- นำเข้า Tailwind CSS สำหรับส่วนจัดการ Form และ Layout -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- นำเข้าฟอนต์ Sarabun -->
@@ -25,7 +25,7 @@
             color: var(--text-color);
         }
 
-        /* Report Styles (คงรูปแบบเดิมที่เน้นตัวใหญ่อ่านง่าย) */
+        /* Report Styles */
         .report-container {
             max-width: 1000px;
             margin: 0 auto;
@@ -83,7 +83,7 @@
         .summary-table .total-row td { font-weight: bold; font-size: 24px; background-color: #eef5fa; color: var(--accent-color); }
 
         .projection-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 18px; }
-        .projection-table th, .projection-table td { padding: 15px; border-bottom: 1px solid #ddd; text-align: right;}
+        .projection-table th, .projection-table td { padding: 12px 15px; border-bottom: 1px solid #ddd; text-align: right;}
         .projection-table th { background-color: #f1f4f8; color: var(--primary-color); font-weight: bold; border-bottom: 2px solid var(--primary-color); font-size: 16px;}
         .projection-table th:first-child, .projection-table td:first-child { text-align: center; }
         .projection-table td:first-child { font-weight: bold; background-color: #f9f9f9; }
@@ -104,7 +104,7 @@
 </head>
 <body class="p-4 md:p-8">
 
-    <!-- Control Panel (ฟอร์มกรอกข้อมูล) -->
+    <!-- Control Panel -->
     <div class="max-w-5xl mx-auto bg-white rounded-xl shadow-lg p-6 mb-8 border border-gray-200 no-print">
         <div class="flex justify-between items-center mb-6 border-b pb-4">
             <h2 class="text-2xl font-bold text-blue-800">เครื่องมือสร้างข้อเสนอ (AIA Health Solution)</h2>
@@ -189,7 +189,7 @@
         </div>
     </div>
 
-    <!-- ส่วนของ Report (จะถูกอัปเดตด้วย JavaScript) -->
+    <!-- Report Output -->
     <div class="report-container" id="report-output">
         <div class="report-header">
             <h1 class="report-h1">รายงานสรุปข้อเสนอประกันภัย</h1>
@@ -343,13 +343,13 @@
             </tbody>
         </table>
 
-        <!-- ตารางเบี้ยล่วงหน้า -->
+        <!-- ตารางเบี้ยล่วงหน้า (Lifetime Projection) -->
         <div class="report-section" style="background-color: #f8fbff; border-color: var(--primary-color); margin-top: 40px;">
-            <h2 class="report-h2">ตารางประมาณการเบี้ยประกันภัยตามช่วงอายุ</h2>
-            <p>แสดงการปรับเพิ่มของเบี้ยประกันภัยตามช่วงอายุ (ก่อนหักส่วนลด Vitality Bonus)</p>
-            <div style="overflow-x: auto;">
-                <table class="projection-table">
-                    <thead>
+            <h2 class="report-h2">ตารางประมาณการเบี้ยประกันภัยตามช่วงอายุ (จนถึงอายุ 99 ปี)</h2>
+            <p>แสดงการปรับเพิ่มของเบี้ยประกันภัยสุขภาพตามช่วงอายุ (ก่อนหักส่วนลด Vitality Bonus)</p>
+            <div style="overflow-x: auto; max-height: 800px; padding-bottom: 10px;">
+                <table class="projection-table" style="min-width: 850px;">
+                    <thead style="position: sticky; top: 0; z-index: 10;">
                         <tr>
                             <th style="width: 12%;">ช่วงอายุ</th>
                             <th style="width: 15%;">ประกันหลัก<br><span style="font-size: 13px; font-weight: normal; color: #888;">(20PLN)</span></th>
@@ -365,7 +365,8 @@
                 </table>
             </div>
             <p style="font-size: 14px; color: #777; margin-top: 15px;">
-                * หมายเหตุ: ประกันหลักชำระเบี้ยคงที่ 20 ปี หลังจากนั้นคุ้มครองต่อเนื่องถึงอายุ 99 ปีโดยไม่ต้องชำระเบี้ยส่วนนี้ สัญญาเพิ่มเติมอื่นๆ จะปรับเบี้ยตามช่วงอายุ (Age Band)
+                * หมายเหตุ: ประกันหลักชำระเบี้ยคงที่ 20 ปี หลังจากนั้นคุ้มครองต่อเนื่องถึงอายุ 99 ปีโดยไม่ต้องชำระเบี้ยส่วนนี้<br>
+                ** คำว่า "(สิ้นสุด)" หมายถึง สัญญาเพิ่มเติมนั้นๆ ได้สิ้นสุดระยะเวลาให้ความคุ้มครอง หรือไม่มีฐานข้อมูลรองรับการต่ออายุในช่วงอายุดังกล่าว
             </p>
         </div>
 
@@ -373,7 +374,7 @@
 
 <script>
 // ==========================================
-// DATA & RATES (Extracted from provided code)
+// DATA & RATES (Extended up to age 99)
 // ==========================================
 const RATE_20PLN = {
     male: { 
@@ -396,18 +397,19 @@ const RATE_20PLN = {
     }
 };
 
+// Full 18 Elements Arrays for HH up to Age 98
 const RATE_HH = {
     male: {
-        "1m":[16400,13500,13700,14700,15100,17000,19200,21600,28300,34100,40900,59400],
-        "5m":[20200,16500,16900,18300,18900,20800,23800,26700,35000,42300,50600,72100],
-        "15m":[25500,20100,21600,26100,29400,31800,36000,40200,50100,63900,72300,105000],
-        "25m":[33400,26200,28000,33800,37800,40900,47300,52400,65300,83000,94100,136700]
+        "1m":[16400,13500,13700,14700,15100,17000,19200,21600,28300,34100,40900,59400,85400,122900,177800,204500,235200,270500],
+        "5m":[20200,16500,16900,18300,18900,20800,23800,26700,35000,42300,50600,72100,104000,150000,217100,249700,287200,330300],
+        "15m":[25500,20100,21600,26100,29400,31800,36000,40200,50100,63900,72300,105000,152100,219900,318300,366000,420900,484200],
+        "25m":[33400,26200,28000,33800,37800,40900,47300,52400,65300,83000,94100,136700,197800,286300,414700,476900,548400,630700]
     },
     female: {
-        "1m":[14400,15200,17200,17500,18400,20400,22300,24500,28500,34400,41500,60800],
-        "5m":[18200,19100,21500,21800,22700,25100,27800,30400,35200,42500,50800,74000],
-        "15m":[21600,23100,27000,30600,34200,37200,42900,46500,50700,65100,73500,107100],
-        "25m":[27900,30300,35300,38000,42300,46000,53600,60700,65500,84600,95700,139300]
+        "1m":[14400,15200,17200,17500,18400,20400,22300,24500,28500,34400,41500,60800,88200,126300,182700,210100,241600,277800],
+        "5m":[18200,19100,21500,21800,22700,25100,27800,30400,35200,42500,50800,74000,107500,154400,223400,256900,295400,339700],
+        "15m":[21600,23100,27000,30600,34200,37200,42900,46500,50700,65100,73500,107100,155700,224700,325500,374400,430500,495000],
+        "25m":[27900,30300,35300,38000,42300,46000,53600,60700,65500,84600,95700,139300,202000,291800,422700,486100,559000,642900]
     }
 };
 
@@ -428,25 +430,37 @@ const HH_DETAILS = {
     "25m": { name: "แผน 25 ล้านบาท", limit: "25,000,000", room: "9,000", opd: "2,000" }
 };
 
-const AGE_BANDS = ["11-15","16-20","21-25","26-30","31-35","36-40","41-45","46-50","51-55","56-60","61-65","66-70"];
+// Full Age Bands up to 98
+const AGE_BANDS = [
+    "11-15","16-20","21-25","26-30","31-35",
+    "36-40","41-45","46-50","51-55",
+    "56-60","61-65","66-70","71-75",
+    "76-80","81-85","86-90","91-95","96-98"
+];
 
 // ==========================================
 // CALCULATION LOGIC
 // ==========================================
 function getBandIndex(age) {
-    if (age >= 11 && age <= 15) return 0;
-    if (age >= 16 && age <= 20) return 1;
-    if (age >= 21 && age <= 25) return 2;
-    if (age >= 26 && age <= 30) return 3;
-    if (age >= 31 && age <= 35) return 4;
-    if (age >= 36 && age <= 40) return 5;
-    if (age >= 41 && age <= 45) return 6;
-    if (age >= 46 && age <= 50) return 7;
-    if (age >= 51 && age <= 55) return 8;
-    if (age >= 56 && age <= 60) return 9;
-    if (age >= 61 && age <= 65) return 10;
-    if (age >= 66 && age <= 70) return 11;
-    return 0; 
+    if (age < 11) return 0;
+    if (age <= 15) return 0;
+    if (age <= 20) return 1;
+    if (age <= 25) return 2;
+    if (age <= 30) return 3;
+    if (age <= 35) return 4;
+    if (age <= 40) return 5;
+    if (age <= 45) return 6;
+    if (age <= 50) return 7;
+    if (age <= 55) return 8;
+    if (age <= 60) return 9;
+    if (age <= 65) return 10;
+    if (age <= 70) return 11;
+    if (age <= 75) return 12;
+    if (age <= 80) return 13;
+    if (age <= 85) return 14;
+    if (age <= 90) return 15;
+    if (age <= 95) return 16;
+    return 17; // 96-98
 }
 
 function getRiderRate(type, age, gender) {
@@ -457,7 +471,7 @@ function getRiderRate(type, age, gender) {
         const max = parts.length > 1 ? parseInt(parts[1]) : 99;
         if (age >= min && age <= max) return rate;
     }
-    return 0; 
+    return 0; // Return 0 if age exceeds available rates
 }
 
 function formatMoney(num) {
@@ -534,12 +548,10 @@ function updateReport() {
         document.getElementById('out-cfc-ipd').textContent = formatMoney((cfcSum/100000) * 2000);
         document.getElementById('out-cfc-opd').textContent = formatMoney((cfcSum/100000) * 500);
         document.getElementById('out-cfc-prem').textContent = formatMoney(pCFC);
-        // Show Vitality CFC section
         document.getElementById('vitality-cfc').style.display = 'block';
     } else {
         document.getElementById('sec-cfc').style.display = 'none';
         document.getElementById('row-sum-cfc').style.display = 'none';
-        // Hide Vitality CFC section
         document.getElementById('vitality-cfc').style.display = 'none';
     }
 
@@ -573,46 +585,54 @@ function updateReport() {
 
     document.getElementById('sum-total-prem').textContent = formatMoney(pTotal);
 
-    // 4. Update Projection Table Header Descriptions
+    // 4. Update Lifetime Projection Table
     document.getElementById('proj-hh-desc').textContent = `(${hh.name})`;
     document.getElementById('proj-cfc-desc').textContent = cfcSum > 0 ? `(ทุน ${(cfcSum/100000)} แสน)` : '';
     document.getElementById('proj-hb-desc').textContent = hbSum > 0 ? `(แผน ${hbSum})` : '';
 
-    // Generate Projection Rows
     const tbody = document.getElementById('projection-tbody');
     tbody.innerHTML = '';
     
     const startIdx = getBandIndex(age);
     
-    // Hide columns if rider is 0
+    // Toggle Table Columns based on selection
     document.getElementById('th-proj-cfc').style.display = cfcSum > 0 ? 'table-cell' : 'none';
     document.getElementById('th-proj-hb').style.display = hbSum > 0 ? 'table-cell' : 'none';
 
+    // Loop until Age 98 (end of AGE_BANDS array)
     for(let i = startIdx; i < AGE_BANDS.length; i++) {
         const bandStr = AGE_BANDS[i];
         const bandStartAge = parseInt(bandStr.split('-')[0]);
         
-        // Premium Main: Pay for 20 years from start age.
-        // If the band's start age is >= (input age + 20), payment is done.
+        // --- Calculate Premium Main (20 Years Pay) ---
         let rowMain = 0;
         let mainDesc = "";
         if (bandStartAge < (age + 20)) {
-            rowMain = pMain; // Still paying
+            rowMain = pMain;
         } else {
             mainDesc = `<br><span style="font-size: 12px; color: #888;">(ครบชำระ)</span>`;
         }
 
+        // --- Calculate Health Happy ---
         const rowHH = RATE_HH[gender][hhPlan][i] || 0;
-        const rowCFC = cfcSum > 0 ? (cfcSum / 100000) * getRiderRate('CFC', bandStartAge, gender) : 0;
-        const rowHB = hbSum > 0 ? (hbSum / 100) * getRiderRate('HB', bandStartAge, gender) : 0;
         
+        // --- Calculate CFC ---
+        const cfcRate = getRiderRate('CFC', bandStartAge, gender);
+        const rowCFC = (cfcSum > 0 && cfcRate > 0) ? (cfcSum / 100000) * cfcRate : 0;
+        
+        // --- Calculate HB Extra ---
+        const hbRate = getRiderRate('HB', bandStartAge, gender);
+        const rowHB = (hbSum > 0 && hbRate > 0) ? (hbSum / 100) * hbRate : 0;
+        
+        // Total active premium for this band
         const rowTotal = rowMain + rowHH + rowCFC + rowHB;
 
         const isCompletePayment = (rowMain === 0);
         
         let tr = document.createElement('tr');
+        // Highlight the row where primary payment stops
         if(isCompletePayment && bandStartAge >= (age + 20) && bandStartAge < (age + 25)) {
-             tr.style.backgroundColor = '#fff4f4'; // Highlight the row where payment stops
+             tr.style.backgroundColor = '#fff4f4'; 
         }
 
         let html = `
@@ -621,8 +641,15 @@ function updateReport() {
             <td>${formatMoney(rowHH)}</td>
         `;
 
-        if(cfcSum > 0) html += `<td>${formatMoney(rowCFC)}</td>`;
-        if(hbSum > 0) html += `<td>${formatMoney(rowHB)}</td>`;
+        if(cfcSum > 0) {
+            let cfcText = rowCFC > 0 ? formatMoney(rowCFC) : '<span style="color:#aaa; font-size:12px;">(สิ้นสุด)</span>';
+            html += `<td>${cfcText}</td>`;
+        }
+        
+        if(hbSum > 0) {
+            let hbText = rowHB > 0 ? formatMoney(rowHB) : '<span style="color:#aaa; font-size:12px;">(สิ้นสุด)</span>';
+            html += `<td>${hbText}</td>`;
+        }
 
         html += `<td style="color: var(--accent-color); font-weight: bold; font-size: 22px;">${formatMoney(rowTotal)}</td>`;
         

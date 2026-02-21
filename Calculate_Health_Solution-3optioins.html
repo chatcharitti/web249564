@@ -104,7 +104,7 @@
     <!-- Control Panel -->
     <div class="max-w-6xl mx-auto bg-white rounded-xl shadow-lg p-6 mb-8 border border-gray-200 no-print">
         <div class="flex justify-between items-center mb-6 border-b pb-4">
-            <h2 class="text-2xl font-bold text-blue-800">โปรแกรมเปรียบเทียบข้อเสนอ (3 Options)</h2>
+            <h2 class="text-2xl font-bold text-blue-800">โปรแกรมเปรียบเทียบข้อเสนอประกันสุขภาพ AIA (3 Options)</h2>
             <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-bold shadow transition flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
                 พิมพ์รายงาน (PDF)
@@ -220,11 +220,13 @@
     <!-- Report Output -->
     <div class="report-container" id="report-output">
         <div class="report-header">
-            <h1 class="report-h1">รายงานเปรียบเทียบข้อเสนอประกันภัย</h1>
+            <h1 class="report-h1">รายงานเปรียบเทียบข้อเสนอประกันชีวิตและสุขภาพ AIA</h1>
             <div class="client-info-box">
-                <p><strong>ผู้มุ่งหวัง:</strong> <span id="out-name">-</span></p>
+                <p><strong>พิเศษสำหรับ:</strong> <span id="out-name">-</span></p>
                 <p><strong>อายุ:</strong> <span id="out-age">-</span> ปี (เพศ<span id="out-gender">-</span>)</p>
                 <p><strong>วันที่จัดทำ:</strong> <span id="out-date">-</span></p>
+                <p><strong>** รายงานนี้ไม่ใช่ข้อเสนอของบริษัท เป็นการจัดทำขึ้นเพื่อประกอบการพิจารณาและให้เห็นภาพเปรียบเทียบได้ชัดเจนขึ้น</strong></p>
+                <p><strong>**** รายละเอียดความคุ้มครองต่างๆ จะอยู่ในกรมธรรม์ของท่านอย่างครบถ้วน ****</strong></p>
             </div>
         </div>
 
@@ -789,5 +791,6 @@ document.addEventListener('DOMContentLoaded', () => app.init());
 </script>
 </body>
 </html>
+
 
 

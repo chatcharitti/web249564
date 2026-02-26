@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIA Elite Income Prestige — Premium Client Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Sans+Thai:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#C9A84C;
+  --gold-light:#E8D9A0;
+  --gold-dark:#8B7332;
+  --navy:#0D1B2A;
+  --navy-mid:#1B2D45;
+  --navy-light:#243B55;
+  --slate:#374151;
+  --cream:#FAF7F0;
+  --cream-dark:#F0EADC;
+  --white:#FFFFFF;
+  --text-primary:#1A1A2E;
+  --text-secondary:#4A4A68;
+  --text-muted:#7A7A96;
+  --emerald:#1B7A4A;
+  --ruby:#8B2240;
+  --purple:#4A2D6E;
+  --fs-body:1.15rem;
+  --fs-h1:2.8rem;
+  --fs-h2:1.85rem;
+  --fs-h3:1.45rem;
+  --fs-kpi:2.6rem;
+  --radius:12px;
+  --shadow:0 4px 24px rgba(13,27,42,.08);
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:'Noto Sans Thai','Segoe UI',sans-serif;
+  background:var(--cream);
+  color:var(--text-primary);
+  font-size:var(--fs-body);
+  line-height:2;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* === UTILITIES & PRINT === */
+.gold-line{height:4px;background:linear-gradient(90deg,transparent,var(--gold),var(--gold-dark),var(--gold),transparent)}
+.container{max-width:960px;margin:0 auto;padding:0 28px}
+.section{padding:48px 0}
+.section + .section{border-top:1px solid var(--cream-dark)}
+.page-break { page-break-before: always; break-before: page; }
+.print-hidden { display: block; }
+@media print {
+  @page { size: A4; margin: 1.2cm; }
+  body { background: #fff; font-size: 11pt; }
+  .hero { padding: 40px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .section { padding: 24px 0; page-break-inside: avoid; border-top: none; }
+  .insight-box, .kpi-card, .sleeve-card, .highlight-banner { box-shadow: none !important; border: 1px solid var(--cream-dark); -webkit-print-color-adjust: exact; print-color-adjust: exact; page-break-inside: avoid; }
+  .print-hidden { display: none !important; }
+}
+
+/* === HERO HEADER === */
+.hero{
+  background:linear-gradient(160deg,var(--navy) 0%,var(--navy-mid) 40%,var(--navy-light) 100%);
+  color:var(--white);
+  padding:60px 40px 50px;
+  text-align:center;
+  position:relative;
+}
+.hero-content{position:relative;z-index:2;max-width:900px;margin:0 auto}
+.hero-brand{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.1rem;
+  letter-spacing:6px;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:16px;
+  font-weight:600;
+}
+.hero h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:var(--fs-h1);
+  font-weight:700;
+  line-height:1.3;
+  margin-bottom:12px;
+}
+.hero h1 em{font-style:italic;color:var(--gold-light)}
+.hero-sub{font-size:1.2rem;opacity:.8;font-weight:300;margin-bottom:24px;}
+.hero-badge{
+  display:inline-block;
+  background:linear-gradient(135deg,var(--gold-dark),var(--gold));
+  color:var(--navy);
+  padding:12px 36px;
+  border-radius:40px;
+  font-weight:700;
+  font-size:1.05rem;
+}
+
+/* === SECTION TITLES === */
+.section-title{
+  font-size:var(--fs-h2);
+  font-weight:800;
+  color:var(--navy);
+  margin-bottom:28px;
+  padding-left:24px;
+  position:relative;
+}
+.section-title::before{
+  content:'';position:absolute;left:0;top:6px;
+  width:5px;height:calc(100% - 12px);
+  background:linear-gradient(180deg,var(--gold),var(--gold-dark));
+}
+
+/* === GRIDS & BOXES === */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:28px}
+
+.insight-box{
+  background:var(--white);
+  border-radius:var(--radius);
+  padding:30px;
+  box-shadow:var(--shadow);
+}
+.insight-box.danger{border-left:4px solid var(--ruby);}
+.insight-box.success{border-left:4px solid var(--emerald);}
+.insight-box.royal{border-left:4px solid var(--purple);}
+.insight-box.warm{border-left:4px solid var(--gold);}
+
+.box-title{
+  font-size:var(--fs-h3);
+  font-weight:700;
+  margin-bottom:16px;
+  color:var(--navy);
+}
+.insight-box.danger .box-title{color:var(--ruby)}
+.insight-box.success .box-title{color:var(--emerald)}
+
+.point{display:flex;align-items:baseline;gap:12px;margin-bottom:8px;}
+.point::before{
+  content:'';flex-shrink:0;width:6px;height:6px;border-radius:50%;
+  background:var(--gold);margin-top:12px;
+}
+.insight-box.danger .point::before{background:var(--ruby)}
+.insight-box.success .point::before{background:var(--emerald)}
+
+/* === KPI === */
+.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:36px}
+.kpi-card{
+  background:var(--white);border-radius:var(--radius);padding:24px 16px;
+  text-align:center;box-shadow:var(--shadow);border-bottom:3px solid var(--gold);
+}
+.kpi-num{font-size:2rem;font-weight:800;color:var(--navy);line-height:1.2;margin-bottom:4px}
+.kpi-label{font-size:.9rem;color:var(--text-muted);font-weight:600;}
+
+/* === TABLES === */
+.premium-table{
+  width:100%;border-collapse:collapse;font-size:1.05rem;
+  background:var(--white);border-radius:var(--radius);overflow:hidden;
+  box-shadow:var(--shadow);margin-bottom:28px;
+}
+.premium-table th{
+  background:var(--navy);color:var(--gold-light);padding:16px;
+  font-weight:700;text-align:center;
+}
+.premium-table td{
+  padding:16px;border-bottom:1px solid var(--cream-dark);
+  text-align:center;
+}
+.premium-table td:first-child{text-align:left;font-weight:600;color:var(--navy)}
+.best-val{color:var(--emerald);font-weight:800}
+
+/* === FLOW & SLEEVE === */
+.flow-visual{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:28px 0}
+.flow-step{
+  background:var(--white);border:1px solid var(--cream-dark);border-radius:8px;
+  padding:16px;text-align:center;font-weight:700;color:var(--navy);flex:1;
+}
+.flow-step span{display:block;font-size:.85rem;font-weight:400;color:var(--text-muted);margin-top:4px}
+.flow-arrow{color:var(--gold);font-weight:800;}
+
+.sleeve-card{
+  background:var(--white);border-radius:var(--radius);padding:24px;
+  box-shadow:var(--shadow);border-top:4px solid var(--navy);
+}
+
+/* === CALCULATOR === */
+.calc-panel{
+  background:var(--white);padding:24px;border-radius:var(--radius);
+  box-shadow:var(--shadow);margin-bottom:24px;
+}
+.calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:end}
+.calc-input{
+  width:100%;padding:10px 14px;border:1px solid #D1D5DB;
+  border-radius:6px;font-size:1rem;font-weight:600;color:var(--navy);
+  font-family:'Noto Sans Thai',sans-serif;
+}
+.calc-label{font-size:.85rem;font-weight:600;color:var(--text-secondary);margin-bottom:6px;display:block}
+.btn-calc{
+  background:var(--navy);color:var(--gold-light);border:none;
+  padding:12px 24px;border-radius:6px;font-weight:700;cursor:pointer;
+  width:100%;font-size:1rem;transition:background .3s;
+}
+.btn-calc:hover{background:var(--navy-mid)}
+
+/* === HIGHLIGHT BANNER === */
+.highlight-banner{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);
+  color:var(--white);border-radius:var(--radius);padding:40px;
+  text-align:center;margin:36px 0;
+}
+.highlight-banner h3{font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--gold-light);margin-bottom:20px}
+.highlight-kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.hk-box{background:rgba(255,255,255,.05);border:1px solid rgba(201,168,76,.3);border-radius:8px;padding:20px 10px}
+.hk-num{font-size:2rem;font-weight:800;color:var(--gold-light)}
+
+/* === ADVISOR CARD === */
+.advisor-card{
+  background:var(--white);border-radius:var(--radius);padding:30px;
+  border:1px solid var(--gold);display:flex;align-items:center;gap:24px;
+  margin-top:40px;box-shadow:var(--shadow);
+}
+.advisor-avatar{width:80px;height:80px;background:var(--cream-dark);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--navy);font-weight:800;font-size:1.5rem}
+
+/* === FOOTER === */
+.footer{text-align:center;padding:36px 28px;font-size:.88rem;color:var(--text-muted);background:var(--white);}
+.footer-gold{height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+
+@media(max-width:768px){
+  .two-col,.three-col,.kpi-grid,.calc-grid,.highlight-kpi-row{grid-template-columns:1fr}
+  .flow-visual{flex-direction:column}
+  .advisor-card{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- Floating Print Button (Hidden on Print) -->
+<div class="print-hidden" style="position: fixed; bottom: 30px; right: 30px; z-index: 9999;">
+  <button onclick="window.print()" style="background: var(--navy); color: var(--gold-light); border: 1px solid var(--gold); padding: 14px 24px; border-radius: 50px; font-weight: 700; font-size: 1.05rem; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 8px 24px rgba(13,27,42,.25); font-family: 'Noto Sans Thai', sans-serif; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
+    <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+    พิมพ์รายงาน (A4)
+  </button>
+</div>
+
+<div class="gold-line"></div>
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-brand">AIA Elite Income Prestige</div>
+    <h1><em>Strategic Wealth Management</em></h1>
+    <div class="hero-sub">นวัตกรรมสร้างกระแสเงินสดอัจฉริยะ และการส่งต่อมรดกอย่างไร้รอยต่อ</div>
+    <div class="hero-badge">Unit-Linked &nbsp;·&nbsp; ชำระเบี้ย 5 ปี &nbsp;·&nbsp; คุ้มครองตลอดชีพ</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ============================================ -->
+  <!-- SECTION 1 : MACROECONOMICS (Merged & Professionalized) -->
+  <!-- ============================================ -->
+  <div class="section">
+    <h2 class="section-title">วิเคราะห์สภาวะเศรษฐกิจมหภาค (Macroeconomic Context)</h2>
+    <p style="margin-bottom:24px;color:var(--text-secondary)">ทำไมไตรมาส 1 ปี 2026 จึงเป็นจุดพลิกผันที่ต้องทบทวนโครงสร้างพอร์ตโฟลิโอ</p>
+
+    <div class="two-col">
+      <div class="insight-box danger">
+        <div class="box-title">ความท้าทายของเศรษฐกิจในประเทศ</div>
+        <div class="point"><span><b>โครงสร้างดอกเบี้ยต่ำสุด:</b> ธปท. คงอัตราดอกเบี้ยนโยบายระดับ 1.25% ส่งผลให้เงินฝากออมทรัพย์ให้ผลตอบแทนแท้จริงติดลบ (0.25%/ปี)</span></div>
+        <div class="point"><span><b>ภาวะเงินเฟ้อติดลบ:</b> ชี้ชัดถึงกำลังซื้อที่หดตัว 10 เดือนติดต่อกัน ท่ามกลางภาระหนี้ครัวเรือนระดับสูง</span></div>
+        <div class="point"><span><b>การเติบโตที่ชะลอตัว:</b> GDP คาดการณ์เติบโตเพียง 1.5–1.6% การกระจุกตัวของความมั่งคั่งในประเทศคือความเสี่ยงเชิงโครงสร้าง</span></div>
+      </div>
+
+      <div class="insight-box success">
+        <div class="box-title">โอกาสเชิงยุทธศาสตร์จากการกระจายการลงทุน</div>
+        <div class="point"><span><b>ความได้เปรียบด้านค่าเงิน:</b> เงินบาทแข็งค่าเป็นจังหวะเหมาะสมที่สุดในการเข้าถือครองสินทรัพย์สกุลเงินหลัก (Hard Currency) อย่าง USD</span></div>
+        <div class="point"><span><b>ผลตอบแทนตราสารหนี้โลก:</b> อัตราดอกเบี้ยโลกที่ยังทรงตัวในระดับสูง เปิดโอกาสให้ High Yield Bond สร้างกระแสเงินสดได้อย่างสม่ำเสมอ</span></div>
+        <div class="point"><span><b>ส่วนต่างผลตอบแทน (Yield Spread):</b> เป้าหมาย Auto Redemption ~3% ต่อปี ให้กระแสเงินสดเหนือกว่าเงินฝากถึง 12 เท่า</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ============================================ -->
+  <!-- SECTION 2 : PRODUCT & CONCEPTS -->
+  <!-- ============================================ -->
+  <div class="section">
+    <h2 class="section-title">โครงสร้างผลิตภัณฑ์และการจัดการความมั่งคั่ง</h2>
+
+    <div class="kpi-grid">
+      <div class="kpi-card"><div class="kpi-num">5 ปี</div><div class="kpi-label">ระยะเวลาชำระเบี้ย</div></div>
+      <div class="kpi-card"><div class="kpi-num">99 ปี</div><div class="kpi-label">คุ้มครองตลอดชีพ</div></div>
+      <div class="kpi-card" style="border-bottom-color:var(--emerald)"><div class="kpi-num" style="color:var(--emerald)">~3%</div><div class="kpi-label">กระแสเงินสดต่อปี</div></div>
+      <div class="kpi-card" style="border-bottom-color:var(--ruby)"><div class="kpi-num" style="color:var(--ruby)">0%</div><div class="kpi-label">ค่าบริหาร ปีที่ 10+</div></div>
+      <div class="kpi-card"><div class="kpi-num">110%</div><div class="kpi-label">การันตีทุนประกันขั้นต่ำ</div></div>
+    </div>
+
+    <div class="two-col">
+      <div class="insight-box warm">
+        <div class="box-title">Smart Income (กระแสเงินสดอัจฉริยะ)</div>
+        <p>เปลี่ยนเบี้ยประกัน 5 ปี เป็นรายได้เสถียรภาพสูง ผ่านกลไกรับซื้อคืนหน่วยลงทุน (Auto Redemption) อัตโนมัติ ~3% ของมูลค่ากองทุนต่อปี <b>เริ่มรับรายได้ตั้งแต่ปีแรก</b> โดยผลประโยชน์ที่ได้รับนี้ไม่ใช่เงินปันผล จึง<b>ได้รับการยกเว้นภาษีหัก ณ ที่จ่าย 10%</b></p>
+      </div>
+      <div class="insight-box royal">
+        <div class="box-title">Smooth Transfer (การส่งต่อมรดก)</div>
+        <p>มูลค่ากองทุนเติบโตทบต้นและพร้อมส่งมอบเป็นมรดกแก่ผู้รับประโยชน์โดยตรงเมื่อเสียชีวิต <b>หลีกเลี่ยงกระบวนการจัดการมรดกทางศาล</b>ที่ล่าช้าและมีค่าใช้จ่าย สินไหมได้รับยกเว้นภาษีมรดก และสามารถระบุสัดส่วนการส่งต่อได้อย่างแม่นยำ</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- SECTION 3 : FUND STRATEGY -->
+  <!-- ============================================ -->
+  <div class="section">
+    <h2 class="section-title">กลยุทธ์การลงทุน AIA-GAIF (Global Active Income Fund)</h2>
+    <p style="margin-bottom:24px;color:var(--text-secondary)">กลไกขับเคลื่อนกระแสเงินสดและมูลค่าพอร์ต บริหารจัดการร่วมกับ 3 พันธมิตรสถาบันการเงินระดับโลก</p>
+
+    <div class="flow-visual">
+      <div class="flow-step" style="border-color:var(--navy)">เงินทุนตั้งต้น<span>(เบี้ยเข้ากองทุน 100%)</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="border-color:var(--gold)">การจัดสรรสินทรัพย์<span>3 กลยุทธ์ (Tri-Sleeve)</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="border-color:var(--purple)">7 แหล่งรายรับ<span>(ดอกเบี้ย, พรีเมียม, กำไร)</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="border-color:var(--emerald)">Auto Redemption<span>~3% ต่อปี กลับคืนสู่ลูกค้า</span></div>
+    </div>
+
+    <div class="three-col">
+      <div class="sleeve-card" style="border-top-color:var(--navy)">
+        <div class="box-title" style="font-size:1.1rem">Sleeve 1: High Yield Bond (~33%)</div>
+        <p style="font-size:1rem;color:var(--text-secondary)">ตราสารหนี้ผลตอบแทนสูง มุ่งเน้นความมั่นคงของกระแสเงินสดรับด้วยอัตราดอกเบี้ยเฉลี่ย 7.45% บริหารโดย Allianz GI</p>
+      </div>
+      <div class="sleeve-card" style="border-top-color:var(--gold)">
+        <div class="box-title" style="font-size:1.1rem">Sleeve 2: Convertible Bond (~33%)</div>
+        <p style="font-size:1rem;color:var(--text-secondary)">ตราสารหนี้แปลงสภาพ ผสานรายรับดอกเบี้ยที่มั่นคงเข้ากับโอกาสรับผลกำไรจากการเปลี่ยนสถานะเป็นทุน</p>
+      </div>
+      <div class="sleeve-card" style="border-top-color:var(--purple)">
+        <div class="box-title" style="font-size:1.1rem">Sleeve 3: US Equity & Call (~33%)</div>
+        <p style="font-size:1rem;color:var(--text-secondary)">หุ้นสหรัฐอเมริกา ควบคู่กลยุทธ์ Covered Call เพื่อเก็บเกี่ยวค่าพรีเมียมส่วนเพิ่มอย่างสม่ำเสมอในทุกสภาวะตลาด</p>
+      </div>
+    </div>
+
+    <div class="insight-box" style="padding:20px; text-align:center; background:#F8FAFC; border:1px solid #E2E8F0">
+      <b style="color:var(--navy)">บทวิเคราะห์การบริหารความเสี่ยงค่าเงิน (Currency Strategy):</b> การตัดสินใจดำเนินนโยบายแบบไม่ป้องกันความเสี่ยงอัตราแลกเปลี่ยน (Unhedged) ช่วยประหยัดต้นทุนส่วนสูญเปล่าได้ถึง 2-4% ต่อปี และถือเป็นการป้องกันอัตราเงินเฟ้อ (Inflation Hedge) อย่างเป็นธรรมชาติในระยะยาว
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ============================================ -->
+  <!-- SECTION 4 : CASHFLOW PROJECTION (Added Back for HNW) -->
+  <!-- ============================================ -->
+  <div class="section">
+    <h2 class="section-title">แบบจำลองผลลัพธ์เชิงกลยุทธ์ (Cashflow Projection)</h2>
+    <p style="margin-bottom:24px;color:var(--text-secondary)" class="print-hidden">ประเมินทิศทางกระแสเงินสดรับและมูลค่าสินทรัพย์เพื่อการส่งต่อ</p>
+
+    <div class="calc-panel print-hidden">
+      <div class="calc-grid">
+        <div>
+          <label class="calc-label">เบี้ยประกันต่อปี (บาท)</label>
+          <input type="number" id="inPrem" class="calc-input" value="1000000" step="500000">
+        </div>
+        <div>
+          <label class="calc-label">ผลตอบแทนกองทุนจำลอง</label>
+          <select id="inRet" class="calc-input">
+            <option value="2">2% ต่อปี (ระมัดระวัง)</option>
+            <option value="3" selected>3% ต่อปี (ปานกลาง)</option>
+            <option value="5">5% ต่อปี (เติบโต)</option>
+          </select>
+        </div>
+        <div>
+          <label class="calc-label">เพศ และ อายุ</label>
+          <div style="display:flex;gap:8px">
+            <select id="inGender" class="calc-input" style="width:40%"><option value="M">ชาย</option><option value="F" selected>หญิง</option></select>
+            <input type="number" id="inAge" class="calc-input" value="45" style="width:60%">
+          </div>
+        </div>
+        <div>
+          <button onclick="calculate()" class="btn-calc">ประมวลผลลัพธ์</button>
+        </div>
+      </div>
+    </div>
+
+    <table class="premium-table" id="resTable" style="display:none; font-size:1rem;">
+      <thead>
+        <tr>
+          <th style="text-align:center">สิ้นปีที่ / อายุ</th>
+          <th>เงินลงทุน (สะสม)</th>
+          <th style="color:var(--gold-light)">รับกระแสเงินสด (3%)</th>
+          <th>มูลค่าพอร์ตคงเหลือ</th>
+          <th>มรดกจัดสรร</th>
+        </tr>
+      </thead>
+      <tbody id="resBody"></tbody>
+    </table>
+    <p id="resNote" style="font-size:0.9rem; color:var(--text-muted); text-align:center; display:none;">
+      * ตัวเลขประมาณการเพื่ออธิบายกลยุทธ์ ไม่ใช่การรับประกัน (หัก COI ตามตารางมรณะ, ปีที่ 1-9 หักค่าบริหาร 2.4%, ปีที่ 10+ ค่าบริหาร 0% รับโบนัส 0.25%)
+    </p>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- EXECUTIVE SUMMARY BANNER -->
+  <!-- ============================================ -->
+  <div class="highlight-banner">
+    <h3>บทสรุปเชิงกลยุทธ์ระดับองค์กร (Executive Summary)</h3>
+    <div class="highlight-kpi-row">
+      <div class="hk-box"><div class="hk-num">~3%</div><div class="kpi-label" style="color:rgba(255,255,255,.7)">Yield สุทธิปลอดภาษี</div></div>
+      <div class="hk-box"><div class="hk-num">1st</div><div class="kpi-label" style="color:rgba(255,255,255,.7)">Year เริ่มรับกระแสเงินสด</div></div>
+      <div class="hk-box"><div class="hk-num">0%</div><div class="kpi-label" style="color:rgba(255,255,255,.7)">ค่าบริหารจัดการ ปี 10+</div></div>
+      <div class="hk-box"><div class="hk-num">Direct</div><div class="kpi-label" style="color:rgba(255,255,255,.7)">ส่งมอบมรดกไม่ผ่านศาล</div></div>
+    </div>
+    <p style="font-size:1.15rem; line-height:1.8; color:rgba(255,255,255,.9)">
+      AIA Elite Income Prestige คือ <b>"Defensive Asset"</b> ที่ออกแบบมาเพื่อบริหารความมั่งคั่งในยุคดอกเบี้ยต่ำ<br>ปกป้องมูลค่าสินทรัพย์จากเงินเฟ้อด้วยโครงสร้างสกุลเงินสากล และการันตีการส่งมอบความสำเร็จสู่รุ่นต่อไปอย่างไร้รอยต่อ
+    </p>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- ADVISOR CONTACT BLOCK (New for HNW) -->
+  <!-- ============================================ -->
+  <div class="advisor-card print-hidden">
+    <div class="advisor-avatar">NT40</div>
+    <div>
+      <div class="box-title" style="margin-bottom:8px">หากสนใจข้อมูลเพิ่มเติมกรุณาติดต่อเรา </div>
+      <p style="color:var(--text-secondary); margin-bottom:4px; font-weight:600;">ผ่านทาง Line หรือ Mail ที่ส่งลิ้งค์นี้ให้ท่านได้เลย</p>
+   <!--   <p style="color:var(--text-muted); font-size:1rem;">ใบอนุญาตผู้แนะนำการลงทุน: XXXXXX | โทรศัพท์: 08X-XXX-XXXX | อีเมล: advisor@example.com</p> -->
+    </div>
+  </div>
+
+</div><!-- end container -->
+
+<div class="footer-gold" style="margin-top:48px">&nbsp;</div>
+<div class="footer">
+  AIA Elite Income Prestige — Strategic Wealth Management<br>
+  เอกสารนี้จัดทำเพื่อวิเคราะห์กลยุทธ์เบื้องต้น ไม่ใช่สัญญาประกันภัย โปรดศึกษาหนังสือชี้ชวนและเงื่อนไขกรมธรรม์ประกอบการตัดสินใจ | กุมภาพันธ์ 2026
+</div>
+
+<!-- ============================================ -->
+<!-- JAVASCRIPT LOGIC -->
+<!-- ============================================ -->
+<script>
+  // Simple Qx Table approximation
+  const qxMale={20:1.28,30:1.72,40:2.82,45:4.10,50:6.51,55:10.97,60:19.14,65:34.26,70:62.43,75:115.3,80:214.6,85:398.8,90:628.0,99:1000};
+  const qxFemale={20:0.52,30:0.79,40:1.48,45:2.22,50:3.51,55:5.82,60:10.00,65:17.78,70:32.70,75:62.22,80:121.8,85:241.2,90:448.0,99:1000};
+  
+  function getQx(age, isMale) {
+      const table = isMale ? qxMale : qxFemale;
+      if(table[age]) return table[age];
+      let lower=20, upper=99;
+      for(let key in table) {
+          if(+key <= age && +key > lower) lower = +key;
+          if(+key >= age && +key < upper) upper = +key;
+      }
+      if(lower === upper) return table[lower];
+      return table[lower] + ((age - lower)/(upper - lower)) * (table[upper] - table[lower]);
+  }
+  function fmt(n){ return Math.round(n).toLocaleString('en-US'); }
+
+  function calculate() {
+      const prem = parseInt(document.getElementById('inPrem').value) || 1000000;
+      const ret = parseFloat(document.getElementById('inRet').value) / 100;
+      const isMale = document.getElementById('inGender').value === 'M';
+      const startAge = parseInt(document.getElementById('inAge').value) || 45;
+      
+      let nav = 0; let totalPrem = 0;
+      const tbody = document.getElementById('resBody');
+      tbody.innerHTML = '';
+      
+      let rows = [];
+      for(let yr=1; yr<=20; yr++) {
+          let age = startAge + yr - 1;
+          if(age > 99) break;
+          
+          let p = (yr <= 5) ? prem : 0;
+          totalPrem += p; nav += p;
+          
+          let coi = (0.10 * totalPrem) * (getQx(age, isMale)/1000);
+          nav = Math.max(0, nav - coi);
+          
+          if(yr <= 9) nav -= (nav * 0.024);
+          if(yr >= 10) nav += (nav * 0.0025);
+          
+          nav += (nav * ret);
+          
+          let autoRed = nav * 0.03;
+          let db = Math.max(1.10 * totalPrem, nav + (0.10 * totalPrem));
+          
+          if(yr <= 5 || yr === 10 || yr === 15 || yr === 20) {
+              rows.push(`<tr>
+                  <td style="text-align:center">ปีที่ ${yr} / อายุ ${age}</td>
+                  <td>${fmt(totalPrem)}</td>
+                  <td style="color:var(--gold-dark);font-weight:700">+${fmt(autoRed)}</td>
+                  <td style="font-weight:600">${fmt(nav)}</td>
+                  <td style="color:var(--navy);font-weight:700">${fmt(db)}</td>
+              </tr>`);
+          }
+      }
+      
+      tbody.innerHTML = rows.join('');
+      document.getElementById('resTable').style.display = 'table';
+      document.getElementById('resNote').style.display = 'block';
+  }
+  
+  // Init
+  document.addEventListener('DOMContentLoaded', calculate);
+</script>
+</body>
+</html>

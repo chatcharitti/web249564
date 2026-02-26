@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIA Elite Income Prestige — Smart Income · Smooth Transfer</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--fs:15px}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:#f5f7fa;color:#1a202c;font-size:var(--fs);line-height:1.7}
+header{background:linear-gradient(135deg,#1a365d 0%,#2b6cb0 50%,#553c9a 100%);color:#fff;padding:24px 28px;position:relative}
+header h1{font-size:1.5em;font-weight:800}
+header p{font-size:.88em;opacity:.85;margin-top:6px;line-height:1.6}
+.htools{position:absolute;top:16px;right:20px;display:flex;gap:8px}
+.htools button{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);color:#fff;padding:6px 14px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;transition:.2s}
+.htools button:hover{background:rgba(255,255,255,.4)}
+nav{display:flex;background:#fff;border-bottom:2px solid #e2e8f0;overflow-x:auto;position:sticky;top:0;z-index:100}
+nav button{padding:14px 18px;border:none;background:none;cursor:pointer;font-size:.88em;font-weight:700;color:#718096;white-space:nowrap;border-bottom:3px solid transparent;transition:.2s}
+nav button.active{color:#2b6cb0;border-bottom-color:#2b6cb0;background:#f7fafc}
+nav button:hover{color:#2b6cb0;background:#f7fafc}
+.page{display:none;padding:24px;max-width:1200px;margin:0 auto}
+.page.active{display:block}
+.card{background:#fff;border-radius:12px;padding:22px;margin-bottom:18px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.card h2{font-size:1.1em;font-weight:800;color:#2d3748;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid #e2e8f0}
+table{width:100%;border-collapse:collapse;font-size:.9em}
+th{background:#2b6cb0;color:#fff;padding:10px 12px;text-align:center;font-weight:700}
+td{padding:10px 12px;border-bottom:1px solid #e2e8f0;text-align:center}
+tr:hover td{background:#f7fafc}
+.best{background:#f0fff4!important;font-weight:700;color:#276749}
+.num{font-family:'Courier New',monospace;font-weight:600}
+.tag{display:inline-block;padding:3px 10px;border-radius:12px;font-size:.78em;font-weight:700}
+.tag-green{background:#c6f6d5;color:#276749}.tag-blue{background:#bee3f8;color:#2b6cb0}
+.tag-orange{background:#feebc8;color:#c05621}.tag-red{background:#fed7d7;color:#c53030}
+.tag-purple{background:#e9d8fd;color:#553c9a}.tag-gold{background:#fef3c7;color:#92400e}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:768px){.grid2,.grid3,.grid4{grid-template-columns:1fr}.htools{position:static;margin-top:10px;justify-content:flex-end}}
+.kpi{background:#fff;border-radius:12px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,.06);border-left:5px solid #2b6cb0}
+.kpi label{font-size:.75em;color:#718096;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.kpi .val{font-size:1.6em;font-weight:800;color:#2b6cb0;margin:6px 0 4px}
+.kpi .sub{font-size:.75em;color:#a0aec0}
+.kpi.green{border-left-color:#38a169}.kpi.green .val{color:#38a169}
+.kpi.orange{border-left-color:#dd6b20}.kpi.orange .val{color:#dd6b20}
+.kpi.purple{border-left-color:#805ad5}.kpi.purple .val{color:#805ad5}
+.kpi.gold{border-left-color:#d69e2e}.kpi.gold .val{color:#d69e2e}
+.alert{padding:16px 20px;border-radius:10px;margin-bottom:16px;font-size:.95em;line-height:1.8}
+.alert-blue{background:#ebf8ff;border-left:5px solid #3182ce;color:#2c5282}
+.alert-green{background:#f0fff4;border-left:5px solid #38a169;color:#276749}
+.alert-orange{background:#fffaf0;border-left:5px solid #dd6b20;color:#7b341e}
+.alert-purple{background:#faf5ff;border-left:5px solid #805ad5;color:#44337a}
+.alert-gold{background:#fffff0;border-left:5px solid #d69e2e;color:#7b6000}
+.benefit-card{background:#fff;border-radius:12px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,.08);border-top:5px solid #2b6cb0;margin-bottom:16px}
+.benefit-card.purple-top{border-top-color:#805ad5}.benefit-card.green-top{border-top-color:#38a169}
+.benefit-card.gold-top{border-top-color:#d69e2e}.benefit-card.red-top{border-top-color:#e53e3e}
+.benefit-card h3{font-size:1em;font-weight:800;margin-bottom:10px;color:#2d3748}
+.benefit-card p,.benefit-card li{font-size:.92em;line-height:1.8;color:#4a5568}
+.benefit-card .big-num{font-size:1.7em;font-weight:800;color:#2b6cb0;margin:10px 0}
+.benefit-card.purple-top .big-num{color:#805ad5}
+.benefit-card.green-top .big-num{color:#38a169}
+.benefit-card.gold-top .big-num{color:#d69e2e}
+.elite-hero{background:linear-gradient(135deg,#1a365d 0%,#2b6cb0 50%,#553c9a 100%);color:#fff;border-radius:14px;padding:32px;margin-bottom:22px}
+.elite-hero h2{font-size:1.5em;font-weight:800;margin-bottom:8px}
+.elite-hero p{font-size:.95em;opacity:.9;line-height:1.8}
+.elite-hero .tagline{font-size:1.15em;font-weight:700;color:#fbd38d;margin-top:10px}
+.flow-row{display:flex;align-items:center;gap:6px;margin:10px 0;flex-wrap:wrap}
+.flow-box{border-radius:10px;padding:10px 16px;text-align:center;font-size:.85em;font-weight:700}
+.flow-box.blue{background:#ebf8ff;border:2px solid #3182ce;color:#2c5282}
+.flow-box.purple{background:#faf5ff;border:2px solid #805ad5;color:#44337a}
+.flow-box.green{background:#f0fff4;border:2px solid #38a169;color:#276749}
+.flow-box.gold{background:#fffff0;border:2px solid #d69e2e;color:#7b6000}
+.flow-box.red{background:#fff5f5;border:2px solid #c53030;color:#c53030}
+.flow-arrow{font-size:1.3em;color:#a0aec0;padding:0 4px}
+.stitle{font-size:1.15em;font-weight:800;color:#1a365d;margin:24px 0 16px;padding-left:14px;border-left:5px solid #2b6cb0}
+.pill-list{list-style:none;padding:0}.pill-list li{padding:10px 16px;margin-bottom:8px;background:#f7fafc;border-radius:8px;border-left:4px solid #2b6cb0;font-size:.95em;line-height:1.7}
+.pill-list li b{color:#1a365d}
+
+/* === Client Report Styles === */
+#clientreport{background:#fff;font-family:'Sarabun','Prompt','Noto Sans Thai','Segoe UI',sans-serif;font-size:16px;line-height:1.8}
+.rpt-page{max-width:210mm;margin:0 auto;padding:16mm 15mm;position:relative;background:#fff}
+.rpt-header{text-align:center;padding-bottom:18px;border-bottom:3px solid #1a365d;margin-bottom:20px}
+.rpt-header h1{font-size:1.8em;color:#1a365d;margin:0 0 6px 0;letter-spacing:1px}
+.rpt-header .rpt-sub{font-size:1.05em;color:#4a5568;margin:6px 0}
+.rpt-header .rpt-badge{display:inline-block;background:linear-gradient(135deg,#2b6cb0,#553c9a);color:#fff;padding:8px 26px;border-radius:20px;font-weight:800;font-size:.95em;margin-top:10px}
+.rpt-section{margin-bottom:18px;page-break-inside:avoid}
+.rpt-section h2{font-size:1.25em;color:#1a365d;border-bottom:2px solid #e2e8f0;padding-bottom:8px;margin:0 0 12px 0}
+.rpt-section h3{font-size:1.1em;color:#2b6cb0;margin:12px 0 8px 0}
+.rpt-2col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.rpt-3col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.rpt-box{background:#f7fafc;border-radius:8px;padding:14px 16px;border-left:5px solid #2b6cb0;font-size:1em;line-height:1.85}
+.rpt-box.purple{border-left-color:#805ad5;background:#faf5ff}
+.rpt-box.green{border-left-color:#38a169;background:#f0fff4}
+.rpt-box.gold{border-left-color:#d69e2e;background:#fffff0}
+.rpt-box.red{border-left-color:#e53e3e;background:#fff5f5}
+.rpt-kpi{text-align:center;background:#f7fafc;border-radius:10px;padding:14px 10px;border:2px solid #e2e8f0}
+.rpt-kpi .rpt-num{font-size:1.7em;font-weight:800;color:#2b6cb0;line-height:1.2}
+.rpt-kpi .rpt-label{font-size:.85em;color:#718096;margin-top:4px}
+.rpt-kpi.green{border-color:#c6f6d5}.rpt-kpi.green .rpt-num{color:#276749}
+.rpt-kpi.purple{border-color:#e9d8fd}.rpt-kpi.purple .rpt-num{color:#553c9a}
+.rpt-kpi.gold{border-color:#fefcbf}.rpt-kpi.gold .rpt-num{color:#92400e}
+.rpt-highlight{background:linear-gradient(135deg,#ebf8ff,#faf5ff);border:2px solid #2b6cb0;border-radius:10px;padding:16px;margin:14px 0;font-size:1em;line-height:1.85}
+.rpt-footer{text-align:center;font-size:.78em;color:#a0aec0;border-top:1px solid #e2e8f0;padding-top:12px;margin-top:18px}
+.rpt-table{width:100%;border-collapse:collapse;font-size:.95em;margin:10px 0}
+.rpt-table th{background:#1a365d;color:#fff;padding:8px 10px;text-align:center;font-size:.95em}
+.rpt-table td{padding:7px 10px;border-bottom:1px solid #e2e8f0;text-align:center}
+.rpt-table tr:nth-child(even){background:#f7fafc}
+.rpt-income-flow{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:12px 0}
+.rpt-income-flow .rpt-step{background:#ebf8ff;border:2px solid #2b6cb0;border-radius:8px;padding:10px 16px;font-weight:700;font-size:.95em;text-align:center;color:#1a365d}
+.rpt-income-flow .rpt-arrow{font-size:1.4em;color:#805ad5;font-weight:800}
+.print-btn-wrap{text-align:center;margin:16px 0;padding:16px}
+.print-btn{background:linear-gradient(135deg,#c05621,#dd6b20);color:#fff;border:none;padding:14px 36px;border-radius:10px;font-size:1.1em;font-weight:800;cursor:pointer;box-shadow:0 4px 12px rgba(192,86,33,.3)}
+.page-break{page-break-before:always}
+
+@media print{
+  nav,.htools,header,.print-btn-wrap{display:none!important}
+  body{background:#fff;font-size:11px;margin:0;padding:0}
+  .page:not(#clientreport){display:none!important}
+  #clientreport{display:block!important;font-size:13.5px;line-height:1.75}
+  .rpt-page{padding:10mm 13mm;max-width:none;box-shadow:none}
+  .page-break{page-break-before:always}
+  .rpt-section{page-break-inside:avoid}
+  .rpt-box,.rpt-kpi{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .rpt-header,.rpt-kpi,.rpt-box,.rpt-highlight,.rpt-table th{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⭐ AIA Elite Income Prestige — Unit-Linked</h1>
+  <p>Smart Income · Smooth Transfer | สร้างรายได้ประจำอัจฉริยะ · ส่งต่อมรดกอย่างเป็นระบบ</p>
+  <div class="htools">
+    <button onclick="changeFontSize(-2)">A−</button>
+    <button onclick="changeFontSize(2)">A+</button>
+    <button onclick="window.print()">🖨️ พิมพ์</button>
+  </div>
+</header>
+
+<nav>
+  <button class="active" onclick="showPage('overview',this)">🏠 ภาพรวมสินค้า</button>
+  <button onclick="showPage('smartincome',this)">💡 Smart Income</button>
+  <button onclick="showPage('fund',this)">🌍 กองทุน AIA-GAIF</button>
+  <button onclick="showPage('autoredeem',this)">💰 Auto Redemption</button>
+  <button onclick="showPage('nohedge',this)">💱 ไม่ Hedge ค่าเงิน</button>
+  <button onclick="showPage('cashflow',this)">📊 ตัวอย่าง Cashflow</button>
+  <button onclick="showPage('fees',this)">📋 ค่าธรรมเนียม</button>
+  <button onclick="showPage('estate',this)">🏛️ วางแผนมรดก</button>
+  <button onclick="showPage('clientreport',this)" style="color:#c05621">📄 รายงานลูกค้า</button>
+</nav>
+
+<!-- ======================================== -->
+<!-- PAGE 1: OVERVIEW -->
+<!-- ======================================== -->
+<div id="overview" class="page active">
+  <div class="elite-hero">
+    <h2>⭐ AIA Elite Income Prestige</h2>
+    <p>นวัตกรรมประกันชีวิตควบการลงทุนรูปแบบใหม่ — ให้เงินทำงานเต็มประสิทธิภาพ เพื่อชีวิตที่ไร้กังวล<br>
+    ชำระเบี้ยเพียง <b>5 ปี</b> คุ้มครองตลอดชีพถึงอายุ <b>99 ปี</b> | รายได้จาก Auto Redemption ตั้งแต่ปีกรมธรรม์ที่ 1</p>
+    <div class="tagline">Smart Income · Smooth Transfer — Wealth · Life · Balance</div>
+  </div>
+
+  <div class="grid4" style="margin-bottom:18px">
+    <div class="kpi"><label>ชำระเบี้ย</label><div class="val">5 ปี</div><div class="sub">คุ้มครองตลอดชีพ 99 ปี</div></div>
+    <div class="kpi purple"><label>เบี้ยขั้นต่ำ/ปี</label><div class="val">500,000</div><div class="sub">บาทต่อปี</div></div>
+    <div class="kpi green"><label>Auto Redemption</label><div class="val">ปีที่ 1</div><div class="sub">รับรายได้ทันทีปีแรก</div></div>
+    <div class="kpi gold"><label>Performance Bonus</label><div class="val">+0.25%</div><div class="sub">ต่อปี ตั้งแต่ปีที่ 10</div></div>
+  </div>
+
+  <div class="card">
+    <h2>📌 สรุปคุณสมบัติหลัก Elite Income Prestige</h2>
+    <div style="overflow-x:auto"><table>
+      <tr><th>รายการ</th><th>รายละเอียด</th></tr>
+      <tr><td style="text-align:left;font-weight:700">ประเภทสินค้า</td><td>ประกันชีวิตควบการลงทุน (Unit-Linked) — ประเภทเบี้ยหลัก Regular Premium</td></tr>
+      <tr><td style="text-align:left;font-weight:700">ระยะเวลาชำระเบี้ย</td><td><b>5 ปี</b></td></tr>
+      <tr><td style="text-align:left;font-weight:700">ระยะเวลาคุ้มครอง</td><td>ตลอดชีพถึงอายุ <b>99 ปี</b></td></tr>
+      <tr><td style="text-align:left;font-weight:700">เบี้ยประกันหลักขั้นต่ำ</td><td class="num">500,000 บาท/ปี</td></tr>
+      <tr><td style="text-align:left;font-weight:700">ทุนประกัน</td><td>110% ของเบี้ยประกันหลักที่ชำระแล้วทั้งหมด</td></tr>
+      <tr><td style="text-align:left;font-weight:700">อายุรับประกัน</td><td>1 เดือน – 70 ปี</td></tr>
+      <tr><td style="text-align:left;font-weight:700">กองทุนหลัก</td><td><b>AIA Global Active Income Fund (AIA-GAIF)</b></td></tr>
+      <tr><td style="text-align:left;font-weight:700">Auto Redemption</td><td>ได้รับตั้งแต่ปีกรมธรรม์ที่ 1 (~3% ของ NAV ต่อปี)</td></tr>
+      <tr><td style="text-align:left;font-weight:700">Performance Bonus</td><td>+0.25%/ปี ของมูลค่ากองทุนหลัก (ตั้งแต่ปีที่ 10)</td></tr>
+      <tr><td style="text-align:left;font-weight:700">ค่าดำเนินการเบี้ยหลัก</td><td class="best">0% (ไม่มี)</td></tr>
+      <tr><td style="text-align:left;font-weight:700">ค่าบริหารกรมธรรม์</td><td>2.4%/ปี (ปีที่ 1-9) → <b>0% ตั้งแต่ปีที่ 10</b></td></tr>
+      <tr><td style="text-align:left;font-weight:700">ค่าถอนเงิน ปีที่ 10+</td><td class="best">0% (ฟรี)</td></tr>
+      <tr><td style="text-align:left;font-weight:700">ลดหย่อนภาษี</td><td><span class="tag tag-orange">ไม่ได้</span> (เป็นสินค้า Unit-Linked)</td></tr>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h2>🎯 4 ประโยชน์หลักของ Elite Income Prestige</h2>
+    <div class="grid2">
+      <div class="benefit-card">
+        <h3>💰 1. Passive Income — รายได้ประจำอัตโนมัติ</h3>
+        <div class="big-num">Auto Redemption ~3%/ปี</div>
+        <p>รับเงินคืนอัตโนมัติตั้งแต่ปีกรมธรรม์แรก จากการรับซื้อคืนหน่วยลงทุนโดยอัตโนมัติ ไม่ต้องรอเกษียณ ไม่ต้องขาย กองทุนจ่ายเข้าบัญชีตรง</p>
+      </div>
+      <div class="benefit-card green-top">
+        <h3>🏛️ 2. Smooth Transfer — วางแผนมรดก</h3>
+        <div class="big-num" style="color:#38a169">110% เบี้ย + NAV กองทุน</div>
+        <p>มูลค่ากองทุนเติบโตตลอดชีพ ส่งต่อเป็นมรดกให้ผู้รับประโยชน์โดยตรง ไม่ผ่านกระบวนการพินัยกรรม ยิ่งมีชีวิตยาว มรดกยิ่งโต</p>
+      </div>
+      <div class="benefit-card gold-top">
+        <h3>📊 3. Cash Flow — กระแสเงินสดยืดหยุ่น</h3>
+        <div class="big-num" style="color:#d69e2e">ปรับตามเงินเฟ้อ</div>
+        <p>Auto Redemption คำนวณเป็น % ของ NAV — หากกองทุนเติบโต รายรับก็ปรับขึ้นตาม ต่างจากบำนาญตายตัวที่ไม่ปรับตามเงินเฟ้อ พร้อมถอนบางส่วนได้ตลอด</p>
+      </div>
+      <div class="benefit-card purple-top">
+        <h3>⏱️ 4. ชำระสั้น คุ้มครองยาว</h3>
+        <div class="big-num" style="color:#805ad5">5 ปี → 99 ปี</div>
+        <p>หลังชำระ 5 ปี เงินทำงานต่อเนื่องในกองทุนระดับโลก ค่าบริหารลดเหลือ 0% ตั้งแต่ปีที่ 10 พร้อม Performance Bonus +0.25%/ปี</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-gold"><strong>⭐ แนวคิดหลัก:</strong> Elite Income Prestige ออกแบบมาเพื่อ <b>Smart Income</b> — สร้างรายได้ประจำจากกองทุนระดับโลก พร้อม <b>Smooth Transfer</b> — ส่งต่อความมั่งคั่งให้คนที่คุณรักอย่างเป็นระบบ ไม่ต้องรอเกษียณจึงจะเริ่มรับเงิน</div>
+</div>
+
+<!-- ======================================== -->
+<!-- PAGE 2: SMART INCOME -->
+<!-- ======================================== -->
+<div id="smartincome" class="page">
+  <div class="elite-hero">
+    <h2>💡 Smart Income — Smooth Transfer</h2>
+    <p>ทำไมการวางแผน "สร้างรายได้ประจำ" จึงสำคัญกว่าที่คิด?<br>
+    และทำไมต้องคิดเรื่อง "ส่งต่อมรดก" ตั้งแต่วันนี้?</p>
+    <div class="tagline">สร้างรายได้ · ปกป้องคนที่รัก · ให้เงินทำงานแทน</div>
+  </div>
+
+  <div class="card">
+    <h2>🔑 ปัญหาที่หลายคนเผชิญหลังเกษียณ</h2>
+    <div class="grid3">
+      <div class="benefit-card red-top">
+        <h3>😰 รายได้หยุด แต่ค่าใช้จ่ายไม่หยุด</h3>
+        <p>เมื่อเกษียณอายุ รายได้จากงานประจำหยุดลงทันที แต่ค่าใช้จ่ายในชีวิตประจำวัน ค่ารักษาพยาบาล ค่าเดินทาง ยังคงมีต่อเนื่อง และมักเพิ่มสูงขึ้นตามเงินเฟ้อ</p>
+      </div>
+      <div class="benefit-card red-top">
+        <h3>📉 เงินเฟ้อกัดกินกำลังซื้อ</h3>
+        <p>เงินเฟ้อเฉลี่ย 3% ต่อปี ทำให้กำลังซื้อลดลงครึ่งหนึ่งภายใน 24 ปี บำนาญตายตัว 240,000 บาท/ปี จะมีกำลังซื้อเหลือเพียง ~120,000 บาทเมื่ออายุ 84 ปี</p>
+      </div>
+      <div class="benefit-card red-top">
+        <h3>⚠️ มรดกไม่มีแผน = ความขัดแย้ง</h3>
+        <p>ทรัพย์สินที่ไม่มีการวางแผนส่งต่ออย่างเป็นระบบ อาจนำไปสู่ปัญหาข้อพิพาท กระบวนการศาล และค่าใช้จ่ายที่ไม่จำเป็น</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>✅ Elite Income Prestige ตอบโจทย์อย่างไร?</h2>
+    <div class="grid2">
+      <div>
+        <div class="stitle">Smart Income — สร้างรายได้อัจฉริยะ</div>
+        <ul class="pill-list">
+          <li><b>รายได้ตั้งแต่ปีแรก</b> — Auto Redemption จ่ายเงินตั้งแต่ปีกรมธรรม์ที่ 1 ไม่ต้องรอเกษียณ</li>
+          <li><b>ปรับตัวตามเงินเฟ้อ</b> — เมื่อกองทุนเติบโต Auto Redemption (~3% NAV) ก็เพิ่มตาม</li>
+          <li><b>ไม่ต้องจัดการเอง</b> — กองทุนรับซื้อคืนหน่วยลงทุนให้โดยอัตโนมัติ เงินเข้าบัญชีโดยตรง</li>
+          <li><b>ไม่ถูกหักภาษี</b> — เงินที่ได้รับจาก Auto Redemption ไม่ใช่เงินปันผล จึงไม่ถูกหักภาษี</li>
+          <li><b>สภาพคล่องสูง</b> — สามารถถอนเงินบางส่วนได้เมื่อต้องการ (มีค่าธรรมเนียมในช่วง 9 ปีแรก)</li>
+        </ul>
+      </div>
+      <div>
+        <div class="stitle" style="border-left-color:#38a169">Smooth Transfer — ส่งต่ออย่างเป็นระบบ</div>
+        <ul class="pill-list">
+          <li style="border-left-color:#38a169"><b>ผู้รับประโยชน์ได้รับโดยตรง</b> — ไม่ผ่านกระบวนการพินัยกรรม ศาลไม่ต้องสั่ง</li>
+          <li style="border-left-color:#38a169"><b>มรดกเติบโตตามเวลา</b> — กองทุนลงทุนต่อเนื่อง ยิ่งอายุยืน มรดกยิ่งใหญ่</li>
+          <li style="border-left-color:#38a169"><b>คุ้มครองชีวิต 110%</b> — กรณีเสียชีวิต ได้ค่าที่มากกว่าระหว่าง 110% เบี้ยชำระ หรือ มูลค่ากองทุน+10% เบี้ย</li>
+          <li style="border-left-color:#38a169"><b>กำหนดผู้รับได้ชัดเจน</b> — ระบุสัดส่วนผู้รับประโยชน์ได้ตามต้องการ ลดปัญหาข้อพิพาท</li>
+          <li style="border-left-color:#38a169"><b>ไม่มีภาษีมรดกจากกรมธรรม์</b> — เงินประกันชีวิตได้รับยกเว้นภาษี</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📈 Timeline: Smart Income → Smooth Transfer</h2>
+    <div style="display:flex;flex-direction:column;gap:16px;padding:4px 0">
+      <div>
+        <div style="font-weight:800;color:#c05621;margin-bottom:8px">📍 ปีที่ 1-5: ชำระเบี้ย + เริ่มรับรายได้ทันที</div>
+        <div class="flow-row">
+          <div class="flow-box red">ชำระเบี้ย 500,000/ปี</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box blue">ลงทุน AIA-GAIF</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box green">Auto Red. ~3%/ปี</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-weight:800;color:#2b6cb0;margin-bottom:8px">📍 ปีที่ 6-9: หยุดชำระ — กองทุนทำงานต่อ</div>
+        <div class="flow-row">
+          <div class="flow-box purple">เงินเติบโตในกองทุน</div>
+          <div class="flow-arrow">+</div>
+          <div class="flow-box green">Auto Red. ยังจ่ายต่อ</div>
+          <div class="flow-arrow">=</div>
+          <div class="flow-box gold">รายได้ไม่หยุด</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-weight:800;color:#38a169;margin-bottom:8px">📍 ปีที่ 10+: ค่าบริหาร 0% + Performance Bonus</div>
+        <div class="flow-row">
+          <div class="flow-box green">ค่าธรรมเนียม 0%</div>
+          <div class="flow-arrow">+</div>
+          <div class="flow-box purple">Bonus +0.25%/ปี</div>
+          <div class="flow-arrow">=</div>
+          <div class="flow-box gold">เงินทำงานเต็มที่</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-weight:800;color:#805ad5;margin-bottom:8px">📍 ตลอดชีพ: มูลค่ากองทุนส่งต่อเป็นมรดก</div>
+        <div class="flow-row">
+          <div class="flow-box purple">กองทุนเติบโตต่อเนื่อง</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box gold">ส่งต่อผู้รับประโยชน์ / ถอนได้ทุกเมื่อ</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-green"><strong>✅ สรุป:</strong> Smart Income ให้คุณมีรายได้ประจำตั้งแต่วันแรกที่ทำกรมธรรม์ และ Smooth Transfer ช่วยให้ความมั่งคั่งส่งต่อถึงคนที่คุณรักอย่างเรียบง่าย ไม่ยุ่งยาก ไม่ต้องรอ</div>
+</div>
+
+<!-- ======================================== -->
+<!-- PAGE 3: FUND DETAILS -->
+<!-- ======================================== -->
+<div id="fund" class="page">
+  <div class="elite-hero" style="background:linear-gradient(135deg,#1a365d,#2b6cb0)">
+    <h2>🌍 กองทุน AIA Global Active Income Fund (AIA-GAIF)</h2>
+    <p>กองทุนเฉพาะสำหรับ Elite Income Prestige — ลงทุนในสินทรัพย์ทั่วโลก<br>
+    บริหารโดย บลจ. เอไอเอ (ประเทศไทย) ร่วมกับพันธมิตรระดับโลก 3 ราย</p>
+  </div>
+
+  <div class="card">
+    <h2>🏢 พันธมิตรบริหารการลงทุนระดับโลก 3 ราย</h2>
+    <div class="grid3">
+      <div class="benefit-card">
+        <h3>🇩🇪 Allianz Global Investors</h3>
+        <div class="big-num" style="font-size:1.3em">€562 พันล้าน</div>
+        <p>AUM (สินทรัพย์ภายใต้การจัดการ)<br>
+        ประสบการณ์กว่า <b>130 ปี</b><br>
+        สำนักงาน <b>20+ ประเทศ</b><br>
+        มีความเชี่ยวชาญด้าน <b>Multi-Asset Income</b><br>
+        บริหารกลยุทธ์ <b>Allianz Income and Growth</b> ซึ่งเป็นแกนหลักของ AIA-GAIF</p>
+      </div>
+      <div class="benefit-card purple-top">
+        <h3>🇺🇸 Wellington Management</h3>
+        <div class="big-num" style="font-size:1.3em;color:#805ad5">$1.29 ล้านล้าน</div>
+        <p>AUM (สินทรัพย์ภายใต้การจัดการ)<br>
+        ให้บริการลูกค้าสถาบัน <b>2,200+ แห่งทั่วโลก</b><br>
+        ก่อตั้งปี <b>1928</b><br>
+        เชี่ยวชาญด้าน <b>Equity Income</b><br>
+        บริหารส่วน <b>AIA Equity Income</b></p>
+      </div>
+      <div class="benefit-card green-top">
+        <h3>🇺🇸 Franklin Templeton</h3>
+        <div class="big-num" style="font-size:1.3em;color:#38a169">$1.6 ล้านล้าน</div>
+        <p>AUM (สินทรัพย์ภายใต้การจัดการ)<br>
+        ก่อตั้งปี <b>1947</b><br>
+        ดำเนินงานใน <b>30+ ประเทศ</b><br>
+        เชี่ยวชาญด้าน <b>Income Strategy</b><br>
+        บริหารส่วน <b>Tactical Asset Allocation (TAA)</b></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🧩 โครงสร้างการลงทุนของ AIA-GAIF</h2>
+    <div class="alert alert-blue" style="margin-bottom:16px">
+      <strong>📌 กองทุน AIA-GAIF ใช้โครงสร้าง SAA + TAA:</strong><br>
+      <b>SAA (Strategic Asset Allocation)</b> = การจัดสรรสินทรัพย์เชิงกลยุทธ์ระยะยาว<br>
+      <b>TAA (Tactical Asset Allocation)</b> = การปรับพอร์ตเชิงกลยุทธ์ระยะสั้นตามสภาวะตลาด
+    </div>
+    <div style="overflow-x:auto"><table>
+      <tr><th>ส่วนประกอบ</th><th>สัดส่วน</th><th>กลยุทธ์ / กองทุนอ้างอิง</th><th>ผู้บริหาร</th><th>สินทรัพย์หลัก</th></tr>
+      <tr><td style="font-weight:700;text-align:left">SAA หลัก</td><td class="num">90%</td><td><b>Allianz Income and Growth</b></td><td>Allianz GI</td><td>หุ้นสหรัฐ + Convertible Bonds + High Yield Bonds</td></tr>
+      <tr><td style="font-weight:700;text-align:left">SAA เสริม</td><td class="num">10%</td><td><b>AIA Equity Income</b></td><td>Wellington Management</td><td>หุ้นปันผลทั่วโลก (Global Dividend Equities)</td></tr>
+      <tr><td style="font-weight:700;text-align:left">TAA</td><td>ปรับตามสภาวะตลาด</td><td><b>Franklin Income Fund</b></td><td>Franklin Templeton</td><td>Multi-Asset Income (ตราสารหนี้ + หุ้น + สินทรัพย์ทางเลือก)</td></tr>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h2>📊 Allianz Income and Growth (90% ของ SAA) — แกนหลัก</h2>
+    <div class="grid2">
+      <div>
+        <div class="alert alert-purple">
+          <strong>📈 กลยุทธ์ลงทุน 3 ส่วน (Tri-Sleeve):</strong><br><br>
+          <b>1. หุ้นสหรัฐ (Equities) ~33%</b><br>
+          เน้นหุ้นเติบโตและหุ้นมูลค่า สร้างผลตอบแทนระยะยาว<br><br>
+          <b>2. Convertible Bonds ~33%</b><br>
+          หุ้นกู้แปลงสภาพ — ได้ดอกเบี้ยสม่ำเสมอ + โอกาสกำไรจากการแปลงเป็นหุ้น<br><br>
+          <b>3. High Yield Bonds ~33%</b><br>
+          ตราสารหนี้ผลตอบแทนสูง — ให้กระแสเงินสดสม่ำเสมอ
+        </div>
+      </div>
+      <div>
+        <div class="alert alert-green">
+          <strong>✅ ข้อดีของกลยุทธ์ Tri-Sleeve:</strong><br><br>
+          ▸ <b>กระจายความเสี่ยง</b> ไม่กระจุกตัวในสินทรัพย์ประเภทเดียว<br><br>
+          ▸ <b>สร้างรายได้สม่ำเสมอ</b> จากดอกเบี้ย + ปันผล<br><br>
+          ▸ <b>มีโอกาสเติบโต</b> จากส่วนหุ้นและ Convertible Bonds<br><br>
+          ▸ <b>ลดความผันผวน</b> ตราสารหนี้ช่วยเป็น Buffer เมื่อหุ้นตก<br><br>
+          ▸ ผลตอบแทนย้อนหลังเฉลี่ย <b>~6-8% ต่อปี</b> (ก่อนหักค่าธรรมเนียม, ไม่รับประกัน)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📋 Wellington — AIA Equity Income (10% ของ SAA)</h2>
+    <div class="alert alert-blue">
+      <strong>🎯 กลยุทธ์:</strong> ลงทุนในหุ้นที่มีการจ่ายปันผลสูงทั่วโลก (Global Dividend Equities) โดยเน้นบริษัทที่มีกระแสเงินสดแข็งแรง สามารถจ่ายปันผลได้อย่างต่อเนื่อง ช่วยเสริมกระแสรายได้ให้กองทุน
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📋 Franklin Templeton — Tactical Asset Allocation (TAA)</h2>
+    <div class="alert alert-orange">
+      <strong>🔄 บทบาท:</strong> ปรับสัดส่วนการลงทุนเชิงกลยุทธ์ระยะสั้น ตามสภาวะตลาดและเศรษฐกิจ เพื่อเพิ่มโอกาสรับผลตอบแทน หรือลดความเสี่ยงในช่วงที่ตลาดผันผวน โดยอิงกลยุทธ์ <b>Franklin Income Fund</b> ที่มีประสบการณ์ยาวนาน
+    </div>
+  </div>
+
+  <!-- === เพิ่มเติมจาก Training Slide หน้า 22-25 === -->
+  <div class="stitle" style="margin-top:28px">🔍 เจาะลึก 3 กลยุทธ์สร้างรายได้ของ Allianz Income and Growth</div>
+
+  <div class="card">
+    <h2>1️⃣ ตราสารหนี้อัตราผลตอบแทนสูง: High Yield Bond (~33%)</h2>
+    <div class="grid2">
+      <div>
+        <div class="alert alert-purple" style="margin-bottom:0">
+          <strong>📌 High Yield Bond คืออะไร?</strong><br><br>
+          ตราสารหนี้ที่มีอันดับความน่าเชื่อถือต่ำกว่า BBB- (ต่ำกว่า Investment Grade) รวมถึงตราสารหนี้ที่ไม่ได้จัดอันดับความน่าเชื่อถือ<br><br>
+          <b>ข้อดี:</b> โอกาสของผลตอบแทนสูงกว่า Investment Grade มาก<br>
+          <b>ข้อเสีย:</b> ความเสี่ยงในการผิดนัดชำระหนี้สูงกว่า
+        </div>
+      </div>
+      <div>
+        <div class="benefit-card gold-top">
+          <h3>🎯 กลยุทธ์ของ Allianz</h3>
+          <div class="big-num" style="color:#d69e2e;font-size:1.4em">ดอกเบี้ยเฉลี่ย 7.45%</div>
+          <p>▸ เน้นลงทุนใน <b>US High Yield Bond</b> ที่ให้อัตราดอกเบี้ยรับเฉลี่ยสูงถึง 7.45%<br>
+          ▸ เลือก High Yield Bond ที่มีแนวโน้มได้รับการ <b>ปรับอันดับความน่าเชื่อถือขึ้น</b> (Rising Stars)<br>
+          ▸ อันดับความน่าเชื่อถือเฉลี่ย <b>B+</b><br>
+          ▸ ใช้ประโยชน์จากดอกเบี้ยรับที่สูง มาจ่ายเป็นรายได้ให้ผู้ลงทุน</p>
+        </div>
+      </div>
+    </div>
+    <div style="overflow-x:auto;margin-top:14px"><table>
+      <tr><th>อันดับความน่าเชื่อถือ</th><th>คุณภาพ</th><th>ตัวอย่าง</th></tr>
+      <tr><td>AAA / AA / A / BBB</td><td><span class="tag tag-green">Investment Grade</span> — ระดับลงทุน</td><td>พันธบัตรรัฐบาลไทย อยู่ที่ BBB+</td></tr>
+      <tr class="highlight-row"><td>BB / B / CCC / CC / C / D</td><td><span class="tag tag-orange">High Yield</span> — ระดับเก็งกำไร ผลตอบแทนสูง</td><td>กลยุทธ์ Allianz เน้นที่ B+ (ใกล้ Investment Grade)</td></tr>
+    </table></div>
+    <p style="color:#718096;font-size:.82em;margin-top:8px">Source: AIAMT, ICE BofA US High Yield data 1998-2024, Allianz GI (data as of Jun 2025)</p>
+  </div>
+
+  <div class="card">
+    <h2>2️⃣ ตราสารหนี้แปลงสภาพ: Convertible Bond (~33%)</h2>
+    <div class="grid2">
+      <div>
+        <div class="alert alert-blue" style="margin-bottom:0">
+          <strong>📌 Convertible Bond คืออะไร?</strong><br><br>
+          คือ <b>ตราสารหนี้ที่ผู้ลงทุนมีสิทธิในการแปลงเป็นหุ้นในอนาคต</b><br><br>
+          เปรียบเสมือนได้ทั้งข้อดีของตราสารหนี้ (ดอกเบี้ย + คืนเงินต้น) และข้อดีของหุ้น (โอกาสกำไรจากราคาหุ้น) ในตัวเดียวกัน
+        </div>
+        <div style="overflow-x:auto;margin-top:14px"><table>
+          <tr><th>ลักษณะ</th><th>ตราสารหนี้ทั่วไป</th><th>ตราสารหนี้แปลงสภาพ</th></tr>
+          <tr><td style="text-align:left;font-weight:700">ได้ดอกเบี้ย</td><td><span class="tag tag-green">✓ ได้</span></td><td><span class="tag tag-green">✓ ได้ (มักต่ำกว่าเล็กน้อย)</span></td></tr>
+          <tr><td style="text-align:left;font-weight:700">ได้คืนเงินต้น</td><td><span class="tag tag-green">✓ ได้</span></td><td><span class="tag tag-green">✓ ได้ (ถ้าไม่แปลงเป็นหุ้น)</span></td></tr>
+          <tr><td style="text-align:left;font-weight:700">แปลงเป็นหุ้นได้</td><td><span class="tag tag-red">✗ ไม่ได้</span></td><td><span class="tag tag-green">✓ ได้</span></td></tr>
+          <tr><td style="text-align:left;font-weight:700">โอกาสกำไรจากราคาหุ้น</td><td><span class="tag tag-red">✗ ไม่ได้</span></td><td><span class="tag tag-green">✓ ได้</span></td></tr>
+        </table></div>
+      </div>
+      <div>
+        <div class="benefit-card purple-top">
+          <h3>📖 ตัวอย่าง Convertible Bond</h3>
+          <p style="line-height:2.2">
+          นาย A ซื้อหุ้นกู้แปลงสภาพของบริษัท ABC<br>
+          ▸ ได้ดอกเบี้ย <b>3% ต่อปี</b><br>
+          ▸ อีก 3 ปี สามารถแปลงเป็นหุ้นได้ในราคา <b>10 บาท/หุ้น</b><br><br>
+          <b>กรณี 1:</b> ครบ 3 ปี ราคาหุ้น ABC ขึ้นเป็น <b>15 บาท</b><br>
+          → นาย A แปลงเป็นหุ้นแล้วขาย ได้กำไร <b>5 บาท/หุ้น</b> (นอกเหนือจากดอกเบี้ยที่ได้ไปแล้ว)<br><br>
+          <b>กรณี 2:</b> ราคาหุ้น ABC เหลือ <b>8 บาท</b><br>
+          → นาย A ไม่แปลง ยังคงได้ <b>ดอกเบี้ย + คืนเงินต้น</b> เหมือนตราสารหนี้ทั่วไป
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>3️⃣ หุ้นสหรัฐฯ + Covered Call: US Equity with Covered Call (~33%)</h2>
+    <div class="grid2">
+      <div>
+        <div class="alert alert-green" style="margin-bottom:0">
+          <strong>📌 Covered Call คืออะไร?</strong><br><br>
+          เป็นกลยุทธ์ <b>ซื้อหุ้น + ขายสิทธิ์ในการซื้อหุ้น (Call Option)</b> ล่วงหน้า<br><br>
+          ▸ เมื่อขาย Call Option ผู้ลงทุนจะได้รับ <b>Premium (ค่าธรรมเนียม)</b> เป็นรายได้ทันที<br>
+          ▸ ทุกครั้งที่ตั้งราคาขายล่วงหน้า จะได้รายได้จาก Premium ด้วย<br>
+          ▸ เป็นการสร้างรายได้ <b>สม่ำเสมอ</b> นอกเหนือจากปันผลหุ้น
+        </div>
+      </div>
+      <div>
+        <div class="benefit-card gold-top">
+          <h3>📖 ตัวอย่าง Covered Call</h3>
+          <p>ซื้อหุ้นราคา <b>100 บาท</b> + ตั้งราคาขายล่วงหน้า <b>110 บาท</b></p>
+          <div style="overflow-x:auto;margin-top:10px"><table style="font-size:.88em">
+            <tr><th></th><th>หุ้นเหลือ 80 บาท</th><th>หุ้นขึ้น 115 บาท</th><th>หุ้นขึ้น 140 บาท</th></tr>
+            <tr><td style="text-align:left;font-weight:700">รายได้จาก Premium</td><td><span class="tag tag-green">✓ 5 บาท</span></td><td><span class="tag tag-green">✓ 5 บาท</span></td><td><span class="tag tag-green">✓ 5 บาท</span></td></tr>
+            <tr><td style="text-align:left;font-weight:700">ขายหุ้นที่ 110 ได้หรือไม่</td><td><span class="tag tag-red">✗ ไม่ได้</span></td><td><span class="tag tag-green">✓ ได้</span></td><td><span class="tag tag-green">✓ ได้</span></td></tr>
+          </table></div>
+          <p style="margin-top:10px">▸ ได้ Premium <b>ทุกรอบ</b> ไม่ว่าหุ้นจะขึ้นหรือลง<br>
+          ▸ กำไรจากส่วนต่างราคาถูกจำกัดที่ราคาที่ตั้งไว้</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="border:3px solid #d69e2e;background:#fffff0">
+    <h2 style="color:#92400e;border-bottom-color:#d69e2e">⭐ Allianz Income and Growth: 7 แหล่งรายรับ (Sources of Income)</h2>
+    <div class="alert alert-gold" style="margin-bottom:16px;font-size:1em">
+      <strong>💡 หัวใจสำคัญ:</strong> กลยุทธ์ Allianz Income and Growth (ซึ่งเป็น 90% ของ AIA-GAIF) สร้างรายได้จาก <b>7 แหล่ง</b> พร้อมกัน ทำให้กระแสรายได้มีความหลากหลายและมั่นคง ไม่พึ่งพาแหล่งใดแหล่งเดียว
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="stitle" style="border-left-color:#d69e2e;font-size:1em">💰 รายได้ประจำ (Income)</div>
+        <ul class="pill-list">
+          <li style="border-left-color:#d69e2e"><b>① ดอกเบี้ยรับ จากตราสารหนี้ High-Yield</b><br>อัตราดอกเบี้ยเฉลี่ย ~7.45% จ่ายสม่ำเสมอ</li>
+          <li style="border-left-color:#d69e2e"><b>② ดอกเบี้ยรับ จากตราสารหนี้แปลงสภาพ</b><br>ดอกเบี้ยคงที่ + โอกาสกำไรจากการแปลงเป็นหุ้น</li>
+          <li style="border-left-color:#d69e2e"><b>③ เงินปันผลรับ จากหุ้นปันผล</b><br>หุ้นสหรัฐฯ ที่มีประวัติจ่ายปันผลสม่ำเสมอ</li>
+          <li style="border-left-color:#d69e2e"><b>④ รายได้จาก Covered Call</b><br>Premium ที่ได้รับจากการขาย Call Option ทุกรอบ</li>
+        </ul>
+      </div>
+      <div>
+        <div class="stitle" style="border-left-color:#805ad5;font-size:1em">📈 กำไรจากส่วนต่างราคา (Capital Gain)</div>
+        <ul class="pill-list">
+          <li style="border-left-color:#805ad5"><b>⑤ กำไรจากหุ้น</b><br>เมื่อราคาหุ้นเพิ่มขึ้น สามารถขายทำกำไรได้</li>
+          <li style="border-left-color:#805ad5"><b>⑥ กำไรจากตราสารหนี้ High-Yield</b><br>เมื่ออันดับเครดิตดีขึ้น ราคาตราสารหนี้เพิ่ม</li>
+          <li style="border-left-color:#805ad5"><b>⑦ กำไรจากตราสารหนี้แปลงสภาพ</b><br>เมื่อแปลงเป็นหุ้นและขายในราคาที่สูงขึ้น</li>
+        </ul>
+        <div class="alert alert-purple" style="margin-top:12px">
+          <strong>🎯 ผลลัพธ์:</strong> รายได้ 7 แหล่งนี้ถูกนำมารวมกัน เพื่อจ่ายเป็น <b>Auto Redemption ~3% ต่อปี</b> ให้ผู้ลงทุน ขณะที่มูลค่ากองทุนยังมีโอกาสเติบโตจากส่วนที่เหลือ
+        </div>
+      </div>
+    </div>
+    <p style="color:#718096;font-size:.82em;margin-top:10px">Source: Allianz Global Investors; Data as of Jun 2025</p>
+  </div>
+
+  <div class="alert alert-gold"><strong>⭐ สรุป AIA-GAIF:</strong> กองทุนนี้ออกแบบมาเพื่อ <b>สร้างรายได้ (Income)</b> เป็นหลัก ไม่ใช่เพื่อเก็งกำไร โดยใช้พันธมิตรระดับโลก 3 รายที่เชี่ยวชาญด้าน Income Strategy โดยเฉพาะ ด้วย <b>7 แหล่งรายรับ</b> จากกลยุทธ์ Tri-Sleeve ทำให้กระแสรายได้มีความหลากหลายและมั่นคง บริหารโดย บลจ.เอไอเอ ซึ่งเป็นส่วนหนึ่งของกลุ่ม AIA — บริษัทประกันที่ใหญ่ที่สุดในเอเชีย</div>
+</div>
+
+<!-- ======================================== -->
+<!-- PAGE 4: AUTO REDEMPTION -->
+<!-- ======================================== -->
+<div id="autoredeem" class="page">
+  <div class="elite-hero" style="background:linear-gradient(135deg,#276749,#38a169)">
+    <h2>💰 Auto Redemption — รายได้อัตโนมัติ</h2>
+    <p>วิธีที่กองทุน AIA-GAIF สร้างรายได้ประจำให้คุณโดยไม่ต้องลงมือขายหน่วยลงทุนเอง</p>
+  </div>
+
+  <div class="card">
+    <h2>🔧 Auto Redemption ทำงานอย่างไร?</h2>
+    <div class="grid2">
+      <div>
+        <div class="alert alert-blue" style="margin-bottom:0">
+          <strong>📌 กลไก Auto Redemption:</strong><br><br>
+          ▸ กองทุน AIA-GAIF กำหนดอัตราการรับซื้อคืนหน่วยลงทุนอัตโนมัติ (Auto Redemption) ที่ประมาณ <b>~3% ของมูลค่า NAV ต่อปี</b><br><br>
+          ▸ กองทุนจะ <b>ขายหน่วยลงทุนบางส่วน</b> ออกโดยอัตโนมัติ แล้วโอนเงินเข้าบัญชีของผู้เอาประกัน<br><br>
+          ▸ เงินที่ได้รับ <b>ไม่ใช่เงินปันผล</b> (Dividend) แต่เป็นการรับซื้อคืนหน่วยลงทุน จึง <b>ไม่ถูกหักภาษี ณ ที่จ่าย</b><br><br>
+          ▸ การจ่าย Auto Redemption เริ่มตั้งแต่ <b>ปีกรมธรรม์ที่ 1</b>
+        </div>
+      </div>
+      <div>
+        <div class="alert alert-green" style="margin-bottom:0">
+          <strong>✅ ข้อดี Auto Redemption:</strong><br><br>
+          ▸ <b>ได้เงินทันที</b> ไม่ต้องรอเกษียณ<br><br>
+          ▸ <b>อัตโนมัติ</b> ไม่ต้องตัดสินใจขายเอง<br><br>
+          ▸ <b>ไม่มีภาษี</b> เพราะเป็นการรับซื้อคืนหน่วยลงทุน ไม่ใช่เงินได้<br><br>
+          ▸ <b>สม่ำเสมอ</b> จ่ายตามรอบที่กำหนด<br><br>
+          ▸ <b>ปรับตามมูลค่ากองทุน</b> หากกองทุนเติบโต เงินที่ได้ก็เพิ่มขึ้น
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>⚠️ Auto Redemption vs เงินปันผล — ต่างกันอย่างไร?</h2>
+    <div style="overflow-x:auto"><table>
+      <tr><th>รายการ</th><th>Auto Redemption (กองทุนนี้)</th><th>เงินปันผล (Dividend)</th></tr>
+      <tr><td style="text-align:left;font-weight:700">ที่มาของเงิน</td><td class="best">ขายหน่วยลงทุนบางส่วนคืนอัตโนมัติ</td><td>แบ่งจากกำไรของกองทุน</td></tr>
+      <tr><td style="text-align:left;font-weight:700">ภาษี ณ ที่จ่าย</td><td class="best">ไม่มี</td><td>ถูกหักภาษี 10%</td></tr>
+      <tr><td style="text-align:left;font-weight:700">ความสม่ำเสมอ</td><td>จ่ายตามรอบ (ขึ้นกับ NAV)</td><td>ขึ้นกับกำไรแต่ละงวด</td></tr>
+      <tr><td style="text-align:left;font-weight:700">ผลต่อจำนวนหน่วย</td><td>จำนวนหน่วยลดลง</td><td>จำนวนหน่วยคงเดิม</td></tr>
+      <tr><td style="text-align:left;font-weight:700">ผลต่อมูลค่าหน่วย (NAV)</td><td>NAV ไม่เปลี่ยน (ขายหน่วยออก)</td><td>NAV ลดลงหลังจ่ายปันผล</td></tr>
+    </table></div>
+    <div class="alert alert-purple" style="margin-top:16px"><strong>💡 หมายเหตุ:</strong> แม้จำนวนหน่วยจะลดลงจากการ Auto Redeem แต่หากกองทุนสร้างผลตอบแทนเฉลี่ยได้มากกว่า 3% ที่ Redeem ออกไป มูลค่ารวมของกองทุนก็ยังเพิ่มขึ้นได้ นี่คือหัวใจสำคัญที่ทำให้ <b>ได้ทั้งรายได้ประจำ + กองทุนยังเติบโต</b></div>
+  </div>
+
+  <div class="card">
+    <h2>📊 ตัวอย่างมูลค่ากองทุนหลัง Auto Redemption</h2>
+    <div class="alert alert-orange" style="margin-bottom:16px">
+      <strong>⚠️ สมมติฐาน:</strong> ตัวอย่างนี้ใช้ผลตอบแทนกองทุนเฉลี่ย ~5% ต่อปี หลังหัก Auto Redemption ~3% มูลค่ากองทุนยังเติบโตสุทธิ ~2%/ปี — <b>ผลตอบแทนไม่รับประกัน</b> ผลที่แท้จริงอาจสูงหรือต่ำกว่านี้
+    </div>
+    <div style="overflow-x:auto"><table>
+      <tr><th>ปีกรมธรรม์</th><th>อายุ (สมมติเริ่ม 50)</th><th>มูลค่ากองทุน (บาท)</th><th>Auto Red./ปี (~3%)</th><th>สถานะ</th></tr>
+      <tr><td>ปีที่ 1-5</td><td>50-54</td><td class="num">เพิ่มขึ้นตามเบี้ยที่ชำระ</td><td class="num">~45,000-75,000</td><td><span class="tag tag-orange">ชำระเบี้ย</span></td></tr>
+      <tr><td>ปีที่ 10</td><td>60</td><td class="num">~2,530,000</td><td class="num">~75,900</td><td><span class="tag tag-green">เงินทำงานแทน</span></td></tr>
+      <tr><td>ปีที่ 20</td><td>70</td><td class="num">~3,130,000</td><td class="num">~93,900</td><td><span class="tag tag-green">กองทุนเติบโต</span></td></tr>
+      <tr><td>ปีที่ 30</td><td>80</td><td class="num">~3,790,000</td><td class="num">~113,700</td><td><span class="tag tag-green">กองทุนเติบโต</span></td></tr>
+      <tr><td>ปีที่ 40</td><td>90</td><td class="num">~4,380,000</td><td class="num">~131,400</td><td><span class="tag tag-blue">ใกล้สิ้นสัญญา</span></td></tr>
+      <tr class="best"><td>ปีที่ 48</td><td>98</td><td class="num">~4,590,000</td><td class="num">~137,700</td><td><span class="tag tag-purple">สิ้นสัญญา / มรดก</span></td></tr>
+    </table></div>
+    <p style="color:#718096;font-size:.82em;margin-top:10px">* ตัวเลขประมาณการจากโบรชัวร์ AIA (ผลตอบแทนเฉลี่ย ~5%/ปี ก่อนหักค่าธรรมเนียม, Auto Red. ~3%/ปี) — ไม่รับประกันผลตอบแทน</p>
+  </div>
+
+  <div class="alert alert-gold"><strong>⭐ สรุป:</strong> Auto Redemption คือกลไกสำคัญที่ทำให้ Elite Income Prestige สร้าง <b>"รายได้ประจำ"</b> ได้จริงตั้งแต่ปีแรก โดยไม่ต้องรอเกษียณ ไม่ต้องขายเอง ไม่มีภาษี หัวใจอยู่ที่กองทุนสามารถสร้างผลตอบแทนได้มากกว่าสิ่งที่ Redeem ออกไป</div>
+</div>
+
+<!-- ======================================== -->
+<!-- PAGE 5: NO HEDGE -->
+<!-- ======================================== -->
+<div id="nohedge" class="page">
+  <div class="elite-hero" style="background:linear-gradient(135deg,#7b341e,#dd6b20)">
+    <h2>💱 ทำไมกองทุน AIA-GAIF ไม่ทำ Hedging ค่าเงิน?</h2>
+    <p>คำตอบที่ช่วยให้เข้าใจว่า "ไม่ Hedge" ไม่ได้แปลว่าเสี่ยงกว่าเสมอไป</p>
+  </div>
+
+  <div class="card">
+    <h2>❓ Currency Hedging คืออะไร?</h2>
+    <div class="alert alert-blue">
+      <strong>📌 อธิบายง่ายๆ:</strong><br><br>
+      <b>Currency Hedging</b> = การทำประกันความเสี่ยงค่าเงิน เช่น กองทุนลงทุนในหุ้นสหรัฐ (เป็น USD) แต่นักลงทุนใช้เงินบาท<br><br>
+      ▸ <b>กองทุนที่ Hedge</b> จะล็อคอัตราแลกเปลี่ยนไว้ เพื่อลดผลกระทบจากค่าเงินบาทที่แข็งค่าหรืออ่อนค่า<br><br>
+      ▸ <b>กองทุนที่ไม่ Hedge</b> (Unhedged เช่น AIA-GAIF) จะไม่ล็อคค่าเงิน ผลตอบแทนจะรวมผลจากอัตราแลกเปลี่ยนด้วย
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>✅ เหตุผลที่ AIA-GAIF เลือกไม่ Hedge ค่าเงิน</h2>
+    <div class="grid2">
+      <div class="benefit-card green-top">
+        <h3>1. ลดต้นทุน Hedging</h3>
+        <p>การทำ Hedging มีค่าใช้จ่าย (Hedging Cost) ซึ่งปัจจุบันอยู่ที่ประมาณ <b>2-4% ต่อปี</b> สำหรับคู่เงิน THB/USD<br><br>
+        สำหรับกองทุนที่ตั้งเป้า Auto Redemption ~3%/ปี หากต้องเสีย Hedging Cost 2-4% จะกินผลตอบแทนไปเกือบหมด หรืออาจเหลือรายได้น้อยมาก<br><br>
+        <b>ไม่ Hedge = ไม่เสียค่าใช้จ่ายส่วนนี้ = โอกาสรายได้สูงกว่า</b></p>
+      </div>
+      <div class="benefit-card green-top">
+        <h3>2. เงินบาทมีแนวโน้มอ่อนค่าระยะยาว</h3>
+        <p>ในระยะยาว (20-40 ปี) เงินบาทมีแนวโน้มอ่อนค่าเมื่อเทียบกับ USD เนื่องจากความแตกต่างของอัตราเงินเฟ้อและโครงสร้างเศรษฐกิจ<br><br>
+        การไม่ Hedge ทำให้ <b>ได้ประโยชน์จากค่าเงินบาทที่อ่อนลง</b> = เงิน USD ที่ลงทุนแปลงกลับมาเป็นบาทได้มากขึ้น<br><br>
+        <b>เท่ากับมี "Inflation Protection" ในตัว</b></p>
+      </div>
+    </div>
+    <div class="grid2" style="margin-top:18px">
+      <div class="benefit-card gold-top">
+        <h3>3. กระจายความเสี่ยงสกุลเงิน</h3>
+        <p>การถือสินทรัพย์ในสกุลเงินต่างประเทศ (USD, EUR) ช่วยกระจายความเสี่ยงจากการพึ่งพาเงินบาทอย่างเดียว<br><br>
+        หากเศรษฐกิจไทยชะลอตัว หรือเกิดวิกฤตค่าเงิน สินทรัพย์ต่างประเทศจะยังคงรักษามูลค่าได้<br><br>
+        <b>เหมือนมีประกันค่าเงินบาทในตัว</b></p>
+      </div>
+      <div class="benefit-card gold-top">
+        <h3>4. ระยะเวลาลงทุนยาว ลด FX Volatility</h3>
+        <p>Elite Income Prestige เป็นสินค้าระยะยาว (20-50 ปี)<br><br>
+        ความผันผวนของค่าเงินในระยะสั้น (1-3 ปี) จะลดลงมากในระยะยาว<br><br>
+        สถิติแสดงว่า ในระยะ 10+ ปี ผลกระทบจากค่าเงินมักถูกชดเชยด้วยผลตอบแทนจากการลงทุน<br><br>
+        <b>ยิ่งลงทุนนาน ผลกระทบ FX ยิ่งลดลง</b></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📊 เปรียบเทียบ Hedge vs ไม่ Hedge</h2>
+    <div style="overflow-x:auto"><table>
+      <tr><th>รายการ</th><th>กองทุน Hedge (FX Hedged)</th><th style="background:#38a169">กองทุนไม่ Hedge (AIA-GAIF)</th></tr>
+      <tr><td style="text-align:left;font-weight:700">ค่าใช้จ่าย Hedging</td><td>~2-4%/ปี</td><td class="best">0% (ไม่มี)</td></tr>
+      <tr><td style="text-align:left;font-weight:700">ผลตอบแทนสุทธิ</td><td>ถูกหักค่า Hedge</td><td class="best">ได้เต็มที่ + ผล FX</td></tr>
+      <tr><td style="text-align:left;font-weight:700">เมื่อบาทอ่อน (THB ↓)</td><td>ไม่ได้ประโยชน์</td><td class="best">ได้ประโยชน์เพิ่ม</td></tr>
+      <tr><td style="text-align:left;font-weight:700">เมื่อบาทแข็ง (THB ↑)</td><td>ได้รับการปกป้อง</td><td>ผลตอบแทนลดลงบ้าง</td></tr>
+      <tr><td style="text-align:left;font-weight:700">เหมาะกับ</td><td>ลงทุนระยะสั้น 1-3 ปี</td><td class="best">ลงทุนระยะยาว 10+ ปี</td></tr>
+      <tr><td style="text-align:left;font-weight:700">กระจายเสี่ยงสกุลเงิน</td><td>ไม่ได้ (ล็อคเป็น THB)</td><td class="best">ได้ (ถือ USD/EUR)</td></tr>
+    </table></div>
+  </div>
+
+  <div class="alert alert-green"><strong>✅ สรุป:</strong> การไม่ทำ Hedging ค่าเงินใน AIA-GAIF เป็น <b>การตัดสินใจเชิงกลยุทธ์</b> ไม่ใช่ความประมาท — ช่วยลดต้นทุน 2-4%/ปี ซึ่งมีนัยสำคัญมากสำหรับกองทุนที่จ่าย Auto Redemption 3% และในระยะยาว (20-50 ปี) ค่าเงินบาทมีแนวโน้มอ่อนค่า ทำให้ผู้ลงทุนได้ประโยชน์เพิ่มเติม</div>
+</div>
+
+<!-- ======================================== -->
+<!-- PAGE 6: CASHFLOW INTERACTIVE -->
+<!-- ======================================== -->
+<div id="cashflow" class="page">
+  <div class="elite-hero" style="background:linear-gradient(135deg,#553c9a,#805ad5)">
+    <h2>📊 คำนวณกระแสเงินสด (Interactive Cashflow Calculator)</h2>
+    <p>กรอกข้อมูลเพื่อจำลองมูลค่ากองทุน, Auto Redemption และมูลค่ามรดกตลอดอายุกรมธรรม์</p>
+  </div>
+
+  <div class="card">
+    <h2>⚙️ ตั้งค่าข้อมูล</h2>
+    <div class="alert alert-orange" style="margin-bottom:16px"><strong>⚠️ หมายเหตุสำคัญ:</strong> ตัวเลขที่คำนวณเป็น <b>ประมาณการเท่านั้น ไม่รับประกันผลตอบแทน</b> ใช้สำหรับเปรียบเทียบเบื้องต้น ผลจริงขึ้นอยู่กับผลตอบแทนกองทุน ค่าธรรมเนียม และตารางมรณะจริง</div>
+    <div class="grid4" style="margin-bottom:18px;align-items:end">
+      <div>
+        <label style="font-weight:700;font-size:.88em;color:#4a5568;display:block;margin-bottom:6px">💰 เบี้ยประกันหลัก/ปี (บาท)</label>
+        <input id="inPremium" type="number" value="500000" min="500000" step="100000" style="width:100%;padding:10px 14px;border:2px solid #e2e8f0;border-radius:8px;font-size:1em;font-weight:700;color:#2b6cb0">
+        <div style="font-size:.75em;color:#a0aec0;margin-top:4px">ขั้นต่ำ 500,000 บาท</div>
+      </div>
+      <div>
+        <label style="font-weight:700;font-size:.88em;color:#4a5568;display:block;margin-bottom:6px">📈 ผลตอบแทนกองทุน/ปี</label>
+        <select id="inReturn" style="width:100%;padding:10px 14px;border:2px solid #e2e8f0;border-radius:8px;font-size:1em;font-weight:700;color:#805ad5">
+          <option value="0">0% (กรณีแย่ที่สุด)</option>
+          <option value="1">1% ต่อปี</option>
+          <option value="2" selected>2% ต่อปี</option>
+        </select>
+      </div>
+      <div>
+        <label style="font-weight:700;font-size:.88em;color:#4a5568;display:block;margin-bottom:6px">👤 เพศ</label>
+        <select id="inGender" style="width:100%;padding:10px 14px;border:2px solid #e2e8f0;border-radius:8px;font-size:1em;font-weight:700;color:#38a169">
+          <option value="M">ชาย</option>
+          <option value="F">หญิง</option>
+        </select>
+      </div>
+      <div>
+        <label style="font-weight:700;font-size:.88em;color:#4a5568;display:block;margin-bottom:6px">🎂 อายุปัจจุบัน (ปี)</label>
+        <input id="inAge" type="number" value="50" min="20" max="70" style="width:100%;padding:10px 14px;border:2px solid #e2e8f0;border-radius:8px;font-size:1em;font-weight:700;color:#dd6b20">
+        <div style="font-size:.75em;color:#a0aec0;margin-top:4px">รับประกัน 1 เดือน – 70 ปี</div>
+      </div>
+    </div>
+    <div style="text-align:center">
+      <button onclick="calcCashflow()" style="background:linear-gradient(135deg,#2b6cb0,#553c9a);color:#fff;border:none;padding:14px 40px;border-radius:10px;font-size:1.1em;font-weight:800;cursor:pointer;transition:.2s;box-shadow:0 4px 12px rgba(43,108,176,.3)">🔄 คำนวณ</button>
+    </div>
+  </div>
+
+  <!-- สมมติฐาน -->
+  <div class="card" id="calcAssumptions" style="display:none">
+    <h2>📋 สมมติฐานการคำนวณ</h2>
+    <div id="assumptionText"></div>
+  </div>
+
+  <!-- KPI Summary -->
+  <div class="grid4" id="calcKPI" style="margin-bottom:18px;display:none">
+    <div class="kpi"><label>เบี้ยรวม 5 ปี</label><div class="val" id="kTotalPrem">—</div><div class="sub">บาท</div></div>
+    <div class="kpi green"><label>Auto Redeem รวม</label><div class="val" id="kTotalRedeem">—</div><div class="sub">บาท (ตลอดสัญญา)</div></div>
+    <div class="kpi purple"><label>มูลค่ากองทุนสุดท้าย</label><div class="val" id="kFinalNAV">—</div><div class="sub">บาท (มรดก)</div></div>
+    <div class="kpi gold"><label>ผลประโยชน์รวม</label><div class="val" id="kTotalBenefit">—</div><div class="sub">Auto Red. + NAV สุดท้าย</div></div>
+  </div>
+
+  <!-- ตาราง Cashflow -->
+  <div class="card" id="calcTable" style="display:none">
+    <h2>📊 ตาราง Cashflow รายปี</h2>
+    <div style="overflow-x:auto"><table id="cfTable">
+      <thead>
+        <tr>
+          <th>ปีที่</th>
+          <th>อายุ</th>
+          <th>เบี้ย (จ่าย)</th>
+          <th>ค่าบริหาร 2.4%</th>
+          <th>COI (ค่าประกัน)</th>
+          <th>ผลตอบแทนกองทุน</th>
+          <th>Perf. Bonus</th>
+          <th>Auto Red. 3%</th>
+          <th>มูลค่ากองทุน</th>
+          <th>มรดก (กรณีเสีย)</th>
+        </tr>
+      </thead>
+      <tbody id="cfBody"></tbody>
+    </table></div>
+    <p style="color:#718096;font-size:.82em;margin-top:10px">* COI คำนวณจาก 10% ของเบี้ยรวมที่ชำระ × อัตรามรณะไทย TMO2017 (ประมาณ) | ค่าบริหาร 2.4% ปีที่ 1-9, 0% ปีที่ 10+ | Performance Bonus +0.25% ปีที่ 10+ | Auto Redemption 3% ของ NAV (ไม่หักออกจากมูลค่ากองทุน) | <b>ผลตอบแทนไม่รับประกัน</b></p>
+  </div>
+
+  <div class="alert alert-gold" id="calcInsight" style="display:none"><strong>⭐ Insight:</strong> <span id="insightText"></span></div>
+</div>
+
+<script>
+// === Thai Mortality Table TMO2017 (qx per 1000) Approximate ===
+const qxMale={20:1.28,21:1.32,22:1.35,23:1.38,24:1.42,25:1.46,26:1.50,27:1.55,28:1.60,29:1.66,30:1.72,31:1.79,32:1.86,33:1.94,34:2.03,35:2.13,36:2.24,37:2.36,38:2.50,39:2.65,40:2.82,41:3.02,42:3.24,43:3.49,44:3.78,45:4.10,46:4.47,47:4.89,48:5.36,49:5.90,50:6.51,51:7.20,52:7.98,53:8.86,54:9.85,55:10.97,56:12.23,57:13.65,58:15.26,59:17.08,60:19.14,61:21.47,62:24.10,63:27.08,64:30.45,65:34.26,66:38.58,67:43.47,68:49.01,69:55.30,70:62.43,71:70.52,72:79.70,73:90.12,74:101.9,75:115.3,76:130.4,77:147.7,78:167.3,79:189.5,80:214.6,81:243.0,82:275.2,83:311.5,84:352.5,85:398.8,86:449.0,87:499.0,88:545.0,89:588.0,90:628.0,91:665.0,92:698.0,93:728.0,94:755.0,95:780.0,96:803.0,97:825.0,98:850.0,99:1000};
+const qxFemale={20:0.52,21:0.54,22:0.56,23:0.58,24:0.60,25:0.62,26:0.65,27:0.68,28:0.71,29:0.75,30:0.79,31:0.83,32:0.88,33:0.93,34:0.99,35:1.05,36:1.12,37:1.20,38:1.28,39:1.38,40:1.48,41:1.60,42:1.73,43:1.88,44:2.04,45:2.22,46:2.42,47:2.65,48:2.90,49:3.19,50:3.51,51:3.87,52:4.28,53:4.73,54:5.24,55:5.82,56:6.47,57:7.20,58:8.02,59:8.95,60:10.00,61:11.19,62:12.54,63:14.07,64:15.81,65:17.78,66:20.03,67:22.59,68:25.52,69:28.87,70:32.70,71:37.10,72:42.14,73:47.93,74:54.58,75:62.22,76:71.03,77:81.18,78:92.87,79:106.3,80:121.8,81:139.5,82:160.0,83:183.5,84:210.5,85:241.2,86:276.0,87:315.0,88:358.0,89:402.0,90:448.0,91:495.0,92:543.0,93:590.0,94:636.0,95:680.0,96:722.0,97:763.0,98:810.0,99:1000};
+
+function fmt(n){return Math.round(n).toLocaleString('en-US')}
+function fmtM(n){
+  if(Math.abs(n)>=1e6) return (n/1e6).toFixed(2)+' ล้าน';
+  if(Math.abs(n)>=1e3) return fmt(n);
+  return fmt(n);
+}
+
+function calcCashflow(){
+  const premium=Math.max(500000,parseInt(document.getElementById('inPremium').value)||500000);
+  const fundReturn=parseFloat(document.getElementById('inReturn').value)/100;
+  const gender=document.getElementById('inGender').value;
+  const startAge=Math.max(20,Math.min(70,parseInt(document.getElementById('inAge').value)||50));
+  const endAge=99;
+  const payYears=5;
+  const autoRedeemRate=0.03;
+  const adminFeeRate=0.024;
+  const bonusRate=0.0025;
+  const qxTable=gender==='M'?qxMale:qxFemale;
+
+  let nav=0;
+  let totalPremPaid=0;
+  let totalRedeem=0;
+  let rows=[];
+
+  for(let year=1;year<=(endAge-startAge);year++){
+    const age=startAge+year-1;
+    if(age>=100) break;
+    const isPaying=year<=payYears;
+    const yearPrem=isPaying?premium:0;
+    if(isPaying) totalPremPaid+=yearPrem;
+
+    // Beginning of year: add premium
+    nav+=yearPrem;
+
+    // 1) COI: 10% ของเบี้ยรวมที่ชำระแล้ว × qx/1000 (หักก่อน)
+    const sarBase=0.10*totalPremPaid;
+    const qx=qxTable[age]||qxTable[99]||500;
+    const coi=sarBase*(qx/1000);
+    nav-=coi;
+    if(nav<0) nav=0;
+
+    // 2) Admin fee 2.4% ของมูลค่ากองทุน (หลังหัก COI แล้ว) — ปีที่ 1-9 เท่านั้น
+    const adminFee=(year<=9)?(nav*adminFeeRate):0;
+    nav-=adminFee;
+
+    // Fund return
+    const fundGain=nav*fundReturn;
+    nav+=fundGain;
+
+    // Performance Bonus (yr10+)
+    const bonus=(year>=10)?(nav*bonusRate):0;
+    nav+=bonus;
+
+    // Auto Redemption 3% of NAV (จ่ายออก แต่ไม่หักจากมูลค่ากองทุน)
+    const autoRed=nav*autoRedeemRate;
+    // nav ไม่ลดลง — Auto Redeem จ่ายจากผลตอบแทน ไม่หักจาก NAV
+    totalRedeem+=autoRed;
+
+    // Death benefit at end of year
+    const db1=1.10*totalPremPaid;
+    const db2=nav+0.10*totalPremPaid;
+    const dbFinal=Math.max(db1,db2);
+
+    rows.push({
+      year,age,prem:yearPrem,admin:adminFee,coi,fundGain,bonus,autoRed,nav,deathBen:dbFinal
+    });
+
+    if(nav<=0) break;
+  }
+
+  // Show assumptions
+  document.getElementById('calcAssumptions').style.display='block';
+  document.getElementById('assumptionText').innerHTML=`
+    <div class="grid2">
+      <div class="alert alert-blue" style="margin-bottom:0">
+        <b>ข้อมูลที่ใช้คำนวณ:</b><br>
+        ▸ เบี้ยประกันหลัก: <b>${fmt(premium)}</b> บาท/ปี × 5 ปี = <b>${fmt(premium*5)}</b> บาท<br>
+        ▸ ผลตอบแทนกองทุน: <b>${(fundReturn*100).toFixed(0)}%</b> ต่อปี (สมมติฐาน ไม่รับประกัน)<br>
+        ▸ เพศ: <b>${gender==='M'?'ชาย':'หญิง'}</b> | อายุเริ่มต้น: <b>${startAge}</b> ปี<br>
+        ▸ ทุนประกัน: <b>110%</b> ของเบี้ยที่ชำระ = <b>${fmt(premium*5*1.1)}</b> บาท
+      </div>
+      <div class="alert alert-purple" style="margin-bottom:0">
+        <b>สมมติฐานค่าธรรมเนียม:</b><br>
+        ▸ ค่าดำเนินการเบี้ยหลัก: <b>0%</b> (เบี้ย 100% เข้ากองทุน)<br>
+        ▸ ค่าบริหารกรมธรรม์: <b>2.4%/ปี</b> (ปีที่ 1-9) → <b>0%</b> (ปีที่ 10+)<br>
+        ▸ COI: คำนวณจาก <b>10% ของเบี้ยรวม × อัตรามรณะ TMO2017</b><br>
+        ▸ Auto Redemption: <b>3%</b> ของ NAV (ไม่หักออกจากมูลค่ากองทุน)<br>
+        ▸ Performance Bonus: <b>+0.25%</b>/ปี (ปีที่ 10+)
+      </div>
+    </div>`;
+
+  // Show KPIs
+  document.getElementById('calcKPI').style.display='grid';
+  const lastRow=rows[rows.length-1];
+  const finalNAV=lastRow?lastRow.nav:0;
+  const totalBenefit=totalRedeem+finalNAV;
+  document.getElementById('kTotalPrem').textContent=fmtM(premium*payYears);
+  document.getElementById('kTotalRedeem').textContent=fmtM(totalRedeem);
+  document.getElementById('kFinalNAV').textContent=fmtM(finalNAV);
+  document.getElementById('kTotalBenefit').textContent=fmtM(totalBenefit);
+
+  // Build table - show key years only
+  const tbody=document.getElementById('cfBody');
+  tbody.innerHTML='';
+  rows.forEach(r=>{
+    // Show years 1-5, 10, every 5 years, and last year
+    const show=r.year<=5||r.year===10||r.year%5===0||r===lastRow||(r.age===60||r.age===65||r.age===70||r.age===75||r.age===80||r.age===85||r.age===90||r.age===95||r.age===99);
+    if(!show) return;
+    const isPay=r.year<=5;
+    const isFree=r.year>=10;
+    const tr=document.createElement('tr');
+    if(isPay) tr.style.background='#fff5f5';
+    else if(isFree) tr.style.background='#f0fff4';
+    else tr.style.background='#fffaf0';
+    tr.innerHTML=`
+      <td><b>${r.year}</b></td>
+      <td>${r.age}</td>
+      <td class="num" style="color:${isPay?'#c53030':'#a0aec0'}">${isPay?'-'+fmt(r.prem):'—'}</td>
+      <td class="num" style="color:#c05621">${r.admin>0?'-'+fmt(r.admin):'—'}</td>
+      <td class="num" style="color:#c53030">-${fmt(r.coi)}</td>
+      <td class="num" style="color:#2b6cb0">${r.fundGain>0?'+'+fmt(r.fundGain):'0'}</td>
+      <td class="num" style="color:#38a169">${r.bonus>0?'+'+fmt(r.bonus):'—'}</td>
+      <td class="num" style="color:#276749"><b>+${fmt(r.autoRed)}</b></td>
+      <td class="num" style="font-weight:700;color:#805ad5">${fmt(r.nav)}</td>
+      <td class="num" style="color:#2d3748">${fmt(r.deathBen)}</td>`;
+    tbody.appendChild(tr);
+  });
+
+  document.getElementById('calcTable').style.display='block';
+
+  // Insight
+  document.getElementById('calcInsight').style.display='block';
+  const profit=totalBenefit-(premium*payYears);
+  document.getElementById('insightText').innerHTML=
+    `จากเบี้ยรวม <b>${fmtM(premium*payYears)}</b> บาท (${fmt(premium)} × 5 ปี) ผลตอบแทนกองทุน ${(fundReturn*100).toFixed(0)}% — `+
+    `ได้รับ Auto Redemption รวม <b>${fmtM(totalRedeem)}</b> บาท + มูลค่ากองทุนสุดท้าย <b>${fmtM(finalNAV)}</b> บาท `+
+    `= ผลประโยชน์รวม <b style="color:#276749">${fmtM(totalBenefit)}</b> บาท `+
+    (profit>0?`(<b style="color:#276749">กำไร +${fmtM(profit)}</b> บาท)`:`(<b style="color:#c53030">ขาดทุน ${fmtM(profit)}</b> บาท)`)+
+    ` | ยิ่งเบี้ยสูงและอายุเริ่มต้นน้อย ผลตอบแทนสะสมยิ่งมาก เพราะกองทุนมีเวลาทำงาน (Compounding) นานขึ้น`;
+}
+
+// Auto calculate on load
+document.addEventListener('DOMContentLoaded',()=>{setTimeout(calcCashflow,300)});
+</script>
+
+
+<!-- ======================================== -->
+<!-- PAGE 7: FEES -->
+<!-- ======================================== -->
+<div id="fees" class="page">
+  <div class="elite-hero" style="background:linear-gradient(135deg,#2d3748,#4a5568)">
+    <h2>📋 ค่าธรรมเนียมและค่าใช้จ่าย</h2>
+    <p>โครงสร้างค่าธรรมเนียมที่ชัดเจนของ Elite Income Prestige</p>
+  </div>
+
+  <div class="card">
+    <h2>💳 สรุปค่าธรรมเนียมทั้งหมด</h2>
+    <div style="overflow-x:auto"><table>
+      <tr><th>รายการ</th><th>อัตรา</th><th>รายละเอียด</th></tr>
+      <tr><td style="text-align:left;font-weight:700">ค่าใช้จ่ายดำเนินการ (เบี้ยหลัก)</td><td class="best">0%</td><td>ไม่มีค่าดำเนินการสำหรับเบี้ยประกันหลัก — เบี้ย 100% เข้ากองทุนทั้งหมด</td></tr>
+      <tr><td style="text-align:left;font-weight:700">ค่าบริหารกรมธรรม์ ปีที่ 1-9</td><td>2.4%/ปี</td><td>หักจากมูลค่ากองทุนอัตโนมัติ</td></tr>
+      <tr><td style="text-align:left;font-weight:700">ค่าบริหารกรมธรรม์ ปีที่ 10+</td><td class="best">0%</td><td>ไม่มีค่าบริหารตั้งแต่ปีที่ 10 เป็นต้นไป</td></tr>
+      <tr><td style="text-align:left;font-weight:700">ค่าการประกันภัย (COI)</td><td>ตามตารางมรณะ</td><td>หักรายเดือนจากมูลค่ากองทุน ขึ้นกับอายุและทุนประกัน</td></tr>
+      <tr><td style="text-align:left;font-weight:700">ค่าสับเปลี่ยนกองทุน</td><td class="best">0%</td><td>ปรับพอร์ตกองทุนได้ตลอดไม่มีค่าใช้จ่าย</td></tr>
+      <tr><td style="text-align:left;font-weight:700">Performance Bonus (ปีที่ 10+)</td><td class="best">+0.25%/ปี</td><td>บริษัทจ่ายเพิ่มเข้ากองทุนหลัก ทบเข้าทุกเดือนอัตโนมัติ</td></tr>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h2>🔓 ค่าธรรมเนียมการถอนเงิน (Surrender Charge)</h2>
+    <div style="overflow-x:auto"><table>
+      <tr><th>ปีกรมธรรม์</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10+</th></tr>
+      <tr><td style="font-weight:700">อัตราค่าถอน</td><td style="color:#c53030;font-weight:700">85%</td><td style="color:#c53030;font-weight:700">75%</td><td style="color:#c53030;font-weight:700">65%</td><td style="color:#dd6b20;font-weight:700">55%</td><td style="color:#dd6b20;font-weight:700">45%</td><td style="color:#d69e2e;font-weight:700">35%</td><td style="color:#d69e2e;font-weight:700">30%</td><td style="color:#38a169;font-weight:700">20%</td><td style="color:#38a169;font-weight:700">10%</td><td class="best">0%</td></tr>
+    </table></div>
+    <div class="alert alert-purple" style="margin-top:16px">
+      <strong>💡 อธิบาย:</strong> ค่า Surrender Charge เป็นค่าธรรมเนียมกรณี <b>ถอนเงินก้อนใหญ่ / ยกเลิกกรมธรรม์</b> ก่อนครบ 10 ปี — <b>Auto Redemption ไม่ถูกเรียกเก็บค่านี้</b> (Auto Redemption จ่ายปกติทุกปี)<br><br>
+      เมื่อถือครบ 10 ปี ค่าถอนเป็น <b>0%</b> สามารถถอนเงินได้อิสระ
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📊 เปรียบเทียบค่าธรรมเนียม: ปีที่ 1-9 vs ปีที่ 10+</h2>
+    <div class="grid2">
+      <div class="benefit-card red-top">
+        <h3>📅 ปีที่ 1-9: มีค่าธรรมเนียม</h3>
+        <div class="big-num" style="color:#e53e3e">2.4%/ปี</div>
+        <p>ค่าบริหารกรมธรรม์ 2.4%/ปี + ค่า COI ตามอายุ<br>
+        มี Surrender Charge หากถอนก่อน<br>
+        แต่ยังคงได้รับ Auto Redemption ตามปกติ</p>
+      </div>
+      <div class="benefit-card green-top">
+        <h3>📅 ปีที่ 10+: แทบไม่มีค่าธรรมเนียม</h3>
+        <div class="big-num" style="color:#38a169">0% + Bonus</div>
+        <p>ค่าบริหาร 0% + Surrender Charge 0%<br>
+        ได้ Performance Bonus +0.25%/ปี<br>
+        เงินทำงานเต็มประสิทธิภาพ ถอนได้อิสระ</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-green"><strong>✅ สรุป:</strong> โครงสร้างค่าธรรมเนียมออกแบบมาเพื่อ <b>จูงใจให้ถือระยะยาว</b> — ปีที่ 10+ ไม่มีค่าบริหาร ไม่มีค่าถอน และยังได้โบนัสเพิ่ม ทำให้ยิ่งถือนาน ยิ่งคุ้ม</div>
+</div>
+
+<!-- ======================================== -->
+<!-- PAGE 8: ESTATE PLANNING -->
+<!-- ======================================== -->
+<div id="estate" class="page">
+  <div class="elite-hero" style="background:linear-gradient(135deg,#276749,#2f855a,#38a169)">
+    <h2>🏛️ Smooth Transfer — วางแผนมรดกอย่างเป็นระบบ</h2>
+    <p>Elite Income Prestige ไม่เพียงสร้างรายได้ แต่ยังเป็นเครื่องมือส่งต่อความมั่งคั่งที่ทรงประสิทธิภาพ</p>
+  </div>
+
+  <div class="card">
+    <h2>💎 ผลประโยชน์กรณีเสียชีวิต</h2>
+    <div class="grid2">
+      <div class="benefit-card green-top">
+        <h3>🛡️ ความคุ้มครองชีวิต</h3>
+        <div class="big-num" style="color:#38a169">110% เบี้ย หรือ NAV + 10% เบี้ย</div>
+        <p>กรณีเสียชีวิต บริษัทจ่ายจำนวนที่มากกว่าระหว่าง:<br><br>
+        <b>(1)</b> 110% ของเบี้ยประกันหลักที่ชำระแล้ว<br>
+        <b>(2)</b> มูลค่ากองทุน + 10% ของเบี้ยประกันหลักที่ชำระแล้ว<br><br>
+        หากกองทุนเติบโตดี ตัวเลือก (2) จะให้มูลค่ามรดกสูงกว่ามาก</p>
+      </div>
+      <div class="benefit-card green-top">
+        <h3>📈 มรดกเติบโตตามเวลา</h3>
+        <div class="big-num" style="color:#38a169">ยิ่งอายุยืน ยิ่งมรดกโต</div>
+        <p>ต่างจากประกันทั่วไปที่ทุนประกันตายตัว<br><br>
+        Elite Income Prestige — มูลค่ากองทุนเติบโตต่อเนื่องตลอดชีพ<br><br>
+        ยิ่งมีชีวิตยาว กองทุนยิ่งมีเวลาทำงาน มรดกยิ่งมากขึ้น<br><br>
+        <b>เป็นแรงจูงใจให้ดูแลสุขภาพ!</b></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📊 ตัวอย่างมูลค่ามรดก (เบี้ย 5,000,000/ปี × 5 ปี อายุ 60)</h2>
+    <div style="overflow-x:auto"><table>
+      <tr><th>อายุที่เสียชีวิต</th><th>มูลค่ากองทุน (NAV)</th><th>มรดกจ่ายให้ผู้รับประโยชน์</th><th>เทียบกับเบี้ยรวม 25 ล้าน</th></tr>
+      <tr><td>70 ปี</td><td class="num">~25,000,000</td><td class="num" style="color:#276749;font-weight:700">~27,500,000</td><td><span class="tag tag-green">+10%</span></td></tr>
+      <tr><td>80 ปี</td><td class="num">~29,240,000</td><td class="num" style="color:#276749;font-weight:700">~31,740,000</td><td><span class="tag tag-green">+27%</span></td></tr>
+      <tr class="best"><td>98 ปี (สิ้นสัญญา)</td><td class="num">~31,780,000</td><td class="num" style="color:#276749;font-weight:700">~31,780,000</td><td><span class="tag tag-green">+27%</span></td></tr>
+    </table></div>
+    <p style="color:#718096;font-size:.82em;margin-top:8px">* ตัวเลขจากโบรชัวร์ AIA — ยังไม่รวม Auto Redemption ที่ได้รับระหว่างมีชีวิต ไม่รับประกันผลตอบแทน</p>
+  </div>
+
+  <div class="card">
+    <h2>✅ จุดเด่นการวางแผนมรดกผ่าน Elite Income Prestige</h2>
+    <div class="grid2">
+      <div>
+        <ul class="pill-list">
+          <li style="border-left-color:#38a169"><b>ผู้รับประโยชน์ได้รับโดยตรง</b> — ไม่ต้องผ่านกระบวนการพินัยกรรมหรือศาล รวดเร็วและเรียบง่าย</li>
+          <li style="border-left-color:#38a169"><b>กำหนดสัดส่วนผู้รับได้</b> — ระบุชื่อและสัดส่วนผู้รับประโยชน์ได้ตามต้องการ ลดปัญหาข้อพิพาทในครอบครัว</li>
+          <li style="border-left-color:#38a169"><b>เปลี่ยนผู้รับประโยชน์ได้</b> — สามารถเปลี่ยนแปลงผู้รับประโยชน์ได้ตลอดอายุกรมธรรม์</li>
+        </ul>
+      </div>
+      <div>
+        <ul class="pill-list">
+          <li style="border-left-color:#805ad5"><b>ได้รับยกเว้นภาษีมรดก</b> — เงินค่าสินไหมประกันชีวิตได้รับยกเว้นภาษีเงินได้ และไม่ถือเป็นทรัพย์มรดกตามกฎหมาย</li>
+          <li style="border-left-color:#805ad5"><b>ไม่ถูกอายัดโดยเจ้าหนี้</b> — เงินประกันชีวิตมีสิทธิเหนือเจ้าหนี้ของผู้เอาประกัน</li>
+          <li style="border-left-color:#805ad5"><b>วางแผนได้ล่วงหน้า</b> — กำหนดแผนส่งต่อความมั่งคั่งได้ตั้งแต่วันที่ทำกรมธรรม์</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🔄 เปรียบเทียบ: มรดกผ่าน Elite vs มรดกทั่วไป</h2>
+    <div style="overflow-x:auto"><table>
+      <tr><th>รายการ</th><th style="background:#38a169">Elite Income Prestige</th><th>มรดกทั่วไป (ทรัพย์สิน/เงินฝาก)</th></tr>
+      <tr><td style="text-align:left;font-weight:700">ระยะเวลาได้รับ</td><td class="best">รวดเร็ว (ยื่นเคลมตามขั้นตอน)</td><td>อาจใช้เวลาหลายเดือน-ปี (ศาล/พินัยกรรม)</td></tr>
+      <tr><td style="text-align:left;font-weight:700">ภาษีมรดก</td><td class="best">ได้รับยกเว้น</td><td>อาจเสียภาษีมรดก 5-10%</td></tr>
+      <tr><td style="text-align:left;font-weight:700">เจ้าหนี้</td><td class="best">ไม่ถูกอายัด</td><td>อาจถูกเจ้าหนี้เรียกร้อง</td></tr>
+      <tr><td style="text-align:left;font-weight:700">ข้อพิพาท</td><td class="best">น้อย (ระบุผู้รับชัดเจน)</td><td>มาก (อาจขัดแย้งในครอบครัว)</td></tr>
+      <tr><td style="text-align:left;font-weight:700">มูลค่า</td><td class="best">เพิ่มขึ้นตามเวลา</td><td>ลดลงตามค่าเสื่อมราคา/เงินเฟ้อ</td></tr>
+      <tr><td style="text-align:left;font-weight:700">ความซับซ้อน</td><td class="best">เรียบง่าย (ระบุผู้รับในกรมธรรม์)</td><td>อาจต้องทำพินัยกรรม/ตั้งผู้จัดการมรดก</td></tr>
+    </table></div>
+  </div>
+
+  <div class="alert alert-green"><strong>✅ Smooth Transfer สรุป:</strong> Elite Income Prestige ทำให้การส่งต่อความมั่งคั่งเป็นเรื่อง <b>เรียบง่าย รวดเร็ว ปราศจากข้อพิพาท</b> — กำหนดผู้รับได้ชัดเจน ไม่ผ่านศาล ไม่เสียภาษีมรดก มูลค่าเพิ่มตามเวลา เป็นเครื่องมือวางแผนมรดกที่ครบถ้วนในตัว</div>
+</div>
+
+<!-- ======================================== -->
+<!-- PAGE 9: CLIENT REPORT (A4 Printable) -->
+<!-- ======================================== -->
+<div id="clientreport" class="page">
+
+  <div class="print-btn-wrap">
+    <button class="print-btn" onclick="printReport()">🖨️ พิมพ์รายงานสำหรับลูกค้า (A4)</button>
+    <div style="font-size:.92em;color:#718096;margin-top:8px">คลิกเพื่อพิมพ์เฉพาะหน้ารายงาน 3 หน้า A4 — พร้อมส่งให้ลูกค้า</div>
+  </div>
+
+  <!-- ===== PAGE 1 of 3 ===== -->
+  <div class="rpt-page">
+    <div class="rpt-header">
+      <div style="font-size:.92em;color:#805ad5;font-weight:700;letter-spacing:2px">AIA ELITE INCOME PRESTIGE</div>
+      <h1>Smart Income — Smooth Transfer</h1>
+      <div class="rpt-sub">สร้างรายได้ Passive Income ตลอดชีพ | ส่งต่อมรดกอย่างราบรื่น</div>
+      <div class="rpt-badge">Unit-Linked | ชำระเบี้ย 5 ปี · คุ้มครองถึงอายุ 99 ปี</div>
+    </div>
+
+    <!-- Why Now? -->
+    <div class="rpt-section">
+      <h2>📍 ทำไมตอนนี้ถึงเป็นจังหวะที่ดี?</h2>
+      <div class="rpt-2col">
+        <div>
+          <div class="rpt-box red">
+            <b>🔴 ปัญหาที่คนไทยกำลังเผชิญ</b><br>
+            ▸ อัตราดอกเบี้ยเงินฝากออมทรัพย์ต่ำสุดในรอบหลายปี เหลือเพียง <b>0.25%/ปี</b> (ฝากประจำ 12 เดือน ~0.85%)<br>
+            ▸ ธปท. ลดดอกเบี้ยนโยบายลงมาที่ <b>1.25%</b> และมีแนวโน้มลดอีก<br>
+            ▸ เศรษฐกิจไทยชะลอตัว GDP ปี 2026 คาดการณ์ที่ <b>1.5-1.6%</b> เท่านั้น<br>
+            ▸ เงินเฟ้อติดลบ 10 เดือนต่อเนื่อง — กำลังซื้อหดตัว<br>
+            ▸ หนี้ครัวเรือนสูง สินเชื่อหดตัว ความไม่แน่นอนทั่วโลกจากสงครามการค้า
+          </div>
+        </div>
+        <div>
+          <div class="rpt-box green">
+            <b>🟢 โอกาสจาก Elite Income Prestige</b><br>
+            ▸ Auto Redemption <b>~3%/ปี</b> ของมูลค่ากองทุน — สูงกว่าดอกเบี้ยเงินฝากถึง <b>12 เท่า</b><br>
+            ▸ ลงทุนในสินทรัพย์ต่างประเทศ (USD/EUR) — กระจายความเสี่ยงจากเศรษฐกิจไทย<br>
+            ▸ 7 แหล่งรายรับจากกลยุทธ์ระดับโลก ไม่พึ่งพาแหล่งเดียว<br>
+            ▸ เบี้ยเข้ากองทุน 100% (ไม่หัก Premium Charge)<br>
+            ▸ ปีที่ 10+ ค่าธรรมเนียม 0% + Performance Bonus +0.25%<br>
+            ▸ มรดกส่งต่อทันที — ไม่ผ่านศาล ไม่เสียภาษี
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Overview -->
+    <div class="rpt-section">
+      <h2>📋 ข้อมูลสินค้า Elite Income Prestige</h2>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px">
+        <div class="rpt-kpi"><div class="rpt-num">5 ปี</div><div class="rpt-label">ชำระเบี้ย</div></div>
+        <div class="rpt-kpi green"><div class="rpt-num">99 ปี</div><div class="rpt-label">คุ้มครองถึงอายุ</div></div>
+        <div class="rpt-kpi purple"><div class="rpt-num">~3%</div><div class="rpt-label">Auto Redeem/ปี</div></div>
+        <div class="rpt-kpi gold"><div class="rpt-num">0%</div><div class="rpt-label">ค่าธรรมเนียม ปี 10+</div></div>
+        <div class="rpt-kpi"><div class="rpt-num">500K</div><div class="rpt-label">เบี้ยขั้นต่ำ/ปี</div></div>
+      </div>
+      <div class="rpt-2col">
+        <div class="rpt-box">
+          <b>💡 แนวคิด Smart Income</b><br>
+          เปลี่ยนเบี้ยประกัน 5 ปี ให้เป็น <b>รายได้ Passive Income ตลอดชีพ</b> ผ่านระบบ Auto Redemption ที่กองทุนจ่ายอัตโนมัติ ~3% ของมูลค่ากองทุนทุกปี โดยเริ่มรับเงินตั้งแต่ <b>ปีแรก</b> ที่ชำระเบี้ย — ไม่ต้องรอ ไม่ต้องทำเรื่องเอง ระบบจัดการให้ทั้งหมด
+        </div>
+        <div class="rpt-box purple">
+          <b>🏛️ แนวคิด Smooth Transfer</b><br>
+          มูลค่ากองทุนที่เติบโตจะส่งต่อเป็น <b>มรดกให้ผู้รับประโยชน์โดยตรง</b> ไม่ต้องผ่านกระบวนการศาลหรือพินัยกรรม ได้รับเงินภายใน 14-30 วัน ไม่เสียภาษีมรดก ไม่ถูกเจ้าหนี้ยึด กำหนดสัดส่วนผู้รับได้อิสระ เปลี่ยนแปลงได้ตลอด
+        </div>
+      </div>
+    </div>
+
+    <!-- Fee summary -->
+    <div class="rpt-section">
+      <h2>💰 โครงสร้างค่าธรรมเนียม — ยิ่งนานยิ่งคุ้ม</h2>
+      <table class="rpt-table">
+        <tr><th>รายการ</th><th>ปีที่ 1-9</th><th>ปีที่ 10+</th></tr>
+        <tr><td style="text-align:left">ค่าดำเนินการเบี้ย (Premium Charge)</td><td><b style="color:#276749">0%</b></td><td><b style="color:#276749">0%</b></td></tr>
+        <tr><td style="text-align:left">ค่าบริหารกรมธรรม์</td><td>2.4%/ปี</td><td><b style="color:#276749">0%</b></td></tr>
+        <tr><td style="text-align:left">Performance Bonus</td><td>—</td><td><b style="color:#276749">+0.25%/ปี</b></td></tr>
+        <tr><td style="text-align:left">ค่าธรรมเนียมสับเปลี่ยนกองทุน</td><td><b style="color:#276749">0%</b></td><td><b style="color:#276749">0%</b></td></tr>
+      </table>
+      <div style="font-size:1em;color:#718096;margin-top:4px;text-align:center">เบี้ย 100% เข้ากองทุนทันที | มีค่าปิดบัญชีก่อนปีที่ 10 (ปีที่ 1: 85% ลดลงจนเป็น 0% ปีที่ 10)</div>
+    </div>
+
+    <div class="rpt-footer">
+      AIA Elite Income Prestige — Smart Income · Smooth Transfer | หน้า 1/3 | เอกสารนี้จัดทำเพื่อให้ข้อมูลเบื้องต้น ไม่ใช่สัญญาประกัน | ก.พ. 2569
+    </div>
+  </div>
+
+  <!-- ===== PAGE 2 of 3 ===== -->
+  <div class="rpt-page page-break">
+    <div class="rpt-header" style="padding-bottom:10px;margin-bottom:14px">
+      <h1 style="font-size:1.5em">กองทุน AIA-GAIF และกลยุทธ์สร้างรายได้ 7 แหล่ง</h1>
+      <div class="rpt-sub">ลงทุนกับพันธมิตรระดับโลก — กระจายแหล่งรายได้ ไม่พึ่งพาแหล่งเดียว</div>
+    </div>
+
+    <!-- Fund Structure -->
+    <div class="rpt-section">
+      <h2>🌍 โครงสร้างกองทุน AIA Global Active Income Fund (AIA-GAIF)</h2>
+      <div class="rpt-income-flow">
+        <div class="rpt-step" style="background:#fff5f5;border-color:#e53e3e">💰 เบี้ยลูกค้า</div>
+        <div class="rpt-arrow">→</div>
+        <div class="rpt-step">🏦 AIA-GAIF<br><span style="font-size:.92em;font-weight:400">บลจ.เอไอเอ</span></div>
+        <div class="rpt-arrow">→</div>
+        <div class="rpt-step" style="background:#faf5ff;border-color:#805ad5">📊 3 กลยุทธ์<br><span style="font-size:.92em;font-weight:400">Tri-Sleeve</span></div>
+        <div class="rpt-arrow">→</div>
+        <div class="rpt-step" style="background:#f0fff4;border-color:#38a169">💵 Auto Redeem<br><span style="font-size:.92em;font-weight:400">~3%/ปี</span></div>
+      </div>
+      <div class="rpt-3col" style="margin-top:10px">
+        <div class="rpt-box" style="border-left-color:#e53e3e">
+          <b>Sleeve 1 (~33%)</b><br>
+          <b style="color:#e53e3e">High Yield Bond</b><br>
+          โดย Allianz GI (€562B AUM)<br>
+          ▸ ตราสารหนี้ผลตอบแทนสูง<br>
+          ▸ ดอกเบี้ยเฉลี่ย <b>7.45%</b><br>
+          ▸ เน้น Rising Stars (อันดับเฉลี่ย B+)
+        </div>
+        <div class="rpt-box purple">
+          <b>Sleeve 2 (~33%)</b><br>
+          <b style="color:#805ad5">Convertible Bond</b><br>
+          โดย Allianz GI<br>
+          ▸ ตราสารหนี้แปลงเป็นหุ้นได้<br>
+          ▸ ได้ทั้งดอกเบี้ย + โอกาสกำไรจากหุ้น<br>
+          ▸ ความเสี่ยงต่ำกว่าหุ้นโดยตรง
+        </div>
+        <div class="rpt-box green">
+          <b>Sleeve 3 (~33%)</b><br>
+          <b style="color:#276749">US Equity + Covered Call</b><br>
+          โดย Allianz GI<br>
+          ▸ ซื้อหุ้นสหรัฐฯ + ขาย Call Option<br>
+          ▸ ได้ Premium ทุกรอบ<br>
+          ▸ + เงินปันผลจากหุ้น
+        </div>
+      </div>
+    </div>
+
+    <!-- 7 Sources of Income -->
+    <div class="rpt-section">
+      <h2>⭐ 7 แหล่งรายรับที่ทำงานพร้อมกัน (Allianz Income and Growth — 90% ของกองทุน)</h2>
+      <div class="rpt-2col">
+        <div>
+          <h3 style="color:#d69e2e">💰 รายได้ประจำ (Income — เงินไหลเข้าสม่ำเสมอ)</h3>
+          <div class="rpt-box gold" style="font-size:.96em">
+            <b>① ดอกเบี้ยจาก High-Yield Bond</b> — อัตราเฉลี่ย ~7.45%<br>
+            <b>② ดอกเบี้ยจาก Convertible Bond</b> — ดอกเบี้ยคงที่<br>
+            <b>③ เงินปันผลจากหุ้น</b> — หุ้นปันผลสม่ำเสมอ<br>
+            <b>④ รายได้จาก Covered Call</b> — Premium ที่ได้รับทุกรอบ
+          </div>
+        </div>
+        <div>
+          <h3 style="color:#805ad5">📈 กำไรจากส่วนต่างราคา (Capital Gain)</h3>
+          <div class="rpt-box purple" style="font-size:.96em">
+            <b>⑤ กำไรจากหุ้น</b> — ราคาหุ้นเพิ่มขึ้น<br>
+            <b>⑥ กำไรจาก High-Yield Bond</b> — เครดิตดีขึ้น ราคาเพิ่ม<br>
+            <b>⑦ กำไรจาก Convertible Bond</b> — แปลงเป็นหุ้นขายในราคาสูง
+          </div>
+        </div>
+      </div>
+      <div class="rpt-highlight">
+        <b>💡 หัวใจสำคัญ:</b> รายได้ 7 แหล่งนี้ถูกรวมกันเป็น <b>Auto Redemption ~3%/ปี</b> จ่ายเข้าบัญชีกรมธรรม์อัตโนมัติ<br>
+        ขณะที่มูลค่ากองทุนยังมีโอกาสเติบโตจากส่วนที่เหลือ — <b>เงินทำงานแทนคุณ ไม่ต้องบริหารเอง</b>
+      </div>
+    </div>
+
+    <!-- Auto Redemption Explained -->
+    <div class="rpt-section">
+      <h2>💰 Auto Redemption ≠ เงินปันผล — ดีกว่าอย่างไร?</h2>
+      <table class="rpt-table">
+        <tr><th style="width:30%">เปรียบเทียบ</th><th style="width:35%">Auto Redemption ✅</th><th style="width:35%">เงินปันผลกองทุน</th></tr>
+        <tr><td style="text-align:left;font-weight:700">ภาษีหัก ณ ที่จ่าย</td><td><b style="color:#276749">ไม่เสีย 0%</b></td><td style="color:#c53030">เสีย 10%</td></tr>
+        <tr><td style="text-align:left;font-weight:700">ความสม่ำเสมอ</td><td><b style="color:#276749">จ่ายทุกปี ~3% ของ NAV</b></td><td>ไม่แน่นอน ขึ้นกับผลประกอบการ</td></tr>
+        <tr><td style="text-align:left;font-weight:700">เริ่มรับเมื่อไหร่</td><td><b style="color:#276749">ปีแรกเลย</b></td><td>ขึ้นกับนโยบายกองทุน</td></tr>
+        <tr><td style="text-align:left;font-weight:700">ผลต่อมูลค่ากองทุน</td><td>ไม่หักจากมูลค่ากองทุน</td><td>หักจาก NAV</td></tr>
+      </table>
+    </div>
+
+    <!-- Why no hedge -->
+    <div class="rpt-section">
+      <h2>💱 ทำไมเลือกไม่ Hedge ค่าเงิน?</h2>
+      <div class="rpt-box gold" style="font-size:.98em">
+        <b>เหตุผลสำคัญ 3 ข้อ:</b><br>
+        ▸ <b>ลดต้นทุน:</b> การ Hedge มีค่าใช้จ่าย 2-4%/ปี ซึ่งจะกินรายได้ Auto Redeem 3% เกือบหมด<br>
+        ▸ <b>เงินบาทมีแนวโน้มอ่อนค่าระยะยาว:</b> เทียบกับ USD — การถือสินทรัพย์ USD เป็นการป้องกันเงินเฟ้อในตัว<br>
+        ▸ <b>ระยะลงทุนยาว 20-50 ปี:</b> ความผันผวน FX ระยะสั้นจะถูกเฉลี่ยออกไปในระยะยาว
+      </div>
+    </div>
+
+    <div class="rpt-footer">
+      AIA Elite Income Prestige — Smart Income · Smooth Transfer | หน้า 2/3 | เอกสารนี้จัดทำเพื่อให้ข้อมูลเบื้องต้น ไม่ใช่สัญญาประกัน | ก.พ. 2569
+    </div>
+  </div>
+
+  <!-- ===== PAGE 3 of 3 ===== -->
+  <div class="rpt-page page-break">
+    <div class="rpt-header" style="padding-bottom:10px;margin-bottom:14px">
+      <h1 style="font-size:1.5em">สรุปผลประโยชน์ และเหตุผลที่ควรตัดสินใจวันนี้</h1>
+      <div class="rpt-sub">เปรียบเทียบกับทางเลือกอื่นในสภาพเศรษฐกิจปัจจุบัน</div>
+    </div>
+
+    <!-- Comparison -->
+    <div class="rpt-section">
+      <h2>📊 เปรียบเทียบผลตอบแทน: Elite Income vs ทางเลือกอื่น</h2>
+      <table class="rpt-table">
+        <tr><th>ทางเลือก</th><th>ผลตอบแทน/ปี</th><th>ภาษี</th><th>สภาพคล่อง</th><th>มรดก</th></tr>
+        <tr><td style="text-align:left">ฝากออมทรัพย์</td><td><b>0.25%</b></td><td>เสีย 15%</td><td>สูง</td><td>ผ่านมรดก/ศาล</td></tr>
+        <tr><td style="text-align:left">ฝากประจำ 12 เดือน</td><td><b>0.85%</b></td><td>เสีย 15%</td><td>ต่ำ</td><td>ผ่านมรดก/ศาล</td></tr>
+        <tr><td style="text-align:left">กองทุนปันผล</td><td><b>2-4%</b> (ไม่แน่นอน)</td><td>เสีย 10%</td><td>ปานกลาง</td><td>ผ่านมรดก/ศาล</td></tr>
+        <tr style="background:#f0fff4"><td style="text-align:left;font-weight:700;color:#276749">✅ Elite Income Prestige</td><td><b style="color:#276749">~3% Auto Redeem</b><br>+ เติบโตของ NAV</td><td style="color:#276749"><b>0%</b></td><td>ปานกลาง<br>(หลังปีที่ 10 ดีมาก)</td><td style="color:#276749"><b>ส่งตรง ไม่ผ่านศาล</b><br>ไม่เสียภาษีมรดก</td></tr>
+      </table>
+    </div>
+
+    <!-- Economic Context -->
+    <div class="rpt-section">
+      <h2>🌏 สภาพเศรษฐกิจปัจจุบัน (ก.พ. 2569) — ทำไมต้องลงมือตอนนี้</h2>
+      <div class="rpt-2col">
+        <div class="rpt-box red" style="font-size:.96em">
+          <b>🔴 สภาพเศรษฐกิจไทย:</b><br>
+          ▸ GDP ปี 2569 คาดโต <b>1.5-1.6%</b> เท่านั้น (IMF/ธปท.)<br>
+          ▸ เงินเฟ้อติดลบ <b>10 เดือนต่อเนื่อง</b> (ม.ค. 69 = -0.66%)<br>
+          ▸ ดอกเบี้ยนโยบาย <b>1.25%</b> — ต่ำสุดนับจากโควิด<br>
+          ▸ ดอกเบี้ยเงินฝากมีแนวโน้มลดลงอีก<br>
+          ▸ ค่าเงินบาทแข็ง — กดดันส่งออกและรายได้<br>
+          ▸ หนี้ครัวเรือนสูง สินเชื่อหดตัว
+        </div>
+        <div class="rpt-box green" style="font-size:.96em">
+          <b>🟢 จังหวะที่ดีสำหรับ Elite Income:</b><br>
+          ▸ ดอกเบี้ยเงินฝาก 0.25% = <b>เงินเสียโอกาส</b><br>
+          ▸ เงินบาทแข็ง = <b>ซื้อ USD ได้ถูก</b> → ลงทุนต่างประเทศคุ้มค่า<br>
+          ▸ Fed ยังคงดอกเบี้ยสูง → <b>High Yield Bond ให้ดอกเบี้ยสูง</b><br>
+          ▸ ยิ่งเริ่มเร็ว ยิ่งได้ <b>Compounding นาน</b><br>
+          ▸ ปีที่ 10+ = <b>ค่าธรรมเนียม 0% + Bonus</b><br>
+          ▸ เหมาะกับ <b>วางแผนเกษียณ</b> ระยะ 15-40 ปี
+        </div>
+      </div>
+    </div>
+
+    <!-- Estate Planning Summary -->
+    <div class="rpt-section">
+      <h2>🏛️ Smooth Transfer — ส่งต่อมรดกอย่างราบรื่น</h2>
+      <div class="rpt-2col">
+        <div class="rpt-box purple" style="font-size:.96em">
+          <b>ผลประโยชน์กรณีเสียชีวิต:</b><br>
+          <b style="font-size:1.35em;color:#553c9a">รับเงินเท่ากับจำนวนที่มากกว่า</b><br>
+          ① 110% ของเบี้ยรวมที่ชำระ <b>หรือ</b><br>
+          ② มูลค่ากองทุน + 10% ของเบี้ยรวม<br><br>
+          ▸ ยิ่งอายุยืน มูลค่ากองทุนยิ่งโต = มรดกยิ่งมาก<br>
+          ▸ ส่งตรงถึงผู้รับประโยชน์ — <b>ภายใน 14-30 วัน</b>
+        </div>
+        <div class="rpt-box green" style="font-size:.96em">
+          <b>ข้อดีเหนือการวางแผนมรดกแบบปกติ:</b><br>
+          ▸ <span style="color:#276749"><b>ไม่ต้องผ่านศาลพิสูจน์พินัยกรรม</b></span><br>
+          ▸ <span style="color:#276749"><b>ไม่เสียภาษีมรดก</b></span> (ต่างจากทรัพย์สินอื่น)<br>
+          ▸ <span style="color:#276749"><b>เจ้าหนี้ยึดไม่ได้</b></span><br>
+          ▸ กำหนดสัดส่วนผู้รับได้อิสระ เปลี่ยนแปลงได้ตลอด<br>
+          ▸ ลดข้อพิพาทในครอบครัว — ชัดเจน โปร่งใส<br>
+          ▸ มูลค่าเพิ่มตามเวลา (ไม่เสื่อมเหมือนอสังหาริมทรัพย์)
+        </div>
+      </div>
+    </div>
+
+    <!-- Final CTA -->
+    <div class="rpt-highlight" style="text-align:center;background:linear-gradient(135deg,#f0fff4,#ebf8ff);border-color:#38a169">
+      <div style="font-size:1.25em;font-weight:800;color:#1a365d;margin-bottom:8px">✅ สรุป — ทำไมต้อง Elite Income Prestige?</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px">
+        <div class="rpt-kpi green"><div class="rpt-num" style="font-size:1.35em">~3%</div><div class="rpt-label">Passive Income/ปี<br>ไม่เสียภาษี</div></div>
+        <div class="rpt-kpi purple"><div class="rpt-num" style="font-size:1.35em">ปีที่ 1</div><div class="rpt-label">เริ่มรับเงินทันที<br>ไม่ต้องรอ</div></div>
+        <div class="rpt-kpi gold"><div class="rpt-num" style="font-size:1.35em">7 แหล่ง</div><div class="rpt-label">รายรับหลากหลาย<br>มั่นคง</div></div>
+        <div class="rpt-kpi"><div class="rpt-num" style="font-size:1.35em">110%+</div><div class="rpt-label">มรดกส่งตรง<br>ไม่ผ่านศาล</div></div>
+      </div>
+      <div style="font-size:1em;color:#2d3748;line-height:1.8">
+        ✨ จ่ายเบี้ยเพียง <b>5 ปี</b> → รับ Passive Income <b>ตลอดชีพ</b> → ส่งต่อมรดกให้คนที่รัก <b>อย่างราบรื่น</b><br>
+        ในยุคดอกเบี้ยต่ำและเศรษฐกิจชะลอตัว — <b>ให้เงินทำงานแทนคุณ ด้วยกองทุนระดับโลก</b>
+      </div>
+    </div>
+
+    <div class="rpt-footer">
+      AIA Elite Income Prestige — Smart Income · Smooth Transfer | หน้า 3/3 | เอกสารนี้จัดทำเพื่อให้ข้อมูลเบื้องต้น <b>ไม่ใช่สัญญาประกัน</b> ผลตอบแทนไม่รับประกัน ผลการดำเนินงานในอดีตไม่ได้เป็นการรับประกันผลในอนาคต | ก.พ. 2569
+    </div>
+  </div>
+
+  <div class="print-btn-wrap">
+    <button class="print-btn" onclick="printReport()">🖨️ พิมพ์รายงานสำหรับลูกค้า (A4)</button>
+  </div>
+</div>
+
+<!-- ======================================== -->
+<!-- JAVASCRIPT -->
+<!-- ======================================== -->
+<script>
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (btn) btn.classList.add('active');
+}
+
+function changeFontSize(delta) {
+  const current = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--fs'));
+  const newSize = Math.max(12, Math.min(22, current + delta));
+  document.documentElement.style.setProperty('--fs', newSize + 'px');
+}
+
+function printReport() {
+  // Ensure the report tab is active before printing
+  showPage('clientreport', document.querySelector('nav button:last-child'));
+  setTimeout(()=>{ window.print(); }, 300);
+}
+</script>
+</body>
+</html>

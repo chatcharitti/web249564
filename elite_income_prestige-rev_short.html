@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIA Elite Income Prestige | Strategic Wealth Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        html { font-size: 18px; }
+        body { font-family: 'Prompt', sans-serif; background-color: #f8fafc; color: #0f172a; }
+        .gradient-text { background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .bg-premium-dark { background-color: #0f172a; }
+        .card-shadow { box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08); }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Print Settings for A4 */
+        @media print {
+            @page { size: A4; margin: 1.2cm; }
+            body { background-color: #ffffff !important; }
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            .print-hidden { display: none !important; }
+            .card-shadow { box-shadow: none !important; border: 1px solid #e2e8f0 !important; }
+            
+            /* Force Cashflow Section to a new page */
+            #calculator { break-before: page; page-break-before: always; padding-top: 0 !important; margin-top: 0 !important; }
+            
+            /* Prevent awkward breaks inside cards */
+            section, .bg-white, .border-l-4 { break-inside: avoid; page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Floating Tools (Hidden on Print) -->
+    <div class="fixed bottom-6 right-6 z-50 flex gap-2 print-hidden card-shadow rounded-lg bg-white p-2 border border-slate-200">
+        <button onclick="changeFontSize(-1)" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2 rounded font-medium text-sm transition duration-200">A-</button>
+        <button onclick="changeFontSize(1)" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2 rounded font-medium text-sm transition duration-200">A+</button>
+        <div class="w-px bg-slate-200 my-1 mx-1"></div>
+        <button onclick="window.print()" class="bg-yellow-600 hover:bg-yellow-500 text-white px-4 py-2 rounded font-medium text-sm transition duration-200 flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+            พิมพ์รายงาน
+        </button>
+    </div>
+
+    <!-- Header / Hero Section -->
+    <header class="bg-premium-dark text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#0f172a]"></div>
+        <div class="max-w-6xl mx-auto px-6 py-24 relative z-10 text-center lg:text-left">
+            <p class="text-yellow-500 font-semibold tracking-widest uppercase text-sm mb-4">Strategic Wealth Management</p>
+            <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6">
+                AIA Elite Income Prestige
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-300 font-light max-w-2xl mb-10">
+                นวัตกรรมการบริหารความมั่งคั่งที่ผสานการสร้าง <span class="text-white font-medium">กระแสเงินสดอัจฉริยะ (Smart Income)</span> 
+                และการ <span class="text-white font-medium">ส่งต่อมรดกอย่างไร้รอยต่อ (Smooth Transfer)</span>
+            </p>
+            <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
+                <a href="#concept" class="bg-yellow-600 hover:bg-yellow-500 text-white px-8 py-3 rounded-md font-medium transition duration-300">เรียนรู้แนวคิด</a>
+                <a href="#calculator" class="bg-transparent border border-slate-500 hover:border-white text-white px-8 py-3 rounded-md font-medium transition duration-300">จำลองกระแสเงินสด</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Executive Summary -->
+    <section class="max-w-6xl mx-auto px-6 py-12 -mt-12 relative z-20">
+        <div class="bg-white rounded-xl card-shadow p-8 grid grid-cols-1 md:grid-cols-4 gap-6 divide-y md:divide-y-0 md:divide-x divide-slate-100">
+            <div class="text-center px-4">
+                <p class="text-slate-400 text-sm font-semibold uppercase tracking-wider mb-2">ระยะเวลาชำระเบี้ย</p>
+                <p class="text-3xl font-bold text-slate-800">5 ปี</p>
+            </div>
+            <div class="text-center px-4 pt-4 md:pt-0">
+                <p class="text-slate-400 text-sm font-semibold uppercase tracking-wider mb-2">ระยะเวลาคุ้มครอง</p>
+                <p class="text-3xl font-bold text-slate-800">ตลอดชีพ</p>
+                <p class="text-xs text-slate-500 mt-1">ถึงอายุ 99 ปี</p>
+            </div>
+            <div class="text-center px-4 pt-4 md:pt-0">
+                <p class="text-slate-400 text-sm font-semibold uppercase tracking-wider mb-2">กระแสเงินสด (Auto Redeem)</p>
+                <p class="text-3xl font-bold text-yellow-600">~3%</p>
+                <p class="text-xs text-slate-500 mt-1">ของมูลค่ารับซื้อคืน ตั้งแต่ปีที่ 1</p>
+            </div>
+            <div class="text-center px-4 pt-4 md:pt-0">
+                <p class="text-slate-400 text-sm font-semibold uppercase tracking-wider mb-2">ค่าบริหารจัดการ (ปีที่ 10+)</p>
+                <p class="text-3xl font-bold text-slate-800">0%</p>
+                <p class="text-xs text-slate-500 mt-1">พร้อมรับโบนัส +0.25% ต่อปี</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Concept Section -->
+    <section id="concept" class="max-w-6xl mx-auto px-6 py-16">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold text-slate-800 mb-4">ปรัชญาการบริหารความมั่งคั่ง</h2>
+            <div class="w-24 h-1 bg-yellow-500 mx-auto rounded"></div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12">
+            <!-- Smart Income -->
+            <div class="bg-white p-10 rounded-2xl card-shadow border-t-4 border-slate-800">
+                <h3 class="text-2xl font-bold text-slate-800 mb-4">Smart Income</h3>
+                <p class="text-yellow-600 font-medium mb-6">สร้างรายได้ประจำ โดยไม่กระทบเป้าหมายการเติบโตของเงินทุน</p>
+                <ul class="space-y-4 text-slate-600">
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-slate-800 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <span><strong class="text-slate-800">กระแสเงินสดทันที:</strong> เริ่มรับรายได้อัตโนมัติตั้งแต่ปีแรกของการลงทุน ผ่านกลไกรับซื้อคืนหน่วยลงทุน (Auto Redemption) ไม่ต้องรอจนถึงวัยเกษียณ</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-slate-800 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <span><strong class="text-slate-800">ประสิทธิภาพทางภาษี:</strong> เงินสดที่ได้รับกลับมาไม่ใช่ "เงินปันผล" แต่เป็นการรับซื้อคืนหน่วยลงทุน จึงไม่ถูกหักภาษี ณ ที่จ่าย</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-slate-800 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <span><strong class="text-slate-800">ปรับตัวสู้เงินเฟ้อ:</strong> มูลค่ารับซื้อคืนแปรผันตามขนาดของกองทุนที่เติบโตขึ้น ช่วยรักษากำลังซื้อในระยะยาว</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Smooth Transfer -->
+            <div class="bg-white p-10 rounded-2xl card-shadow border-t-4 border-yellow-500">
+                <h3 class="text-2xl font-bold text-slate-800 mb-4">Smooth Transfer</h3>
+                <p class="text-yellow-600 font-medium mb-6">ส่งต่อความมั่งคั่งอย่างเป็นระบบ ไร้ข้อพิพาท และได้รับการปกป้อง</p>
+                <ul class="space-y-4 text-slate-600">
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-yellow-600 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <span><strong class="text-slate-800">การส่งมอบโดยตรง (Direct Transfer):</strong> สินไหมทดแทนส่งตรงถึงผู้รับประโยชน์ที่ระบุไว้ ไม่ต้องผ่านกระบวนการจัดการมรดกทางศาลที่ล่าช้า</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-yellow-600 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <span><strong class="text-slate-800">มูลค่ามรดกที่เติบโต:</strong> การันตีความคุ้มครองขั้นต่ำที่ 110% ของเบี้ย หรือ มูลค่ากองทุนบวก 10% ของเบี้ย ทำให้ยิ่งอายุยืน มรดกยิ่งมีมูลค่าสูงขึ้น</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-yellow-600 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <span><strong class="text-slate-800">ความได้เปรียบทางกฎหมาย:</strong> เงินสินไหมประกันชีวิตได้รับข้อยกเว้นเรื่องภาษีมรดก และได้รับการปกป้องจากข้อเรียกร้องทางกฎหมายต่างๆ ในระดับที่สูงกว่าทรัพย์สินทั่วไป</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Engine (Funds) -->
+    <section class="bg-slate-50 py-16 border-y border-slate-200">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-800 mb-4">ขุมพลังการลงทุนระดับโลก (Global Investment Engine)</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto">กองทุน AIA Global Active Income Fund (AIA-GAIF) ออกแบบเฉพาะสำหรับเครื่องมือนี้ บริหารโดย AIA ร่วมกับ 3 พันธมิตรการลงทุนระดับสถาบันที่เชี่ยวชาญด้านการสร้างรายได้ (Income Strategy)</p>
+                <div class="w-24 h-1 bg-slate-800 mx-auto rounded mt-6"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <!-- Allianz -->
+                <div class="bg-white p-8 rounded-xl border border-slate-100 card-shadow">
+                    <h4 class="text-xl font-bold text-slate-800 mb-1">Allianz Global Investors</h4>
+                    <p class="text-sm text-yellow-600 font-medium mb-4">Core Strategy (90% SAA)</p>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">รับผิดชอบกลยุทธ์หลัก <strong>Allianz Income and Growth</strong> ซึ่งใช้โครงสร้าง "Tri-Sleeve" กระจายการลงทุน 3 ส่วนเท่าๆ กันใน หุ้นสหรัฐฯ, หุ้นกู้แปลงสภาพ และตราสารหนี้ High Yield เพื่อสร้างรายได้ 7 ช่องทางพร้อมกัน</p>
+                </div>
+                <!-- Wellington -->
+                <div class="bg-white p-8 rounded-xl border border-slate-100 card-shadow">
+                    <h4 class="text-xl font-bold text-slate-800 mb-1">Wellington Management</h4>
+                    <p class="text-sm text-yellow-600 font-medium mb-4">Satellite Strategy (10% SAA)</p>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">บริหารส่วน <strong>AIA Equity Income</strong> เน้นลงทุนในหุ้นคุณภาพสูงทั่วโลกที่มีประวัติการจ่ายเงินปันผลที่แข็งแกร่งและสม่ำเสมอ เพื่อเสริมเกราะป้องกันความผันผวนของพอร์ต</p>
+                </div>
+                <!-- Franklin -->
+                <div class="bg-white p-8 rounded-xl border border-slate-100 card-shadow">
+                    <h4 class="text-xl font-bold text-slate-800 mb-1">Franklin Templeton</h4>
+                    <p class="text-sm text-yellow-600 font-medium mb-4">Tactical Asset Allocation (TAA)</p>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4">ทำหน้าที่ปรับพอร์ตระยะสั้นตามสภาวะตลาด (Dynamic Allocation) ผ่านกลยุทธ์ <strong>Franklin Income Fund</strong> เพื่อจับจังหวะทำกำไรและบริหารความเสี่ยงระดับมหภาค</p>
+                </div>
+            </div>
+
+            <!-- Auto Redeem Logic Explained -->
+            <div class="bg-premium-dark text-white rounded-2xl p-8 md:p-12 relative overflow-hidden">
+                <div class="absolute right-0 top-0 opacity-10 w-64 h-64 bg-yellow-500 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2"></div>
+                <h3 class="text-2xl font-bold mb-6 relative z-10 text-yellow-500">ตรรกะเบื้องหลังกลไก Auto Redemption (~3%)</h3>
+                <div class="grid md:grid-cols-2 gap-8 relative z-10">
+                    <div>
+                        <p class="text-slate-300 leading-relaxed mb-4">
+                            การที่พอร์ตสามารถจ่ายกระแสเงินสดกลับคืนให้ท่านได้อัตโนมัติปีละประมาณ 3% <strong>ไม่ใช่การกินทุนเดิม</strong> แต่เป็นผลมาจากกลยุทธ์ Tri-Sleeve ของ Allianz ที่สามารถสร้างกระแสรายได้จาก 7 แหล่งพร้อมกัน ได้แก่:
+                        </p>
+                        <ul class="list-disc pl-5 text-slate-300 space-y-2 text-sm">
+                            <li>ดอกเบี้ยรับจาก High-Yield Bonds (เฉลี่ย ~7.45%)</li>
+                            <li>ดอกเบี้ยรับจากตราสารหนี้แปลงสภาพ</li>
+                            <li>เงินปันผลจากหุ้น</li>
+                            <li>ค่าพรีเมียมจากกลยุทธ์ Covered Call</li>
+                            <li>กำไรส่วนต่างจากการเติบโตของสินทรัพย์ (Capital Gains) อีก 3 แหล่ง</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+                        <p class="text-sm text-slate-300 mb-2 font-medium">ทำไมเลือกแนวทาง "Unhedged" (ไม่ป้องกันความเสี่ยงค่าเงินเต็มจำนวน)?</p>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            การทำ Hedging ค่าเงิน USD/THB มีต้นทุนที่สูญเปล่าประมาณ 2-4% ต่อปี ซึ่งจะไปหักล้างเป้าหมายรายได้ 3% ทิ้งไป การเลือกไม่ทำ Hedge ในสินทรัพย์ระยะยาว ช่วยลดต้นทุนส่วนนี้ลงเหลือ 0% และในเชิงยุทธศาสตร์ เงินบาทในระยะ 20-40 ปีมีแนวโน้มอ่อนค่า การถือครองสินทรัพย์สกุลเงินแข็งอย่าง USD จึงเป็นเสมือนการป้องกันอัตราเงินเฟ้อ (Inflation Hedge) ที่มีประสิทธิภาพ
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Macroeconomic Context -->
+    <section class="max-w-6xl mx-auto px-6 py-16">
+        <div class="bg-white rounded-2xl card-shadow border-t-4 border-slate-800 p-10">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-slate-800 mb-4">จังหวะเวลาเชิงกลยุทธ์: ทำไมต้องเป็น Elite Income Prestige ในสภาวะปัจจุบัน?</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto">วิเคราะห์สภาวะเศรษฐกิจมหภาค (Macroeconomics) และความจำเป็นเร่งด่วนในการปรับพอร์ตโฟลิโอ</p>
+                <div class="w-24 h-1 bg-yellow-500 mx-auto rounded mt-6"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div class="border-l-4 border-yellow-600 pl-4">
+                    <h4 class="text-lg font-bold text-slate-800 mb-2">1. วัฏจักรดอกเบี้ยที่ผ่านจุดสูงสุด (Rate Normalization)</h4>
+                    <p class="text-sm text-slate-600 leading-relaxed">ในยุคที่ธนาคารกลางทั่วโลกเริ่มปรับลดอัตราดอกเบี้ยนโยบาย การถือครองเงินสดหรือตราสารหนี้ระยะสั้นให้ผลตอบแทนแท้จริง (Real Yield) ที่ลดลง กองทุนที่เน้น Income Strategy อย่าง AIA-GAIF เป็นทางเลือกที่สามารถรักษากระแสเงินสดในระดับ ~3% ได้อย่างมีเสถียรภาพ ดีกว่าการพึ่งพาดอกเบี้ยเงินฝากเพียงอย่างเดียว</p>
+                </div>
+                <div class="border-l-4 border-slate-800 pl-4">
+                    <h4 class="text-lg font-bold text-slate-800 mb-2">2. ความผันผวนทางภูมิรัฐศาสตร์เชิงโครงสร้าง</h4>
+                    <p class="text-sm text-slate-600 leading-relaxed">ตลาดทุนเผชิญความไม่แน่นอนสูงจากปัจจัยภูมิรัฐศาสตร์ กลยุทธ์ Tri-Sleeve ของกองทุนที่กระจายสู่หุ้นกู้แปลงสภาพและ High Yield ช่วยจำกัดความเสี่ยงขาลง (Downside Protection) ในขณะที่ระบบยังคงดึงผลตอบแทนจากดอกเบี้ยและค่าพรีเมียมมาจ่ายเป็นกระแสเงินสดได้อย่างสม่ำเสมอ</p>
+                </div>
+                <div class="border-l-4 border-yellow-600 pl-4">
+                    <h4 class="text-lg font-bold text-slate-800 mb-2">3. การกระจายความเสี่ยงด้านค่าเงิน (Currency Diversification)</h4>
+                    <p class="text-sm text-slate-600 leading-relaxed">การกระจุกตัวของความมั่งคั่งในสกุลเงินบาทเพียงอย่างเดียวถือเป็นความเสี่ยงเชิงโครงสร้างในระยะยาว การเลือกลงทุนแบบ Unhedged ในสินทรัพย์ที่อิงกับสกุลเงินแข็ง (Hard Currency เช่น USD) เป็นการป้องกันการด้อยค่าของกำลังซื้อ และปกป้องมูลค่ามรดกที่จะส่งต่อในอนาคต</p>
+                </div>
+            </div>
+            
+            <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                <p class="text-sm text-slate-800 font-medium leading-relaxed">
+                    <strong class="text-yellow-600 uppercase tracking-wider text-xs block mb-1">Strategic Conclusion</strong> 
+                    ในสภาวะที่ผลตอบแทนไร้ความเสี่ยง (Risk-free rate) กำลังลดลง และความผันผวนของตลาดอยู่ในระดับสูง การมุ่งเน้นที่กำไรส่วนต่าง (Capital Gain) เพียงอย่างเดียวมีความเสี่ยงเกินไป Elite Income Prestige ไม่ใช่เพียงเครื่องมือประกันชีวิต แต่คือ <strong>"Defensive Asset" (สินทรัพย์เชิงรับ)</strong> ที่ถูกออกแบบมาเพื่อสร้างกระแสเงินสดเชิงรุก ป้องกันอัตราเงินเฟ้อ และการันตีการส่งมอบความมั่งคั่งโดยไม่ปล่อยให้มูลค่าทรัพย์สินตกเป็นเหยื่อของวัฏจักรเศรษฐกิจระยะสั้น
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Calculator -->
+    <section id="calculator" class="max-w-6xl mx-auto px-6 py-16">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-slate-800 mb-4">แบบจำลองผลลัพธ์เชิงกลยุทธ์ (Cashflow Projection)</h2>
+            <p class="text-slate-600 print-hidden">วิเคราะห์ทิศทางของกระแสเงินสดและมูลค่ากองทุนตลอดชีพ</p>
+        </div>
+
+        <div class="bg-white rounded-2xl card-shadow border border-slate-100 overflow-hidden">
+            <!-- Controls -->
+            <div class="bg-slate-50 p-6 md:p-8 border-b border-slate-200 print-hidden">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 items-end">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">เบี้ยประกันต่อปี (บาท)</label>
+                        <input id="inPremium" type="number" value="1000000" min="500000" step="100000" class="w-full bg-white border border-slate-300 text-slate-800 font-semibold rounded-lg px-4 py-3 focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">ผลตอบแทนคาดการณ์ต่อปี</label>
+                        <select id="inReturn" class="w-full bg-white border border-slate-300 text-slate-800 font-semibold rounded-lg px-4 py-3 focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800">
+                            <option value="1">1% (Conservative)</option>
+                            <option value="2">2%</option>
+                            <option value="3" selected>3% (Moderate)</option>
+                            <option value="5">5% (Growth)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">เพศ</label>
+                        <select id="inGender" class="w-full bg-white border border-slate-300 text-slate-800 font-semibold rounded-lg px-4 py-3 focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800">
+                            <option value="M">ชาย (Male)</option>
+                            <option value="F" selected>หญิง (Female)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">อายุปัจจุบัน</label>
+                        <div class="flex space-x-4">
+                            <input id="inAge" type="number" value="45" min="20" max="70" class="w-full bg-white border border-slate-300 text-slate-800 font-semibold rounded-lg px-4 py-3 focus:outline-none focus:border-slate-800 focus:ring-1 focus:ring-slate-800">
+                            <button onclick="calcCashflow()" class="bg-slate-800 hover:bg-slate-700 text-white px-6 py-3 rounded-lg font-medium transition duration-200 shadow-lg">วิเคราะห์</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary KPI -->
+            <div id="calcKPI" class="grid grid-cols-2 md:grid-cols-4 gap-px bg-slate-200 hidden">
+                <div class="bg-white p-6 text-center">
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">เงินต้นรวม (5 ปี)</p>
+                    <p id="kTotalPrem" class="text-2xl font-bold text-slate-800">—</p>
+                </div>
+                <div class="bg-white p-6 text-center">
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">รายรับสม่ำเสมอสะสม</p>
+                    <p id="kTotalRedeem" class="text-2xl font-bold text-yellow-600">—</p>
+                </div>
+                <div class="bg-white p-6 text-center">
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">มูลค่าส่งต่อ (อายุ 99)</p>
+                    <p id="kFinalNAV" class="text-2xl font-bold text-slate-800">—</p>
+                </div>
+                <div class="bg-white p-6 text-center">
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">ผลประโยชน์รวมสุทธิ</p>
+                    <p id="kTotalBenefit" class="text-2xl font-bold text-green-600">—</p>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div id="calcTable" class="overflow-x-auto hidden">
+                <table class="w-full text-left text-sm text-slate-600">
+                    <thead class="bg-slate-50 text-xs uppercase text-slate-500 border-y border-slate-200">
+                        <tr>
+                            <th class="px-6 py-4 font-bold">ปีที่ (อายุ)</th>
+                            <th class="px-6 py-4 font-bold text-right">เงินลงทุน (เบี้ย)</th>
+                            <th class="px-6 py-4 font-bold text-right">ค่าบริหาร 2.4%</th>
+                            <th class="px-6 py-4 font-bold text-right text-green-600">โบนัส 0.25%</th>
+                            <th class="px-6 py-4 font-bold text-right text-yellow-600">กระแสเงินสดรับ (3%)</th>
+                            <th class="px-6 py-4 font-bold text-right text-slate-800">มูลค่ากองทุนคงเหลือ</th>
+                            <th class="px-6 py-4 font-bold text-right text-slate-800">มูลค่าส่งต่อมรดก</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cfBody" class="divide-y divide-slate-100 bg-white">
+                        <!-- JS renders here -->
+                    </tbody>
+                </table>
+                <div class="p-4 bg-slate-50 text-xs text-slate-500 border-t border-slate-200">
+                    * ประมาณการนี้ใช้เพื่อประกอบการอธิบายแนวคิด ไม่ใช่การรับประกันผลตอบแทน (คำนวณหักค่าประกันภัย COI โดยประมาณตามตารางมรณะ) ปีที่ 10 ขึ้นไป ค่าบริหารลดเหลือ 0% และรับโบนัส +0.25% ต่อปี
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 text-slate-400 py-10 text-center text-sm border-t border-slate-800">
+        <p class="mb-2">AIA Elite Income Prestige - เอกสารนี้จัดทำขึ้นเพื่อการนำเสนอภาพรวมเชิงกลยุทธ์เท่านั้น</p>
+        <p>โปรดศึกษาข้อกำหนดและเงื่อนไขเพิ่มเติมในกรมธรรม์และหนังสือชี้ชวนของกองทุน</p>
+    </footer>
+
+    <!-- JS Logic -->
+    <script>
+        // Accessibility: Font Size Control
+        let currentFontSize = 18;
+        function changeFontSize(delta) {
+            currentFontSize = Math.max(14, Math.min(26, currentFontSize + delta));
+            document.documentElement.style.fontSize = currentFontSize + 'px';
+        }
+
+        // Approximate TMO2017 Mortality Table (qx per 1000)
+        const qxMale={20:1.28,30:1.72,40:2.82,45:4.10,50:6.51,55:10.97,60:19.14,65:34.26,70:62.43,75:115.3,80:214.6,85:398.8,90:628.0,99:1000};
+        const qxFemale={20:0.52,30:0.79,40:1.48,45:2.22,50:3.51,55:5.82,60:10.00,65:17.78,70:32.70,75:62.22,80:121.8,85:241.2,90:448.0,99:1000};
+        
+        // Helper to interpolate missing ages roughly for demo
+        function getQx(age, isMale) {
+            const table = isMale ? qxMale : qxFemale;
+            if(table[age]) return table[age];
+            let lower=20, upper=99;
+            for(let key in table) {
+                if(+key <= age && +key > lower) lower = +key;
+                if(+key >= age && +key < upper) upper = +key;
+            }
+            if(lower === upper) return table[lower];
+            const ratio = (age - lower) / (upper - lower);
+            return table[lower] + ratio * (table[upper] - table[lower]);
+        }
+
+        function fmt(n){ return Math.round(n).toLocaleString('en-US'); }
+        function fmtM(n){
+            if(Math.abs(n)>=1e6) return (n/1e6).toFixed(2)+' ล้านบาท';
+            return fmt(n) + ' บาท';
+        }
+
+        function calcCashflow(){
+            const premium = parseInt(document.getElementById('inPremium').value) || 1000000;
+            const fundReturn = parseFloat(document.getElementById('inReturn').value) / 100;
+            const isMale = document.getElementById('inGender').value === 'M';
+            const startAge = parseInt(document.getElementById('inAge').value) || 45;
+            const payYears = 5;
+            const endAge = 99;
+            
+            let nav = 0;
+            let totalPremPaid = 0;
+            let totalRedeem = 0;
+            let rows = [];
+
+            for(let year=1; year<=(endAge-startAge); year++){
+                const age = startAge + year - 1;
+                if(age >= 100) break;
+                
+                const isPaying = year <= payYears;
+                const yearPrem = isPaying ? premium : 0;
+                if(isPaying) totalPremPaid += yearPrem;
+
+                nav += yearPrem;
+
+                // COI
+                const sarBase = 0.10 * totalPremPaid;
+                const qx = getQx(age, isMale);
+                const coi = sarBase * (qx/1000);
+                nav -= coi;
+                if(nav < 0) nav = 0;
+
+                // Admin Fee 2.4% (Yr 1-9)
+                const adminFee = (year <= 9) ? (nav * 0.024) : 0;
+                nav -= adminFee;
+
+                // Performance Bonus 0.25% (Yr 10+) added before return
+                const bonus = (year >= 10) ? (nav * 0.0025) : 0;
+                nav += bonus;
+
+                // Return
+                nav += (nav * fundReturn);
+
+                // Auto Redeem
+                const autoRed = nav * 0.03;
+                totalRedeem += autoRed;
+
+                // Death Benefit
+                const dbFinal = Math.max(1.10 * totalPremPaid, nav + (0.10 * totalPremPaid));
+
+                rows.push({ year, age, prem: yearPrem, admin: adminFee, bonus, autoRed, nav, dbFinal });
+            }
+
+            // Update UI
+            document.getElementById('calcKPI').classList.remove('hidden');
+            document.getElementById('calcTable').classList.remove('hidden');
+            
+            const lastRow = rows[rows.length-1];
+            document.getElementById('kTotalPrem').textContent = fmtM(premium * payYears);
+            document.getElementById('kTotalRedeem').textContent = fmtM(totalRedeem);
+            document.getElementById('kFinalNAV').textContent = fmtM(lastRow.nav);
+            document.getElementById('kTotalBenefit').textContent = fmtM(totalRedeem + lastRow.nav);
+
+            const tbody = document.getElementById('cfBody');
+            tbody.innerHTML = '';
+            
+            rows.forEach(r => {
+                // Filter rows for cleaner presentation
+                if(r.year <= 5 || r.year === 10 || r.year % 5 === 0 || r === lastRow) {
+                    const isPay = r.year <= 5;
+                    const tr = document.createElement('tr');
+                    tr.className = "hover:bg-slate-50 transition";
+                    tr.innerHTML = `
+                        <td class="px-6 py-4"><span class="font-bold text-slate-800">ปีที่ ${r.year}</span> <span class="text-xs text-slate-400 ml-1">(อายุ ${r.age})</span></td>
+                        <td class="px-6 py-4 text-right font-medium ${isPay ? 'text-slate-800' : 'text-slate-400'}">${isPay ? fmt(r.prem) : '—'}</td>
+                        <td class="px-6 py-4 text-right text-slate-500">${r.admin > 0 ? fmt(r.admin) : '0'}</td>
+                        <td class="px-6 py-4 text-right font-medium text-green-600">${r.bonus > 0 ? '+' + fmt(r.bonus) : '—'}</td>
+                        <td class="px-6 py-4 text-right font-bold text-yellow-600">+${fmt(r.autoRed)}</td>
+                        <td class="px-6 py-4 text-right font-bold text-slate-800">${fmt(r.nav)}</td>
+                        <td class="px-6 py-4 text-right font-bold text-slate-800">${fmt(r.dbFinal)}</td>
+                    `;
+                    tbody.appendChild(tr);
+                }
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', calcCashflow);
+    </script>
+</body>
+</html>

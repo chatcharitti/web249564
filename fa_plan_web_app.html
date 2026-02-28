@@ -10,8 +10,8 @@
 <style>
 /* ปรับขนาดตัวอักษรพื้นฐานเพิ่มขึ้น ~40% (จาก 14px เป็น 19px) */
 :root{--fs:19px}
-[data-theme="dark"]{--bg:#0a0e17;--bg2:#111827;--bg3:#1a2235;--card:#151d2e;--cb:#1e293b;--ac:#38bdf8;--ac2:#818cf8;--ac3:#34d399;--warn:#fbbf24;--dng:#f87171;--tx:#e2e8f0;--tx2:#94a3b8;--tx3:#64748b;--gold:#d4a853;--sbbg:linear-gradient(180deg,#0d1321,#111827);--topbg:rgba(10,14,23,.88);--hovbg:rgba(56,189,248,.04);--actbg:rgba(56,189,248,.08)}
-[data-theme="light"]{--bg:#f1f5f9;--bg2:#e2e8f0;--bg3:#fff;--card:#fff;--cb:#cbd5e1;--ac:#0284c7;--ac2:#6366f1;--ac3:#059669;--warn:#d97706;--dng:#dc2626;--tx:#1e293b;--tx2:#475569;--tx3:#64748b;--gold:#b8860b;--sbbg:linear-gradient(180deg,#f8fafc,#e2e8f0);--topbg:rgba(241,245,249,.92);--hovbg:rgba(2,132,199,.06);--actbg:rgba(2,132,199,.1)}
+[data-theme="dark"]{--bg:#0a0e17;--bg2:#111827;--bg3:#1a2235;--card:#151d2e;--cb:#1e293b;--ac:#38bdf8;--ac2:#818cf8;--ac3:#34d399;--warn:#fbbf24;--dng:#f87171;--tx:#e2e8f0;--tx2:#94a3b8;--tx3:#64748b;--gold:#d4a853;--sbbg:linear-gradient(180deg,#0d1321,#111827);--topbg:rgba(10,14,23,.88);--hovbg:rgba(56,189,248,.04);--actbg:rgba(56,189,248,.08);--tr-hov:rgba(248,113,113,.2)}
+[data-theme="light"]{--bg:#f1f5f9;--bg2:#e2e8f0;--bg3:#fff;--card:#fff;--cb:#cbd5e1;--ac:#0284c7;--ac2:#6366f1;--ac3:#059669;--warn:#d97706;--dng:#dc2626;--tx:#1e293b;--tx2:#475569;--tx3:#64748b;--gold:#b8860b;--sbbg:linear-gradient(180deg,#f8fafc,#e2e8f0);--topbg:rgba(241,245,249,.92);--hovbg:rgba(2,132,199,.06);--actbg:rgba(2,132,199,.1);--tr-hov:rgba(220,38,38,.15)}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Prompt',sans-serif;background:var(--bg);color:var(--tx);line-height:1.7;font-size:var(--fs);transition:background .3s,color .3s}
 .mono{font-family:'JetBrains Mono',monospace}
@@ -50,8 +50,8 @@ body{font-family:'Prompt',sans-serif;background:var(--bg);color:var(--tx);line-h
 .tw{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-size:calc(var(--fs) - 2px)}
 th{text-align:left;padding:10px 14px;font-weight:600;font-size:calc(var(--fs) - 4px);text-transform:uppercase;letter-spacing:.5px;color:var(--tx3);border-bottom:1px solid var(--cb);white-space:nowrap}
-td{padding:10px 14px;border-bottom:1px solid rgba(100,116,139,.15);white-space:nowrap}
-tr:hover td{background:var(--hovbg)}
+td{padding:10px 14px;border-bottom:1px solid rgba(100,116,139,.15);white-space:nowrap;transition:background .2s}
+tr:hover td{background:var(--tr-hov)}
 .tr{text-align:right}.tc{text-align:center}
 .num{font-family:'JetBrains Mono',monospace;font-size:calc(var(--fs) - 2px)}
 .pos{color:var(--ac3)}.neg{color:var(--dng)}
@@ -497,7 +497,6 @@ function exportData(){
       startAge:+document.getElementById('rf_startAge').value,years:+document.getElementById('rf_years').value}
   };
   const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
-
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);
   a.download='FA_Plan_'+APP.client.name.replace(/\s/g,'_')+'_'+new Date().toISOString().slice(0,10)+'.json';
   a.click();URL.revokeObjectURL(a.href);
@@ -574,7 +573,6 @@ const cfItems=[
   {cat:'inc',grp:'เงินได้จากการทำงาน',name:'โบนัส',m:[0,0,0,0,0,0,0,0,0,0,0,0],a:0},
   {cat:'inc',grp:'เงินได้จากสินทรัพย์',name:'ดอกเบี้ย/เงินปันผล',m:[0,0,0,0,0,0,0,0,0,0,0,0],a:0},
   {cat:'inc',grp:'เงินได้จากสินทรัพย์',name:'อื่นๆ (รายปี)',m:[0,0,0,0,0,0,0,0,0,0,0,0],a:42000},
-
   {cat:'save',grp:'เงินออมและลงทุน',name:'เงินสะสมกองทุนสำรองเลี้ยงชีพ',m:[0,0,0,0,0,0,0,0,0,0,0,0],a:0},
   {cat:'save',grp:'เงินออมและลงทุน',name:'เงินลงทุนเพื่อเกษียณ',m:[0,0,0,0,0,0,0,0,0,0,0,0],a:0},
   {cat:'fix',grp:'ภาษี',name:'ภาษีเงินได้หัก ณ ที่จ่าย',m:[1267,1267,1267,1267,1267,1267,1267,1267,1267,1267,1267,1267],a:0},
@@ -723,7 +721,6 @@ function subRow(label,val){
 function formulaRow(text){
   return '<tr><td colspan=4 style="padding-left:32px;font-size:calc(var(--fs) - 3px);color:var(--tx3);font-style:italic;border-bottom:1px solid var(--cb);padding-bottom:12px;margin-bottom:6px">📐 '+text+'</td></tr>';
 }
-
 
 // ===== CASH FLOW =====
 function cfTotal(item){return item.m.reduce((a,v)=>a+v,0)+item.a;}

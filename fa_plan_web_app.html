@@ -150,7 +150,7 @@ tr:hover td{background:var(--tr-hov)}
 </head>
 <body>
 <nav class="sidebar" id="sidebar">
-<div class="sidebar-hd"><div class="logo">Financial Advisory</div><div class="ttl">แผนการเงินแบบองค์รวม</div></div>
+<div class="sidebar-hd"><div class="logo">Financial Advisory</div><div class="ttl">แผนการเงินแบบองค์รวม rev.01</div></div>
 <div class="sidebar-nav">
 <div class="nav-i active" data-s="dashboard"><span class="ic">📊</span>Dashboard</div>
 <div class="nav-i" data-s="balance"><span class="ic">📋</span>งบดุลส่วนบุคคล</div>
@@ -252,6 +252,7 @@ tr:hover td{background:var(--tr-hov)}
 <button class="btn btn-go btn-sm" onclick="cfChanged();recalcAll()">🔄 คำนวณใหม่ทั้งหมด</button>
 </div>
 <div id="cfM" class="tab-c"><div class="g4" style="margin-bottom:20px" id="cfKPI"></div>
+<div class="card" style="margin-bottom:20px"><div class="card-h"><div class="bdg b-bl">📋</div><div style="flex:1"><h2>สรุปกระแสเงินสด (รายเดือน)</h2></div></div><div class="tw"><table id="tblCFSummary"></table></div></div>
 <div class="card"><div class="card-h"><div class="bdg b-gr">💵</div><div style="flex:1"><h2>กระแสเงินสดรายเดือน — แก้ไขได้</h2></div>
 <button class="btn btn-ac btn-sm" onclick="addCFRow()">＋ เพิ่มรายการ</button></div>
 <div class="tw"><table id="tblCF"></table></div></div></div>
@@ -322,7 +323,7 @@ tr:hover td{background:var(--tr-hov)}
 <script>
 // ===== GLOBALS =====
 let APP={
-  client:{name:'ลูกค้า วางแผนการเงิน',gender:'หญิง',age:25,status:'โสด',job:'พนักงาน/เจ้าของ',company:'work from home'},
+  client:{name:'ลูกค้า วางแผนการเงิน',gender:'หญิง',age:45,status:'โสด',job:'พนักงาน/เจ้าของ',company:'work from home'},
   assum:{retAge:60,endAge:85,incGrow:0.02,infGen:0.025,infMed:0.10,retReturn:0.03,pvdReturn:0.05,addInvest:60000},
   charts:{}
 };
@@ -760,6 +761,30 @@ function renderCFSummary(){
   const incM=new Array(12).fill(0),expM=new Array(12).fill(0);let incA=0,expA=0;
   cfItems.forEach(item=>{const isInc=item.cat==='inc';for(let m=0;m<12;m++){if(isInc)incM[m]+=item.m[m];else expM[m]+=item.m[m];}if(isInc)incA+=item.a;else expA+=item.a;});
   const tInc=incM.reduce((a,v)=>a+v,0)+incA,tExp=expM.reduce((a,v)=>a+v,0)+expA,tNet=tInc-tExp,sr=tInc>0?tNet/tInc:0;
+  
+  let sumH='<thead><tr><th style="min-width:200px">สรุปรายการ</th>';
+  MO.forEach(m=>sumH+='<th class="tr">'+m+'</th>');
+  sumH+='<th class="tr">รวมทั้งปี</th></tr></thead><tbody>';
+  
+  sumH+='<tr><td style="font-weight:600;color:var(--ac3)">1. กระแสเงินสดรับ</td>';
+  let totIncRow=0;for(let m=0;m<12;m++){sumH+='<td class="tr num pos">'+F(incM[m])+'</td>';totIncRow+=incM[m];}
+  sumH+='<td class="tr num pos" style="font-weight:700">'+F(totIncRow+incA)+'</td></tr>';
+  
+  sumH+='<tr><td style="font-weight:600;color:var(--dng)">2. กระแสเงินสดจ่าย</td>';
+  let totExpRow=0;for(let m=0;m<12;m++){sumH+='<td class="tr num neg">'+F(expM[m])+'</td>';totExpRow+=expM[m];}
+  sumH+='<td class="tr num neg" style="font-weight:700">'+F(totExpRow+expA)+'</td></tr>';
+  
+  sumH+='<tr style="background:var(--hovbg);border-top:2px solid var(--cb)"><td style="font-weight:700;color:var(--ac)">3. กระแสเงินสดสุทธิ</td>';
+  for(let m=0;m<12;m++){
+    let net=incM[m]-expM[m];
+    sumH+='<td class="tr num '+(net>=0?'pos':'neg')+'" style="font-weight:700">'+F(net)+'</td>';
+  }
+  let grandNet=(totIncRow+incA)-(totExpRow+expA);
+  sumH+='<td class="tr num '+(grandNet>=0?'pos':'neg')+'" style="font-weight:800;font-size:calc(var(--fs) + 1px)">'+F(grandNet)+'</td></tr></tbody>';
+  
+  const tblSum=document.getElementById('tblCFSummary');
+  if(tblSum)tblSum.innerHTML=sumH;
+
   document.getElementById('cfKPI').innerHTML=
     '<div class="kpi"><div class="lb">รายรับรวม/ปี</div><div class="vl pos">'+F(tInc)+'</div></div>'+
     '<div class="kpi"><div class="lb">รายจ่ายรวม/ปี</div><div class="vl neg">'+F(tExp)+'</div></div>'+

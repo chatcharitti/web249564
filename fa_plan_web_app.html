@@ -101,7 +101,7 @@ tr:hover td{background:var(--tr-hov)}
 @media print{
   @page{size:A4 landscape;margin:10mm}
   body{background:#fff!important;color:#000!important;font-size:11px!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;width:100%!important}
-  .sidebar,.topbar,.menu-toggle,.btn,.fs-btn,.th-btn,.io-bar,.param-card .btn,.sep,#impFile,.no-print{display:none!important}
+  .sidebar,.topbar,.menu-toggle,.btn,.fs-btn,.th-btn,.io-bar,.param-card .btn,.sep,#impFile,.no-print,.app-footer{display:none!important}
   
   input, select, textarea {
       color: #000 !important;
@@ -145,7 +145,20 @@ tr:hover td{background:var(--tr-hov)}
   .print-hdr h1{font-size:18px;font-weight:700;color:#1e293b}.print-hdr p{font-size:11px;color:#475569}
 }
 .print-hdr{display:none}
+.app-footer{position:sticky;bottom:0;z-index:40;background:var(--bg2);border-top:1px solid var(--cb);padding:8px 24px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:calc(var(--fs) - 4px);color:var(--tx3);flex-wrap:wrap;transition:background .3s}
+.app-footer .sep-dot{color:var(--tx3);opacity:.5}
 
+/* About Section Styles */
+.about-block{padding:20px 24px;border-radius:16px;margin-bottom:20px;border-left:5px solid;box-shadow:0 4px 12px rgba(0,0,0,.05);transition:transform .2s,box-shadow .2s;text-indent:1.5em;line-height:1.8}
+.about-block:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.08)}
+.ab-blue{background:rgba(56,189,248,.08);border-left-color:var(--ac)}
+.ab-green{background:rgba(52,211,153,.08);border-left-color:var(--ac3)}
+.ab-purple{background:rgba(129,140,248,.08);border-left-color:var(--ac2)}
+.ab-gold{background:rgba(212,168,83,.08);border-left-color:var(--gold)}
+.contact-card{background:linear-gradient(135deg,rgba(56,189,248,.05),rgba(129,140,248,.05));border:1px solid rgba(129,140,248,.2);border-radius:16px;padding:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.contact-item{display:flex;align-items:center;gap:12px;background:var(--card);padding:12px 16px;border-radius:12px;border:1px solid var(--cb);transition:transform .2s;text-indent:0}
+.contact-item:hover{transform:translateY(-2px);border-color:var(--ac)}
+.contact-icon{font-size:24px;background:var(--bg);width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:50%;flex-shrink:0}
 </style>
 </head>
 <body>
@@ -159,6 +172,7 @@ tr:hover td{background:var(--tr-hov)}
 <div class="nav-i" data-s="retirement"><span class="ic">🏖️</span>แผนเกษียณอายุ</div>
 <div class="nav-i" data-s="retfund"><span class="ic">📈</span>กองทุนเกษียณที่พึงมี</div>
 <div class="nav-i" data-s="investment"><span class="ic">💎</span>แผนการลงทุน</div>
+<div class="nav-i" data-s="about"><span class="ic">ℹ️</span>เกี่ยวกับแอพนี้</div>
 </div>
 <div class="sidebar-ft">วันที่วางแผน: 22 พ.ย. 2567</div>
 </nav>
@@ -319,6 +333,95 @@ tr:hover td{background:var(--tr-hov)}
 <div class="card"><div class="card-h"><div class="bdg b-gr">📈</div><div><h2>Budget Projection 50 ปี</h2></div></div><div class="chart-box" style="height:380px"><canvas id="cBudget"></canvas></div></div>
 </div>
 
+<!-- ABOUT -->
+<div class="section" id="sec-about">
+<div class="print-hdr"><h1>เกี่ยวกับ Web App — FA Plan Tool v.1</h1><p id="ph-about"></p></div>
+<div class="card" style="padding: 32px;">
+
+<div style="text-align: center; margin-bottom: 36px;">
+  <div style="display:inline-flex; align-items:center; justify-content:center; width: 64px; height: 64px; border-radius: 20px; background: rgba(56,189,248,0.15); color: var(--ac); font-size: 32px; margin-bottom: 16px;">ℹ️</div>
+  <h2 style="font-size: calc(var(--fs) + 6px); font-weight: 700;">เกี่ยวกับ Web App — FA Plan Tool v.1</h2>
+  <div style="font-size: calc(var(--fs)); color: var(--tx2); margin-top: 4px;">ผู้พัฒนา: ชัฌฤทธินันท์ โชคชวัลพันทวี</div>
+  <div style="display:inline-block; margin-top: 16px; padding: 4px 16px; border-radius: 20px; background: var(--bg2); color: var(--ac); font-weight: 600; font-size: calc(var(--fs) - 2px);">อัปเดตข้อมูลล่าสุด: 1 มีนาคม 2026</div>
+</div>
+
+<div style="max-width: 900px; margin: 0 auto;">
+
+  <div class="about-block ab-blue">
+    <div style="font-weight: 600; color: var(--ac); margin-bottom: 8px; font-size: calc(var(--fs)); text-indent: 0;">🚀 จุดเริ่มต้นของการพัฒนา</div>
+    <p>Web App : FA Plan Tool v.1 ที่ท่านได้ลองใช้งานอยู่ชุดนี้ พัฒนาขึ้นด้วยเทคโนโลยี AI จาก claude.ai และ Gemini 3 จึงสามารถพัฒนาได้อย่างรวดเร็วในเวลาอันสั้น</p>
+  </div>
+
+  <div class="about-block ab-gold">
+    <div style="font-weight: 600; color: var(--gold); margin-bottom: 8px; font-size: calc(var(--fs)); text-indent: 0;">📊 จาก Excel สู่ Web Application</div>
+    <p>เดิมทีผู้พัฒนาใช้วิธีคำนวณด้วย MS Excel ซึ่งเรียนรู้มาจากการฝึกอบรมต่างๆ ทั้งหลักสูตร IARFC แบบจ่ายเงินอบรมเอง และเรียนกับอาจารย์ที่เป็น CFP เมื่อครั้งเป็น รอง ผอ. ฝ่ายฝึกอบรมของบริษัทประกันอันดับต้นๆ ของไทย จากนั้นจึงนำความรู้และต้นแบบ Excel มาต่อยอดและปรับปรุง เพิ่มเติมสิ่งต่างๆ เพื่อใช้นำเสนอลูกค้า จนไฟล์มีขนาดใหญ่ สูตรซับซ้อน และข้อมูลมากขึ้นตามลำดับ</p>
+  </div>
+
+  <div class="about-block ab-purple">
+    <div style="font-weight: 600; color: var(--ac2); margin-bottom: 8px; font-size: calc(var(--fs)); text-indent: 0;">💡 แรงบันดาลใจในการต่อยอด</div>
+    <p>จุดเปลี่ยนเกิดขึ้นเมื่อได้พูดคุยกับพี่สาวที่น่ารักคนหนึ่ง ซึ่งมักให้คำแนะนำดีๆ อยู่เสมอ มีอยู่ครั้งหนึ่งเป็นเรื่องเกี่ยวกับการวางแผนการเงิน แม้ไม่รู้ว่าพี่เขาจำได้ไหมซึ่งเขาบอกว่าไฟล์ที่ผมใช้งานดูดีขึ้นมากเลย บางคนที่มี CFP ที่เคยพบยังทำไม่ได้เท่านี้ ถึงแม้ผมจะมีเพียงใบอนุญาตตัวแทนประกันและใบอนุญาตขายกองทุน (ทำเอาตัวลอยเลยทีเดียว) ซึ่งนั่นเองคือจุดเริ่มต้นของความตั้งใจที่จะทำโปรแกรมให้ทุกคนเข้าถึงได้ เพื่อใช้วางแผนการเงินส่วนบุคคลที่พัฒนาจากประสบการณ์การทำงานของตัวแทนประกันชีวิต และในที่สุดด้วยพลังของ AI แอพเวอร์ชัน 1 จึงได้เกิดขึ้น ถึงแม้ฟังก์ชั่นเพื่อการวางแผนการเงินจะยังไม่ครบทั้งหมด แต่เชื่อว่าจะทำให้ท่านได้เห็นภาพรวมการวางแผน เห็นความสำคัญของอัตราดอกเบั้ย และได้ตระหนักว่าเวลาเป็นสิ่งสำคัญ หากเริ่มช้าจะทำให้ต้องใช้เงินก้อนใหญ่ในการวางแผนระยะสั้นเพื่อเป้าหมายที่ต้องการ ซึ่งอาจจะทำให้ต้องเลื่อนการเกษียณออกไป</p>
+  </div>
+
+  <div class="about-block ab-green">
+    <div style="font-weight: 600; color: var(--ac3); margin-bottom: 8px; font-size: calc(var(--fs)); text-indent: 0;">🎁 เจตนารมณ์ในการแบ่งปัน</div>
+    <p>ผมหวังว่าแอพนี้จะเป็นประโยชน์สำหรับผู้ที่ได้มาพบและทดลองใช้ ซึ่งผู้พัฒนาอนุญาตให้ท่านนำไปใช้สำหรับตนเองและครอบครัวได้อย่างอิสระ ไม่มีลิขสิทธิ์ใดๆ หรือถ้าจะอ้างถึงบ้างก็จะขอบคุณมากๆ ครับ</p>
+  </div>
+
+  <div style="margin-top: 48px;">
+    <p style="text-align: center; margin-bottom: 24px; color: var(--tx2); text-indent: 0;">สำหรับคำแนะนำติชม หรือต้องการสอบถามเกี่ยวกับการวางแผน สินค้าประกันชีวิต สามารถติดต่อได้ตามข้อมูลด้านล่างนี้เลยครับ</p>
+    
+    <div class="contact-card">
+      <div style="grid-column: 1 / -1; font-weight: 700; color: var(--ac); font-size: calc(var(--fs) + 2px); text-align: center; margin-bottom: 8px;">📞 ช่องทางการติดต่อ</div>
+      
+      <div class="contact-item">
+        <div class="contact-icon">👤</div>
+        <div>
+          <div style="font-size: calc(var(--fs) - 4px); color: var(--tx3);">ชื่อ - สกุล</div>
+          <div style="font-weight: 600; color: var(--tx);">ชัฌฤทธินันท์ โชคชวัลพันทวี</div>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">📱</div>
+        <div>
+          <div style="font-size: calc(var(--fs) - 4px); color: var(--tx3);">โทรศัพท์</div>
+          <div style="font-weight: 600; color: var(--tx);">061 645 9092</div>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">📧</div>
+        <div>
+          <div style="font-size: calc(var(--fs) - 4px); color: var(--tx3);">Email</div>
+          <div style="font-weight: 600;"><a href="mailto:chatcharitti@ctk.co.th" style="color: var(--ac); text-decoration: none;">chatcharitti@ctk.co.th</a></div>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">💬</div>
+        <div>
+          <div style="font-size: calc(var(--fs) - 4px); color: var(--tx3);">Line ID</div>
+          <div style="font-weight: 600; color: var(--tx);"><a href="https://line.me/ti/p/MeH_gnuj6j" title="chatcharitti_mobile" target="new">chatcharitti_mobile</a></div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+</div>
+</div>
+</div>
+
+<!-- PERSISTENT FOOTER -->
+<div class="app-footer">
+<span>👤 ชัฌฤทธินันท์ โชคชวัลพันทวี</span>
+<span class="sep-dot">•</span>
+<!--<span>💬 Line: chatcharitti_mobile</span> -->
+<span>💬 Line: <a href="https://line.me/ti/p/MeH_gnuj6j" title="chatcharitti_mobile" target="new">chatcharitti_mobile</a></span>
+<span class="sep-dot">•</span>
+<span>📧 <a href="mailto:chatcharitti@ctk.co.th" style="color:var(--ac)">chatcharitti@ctk.co.th</a></span>
+</div>
+
 </div></div>
 <script>
 // ===== GLOBALS =====
@@ -367,7 +470,7 @@ document.querySelectorAll('.nav-i').forEach(n=>{
     document.querySelectorAll('.nav-i').forEach(x=>x.classList.remove('active'));n.classList.add('active');
     document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));
     document.getElementById('sec-'+s).classList.add('active');
-    const T={dashboard:'Dashboard — ภาพรวมแผนการเงิน',balance:'งบดุลส่วนบุคคล',cashflow:'กระแสเงินสด',ratio:'อัตราส่วนทางการเงิน',retirement:'แผนเกษียณอายุ',retfund:'กองทุนเกษียณที่พึงมี',investment:'แผนการลงทุน'};
+    const T={dashboard:'Dashboard — ภาพรวมแผนการเงิน',balance:'งบดุลส่วนบุคคล',cashflow:'กระแสเงินสด',ratio:'อัตราส่วนทางการเงิน',retirement:'แผนเกษียณอายุ',retfund:'กองทุนเกษียณที่พึงมี',investment:'แผนการลงทุน',about:'เกี่ยวกับแอพนี้'};
     document.getElementById('topT').textContent=T[s]||'';
     document.getElementById('sidebar').classList.remove('open');
   });
@@ -516,6 +619,7 @@ function importData(ev){
       if(d.retParams){
         document.getElementById('r_curExp').value=d.retParams.curExp;
         document.getElementById('r_inf').value=d.retParams.inf;
+
         document.getElementById('r_retAge').value=d.retParams.retAge;
         document.getElementById('r_endAge').value=d.retParams.endAge;
         document.getElementById('r_retRtn').value=d.retParams.retRtn;

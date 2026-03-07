@@ -74,9 +74,65 @@
                     </div>
                     <span class="font-bold text-xl tracking-tight text-slate-800">Finance<span class="text-brand-600"> Hub</span> <span class="text-rose-600"> : Partner With Your Wealth </span></span>
                 </div>
-                <!-- Optional: Right side menu (can be added later) -->
-                <div class="hidden md:block">
-                    <span class="text-xs font-medium text-slate-400 uppercase tracking-wider">Knowledge Base</span>
+                <!-- File Selector Dropdown -->
+                <div class="hidden md:flex items-center gap-3">
+                    <label for="fileSelector" class="text-xs font-medium text-slate-400 uppercase tracking-wider whitespace-nowrap">เปิดไฟล์:</label>
+                    <div class="relative">
+                        <select id="fileSelector" onchange="openSelectedFile(this)"
+                            class="appearance-none bg-slate-50 border border-slate-200 text-slate-700 text-sm rounded-lg px-3 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 cursor-pointer hover:bg-white transition-colors max-w-xs">
+                            <option value="">-- เลือกไฟล์ที่ต้องการ --</option>
+                            <optgroup label="ประกันสุขภาพ (Health)">
+                                <option value="compare hsx2500 vs hsx3500.html">เปรียบเทียบ HSX2500 vs HSX3500</option>
+                                <option value="Compare_hs_2800-3400.html">Compare HS 2800-3400</option>
+                                <option value="Compare_HSX_HSV_HH.html">Compare HSX / HSV / HH</option>
+                                <option value="Gemini_Compare_health_v.2.html">Compare Health V.2</option>
+                                <option value="Gen_compare_health_v3.html">Compare Health V.3</option>
+                                <option value="Health_Plan_Comparison_AIA_MTL.html">Compare AIA vs MTL Health</option>
+                                <option value="Calculate_Health_Sulution.html">คำนวณ 20PLN + Health Happy</option>
+                                <option value="Calculate_Health_Solution-3optioins.html">คำนวณ 20PLN + HSV + HS (3 ตัวเลือก)</option>
+                                <option value="Calculate_Health_Solution-Compare_AIA_MTL.html">เปรียบเทียบ AIA-MTL (เลือกอายุได้)</option>
+                                <option value="MTL_D_HealthPlus-v1.html">MTL D-Health Plus V.1</option>
+                                <option value="Compare_MTL D-Health Plus-v.1.html">Compare MTL D-Health Plus</option>
+                            </optgroup>
+                            <optgroup label="ประกันโรคร้ายแรง (CI)">
+                                <option value="AIA_MultiPay_CI.html">AIA MultiPay CI</option>
+                                <option value="aia_ci_comparison_1.html">เทียบ AIA CI Care / MultiPay / Care for Cancer</option>
+                                <option value="AIA_CI_Procare.html">AIA CI Procare</option>
+                            </optgroup>
+                            <optgroup label="แผนเกษียณ & Elite Income">
+                                <option value="Retire_with_Elite_Income_prestige.html">Retire with Elite Income Prestige</option>
+                                <option value="Plan_with_Elite_Income.html">Plan with Elite Income</option>
+                                <option value="elite_income_prestige-v3_tab_prt-customer.html">Elite Income Prestige (แบบเต็ม)</option>
+                                <option value="elite_income_prestige-rev_short.html">Elite Income Prestige (แบบย่อ)</option>
+                                <option value="elite_income_prestige.html">Elite Income Prestige</option>
+                                <option value="Elite_Income_Slide.html">Elite Income Slide Style</option>
+                                <option value="elite_income_prestige_Report_to_clicent.html">Elite Income Prestige - ส่งลูกค้า</option>
+                                <option value="AIA_Elite_Income_Premium_Report_to_clicent.html">AIA Elite Income Premium Report</option>
+                                <option value="AIA_Elite_Income_summary_for_Age60Pllus.html">AIA Elite Income (อายุ 60+)</option>
+                            </optgroup>
+                            <optgroup label="เครื่องมือคำนวณ">
+                                <option value="Gen-calculate-premium.html">คำนวณเบี้ย (Gen)</option>
+                                <option value="Gen-calculate-premium_v2.html">คำนวณเบี้ย V.2 (Gen)</option>
+                                <option value="GPT-calculate-premium.html">คำนวณเบี้ย (GPT)</option>
+                                <option value="Wealth_plan_man55.html">แผนการเงิน (ชาย อายุ 55)</option>
+                            </optgroup>
+                            <optgroup label="ข้อมูลอื่นๆ">
+                                <option value="Idea-for-Start-Retirement-Plan.html">เริ่มต้นวางแผนบำนาญ</option>
+                                <option value="Compare_AIA_and_MTL_Ly.html">Compare AIA and MTL (Ly)</option>
+                                <option value="compare_MTL_annuity_90_5.html">Compare MTL Annuity 90/5</option>
+                                <option value="compare MTL annuity 90_5.html">Compare MTL Annuity 90/5 (เก่า)</option>
+                                <option value="AIA_Vitality_Report.html">AIA Vitality Report</option>
+                                <option value="Inheritance_Tax_Death_Duty_2558.html">ภาษีมรดก พรบ. 2558</option>
+                                <option value="fa_plan_web_app.html">FA Plan Web App</option>
+                            </optgroup>
+                        </select>
+                        <!-- Dropdown Arrow Icon -->
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-400">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -352,8 +408,17 @@
     </div>
 
     <script>
+        function openSelectedFile(selectEl) {
+            const file = selectEl.value;
+            if (file) {
+                window.open(file, '_blank');
+                // Reset dropdown after opening
+                selectEl.value = '';
+            }
+        }
+
         let currentSize = 100;
-        
+
         function changeFontSize(direction) {
             // Adjust size by 5% each click
             currentSize += (direction * 5);

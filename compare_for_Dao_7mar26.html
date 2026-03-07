@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIA Sure Saving 140K - เปรียบเทียบแผนสุขภาพ เกศดาว</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+```
+<style>
+    :root {
+        --primary-color: #0056b3;
+        --accent-color: #d31145;
+        --bg-color: #f4f7f6;
+        --card-bg: #ffffff;
+        --text-color: #333333;
+        --border-color: #e0e0e0;
+        --opt1-color: #059669;
+        --opt2-color: #b45309;
+    }
+    body { font-family: 'Sarabun', sans-serif; background-color: var(--bg-color); color: var(--text-color); }
+
+    .report-container { max-width: 1200px; margin: 0 auto; background-color: var(--card-bg); padding: 40px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); font-size: 17px; line-height: 1.6; }
+    .report-header { border-bottom: 3px solid var(--primary-color); padding-bottom: 20px; margin-bottom: 30px; }
+    .report-h1 { font-size: 30px; color: var(--primary-color); margin: 0 0 10px 0; font-weight: 700; }
+    .report-h2 { font-size: 22px; color: var(--primary-color); border-bottom: 1px solid #ddd; padding-bottom: 8px; margin-top: 0; margin-bottom: 20px; font-weight: 600; }
+    .client-info-box { background-color: #eef5fa; padding: 20px; border-radius: 10px; border-left: 6px solid var(--primary-color); font-size: 18px; }
+    .report-section { margin-bottom: 40px; padding: 25px; border: 1px solid var(--border-color); border-radius: 12px; }
+
+    /* Tables */
+    .compare-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 15px; }
+    .compare-table th, .compare-table td { padding: 11px 14px; border-bottom: 1px solid #ddd; vertical-align: top; }
+    .compare-table th { background-color: #f1f4f8; color: var(--primary-color); font-weight: bold; text-align: center; border-bottom: 2px solid var(--primary-color); }
+    .compare-table td.row-header { font-weight: 600; color: #444; background-color: #fafafa; text-align: left; width: 30%; border-right: 1px solid #ddd; }
+    .compare-table td.data-cell { text-align: center; border-right: 1px solid #eee; }
+    .compare-table tr:hover td { background-color: #f9fbfd; }
+    .sub-header-row td { background-color: #e3e8ee !important; font-weight: bold; color: var(--primary-color); text-align: left !important; padding-top: 16px; border-top: 2px solid #ccc; }
+    .total-row td { font-weight: bold; font-size: 20px; background-color: #fff4f4 !important; color: var(--accent-color); border-top: 2px solid var(--accent-color); }
+
+    .badge { display: inline-block; padding: 3px 9px; border-radius: 20px; font-size: 13px; font-weight: bold; color: white; vertical-align: middle; margin-left: 6px; }
+    .badge-tax { background-color: #28a745; }
+    .badge-saving { background-color: #0056b3; }
+
+    /* Projection Table */
+    .proj-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+    .proj-table th { background-color: #f1f4f8; color: var(--primary-color); padding: 12px; text-align: right; border-bottom: 2px solid var(--primary-color); }
+    .proj-table th:first-child { text-align: center; }
+    .proj-table td { padding: 10px 12px; border-bottom: 1px solid #eee; text-align: right; }
+    .proj-table td:first-child { text-align: center; font-weight: bold; background-color: #fafafa; border-right: 1px solid #ddd; }
+    .proj-table tr:hover td { background-color: #f9fbfd; }
+
+    /* Winner badge */
+    .winner { background: #dcfce7; color: #166534; font-weight: 700; border-radius: 6px; padding: 2px 8px; font-size: 12px; margin-left: 6px; }
+    .loser { color: #9ca3af; }
+
+    /* Recommendation */
+    .rec-box { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border: 2px solid #f59e0b; border-radius: 12px; padding: 20px 24px; margin-top: 20px; }
+    .rec-box h3 { color: #92400e; font-size: 20px; font-weight: 700; margin: 0 0 10px 0; }
+
+    /* Print */
+    @media print {
+        .no-print { display: none !important; }
+        body { background-color: white; padding: 0; }
+        .report-container { box-shadow: none; padding: 0; max-width: 100%; margin: 0; border: none; }
+        .page-break { page-break-before: always; }
+        .report-section { padding: 10px 0; border: none; }
+    }
+
+    /* Saving benefit box */
+    .saving-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-left: 5px solid #2563eb; border-radius: 10px; padding: 18px 22px; margin-bottom: 20px; }
+    .saving-box h4 { color: #1e40af; font-size: 18px; font-weight: 700; margin: 0 0 8px 0; }
+
+    /* Opt colors */
+    .opt1-text { color: var(--opt1-color); }
+    .opt2-text { color: var(--opt2-color); }
+    .opt1-bg th { background-color: #ecfdf5 !important; color: var(--opt1-color) !important; }
+    .opt2-bg th { background-color: #fffbeb !important; color: var(--opt2-color) !important; }
+</style>
+```
+
+</head>
+<body class="p-4 md:p-8">
+
+```
+<!-- Control Panel (no-print) -->
+<div class="max-w-6xl mx-auto bg-white rounded-xl shadow-lg p-5 mb-6 border border-gray-200 no-print">
+    <div class="flex justify-between items-center">
+        <div>
+            <h2 class="text-xl font-bold text-blue-800">รายงานเปรียบเทียบ: AIA Sure Saving 140K</h2>
+            <p class="text-sm text-gray-500 mt-1">น.ส.เกศดาว ชูวรเชษฐ์ | อายุ 48 ปี | เพศหญิง</p>
+        </div>
+        <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-bold shadow flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
+            พิมพ์รายงาน (PDF)
+        </button>
+    </div>
+</div>
+
+<!-- Report Output -->
+<div class="report-container" id="report-output">
+
+    <!-- Header -->
+    <div class="report-header">
+        <h1 class="report-h1">รายงานเปรียบเทียบข้อเสนอประกันสุขภาพ</h1>
+        <div class="client-info-box">
+            <p><strong>พิเศษสำหรับ:</strong> น.ส.เกศดาว ชูวรเชษฐ์</p>
+            <p><strong>อายุ:</strong> 48 ปี &nbsp;|&nbsp; <strong>เพศ:</strong> หญิง</p>
+            <p><strong>วันที่จัดทำ:</strong> 7 มีนาคม 2568</p>
+            <p><strong>ตัวแทน:</strong> ชัฌฤทธินันท์ โชคชวัลพันทวี &nbsp;|&nbsp; ใบอนุญาต 4801000820 &nbsp;|&nbsp; รหัส 0000241713</p>
+            <p class="text-sm text-gray-500 mt-2">** รายงานนี้ไม่ใช่ข้อเสนอทางการของบริษัท จัดทำขึ้นเพื่อประกอบการพิจารณาเปรียบเทียบแผนเท่านั้น</p>
+        </div>
+    </div>
+
+    <!-- ส่วนออมทรัพย์ (ร่วมกัน) -->
+    <div class="report-section saving-box" style="border: 2px solid #2563eb; border-left: 5px solid #2563eb; background: linear-gradient(135deg, #eff6ff, #dbeafe); padding: 22px;">
+        <h2 class="report-h2" style="color: #1e40af; border-color: #93c5fd;">แบบประกันหลัก: AIA Sure Saving 140K <span class="badge badge-saving">เหมือนกันทั้ง 2 แผน</span></h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <table class="compare-table">
+                    <thead><tr><th colspan="2" style="background:#dbeafe; color:#1e40af;">เงื่อนไขหลัก</th></tr></thead>
+                    <tbody>
+                        <tr><td class="row-header" style="background:#f0f7ff;">ระยะชำระเบี้ย</td><td class="data-cell font-bold text-blue-700">10 ปี</td></tr>
+                        <tr><td class="row-header" style="background:#f0f7ff;">ระยะความคุ้มครอง</td><td class="data-cell">51 ปี (ถึงอายุ 99 ปี)</td></tr>
+                        <tr><td class="row-header" style="background:#f0f7ff;">เบี้ยประกันหลัก</td><td class="data-cell font-bold text-blue-700">50,872 บาท/ปี</td></tr>
+                        <tr><td class="row-header" style="background:#f0f7ff;">เบี้ยสะสม 10 ปี</td><td class="data-cell">508,718 บาท</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <table class="compare-table">
+                    <thead><tr><th colspan="2" style="background:#dbeafe; color:#1e40af;">ผลประโยชน์คืนเงิน</th></tr></thead>
+                    <tbody>
+                        <tr><td class="row-header" style="background:#f0f7ff;">เงินคืนรายงวดรวมตลอดสัญญา</td><td class="data-cell font-bold text-emerald-700">1,148,000 บาท</td></tr>
+                        <tr><td class="row-header" style="background:#f0f7ff;">ผลประโยชน์กรณีเสียชีวิต (ปีที่ 51)</td><td class="data-cell font-bold">1,148,000 บาท</td></tr>
+                        <tr><td class="row-header" style="background:#f0f7ff;">WP (ยกเว้นเบี้ยทุพพลภาพ)</td><td class="data-cell text-green-600 font-bold">ฟรี</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div style="margin-top: 14px; padding: 10px 16px; background: #fff; border-left: 4px solid #2563eb; border-radius: 6px; font-size: 14px; color: #1e40af;">
+            🌟 <strong>AIA Vitality:</strong> ผู้เอาประกันได้รับสิทธิ์โครงการส่งเสริมสุขภาพ AIA Vitality — โบนัสสุขภาพ Gold 5% (สัญญาสุขภาพ) และ 10% (โรคร้ายแรง)
+        </div>
+    </div>
+
+    <!-- 1. สรุปเบี้ยประกัน -->
+    <div class="report-section">
+        <h2 class="report-h2">1. สรุปเบี้ยประกันภัยปีแรก (Premium Summary)</h2>
+        <table class="compare-table">
+            <thead>
+                <tr>
+                    <th style="text-align:left; background:white; border:none; width:30%;"></th>
+                    <th class="opt1-bg" style="font-size:17px; background:#ecfdf5; color:#065f46;">แผน 1 — HS3400</th>
+                    <th style="font-size:17px; background:#fffbeb; color:#92400e;">แผน 2 — HSV</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="row-header">ประกันชีวิตหลัก (AIA Sure Saving 140K) <br><span class="badge badge-saving" style="margin-left:0;">ออมทรัพย์ + ลดหย่อนภาษี</span></td>
+                    <td class="data-cell text-blue-700 font-bold">50,872 บาท</td>
+                    <td class="data-cell text-blue-700 font-bold">50,872 บาท</td>
+                </tr>
+                <tr>
+                    <td class="row-header">ประกันสุขภาพ (Health) <br><span class="badge badge-tax" style="margin-left:0;">ลดหย่อนภาษีได้</span></td>
+                    <td class="data-cell font-bold opt1-text">
+                        <div class="text-xs font-normal text-gray-500 mb-1">AIA H&S New Standard แผน 3,400</div>
+                        12,750 บาท
+                    </td>
+                    <td class="data-cell font-bold opt2-text">
+                        <div class="text-xs font-normal text-gray-500 mb-1">AIA Health Saver แผน 2,000</div>
+                        16,000 บาท
+                    </td>
+                </tr>
+                <tr>
+                    <td class="row-header">โรคร้ายแรง (AIA Care for Cancer 500K)</td>
+                    <td class="data-cell">
+                        <div class="text-xs text-gray-400 mb-1">ทุน 500,000 บาท</div>
+                        4,606 บาท
+                    </td>
+                    <td class="data-cell">
+                        <div class="text-xs text-gray-400 mb-1">ทุน 500,000 บาท</div>
+                        4,606 บาท
+                    </td>
+                </tr>
+                <tr>
+                    <td class="row-header">ชดเชยรายได้ (AIA HB Extra)</td>
+                    <td class="data-cell">
+                        <div class="text-xs text-gray-400 mb-1">แผน 500 บ./วัน</div>
+                        1,850 บาท
+                    </td>
+                    <td class="data-cell">
+                        <div class="text-xs text-gray-400 mb-1">แผน 1,000 บ./วัน</div>
+                        3,700 บาท
+                    </td>
+                </tr>
+                <tr>
+                    <td class="row-header">WP (ยกเว้นเบี้ยทุพพลภาพ)</td>
+                    <td class="data-cell text-green-600 font-bold">ฟรี</td>
+                    <td class="data-cell text-green-600 font-bold">ฟรี</td>
+                </tr>
+                <tr class="total-row">
+                    <td class="row-header" style="background:transparent;">รวมเบี้ยประกันภัยสุทธิ (บาท/ปี)</td>
+                    <td class="data-cell">70,077 บาท <span class="winner">ประหยัดกว่า</span></td>
+                    <td class="data-cell">75,177 บาท</td>
+                </tr>
+                <tr style="background:#fff8f8;">
+                    <td class="row-header" style="color:#dc2626;">ส่วนต่างเบี้ย (ต่อปี)</td>
+                    <td class="data-cell" colspan="2" style="text-align:center; color:#dc2626; font-weight:700; font-size:16px;">
+                        แผน 2 แพงกว่า <strong>5,100 บาท/ปี</strong> &nbsp;|&nbsp; รวม 10 ปี = <strong>51,000 บาท</strong>
+                    </td>
+                </tr>
+                <tr style="background:#f0fdf4;">
+                    <td class="row-header" style="color:#15803d;">ลดหย่อนภาษีเบี้ยสุขภาพ (สูงสุด)</td>
+                    <td class="data-cell text-emerald-700 font-bold">12,750 บาท/ปี</td>
+                    <td class="data-cell text-emerald-700 font-bold">16,000 บาท/ปี <span class="winner">มากกว่า</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- 2. ตารางเปรียบเทียบความคุ้มครอง -->
+    <div class="report-section">
+        <h2 class="report-h2">2. ตารางเปรียบเทียบผลประโยชน์ความคุ้มครอง (Benefit Comparison)</h2>
+        <table class="compare-table" style="font-size:14px;">
+            <thead>
+                <tr>
+                    <th style="text-align:left; width:34%;">รายละเอียดความคุ้มครอง</th>
+                    <th style="background:#ecfdf5; color:#065f46;">แผน 1 — HS3400</th>
+                    <th style="background:#fffbeb; color:#92400e;">แผน 2 — HSV</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="sub-header-row"><td colspan="3">ส่วนที่ 1: ความคุ้มครองสุขภาพ</td></tr>
+
+                <tr>
+                    <td class="row-header">วงเงินสูงสุดต่อรอบปีกรมธรรม์</td>
+                    <td class="data-cell">แยกหมวด</td>
+                    <td class="data-cell font-bold text-emerald-700">เหมาจ่าย 200,000 บาท ✅</td>
+                </tr>
+                <tr>
+                    <td class="row-header">ค่าห้อง ค่าอาหาร (ต่อวัน)</td>
+                    <td class="data-cell font-bold text-emerald-700">3,400 บาท ✅</td>
+                    <td class="data-cell">2,000 บาท</td>
+                </tr>
+                <tr>
+                    <td class="row-header">ค่าบริการทางการแพทย์ (ต่อครั้ง)</td>
+                    <td class="data-cell">20,000 บาท (หมวด 2)</td>
+                    <td class="data-cell font-bold text-emerald-700">เหมาจ่ายรวม ✅</td>
+                </tr>
+                <tr>
+                    <td class="row-header">ค่าแพทย์ตรวจรักษา (ต่อวัน)</td>
+                    <td class="data-cell">800 บาท</td>
+                    <td class="data-cell font-bold text-emerald-700">จ่ายตามจริง ✅</td>
+                </tr>
+                <tr>
+                    <td class="row-header">ค่าผ่าตัดและหัตถการ</td>
+                    <td class="data-cell">80,000 บาท (หมวด 4)</td>
+                    <td class="data-cell font-bold text-emerald-700">จ่ายตามจริง (เหมาจ่าย) ✅</td>
+                </tr>
+                <tr>
+                    <td class="row-header">Day Surgery (ผ่าตัดไม่นอน)</td>
+                    <td class="data-cell">จ่ายตามจริง</td>
+                    <td class="data-cell">จ่ายตามจริง</td>
+                </tr>
+                <tr>
+                    <td class="row-header">ตรวจวินิจฉัยก่อน/หลัง Admit</td>
+                    <td class="data-cell text-gray-400">ไม่คุ้มครอง ❌</td>
+                    <td class="data-cell font-bold text-emerald-700">✅ ภายใน 30 วัน</td>
+                </tr>
+                <tr>
+                    <td class="row-header">อุบัติเหตุฉุกเฉิน OPD (ภายใน 24 ชม.)</td>
+                    <td class="data-cell">6,500 บาท</td>
+                    <td class="data-cell font-bold text-emerald-700">8,000 บาท ✅</td>
+                </tr>
+                <tr>
+                    <td class="row-header">ผ่าตัดเล็ก</td>
+                    <td class="data-cell">4,000 บาท</td>
+                    <td class="data-cell font-bold text-emerald-700">15,000 บาท ✅</td>
+                </tr>
+                <tr>
+                    <td class="row-header">OPD ต่อเนื่องหลัง Admit</td>
+                    <td class="data-cell text-gray-400">ไม่คุ้มครอง ❌</td>
+                    <td class="data-cell font-bold text-emerald-700">✅ 2 ครั้ง (1,000 บ./ครั้ง)</td>
+                </tr>
+                <tr>
+                    <td class="row-header">รังสีรักษา / มะเร็ง (ต่อปี)</td>
+                    <td class="data-cell">35,000 บาท</td>
+                    <td class="data-cell font-bold text-emerald-700">รวมในวงเงินเหมาจ่าย ✅</td>
+                </tr>
+                <tr>
+                    <td class="row-header">เคมีบำบัด / Targeted Therapy</td>
+                    <td class="data-cell text-gray-400">ไม่คุ้มครอง ❌</td>
+                    <td class="data-cell font-bold text-emerald-700">รวมในวงเงินเหมาจ่าย ✅</td>
+                </tr>
+                <tr>
+                    <td class="row-header">โรคร้ายแรง (Health Saver — วงเงิน 2 เท่า)</td>
+                    <td class="data-cell text-gray-400">ไม่มี ❌</td>
+                    <td class="data-cell font-bold text-emerald-700">600,000 บาท ✅</td>
+                </tr>
+                <tr>
+                    <td class="row-header">รถพยาบาลฉุกเฉิน</td>
+                    <td class="data-cell">4,000 บาท</td>
+                    <td class="data-cell font-bold text-emerald-700">จ่ายตามจริง ✅</td>
+                </tr>
+
+                <tr class="sub-header-row"><td colspan="3">ส่วนที่ 2: AIA Care for Cancer (CFC) — เหมือนกันทั้ง 2 แผน</td></tr>
+                <tr>
+                    <td class="row-header">เงินก้อนเมื่อตรวจพบมะเร็ง (ทุกระยะ)</td>
+                    <td class="data-cell font-bold text-rose-600" colspan="2" style="text-align:center;">500,000 บาท (ทั้ง 2 แผน)</td>
+                </tr>
+                <tr>
+                    <td class="row-header">ชดเชยรายวันกรณีแอดมิทด้วยมะเร็ง</td>
+                    <td class="data-cell" colspan="2" style="text-align:center;">10,000 บาท/วัน (ทั้ง 2 แผน)</td>
+                </tr>
+                <tr>
+                    <td class="row-header">ชดเชยเคมีบำบัด / รังสีรักษา (OPD)</td>
+                    <td class="data-cell" colspan="2" style="text-align:center;">2,500 บาท/ครั้ง (ทั้ง 2 แผน)</td>
+                </tr>
+
+                <tr class="sub-header-row"><td colspan="3">ส่วนที่ 3: AIA HB Extra (ชดเชยรายได้)</td></tr>
+                <tr>
+                    <td class="row-header">ชดเชยรายวันทั่วไป (IPD)</td>
+                    <td class="data-cell">500 บาท/วัน</td>
+                    <td class="data-cell font-bold text-emerald-700">1,000 บาท/วัน ✅</td>
+                </tr>
+                <tr>
+                    <td class="row-header">ชดเชยห้อง ICU (3 เท่า)</td>
+                    <td class="data-cell">1,500 บาท/วัน</td>
+                    <td class="data-cell font-bold text-emerald-700">3,000 บาท/วัน ✅</td>
+                </tr>
+                <tr>
+                    <td class="row-header">ผ่าตัดใหญ่ (5 เท่า)</td>
+                    <td class="data-cell">2,500 บาท/ครั้ง</td>
+                    <td class="data-cell font-bold text-emerald-700">5,000 บาท/ครั้ง ✅</td>
+                </tr>
+                <tr>
+                    <td class="row-header">โรคร้ายแรงเฉียบพลัน 13 โรค (25 เท่า)</td>
+                    <td class="data-cell">12,500 บาท</td>
+                    <td class="data-cell font-bold text-emerald-700">25,000 บาท ✅</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="text-sm text-gray-500 mt-3">* ค่ารักษาพยาบาลกลุ่มเหมาจ่าย จะนับรวมวงเงินผลประโยชน์ต่อรอบปีกรมธรรม์</p>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- 3. ตารางเบี้ยในอนาคต (Lifetime Projection) -->
+    <div class="report-section" style="background-color:#f8fbff; border-color:var(--primary-color);">
+        <h2 class="report-h2">3. ตารางประมาณการเบี้ยประกันภัยตามช่วงอายุ (Lifetime Projection)</h2>
+        <p class="text-base text-gray-700 mb-2">
+            แสดงเบี้ยประกันรวมที่ต้องชำระรายปีตามช่วงอายุ (รวมทุกสัญญาของแต่ละแผน)<br>
+            <span class="text-sm text-gray-500">* เบี้ยประกันหลัก AIA Sure Saving 140K ชำระ <strong>10 ปีแรกเท่านั้น</strong> (อายุ 48–57 ปี) หลังจากนั้นจ่ายเฉพาะสัญญาสุขภาพและสัญญาเพิ่มเติม</span>
+        </p>
+
+        <div style="overflow-x:auto;">
+            <table class="proj-table" id="proj-table">
+                <thead>
+                    <tr>
+                        <th style="width:16%; text-align:center;">ช่วงอายุ</th>
+                        <th style="background:#ecfdf5; color:#065f46; width:28%;">
+                            แผน 1 — HS3400 รวม<br>
+                            <span style="font-size:11px; font-weight:400;">(Sure Saving + HS3400 + CFC + HB500)</span>
+                        </th>
+                        <th style="background:#fffbeb; color:#92400e; width:28%;">
+                            แผน 2 — HSV รวม<br>
+                            <span style="font-size:11px; font-weight:400;">(Sure Saving + HSV + CFC + HB1000)</span>
+                        </th>
+                        <th style="width:28%; background:#f1f4f8; color:#374151;">
+                            ส่วนต่าง<br>
+                            <span style="font-size:11px; font-weight:400;">(แผน 2 − แผน 1)</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="proj-tbody">
+                    <!-- Populated by JS -->
+                </tbody>
+            </table>
+        </div>
+
+        <div style="margin-top:16px; padding:12px 16px; background:#fff8e1; border:1.5px solid #f9a825; border-radius:8px; font-size:14px; color:#5d4037;">
+            <strong>📌 หมายเหตุสำคัญ:</strong>
+            เบี้ยสัญญาสุขภาพและสัญญาเพิ่มเติมจะปรับขึ้นตามช่วงอายุทุก 5 ปี ตามตารางอัตราเบี้ยของบริษัท
+            | CFC คุ้มครองถึงอายุ 79 ปี | HB Extra คุ้มครองถึงอายุ 79 ปี | Sure Saving ชำระเบี้ยครบ 10 ปี (อายุ 57 ปี)
+        </div>
+    </div>
+
+    <!-- 4. สรุปและข้อแนะนำ -->
+    <div class="report-section">
+        <h2 class="report-h2">4. สรุปเปรียบเทียบและข้อแนะนำ</h2>
+
+        <table class="compare-table" style="font-size:14px; margin-bottom:20px;">
+            <thead>
+                <tr>
+                    <th style="text-align:left; width:34%;">เกณฑ์การพิจารณา</th>
+                    <th style="background:#ecfdf5; color:#065f46;">แผน 1 — HS3400</th>
+                    <th style="background:#fffbeb; color:#92400e;">แผน 2 — HSV</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="row-header">เบี้ยประกันรายปี</td><td class="data-cell font-bold text-emerald-700">70,077 บาท ✅</td><td class="data-cell">75,177 บาท</td></tr>
+                <tr><td class="row-header">ค่าห้องพักต่อวัน</td><td class="data-cell font-bold text-emerald-700">3,400 บาท ✅</td><td class="data-cell">2,000 บาท</td></tr>
+                <tr><td class="row-header">วงเงินรวมต่อครั้ง/ปี</td><td class="data-cell">แยกหมวด (จำกัดแต่ละหมวด)</td><td class="data-cell font-bold text-emerald-700">เหมาจ่าย 200,000 ✅</td></tr>
+                <tr><td class="row-header">OPD ต่อเนื่อง / ตรวจ 30 วัน</td><td class="data-cell text-gray-400">ไม่มี ❌</td><td class="data-cell font-bold text-emerald-700">มี ✅</td></tr>
+                <tr><td class="row-header">โรคร้ายแรงจากแผนสุขภาพ</td><td class="data-cell text-gray-400">ไม่มี ❌</td><td class="data-cell font-bold text-emerald-700">600,000 บาท ✅</td></tr>
+                <tr><td class="row-header">ชดเชยรายวัน HB Extra</td><td class="data-cell">500 บาท/วัน</td><td class="data-cell font-bold text-emerald-700">1,000 บาท/วัน ✅</td></tr>
+                <tr><td class="row-header">ลดหย่อนภาษีเบี้ยสุขภาพ</td><td class="data-cell">12,750 บาท/ปี</td><td class="data-cell font-bold text-emerald-700">16,000 บาท/ปี ✅</td></tr>
+                <tr><td class="row-header">เหมาะกับ รพ. เอกชนชั้นนำ</td><td class="data-cell font-bold text-emerald-700">ห้องระดับ 3,000–4,000 บ. ✅</td><td class="data-cell">ห้องระดับ 2,000 บ.</td></tr>
+                <tr><td class="row-header">คุ้มค่าระยะยาว (อายุ 48+)</td><td class="data-cell">ดี</td><td class="data-cell font-bold text-emerald-700">ดีกว่า ✅</td></tr>
+            </tbody>
+        </table>
+
+        <div class="rec-box">
+            <h3>💡 ข้อแนะนำสำหรับ น.ส.เกศดาว อายุ 48 ปี</h3>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 12px;">
+                <div style="background:#ecfdf5; border:1.5px solid #10b981; border-radius:8px; padding:14px;">
+                    <p style="font-weight:700; color:#065f46; margin:0 0 6px;">เลือก แผน 1 (HS3400) หากต้องการ:</p>
+                    <ul style="margin:0; padding-left:18px; color:#374151; font-size:14px; line-height:2;">
+                        <li>ประหยัดเบี้ยรายปี (5,100 บาท/ปี)</li>
+                        <li>ใช้โรงพยาบาลที่ค่าห้อง 3,000–4,000 บาท/คืน</li>
+                        <li>งบประมาณจำกัดในช่วงแรก</li>
+                    </ul>
+                </div>
+                <div style="background:#fff7ed; border:2px solid #f59e0b; border-radius:8px; padding:14px;">
+                    <p style="font-weight:700; color:#92400e; margin:0 0 6px;">⭐ แนะนำ แผน 2 (HSV) เพราะ:</p>
+                    <ul style="margin:0; padding-left:18px; color:#374151; font-size:14px; line-height:2;">
+                        <li>วงเงินเหมาจ่าย — ไม่ต้องกังวลค่าใช้จ่ายเกินหมวด</li>
+                        <li>OPD ต่อเนื่อง + ตรวจวินิจฉัย 30 วัน</li>
+                        <li>โรคร้ายแรง 600,000 บาท จากแผนสุขภาพ</li>
+                        <li>ลดหย่อนภาษีสูงกว่า 3,250 บาท/ปี</li>
+                        <li><strong>อายุ 48 ปี ความเสี่ยงสุขภาพสูงขึ้น — คุ้มค่ามากในระยะยาว</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div><!-- end report-container -->
+```
+
+<script>
+// ==========================================
+// DATA: อัตราเบี้ยรายปีแยกตามช่วงอายุ สำหรับ น.ส.เกศดาว (เพศหญิง)
+// ==========================================
+
+// Sure Saving 140K เบี้ยหลัก 50,872 บ./ปี ชำระ 10 ปี (อายุ 48–57)
+const SURE_SAVING_PREM = 50872;
+const SURE_SAVING_PAY_YEARS = 10;
+const START_AGE = 48;
+
+// AIA H&S New Standard แผน 3400 — เพศหญิง (อัตราตามช่วงอายุ)
+// ช่วงอายุ: 46-50, 51-55, 56-60, 61-65, 66-70, 71-75, 76-80
+const HS3400_FEMALE = {
+    "46-50": 12750,
+    "51-55": 21200,
+    "56-60": 33200,
+    "61-65": 52440,
+    "66-70": 73400,
+    "71-75": 80740,
+    "76-80": 88810
+};
+
+// AIA Health Saver แผน 2,000 — เพศหญิง
+const HSV_2000_FEMALE = {
+    "46-50": 16000,
+    "51-55": 20800,
+    "56-60": 43160,
+    "61-65": 68200,
+    "66-70": 95480,
+    "71-75": 105030,
+    "76-80": 115530
+};
+
+// AIA Care for Cancer 500K — เพศหญิง (อัตรา/1แสน * 5)
+// อัตราต่อแสน: 46-50: 921.10, 51-55: 1247.10, 56-60: 1774.95, 61-65: 2115.73, 66-70: 3143.33, 71-75: 3834.44, 76-79: 4591.68
+const CFC_FEMALE_PER_100K = {
+    "46-50": 921.10,
+    "51-55": 1247.10,
+    "56-60": 1774.95,
+    "61-65": 2115.73,
+    "66-70": 3143.33,
+    "71-75": 3834.44,
+    "76-79": 4591.68
+};
+function getCFCPrem(ageBand, sumK) {
+    const rate = CFC_FEMALE_PER_100K[ageBand];
+    if (!rate) return 0;
+    return Math.round((sumK / 100000) * rate);
+}
+
+// AIA HB Extra — เพศหญิง (อัตราต่อ 100 บาทชดเชย)
+// 46-50: 370, 51-55: 400, 56-60: 460, 61-65: 490, 66-70: 600, 71-75: 710, 76-79: 840
+const HB_FEMALE_PER_100 = {
+    "46-50": 370,
+    "51-55": 400,
+    "56-60": 460,
+    "61-65": 490,
+    "66-70": 600,
+    "71-75": 710,
+    "76-79": 840
+};
+function getHBPrem(ageBand, dailySum) {
+    const rate = HB_FEMALE_PER_100[ageBand];
+    if (!rate) return 0;
+    return Math.round((dailySum / 100) * rate);
+}
+
+// ช่วงอายุที่ต้องแสดง (เริ่มจากอายุ 48)
+const AGE_BANDS = [
+    "46-50", "51-55", "56-60", "61-65", "66-70", "71-75", "76-80"
+];
+
+// CFC และ HB หยุดคุ้มครองเมื่ออายุ 80 ปี (แสดงหมายเหตุ)
+
+function fmt(n) {
+    if (!n && n !== 0) return "-";
+    return Math.round(n).toLocaleString('en-US');
+}
+
+function buildProjectionTable() {
+    const tbody = document.getElementById('proj-tbody');
+    let html = '';
+
+    AGE_BANDS.forEach(band => {
+        const bandStart = parseInt(band.split('-')[0]);
+        const bandEnd = parseInt(band.split('-')[1]);
+
+        // Sure Saving: ชำระแค่อายุ 48-57 เท่านั้น
+        // หาก bandStart < START_AGE + SURE_SAVING_PAY_YEARS แต่ bandEnd >= START_AGE ถือว่ายังชำระ
+        const sureSavingAge = START_AGE + SURE_SAVING_PAY_YEARS - 1; // = 57
+        const isSureSavingActive = bandStart <= sureSavingAge && bandEnd >= START_AGE;
+        const surePrem = isSureSavingActive ? SURE_SAVING_PREM : 0;
+
+        // HS3400
+        const hs3400 = HS3400_FEMALE[band] || 0;
+        // HSV 2000
+        const hsv = HSV_2000_FEMALE[band] || 0;
+
+        // CFC (หยุดอายุ 80)
+        const cfcActive = bandStart <= 79;
+        const cfcBand = cfcActive ? (CFC_FEMALE_PER_100K[band] ? band : null) : null;
+        const cfc500k = cfcBand ? getCFCPrem(band, 500000) : 0;
+
+        // HB (หยุดอายุ 80)
+        const hbActive = bandStart <= 79;
+        const hb500 = hbActive ? getHBPrem(band, 500) : 0;
+        const hb1000 = hbActive ? getHBPrem(band, 1000) : 0;
+
+        // Totals
+        const total1 = surePrem + hs3400 + cfc500k + hb500;
+        const total2 = surePrem + hsv + cfc500k + hb1000;
+        const diff = total2 - total1;
+
+        // Flags
+        let noteArr = [];
+        if (!isSureSavingActive && bandStart <= 70) noteArr.push("Sure Saving ครบชำระแล้ว");
+        if (!cfcActive) noteArr.push("CFC สิ้นสุด");
+        if (!hbActive) noteArr.push("HB สิ้นสุด");
+
+        // กรณีที่ band เริ่มก่อนอายุเริ่ม ให้ข้าม
+        if (bandEnd < START_AGE) return;
+
+        let noteHtml = noteArr.length > 0 ? `<br><span style="font-size:11px; color:#9ca3af;">(${noteArr.join(', ')})</span>` : '';
+
+        // Highlight Sure Saving still active
+        const isSavingRow = isSureSavingActive;
+
+        html += `<tr ${isSavingRow ? '' : 'style="background:#fafbff;"'}>
+            <td>${band}${noteHtml}</td>
+            <td style="color:#065f46; font-weight:700;">
+                ${fmt(total1)} บาท
+                <div style="font-size:12px; color:#6b7280; font-weight:400; text-align:right; margin-top:2px;">
+                    ${isSureSavingActive ? fmt(surePrem)+' (หลัก) + ' : ''}${fmt(hs3400)} + ${fmt(cfc500k)} + ${fmt(hb500)}
+                </div>
+            </td>
+            <td style="color:#92400e; font-weight:700;">
+                ${fmt(total2)} บาท
+                <div style="font-size:12px; color:#6b7280; font-weight:400; text-align:right; margin-top:2px;">
+                    ${isSureSavingActive ? fmt(surePrem)+' (หลัก) + ' : ''}${fmt(hsv)} + ${fmt(cfc500k)} + ${fmt(hb1000)}
+                </div>
+            </td>
+            <td style="color:${diff > 0 ? '#dc2626' : '#15803d'}; font-weight:700; text-align:right;">
+                ${diff > 0 ? '+' : ''}${fmt(diff)} บาท
+            </td>
+        </tr>`;
+    });
+
+    tbody.innerHTML = html;
+}
+
+document.addEventListener('DOMContentLoaded', buildProjectionTable);
+</script>
+
+</body>
+</html>

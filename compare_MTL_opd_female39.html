@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>รายงานเปรียบเทียบข้อเสนอประกันภัย — เมืองไทยประกันชีวิต</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold:       #B8973A;
+    --gold-light: #D4B05A;
+    --gold-pale:  #F5EDD8;
+    --cream:      #FDFAF4;
+    --white:      #FFFFFF;
+    --ink:        #1C1A14;
+    --ink-mid:    #4A4435;
+    --ink-soft:   #8C7D5F;
+    --rule:       #E8DFC8;
+    --green:      #2E7D52;
+    --green-bg:   #EAF5EE;
+    --blue:       #1C5FA6;
+    --blue-bg:    #EBF2FC;
+    --teal:       #0E7490;
+    --teal-bg:    #ECFEFF;
+    --teal-light: #A5D8E6;
+    --red:        #A0302A;
+    --red-bg:     #FAEAEA;
+    --shadow-sm:  0 2px 8px rgba(184,151,58,0.10);
+    --shadow-md:  0 6px 24px rgba(184,151,58,0.14);
+    --shadow-lg:  0 12px 48px rgba(184,151,58,0.18);
+    --radius:     16px;
+    --radius-sm:  10px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Sarabun', sans-serif;
+    font-size: 18px;
+    line-height: 1.7;
+    background: var(--cream);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+  .page-wrap { max-width: 1020px; margin: 0 auto; padding: 48px 28px 80px; }
+
+/* ── HEADER ── */
+.header {
+background: var(–white);
+border-radius: var(–radius);
+box-shadow: var(–shadow-lg);
+padding: 40px 44px;
+margin-bottom: 36px;
+border-top: 6px solid var(–gold);
+display: flex; align-items: flex-start; gap: 32px;
+animation: fadeUp 0.5s ease both;
+}
+.header-logo {
+flex-shrink: 0; width: 72px; height: 72px;
+background: var(–gold-pale); border-radius: 50%;
+display: flex; align-items: center; justify-content: center; font-size: 30px;
+}
+.header-body { flex: 1; }
+.header-badge {
+display: inline-block; font-size: 11px; font-weight: 700;
+letter-spacing: 0.12em; text-transform: uppercase;
+color: var(–gold); background: var(–gold-pale);
+border: 1px solid var(–gold-light); border-radius: 4px;
+padding: 3px 10px; margin-bottom: 10px;
+}
+.header h1 {
+font-family: ‘Playfair Display’, serif; font-size: 26px; font-weight: 700;
+color: var(–ink); line-height: 1.25; margin-bottom: 6px;
+}
+.header-sub { font-size: 15px; color: var(–ink-soft); }
+.header-meta { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; }
+.meta-chip {
+display: inline-flex; align-items: center; gap: 6px;
+font-size: 14px; font-weight: 500; color: var(–ink-mid);
+background: var(–cream); border: 1px solid var(–rule);
+border-radius: 100px; padding: 5px 14px;
+}
+.meta-chip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(–gold); flex-shrink: 0; }
+
+/* ── SECTION ── */
+section { margin-bottom: 32px; animation: fadeUp 0.5s ease both; }
+section:nth-child(2) { animation-delay: 0.10s; }
+section:nth-child(3) { animation-delay: 0.17s; }
+section:nth-child(4) { animation-delay: 0.24s; }
+section:nth-child(5) { animation-delay: 0.31s; }
+section:nth-child(6) { animation-delay: 0.38s; }
+section:nth-child(7) { animation-delay: 0.45s; }
+
+.section-header { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+.section-num {
+width: 38px; height: 38px; border-radius: 50%;
+background: var(–gold); color: #fff; font-size: 15px; font-weight: 700;
+display: flex; align-items: center; justify-content: center;
+flex-shrink: 0; font-family: ‘Playfair Display’, serif;
+}
+.section-title { font-family: ‘Playfair Display’, serif; font-size: 22px; font-weight: 600; color: var(–ink); }
+.section-title span { font-size: 14px; font-weight: 500; color: var(–ink-soft); font-family: ‘Sarabun’, sans-serif; margin-left: 8px; }
+
+/* ── CARD ── */
+.card {
+background: var(–white); border-radius: var(–radius);
+box-shadow: var(–shadow-sm); overflow: hidden;
+transition: box-shadow 0.2s;
+}
+.card:hover { box-shadow: var(–shadow-md); }
+.card-inner { padding: 28px 32px; }
+.card-header-band {
+padding: 16px 28px; display: flex; justify-content: space-between; align-items: center;
+}
+.card-header-band.gold-band { background: linear-gradient(135deg, var(–gold) 0%, var(–gold-light) 100%); }
+.card-header-band.blue-band { background: linear-gradient(135deg, var(–blue) 0%, #2E7FC0 100%); }
+.card-header-band.green-band { background: linear-gradient(135deg, var(–green) 0%, #3E9C62 100%); }
+.card-header-band.teal-band { background: linear-gradient(135deg, var(–teal) 0%, #0E9DBB 100%); }
+.card-header-band .title { color: #fff; font-size: 17px; font-weight: 700; }
+.card-header-band .badge-price {
+background: rgba(255,255,255,0.25); color: #fff; border-radius: 8px;
+padding: 6px 16px; font-size: 20px; font-weight: 700;
+font-family: ‘Playfair Display’, serif;
+}
+
+/* ── COMPARISON HERO ── */
+.compare-hero {
+display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 28px;
+}
+.plan-card {
+border-radius: var(–radius); overflow: hidden; box-shadow: var(–shadow-md);
+transition: transform 0.2s, box-shadow 0.2s;
+}
+.plan-card:hover { transform: translateY(-3px); box-shadow: var(–shadow-lg); }
+.plan-card .plan-header {
+padding: 20px 24px; text-align: center;
+}
+.plan-card.plan-a .plan-header { background: linear-gradient(135deg, var(–green), #3E9C62); }
+.plan-card.plan-b .plan-header { background: linear-gradient(135deg, var(–teal), #0E9DBB); }
+.plan-card .plan-label {
+font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+color: rgba(255,255,255,0.8); margin-bottom: 6px;
+}
+.plan-card .plan-name { font-family: ‘Playfair Display’, serif; font-size: 18px; font-weight: 700; color: #fff; line-height: 1.3; }
+.plan-card .plan-code { font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 4px; }
+.plan-card .plan-body { background: var(–white); padding: 20px 24px; }
+.plan-stat { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(–rule); }
+.plan-stat:last-child { border-bottom: none; }
+.plan-stat .stat-label { font-size: 15px; color: var(–ink-mid); font-weight: 500; }
+.plan-stat .stat-val { font-size: 16px; font-weight: 700; color: var(–ink); text-align: right; }
+.plan-stat .stat-val.big { font-family: ‘Playfair Display’, serif; font-size: 22px; }
+.plan-stat .stat-val.gold { color: var(–gold); }
+.plan-stat .stat-val.green { color: var(–green); }
+.plan-stat .stat-val.teal { color: var(–teal); }
+
+/* ── COMPARISON TABLE ── */
+.compare-table-wrap { overflow-x: auto; }
+.compare-table {
+width: 100%; border-collapse: collapse; font-size: 16px; min-width: 640px;
+}
+.compare-table thead tr.head-row-main th {
+padding: 0; font-size: 14px; text-align: center; border: none;
+}
+.compare-table thead tr.head-row-main th:first-child { width: 36%; text-align: left; }
+.compare-table .th-plan {
+padding: 14px 16px; font-weight: 700; font-size: 14px; letter-spacing: 0.04em; text-align: center;
+}
+.compare-table .th-plan.green { background: var(–green); color: #fff; border-radius: 10px 10px 0 0; }
+.compare-table .th-plan.teal  { background: var(–teal);  color: #fff; border-radius: 10px 10px 0 0; }
+.compare-table .th-label { background: var(–gold-pale); padding: 12px 16px; text-align: left; font-weight: 700; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(–gold); }
+.compare-table td { padding: 13px 16px; border-bottom: 1px solid var(–rule); vertical-align: middle; }
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table tr:hover td { background: var(–cream); }
+.compare-table .row-label { font-size: 15px; font-weight: 600; color: var(–ink-mid); }
+.compare-table .row-sub { font-size: 13px; color: var(–ink-soft); margin-top: 2px; }
+.compare-table .cell-val { text-align: center; font-size: 16px; font-weight: 600; }
+.compare-table .cell-val.highlight-green { background: var(–green-bg); color: var(–green); font-weight: 700; }
+.compare-table .cell-val.highlight-teal  { background: var(–teal-bg);  color: var(–teal);  font-weight: 700; }
+.compare-table .amt { font-family: ‘Playfair Display’, serif; font-size: 18px; }
+.compare-table .icon-yes { color: var(–green); font-size: 18px; }
+.compare-table .icon-no  { color: var(–red);   font-size: 18px; }
+.compare-table .total-row td {
+font-weight: 700; font-size: 17px; border-top: 3px solid var(–gold-light); background: var(–gold-pale) !important;
+}
+.compare-table .total-row .cell-val.highlight-green { background: var(–green) !important; color: #fff; font-size: 20px; border-radius: 8px; }
+.compare-table .total-row .cell-val.highlight-teal  { background: var(–teal)  !important; color: #fff; font-size: 20px; border-radius: 8px; }
+
+/* ── STANDARD TABLE ── */
+.data-table { width: 100%; border-collapse: collapse; font-size: 16px; }
+.data-table th {
+background: var(–gold-pale); color: var(–gold); font-weight: 700;
+font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase;
+padding: 12px 16px; text-align: left; border-bottom: 2px solid var(–gold-light);
+}
+.data-table th.right, .data-table td.right { text-align: right; }
+.data-table td { padding: 13px 16px; border-bottom: 1px solid var(–rule); vertical-align: middle; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: var(–cream); }
+.data-table .amt { font-weight: 700; color: var(–ink); font-family: ‘Playfair Display’, serif; font-size: 17px; }
+.data-table .total-row td { background: var(–gold-pale); font-weight: 700; color: var(–gold); font-size: 18px; border-top: 2px solid var(–gold-light); border-bottom: none; }
+.data-table .total-row .amt { font-size: 22px; color: var(–gold); }
+
+/* ── COV GRID ── */
+.cov-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 24px 28px; }
+.cov-item {
+background: var(–cream); border-radius: var(–radius-sm); padding: 18px 20px;
+display: flex; justify-content: space-between; align-items: center; border-left: 4px solid var(–gold-light);
+}
+.cov-item .cov-label { font-size: 15px; font-weight: 600; color: var(–ink-mid); line-height: 1.4; }
+.cov-item .cov-pct  { font-size: 13px; color: var(–ink-soft); margin-top: 2px; }
+.cov-item .cov-val  { font-family: ‘Playfair Display’, serif; font-size: 19px; font-weight: 700; color: var(–ink); text-align: right; white-space: nowrap; margin-left: 16px; }
+.cov-item.highlight { background: var(–green-bg); border-left-color: var(–green); }
+.cov-item.highlight .cov-val, .cov-item.highlight .cov-label { color: var(–green); }
+
+/* ── NOTICE ── */
+.notice {
+border-radius: var(–radius-sm); padding: 16px 20px; font-size: 15px; line-height: 1.6;
+display: flex; gap: 12px; align-items: flex-start; margin: 16px 28px 24px;
+}
+.notice.yellow { background: var(–gold-pale); border: 1px solid var(–gold-light); color: var(–ink-mid); }
+.notice.blue   { background: var(–blue-bg); border: 1px solid #C0D8F5; color: #174a87; }
+.notice.red    { background: var(–red-bg); border: 1px solid #F5C0C0; color: var(–red); }
+.notice.green  { background: var(–green-bg); border: 1px solid #B3DEC5; color: #1d5c38; }
+.notice.teal   { background: var(–teal-bg); border: 1px solid var(–teal-light); color: #0c5a6e; }
+.notice-icon { font-size: 20px; flex-shrink: 0; line-height: 1; }
+
+/* ── WAITING CHIPS ── */
+.waiting-grid { display: flex; flex-wrap: wrap; gap: 12px; padding: 0 28px 24px; }
+.wait-chip { border-radius: 10px; padding: 14px 20px; flex: 1; min-width: 180px; text-align: center; }
+.wait-chip .days { font-family: ‘Playfair Display’, serif; font-size: 26px; font-weight: 700; line-height: 1; margin-bottom: 4px; }
+.wait-chip .desc { font-size: 14px; font-weight: 500; color: var(–ink-mid); }
+.wait-chip.w30  { background: var(–green-bg); border: 1.5px solid #A8D9BC; }
+.wait-chip.w30  .days { color: var(–green); }
+.wait-chip.w120 { background: var(–blue-bg); border: 1.5px solid #A0C4EC; }
+.wait-chip.w120 .days { color: var(–blue); }
+.wait-chip.w180 { background: var(–red-bg); border: 1.5px solid #F0B8B8; }
+.wait-chip.w180 .days { color: var(–red); }
+
+/* ── EXCL LIST ── */
+.excl-list { list-style: none; padding: 0 28px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.excl-list li { font-size: 15px; color: var(–ink-mid); padding: 10px 14px; background: var(–cream); border-radius: 8px; display: flex; gap: 8px; align-items: flex-start; line-height: 1.5; }
+.excl-list .x { color: var(–red); font-weight: 700; flex-shrink: 0; }
+
+/* ── PROJECTION TABLE ── */
+.proj-table-wrap { padding: 0 28px 28px; overflow-x: auto; }
+.proj-table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 600px; }
+.proj-table th { background: var(–gold); color: #fff; font-weight: 700; padding: 11px 14px; text-align: center; font-size: 13px; letter-spacing: 0.04em; }
+.proj-table td { padding: 10px 14px; border-bottom: 1px solid var(–rule); text-align: center; }
+.proj-table tr:nth-child(even) td { background: #FDFAF7; }
+.proj-table tr:hover td { background: var(–gold-pale); }
+.proj-table .milestone td { background: var(–gold-pale) !important; font-weight: 700; color: var(–gold); border-top: 2px solid var(–gold-light); border-bottom: 2px solid var(–gold-light); }
+.proj-table .highlight-green td { background: var(–green-bg) !important; font-weight: 700; color: var(–green); }
+
+/* ── SUMMARY STRIP ── */
+.summary-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 36px; animation: fadeUp 0.5s 0.1s ease both; }
+.sum-card { background: var(–white); border-radius: var(–radius); box-shadow: var(–shadow-sm); padding: 28px 24px; text-align: center; border-bottom: 4px solid var(–gold-light); transition: transform 0.2s, box-shadow 0.2s; }
+.sum-card:hover { transform: translateY(-3px); box-shadow: var(–shadow-md); }
+.sum-card .label { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(–ink-soft); margin-bottom: 10px; }
+.sum-card .value { font-family: ‘Playfair Display’, serif; font-size: 30px; font-weight: 700; color: var(–ink); line-height: 1; margin-bottom: 4px; }
+.sum-card .unit { font-size: 14px; color: var(–ink-soft); }
+.sum-card.gold .value { color: var(–gold); }
+.sum-card.green .value { color: var(–green); }
+
+/* ── FOOTER ── */
+.report-footer {
+margin-top: 40px; padding: 24px 28px; background: var(–white);
+border-radius: var(–radius); box-shadow: var(–shadow-sm);
+border-top: 3px solid var(–gold-light); display: flex;
+justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap;
+font-size: 14px; color: var(–ink-soft); animation: fadeUp 0.5s 0.6s ease both;
+}
+.footer-brand { font-family: ‘Playfair Display’, serif; font-size: 17px; font-weight: 700; color: var(–ink); }
+.footer-brand small { display: block; font-family: ‘Sarabun’, sans-serif; font-size: 13px; font-weight: 400; color: var(–ink-soft); margin-top: 2px; }
+.footer-divider { width: 1px; height: 40px; background: var(–rule); }
+.footer-disclaimer { font-size: 13px; color: var(–ink-soft); line-height: 1.6; max-width: 440px; }
+
+/* ── VERDICT BADGE ── */
+.verdict-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0 0; }
+.verdict-box { border-radius: var(–radius-sm); padding: 18px 20px; }
+.verdict-box.green { background: var(–green-bg); border: 2px solid #B3DEC5; }
+.verdict-box.teal  { background: var(–teal-bg);  border: 2px solid var(–teal-light); }
+.verdict-box .verdict-title { font-weight: 700; font-size: 15px; margin-bottom: 6px; }
+.verdict-box.green .verdict-title { color: var(–green); }
+.verdict-box.teal  .verdict-title { color: var(–teal); }
+.verdict-box p { font-size: 14px; color: var(–ink-mid); line-height: 1.6; }
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
+
+@media print {
+body { background: white; font-size: 13px; }
+.page-wrap { padding: 0; max-width: 100%; }
+.card { box-shadow: none; border: 1px solid var(–rule); page-break-inside: avoid; }
+section { page-break-inside: avoid; }
+}
+@media (max-width: 720px) {
+.compare-hero, .summary-grid, .verdict-row { grid-template-columns: 1fr; }
+.cov-grid, .excl-list { grid-template-columns: 1fr; }
+.header { flex-direction: column; padding: 28px 24px; }
+}
+</style>
+
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- ════ HEADER ════ -->
+
+  <div class="header">
+    <div class="header-logo">🛡</div>
+    <div class="header-body">
+      <div class="header-badge">รายงานเปรียบเทียบข้อเสนอประกันภัย</div>
+      <h1>แผนประกันภัย เมืองไทย สมาร์ท โพรเทคชั่น 99/20<br>เปรียบเทียบ 2 แผน OPD: แยกค่าใช้จ่าย vs. เหมาจ่าย</h1>
+      <div class="header-sub">บมจ. เมืองไทยประกันชีวิต &nbsp;·&nbsp; เสนอโดย นาย สุรัตน์ หงษาชาติ ใบอนุญาต 6101036694</div>
+      <div class="header-meta">
+        <span class="meta-chip"><span class="dot"></span>อายุ 39 ปี · เพศหญิง</span>
+        <span class="meta-chip"><span class="dot"></span>วันที่เสนอ: 11 มีนาคม 2568</span>
+        <span class="meta-chip"><span class="dot"></span>ชำระเบี้ยราย ปี</span>
+        <span class="meta-chip"><span class="dot"></span>แบบประกันหลักเหมือนกันทั้งสองแผน</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ SECTION 1 : COMPARISON HERO CARDS ════ -->
+
+  <section>
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-title">ภาพรวมสองแผน <span>Plan Overview</span></div>
+    </div>
+    <div class="compare-hero">
+      <!-- Plan A -->
+      <div class="plan-card plan-a">
+        <div class="plan-header">
+          <div class="plan-label">แผน ก</div>
+          <div class="plan-name">OPD แยกค่าใช้จ่าย<br>แผน 2,000 บาท/ครั้ง</div>
+          <div class="plan-code">ROR201</div>
+        </div>
+        <div class="plan-body">
+          <div class="plan-stat">
+            <span class="stat-label">ประกันชีวิตหลัก</span>
+            <span class="stat-val">4,896 บ./ปี</span>
+          </div>
+          <div class="plan-stat">
+            <span class="stat-label">อุบัติเหตุ (RAAN2)</span>
+            <span class="stat-val">250 บ./ปี</span>
+          </div>
+          <div class="plan-stat">
+            <span class="stat-label">OPD (ROR201)</span>
+            <span class="stat-val">8,820 บ./ปี</span>
+          </div>
+          <div class="plan-stat">
+            <span class="stat-label">รวมเบี้ยทั้งสิ้น</span>
+            <span class="stat-val big green">13,966 บ./ปี</span>
+          </div>
+          <div class="plan-stat">
+            <span class="stat-label">วงเงิน OPD ต่อครั้ง</span>
+            <span class="stat-val">สูงสุด 2,000 บาท</span>
+          </div>
+          <div class="plan-stat">
+            <span class="stat-label">จำนวนครั้งสูงสุด/ปี</span>
+            <span class="stat-val">30 ครั้ง</span>
+          </div>
+          <div class="plan-stat">
+            <span class="stat-label">วงเงินคุ้มครอง OPD/ปี (สูงสุด)</span>
+            <span class="stat-val">60,000 บาท</span>
+          </div>
+        </div>
+      </div>
+      <!-- Plan B -->
+      <div class="plan-card plan-b">
+        <div class="plan-header">
+          <div class="plan-label">แผน ข</div>
+          <div class="plan-name">OPD เหมาจ่าย<br>แผน 25,000 บาท/ปี</div>
+          <div class="plan-code">ROL031</div>
+        </div>
+        <div class="plan-body">
+          <div class="plan-stat">
+            <span class="stat-label">ประกันชีวิตหลัก</span>
+            <span class="stat-val">4,896 บ./ปี</span>
+          </div>
+          <div class="plan-stat">
+            <span class="stat-label">อุบัติเหตุ (RAAN2)</span>
+            <span class="stat-val">250 บ./ปี</span>
+          </div>
+          <div class="plan-stat">
+            <span class="stat-label">OPD เหมาจ่าย (ROL031)</span>
+            <span class="stat-val">13,938 บ./ปี</span>
+          </div>
+          <div class="plan-stat">
+            <span class="stat-label">รวมเบี้ยทั้งสิ้น</span>
+            <span class="stat-val big teal">19,084 บ./ปี</span>
+          </div>
+          <div class="plan-stat">
+            <span class="stat-label">วงเงิน OPD (เหมาจ่าย/ปี)</span>
+            <span class="stat-val">25,000 บาท</span>
+          </div>
+          <div class="plan-stat">
+            <span class="stat-label">จำนวนครั้ง/ปี</span>
+            <span class="stat-val">ไม่จำกัดครั้ง</span>
+          </div>
+          <div class="plan-stat">
+            <span class="stat-label">วงเงินคุ้มครอง OPD/ปี</span>
+            <span class="stat-val">25,000 บาท (เหมาจ่ายรวม)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+```
+<!-- Verdict -->
+<div class="verdict-row">
+  <div class="verdict-box green">
+    <div class="verdict-title">✅ แผน ก เหมาะสำหรับ</div>
+    <p>ผู้ที่พบแพทย์ไม่บ่อย หรือค่ารักษาต่อครั้งไม่สูง ต้องการเบี้ยต่ำ ประหยัดได้ <strong>5,118 บาท/ปี</strong> เมื่อเทียบแผน ข</p>
+  </div>
+  <div class="verdict-box teal">
+    <div class="verdict-title">✅ แผน ข เหมาะสำหรับ</div>
+    <p>ผู้ที่พบแพทย์บ่อย หรือค่ารักษาต่อครั้งสูงกว่า 2,000 บาท ต้องการความคุ้มครองแบบเหมาจ่ายไม่ติดลิมิตต่อครั้ง</p>
+  </div>
+</div>
+```
+
+  </section>
+
+  <!-- ════ SECTION 2 : COMPARISON TABLE ════ -->
+
+  <section>
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div class="section-title">ตารางเปรียบเทียบรายละเอียด <span>Detailed Comparison</span></div>
+    </div>
+    <div class="card">
+      <div class="compare-table-wrap" style="padding:0 0 4px">
+        <table class="compare-table">
+          <thead>
+            <tr class="head-row-main">
+              <th style="padding:12px 20px;background:var(--gold-pale);border-radius:10px 0 0 0">
+                <span style="font-size:13px;font-weight:700;color:var(--gold);letter-spacing:0.06em;text-transform:uppercase">รายการเปรียบเทียบ</span>
+              </th>
+              <th style="padding:6px 8px 0;background:#f8fdf9">
+                <div class="th-plan green">แผน ก — OPD 2,000/ครั้ง<br><small style="font-weight:400;font-size:12px">ROR201</small></div>
+              </th>
+              <th style="padding:6px 8px 0;background:#f0fafc;border-radius:0 10px 0 0">
+                <div class="th-plan teal">แผน ข — OPD เหมาจ่าย 25,000<br><small style="font-weight:400;font-size:12px">ROL031</small></div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- ส่วนที่เหมือนกัน -->
+            <tr><td colspan="3" class="th-label">ส่วนที่เหมือนกันทั้งสองแผน</td></tr>
+            <tr>
+              <td><div class="row-label">แบบประกันชีวิตหลัก</div><div class="row-sub">MTL Smart Protection 99/20</div></td>
+              <td class="cell-val">เมืองไทย สมาร์ท โพรเทคชั่น 99/20</td>
+              <td class="cell-val">เมืองไทย สมาร์ท โพรเทคชั่น 99/20</td>
+            </tr>
+            <tr>
+              <td><div class="row-label">ทุนประกันชีวิต</div></td>
+              <td class="cell-val"><span class="amt">200,000</span> บาท</td>
+              <td class="cell-val"><span class="amt">200,000</span> บาท</td>
+            </tr>
+            <tr>
+              <td><div class="row-label">เบี้ยประกันชีวิตหลัก</div><div class="row-sub">ชำระ 20 ปี คุ้มครองถึงอายุ 99 ปี</div></td>
+              <td class="cell-val"><span class="amt">4,896</span> บาท/ปี</td>
+              <td class="cell-val"><span class="amt">4,896</span> บาท/ปี</td>
+            </tr>
+            <tr>
+              <td><div class="row-label">สัญญาเพิ่มเติมอุบัติเหตุ แบบ ก</div><div class="row-sub">RAAN2 · ทุน 100,000 บาท</div></td>
+              <td class="cell-val"><span class="amt">250</span> บาท/ปี</td>
+              <td class="cell-val"><span class="amt">250</span> บาท/ปี</td>
+            </tr>
+            <tr>
+              <td><div class="row-label">ความคุ้มครองชีวิต (ตลอดสัญญา)</div></td>
+              <td class="cell-val">200,000 บาท</td>
+              <td class="cell-val">200,000 บาท</td>
+            </tr>
+            <tr>
+              <td><div class="row-label">ผลประโยชน์ครบสัญญา (อายุ 99 ปี)</div></td>
+              <td class="cell-val">200,000 บาท</td>
+              <td class="cell-val">200,000 บาท</td>
+            </tr>
+            <tr>
+              <td><div class="row-label">รองรับ Telemedicine</div></td>
+              <td class="cell-val"><span class="icon-yes">✔</span></td>
+              <td class="cell-val"><span class="icon-yes">✔</span></td>
+            </tr>
+            <tr>
+              <td><div class="row-label">Second Opinion</div><div class="row-sub">ขอความเห็นแพทย์ท่านที่ 2</div></td>
+              <td class="cell-val"><span class="icon-no">✗</span></td>
+              <td class="cell-val"><span class="icon-yes">✔</span> (อาการเดิม)</td>
+            </tr>
+
+```
+        <!-- ส่วน OPD ต่างกัน -->
+        <tr><td colspan="3" class="th-label">ส่วนที่แตกต่าง — ความคุ้มครอง OPD</td></tr>
+        <tr>
+          <td><div class="row-label">รหัสสัญญาเพิ่มเติม OPD</div></td>
+          <td class="cell-val">ROR201</td>
+          <td class="cell-val">ROL031</td>
+        </tr>
+        <tr>
+          <td><div class="row-label">ประเภทความคุ้มครอง</div></td>
+          <td class="cell-val highlight-green">จ่ายตามจริง ไม่เกิน <strong>2,000 บ./ครั้ง</strong></td>
+          <td class="cell-val highlight-teal">เหมาจ่ายรวม <strong>25,000 บ./ปี</strong></td>
+        </tr>
+        <tr>
+          <td><div class="row-label">วงเงินสูงสุดต่อครั้ง</div></td>
+          <td class="cell-val">2,000 บาท</td>
+          <td class="cell-val"><strong>ไม่จำกัดต่อครั้ง</strong> (ใช้จาก pool 25,000)</td>
+        </tr>
+        <tr>
+          <td><div class="row-label">จำนวนครั้งสูงสุดต่อปี</div></td>
+          <td class="cell-val">30 ครั้ง</td>
+          <td class="cell-val">ไม่จำกัดครั้ง</td>
+        </tr>
+        <tr>
+          <td><div class="row-label">วงเงินคุ้มครอง OPD รวมต่อปี</div></td>
+          <td class="cell-val">สูงสุด 60,000 บาท<div style="font-size:13px;color:var(--ink-soft)">(2,000 × 30 ครั้ง)</div></td>
+          <td class="cell-val"><strong>25,000 บาท</strong> (เหมาจ่ายทั้งปี)</td>
+        </tr>
+        <tr>
+          <td><div class="row-label">โรคเดิมต่อเนื่อง (ต่อโรค)</div></td>
+          <td class="cell-val">ไม่เกิน 7 ครั้ง/โรค</td>
+          <td class="cell-val">นับจาก pool 25,000 รวม</td>
+        </tr>
+        <tr>
+          <td><div class="row-label">ค่ายา (หลังรับการรักษา)</div></td>
+          <td class="cell-val">ไม่เกิน 10 วัน</td>
+          <td class="cell-val">ไม่เกิน 30 วัน</td>
+        </tr>
+        <tr>
+          <td><div class="row-label">เบี้ยประกัน OPD</div></td>
+          <td class="cell-val highlight-green"><span class="amt">8,820</span> บาท/ปี</td>
+          <td class="cell-val highlight-teal"><span class="amt">13,938</span> บาท/ปี</td>
+        </tr>
+
+        <!-- ระยะรอคอย (เหมือนกัน) -->
+        <tr><td colspan="3" class="th-label">ระยะเวลาที่ไม่คุ้มครอง (Waiting Period) — เหมือนกันทั้งสองแผน</td></tr>
+        <tr>
+          <td><div class="row-label">30 วัน</div><div class="row-sub">โรคทั่วไปทุกชนิด</div></td>
+          <td class="cell-val"><span class="icon-yes">✔</span></td>
+          <td class="cell-val"><span class="icon-yes">✔</span></td>
+        </tr>
+        <tr>
+          <td><div class="row-label">120 วัน</div><div class="row-sub">8 โรคเฉพาะ เช่น เนื้องอก ริดสีดวง ไส้เลื่อน ต้อ ทอนซิล นิ้วล็อค เส้นเลือดขอด เยื่อบุโพรงมดลูก</div></td>
+          <td class="cell-val"><span class="icon-yes">✔</span></td>
+          <td class="cell-val"><span class="icon-yes">✔</span></td>
+        </tr>
+        <tr>
+          <td><div class="row-label">180 วัน</div><div class="row-sub">7 โรค เช่น ไทรอยด์ ลมบ้าหมู เบาหวาน ภูมิแพ้ ความดันสูง โรคหัวใจ กระเพาะอาหาร</div></td>
+          <td class="cell-val"><span class="icon-yes">✔</span></td>
+          <td class="cell-val"><span class="icon-yes">✔</span></td>
+        </tr>
+
+        <!-- เบี้ยรวม -->
+        <tr class="total-row">
+          <td><strong>รวมเบี้ยประกันภัยทั้งสิ้น / ปี</strong></td>
+          <td class="cell-val highlight-green"><span class="amt">13,966</span> บาท/ปี</td>
+          <td class="cell-val highlight-teal"><span class="amt">19,084</span> บาท/ปี</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="notice yellow" style="margin-top:4px">
+    <span class="notice-icon">📌</span>
+    <div>แผน ข แพงกว่าแผน ก <strong>5,118 บาท/ปี</strong> (ส่วนต่างเฉพาะเบี้ย OPD) ทั้งนี้แผน ข คุ้มค่ากว่าหากค่ารักษาพยาบาลต่อครั้งเกิน 2,000 บาท หรือพบแพทย์เฉพาะทางบ่อยครั้ง</div>
+  </div>
+</div>
+```
+
+  </section>
+
+  <!-- ════ SECTION 3 : ประกันชีวิตหลัก (เหมือนกัน) ════ -->
+
+  <section>
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div class="section-title">ประกันชีวิตหลัก (เหมือนกันทั้งสองแผน) <span>MTL Smart Protection 99/20</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header-band gold-band">
+        <span class="title">เมืองไทย สมาร์ท โพรเทคชั่น 99/20 · ชำระเบี้ย 20 ปี · คุ้มครองถึงอายุ 99 ปี</span>
+        <span class="badge-price">4,896 บาท / ปี</span>
+      </div>
+      <div class="cov-grid">
+        <div class="cov-item">
+          <div><div class="cov-label">ทุนประกันภัย</div><div class="cov-pct">จำนวนเงินเอาประกัน</div></div>
+          <div class="cov-val">200,000</div>
+        </div>
+        <div class="cov-item">
+          <div><div class="cov-label">ความคุ้มครองชีวิต</div><div class="cov-pct">100% ตลอดอายุ 99 ปี</div></div>
+          <div class="cov-val">200,000</div>
+        </div>
+        <div class="cov-item">
+          <div><div class="cov-label">มูลค่าเวนคืน (สิ้นปีที่ 20)</div><div class="cov-pct">สิ้นสุดการชำระเบี้ย</div></div>
+          <div class="cov-val">77,000</div>
+        </div>
+        <div class="cov-item highlight">
+          <div><div class="cov-label">ผลประโยชน์ครบสัญญา</div><div class="cov-pct">อายุ 99 ปี รับ 100% ทุนประกัน</div></div>
+          <div class="cov-val">200,000</div>
+        </div>
+      </div>
+      <div class="notice green" style="margin-top:0">
+        <span class="notice-icon">✅</span>
+        <div><strong>ผลตอบแทนสุทธิ (มีชีวิตครบสัญญา):</strong> รับ 200,000 บาท · ชำระเบี้ยรวม 97,920 บาท · <strong>กำไรสุทธิ 102,080 บาท</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ SECTION 4 : ผลประโยชน์สะสม ════ -->
+
+  <section>
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div class="section-title">ตารางผลประโยชน์ระหว่างสัญญา <span>Benefit Projection (ชีวิตหลัก)</span></div>
+    </div>
+    <div class="card">
+      <div class="proj-table-wrap">
+        <table class="proj-table">
+          <thead>
+            <tr>
+              <th>ปีกรมธรรม์</th>
+              <th>เบี้ยสะสม (บาท)</th>
+              <th>ความคุ้มครองชีวิต (บาท)</th>
+              <th>มูลค่าเวนคืน (บาท)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>4,896</td><td>200,000</td><td>—</td></tr>
+            <tr><td>2</td><td>9,792</td><td>200,000</td><td>1,400</td></tr>
+            <tr><td>3</td><td>14,688</td><td>200,000</td><td>4,200</td></tr>
+            <tr><td>4</td><td>19,584</td><td>200,000</td><td>7,400</td></tr>
+            <tr><td>5</td><td>24,480</td><td>200,000</td><td>10,600</td></tr>
+            <tr><td>6</td><td>29,376</td><td>200,000</td><td>14,400</td></tr>
+            <tr><td>7</td><td>34,272</td><td>200,000</td><td>18,400</td></tr>
+            <tr><td>8</td><td>39,168</td><td>200,000</td><td>22,000</td></tr>
+            <tr><td>9</td><td>44,064</td><td>200,000</td><td>25,600</td></tr>
+            <tr><td>10</td><td>48,960</td><td>200,000</td><td>29,400</td></tr>
+            <tr><td>11</td><td>53,856</td><td>200,000</td><td>33,400</td></tr>
+            <tr><td>12</td><td>58,752</td><td>200,000</td><td>37,600</td></tr>
+            <tr><td>13</td><td>63,648</td><td>200,000</td><td>41,800</td></tr>
+            <tr><td>14</td><td>68,544</td><td>200,000</td><td>46,400</td></tr>
+            <tr><td>15</td><td>73,440</td><td>200,000</td><td>51,000</td></tr>
+            <tr><td>16</td><td>78,336</td><td>200,000</td><td>55,800</td></tr>
+            <tr><td>17</td><td>83,232</td><td>200,000</td><td>60,800</td></tr>
+            <tr><td>18</td><td>88,128</td><td>200,000</td><td>66,000</td></tr>
+            <tr><td>19</td><td>93,024</td><td>200,000</td><td>71,400</td></tr>
+            <tr class="milestone"><td>20 (หมดภาระเบี้ย)</td><td>97,920</td><td>200,000</td><td>77,000</td></tr>
+            <tr><td>21 – อายุ 98</td><td>97,920</td><td>200,000</td><td>79,800 – 191,400</td></tr>
+            <tr class="highlight-green"><td>ครบอายุ 99 ปี</td><td>97,920</td><td>200,000</td><td><strong>200,000</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ SECTION 5 : อุบัติเหตุ ════ -->
+
+  <section>
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div class="section-title">สัญญาเพิ่มเติมอุบัติเหตุ แบบ ก (เหมือนกันทั้งสองแผน) <span>RAAN 2</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header-band blue-band">
+        <span class="title">การประกันภัยอุบัติเหตุ แบบ ก · ทุน 100,000 บาท</span>
+        <span class="badge-price">250 บาท / ปี</span>
+      </div>
+      <table class="data-table">
+        <thead>
+          <tr><th>กรณีที่ได้รับความคุ้มครอง</th><th class="right">%</th><th class="right">จำนวนเงิน (บาท)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>เสียชีวิตจากอุบัติเหตุ</td><td class="right">100%</td><td class="right amt">100,000</td></tr>
+          <tr><td>สูญเสียอวัยวะ / สายตา 2 ใน 6 ส่วน</td><td class="right">100%</td><td class="right amt">100,000</td></tr>
+          <tr><td>สูญเสียอวัยวะ / สายตา 1 ใน 6 ส่วน</td><td class="right">60%</td><td class="right amt">60,000</td></tr>
+          <tr><td>สูญเสียนิ้วหัวแม่มือ + นิ้วชี้ มือเดียวกัน</td><td class="right">25%</td><td class="right amt">25,000</td></tr>
+          <tr><td>สูญเสียนิ้วหัวแม่มือ (ตัดตั้งแต่ข้อแรก)</td><td class="right">10%</td><td class="right amt">10,000</td></tr>
+          <tr><td>สูญเสียนิ้วอื่นๆ นอกจากนิ้วหัวแม่มือ</td><td class="right">5%</td><td class="right amt">5,000</td></tr>
+        </tbody>
+      </table>
+      <div class="notice blue">
+        <span class="notice-icon">⚡</span>
+        <div><strong>อุบัติเหตุสาธารณะ:</strong> บริษัทฯ จ่าย <strong>2 เท่า</strong> ของค่าทดแทนทุกรายการ</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ SECTION 6 : OPD รายละเอียดแผน ก ════ -->
+
+  <section>
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <div class="section-title">แผน ก — OPD แยกค่าใช้จ่าย 2,000 บ./ครั้ง <span>ROR201</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header-band green-band">
+        <span class="title">การรักษาพยาบาลผู้ป่วยนอก · จ่ายตามจริง ไม่เกิน 2,000 บาท/ครั้ง</span>
+        <span class="badge-price">8,820 บาท / ปี</span>
+      </div>
+      <div class="cov-grid">
+        <div class="cov-item"><div><div class="cov-label">วงเงินต่อครั้ง (สูงสุด)</div><div class="cov-pct">ตามจ่ายจริง</div></div><div class="cov-val">2,000 บ.</div></div>
+        <div class="cov-item"><div><div class="cov-label">จำนวนครั้งสูงสุด/ปี</div></div><div class="cov-val">30 ครั้ง</div></div>
+        <div class="cov-item"><div><div class="cov-label">โรคเดิมต่อเนื่อง/โรค</div></div><div class="cov-val">7 ครั้ง</div></div>
+        <div class="cov-item"><div><div class="cov-label">สั่งจ่ายยา</div><div class="cov-pct">นับจากวันรับการรักษา</div></div><div class="cov-val">≤ 10 วัน</div></div>
+      </div>
+      <div style="padding:0 28px 10px"><strong style="font-size:16px">ระยะเวลาที่ไม่คุ้มครอง</strong></div>
+      <div class="waiting-grid">
+        <div class="wait-chip w30"><div class="days">30 วัน</div><div class="desc">โรคทั่วไปทุกชนิด</div></div>
+        <div class="wait-chip w120"><div class="days">120 วัน</div><div class="desc">8 โรคเฉพาะ: เนื้องอก ริดสีดวง ไส้เลื่อน ต้อเนื้อ/ต้อกระจก ทอนซิล นิ้วล็อค เส้นเลือดขอด เยื่อบุโพรงมดลูก</div></div>
+        <div class="wait-chip w180"><div class="days">180 วัน</div><div class="desc">7 โรค: ไทรอยด์ ลมบ้าหมู เบาหวาน ภูมิแพ้ ความดันสูง หัวใจ กระเพาะอาหาร</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ SECTION 7 : OPD แผน ข — เหมาจ่าย ════ -->
+
+  <section>
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <div class="section-title">แผน ข — OPD เหมาจ่าย 25,000 บ./ปี <span>ROL031</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header-band teal-band">
+        <span class="title">การรักษาพยาบาลผู้ป่วยนอก · เหมาจ่ายรวม 25,000 บาท/ปี (ไม่จำกัดครั้ง)</span>
+        <span class="badge-price">13,938 บาท / ปี</span>
+      </div>
+      <div class="cov-grid">
+        <div class="cov-item"><div><div class="cov-label">วงเงินเหมาจ่ายต่อปี</div><div class="cov-pct">รวมทุกครั้ง ทุกโรค</div></div><div class="cov-val">25,000 บ.</div></div>
+        <div class="cov-item"><div><div class="cov-label">จำนวนครั้ง/ปี</div><div class="cov-pct">ไม่จำกัดครั้ง</div></div><div class="cov-val">ไม่จำกัด</div></div>
+        <div class="cov-item"><div><div class="cov-label">Second Opinion</div><div class="cov-pct">แพทย์ท่านที่ 2 สำหรับอาการเดิม</div></div><div class="cov-val">✔</div></div>
+        <div class="cov-item"><div><div class="cov-label">สั่งจ่ายยา</div><div class="cov-pct">นับจากวันรับการรักษา</div></div><div class="cov-val">≤ 30 วัน</div></div>
+      </div>
+      <div class="notice teal" style="margin-top:0">
+        <span class="notice-icon">💡</span>
+        <div>ครอบคลุม: ค่าธรรมเนียมแพทย์ทั่วไปและเฉพาะทาง, กายภาพบำบัด, กิจกรรมบำบัด, ค่าวินิจฉัย, ตรวจทางห้องปฏิบัติการ, เอกซ์เรย์, อัลตราซาวด์ และค่ายา — ทั้งแบบ Walk-in และ Telemedicine</div>
+      </div>
+      <div style="padding:0 28px 10px"><strong style="font-size:16px">ระยะเวลาที่ไม่คุ้มครอง (เดียวกับแผน ก)</strong></div>
+      <div class="waiting-grid">
+        <div class="wait-chip w30"><div class="days">30 วัน</div><div class="desc">โรคทั่วไปทุกชนิด</div></div>
+        <div class="wait-chip w120"><div class="days">120 วัน</div><div class="desc">8 โรคเฉพาะ (เหมือนแผน ก)</div></div>
+        <div class="wait-chip w180"><div class="days">180 วัน</div><div class="desc">7 โรคเรื้อรัง (เหมือนแผน ก)</div></div>
+      </div>
+      <div style="padding:0 28px 10px"><strong style="font-size:16px;color:var(--ink)">ข้อยกเว้นสำคัญ (26 ข้อ — ตัวอย่างหลัก เดียวกับแผน ก)</strong></div>
+      <ul class="excl-list">
+        <li><span class="x">✗</span>โรคที่มีอยู่ก่อนวันทำสัญญา</li>
+        <li><span class="x">✗</span>เสริมสวย ปัญหาผิวพรรณ สิว ฝ้า ผมร่วง</li>
+        <li><span class="x">✗</span>การตั้งครรภ์ คลอดบุตร โรคแทรกซ้อนจากครรภ์</li>
+        <li><span class="x">✗</span>โรคเอดส์ กามโรค โรคติดต่อทางเพศสัมพันธ์</li>
+        <li><span class="x">✗</span>ปัญหาการมีบุตรยาก (ตรวจและรักษา)</li>
+        <li><span class="x">✗</span>การชะลอความเสื่อมของวัย / ฮอร์โมนทดแทน</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ════ SECTION 8 : FUTURE PREMIUM PROJECTION ════ -->
+
+  <section>
+    <div class="section-header">
+      <div class="section-num">8</div>
+      <div class="section-title">การปรับขึ้นเบี้ยประกันภัยตามช่วงอายุ <span>Future Premium Projection · เพศหญิง อายุ 39 ปี</span></div>
+    </div>
+
+```
+<div class="card" style="margin-bottom:20px">
+  <div class="card-header-band gold-band">
+    <span class="title">ตารางฉายเบี้ยประกันทั้งสองแผนตลอดอายุสัญญา</span>
+    <span class="badge-price" style="font-size:14px">เริ่มต้น อายุ 39 ปี</span>
+  </div>
+  <div class="notice yellow" style="margin:20px 24px 0">
+    <span class="notice-icon">📋</span>
+    <div><strong>หลักการอ่านตาราง:</strong> เบี้ยประกันชีวิตหลัก (4,896 บาท/ปี) ชำระ <strong>20 ปี</strong> หมดภาระเมื่ออายุ 58 ปี หลังจากนั้นคงความคุ้มครองชีวิตถึงอายุ 99 ปีโดยไม่มีค่าใช้จ่ายเพิ่ม &nbsp;·&nbsp; เบี้ย OPD ทั้งสองแผนปรับตามช่วงอายุทุกรอบ &nbsp;·&nbsp; เบี้ยอุบัติเหตุ RAAN2 แสดงเป็นค่าประมาณ (อ้างอิงอัตรา ณ อายุ 39 ปี)</div>
+  </div>
+
+  <div style="overflow-x:auto;padding:20px 24px 28px">
+    <table style="width:100%;border-collapse:collapse;font-size:15px;min-width:760px">
+      <thead>
+        <tr>
+          <th rowspan="2" style="background:var(--gold-pale);color:var(--gold);font-size:13px;letter-spacing:0.06em;text-transform:uppercase;padding:12px 14px;text-align:left;border-bottom:2px solid var(--gold-light);vertical-align:middle">ช่วงอายุ</th>
+          <th rowspan="2" style="background:var(--gold-pale);color:var(--gold);font-size:13px;letter-spacing:0.06em;text-transform:uppercase;padding:12px 14px;text-align:center;border-bottom:2px solid var(--gold-light);vertical-align:middle">ชีวิตหลัก<br><small style="font-weight:400;font-size:11px">(WON20I)</small></th>
+          <th rowspan="2" style="background:var(--gold-pale);color:var(--gold);font-size:13px;letter-spacing:0.06em;text-transform:uppercase;padding:12px 14px;text-align:center;border-bottom:2px solid var(--gold-light);vertical-align:middle">อุบัติเหตุ<br><small style="font-weight:400;font-size:11px">(RAAN2)</small></th>
+          <th colspan="2" style="background:#e8f5ee;color:var(--green);font-size:13px;letter-spacing:0.06em;text-transform:uppercase;padding:10px 14px;text-align:center;border-bottom:2px solid #b3dec5">แผน ก — OPD 2,000 บ./ครั้ง (ROR201)</th>
+          <th colspan="2" style="background:#e0f5fa;color:var(--teal);font-size:13px;letter-spacing:0.06em;text-transform:uppercase;padding:10px 14px;text-align:center;border-bottom:2px solid var(--teal-light)">แผน ข — OPD เหมาจ่าย 25,000 (ROL031)</th>
+        </tr>
+        <tr>
+          <th style="background:#edf8f2;color:var(--green);font-size:13px;padding:8px 14px;text-align:center;border-bottom:2px solid #b3dec5">เบี้ย OPD ก</th>
+          <th style="background:#edf8f2;color:var(--green);font-size:13px;padding:8px 14px;text-align:center;border-bottom:2px solid #b3dec5;font-weight:800">รวมเบี้ย แผน ก</th>
+          <th style="background:#e6f7fb;color:var(--teal);font-size:13px;padding:8px 14px;text-align:center;border-bottom:2px solid var(--teal-light)">เบี้ย OPD ข</th>
+          <th style="background:#e6f7fb;color:var(--teal);font-size:13px;padding:8px 14px;text-align:center;border-bottom:2px solid var(--teal-light);font-weight:800">รวมเบี้ย แผน ข</th>
+        </tr>
+      </thead>
+      <tbody id="projBody">
+
+        <!-- แถว helper macro: bg สลับ -->
+        <!-- อายุ 39-40 (ปัจจุบัน) -->
+        <tr style="background:var(--gold-pale)">
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);font-weight:700;color:var(--gold)">39 – 40 ปี <span style="font-size:12px;font-weight:400;background:var(--gold);color:#fff;border-radius:4px;padding:2px 7px;margin-left:4px">ปัจจุบัน</span></td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;font-family:'Playfair Display',serif;font-weight:700;color:var(--gold)">4,896</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--ink-mid)">250</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--green)">8,820</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;background:#d4ede0;font-weight:800;font-family:'Playfair Display',serif;font-size:17px;color:var(--green)">13,966</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--teal)">13,938</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;background:#c8eaf2;font-weight:800;font-family:'Playfair Display',serif;font-size:17px;color:var(--teal)">19,084</td>
+        </tr>
+
+        <!-- อายุ 41-45 -->
+        <tr>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule)">41 – 45 ปี</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;font-family:'Playfair Display',serif;color:var(--ink)">4,896</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--ink-mid)">250</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--green)">10,201</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;background:#edf8f2;font-weight:700;font-family:'Playfair Display',serif;color:var(--green)">15,347</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--teal)">16,763</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;background:#e6f7fb;font-weight:700;font-family:'Playfair Display',serif;color:var(--teal)">21,909</td>
+        </tr>
+
+        <!-- อายุ 46-50 -->
+        <tr style="background:#fdfaf7">
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule)">46 – 50 ปี</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;font-family:'Playfair Display',serif;color:var(--ink)">4,896</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--ink-mid)">250</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--green)">13,530</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;background:#edf8f2;font-weight:700;font-family:'Playfair Display',serif;color:var(--green)">18,676</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--teal)">16,763</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;background:#e6f7fb;font-weight:700;font-family:'Playfair Display',serif;color:var(--teal)">21,909</td>
+        </tr>
+
+        <!-- อายุ 51-55 -->
+        <tr>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule)">51 – 55 ปี</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;font-family:'Playfair Display',serif;color:var(--ink)">4,896</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--ink-mid)">250</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--green)">14,004</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;background:#edf8f2;font-weight:700;font-family:'Playfair Display',serif;color:var(--green)">19,150</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--teal)">18,635</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;background:#e6f7fb;font-weight:700;font-family:'Playfair Display',serif;color:var(--teal)">23,781</td>
+        </tr>
+
+        <!-- อายุ 56-58 (ปีสุดท้ายที่ยังชำระเบี้ยชีวิต) -->
+        <tr style="background:#fdfaf7">
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule)">56 – 58 ปี <span style="font-size:11px;color:var(--ink-soft)">(ปีสุดท้ายชำระเบี้ยชีวิต)</span></td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;font-family:'Playfair Display',serif;color:var(--gold);font-weight:700">4,896</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--ink-mid)">250</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--green)">17,508</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;background:#edf8f2;font-weight:700;font-family:'Playfair Display',serif;color:var(--green)">22,654</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--teal)">18,635</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;background:#e6f7fb;font-weight:700;font-family:'Playfair Display',serif;color:var(--teal)">23,781</td>
+        </tr>
+
+        <!-- แถว milestone: หมดเบี้ยชีวิต -->
+        <tr style="background:var(--gold-pale);border-top:3px solid var(--gold-light);border-bottom:3px solid var(--gold-light)">
+          <td colspan="7" style="padding:10px 14px;font-size:14px;color:var(--gold);font-weight:700;text-align:center">
+            ⭐ อายุ 59 ปี — หมดภาระชำระเบี้ยประกันชีวิตหลัก (ครบ 20 ปี) · คุ้มครองชีวิต 200,000 บาท ต่อเนื่องถึงอายุ 99 ปี โดยไม่มีค่าใช้จ่ายเพิ่ม
+          </td>
+        </tr>
+
+        <!-- อายุ 59-60 (ไม่มีเบี้ยชีวิตแล้ว) -->
+        <tr>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule)">59 – 60 ปี</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--ink-soft);font-style:italic">—</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--ink-mid)">250</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--green)">17,508</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;background:#edf8f2;font-weight:700;font-family:'Playfair Display',serif;color:var(--green)">17,758</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--teal)">18,635</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;background:#e6f7fb;font-weight:700;font-family:'Playfair Display',serif;color:var(--teal)">18,885</td>
+        </tr>
+
+        <!-- อายุ 61-65 ← crossover point! -->
+        <tr style="background:#fff8e8">
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);font-weight:700">61 – 65 ปี <span style="font-size:11px;background:#B8973A;color:#fff;border-radius:4px;padding:2px 7px;margin-left:4px">จุดเปลี่ยน</span></td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--ink-soft);font-style:italic">—</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--ink-mid)">250</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--green)">22,653</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;background:#faeaea;font-weight:700;font-family:'Playfair Display',serif;color:var(--red)">22,903</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--teal)">22,228</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;background:#c8eaf2;font-weight:800;font-family:'Playfair Display',serif;font-size:17px;color:var(--teal)">22,478</td>
+        </tr>
+
+        <!-- อายุ 66-70 -->
+        <tr style="background:#fdfaf7">
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule)">66 – 70 ปี</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--ink-soft);font-style:italic">—</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--ink-mid)">250</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--green)">27,095</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;background:#faeaea;font-weight:700;font-family:'Playfair Display',serif;color:var(--red)">27,345</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--teal)">22,228</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;background:#c8eaf2;font-weight:800;font-family:'Playfair Display',serif;color:var(--teal)">22,478</td>
+        </tr>
+
+        <!-- อายุ 71-75 -->
+        <tr>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule)">71 – 75 ปี</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--ink-soft);font-style:italic">—</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--ink-mid)">250</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--green)">32,513</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;background:#faeaea;font-weight:700;font-family:'Playfair Display',serif;color:var(--red)">32,763</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--teal)">22,500</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;background:#c8eaf2;font-weight:800;font-family:'Playfair Display',serif;color:var(--teal)">22,750</td>
+        </tr>
+
+        <!-- อายุ 76-80 -->
+        <tr style="background:#fdfaf7">
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule)">76 – 80 ปี</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--ink-soft);font-style:italic">—</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--ink-mid)">250</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--green)">38,040</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;background:#faeaea;font-weight:700;font-family:'Playfair Display',serif;color:var(--red)">38,290</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--teal)">22,500</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;background:#c8eaf2;font-weight:800;font-family:'Playfair Display',serif;color:var(--teal)">22,750</td>
+        </tr>
+
+        <!-- อายุ 81-85 -->
+        <tr>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule)">81 – 85 ปี *</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--ink-soft);font-style:italic">—</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--ink-mid)">250</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--green)">43,746</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;background:#faeaea;font-weight:700;font-family:'Playfair Display',serif;color:var(--red)">43,996</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--teal)">23,750</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;background:#c8eaf2;font-weight:800;font-family:'Playfair Display',serif;color:var(--teal)">24,000</td>
+        </tr>
+
+        <!-- อายุ 86-90 -->
+        <tr style="background:#fdfaf7">
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule)">86 – 90 ปี *</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--ink-soft);font-style:italic">—</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--ink-mid)">250</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--green)">48,000</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;background:#faeaea;font-weight:700;font-family:'Playfair Display',serif;color:var(--red)">48,250</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;color:var(--teal)">23,750</td>
+          <td style="padding:11px 14px;border-bottom:1px solid var(--rule);text-align:center;background:#c8eaf2;font-weight:800;font-family:'Playfair Display',serif;color:var(--teal)">24,000</td>
+        </tr>
+
+        <!-- อายุ 91-98 -->
+        <tr>
+          <td style="padding:11px 14px;font-weight:700;color:var(--ink-mid)">91 – 98 ปี *</td>
+          <td style="padding:11px 14px;text-align:center;color:var(--ink-soft);font-style:italic">—</td>
+          <td style="padding:11px 14px;text-align:center;color:var(--ink-mid)">250</td>
+          <td style="padding:11px 14px;text-align:center;color:var(--green)">48,000</td>
+          <td style="padding:11px 14px;text-align:center;background:#faeaea;font-weight:700;font-family:'Playfair Display',serif;color:var(--red)">48,250</td>
+          <td style="padding:11px 14px;text-align:center;color:var(--teal)">23,750</td>
+          <td style="padding:11px 14px;text-align:center;background:#c8eaf2;font-weight:800;font-family:'Playfair Display',serif;color:var(--teal)">24,000</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:14px;font-size:13px;color:var(--ink-soft);line-height:1.7">
+      * ช่วงอายุ 81–98 ปี เบี้ยเป็นค่าสำหรับการต่ออายุสัญญาเพิ่มเติมเท่านั้น &nbsp;·&nbsp; เบี้ยอุบัติเหตุ RAAN2 อาจมีการปรับตามช่วงอายุ (ไม่มีตารางแนบในเอกสารนี้) &nbsp;·&nbsp; ตัวเลขทั้งหมดคือเบี้ยรายปี หน่วย บาท
+    </div>
+  </div>
+</div>
+
+<!-- CROSSOVER INSIGHT -->
+<div class="card">
+  <div class="card-header-band gold-band">
+    <span class="title">⚡ จุดเปลี่ยนสำคัญ — เมื่อใดแผน ข ถูกกว่าแผน ก</span>
+  </div>
+  <div style="padding:24px 28px;display:grid;grid-template-columns:1fr 1fr;gap:20px">
+
+    <div style="background:var(--green-bg);border:2px solid #b3dec5;border-radius:12px;padding:20px">
+      <div style="font-weight:700;color:var(--green);font-size:16px;margin-bottom:8px">✅ อายุ 39 – 60 ปี → แผน ก ประหยัดกว่า</div>
+      <p style="font-size:15px;color:var(--ink-mid);line-height:1.6">ช่วงนี้แผน ก รวมเบี้ยถูกกว่าแผน ข โดยตลอด ต่างกันตั้งแต่ <strong>2,230 – 5,118 บาท/ปี</strong> ขึ้นอยู่กับช่วงอายุ หากค่ารักษาต่อครั้งไม่เกิน 2,000 บาท แผน ก คุ้มค่ามากกว่า</p>
+    </div>
+
+    <div style="background:var(--teal-bg);border:2px solid var(--teal-light);border-radius:12px;padding:20px">
+      <div style="font-weight:700;color:var(--teal);font-size:16px;margin-bottom:8px">✅ อายุ 61 ปีเป็นต้นไป → แผน ข ถูกกว่าแผน ก</div>
+      <p style="font-size:15px;color:var(--ink-mid);line-height:1.6">เมื่ออายุ 61 ปี เบี้ย OPD แยกค่าใช้จ่าย (แผน ก) พุ่งสูงเกินเบี้ยเหมาจ่าย (แผน ข) และห่างกันมากขึ้นเรื่อยๆ จนถึง <strong>24,250 บาท/ปี</strong> ที่อายุ 86–98 ปี</p>
+    </div>
+
+    <div style="background:var(--red-bg);border:2px solid #f5c0c0;border-radius:12px;padding:20px">
+      <div style="font-weight:700;color:var(--red);font-size:16px;margin-bottom:8px">⚠️ ความเสี่ยงแผน ก ในระยะยาว</div>
+      <p style="font-size:15px;color:var(--ink-mid);line-height:1.6">เบี้ย OPD แผน ก ที่อายุ 91–98 ปี สูงถึง <strong>48,000 บาท/ปี</strong> เทียบกับแผน ข ซึ่งคงที่ที่ <strong>23,750 บาท/ปี</strong> — ต่างกันถึง 2 เท่า</p>
+    </div>
+
+    <div style="background:var(--gold-pale);border:2px solid var(--gold-light);border-radius:12px;padding:20px">
+      <div style="font-weight:700;color:var(--gold);font-size:16px;margin-bottom:8px">📌 กลยุทธ์แนะนำ</div>
+      <p style="font-size:15px;color:var(--ink-mid);line-height:1.6">เริ่มต้นด้วยแผน ก หรือแผน ข ขึ้นกับงบปัจจุบัน และพิจารณาทบทวนเมื่อเข้าสู่อายุ <strong>55–60 ปี</strong> เนื่องจากแผน ข จะกลายเป็นตัวเลือกที่ประหยัดกว่าอย่างชัดเจนในระยะนั้น</p>
+    </div>
+
+  </div>
+</div>
+```
+
+  </section>
+
+  <!-- ════ FOOTER ════ -->
+
+  <div class="report-footer">
+    <div>
+      <div class="footer-brand">บมจ. เมืองไทยประกันชีวิต
+        <small>250 ถนนรัชดาภิเษก เขตห้วยขวาง กรุงเทพฯ 10310<br>โทร. +66 (0) 2274-9400 &nbsp;|&nbsp; สายด่วน 1766</small>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-disclaimer">
+      เอกสารนี้จัดทำขึ้นเพื่อประกอบการนำเสนอขายเท่านั้น ข้อกำหนดและเงื่อนไขความคุ้มครองที่สมบูรณ์จะระบุไว้ในกรมธรรม์ประกันภัยที่ออกให้ กรุณาศึกษาเงื่อนไขกรมธรรม์ก่อนตัดสินใจ เบี้ยประกันสัญญาเพิ่มเติม (*) อาจเปลี่ยนแปลงตามช่วงอายุที่เพิ่มขึ้น
+    </div>
+    <div style="font-size:13px;color:var(--ink-soft);text-align:right;min-width:120px">
+      V. 5.10.000<br>11/03/2026<br>WON20I
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

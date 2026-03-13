@@ -27,9 +27,185 @@ Confirmation: NEITHER Mermaid JS NOR SVG were used anywhere in the output.
         .chart-container { position: relative; width: 100%; max-width: 800px; margin-left: auto; margin-right: auto; height: 350px; max-height: 400px; }
         @media (min-width: 768px) { .chart-container { height: 400px; } }
         .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); }
+        
+        @media print {
+            /* ─── Page Setup ─────────────────────────────────────────────── */
+            @page {
+                size: A4 portrait;
+                margin: 10mm 12mm 10mm 12mm;
+            }
+
+            /* ─── Base Reset ─────────────────────────────────────────────── */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+                box-shadow: none !important;
+                text-shadow: none !important;
+                backdrop-filter: none !important;
+            }
+
+            html {
+                font-size: 11px !important;
+            }
+
+            body {
+                background-color: white !important;
+                padding-bottom: 0 !important;
+                margin: 0 !important;
+                width: 100% !important;
+            }
+
+            /* ─── Hide Non-Print Elements ────────────────────────────────── */
+            .no-print,
+            .fixed { display: none !important; }
+
+            /* ─── Header ─────────────────────────────────────────────────── */
+            header {
+                padding: 6mm 8mm 10mm 8mm !important;
+                margin-bottom: 0 !important;
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            header h1 {
+                font-size: 1.5rem !important;
+                margin-bottom: 2mm !important;
+                line-height: 1.3 !important;
+            }
+
+            header p {
+                font-size: 0.8rem !important;
+            }
+
+            /* ─── Main Container ─────────────────────────────────────────── */
+            main {
+                max-width: 100% !important;
+                width: 100% !important;
+                margin-top: 0 !important;
+                padding: 0 !important;
+                position: static !important;
+            }
+
+            /* ─── Cards / Sections ───────────────────────────────────────── */
+            .glass-card {
+                background: white !important;
+                border: 1px solid #cbd5e1 !important;
+                border-radius: 6px !important;
+                margin-bottom: 4mm !important;
+                padding: 4mm 5mm !important;
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            section {
+                break-inside: avoid;
+                page-break-inside: avoid;
+                margin-bottom: 4mm !important;
+            }
+
+            /* ─── Typography ─────────────────────────────────────────────── */
+            h2 {
+                font-size: 1.1rem !important;
+                margin-bottom: 2mm !important;
+            }
+
+            h3 {
+                font-size: 0.95rem !important;
+                margin-bottom: 1mm !important;
+            }
+
+            p, li, .text-sm, .text-xs {
+                font-size: 0.85rem !important;
+                line-height: 1.45 !important;
+            }
+
+            .text-lg { font-size: 0.95rem !important; }
+            .text-xl { font-size: 1.05rem !important; }
+            .text-2xl { font-size: 1.1rem !important; }
+            .text-3xl { font-size: 1.4rem !important; }
+            .text-4xl { font-size: 1.6rem !important; }
+
+            /* ─── Spacing Overrides ──────────────────────────────────────── */
+            .mb-6, .mb-8 { margin-bottom: 2mm !important; }
+            .mb-4, .mb-3 { margin-bottom: 1.5mm !important; }
+            .mb-2        { margin-bottom: 1mm !important; }
+            .p-8, .p-6   { padding: 3mm !important; }
+            .p-5, .p-4   { padding: 2.5mm !important; }
+            .p-3, .p-2   { padding: 2mm !important; }
+            .gap-8       { gap: 3mm !important; }
+            .gap-6       { gap: 2.5mm !important; }
+            .gap-4, .gap-3 { gap: 2mm !important; }
+            .space-y-4 > * + * { margin-top: 1.5mm !important; }
+            .space-y-3 > * + * { margin-top: 1mm !important; }
+            .mt-6, .mt-12 { margin-top: 3mm !important; }
+
+            /* ─── Grid Layouts ───────────────────────────────────────────── */
+            /* 2-col grid: keep as-is to save vertical space */
+            .grid.grid-cols-1.lg\\:grid-cols-2 {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 3mm !important;
+            }
+
+            /* 3-col critical illness grid → keep 3-col */
+            .grid.grid-cols-1.md\\:grid-cols-3 {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 2mm !important;
+            }
+
+            /* 4-col exclusions grid → 2-col for print */
+            .grid.grid-cols-2.md\\:grid-cols-4 {
+                grid-template-columns: repeat(4, 1fr) !important;
+                gap: 2mm !important;
+            }
+
+            /* ─── Chart ──────────────────────────────────────────────────── */
+            .chart-container {
+                height: 160px !important;
+                max-height: 160px !important;
+                margin-bottom: 2mm !important;
+            }
+
+            /* ─── Insight Boxes ──────────────────────────────────────────── */
+            .bg-blue-50 {
+                padding: 2mm 3mm !important;
+                margin-top: 2mm !important;
+            }
+
+            /* ─── Emoji Size ─────────────────────────────────────────────── */
+            .text-3xl.mb-2 { font-size: 1.1rem !important; }
+
+            /* ─── Footer ─────────────────────────────────────────────────── */
+            footer {
+                margin-top: 4mm !important;
+                padding-top: 3mm !important;
+                break-inside: avoid;
+            }
+
+            footer h3 { font-size: 1rem !important; }
+            footer p  { font-size: 0.85rem !important; }
+
+            /* ─── Page Breaks ────────────────────────────────────────────── */
+            /* Allow page break between major sections if needed */
+            main > section:nth-child(3),
+            main > .grid.grid-cols-1 + section {
+                break-before: auto;
+            }
+        }
     </style>
 </head>
-<body class="antialiased pb-20">
+<body class="antialiased pb-20 transition-all duration-300">
+
+    <!-- Control Panel -->
+    <div class="fixed top-4 right-4 z-50 no-print flex gap-2 bg-white/90 backdrop-blur-sm p-2 rounded-lg shadow-lg border border-gray-200">
+        <button onclick="adjustTextSize(-0.1)" class="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-[#1E3A8A] rounded font-medium text-sm transition-colors" title="ลดขนาดตัวอักษร">A-</button>
+        <button onclick="resetTextSize()" class="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-[#1E3A8A] rounded font-medium text-sm transition-colors" title="ขนาดตัวอักษรปกติ">A</button>
+        <button onclick="adjustTextSize(0.1)" class="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-[#1E3A8A] rounded font-medium text-sm transition-colors" title="เพิ่มขนาดตัวอักษร">A+</button>
+        <div class="w-px bg-gray-300 mx-1"></div>
+        <button onclick="window.print()" class="px-4 py-1 bg-[#06B6D4] hover:bg-[#0891b2] text-white rounded font-medium text-sm flex items-center gap-2 transition-colors">
+            <span>🖨️</span> พิมพ์เอกสาร (A4)
+        </button>
+    </div>
 
     <header class="bg-[#1E3A8A] text-white pt-16 pb-24 px-6 relative overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-[#06B6D4] via-[#1E3A8A] to-[#1E3A8A]"></div>
@@ -227,6 +403,45 @@ Confirmation: NEITHER Mermaid JS NOR SVG were used anywhere in the output.
     </main>
 
     <script>
+        let currentScale = 1;
+        
+        function adjustTextSize(delta) {
+            currentScale += delta;
+            if (currentScale < 0.8) currentScale = 0.8;
+            if (currentScale > 1.4) currentScale = 1.4;
+            document.documentElement.style.fontSize = `${16 * currentScale}px`;
+        }
+        
+        function resetTextSize() {
+            currentScale = 1;
+            document.documentElement.style.fontSize = '16px';
+        }
+
+        // ── Print: Resize Chart for A4 ────────────────────────────────────
+        let chartInstance = null;
+
+        window.addEventListener('beforeprint', function () {
+            if (chartInstance) {
+                const container = document.querySelector('.chart-container');
+                if (container) {
+                    container.style.height = '160px';
+                    container.style.maxHeight = '160px';
+                }
+                chartInstance.resize();
+            }
+        });
+
+        window.addEventListener('afterprint', function () {
+            if (chartInstance) {
+                const container = document.querySelector('.chart-container');
+                if (container) {
+                    container.style.height = '';
+                    container.style.maxHeight = '';
+                }
+                chartInstance.resize();
+            }
+        });
+
         document.addEventListener('DOMContentLoaded', function() {
             function wrapLabel(label, maxChars) {
                 const words = label.split(' ');
@@ -266,7 +481,7 @@ Confirmation: NEITHER Mermaid JS NOR SVG were used anywhere in the output.
             const formattedLabels = rawLabels.map(label => wrapLabel(label, 16));
 
             const ctx = document.getElementById('waitingPeriodChart').getContext('2d');
-            new Chart(ctx, {
+            chartInstance = new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: formattedLabels,

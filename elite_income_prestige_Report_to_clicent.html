@@ -52,13 +52,307 @@ body{
 .section + .section{border-top:1px solid var(--cream-dark)}
 .page-break { page-break-before: always; break-before: page; }
 .print-hidden { display: block; }
+
+/* ═══════════════════════════════════════════
+   PRINT — A4 OPTIMIZED
+   @page: 10mm×14mm → usable 182mm×257mm
+   base: 12pt body, 11pt table, 14–16pt heading
+   ทุก element ครอบคลุมรวมถึง section ใหม่
+═══════════════════════════════════════════ */
 @media print {
-  @page { size: A4; margin: 1.2cm; }
-  body { background: #fff; font-size: 11pt; }
-  .hero { padding: 40px 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .section { padding: 24px 0; page-break-inside: avoid; border-top: none; }
-  .insight-box, .kpi-card, .sleeve-card, .highlight-banner { box-shadow: none !important; border: 1px solid var(--cream-dark); -webkit-print-color-adjust: exact; print-color-adjust: exact; page-break-inside: avoid; }
-  .print-hidden { display: none !important; }
+
+  /* ── PAGE SETUP ──────────────────────── */
+  @page {
+    size: A4 portrait;
+    margin: 10mm 14mm 12mm 14mm;
+  }
+  @page :first { margin-top: 8mm; }
+
+  /* ── FORCE COLOUR ────────────────────── */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-scheme: light !important;
+  }
+
+  /* ── BASE ────────────────────────────── */
+  html { font-size: 12pt !important; }
+  body {
+    background: #fff !important;
+    font-size: 12pt !important;
+    line-height: 1.65 !important;
+    color: var(--text-primary) !important;
+  }
+  p { font-size: 11.5pt !important; line-height: 1.65 !important; margin-bottom: 8pt !important; }
+  b, strong { color: var(--navy) !important; }
+
+  /* ── HIDE SCREEN-ONLY ────────────────── */
+  .print-hidden,
+  .calc-panel,
+  .advisor-card,
+  .wt-link-btn,        /* ปุ่มลิงก์ไม่มีประโยชน์บนกระดาษ */
+  .gold-line           { display: none !important; }
+
+  /* ── CONTAINER & LAYOUT ──────────────── */
+  .container { max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
+  .section {
+    padding: 14pt 0 !important;
+    border-top: none !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .section + .section { border-top: 1pt solid #e2e8f0 !important; }
+
+  /* ── HERO ────────────────────────────── */
+  .hero {
+    background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 40%, var(--navy-light) 100%) !important;
+    padding: 22pt 20pt 18pt !important;
+    text-align: center !important;
+    page-break-after: avoid;
+  }
+  .hero-brand { font-size: 9pt !important; letter-spacing: 4px !important; margin-bottom: 8pt !important; }
+  .hero h1    { font-size: 22pt !important; margin-bottom: 8pt !important; line-height: 1.25 !important; }
+  .hero-sub   { font-size: 11pt !important; margin-bottom: 10pt !important; }
+  .hero-badge { font-size: 10pt !important; padding: 8pt 20pt !important; }
+
+  /* ── SECTION TITLE ───────────────────── */
+  .section-title {
+    font-size: 15pt !important;
+    font-weight: 800 !important;
+    margin-bottom: 12pt !important;
+    padding-left: 16pt !important;
+    line-height: 1.3 !important;
+    page-break-after: avoid;
+  }
+  .section-title::before { width: 4pt !important; top: 4pt !important; }
+
+  /* ── GRIDS ───────────────────────────── */
+  .two-col   { grid-template-columns: 1fr 1fr !important; gap: 10pt !important; margin-bottom: 12pt !important; }
+  .three-col { grid-template-columns: 1fr 1fr 1fr !important; gap: 9pt !important; margin-bottom: 12pt !important; }
+
+  /* ── INSIGHT BOXES ───────────────────── */
+  .insight-box {
+    padding: 14pt 16pt !important;
+    box-shadow: none !important;
+    border-radius: 6pt !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .box-title { font-size: 12.5pt !important; margin-bottom: 8pt !important; line-height: 1.35 !important; }
+  .point      { margin-bottom: 5pt !important; font-size: 11pt !important; line-height: 1.55 !important; }
+  .point::before { margin-top: 7pt !important; }
+
+  /* ── KPI GRID (5 cols) ───────────────── */
+  .kpi-grid {
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 8pt !important;
+    margin-bottom: 14pt !important;
+  }
+  .kpi-card  { padding: 12pt 8pt !important; box-shadow: none !important; border-radius: 6pt !important; border-bottom-width: 3pt !important; }
+  .kpi-num   { font-size: 18pt !important; margin-bottom: 3pt !important; }
+  .kpi-label { font-size: 8.5pt !important; }
+
+  /* ── FLOW DIAGRAM ────────────────────── */
+  .flow-visual {
+    gap: 6pt !important;
+    margin: 12pt 0 !important;
+    align-items: stretch !important;
+  }
+  .flow-step {
+    padding: 10pt 8pt !important;
+    font-size: 10pt !important;
+    border-radius: 6pt !important;
+    box-shadow: none !important;
+  }
+  .flow-step span { font-size: 8.5pt !important; margin-top: 3pt !important; }
+  .flow-arrow     { font-size: 14pt !important; line-height: 1 !important; }
+
+  /* ── SLEEVE CARDS ────────────────────── */
+  .sleeve-card {
+    padding: 12pt 12pt !important;
+    box-shadow: none !important;
+    border-radius: 6pt !important;
+    border-top-width: 3pt !important;
+    page-break-inside: avoid;
+  }
+  .sleeve-card .box-title { font-size: 11pt !important; margin-bottom: 6pt !important; }
+  .sleeve-card p          { font-size: 10pt !important; line-height: 1.55 !important; }
+
+  /* ── CASHFLOW TABLE ──────────────────── */
+  #resTable { display: table !important; }  /* แสดงตารางในการพิมพ์เสมอ */
+  #resNote  { display: block !important; font-size: 8.5pt !important; }
+  .premium-table { font-size: 10.5pt !important; box-shadow: none !important; margin-bottom: 12pt !important; }
+  .premium-table th { padding: 10pt 10pt !important; font-size: 10pt !important; }
+  .premium-table td { padding: 9pt 10pt !important; font-size: 10.5pt !important; line-height: 1.4 !important; }
+
+  /* ── HIGHLIGHT / EXEC SUMMARY ────────── */
+  .highlight-banner {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%) !important;
+    padding: 22pt 20pt !important;
+    border-radius: 8pt !important;
+    margin: 14pt 0 !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .highlight-banner h3 { font-size: 16pt !important; margin-bottom: 12pt !important; }
+  .highlight-kpi-row {
+    grid-template-columns: repeat(4,1fr) !important;
+    gap: 8pt !important;
+    margin-bottom: 12pt !important;
+  }
+  .hk-box  { padding: 12pt 8pt !important; border-radius: 6pt !important; }
+  .hk-num  { font-size: 18pt !important; }
+  .highlight-banner p { font-size: 11pt !important; line-height: 1.6 !important; }
+
+  /* ── FOOTER ──────────────────────────── */
+  .footer-gold { height: 2pt !important; margin-top: 20pt !important; }
+  .footer      { padding: 10pt 0 !important; font-size: 8.5pt !important; line-height: 1.6 !important; }
+
+  /* ──────────────────────────────────────
+     NEW SECTIONS (Wealth Transfer)
+  ────────────────────────────────────── */
+
+  /* wt-hero dark banner */
+  .wt-hero {
+    background: linear-gradient(135deg, #1a0a30 0%, var(--navy-mid) 60%, #0a2240 100%) !important;
+    border-radius: 8pt !important;
+    padding: 18pt 20pt !important;
+    margin-bottom: 12pt !important;
+    overflow: visible !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .wt-hero::before { display: none !important; }
+  .wt-hero-label { font-size: 8pt !important; margin-bottom: 7pt !important; letter-spacing: 1.5pt !important; }
+  .wt-hero-title { font-size: 17pt !important; margin-bottom: 9pt !important; line-height: 1.3 !important; }
+  .wt-hero-body  { font-size: 11pt !important; line-height: 1.65 !important; max-width: 100% !important; }
+
+  /* 3-pillar cards */
+  .wt-pillars {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 9pt !important;
+    margin: 12pt 0 !important;
+  }
+  .wt-pillar {
+    padding: 14pt 12pt !important;
+    box-shadow: none !important;
+    border-radius: 6pt !important;
+    border-top-width: 3pt !important;
+    page-break-inside: avoid;
+  }
+  .wt-pillar-icon  { font-size: 18pt !important; margin-bottom: 6pt !important; }
+  .wt-pillar-title { font-size: 11pt !important; margin-bottom: 5pt !important; }
+  .wt-pillar-text  { font-size: 10pt !important; line-height: 1.55 !important; }
+
+  /* comparison table */
+  .wt-compare {
+    margin: 12pt 0 !important;
+    font-size: 10.5pt !important;
+    box-shadow: none !important;
+    border-radius: 6pt !important;
+    overflow: visible !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .wt-compare thead th {
+    padding: 9pt 10pt !important;
+    font-size: 9.5pt !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+  }
+  .wt-compare tbody td {
+    padding: 8pt 10pt !important;
+    font-size: 10.5pt !important;
+    line-height: 1.5 !important;
+  }
+  .wt-tag-bad, .wt-tag-good { font-size: 8pt !important; padding: 1pt 6pt !important; margin-bottom: 3pt !important; }
+
+  /* legal reference */
+  .wt-legal {
+    padding: 10pt 14pt !important;
+    font-size: 10pt !important;
+    margin: 9pt 0 !important;
+    line-height: 1.65 !important;
+    border-radius: 0 6pt 6pt 0 !important;
+  }
+  .wt-legal strong { font-size: 7.5pt !important; margin-bottom: 4pt !important; }
+
+  /* link box — hide button, keep text */
+  .wt-link-box {
+    padding: 12pt 16pt !important;
+    border-radius: 6pt !important;
+    margin-top: 12pt !important;
+    gap: 12pt !important;
+    page-break-inside: avoid;
+  }
+  .wt-link-icon         { font-size: 18pt !important; }
+  .wt-link-text strong  { font-size: 11pt !important; margin-bottom: 3pt !important; }
+  .wt-link-text p       { font-size: 10pt !important; line-height: 1.55 !important; }
+
+  /* teaser bridge */
+  .teaser-bridge {
+    padding: 16pt 20pt !important;
+    gap: 16pt !important;
+    border-radius: 8pt !important;
+    background: linear-gradient(135deg, var(--navy-light) 0%, #0d2035 100%) !important;
+    margin-bottom: 4pt !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    border-left-width: 5pt !important;
+  }
+  .teaser-bridge-icon  { font-size: 22pt !important; }
+  .teaser-bridge-tag   { font-size: 7.5pt !important; margin-bottom: 5pt !important; letter-spacing: 1.5pt !important; }
+  .teaser-bridge-text  { font-size: 14pt !important; line-height: 1.4 !important; }
+
+  /* ── PAGE BREAK STRATEGY ─────────────── */
+  /*  หน้า 1: Hero + Section 0 (wealth transfer)  */
+  /*  หน้า 2: Teaser + Section 1 (macro)           */
+  /*  หน้า 3: Section 2 + 3 (product + fund)       */
+  /*  หน้า 4: Section 4 (cashflow) + Exec Summary  */
+  .teaser-bridge + .page-break + .section { page-break-before: always !important; }
+  #resTable    { page-break-before: auto; }
+
+  /* proposal banner */
+  .proposal-banner {
+    background: #fff5f5 !important;
+    border: 1pt solid #fca5a5 !important;
+    border-left: 5pt solid #c0152a !important;
+    border-radius: 0 6pt 6pt 0 !important;
+    padding: 16pt 18pt !important;
+    margin: 10pt 0 !important;
+    overflow: visible !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    box-shadow: none !important;
+  }
+  .proposal-banner::before { display: none !important; }
+  .proposal-tag      { font-size: 7.5pt !important; margin-bottom: 7pt !important; }
+  .proposal-tag::before { width: 20pt !important; }
+  .proposal-headline { font-size: 16pt !important; margin-bottom: 10pt !important; line-height: 1.3 !important; }
+  .proposal-divider  { margin: 9pt 0 !important; }
+  .proposal-points   { gap: 8pt !important; }
+  .proposal-point    { font-size: 11pt !important; gap: 10pt !important; line-height: 1.6 !important; }
+  .proposal-point-dot{ width: 22pt !important; height: 22pt !important; font-size: 10pt !important; flex-shrink: 0 !important; }
+  .proposal-banner > p { font-size: 10pt !important; line-height: 1.6 !important; }
+
+  /* ── KILL ANIMATIONS / TRANSFORMS ───── */
+  * {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  /* restore necessary borders after shadow kill */
+  .insight-box.danger { border-left: 4pt solid var(--ruby) !important; box-shadow: none !important; }
+  .insight-box.success{ border-left: 4pt solid var(--emerald) !important; }
+  .insight-box.royal  { border-left: 4pt solid var(--purple) !important; }
+  .insight-box.warm   { border-left: 4pt solid var(--gold) !important; }
+  .kpi-card           { border-bottom: 3pt solid var(--gold) !important; }
+  .wt-hero            { box-shadow: none !important; }
+  .wt-pillar          { border-top: 3pt solid var(--gold) !important; }
+  .teaser-bridge      { box-shadow: none !important; }
+
 }
 
 /* === HERO HEADER === */
@@ -227,20 +521,264 @@ body{
 .footer{text-align:center;padding:36px 28px;font-size:.88rem;color:var(--text-muted);background:var(--white);}
 .footer-gold{height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
 
+/* === WEALTH TRANSFER SECTION === */
+.wt-hero {
+  background: linear-gradient(135deg, #1a0a30 0%, var(--navy-mid) 60%, #0a2240 100%);
+  border-radius: var(--radius);
+  padding: 40px;
+  margin-bottom: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.wt-hero::before {
+  content: '⚖';
+  position: absolute; right: 32px; bottom: -16px;
+  font-size: 120px; opacity: .04; line-height: 1;
+}
+.wt-hero-label {
+  font-size: .78rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 12px;
+  display: flex; align-items: center; gap: 10px;
+}
+.wt-hero-label::before { content: ''; width: 28px; height: 2px; background: var(--gold); border-radius: 2px; }
+.wt-hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.9rem; font-weight: 700; line-height: 1.35;
+  color: var(--white); margin-bottom: 16px;
+}
+.wt-hero-title em { font-style: italic; color: var(--gold-light); }
+.wt-hero-body { font-size: 1.05rem; color: rgba(255,255,255,.75); line-height: 1.85; max-width: 680px; }
+
+.wt-pillars {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 18px;
+  margin: 28px 0;
+}
+.wt-pillar {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 24px 20px;
+  border-top: 4px solid var(--gold);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+.wt-pillar-icon { font-size: 2rem; margin-bottom: 10px; }
+.wt-pillar-title { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.wt-pillar-text  { font-size: .92rem; color: var(--text-secondary); line-height: 1.7; }
+
+.wt-compare {
+  width: 100%; border-collapse: collapse;
+  background: var(--white); border-radius: var(--radius);
+  overflow: hidden; box-shadow: var(--shadow);
+  margin: 28px 0; font-size: 1rem;
+}
+.wt-compare thead th {
+  padding: 14px 18px; font-weight: 700; font-size: .9rem;
+  letter-spacing: .4px; text-align: left; text-transform: uppercase;
+}
+.wt-compare thead th:first-child { background: #f1f5f9; color: var(--navy); width: 26%; }
+.wt-compare thead th:nth-child(2){ background: var(--navy); color: #93c5fd; width: 37%; }
+.wt-compare thead th:nth-child(3){ background: var(--gold-dark); color: #fff; width: 37%; }
+.wt-compare tbody td {
+  padding: 13px 18px; border-bottom: 1px solid var(--cream-dark);
+  vertical-align: top; line-height: 1.65; font-size: .97rem;
+}
+.wt-compare tbody tr:last-child td { border-bottom: none; }
+.wt-compare tbody td:first-child { background: #f8fafc; font-weight: 600; color: var(--navy); border-right: 1px solid var(--cream-dark); }
+.wt-compare tbody td:nth-child(2){ background: #fff; color: var(--text-secondary); }
+.wt-compare tbody td:nth-child(3){ background: #fffdf5; color: var(--text-secondary); }
+.wt-tag-bad  { display:inline-block; background:#fff1f2; color:#be123c; font-size:.8rem; font-weight:700; padding:2px 8px; border-radius:5px; margin-bottom:4px; }
+.wt-tag-good { display:inline-block; background:#ecfdf5; color:#059669; font-size:.8rem; font-weight:700; padding:2px 8px; border-radius:5px; margin-bottom:4px; }
+
+.wt-legal {
+  background: #f0f6ff;
+  border: 1px solid #bfdbfe;
+  border-left: 4px solid #2563eb;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 18px 22px; margin: 20px 0;
+  font-size: .92rem; color: #1e3a6e; line-height: 1.8; font-style: italic;
+}
+.wt-legal strong { font-style: normal; font-size: .78rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #1d4ed8; display: block; margin-bottom: 6px; }
+
+.wt-link-box {
+  background: var(--cream);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 22px 28px;
+  display: flex; align-items: center; gap: 20px;
+  margin-top: 28px;
+}
+.wt-link-icon { font-size: 2.2rem; flex-shrink: 0; }
+.wt-link-text { flex: 1; }
+.wt-link-text p { margin: 0; font-size: .97rem; color: var(--text-secondary); line-height: 1.65; }
+.wt-link-text strong { color: var(--navy); font-size: 1.05rem; display: block; margin-bottom: 4px; }
+.wt-link-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--navy); color: var(--gold-light);
+  padding: 11px 22px; border-radius: 8px;
+  font-weight: 700; font-size: .95rem; text-decoration: none;
+  flex-shrink: 0; transition: all .25s;
+  border: 1px solid rgba(201,168,76,.3);
+}
+.wt-link-btn:hover { background: var(--navy-mid); transform: translateY(-2px); box-shadow: 0 4px 14px rgba(13,27,42,.25); }
+.wt-link-btn svg { flex-shrink: 0; }
+
+/* === TEASER BRIDGE === */
+.teaser-bridge {
+  background: linear-gradient(135deg, var(--navy-light) 0%, #0d2035 100%);
+  border-radius: var(--radius);
+  padding: 32px 40px;
+  margin: 0 0 0 0;
+  display: flex; align-items: center; gap: 24px;
+  border-left: 6px solid var(--gold);
+  box-shadow: var(--shadow);
+}
+.teaser-bridge-icon { font-size: 2.8rem; flex-shrink: 0; opacity: .9; }
+.teaser-bridge-body {}
+.teaser-bridge-tag {
+  font-size: .75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 8px;
+}
+.teaser-bridge-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.55rem; font-weight: 600; line-height: 1.4;
+  color: var(--white);
+}
+.teaser-bridge-text em { font-style: italic; color: var(--gold-light); }
+
+/* === FLOATING TOOLBAR (font-size + print) === */
+.float-toolbar {
+  position: fixed;
+  bottom: 28px; right: 28px;
+  z-index: 9999;
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(13,27,42,.96);
+  border: 1px solid rgba(201,168,76,.35);
+  border-radius: 100px;
+  padding: 8px 14px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.35);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  font-family: 'Noto Sans Thai', sans-serif;
+}
+.ftb-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+  color: rgba(255,255,255,.4); padding: 0 6px; white-space: nowrap;
+}
+.ftb-btn {
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid rgba(201,168,76,.25);
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.9);
+  font-size: 15px; font-weight: 700;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all .2s; font-family: 'Noto Sans Thai', sans-serif; line-height: 1;
+  flex-shrink: 0;
+}
+.ftb-btn:hover { background: rgba(201,168,76,.2); border-color: var(--gold); transform: scale(1.08); }
+.ftb-btn:active { transform: scale(.93); }
+.ftb-size {
+  min-width: 30px; text-align: center;
+  font-size: 13px; font-weight: 700;
+  color: var(--gold); user-select: none; font-family: 'Noto Sans Thai', sans-serif;
+}
+.ftb-sep { width: 1px; height: 22px; background: rgba(201,168,76,.2); margin: 0 2px; flex-shrink: 0; }
+.ftb-print {
+  display: flex; align-items: center; gap: 7px;
+  padding: 0 18px; height: 34px; border-radius: 100px;
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+  color: var(--navy);
+  font-size: 12px; font-weight: 700;
+  border: none; cursor: pointer;
+  font-family: 'Noto Sans Thai', sans-serif;
+  transition: all .2s; white-space: nowrap; flex-shrink: 0;
+}
+.ftb-print:hover { filter: brightness(1.08); box-shadow: 0 4px 14px rgba(201,168,76,.4); }
+.ftb-print:active { transform: scale(.97); }
+
+/* === RED PROPOSAL BANNER (Light Premium) === */
+.proposal-banner {
+  position: relative;
+  background: linear-gradient(135deg, #fff5f5 0%, #fff0ee 60%, #fef2f2 100%);
+  border: 1px solid #fecaca;
+  border-left: 6px solid #c0152a;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 40px 48px;
+  margin: 20px 0;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(176,14,40,.08), inset 0 1px 0 rgba(255,255,255,.8);
+}
+.proposal-banner::before {
+  content: '✦';
+  position: absolute; right: 36px; top: 50%; transform: translateY(-50%);
+  font-size: 96px; color: rgba(192,21,42,.06); line-height: 1; pointer-events: none;
+}
+.proposal-tag {
+  font-size: .78rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+  color: #c0152a; margin-bottom: 14px;
+  display: flex; align-items: center; gap: 10px;
+}
+.proposal-tag::before {
+  content: ''; width: 28px; height: 2px;
+  background: linear-gradient(90deg, #c0152a, #e53e3e);
+  border-radius: 2px; flex-shrink: 0;
+}
+.proposal-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem; font-weight: 700; line-height: 1.3;
+  color: #7f1d1d;
+  margin-bottom: 20px;
+}
+.proposal-headline em { font-style: italic; color: #c0152a; }
+.proposal-points {
+  display: flex; flex-direction: column; gap: 10px;
+  margin-top: 4px;
+}
+.proposal-point {
+  display: flex; align-items: flex-start; gap: 14px;
+  font-size: 1.1rem; color: #450a0a; line-height: 1.7; font-weight: 500;
+}
+.proposal-point-dot {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; margin-top: 2px;
+  background: linear-gradient(135deg, #c0152a, #e53e3e);
+  color: white; font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.proposal-point b { color: #9b1c1c; }
+.proposal-divider {
+  height: 1px; background: linear-gradient(90deg, #fca5a5, transparent);
+  margin: 16px 0;
+}
+
 @media(max-width:768px){
-  .two-col,.three-col,.kpi-grid,.calc-grid,.highlight-kpi-row{grid-template-columns:1fr}
+  .two-col,.three-col,.kpi-grid,.calc-grid,.highlight-kpi-row,.wt-pillars{grid-template-columns:1fr}
   .flow-visual{flex-direction:column}
   .advisor-card{flex-direction:column;text-align:center}
+  .wt-link-box{flex-direction:column;text-align:center}
+  .wt-link-btn{width:100%;justify-content:center}
+  .teaser-bridge{flex-direction:column;text-align:center;padding:28px 24px}
+  .proposal-banner{padding:28px 24px}
+  .proposal-headline{font-size:1.65rem}
+  .float-toolbar{bottom:16px;right:16px;padding:7px 10px;gap:4px}
+  .ftb-label{display:none}
 }
 </style>
 </head>
 <body>
 
-<!-- Floating Print Button (Hidden on Print) -->
-<div class="print-hidden" style="position: fixed; bottom: 30px; right: 30px; z-index: 9999;">
-  <button onclick="window.print()" style="background: var(--navy); color: var(--gold-light); border: 1px solid var(--gold); padding: 14px 24px; border-radius: 50px; font-weight: 700; font-size: 1.05rem; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 8px 24px rgba(13,27,42,.25); font-family: 'Noto Sans Thai', sans-serif; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">
-    <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
-    พิมพ์รายงาน (A4)
+<!-- Floating Toolbar: font-size + print (hidden on print) -->
+<div class="float-toolbar print-hidden" id="floatToolbar">
+  <span class="ftb-label">อักษร</span>
+  <button class="ftb-btn" id="fzDown" title="ลดขนาดอักษร">A−</button>
+  <span class="ftb-size" id="fzDisplay">16</span>
+  <button class="ftb-btn" id="fzUp" title="เพิ่มขนาดอักษร">A+</button>
+  <div class="ftb-sep"></div>
+  <button class="ftb-print" id="btnPrint">
+    <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="6 9 6 2 18 2 18 9"/>
+      <path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/>
+      <rect x="6" y="14" width="12" height="8"/>
+    </svg>
+    พิมพ์ A4
   </button>
 </div>
 
@@ -255,6 +793,165 @@ body{
 </div>
 
 <div class="container">
+
+  <!-- ============================================ -->
+  <!-- SECTION 0 : WEALTH TRANSFER FOUNDATION (NEW) -->
+  <!-- ============================================ -->
+  <div class="section">
+    <div class="wt-hero">
+      <div class="wt-hero-label">หลักการสำคัญ — ก่อนตัดสินใจ</div>
+      <div class="wt-hero-title">
+        การซื้อประกันชีวิต คือ<br>
+        <em>การวางแผนส่งต่อความมั่งคั่งอย่างเป็นระบบ</em><br>
+        ที่ระบุผู้รับได้อย่างแน่นอน
+      </div>
+      <p class="wt-hero-body">
+        ข้อผิดพลาดที่พบบ่อยในการวางแผนมรดกคือ การสับสนระหว่าง "ทรัพย์สินที่มีอยู่เดิม" กับ "เงินที่เกิดขึ้นหลังเสียชีวิตตามสัญญา" — ประกันชีวิตอยู่ในหมวดหลัง ซึ่งหมายความว่ามันทำงานนอกระบบมรดกทั้งหมด ส่งตรงถึงมือผู้รับประโยชน์โดยไม่ผ่านศาล ไม่ผ่านเจ้าหนี้ และไม่เสียภาษีมรดก
+      </p>
+    </div>
+
+    <!-- 3 ข้อได้เปรียบเชิงโครงสร้าง -->
+    <div class="wt-pillars">
+      <div class="wt-pillar">
+        <div class="wt-pillar-icon">🎯</div>
+        <div class="wt-pillar-title">ระบุผู้รับได้อย่างแม่นยำ</div>
+        <div class="wt-pillar-text">ระบุชื่อ-นามสกุล และสัดส่วนการรับได้โดยตรงในกรมธรรม์ ผู้รับได้รับเงินตามสิทธิสัญญา ไม่ขึ้นกับการตีความของทายาทคนอื่น หรือข้อพิพาทในครอบครัว</div>
+      </div>
+      <div class="wt-pillar">
+        <div class="wt-pillar-icon">⚡</div>
+        <div class="wt-pillar-title">ส่งมอบทันที — ไม่รอศาล</div>
+        <div class="wt-pillar-text">กระบวนการจัดการมรดกทั่วไปใช้เวลา 6–18 เดือนขึ้นไป เงินประกันชีวิตส่งตรงถึงผู้รับประโยชน์เป็นเงินสดสภาพคล่อง โดยไม่ต้องรอผู้จัดการมรดกหรือคำสั่งศาล</div>
+      </div>
+      <div class="wt-pillar">
+        <div class="wt-pillar-icon">🛡</div>
+        <div class="wt-pillar-title">ปลอดจากเจ้าหนี้ &amp; ภาษี</div>
+        <div class="wt-pillar-text">เจ้าหนี้ของผู้ตายไม่มีสิทธิเรียกร้องเงินก้อนนี้ และผู้รับประโยชน์ไม่ต้องเสียภาษีมรดก ทำให้เงินทั้งก้อนถึงมือคนที่ต้องการดูแลได้อย่างครบถ้วน</div>
+      </div>
+    </div>
+
+    <!-- ตารางเปรียบเทียบ -->
+    <table class="wt-compare">
+      <thead>
+        <tr>
+          <th>ประเด็น</th>
+          <th>🏛 มรดกทั่วไป</th>
+          <th>🛡 ประกันชีวิต (ผู้รับประโยชน์)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ที่มาของเงิน</td>
+          <td>ทรัพย์สินที่มีอยู่ก่อน / ขณะตาย</td>
+          <td>เกิดขึ้นหลังเสียชีวิต ตามสัญญาประกัน</td>
+        </tr>
+        <tr>
+          <td>ความแน่นอนของผู้รับ</td>
+          <td>ขึ้นกับพินัยกรรม หรือกฎทายาทโดยธรรม อาจมีข้อพิพาท</td>
+          <td><b>ระบุชื่อในกรมธรรม์</b> — ผูกพันตามสัญญา ไม่อาจโต้แย้งได้</td>
+        </tr>
+        <tr>
+          <td>ระยะเวลาได้รับ</td>
+          <td>
+            <span class="wt-tag-bad">⚠️ ช้า</span><br>
+            6–18 เดือนขึ้นไป ผ่านกระบวนการศาล
+          </td>
+          <td>
+            <span class="wt-tag-good">✅ ทันที</span><br>
+            เงินสดสภาพคล่องจากบริษัทประกัน
+          </td>
+        </tr>
+        <tr>
+          <td>ความคุ้มครองจากเจ้าหนี้</td>
+          <td>
+            <span class="wt-tag-bad">⚠️ ไม่คุ้มครอง</span><br>
+            เจ้าหนี้มีสิทธิฟ้องชำระหนี้จากกองมรดก
+          </td>
+          <td>
+            <span class="wt-tag-good">✅ ปลอดภัย</span><br>
+            เจ้าหนี้ไม่มีสิทธิแตะต้อง
+          </td>
+        </tr>
+        <tr>
+          <td>ภาษีมรดก</td>
+          <td>อาจต้องเสียหากมูลค่าเกิน 100 ล้านบาท</td>
+          <td>
+            <span class="wt-tag-good">✅ ยกเว้นภาษี</span><br>
+            ผู้รับได้เต็มจำนวน ไม่ถูกหักภาษี
+          </td>
+        </tr>
+        <tr>
+          <td>บทบาทของพินัยกรรม</td>
+          <td>พินัยกรรมเป็นเครื่องมือหลักในการกำหนดผู้รับ</td>
+          <td><b>พินัยกรรมไม่มีผลบังคับ</b> — การเปลี่ยนผู้รับต้องแจ้งบริษัทประกันโดยตรงเท่านั้น</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- อ้างอิงกฎหมาย -->
+    <div class="wt-legal">
+      <strong>⚖️ หลักกฎหมาย — ป.พ.พ. มาตรา 897 และมาตรา 1646</strong>
+      เงินประกันชีวิตเป็นเงินที่เกิดจากสัญญาระหว่างผู้เอาประกันกับบริษัท ซึ่งเงื่อนไขการจ่ายอาศัยเหตุการณ์ "ความตาย" เงินนี้จึงไม่ใช่ทรัพย์สินของผู้ตายที่มีอยู่ก่อนหรือขณะถึงแก่ความตาย — จำนวนเงินย่อมตกเป็นของผู้รับประโยชน์ที่ระบุในกรมธรรม์ทันทีที่ผู้เอาประกันถึงแก่ความตาย อ้างอิง: คำพิพากษาฎีกาที่ 4714/2542
+    </div>
+
+    <!-- ลิงก์อ่านเพิ่มเติม -->
+    <div class="wt-link-box">
+      <div class="wt-link-icon">📖</div>
+      <div class="wt-link-text">
+        <strong>อ่านเพิ่มเติม: เงินประกันชีวิต กับ มรดก ต่างกันอย่างไร?</strong>
+        <p>คู่มือวิเคราะห์เชิงกฎหมายและการวางแผนการเงิน ครอบคลุมกรณีศึกษาจากคำพิพากษาฎีกา ข้อยกเว้นที่ต้องระวัง และ Checklist ปฏิบัติสำหรับผู้วางแผนมรดก</p>
+      </div>
+      <a class="wt-link-btn" href="Life_insuracne_vs_Heritage.html" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        เปิดคู่มือ
+      </a>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- TEASER BRIDGE — ก่อน Section 1 เดิม        -->
+  <!-- ============================================ -->
+  <div class="teaser-bridge" style="margin-bottom: 0;">
+    <div class="teaser-bridge-icon">💡</div>
+    <div class="teaser-bridge-body">
+      <div class="teaser-bridge-tag">คำถามเชิงกลยุทธ์</div>
+      <div class="teaser-bridge-text">
+        จะดียิ่งขึ้นไปไหม ถ้าหาก <em>เงินเพื่อการส่งต่อนี้</em><br>
+        ยังมีโอกาสสร้าง <em>Passive Income</em> ให้ได้ไปจนถึงวันที่ต้องจากไป?
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- PROPOSAL BANNER — RED LIGHT PREMIUM         -->
+  <!-- ============================================ -->
+  <div class="proposal-banner">
+    <div class="proposal-tag">ข้อเสนอเชิงกลยุทธ์</div>
+    <div class="proposal-headline">
+      เราขอเสนอ <em>AIA Elite Income Prestige</em><br>
+      เพื่อการส่งต่อความมั่งคั่งอย่างเป็นระบบ
+    </div>
+    <div class="proposal-divider"></div>
+    <div class="proposal-points">
+      <div class="proposal-point">
+        <div class="proposal-point-dot">1</div>
+        <div>
+          <b>ระบุผู้รับประโยชน์ได้อย่างแน่นอน</b> — ส่งมอบความมั่งคั่งตรงถึงมือคนที่ท่านรัก โดยไม่ผ่านกระบวนการศาล ปลอดจากเจ้าหนี้ และได้รับยกเว้นภาษีมรดก
+        </div>
+      </div>
+      <div class="proposal-point">
+        <div class="proposal-point-dot">2</div>
+        <div>
+          <b>Auto Redemption สร้างรายได้ประจำได้ด้วย</b> — กลไกรับซื้อคืนหน่วยลงทุนอัตโนมัติ ~3% ต่อปี สร้าง Passive Income ได้ตั้งแต่ปีแรก ควบคู่กับการสะสมมูลค่าสินทรัพย์เพื่อส่งต่อ
+        </div>
+      </div>
+    </div>
+    <div class="proposal-divider"></div>
+    <p style="font-size:.95rem;color:#7f1d1d;margin:0;line-height:1.7;">
+      ใน section ถัดไป — เราจะสรุปให้ท่านเห็นภาพรวมสินค้า และความเหมาะสมกับสภาวะเศรษฐกิจในช่วงนี้อย่างไร
+    </p>
+  </div>
+
+  <div class="page-break"></div>
 
   <!-- ============================================ -->
   <!-- SECTION 1 : MACROECONOMICS (Merged & Professionalized) -->
@@ -444,7 +1141,38 @@ body{
 <!-- JAVASCRIPT LOGIC -->
 <!-- ============================================ -->
 <script>
-  // Simple Qx Table approximation
+  /* ── FONT SIZE CONTROL ── */
+  const SIZES   = [13,14,15,16,17,18,20,22,24,28];
+  let   sizeIdx = 3; // default = 16px
+
+  const fzDisplay = document.getElementById('fzDisplay');
+  const fzDown    = document.getElementById('fzDown');
+  const fzUp      = document.getElementById('fzUp');
+
+  function applyFontSize() {
+    document.documentElement.style.fontSize = SIZES[sizeIdx] + 'px'; /* เปลี่ยน html root → rem ทุก section ตอบสนอง */
+    fzDisplay.textContent = SIZES[sizeIdx];
+    fzDown.style.opacity = sizeIdx === 0 ? '.3' : '1';
+    fzDown.style.pointerEvents = sizeIdx === 0 ? 'none' : 'auto';
+    fzUp.style.opacity   = sizeIdx === SIZES.length - 1 ? '.3' : '1';
+    fzUp.style.pointerEvents = sizeIdx === SIZES.length - 1 ? 'none' : 'auto';
+    try { localStorage.setItem('eip_fz', sizeIdx); } catch(e) {}
+  }
+
+  // Restore saved preference
+  try {
+    const saved = parseInt(localStorage.getItem('eip_fz'));
+    if (!isNaN(saved) && saved >= 0 && saved < SIZES.length) sizeIdx = saved;
+  } catch(e) {}
+  applyFontSize();
+
+  fzDown.addEventListener('click', () => { if (sizeIdx > 0) { sizeIdx--; applyFontSize(); } });
+  fzUp.addEventListener('click',   () => { if (sizeIdx < SIZES.length - 1) { sizeIdx++; applyFontSize(); } });
+
+  /* ── PRINT ── */
+  document.getElementById('btnPrint').addEventListener('click', () => window.print());
+
+  /* ── CASHFLOW CALCULATOR ── */
   const qxMale={20:1.28,30:1.72,40:2.82,45:4.10,50:6.51,55:10.97,60:19.14,65:34.26,70:62.43,75:115.3,80:214.6,85:398.8,90:628.0,99:1000};
   const qxFemale={20:0.52,30:0.79,40:1.48,45:2.22,50:3.51,55:5.82,60:10.00,65:17.78,70:32.70,75:62.22,80:121.8,85:241.2,90:448.0,99:1000};
   

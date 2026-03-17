@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เปรียบเทียบความคุ้มครอง — คุณนวลจันทร์ สุธรรมพร</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&family=Prompt:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary:#0057a8; --primary-lt:#e8f0fb; --primary-dk:#003d7a;
+  --accent:#f4a11b;  --accent-lt:#fff8e8;
+  --teal:#00897b;    --teal-lt:#e0f2f1;
+  --red:#e53935;     --green:#2e7d32;
+  --pink:#d81b60;    --pink-lt:#fce4ec;
+  --text:#1a2744;    --muted:#7a8aaa;
+  --border:#dce5f5;  --bg:#f0f4fb;
+  --white:#ffffff;   --shadow:0 2px 12px rgba(0,87,168,.10);
+  --radius:12px;     --fs:14px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);font-size:var(--fs);min-height:100vh}
+
+/* TOOLBAR */
+.toolbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--white);border-bottom:2px solid var(--primary);padding:9px 20px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 16px rgba(0,87,168,.12);flex-wrap:wrap}
+.toolbar-logo{font-family:'Prompt',sans-serif;font-size:1.1em;font-weight:700;color:var(--primary);flex:1;white-space:nowrap}
+.toolbar-logo span{color:var(--accent)}
+.btn{border:none;cursor:pointer;border-radius:8px;padding:6px 14px;font-family:'Sarabun',sans-serif;font-size:.88em;font-weight:600;transition:all .18s}
+.btn-fs{background:var(--primary-lt);color:var(--primary);width:32px;height:32px;padding:0;display:grid;place-items:center}
+.btn-fs:hover{background:var(--primary);color:#fff}
+.btn-print{background:linear-gradient(135deg,var(--primary),#1976d2);color:#fff;display:flex;align-items:center;gap:5px}
+.btn-print:hover{opacity:.88;transform:translateY(-1px)}
+.orient-group{display:flex;border-radius:8px;overflow:hidden;border:1.5px solid var(--border)}
+.btn-orient{background:var(--white);color:var(--muted);border:none;padding:5px 11px;cursor:pointer;font-family:'Sarabun',sans-serif;font-size:.8em;font-weight:600;transition:all .15s}
+.btn-orient+.btn-orient{border-left:1.5px solid var(--border)}
+.btn-orient.active{background:var(--primary);color:#fff}
+.tool-sep{width:1px;height:24px;background:var(--border)}
+.lbl-sm{font-size:.78em;color:var(--muted);font-weight:500;white-space:nowrap}
+
+/* LAYOUT */
+.page-wrap{max-width:1300px;margin:0 auto;padding:80px 16px 40px}
+
+/* HEADER CARD */
+.header-card{background:linear-gradient(135deg,var(--primary) 0%,#1a5fb4 60%,#0d3d82 100%);border-radius:var(--radius);padding:28px 32px;color:#fff;display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;position:relative;overflow:hidden}
+.header-card::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;background:rgba(255,255,255,.07);border-radius:50%}
+.hc-left h1{font-size:1.75em;font-weight:800;font-family:'Prompt',sans-serif}
+.hc-left p{margin-top:4px;opacity:.8;font-size:.9em}
+.hc-badges{display:flex;gap:16px;flex-wrap:wrap}
+.hc-badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:10px;padding:8px 16px;text-align:center;backdrop-filter:blur(4px)}
+.hc-badge .val{font-size:1.2em;font-weight:700}
+.hc-badge .lbl{font-size:.75em;opacity:.8;margin-top:2px}
+
+/* GRID LAYOUT */
+.main-grid{display:grid;grid-template-columns:340px 1fr;gap:16px;align-items:start}
+
+/* SELECTOR CARD */
+.card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.card-title{font-size:.95em;font-weight:700;color:var(--primary);border-left:4px solid var(--accent);padding-left:10px;margin-bottom:14px}
+.form-row{margin-bottom:10px}
+.form-row label{display:block;font-size:.82em;font-weight:600;color:var(--muted);margin-bottom:4px}
+select,input[type=number],input[type=text]{width:100%;padding:7px 10px;border:1.5px solid var(--border);border-radius:8px;font-family:'Sarabun',sans-serif;font-size:.9em;color:var(--text);background:#fff;transition:border-color .15s}
+select:focus,input:focus{outline:none;border-color:var(--primary)}
+.badge-plan{display:inline-block;font-size:.72em;font-weight:700;padding:2px 8px;border-radius:12px;margin-left:4px}
+
+/* CURRENT POLICY SUMMARY */
+.policy-row{display:flex;gap:8px;margin-bottom:10px}
+.policy-chip{flex:1;border-radius:8px;padding:8px 12px;font-size:.82em}
+.chip-e445{background:#e8f0fb;border:1.5px solid #b8d0f5}
+.chip-t80{background:#e0f2f1;border:1.5px solid #a7d7d3}
+.chip-label{font-weight:700;font-size:.8em;color:var(--muted);margin-bottom:2px}
+.chip-val{font-size:1.05em;font-weight:700;color:var(--primary)}
+.chip-t80 .chip-val{color:var(--teal)}
+
+/* SECTION TITLE */
+.sec-title{font-size:1em;font-weight:700;color:var(--primary);border-left:4px solid var(--accent);padding-left:10px;margin:20px 0 12px}
+
+/* TABLES */
+.tbl-wrap{overflow-x:auto;border-radius:10px;box-shadow:0 1px 6px rgba(0,87,168,.07)}
+table{width:100%;border-collapse:collapse}
+thead th{background:var(--primary);color:#fff;padding:10px 12px;text-align:center;font-weight:600;font-size:.85em;white-space:nowrap}
+thead th:first-child{text-align:left;border-radius:10px 0 0 0}
+thead th:last-child{border-radius:0 10px 0 0}
+thead th.col-e445{background:#1a5fb4}
+thead th.col-t80{background:#00796b}
+thead th.col-new{background:linear-gradient(135deg,#e65100,#f4511e);border-left:3px solid #ff7043}
+thead th.col-combined{background:#37474f}
+
+tbody tr:nth-child(even){background:var(--primary-lt)}
+tbody tr:hover{background:#d6e6f9}
+tbody td{padding:9px 12px;border-bottom:1px solid var(--border);font-size:.88em;vertical-align:middle}
+tbody td:first-child{font-weight:600}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+td.center{text-align:center}
+
+.row-cat td{background:#eaf1fb!important;font-weight:700;color:var(--primary);font-size:.8em;letter-spacing:.3px;padding:6px 12px!important}
+
+/* BENEFIT VALUES */
+.val-good{color:var(--green);font-weight:700}
+.val-warn{color:#e65100;font-weight:600}
+.val-none{color:var(--muted)}
+.val-highlight{color:var(--primary);font-weight:700}
+.val-new{color:#e65100;font-weight:700}
+.val-mtl{color:var(--pink);font-weight:700}
+
+/* PREMIUM TABLE */
+tfoot td{background:var(--primary);color:#fff;font-weight:700;padding:10px 12px}
+tfoot td.num{text-align:right}
+tfoot td.col-new-foot{background:linear-gradient(135deg,#e65100,#f4511e);border-left:3px solid #ff7043}
+tfoot td.col-total-foot{background:#37474f}
+
+/* DIFF BADGE */
+.diff-badge{display:inline-block;padding:2px 7px;border-radius:10px;font-size:.75em;font-weight:700;margin-left:4px}
+.diff-up{background:#fdecea;color:var(--red)}
+.diff-dn{background:#e8f5e9;color:var(--green)}
+.diff-eq{background:#f5f5f5;color:var(--muted)}
+
+/* RESULT SUMMARY BAR */
+.result-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.result-chip{border-radius:10px;padding:12px 14px;text-align:center;border:1.5px solid}
+.rc-current{background:#e8f0fb;border-color:#b8d0f5}
+.rc-new{background:#fff3e0;border-color:#ffcc80}
+.rc-diff{background:#e8f5e9;border-color:#a5d6a7}
+.rc-total{background:linear-gradient(135deg,#e8eaf6,#ede7f6);border-color:#9fa8da}
+.result-chip .rv{font-size:1.3em;font-weight:800;color:var(--primary);font-family:'Prompt',sans-serif}
+.rc-new .rv{color:#e65100}
+.rc-diff .rv{color:var(--green)}
+.rc-diff .rv.up{color:var(--red)}
+.rc-total .rv{color:#4527a0}
+.result-chip .rl{font-size:.75em;color:var(--muted);margin-top:2px}
+
+/* RIDER SECTION */
+.rider-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.rider-row{display:flex;align-items:center;gap:6px;padding:6px 8px;border:1.5px solid var(--border);border-radius:8px;background:#fafbff}
+.rider-row label{font-size:.8em;font-weight:600;color:var(--muted);flex:1;white-space:nowrap}
+.rider-row select{width:auto;flex:1;padding:4px 6px;font-size:.8em}
+.btn-sum-quick{background:var(--primary-lt);color:var(--primary);border:1.5px solid var(--border);border-radius:6px;padding:3px 8px;font-size:.76em;font-weight:600;cursor:pointer;font-family:'Sarabun',sans-serif;transition:all .15s}
+.btn-sum-quick:hover{background:var(--primary);color:#fff}
+
+/* AGE PROGRESSION TABLE */
+.age-table-wrap{overflow-x:auto;border-radius:10px;box-shadow:0 1px 6px rgba(0,87,168,.07)}
+.age-table-wrap table thead th{background:#37474f}
+.age-table-wrap table thead th.th-e445{background:#1a5fb4}
+.age-table-wrap table thead th.th-t80{background:#00796b}
+.age-table-wrap table thead th.th-new{background:#bf360c}
+.age-table-wrap table thead th.th-total{background:#4527a0}
+tr.age-current{background:#fff8e8!important;outline:2px solid var(--accent);outline-offset:-2px}
+tr.age-current td:first-child::after{content:' ◄ ปัจจุบัน';color:var(--accent);font-weight:800;font-size:.82em}
+tr.age-band-change td{border-top:2.5px dashed #f4a11b!important}
+.band-badge{display:inline-block;background:var(--accent);color:#fff;font-size:.7em;font-weight:700;padding:1px 6px;border-radius:8px;margin-left:3px;vertical-align:middle}
+td.prem-jump{color:var(--red);font-weight:700}
+td.prem-same{color:var(--muted)}
+.age-note{font-size:.75em;color:var(--muted);margin-top:8px;line-height:1.6}
+
+/* PRINT */
+@media print{
+  @page{margin:10mm 8mm}
+  .toolbar,.selector-panel{display:none!important}
+  body{background:#fff!important}
+  .page-wrap{padding:0!important;max-width:100%!important}
+  .main-grid{grid-template-columns:1fr!important}
+  .header-card{print-color-adjust:exact;-webkit-print-color-adjust:exact;break-inside:avoid}
+  .tbl-wrap table{page-break-inside:auto}
+  tr{page-break-inside:avoid}
+  thead{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  .row-cat td{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  tfoot td{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  .result-bar{display:flex;flex-wrap:wrap;gap:8px}
+  .result-chip{print-color-adjust:exact;-webkit-print-color-adjust:exact;break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<!-- TOOLBAR -->
+<div class="toolbar">
+  <div class="toolbar-logo">AIA <span>Compare</span> Report</div>
+  <div class="tool-sep"></div>
+  <span class="lbl-sm">ตัวอักษร:</span>
+  <div style="display:flex;gap:4px">
+    <button class="btn btn-fs" onclick="chFont(-1)">A−</button>
+    <button class="btn btn-fs" onclick="chFont(0)" style="font-size:.85em">A</button>
+    <button class="btn btn-fs" onclick="chFont(1)" style="font-size:1.05em">A+</button>
+  </div>
+  <div class="tool-sep"></div>
+  <span class="lbl-sm">การวาง:</span>
+  <div class="orient-group">
+    <button class="btn-orient" id="btn-pt" onclick="setOrient('portrait')">แนวตั้ง</button>
+    <button class="btn-orient active" id="btn-ls" onclick="setOrient('landscape')">แนวนอน</button>
+  </div>
+  <button class="btn btn-print" onclick="doPrint()">🖨️ พิมพ์/PDF</button>
+</div>
+
+<div class="page-wrap">
+<!-- HEADER -->
+<div class="header-card">
+  <div class="hc-left">
+    <h1>คุณนวลจันทร์ สุธรรมพร</h1>
+    <p>เปรียบเทียบความคุ้มครองสุขภาพ — กรมธรรม์ที่มีอยู่ กับ แผนที่เลือกเพิ่ม | มีนาคม 2569</p>
+  </div>
+  <div class="hc-badges">
+    <div class="hc-badge"><div class="val">63</div><div class="lbl">อายุปัจจุบัน (ปี)</div></div>
+    <div class="hc-badge"><div class="val">800,000</div><div class="lbl">ทุนประกันรวม (บ.)</div></div>
+    <div class="hc-badge"><div class="val" id="hdr-total-prem">180,835</div><div class="lbl">เบี้ยรวมปัจจุบัน (บ./ปี)</div></div>
+    <div class="hc-badge" style="border-color:rgba(255,180,0,.4);background:rgba(255,180,0,.15)">
+      <div class="val" id="hdr-new-prem" style="color:#ffe082">—</div>
+      <div class="lbl">เบี้ยแผนใหม่ (บ./ปี)</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN GRID -->
+<div class="main-grid">
+
+<!-- LEFT: SELECTOR PANEL -->
+<div class="selector-panel">
+  <div class="card">
+    <div class="card-title">🔧 เลือกแผนสุขภาพที่ต้องการเพิ่ม</div>
+
+    <div class="form-row">
+      <label>แบบประกันสุขภาพ</label>
+      <select id="plan-type" onchange="onTypeChange()">
+        <option value="NONE">— ไม่เลือก —</option>
+        <option value="HH">AIA Health Happy (เหมาจ่าย)</option>
+        <option value="HSV">AIA Health Saver</option>
+        <option value="HS">AIA H&S (New Standard)</option>
+        <option value="HSX">AIA H&S Extra</option>
+        <option value="DHP">MTL D Health Plus (เหมาจ่าย)</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label>แผน / วงเงิน</label>
+      <select id="plan-opt" onchange="onCalc()"></select>
+    </div>
+    <div class="form-row" id="row-sum" style="display:none">
+      <label>ทุนประกันหลัก AIA 20PLN (บาท)
+        <span style="font-size:.78em;color:var(--teal);font-weight:500;margin-left:4px">— กรอกได้เอง</span>
+      </label>
+      <div style="display:flex;gap:6px;align-items:center">
+        <input type="number" id="main-sum" value="500000" min="150000" max="5000000" step="50000"
+               oninput="onCalc()" onchange="onCalc()"
+               style="flex:1;border:1.5px solid var(--border);border-radius:8px;padding:7px 10px;font-family:'Sarabun',sans-serif;font-size:.9em">
+        <span style="font-size:.82em;color:var(--muted);white-space:nowrap">บาท</span>
+      </div>
+      <div style="display:flex;gap:4px;margin-top:6px;flex-wrap:wrap">
+        <button onclick="setSum(150000)"  class="btn-sum-quick">150,000</button>
+        <button onclick="setSum(300000)"  class="btn-sum-quick">300,000</button>
+        <button onclick="setSum(500000)"  class="btn-sum-quick">500,000</button>
+        <button onclick="setSum(700000)"  class="btn-sum-quick">700,000</button>
+        <button onclick="setSum(1000000)" class="btn-sum-quick">1,000,000</button>
+      </div>
+      <div id="main-prem-display" style="margin-top:6px;font-size:.82em;color:var(--teal);font-weight:600"></div>
+    </div>
+    <div class="form-row" id="row-mtl-prem" style="display:none">
+      <label>เบี้ยหลัก MTL (กรอกเอง, บาท/ปี)</label>
+      <input type="number" id="mtl-prem" value="0" onchange="onCalc()" placeholder="ป้อนเบี้ยหลัก MTL">
+    </div>
+
+    <hr style="border:none;border-top:1px solid var(--border);margin:12px 0">
+    <div style="font-size:.8em;font-weight:700;color:var(--muted);margin-bottom:8px">สัญญาเพิ่มเติม (Riders)</div>
+
+    <div class="rider-grid">
+      <div class="rider-row">
+        <label>CFC มะเร็ง</label>
+        <select id="rider-cfc" onchange="onCalc()">
+          <option value="0">ไม่เลือก</option>
+          <option value="100000">1 แสน</option>
+          <option value="200000">2 แสน</option>
+          <option value="300000">3 แสน</option>
+          <option value="500000">5 แสน</option>
+          <option value="1000000">1 ล้าน</option>
+        </select>
+      </div>
+      <div class="rider-row">
+        <label>HB ชดเชยรายวัน</label>
+        <select id="rider-hb" onchange="onCalc()">
+          <option value="0">ไม่เลือก</option>
+          <option value="500">500/วัน</option>
+          <option value="1000">1,000/วัน</option>
+          <option value="1500">1,500/วัน</option>
+          <option value="2000">2,000/วัน</option>
+          <option value="3000">3,000/วัน</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row" id="row-cp" style="display:none">
+      <label style="display:flex;align-items:center;gap:6px;cursor:pointer">
+        <input type="checkbox" id="rider-cp" onchange="onCalc()">
+        <span>MTL Care Plus (5 ล้าน ตามอายุจริง)</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- CURRENT POLICY SUMMARY CARD -->
+  <div class="card" style="margin-top:12px">
+    <div class="card-title">📋 กรมธรรม์ปัจจุบัน (2569)</div>
+    <div class="policy-row">
+      <div class="policy-chip chip-e445">
+        <div class="chip-label">E445 | T119709548 | อายุ 63 ปี</div>
+        <div class="chip-val">เบี้ยรวม 113,811 บ./ปี</div>
+        <div style="font-size:.78em;color:var(--muted);margin-top:4px">H&S แผน 2200 · ECIR 1 ล้าน · CR 5 แสน</div>
+      </div>
+    </div>
+    <div class="policy-row">
+      <div class="policy-chip chip-t80">
+        <div class="chip-label">10for80 | T177945988 | อายุ 62 ปี</div>
+        <div class="chip-val">เบี้ยรวม 67,024 บ./ปี</div>
+        <div style="font-size:.78em;color:var(--muted);margin-top:4px">H&S แผน 4000 · ECIR 6 แสน · CR 1 ล้าน</div>
+      </div>
+    </div>
+    <div style="background:var(--primary-lt);border:1.5px solid var(--border);border-radius:8px;padding:10px;text-align:center;margin-top:6px">
+      <div style="font-size:.78em;color:var(--muted)">รวมเบี้ยปัจจุบัน</div>
+      <div style="font-size:1.4em;font-weight:800;color:var(--primary)">180,835 บ./ปี</div>
+    </div>
+  </div>
+</div>
+
+<!-- RIGHT: COMPARISON TABLES -->
+<div class="right-panel">
+  <!-- RESULT SUMMARY BAR -->
+  <div class="result-bar" id="result-bar">
+    <div class="result-chip rc-current">
+      <div class="rv">180,835</div>
+      <div class="rl">เบี้ยกรมธรรม์เดิม 2 ฉบับ (บ./ปี)</div>
+    </div>
+    <div class="result-chip rc-new">
+      <div class="rv" id="rc-new-val">—</div>
+      <div class="rl" id="rc-new-lbl">เบี้ยแผนที่เลือกเพิ่ม (บ./ปี)</div>
+    </div>
+    <div class="result-chip rc-diff">
+      <div class="rv" id="rc-diff-val">—</div>
+      <div class="rl">ผลต่างเบี้ย (บ./ปี)</div>
+    </div>
+    <div class="result-chip rc-total">
+      <div class="rv" id="rc-total-val">180,835</div>
+      <div class="rl">เบี้ยรวมทั้งหมด (บ./ปี)</div>
+    </div>
+  </div>
+
+  <!-- COVERAGE COMPARISON TABLE -->
+  <div class="sec-title">📊 ตารางเปรียบเทียบความคุ้มครองสุขภาพ</div>
+  <div class="tbl-wrap" id="cov-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:30%;text-align:left">รายการความคุ้มครอง</th>
+          <th class="col-e445">E445<br><small style="font-weight:400;opacity:.85">H&S แผน 2200</small></th>
+          <th class="col-t80">10for80<br><small style="font-weight:400;opacity:.85">H&S แผน 4000</small></th>
+          <th class="col-combined">รวมปัจจุบัน</th>
+          <th class="col-new" id="th-new">แผนที่เลือก<br><small style="font-weight:400;opacity:.9">— ยังไม่เลือก —</small></th>
+          <th class="col-new" id="th-compare">เทียบ</th>
+        </tr>
+      </thead>
+      <tbody id="cov-tbody"></tbody>
+    </table>
+  </div>
+
+  <!-- PREMIUM COMPARISON TABLE -->
+  <div class="sec-title" style="margin-top:20px">💰 ตารางเปรียบเทียบเบี้ยประกัน</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:30%;text-align:left">รายการ</th>
+          <th class="col-e445">E445<br><small style="font-weight:400;opacity:.85">T119709548</small></th>
+          <th class="col-t80">10for80<br><small style="font-weight:400;opacity:.85">T177945988</small></th>
+          <th class="col-combined">รวมเดิม</th>
+          <th class="col-new">แผนที่เลือกเพิ่ม</th>
+          <th class="col-new">รวมทั้งหมด</th>
+        </tr>
+      </thead>
+      <tbody id="prem-tbody"></tbody>
+      <tfoot id="prem-tfoot"></tfoot>
+    </table>
+  </div>
+
+  <!-- NOTE -->
+  <p style="font-size:.78em;color:var(--muted);margin-top:10px;line-height:1.6">
+    หมายเหตุ: เบี้ยกรมธรรม์ E445 และ 10for80 ใช้ตัวเลขจริงจาก Excel ปี 2569 | เบี้ยแผนที่เลือกคำนวณจาก Rate Table อ้างอิง AIA/MTL (ประมาณการ ณ อายุ 63 ปี เพศหญิง) | ตัวเลขอาจต่างจากเบี้ยที่ออกจริงเนื่องจากการปรับอัตราตามปีกรมธรรม์
+  </p>
+
+  <!-- AGE PROGRESSION TABLE -->
+  <div class="sec-title" style="margin-top:24px">📈 ตารางเบี้ยที่เพิ่มตามอายุ — เปรียบเทียบกรมธรรม์เดิม กับ แผนที่เลือกเพิ่ม</div>
+  <p style="font-size:.82em;color:var(--muted);margin-bottom:10px">เบี้ยกรมธรรม์เดิมใช้ตัวเลขจริงจาก Excel (gross ไม่หักเงินคืน) | เบี้ยแผนใหม่ประมาณการจาก Rate Table ณ แต่ละช่วงอายุ | เส้นประสีทอง = จุดที่เบี้ยปรับขึ้น (เปลี่ยน age band)</p>
+  <div class="age-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align:left;background:#37474f">ปี พ.ศ. / อายุ</th>
+          <th class="th-e445">E445<br><small style="font-weight:400;opacity:.85">รวม Gross (บ./ปี)</small></th>
+          <th class="th-t80">10for80<br><small style="font-weight:400;opacity:.85">รวม Gross (บ./ปี)</small></th>
+          <th style="background:#37474f">รวมเดิม<br><small style="font-weight:400;opacity:.85">(บ./ปี)</small></th>
+          <th class="th-new" id="age-th-main">เบี้ยหลักใหม่<br><small style="font-weight:400;opacity:.85">(บ./ปี)</small></th>
+          <th class="th-new" id="age-th-hs">H&S / เหมา<br><small style="font-weight:400;opacity:.85">แผนใหม่ (บ./ปี)</small></th>
+          <th class="th-new">Riders<br><small style="font-weight:400;opacity:.85">CFC+HB+CP (บ./ปี)</small></th>
+          <th class="th-new">รวมแผนใหม่<br><small style="font-weight:400;opacity:.85">(บ./ปี)</small></th>
+          <th class="th-total">รวมทั้งหมด<br><small style="font-weight:400;opacity:.85">(บ./ปี)</small></th>
+          <th style="background:#455a64">เพิ่ม ΔNew<br><small style="font-weight:400;opacity:.85">vs ปีก่อน</small></th>
+        </tr>
+      </thead>
+      <tbody id="age-tbody"><tr><td colspan="10" style="text-align:center;color:var(--muted);padding:20px">เลือกแผนที่ต้องการเปรียบเทียบก่อน</td></tr></tbody>
+    </table>
+  </div>
+  <div class="age-note" id="age-note">
+    💡 เส้นประสีทอง = จุดเปลี่ยน Age Band (เบี้ยสุขภาพปรับขึ้น) | ⚠️ เบี้ย E445 ที่แสดงปี 2026 ยังรวมเงินคืน 3 แสน แต่ตารางแสดง gross (ไม่หักเงินคืน)
+  </div>
+</div><!-- /right-panel -->
+</div><!-- /main-grid -->
+</div><!-- /page-wrap -->
+
+<script>
+// ================================================================
+// SECTION A: DATA
+// ================================================================
+let fsBase = 14, printOrient = 'landscape';
+
+// Age & gender for นวลจันทร์ (E445 base age in 2026)
+const CLIENT = { age: 63, gender: 'female', ageBand: 10 }; // band 10 = 61-65
+
+// Current E445 premiums (from Excel 2026)
+const CUR_E445 = {
+  main: 55050, ai_rcc: 4375, hb: 0, hs: 19140, cr: 6876, ecir: 28370, total: 113811,
+  plan: 'HS_2200'
+};
+// Current 10for80 premiums (from Excel 2026)
+const CUR_T80 = {
+  main: 0, ai_rcc: 6250, hb: 0, hs: 30000, cr: 13752, ecir: 17022, total: 67024,
+  plan: 'HS_4000'
+};
+const CUR_TOTAL = CUR_E445.total + CUR_T80.total; // 180,835
+
+// Plans catalog
+const PLANS = {
+  NONE: { name:'— ไม่เลือก —', opts:[{name:'-',k:'none'}] },
+  HH:  { name:'AIA Health Happy', opts:[{name:'แผน 1 ล้าน',k:'1m'},{name:'แผน 5 ล้าน',k:'5m'},{name:'แผน 15 ล้าน',k:'15m'},{name:'แผน 25 ล้าน',k:'25m'}] },
+  HSV: { name:'AIA Health Saver', opts:[{name:'แผน 2 แสน',k:'200k'},{name:'แผน 3 แสน',k:'300k'},{name:'แผน 4 แสน',k:'400k'},{name:'แผน 5 แสน',k:'500k'}] },
+  HS:  { name:'AIA H&S New Standard', opts:[{name:'แผน 1000',k:'1000'},{name:'แผน 1600',k:'1600'},{name:'แผน 2200',k:'2200'},{name:'แผน 2800',k:'2800'},{name:'แผน 3400',k:'3400'},{name:'แผน 4000',k:'4000'},{name:'แผน 5000',k:'5000'}] },
+  HSX: { name:'AIA H&S Extra', opts:[{name:'แผน 1500',k:'1500'},{name:'แผน 2000',k:'2000'},{name:'แผน 2500',k:'2500'},{name:'แผน 3500',k:'3500'},{name:'แผน 4500',k:'4500'},{name:'แผน 5500',k:'5500'},{name:'แผน 6500',k:'6500'}] },
+  DHP: { name:'MTL D Health Plus', opts:[{name:'1ล้าน (Ded 0)',k:'1M_0'},{name:'1ล้าน (Ded 20k)',k:'1M_20k'},{name:'1ล้าน (Ded 50k)',k:'1M_50k'},{name:'5ล้าน (Ded 0)',k:'5M_0'},{name:'5ล้าน (Ded 30k)',k:'5M_30k'},{name:'5ล้าน (Ded 50k)',k:'5M_50k'},{name:'5ล้าน (Ded 100k)',k:'5M_100k'}] }
+};
+
+// Benefits catalog (สำหรับแผนใหม่ที่เลือก)
+const BENFITS = {
+  'NONE_none':{ max:'—',r1:'—',r2:'—',r3:'—',r4:'—',r5:'—',r6:'—',r7:'—',r8:'—',r9:'—',r10:'—',r11:'—',r12:'—',r13:'—',d:'—',opd:'—' },
+  // H&S NEW STANDARD (ปัจจุบัน E445=2200, 10for80=4000)
+  'HS_2200':{ max:'แยกหมวด',r1:'2,200',r2:'20,000',r3:'850',r4:'60,000',r5:'จ่ายตามจริง',r6:'5,500',r7:'5,000',r8:'—',r9:'—',r10:'25,000',r11:'—',r12:'4,500',r13:'6,500',d:'10,000',opd:'—' },
+  'HS_4000':{ max:'แยกหมวด',r1:'4,000',r2:'25,000',r3:'1,000',r4:'90,000',r5:'จ่ายตามจริง',r6:'7,000',r7:'7,000',r8:'—',r9:'—',r10:'40,000',r11:'—',r12:'5,500',r13:'7,000',d:'10,000',opd:'—' },
+  // AIA Health Happy
+  'HH_1m':{ max:'1,000,000 บ.',r1:'1,500',r2:'จ่ายตามจริง',r3:'1,000',r4:'จ่ายตามจริง',r5:'จ่ายตามจริง',r6:'จ่ายตามจริง',r7:'จ่ายตามจริง',r8:'จ่ายตามจริง',r9:'จ่ายตามจริง',r10:'จ่ายตามจริง',r11:'จ่ายตามจริง',r12:'จ่ายตามจริง',r13:'จ่ายตามจริง',d:'10,000',opd:'—' },
+  'HH_5m':{ max:'5,000,000 บ.',r1:'3,000',r2:'จ่ายตามจริง',r3:'2,000',r4:'จ่ายตามจริง',r5:'จ่ายตามจริง',r6:'จ่ายตามจริง',r7:'จ่ายตามจริง',r8:'จ่ายตามจริง',r9:'จ่ายตามจริง',r10:'จ่ายตามจริง',r11:'จ่ายตามจริง',r12:'จ่ายตามจริง',r13:'จ่ายตามจริง',d:'10,000',opd:'—' },
+  'HH_15m':{ max:'15,000,000 บ.',r1:'6,000',r2:'จ่ายตามจริง',r3:'4,000',r4:'จ่ายตามจริง',r5:'จ่ายตามจริง',r6:'จ่ายตามจริง',r7:'จ่ายตามจริง',r8:'จ่ายตามจริง',r9:'จ่ายตามจริง',r10:'จ่ายตามจริง',r11:'จ่ายตามจริง',r12:'จ่ายตามจริง',r13:'จ่ายตามจริง',d:'10,000',opd:'—' },
+  'HH_25m':{ max:'25,000,000 บ.',r1:'9,000',r2:'จ่ายตามจริง',r3:'6,000',r4:'จ่ายตามจริง',r5:'จ่ายตามจริง',r6:'จ่ายตามจริง',r7:'จ่ายตามจริง',r8:'จ่ายตามจริง',r9:'จ่ายตามจริง',r10:'จ่ายตามจริง',r11:'จ่ายตามจริง',r12:'จ่ายตามจริง',r13:'จ่ายตามจริง',d:'10,000',opd:'2,000/ครั้ง (30/ปี)' },
+  // Health Saver
+  'HSV_200k':{ max:'200,000 บ.',r1:'1,500',r2:'25,000',r3:'จ่ายตามจริง',r4:'จ่ายตามจริง',r5:'จ่ายตามจริง',r6:'จ่ายตามจริง',r7:'7,000',r8:'ไม่คุ้มครอง',r9:'Copay',r10:'Copay',r11:'Copay',r12:'จ่ายตามจริง',r13:'10,000',d:'10,000',opd:'—' },
+  'HSV_300k':{ max:'300,000 บ.',r1:'2,000',r2:'35,000',r3:'จ่ายตามจริง',r4:'จ่ายตามจริง',r5:'จ่ายตามจริง',r6:'จ่ายตามจริง',r7:'8,000',r8:'ไม่คุ้มครอง',r9:'Copay',r10:'Copay',r11:'Copay',r12:'จ่ายตามจริง',r13:'15,000',d:'10,000',opd:'—' },
+  'HSV_400k':{ max:'400,000 บ.',r1:'3,000',r2:'40,000',r3:'จ่ายตามจริง',r4:'จ่ายตามจริง',r5:'จ่ายตามจริง',r6:'จ่ายตามจริง',r7:'10,000',r8:'ไม่คุ้มครอง',r9:'Copay',r10:'Copay',r11:'Copay',r12:'จ่ายตามจริง',r13:'20,000',d:'10,000',opd:'1,000 (30/ปี)' },
+  'HSV_500k':{ max:'500,000 บ.',r1:'4,000',r2:'50,000',r3:'จ่ายตามจริง',r4:'จ่ายตามจริง',r5:'จ่ายตามจริง',r6:'จ่ายตามจริง',r7:'9,000',r8:'ไม่คุ้มครอง',r9:'Copay',r10:'Copay',r11:'Copay',r12:'จ่ายตามจริง',r13:'25,000',d:'10,000',opd:'1,500 (30/ปี)' },
+  // HS New Standard (แผนอื่น)
+  'HS_1000':{ max:'แยกหมวด',r1:'1,000',r2:'16,000',r3:'550',r4:'40,000',r5:'จ่ายตามจริง',r6:'4,500',r7:'3,000',r8:'—',r9:'—',r10:'15,000',r11:'—',r12:'3,000',r13:'4,500',d:'10,000',opd:'—' },
+  'HS_1600':{ max:'แยกหมวด',r1:'1,600',r2:'20,000',r3:'750',r4:'50,000',r5:'จ่ายตามจริง',r6:'5,000',r7:'4,000',r8:'—',r9:'—',r10:'20,000',r11:'—',r12:'3,500',r13:'5,000',d:'10,000',opd:'—' },
+  'HS_2800':{ max:'แยกหมวด',r1:'2,800',r2:'25,000',r3:'900',r4:'70,000',r5:'จ่ายตามจริง',r6:'6,500',r7:'5,500',r8:'—',r9:'—',r10:'30,000',r11:'—',r12:'5,000',r13:'6,000',d:'10,000',opd:'—' },
+  'HS_3400':{ max:'แยกหมวด',r1:'3,400',r2:'20,000',r3:'800',r4:'80,000',r5:'จ่ายตามจริง',r6:'6,000',r7:'6,500',r8:'—',r9:'—',r10:'35,000',r11:'—',r12:'4,000',r13:'5,500',d:'10,000',opd:'—' },
+  'HS_5000':{ max:'แยกหมวด',r1:'5,000',r2:'25,000',r3:'1,200',r4:'100,000',r5:'จ่ายตามจริง',r6:'8,000',r7:'8,000',r8:'—',r9:'—',r10:'50,000',r11:'—',r12:'6,000',r13:'8,000',d:'10,000',opd:'—' },
+  // HS Extra
+  'HSX_1500':{ max:'แยกหมวด',r1:'1,500',r2:'30,000',r3:'600',r4:'90,000',r5:'จ่ายตามจริง',r6:'5,000',r7:'3,000',r8:'—',r9:'—',r10:'20,000',r11:'—',r12:'4,000',r13:'5,000',d:'10,000',opd:'3,000/ปี' },
+  'HSX_2000':{ max:'แยกหมวด',r1:'2,000',r2:'25,000',r3:'800',r4:'100,000',r5:'จ่ายตามจริง',r6:'5,500',r7:'4,000',r8:'—',r9:'—',r10:'25,000',r11:'—',r12:'4,500',r13:'6,000',d:'10,000',opd:'4,000/ปี' },
+  'HSX_2500':{ max:'แยกหมวด',r1:'2,500',r2:'20,000',r3:'900',r4:'50,000',r5:'จ่ายตามจริง',r6:'6,000',r7:'5,000',r8:'—',r9:'—',r10:'35,000',r11:'—',r12:'5,000',r13:'8,000',d:'10,000',opd:'5,000/ปี' },
+  'HSX_3500':{ max:'แยกหมวด',r1:'3,500',r2:'25,000',r3:'1,000',r4:'70,000',r5:'จ่ายตามจริง',r6:'7,000',r7:'6,000',r8:'—',r9:'—',r10:'45,000',r11:'—',r12:'6,000',r13:'9,000',d:'10,000',opd:'7,000/ปี' },
+  'HSX_4500':{ max:'แยกหมวด',r1:'4,500',r2:'30,000',r3:'1,200',r4:'90,000',r5:'จ่ายตามจริง',r6:'8,000',r7:'7,000',r8:'—',r9:'—',r10:'55,000',r11:'—',r12:'7,000',r13:'10,000',d:'10,000',opd:'9,000/ปี' },
+  'HSX_5500':{ max:'แยกหมวด',r1:'5,500',r2:'35,000',r3:'1,500',r4:'110,000',r5:'จ่ายตามจริง',r6:'9,000',r7:'8,000',r8:'—',r9:'—',r10:'65,000',r11:'—',r12:'8,000',r13:'11,000',d:'10,000',opd:'10,000/ปี' },
+  'HSX_6500':{ max:'แยกหมวด',r1:'6,500',r2:'40,000',r3:'2,000',r4:'130,000',r5:'จ่ายตามจริง',r6:'10,000',r7:'9,000',r8:'—',r9:'—',r10:'75,000',r11:'—',r12:'9,000',r13:'12,000',d:'10,000',opd:'12,000/ปี' },
+  // MTL D Health Plus
+  'DHP_1M_0':{ max:'1,000,000 บ.',r1:'จ่ายตามจริง',r2:'จ่ายตามจริง',r3:'จ่ายตามจริง',r4:'จ่ายตามจริง',r5:'จ่ายตามจริง',r6:'จ่ายตามจริง',r7:'จ่ายตามจริง',r8:'จ่ายตามจริง',r9:'—',r10:'—',r11:'—',r12:'จ่ายตามจริง',r13:'จ่ายตามจริง',d:'—',opd:'—' },
+  'DHP_1M_20k':{ max:'1,000,000 บ. (Ded 20k)',r1:'จ่ายตามจริง',r2:'จ่ายตามจริง',r3:'จ่ายตามจริง',r4:'จ่ายตามจริง',r5:'จ่ายตามจริง',r6:'จ่ายตามจริง',r7:'จ่ายตามจริง',r8:'จ่ายตามจริง',r9:'—',r10:'—',r11:'—',r12:'จ่ายตามจริง',r13:'จ่ายตามจริง',d:'—',opd:'—' },
+  'DHP_1M_50k':{ max:'1,000,000 บ. (Ded 50k)',r1:'จ่ายตามจริง',r2:'จ่ายตามจริง',r3:'จ่ายตามจริง',r4:'จ่ายตามจริง',r5:'จ่ายตามจริง',r6:'จ่ายตามจริง',r7:'จ่ายตามจริง',r8:'จ่ายตามจริง',r9:'—',r10:'—',r11:'—',r12:'จ่ายตามจริง',r13:'จ่ายตามจริง',d:'—',opd:'—' },
+  'DHP_5M_0':{ max:'5,000,000 บ.',r1:'จ่ายตามจริง',r2:'จ่ายตามจริง',r3:'จ่ายตามจริง',r4:'จ่ายตามจริง',r5:'จ่ายตามจริง',r6:'จ่ายตามจริง',r7:'จ่ายตามจริง',r8:'จ่ายตามจริง',r9:'—',r10:'—',r11:'—',r12:'จ่ายตามจริง',r13:'จ่ายตามจริง',d:'—',opd:'—' },
+  'DHP_5M_30k':{ max:'5,000,000 บ. (Ded 30k)',r1:'จ่ายตามจริง',r2:'จ่ายตามจริง',r3:'จ่ายตามจริง',r4:'จ่ายตามจริง',r5:'จ่ายตามจริง',r6:'จ่ายตามจริง',r7:'จ่ายตามจริง',r8:'จ่ายตามจริง',r9:'—',r10:'—',r11:'—',r12:'จ่ายตามจริง',r13:'จ่ายตามจริง',d:'—',opd:'—' },
+  'DHP_5M_50k':{ max:'5,000,000 บ. (Ded 50k)',r1:'จ่ายตามจริง',r2:'จ่ายตามจริง',r3:'จ่ายตามจริง',r4:'จ่ายตามจริง',r5:'จ่ายตามจริง',r6:'จ่ายตามจริง',r7:'จ่ายตามจริง',r8:'จ่ายตามจริง',r9:'—',r10:'—',r11:'—',r12:'จ่ายตามจริง',r13:'จ่ายตามจริง',d:'—',opd:'—' },
+  'DHP_5M_100k':{ max:'5,000,000 บ. (Ded 100k)',r1:'จ่ายตามจริง',r2:'จ่ายตามจริง',r3:'จ่ายตามจริง',r4:'จ่ายตามจริง',r5:'จ่ายตามจริง',r6:'จ่ายตามจริง',r7:'จ่ายตามจริง',r8:'จ่ายตามจริง',r9:'—',r10:'—',r11:'—',r12:'จ่ายตามจริง',r13:'จ่ายตามจริง',d:'—',opd:'—' }
+};
+
+// Benefit rows config
+const BEN_ROWS = [
+  { id:'max',  label:'วงเงินสูงสุดต่อรอบปี' },
+  { id:'r1',   label:'1. ค่าห้อง/อาหาร (ต่อวัน)' },
+  { id:'r2',   label:'2. ค่าบริการทางการแพทย์ (ต่อครั้ง)' },
+  { id:'r3',   label:'3. ค่าแพทย์ตรวจรักษา (ต่อวัน)' },
+  { id:'r4',   label:'4. ค่าผ่าตัด' },
+  { id:'r5',   label:'5. Day Surgery (ไม่นอน รพ.)' },
+  { id:'r6',   label:'6. วินิจฉัยก่อน/หลังแอดมิท' },
+  { id:'r7',   label:'7. อุบัติเหตุฉุกเฉิน (24 ชม.)' },
+  { id:'r8',   label:'8. เวชศาสตร์ฟื้นฟู' },
+  { id:'r9',   label:'9. ล้างไต' },
+  { id:'r10',  label:'10. รังสีรักษา / มะเร็ง' },
+  { id:'r11',  label:'11. เคมีบำบัด / Targeted Therapy' },
+  { id:'r12',  label:'12. รถพยาบาลฉุกเฉิน' },
+  { id:'r13',  label:'13. ผ่าตัดเล็ก' },
+  { id:'opd',  label:'OPD (ผู้ป่วยนอก)' },
+  { id:'d',    label:'เงินชดเชยกรณีเสียชีวิต' }
+];
+
+// ================================================================
+// SECTION B: RATE TABLES
+// ================================================================
+// AGE BAND INDEX 10 = 61-65
+// INDEX mapping: 0=≤15,1=16-20,2=21-25,3=26-30,4=31-35,5=36-40,6=41-45,7=46-50,8=51-55,9=56-60,10=61-65,11=66-70,12=71-75,13=76-80,14=81-85,15=86-90,16=91-95,17=96-98
+
+const RATE_HH_F = { '1m':[14400,15200,17200,17500,18400,20400,22300,24500,28500,34400,41500,60800,88200,126300,182700,210100,241600,277800],'5m':[18200,19100,21500,21800,22700,25100,27800,30400,35200,42500,50800,74000,107500,154400,223400,256900,295400,339700],'15m':[21600,23100,27000,30600,34200,37200,42900,46500,50700,65100,73500,107100,155700,224700,325500,374400,430500,495000],'25m':[27900,30300,35300,38000,42300,46000,53600,60700,65500,84600,95700,139300,202000,291800,422700,486100,559000,642900] };
+const RATE_HSV_F = { '200k':[8500,7400,8600,9100,9200,10400,12100,14300,15500,20800,27600,37900,54200,77700,111300,122400,134600,148100],'300k':[10500,9700,10600,11300,11700,11900,13800,16000,17200,24400,31300,47600,68100,97600,139900,153900,169300,186200],'400k':[14100,12000,14400,17100,18000,18500,21700,23200,25600,31000,47500,66600,95300,136600,195700,225100,258900,297700],'500k':[18200,15000,18100,21000,22700,25100,26500,29200,34100,40900,57200,81800,117000,167300,239200,275100,316400,363900] };
+const RATE_HS_F_BANDS = [ [4030,5400,6160,6790,8160,9520,11960],[4600,6200,7040,7700,9350,10960,13630],[5460,7200,8140,9030,10880,12700,15650],[5920,7800,8800,9800,11730,13740,16980],[6420,8520,9570,10500,12750,14820,18420],[8120,10800,12210,13580,16320,18860,23690],[10540,14120,15730,17570,21250,25000,30740],[13810,18520,20900,23240,27710,32700,40290],[20330,27560,31020,34860,41990,48200,60460],[31930,43160,48730,54670,65790,75940,95250],[50560,68200,77110,86310,103870,120480,151110],[70780,95480,107910,120820,145350,168680,211550],[77860,105030,118710,132920,159890,185550,232710],[85650,115530,130570,146220,175940,204110,255980],[94220,127080,143640,160850,193470,224520,281580] ];
+// Band mapping for HS (15 rows, rows map to 18 age bands)
+const HS_BAND_MAP = [0,0,1,1,1,2,3,4,5,6,7,8,9,10,11,12,13,14];
+const HS_PLANS = ['1000','1600','2200','2800','3400','4000','5000'];
+const RATE_HS_F = {};
+HS_PLANS.forEach((k,idx) => { RATE_HS_F[k] = HS_BAND_MAP.map(r => RATE_HS_F_BANDS[r][idx]); });
+
+const RATE_HSX_F = { '1500':[7690,7370,8510,9050,9170,9420,10050,11080,13790,17970,23990,33060,47540,68460,95840,105420,115960,127560],'2000':[9810,9690,10550,11300,11330,11800,12610,13760,16730,21880,28910,39360,56580,81480,114060,125470,138020,151820],'2500':[11620,11170,12420,12890,13030,14070,15070,16880,20160,25290,34030,45860,64620,93050,130270,143300,157630,173390],'3500':[15410,15190,16390,17030,17330,17970,19310,22380,26830,34000,46090,62780,86810,125010,175010,192510,211760,232940],'4500':[18380,18380,20120,20740,21030,21500,23190,27160,32920,42170,57150,77480,108830,156720,219400,241340,265470,292020],'5500':[20120,19950,22260,23250,23550,23820,25720,30190,36760,48190,67060,96040,132630,178070,249300,274230,301650,331820],'6500':[21600,21550,24050,24760,25080,25510,27580,32400,39370,51340,71040,96180,134860,194200,271880,299070,328980,361880] };
+const RATE_DHP_F = { '1M_0':[19969,17986,19624,20944,22894,24798,28960,31915,38638,52559,72001,97515,128227,159977,200426,222473,248226,280496],'1M_20k':[13730,13014,14010,15755,16611,17216,17757,20043,24884,39529,52355,71167,95190,110187,134616,146177,163097,184299],'1M_50k':[6824,6906,7971,9211,9629,10954,11804,15076,18720,31042,44149,59169,82233,98813,119615,129887,144922,163763],'5M_0':[21937,19269,20351,21909,23492,25445,29981,32748,40847,55537,77488,105581,142940,177752,214586,238191,275807,311662],'5M_30k':[11534,11441,11934,13263,13633,14916,16478,18949,23328,36507,51470,68742,96109,116447,137083,146266,167867,189688],'5M_50k':[7580,8392,9133,10435,10816,12308,12943,15662,21196,35150,49757,64831,90348,108695,126785,137673,159415,180139],'5M_100k':[2288,3325,3655,4006,4684,5321,5721,6832,10866,23044,33682,49397,74775,88233,103871,112792,130603,147582] };
+
+// Care Plus (MTL) - exact age, female
+const RATE_CP_F = [1741,1697,1657,1621,1584,1553,1524,1512,1508,1505,1507,1590,1642,1655,1669,1682,1726,1779,1836,1897,1960,2037,2117,2200,2286,2375,2468,2564,2663,2766,2873,2990,3110,3236,3368,3507,3652,3804,3966,4131,4305,4490,4685,4890,5107,5336,5579,5836,6109,6400,6722,7063,7261,7478,7869,8273,8694,9134,9594,10073,10571,11085,11619,12174,12750,13348,14001,14688,15411,16174,16985,17848,18768,19751,20800,21921,23118,24398,25763,27218,28768,30420,32181,34058,36059,38195,40472,42897,45478,48224,51140,54238,57523,61006,64693,68593,73249];
+
+// CFC rate (female, age bands)
+const RATE_CFC_F = { '0-15':119.51,'16-20':139.33,'21-25':182.50,'26-30':253.40,'31-35':375.68,'36-40':462.17,'41-45':669.69,'46-50':921.10,'51-55':1247.10,'56-60':1774.95,'61-65':2115.73,'66-70':3143.33,'71-75':3834.44,'76-79':4591.68 };
+const RATE_HB_F = { '0-20':325,'21-35':280,'36-40':290,'41-45':320,'46-50':370,'51-55':400,'56-60':460,'61-65':490,'66-70':600,'71-75':710,'76-79':840 };
+
+// 20PLN rate female
+const RATE_20PLN_F = { 0:11.47,10:12.66,20:14.90,30:18.11,40:23.30,42:24.66,43:25.39,44:26.15,45:26.95,46:27.79,47:28.68,48:29.61,49:30.59,50:31.62,51:32.72,52:33.88,53:35.11,54:36.41,55:37.81,56:39.29,57:40.89,58:42.60,59:44.44,60:46.43,61:48.59,62:50.93,63:53.49,64:56.27,65:59.32,66:61.90,67:63.61,68:64.71,69:66.13,70:67.07 };
+
+// ================================================================
+// SECTION C: UTILITY FUNCTIONS
+// ================================================================
+const fmt = n => (n===0||n===null||n===undefined) ? '—' : Math.round(n).toLocaleString('th-TH');
+const fmtN = n => Math.round(n).toLocaleString('th-TH');
+
+function getBandIndex(age) {
+  if(age<=15)return 0;if(age<=20)return 1;if(age<=25)return 2;if(age<=30)return 3;
+  if(age<=35)return 4;if(age<=40)return 5;if(age<=45)return 6;if(age<=50)return 7;
+  if(age<=55)return 8;if(age<=60)return 9;if(age<=65)return 10;if(age<=70)return 11;
+  if(age<=75)return 12;if(age<=80)return 13;if(age<=85)return 14;if(age<=90)return 15;
+  if(age<=95)return 16;return 17;
+}
+
+function getCFCRate(age) {
+  const tbl = RATE_CFC_F;
+  for(const [range,rate] of Object.entries(tbl)) {
+    const p = range.split('-'); const mn=parseInt(p[0]); const mx=parseInt(p[1]||'99');
+    if(age>=mn&&age<=mx) return rate;
+  } return 0;
+}
+
+function getHBRate(age) {
+  const tbl = RATE_HB_F;
+  for(const [range,rate] of Object.entries(tbl)) {
+    const p=range.split('-'); const mn=parseInt(p[0]); const mx=parseInt(p[1]||'99');
+    if(age>=mn&&age<=mx) return rate;
+  } return 0;
+}
+
+function get20PLNRate(age) {
+  if(RATE_20PLN_F[age]) return RATE_20PLN_F[age];
+  if(age>70) return RATE_20PLN_F[70];
+  return 0;
+}
+
+function calcHSPremium(type, optKey, age) {
+  const band = getBandIndex(age);
+  if(type==='HH')  return (RATE_HH_F[optKey]||[])[band]||0;
+  if(type==='HSV') return (RATE_HSV_F[optKey]||[])[band]||0;
+  if(type==='HS')  return (RATE_HS_F[optKey]||[])[band]||0;
+  if(type==='HSX') return (RATE_HSX_F[optKey]||[])[band]||0;
+  if(type==='DHP') return (RATE_DHP_F[optKey]||[])[band]||0;
+  return 0;
+}
+
+function calcMainPremium(mainSum, age) {
+  const rate = get20PLNRate(age);
+  let disc = 0;
+  if(mainSum>=600000) disc=2; else if(mainSum>=250000) disc=1;
+  return Math.round((mainSum/1000)*Math.max(0,rate-disc));
+}
+
+// ================================================================
+// SECTION D: UI HANDLERS
+// ================================================================
+function chFont(d) {
+  if(d===0) fsBase=14; else fsBase=Math.min(20,Math.max(10,fsBase+d));
+  document.documentElement.style.setProperty('--fs',fsBase+'px');
+}
+function setOrient(o) {
+  printOrient=o;
+  document.getElementById('btn-pt').classList.toggle('active',o==='portrait');
+  document.getElementById('btn-ls').classList.toggle('active',o==='landscape');
+}
+function doPrint() {
+  let s=document.getElementById('ps'); if(!s){s=document.createElement('style');s.id='ps';document.head.appendChild(s);}
+  s.textContent=`@media print{@page{size:A4 ${printOrient};}}`;
+  window.print();
+}
+
+function onTypeChange() {
+  const type = document.getElementById('plan-type').value;
+  const optSel = document.getElementById('plan-opt');
+  const opts = PLANS[type]?.opts||[];
+  optSel.innerHTML = opts.map((o,i)=>`<option value="${i}">${o.name}</option>`).join('');
+  
+  const isMTL = type==='DHP';
+  const isNone = type==='NONE';
+  document.getElementById('row-sum').style.display = (!isMTL&&!isNone)?'block':'none';
+  document.getElementById('row-mtl-prem').style.display = isMTL?'block':'none';
+  document.getElementById('row-cp').style.display = isMTL?'block':'none';
+  if(!isMTL) document.getElementById('rider-cp').checked=false;
+  onCalc();
+}
+
+function onCalc() {
+  const type = document.getElementById('plan-type').value;
+  const optIdx = parseInt(document.getElementById('plan-opt').value)||0;
+  const optKey = PLANS[type]?.opts[optIdx]?.k||'none';
+  const age = CLIENT.age;
+  const mainSum = parseInt(document.getElementById('main-sum').value)||500000;
+  const cfcSum = parseInt(document.getElementById('rider-cfc').value)||0;
+  const hbSum = parseInt(document.getElementById('rider-hb').value)||0;
+  const cpCheck = document.getElementById('rider-cp').checked;
+  const mtlPrem = parseInt(document.getElementById('mtl-prem').value)||0;
+
+  let pMain=0, pHS=0, pCFC=0, pHB=0, pCP=0;
+
+  if(type==='NONE') {
+    renderCovTable('NONE','none',0,0,0,false);
+    renderPremTable(0,0,0,0,0,0);
+    updateHeader(0,0);
+    return;
+  }
+
+  // Main premium
+  if(type==='DHP') { pMain = mtlPrem; }
+  else { pMain = calcMainPremium(mainSum, age); }
+
+  // Health plan premium
+  pHS = calcHSPremium(type, optKey, age);
+
+  // CFC
+  pCFC = cfcSum>0 ? Math.round((cfcSum/100000)*getCFCRate(age)) : 0;
+  // HB
+  pHB = hbSum>0 ? Math.round((hbSum/100)*getHBRate(age)) : 0;
+  // Care Plus
+  pCP = (cpCheck&&type==='DHP') ? (RATE_CP_F[Math.min(96,age)]||0) : 0;
+
+  const pNewTotal = pMain+pHS+pCFC+pHB+pCP;
+
+  // Show auto-calculated main premium hint
+  if(type!=='DHP'&&type!=='NONE') {
+    document.getElementById('main-prem-display').textContent =
+      `เบี้ยหลัก AIA 20PLN ≈ ${fmtN(pMain)} บ./ปี (อายุ ${age} ปี)`;
+  } else {
+    document.getElementById('main-prem-display').textContent='';
+  }
+
+  renderCovTable(type, optKey, cfcSum, hbSum, pCP, cpCheck);
+  renderPremTable(pMain, pHS, pCFC, pHB, pCP, pNewTotal);
+  renderAgeTable(type, optKey, mainSum, cfcSum, hbSum, cpCheck);
+  updateHeader(pNewTotal, type, PLANS[type]?.opts[optIdx]?.name||'');
+}
+
+function updateHeader(newPrem, type, optName) {
+  const grand = CUR_TOTAL + newPrem;
+  const diff = newPrem;
+  document.getElementById('hdr-new-prem').textContent = newPrem>0 ? fmtN(newPrem) : '—';
+  document.getElementById('hdr-total-prem').textContent = fmtN(grand);
+  
+  document.getElementById('rc-new-val').textContent = newPrem>0 ? fmtN(newPrem)+' บ.' : '—';
+  document.getElementById('rc-new-lbl').textContent = type&&type!=='NONE' ? (PLANS[type]?.name||'')+(optName?' '+optName:'') : 'เบี้ยแผนที่เลือกเพิ่ม (บ./ปี)';
+  
+  const diffEl = document.getElementById('rc-diff-val');
+  diffEl.textContent = newPrem>0 ? '+'+fmtN(diff)+' บ.' : '—';
+  diffEl.className = 'rv'+(newPrem>0?' up':'');
+  document.getElementById('rc-total-val').textContent = fmtN(grand)+' บ.';
+
+  // Update th-new header
+  const thNew = document.getElementById('th-new');
+  if(type&&type!=='NONE') {
+    thNew.innerHTML = (PLANS[type]?.name||type)+'<br><small style="font-weight:400;opacity:.9">'+optName+'</small>';
+  } else {
+    thNew.innerHTML = 'แผนที่เลือก<br><small style="font-weight:400;opacity:.9">— ยังไม่เลือก —</small>';
+  }
+}
+
+// ================================================================
+// SECTION E: RENDER TABLES
+// ================================================================
+function valClass(v) {
+  if(!v||v==='—') return 'val-none';
+  if(v.includes('ไม่คุ้มครอง')) return 'val-warn';
+  if(v.includes('จ่ายตามจริง')||v.includes('เหมาจ่าย')||v.includes('Copay')) return 'val-good';
+  if(v.includes('Care Plus')) return 'val-mtl';
+  return 'val-highlight';
+}
+
+function combineHS(id1, id2) {
+  // For numeric fields: sum them, for text: show both
+  const v1 = id1||'—'; const v2 = id2||'—';
+  if(v1==='—'&&v2==='—') return '—';
+  if(v1===v2) return v1;
+  // Try numeric addition
+  const n1 = parseFloat((v1||'0').replace(/,/g,''));
+  const n2 = parseFloat((v2||'0').replace(/,/g,''));
+  if(!isNaN(n1)&&!isNaN(n2)&&v1!=='—'&&v2!=='—') {
+    return fmtN(n1+n2);
+  }
+  if(v1==='—') return v2;
+  if(v2==='—') return v1;
+  if(v1===v2) return v1;
+  return v1; // for text, show E445 (primary)
+}
+
+function renderCovTable(type, optKey, cfcSum, hbSum, pCP, cpCheck) {
+  const bE = BENFITS['HS_2200']||{};
+  const bT = BENFITS['HS_4000']||{};
+  const bNew = BENFITS[type+'_'+optKey]||BENFITS['NONE_none'];
+  const isNone = type==='NONE';
+
+  let html = '';
+  // Section 1: HS coverage
+  html += `<tr class="row-cat"><td colspan="6">🏥 ส่วนที่ 1: ความคุ้มครองสุขภาพ (H&S / เหมาจ่าย)</td></tr>`;
+
+  BEN_ROWS.forEach(row => {
+    const vE = bE[row.id]||'—';
+    const vT = bT[row.id]||'—';
+    let vC = combineHS(vE, vT);
+    let vN = bNew[row.id]||'—';
+
+    // CP override for dialysis/chemo rows
+    if(cpCheck&&type==='DHP'&&(row.id==='r9'||row.id==='r10'||row.id==='r11')) {
+      vN = 'คุ้มครอง 5 ล้าน (Care Plus)';
+    }
+
+    // Determine compare
+    let compareHtml = '—';
+    if(!isNone && vN!=='—') {
+      // Try to compare numeric
+      const nN = parseFloat((vN||'0').replace(/,/g,'').replace(/[^0-9.]/g,''));
+      const nC = parseFloat((vC||'0').replace(/,/g,'').replace(/[^0-9.]/g,''));
+      if(!isNaN(nN)&&!isNaN(nC)&&nN>0&&nC>0) {
+        const diff = nN-nC;
+        if(diff>0) compareHtml=`<span class="diff-badge diff-up">+${fmtN(diff)}</span>`;
+        else if(diff<0) compareHtml=`<span class="diff-badge diff-dn">${fmtN(diff)}</span>`;
+        else compareHtml=`<span class="diff-badge diff-eq">เท่ากัน</span>`;
+      } else if(vN.includes('จ่ายตามจริง')&&!vC.includes('จ่ายตามจริง')) {
+        compareHtml=`<span class="diff-badge diff-dn">↑ เพิ่มขึ้น</span>`;
+      } else if(vN===vC) {
+        compareHtml=`<span class="diff-badge diff-eq">เท่ากัน</span>`;
+      } else {
+        compareHtml=`<span class="diff-badge diff-up">ต่างกัน</span>`;
+      }
+    }
+
+    html += `<tr>
+      <td>${row.label}</td>
+      <td class="center ${valClass(vE)}">${vE}</td>
+      <td class="center ${valClass(vT)}">${vT}</td>
+      <td class="center val-highlight">${vC}</td>
+      <td class="center ${valClass(vN)}">${vN}</td>
+      <td class="center">${compareHtml}</td>
+    </tr>`;
+  });
+
+  // Section 2: CFC
+  html += `<tr class="row-cat"><td colspan="6">🎗️ ส่วนที่ 2: โรคร้ายแรง Care for Cancer (CFC) — กรมธรรม์เดิมไม่มี</td></tr>`;
+  const cfcLump = cfcSum>0?fmtN(cfcSum)+' บ.':'—';
+  const cfcDaily = cfcSum>0?fmtN((cfcSum/100000)*2000)+' บ./วัน':'—';
+  const cfcChemo = cfcSum>0?fmtN((cfcSum/100000)*500)+' บ./ครั้ง':'—';
+  html += `<tr><td>เงินก้อนตรวจพบมะเร็ง (ทุกระยะ)</td><td class="center val-none">—</td><td class="center val-none">—</td><td class="center val-none">—</td><td class="center val-new">${cfcLump}</td><td class="center">${cfcSum>0?'<span class="diff-badge diff-dn">เพิ่มใหม่</span>':'—'}</td></tr>`;
+  html += `<tr><td>ชดเชยรายวัน (แอดมิทมะเร็ง)</td><td class="center val-none">—</td><td class="center val-none">—</td><td class="center val-none">—</td><td class="center val-new">${cfcDaily}</td><td class="center">—</td></tr>`;
+  html += `<tr><td>เคมีบำบัด/รังสีรักษา OPD</td><td class="center val-none">—</td><td class="center val-none">—</td><td class="center val-none">—</td><td class="center val-new">${cfcChemo}</td><td class="center">—</td></tr>`;
+
+  // Section 3: HB
+  html += `<tr class="row-cat"><td colspan="6">💊 ส่วนที่ 3: ชดเชยรายได้ HB Extra — กรมธรรม์เดิมไม่มี</td></tr>`;
+  const hbDay = hbSum>0?fmtN(hbSum)+' บ./วัน':'—';
+  const hbICU = hbSum>0?fmtN(hbSum*3)+' บ./วัน':'—';
+  html += `<tr><td>ชดเชยรายวัน IPD</td><td class="center val-none">—</td><td class="center val-none">—</td><td class="center val-none">—</td><td class="center val-new">${hbDay}</td><td class="center">${hbSum>0?'<span class="diff-badge diff-dn">เพิ่มใหม่</span>':'—'}</td></tr>`;
+  html += `<tr><td>ชดเชยห้อง ICU (3 เท่า)</td><td class="center val-none">—</td><td class="center val-none">—</td><td class="center val-none">—</td><td class="center val-new">${hbICU}</td><td class="center">—</td></tr>`;
+
+  // Section 4: existing CI coverage (E445+10for80)
+  html += `<tr class="row-cat"><td colspan="6">🔬 ส่วนที่ 4: ความคุ้มครองโรคร้ายแรง (ECIR/CR) — กรมธรรม์เดิม</td></tr>`;
+  html += `<tr><td>ECIR ชดเชยล่วงหน้า 40 โรค</td><td class="center val-highlight">1,000,000 บ.</td><td class="center val-highlight">600,000 บ.</td><td class="center val-highlight" style="color:var(--green);font-weight:800">1,600,000 บ.</td><td class="center val-none">—</td><td class="center">—</td></tr>`;
+  html += `<tr><td>CR ชดเชย 6 โรคร้ายแรง (ก้อน)</td><td class="center val-highlight">500,000 บ.</td><td class="center val-highlight">1,000,000 บ.</td><td class="center val-highlight" style="color:var(--green);font-weight:800">1,500,000 บ.</td><td class="center val-none">—</td><td class="center">—</td></tr>`;
+  html += `<tr><td>CR ชดเชยรายวัน 6 โรค</td><td class="center val-highlight">5,000 บ./วัน</td><td class="center val-highlight">10,000 บ./วัน</td><td class="center val-highlight">15,000 บ./วัน</td><td class="center val-none">—</td><td class="center">—</td></tr>`;
+
+  document.getElementById('cov-tbody').innerHTML = html;
+}
+
+function renderPremTable(pMain, pHS, pCFC, pHB, pCP, pNewTotal) {
+  const tbody = document.getElementById('prem-tbody');
+  const tfoot = document.getElementById('prem-tfoot');
+  const grandTotal = CUR_TOTAL + pNewTotal;
+
+  const rows = [
+    { label:'เบี้ยหลัก (สัญญาหลัก)', e445: CUR_E445.main, t80:'ชำระครบแล้ว', newVal: pMain },
+    { label:'AI/RCC อุบัติเหตุ',      e445: CUR_E445.ai_rcc, t80: CUR_T80.ai_rcc, newVal:0 },
+    { label:'H&S สุขภาพในโรงพยาบาล', e445: CUR_E445.hs, t80: CUR_T80.hs, newVal: pHS, isHS:true },
+    { label:'ECIR โรคร้ายแรง 40 โรค', e445: CUR_E445.ecir, t80: CUR_T80.ecir, newVal:0 },
+    { label:'CR โรคร้ายแรง 6 โรค',    e445: CUR_E445.cr, t80: CUR_T80.cr, newVal:0 },
+    { label:'CFC มะเร็ง (Rider ใหม่)', e445: 0, t80: 0, newVal: pCFC, isNew:true },
+    { label:'HB ชดเชยรายวัน (ใหม่)',   e445: 0, t80: 0, newVal: pHB, isNew:true },
+    { label:'Care Plus MTL (ใหม่)',     e445: 0, t80: 0, newVal: pCP, isNew:true },
+  ];
+
+  let html='';
+  rows.forEach(r => {
+    const vE = r.e445===0?'—':(typeof r.e445==='string'?r.e445:fmtN(r.e445));
+    const vT = r.t80===0?'—':(typeof r.t80==='string'?r.t80:fmtN(r.t80));
+    const sumCur = (typeof r.e445==='number'?r.e445:0)+(typeof r.t80==='number'?r.t80:0);
+    const vC = sumCur>0?fmtN(sumCur):'—';
+    const vN = r.newVal>0?fmtN(r.newVal):(r.isNew?'<span class="val-none">—</span>':'<span class="val-none">—</span>');
+    const vG = (sumCur+(r.newVal||0))>0?fmtN(sumCur+(r.newVal||0)):'—';
+    const newCls = r.isNew&&r.newVal>0?'style="color:#e65100;font-weight:700"':'';
+    const hsCls = r.isHS?'style="color:var(--primary);font-weight:700"':'';
+    html+=`<tr${r.isNew?' style="background:#fff3e0"':''}>
+      <td>${r.label}</td>
+      <td class="num">${vE}</td>
+      <td class="num">${vT}</td>
+      <td class="num" ${hsCls}>${vC}</td>
+      <td class="num" ${newCls}>${vN}</td>
+      <td class="num">${vG}</td>
+    </tr>`;
+  });
+  tbody.innerHTML=html;
+
+  tfoot.innerHTML=`<tr>
+    <td><strong>รวมเบี้ยทั้งหมด / ปี</strong></td>
+    <td class="num col-e445">${fmtN(CUR_E445.total)}</td>
+    <td class="num col-t80">${fmtN(CUR_T80.total)}</td>
+    <td class="num">${fmtN(CUR_TOTAL)}</td>
+    <td class="num col-new-foot">${pNewTotal>0?fmtN(pNewTotal):'—'}</td>
+    <td class="num col-total-foot" style="font-size:1.05em">${fmtN(grandTotal)}</td>
+  </tr>`;
+}
+
+// ================================================================
+// SECTION F: SET SUM QUICK BUTTON
+// ================================================================
+function setSum(v) {
+  document.getElementById('main-sum').value = v;
+  onCalc();
+}
+
+// ================================================================
+// SECTION G: AGE PROGRESSION TABLE
+// ================================================================
+
+// E445 actual data from Excel (gross, no return deduction) 2026→2047
+// [year, beYear, ageE445, age10f80, e445Gross, t80Gross]
+const AGE_DATA = [
+  [2026,63,62, 60731, 67024],
+  [2027,64,63, 62701, 68206],
+  [2028,65,64, 64721, 69388],
+  [2029,66,65, 73423, 70600],
+  [2030,67,66, 75423, 81388],
+  [2031,68,67, 77983, 81388],
+  [2032,69,68, 80673, 81388],
+  [2033,70,69, 83563, 87256],
+  [2034,71,70, 106572,88990],
+  [2035,72,71, 110572,123260],
+  [2036,73,72, 114572,125660],
+  [2037,74,73, 118572,128060],
+  [2038,75,74, 122572,130460],
+  [2039,76,75, 158251,132860],
+  [2040,77,76, 163251,185090],
+  [2041,78,77, 168251,188090],
+  [2042,79,78, 174251,191090],
+  [2043,80,79, 174251,194690],
+  [2044,81,80, 0,     194690],
+];
+
+function getBandIdx(age) {
+  if(age<=15)return 0;if(age<=20)return 1;if(age<=25)return 2;if(age<=30)return 3;
+  if(age<=35)return 4;if(age<=40)return 5;if(age<=45)return 6;if(age<=50)return 7;
+  if(age<=55)return 8;if(age<=60)return 9;if(age<=65)return 10;if(age<=70)return 11;
+  if(age<=75)return 12;if(age<=80)return 13;if(age<=85)return 14;if(age<=90)return 15;
+  if(age<=95)return 16;return 17;
+}
+
+function calcNewPremForAge(type, optKey, mainSum, cfcSum, hbSum, cpCheck, age) {
+  let pMain=0, pHS=0, pCFC=0, pHB=0, pCP=0;
+  if(type==='NONE') return {main:0,hs:0,riders:0,total:0};
+  if(type==='DHP') {
+    pMain = parseInt(document.getElementById('mtl-prem').value)||0;
+  } else {
+    const r20 = get20PLNRate(age);
+    let disc=0; if(mainSum>=600000)disc=2; else if(mainSum>=250000)disc=1;
+    pMain = Math.round((mainSum/1000)*Math.max(0,r20-disc));
+  }
+  pHS = calcHSPremium(type, optKey, age);
+  pCFC = cfcSum>0 ? Math.round((cfcSum/100000)*getCFCRate(age)) : 0;
+  pHB  = hbSum>0  ? Math.round((hbSum/100)*getHBRate(age)) : 0;
+  pCP  = (cpCheck&&type==='DHP') ? (RATE_CP_F[Math.min(96,age)]||0) : 0;
+  return { main:pMain, hs:pHS, riders:pCFC+pHB+pCP, total:pMain+pHS+pCFC+pHB+pCP };
+}
+
+function renderAgeTable(type, optKey, mainSum, cfcSum, hbSum, cpCheck) {
+  const tbody = document.getElementById('age-tbody');
+  const isNone = type==='NONE';
+
+  // Update column headers
+  const planLabel = isNone ? '— ไม่เลือก —' : (PLANS[type]?.name||type);
+  document.getElementById('age-th-hs').innerHTML =
+    (type==='HH'||type==='HSV'||type==='DHP' ? 'เหมาจ่าย' : 'H&S แยกหมวด')+
+    '<br><small style="font-weight:400;opacity:.85">'+planLabel+' (บ./ปี)</small>';
+
+  if(isNone) {
+    tbody.innerHTML='<tr><td colspan="10" style="text-align:center;color:var(--muted);padding:16px">เลือกแผนที่ต้องการเปรียบเทียบก่อน</td></tr>';
+    return;
+  }
+
+  let html='', prevNewTotal=null, prevBand=null;
+
+  AGE_DATA.forEach(([be, ageE, ageT, e445g, t80g]) => {
+    const isCur = be===2026;
+    const band = getBandIdx(ageE); // use E445 age (same person)
+    const bandChanged = prevBand!==null && band!==prevBand;
+    const p = calcNewPremForAge(type, optKey, mainSum, cfcSum, hbSum, cpCheck, ageE);
+    const combined = e445g + t80g;
+    const grandTotal = combined + p.total;
+
+    // Delta vs previous year
+    let deltaHtml = '—';
+    if(prevNewTotal!==null) {
+      const d = p.total - prevNewTotal;
+      if(d>0) deltaHtml = `<span style="color:var(--red);font-weight:700">+${fmtN(d)}</span>`;
+      else if(d<0) deltaHtml = `<span style="color:var(--green);">${fmtN(d)}</span>`;
+      else deltaHtml = `<span class="prem-same">—</span>`;
+    }
+
+    const bandBadge = bandChanged ? `<span class="band-badge">ปรับเบี้ย</span>` : '';
+    const e445Display = e445g>0 ? fmtN(e445g) : `<span style="color:var(--muted)">สิ้นสุด</span>`;
+    const t80Display  = t80g>0  ? fmtN(t80g)  : `<span style="color:var(--muted)">สิ้นสุด</span>`;
+
+    html += `<tr class="${isCur?'age-current':''}${bandChanged?' age-band-change':''}">
+      <td>${be} / ${ageE}ปี${bandBadge}</td>
+      <td class="num ${bandChanged&&e445g>0?'prem-jump':''}">${e445Display}</td>
+      <td class="num ${bandChanged&&t80g>0?'prem-jump':''}">${t80Display}</td>
+      <td class="num" style="font-weight:700">${fmtN(combined)}</td>
+      <td class="num" style="color:#e65100">${p.main>0?fmtN(p.main):'—'}</td>
+      <td class="num ${bandChanged?'prem-jump':''}" style="color:#bf360c;font-weight:${bandChanged?'800':'400'}">${p.hs>0?fmtN(p.hs):'—'}</td>
+      <td class="num" style="color:#ad1457">${p.riders>0?fmtN(p.riders):'—'}</td>
+      <td class="num" style="color:#bf360c;font-weight:700">${p.total>0?fmtN(p.total):'—'}</td>
+      <td class="num" style="color:#4527a0;font-weight:800">${fmtN(grandTotal)}</td>
+      <td class="num">${deltaHtml}</td>
+    </tr>`;
+
+    prevNewTotal = p.total;
+    prevBand = band;
+  });
+
+  tbody.innerHTML = html;
+}
+
+// ================================================================
+// SECTION H: INIT
+// ================================================================
+onTypeChange();
+</script>
+</body>
+</html>

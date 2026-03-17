@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>สรุปความคุ้มครอง — คุณนวลจันทร์ สุธรรมพร</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&family=Prompt:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary:   #0057a8;
+  --primary-lt:#e8f0fb;
+  --accent:    #f4a11b;
+  --accent-lt: #fff8e8;
+  --teal:      #00897b;
+  --teal-lt:   #e0f2f1;
+  --red:       #e53935;
+  --red-lt:    #fdecea;
+  --text:      #1a2744;
+  --muted:     #7a8aaa;
+  --border:    #dce5f5;
+  --bg:        #f0f4fb;
+  --white:     #ffffff;
+  --shadow:    0 2px 12px rgba(0,87,168,.10);
+  --radius:    12px;
+  --fs:        14px; /* base font-size controlled by JS */
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Sarabun', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: var(--fs);
+  min-height: 100vh;
+}
+
+/* ── TOOLBAR ── */
+.toolbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: var(--white);
+  border-bottom: 2px solid var(--primary);
+  padding: 10px 24px;
+  display: flex; align-items: center; gap: 16px;
+  box-shadow: 0 2px 16px rgba(0,87,168,.12);
+}
+.toolbar-logo {
+  font-family: 'Prompt', sans-serif;
+  font-size: 1.2em; font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -.3px;
+  flex: 1;
+}
+.toolbar-logo span { color: var(--accent); }
+.btn-group { display: flex; gap: 6px; align-items: center; }
+.btn {
+  border: none; cursor: pointer; border-radius: 8px;
+  padding: 6px 14px; font-family: 'Sarabun', sans-serif;
+  font-size: .9em; font-weight: 600; transition: all .18s;
+}
+.btn-fs {
+  background: var(--primary-lt); color: var(--primary);
+  width: 34px; height: 34px; padding: 0; border-radius: 8px;
+  display: grid; place-items: center;
+}
+.btn-fs:hover { background: var(--primary); color: #fff; }
+.btn-print {
+  background: linear-gradient(135deg, var(--primary) 0%, #1976d2 100%);
+  color: #fff; padding: 7px 20px; border-radius: 8px;
+  display: flex; align-items: center; gap: 6px;
+}
+.btn-print:hover { opacity: .88; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,87,168,.3); }
+.fs-label { font-size: .82em; color: var(--muted); font-weight: 500; }
+
+/* ── ORIENTATION TOGGLE ── */
+.orient-group { display: flex; gap: 0; border-radius: 8px; overflow: hidden; border: 1.5px solid var(--border); }
+.btn-orient {
+  background: var(--white); color: var(--muted);
+  border: none; padding: 6px 13px; cursor: pointer;
+  font-family: 'Sarabun', sans-serif; font-size: .82em; font-weight: 600;
+  transition: all .15s; display: flex; align-items: center; gap: 5px;
+}
+.btn-orient + .btn-orient { border-left: 1.5px solid var(--border); }
+.btn-orient.active { background: var(--primary); color: #fff; }
+.btn-orient:hover:not(.active) { background: var(--primary-lt); color: var(--primary); }
+.orient-label { font-size: .82em; color: var(--muted); font-weight: 500; }
+/* page icons */
+.icon-portrait  { display:inline-block; width:10px; height:13px; border:1.5px solid currentColor; border-radius:1px; }
+.icon-landscape { display:inline-block; width:13px; height:10px; border:1.5px solid currentColor; border-radius:1px; }
+
+/* ── HEADER CARD ── */
+.page-wrap { max-width: 1260px; margin: 0 auto; padding: 88px 20px 40px; }
+.header-card {
+  background: linear-gradient(135deg, var(--primary) 0%, #1a5fb4 60%, #0d3d82 100%);
+  border-radius: var(--radius);
+  padding: 32px 36px;
+  color: #fff;
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 24px;
+  position: relative; overflow: hidden;
+}
+.header-card::before {
+  content: '';
+  position: absolute; top: -40px; right: -40px;
+  width: 200px; height: 200px;
+  background: rgba(255,255,255,.07); border-radius: 50%;
+}
+.header-card::after {
+  content: '';
+  position: absolute; bottom: -60px; right: 80px;
+  width: 140px; height: 140px;
+  background: rgba(255,255,255,.04); border-radius: 50%;
+}
+.hc-left h1 { font-size: 1.9em; font-weight: 800; font-family: 'Prompt', sans-serif; }
+.hc-left p { margin-top: 4px; opacity: .8; font-size: .95em; }
+.hc-meta { display: flex; gap: 24px; }
+.hc-badge {
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 10px; padding: 10px 18px; text-align: center;
+  backdrop-filter: blur(4px);
+}
+.hc-badge .val { font-size: 1.35em; font-weight: 700; }
+.hc-badge .lbl { font-size: .78em; opacity: .8; margin-top: 2px; }
+
+/* ── TABS ── */
+.tabs { display: flex; gap: 8px; margin-bottom: 0; }
+.tab-btn {
+  padding: 11px 22px; border: none; cursor: pointer;
+  border-radius: 10px 10px 0 0; font-family: 'Sarabun', sans-serif;
+  font-size: .95em; font-weight: 600; transition: all .18s;
+  background: var(--white); color: var(--muted);
+  border: 1.5px solid var(--border); border-bottom: none;
+}
+.tab-btn.active {
+  background: var(--primary); color: #fff;
+  border-color: var(--primary);
+}
+.tab-btn:hover:not(.active) { background: var(--primary-lt); color: var(--primary); }
+
+.tab-content {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 0 var(--radius) var(--radius) var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+}
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+
+/* ── SECTION TITLE ── */
+.sec-title {
+  font-size: 1.05em; font-weight: 700; color: var(--primary);
+  border-left: 4px solid var(--accent); padding-left: 12px;
+  margin: 24px 0 14px;
+}
+.sec-title:first-child { margin-top: 0; }
+
+/* ── COVERAGE GRID ── */
+.cov-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 14px; margin-bottom: 24px;
+}
+.cov-card {
+  border-radius: 10px; padding: 18px 20px;
+  border: 1.5px solid var(--border);
+  position: relative;
+}
+.cov-card.e445 { background: linear-gradient(135deg,#e8f0fb,#f5f8ff); border-color: #b8d0f5; }
+.cov-card.t80  { background: linear-gradient(135deg,#e0f2f1,#f0faf9); border-color: #a7d7d3; }
+.cov-card.both { grid-column: 1/-1; background: linear-gradient(135deg,#fff8e8,#fffdf5); border-color: #f0d080; }
+.cov-card-tag {
+  position: absolute; top: 14px; right: 14px;
+  font-size: .75em; font-weight: 700;
+  padding: 3px 10px; border-radius: 20px;
+}
+.e445 .cov-card-tag { background: var(--primary); color: #fff; }
+.t80  .cov-card-tag { background: var(--teal); color: #fff; }
+.both .cov-card-tag { background: var(--accent); color: #fff; }
+.cov-card h3 { font-size: .82em; color: var(--muted); font-weight: 500; margin-bottom: 4px; }
+.cov-card .val { font-size: 1.6em; font-weight: 800; color: var(--primary); font-family: 'Prompt', sans-serif; }
+.t80 .val { color: var(--teal); }
+.both .val { color: #c07000; }
+
+/* ── COVERAGE TABLE ── */
+.cov-table-wrap { overflow-x: auto; border-radius: 10px; box-shadow: 0 1px 6px rgba(0,87,168,.07); }
+table { width: 100%; border-collapse: collapse; }
+thead th {
+  background: var(--primary); color: #fff;
+  padding: 11px 14px; text-align: center;
+  font-weight: 600; font-size: .88em;
+  white-space: nowrap;
+}
+thead th:first-child { text-align: left; border-radius: 10px 0 0 0; }
+thead th:last-child  { border-radius: 0 10px 0 0; }
+tbody tr:nth-child(even) { background: var(--primary-lt); }
+tbody tr:hover { background: #d6e6f9; }
+tbody td {
+  padding: 10px 14px; border-bottom: 1px solid var(--border);
+  font-size: .9em; vertical-align: middle;
+}
+tbody td:first-child { font-weight: 600; color: var(--text); }
+td.num { text-align: right; font-variant-numeric: tabular-nums; }
+td.total { font-weight: 800; color: var(--primary); }
+tfoot td { background: var(--primary); color: #fff; font-weight: 700; padding: 11px 14px; }
+tfoot td.num { text-align: right; }
+
+/* Category separators */
+.row-cat td { background: #eaf1fb !important; font-weight: 700; color: var(--primary); font-size: .82em; letter-spacing: .4px; padding: 7px 14px !important; }
+
+/* ── PREMIUM TABLE (annual) ── */
+.yr-table-wrap { overflow-x: auto; border-radius: 10px; box-shadow: 0 1px 6px rgba(0,87,168,.07); }
+.yr-table-wrap table thead th { background: var(--primary); }
+.yr-table-wrap table { min-width: 860px; }
+
+tr.has-return { background: #fff8e8 !important; }
+tr.has-return:hover { background: #ffefc0 !important; }
+.badge-return {
+  display: inline-block; background: var(--accent);
+  color: #fff; font-size: .72em; font-weight: 700;
+  padding: 2px 8px; border-radius: 12px; margin-left: 4px;
+}
+td.negative { color: var(--red); font-weight: 700; }
+tr.current-year { outline: 2px solid var(--accent); outline-offset: -2px; }
+tr.current-year td:first-child::after { content: ' ◄ ปัจจุบัน 2569'; font-size:.75em; color:var(--accent); font-weight:700; }
+
+/* ── LEGEND ── */
+.legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 14px; }
+.leg-item { display: flex; align-items: center; gap: 6px; font-size: .82em; color: var(--muted); }
+.leg-box { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
+
+/* ── PRINT ── */
+@media print {
+  @page { margin: 12mm 10mm; }
+  .toolbar, .tabs { display: none !important; }
+  body { background: #fff !important; font-size: 10pt !important; }
+  .page-wrap { padding: 0 !important; max-width: 100% !important; }
+  .header-card { print-color-adjust: exact; -webkit-print-color-adjust: exact; break-inside: avoid; }
+  .tab-pane { display: block !important; page-break-before: always; }
+  .tab-pane:first-of-type { page-break-before: auto; }
+  .tab-content { border: none !important; box-shadow: none !important; padding: 8px 0 !important; }
+  thead { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  tbody tr:nth-child(even) { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  tr.has-return { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .cov-card { print-color-adjust: exact; -webkit-print-color-adjust: exact; break-inside: avoid; }
+  .yr-table-wrap table { min-width: unset !important; }
+  .tab-content { page-break-inside: avoid; }
+  table { page-break-inside: auto; }
+  tr { page-break-inside: avoid; }
+  .print-tab-title { display: block !important; font-family: 'Prompt', sans-serif; font-size: 14pt; font-weight: 700; color: var(--primary); margin: 12px 0 8px; }
+}
+.print-tab-title { display: none; }
+</style>
+</head>
+<body>
+
+<!-- TOOLBAR -->
+<div class="toolbar">
+  <div class="toolbar-logo">AIA <span>Coverage</span> Report</div>
+  <span class="fs-label">ขนาดตัวอักษร:</span>
+  <div class="btn-group">
+    <button class="btn btn-fs" onclick="changeFont(-1)" title="ลด">A−</button>
+    <button class="btn btn-fs" onclick="changeFont(0)" title="ปกติ" style="font-size:.9em">A</button>
+    <button class="btn btn-fs" onclick="changeFont(1)" title="เพิ่ม" style="font-size:1.1em">A+</button>
+  </div>
+  <span class="orient-label">การวาง:</span>
+  <div class="orient-group">
+    <button class="btn-orient" id="btn-portrait" onclick="setOrient('portrait')" title="แนวตั้ง">
+      <span class="icon-portrait"></span> แนวตั้ง
+    </button>
+    <button class="btn-orient active" id="btn-landscape" onclick="setOrient('landscape')" title="แนวนอน">
+      <span class="icon-landscape"></span> แนวนอน
+    </button>
+  </div>
+  <button class="btn btn-print" onclick="doPrint()">
+    🖨️ พิมพ์ / PDF
+  </button>
+</div>
+
+<!-- PAGE -->
+<div class="page-wrap">
+
+  <!-- HEADER -->
+  <div class="header-card">
+    <div class="hc-left">
+      <h1>คุณนวลจันทร์ สุธรรมพร</h1>
+      <p>สรุปความคุ้มครองประกันชีวิตและสุขภาพ — AIA &nbsp;|&nbsp; จัดทำ มีนาคม 2568</p>
+    </div>
+    <div class="hc-meta">
+      <div class="hc-badge">
+        <div class="val">800,000</div>
+        <div class="lbl">ทุนประกันรวม (บาท)</div>
+      </div>
+      <div class="hc-badge">
+        <div class="val">1,600,000</div>
+        <div class="lbl">คุ้มครองโรคร้ายแรง (บาท)</div>
+      </div>
+      <div class="hc-badge">
+        <div class="val">180,835</div>
+        <div class="lbl">เบี้ยรวมปัจจุบัน/ปี (บาท)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('tab1',this)">📋 ภาพรวมความคุ้มครอง</button>
+    <button class="tab-btn" onclick="showTab('tab2',this)">📊 เบี้ยรายปี — E445</button>
+    <button class="tab-btn" onclick="showTab('tab3',this)">📊 เบี้ยรายปี — 10for80</button>
+  </div>
+
+  <div class="tab-content">
+
+    <!-- ════ TAB 1: COVERAGE OVERVIEW ════ -->
+    <div id="tab1" class="tab-pane active">
+      <div class="print-tab-title">ภาพรวมความคุ้มครอง</div>
+
+      <div class="sec-title">ข้อมูลกรมธรรม์</div>
+      <div class="cov-grid">
+        <div class="cov-card e445">
+          <span class="cov-card-tag">E445</span>
+          <h3>เลขที่กรมธรรม์</h3>
+          <div class="val" style="font-size:1.2em">T119709548</div>
+          <p style="margin-top:8px;font-size:.85em;color:var(--muted)">วันที่กรมธรรม์: 7 ต.ค. 2548 | คุ้มครอง 42 ปี / ชำระเบี้ย 21 ปี</p>
+        </div>
+        <div class="cov-card t80">
+          <span class="cov-card-tag">10for80</span>
+          <h3>เลขที่กรมธรรม์</h3>
+          <div class="val" style="font-size:1.2em">T177945988</div>
+          <p style="margin-top:8px;font-size:.85em;color:var(--muted)">วันที่กรมธรรม์: 20 มี.ค. 2556 | คุ้มครองถึงอายุ 80 ปี / ชำระเบี้ย 10 ปี</p>
+        </div>
+      </div>
+
+      <div class="sec-title">สรุปความคุ้มครอง</div>
+      <div class="cov-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:38%">รายการความคุ้มครอง</th>
+              <th>E445<br><small style="font-weight:400;opacity:.8">T119709548</small></th>
+              <th>10for80<br><small style="font-weight:400;opacity:.8">T177945988</small></th>
+              <th>รวม</th>
+              <th>หน่วย</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="row-cat"><td colspan="5">🛡️ ความคุ้มครองชีวิต (สัญญาหลัก)</td></tr>
+            <tr>
+              <td>ทุนประกันชีวิต (เสียชีวิต / สุขภาพทุพพลภาพ)</td>
+              <td class="num">500,000</td>
+              <td class="num">300,000</td>
+              <td class="num total">800,000</td>
+              <td>บาท</td>
+            </tr>
+            <tr>
+              <td>WP — ยกเว้นเบี้ย (บริษัทส่งแทนกรณีทุพพลภาพ)</td>
+              <td class="num">500,000</td>
+              <td class="num">300,000</td>
+              <td class="num total">800,000</td>
+              <td>บาท</td>
+            </tr>
+
+            <tr class="row-cat"><td colspan="5">🚨 AI/ADD — คุ้มครองอุบัติเหตุ (AIA ADD)</td></tr>
+            <tr>
+              <td>คุ้มครองกรณีอุบัติเหตุ / ทุพพลภาพ (AI/ADD)</td>
+              <td class="num">700,000</td>
+              <td class="num">1,000,000</td>
+              <td class="num total">1,700,000</td>
+              <td>บาท</td>
+            </tr>
+            <tr>
+              <td>ชดเชยนอนโรงพยาบาล (อุบัติเหตุ)</td>
+              <td class="num">6,300</td>
+              <td class="num">9,000</td>
+              <td class="num total">15,300</td>
+              <td>บาท/สัปดาห์</td>
+            </tr>
+            <tr>
+              <td>ชดเชยรักษาตัวที่บ้าน (อุบัติเหตุ)</td>
+              <td class="num">4,200</td>
+              <td class="num">6,000</td>
+              <td class="num total">10,200</td>
+              <td>บาท/สัปดาห์</td>
+            </tr>
+            <tr>
+              <td>ชดเชยบาดเจ็บเล็กน้อย (อุบัติเหตุ)</td>
+              <td class="num">1,400</td>
+              <td class="num">2,000</td>
+              <td class="num total">3,400</td>
+              <td>บาท/สัปดาห์</td>
+            </tr>
+            <tr>
+              <td>RCC — คุ้มครองกรณีถูกลอบทำร้าย</td>
+              <td class="num">700,000</td>
+              <td class="num">1,000,000</td>
+              <td class="num total">1,700,000</td>
+              <td>บาท</td>
+            </tr>
+
+            <tr class="row-cat"><td colspan="5">🏥 H&S — สุขภาพในโรงพยาบาล (AIA H&amp;S)</td></tr>
+            <tr>
+              <td>ค่าห้อง, อาหาร, พยาบาล</td>
+              <td class="num">2,200</td>
+              <td class="num">4,000</td>
+              <td class="num total">6,200</td>
+              <td>บาท/วัน</td>
+            </tr>
+            <tr>
+              <td>ค่าห้อง ICU</td>
+              <td class="num">4,400</td>
+              <td class="num">8,000</td>
+              <td class="num total">12,400</td>
+              <td>บาท/วัน</td>
+            </tr>
+            <tr>
+              <td>ค่ารักษาพยาบาลทั่วไป</td>
+              <td class="num">20,000</td>
+              <td class="num">30,000</td>
+              <td class="num total">50,000</td>
+              <td>บาท/ครั้ง</td>
+            </tr>
+            <tr>
+              <td>ค่าศัลยกรรม (ผ่าตัด)</td>
+              <td class="num">60,000</td>
+              <td class="num">90,000</td>
+              <td class="num total">150,000</td>
+              <td>บาท/ครั้ง</td>
+            </tr>
+            <tr>
+              <td>ค่าห้องผ่าตัด</td>
+              <td class="num">5,500</td>
+              <td class="num">7,000</td>
+              <td class="num total">12,500</td>
+              <td>บาท/ครั้ง</td>
+            </tr>
+            <tr>
+              <td>ค่าวางยาสลบ</td>
+              <td class="num">6,000</td>
+              <td class="num">7,500</td>
+              <td class="num total">13,500</td>
+              <td>บาท/ครั้ง</td>
+            </tr>
+            <tr>
+              <td>ค่าพยาบาลฉุกเฉิน</td>
+              <td class="num">5,000</td>
+              <td class="num">7,500</td>
+              <td class="num total">12,500</td>
+              <td>บาท/ครั้ง</td>
+            </tr>
+            <tr>
+              <td>ค่าวินิจฉัยโรคและเอ็กซเรย์</td>
+              <td class="num">3,000</td>
+              <td class="num">4,000</td>
+              <td class="num total">7,000</td>
+              <td>บาท/ครั้ง</td>
+            </tr>
+            <tr>
+              <td>ค่าปรึกษาแพทย์</td>
+              <td class="num">800</td>
+              <td class="num">950</td>
+              <td class="num total">1,750</td>
+              <td>บาท/วัน</td>
+            </tr>
+
+            <tr class="row-cat"><td colspan="5">💊 CR — โรคร้ายแรง 6 โรค (AIA CR)</td></tr>
+            <tr>
+              <td>ชดเชยรายวัน (6 โรคร้ายแรง)</td>
+              <td class="num">5,000</td>
+              <td class="num">10,000</td>
+              <td class="num total">15,000</td>
+              <td>บาท/วัน</td>
+            </tr>
+            <tr>
+              <td>ชดเชยกรณีเสียชีวิต (6 โรคร้ายแรง)</td>
+              <td class="num">500,000</td>
+              <td class="num">1,000,000</td>
+              <td class="num total">1,500,000</td>
+              <td>บาท</td>
+            </tr>
+
+            <tr class="row-cat"><td colspan="5">🔬 ECIR — โรคร้ายแรง 40 โรค ล่วงหน้า (AIA ECIR)</td></tr>
+            <tr>
+              <td>ชดเชยล่วงหน้า 40 โรคร้ายแรง</td>
+              <td class="num">1,000,000</td>
+              <td class="num">600,000</td>
+              <td class="num total">1,600,000</td>
+              <td>บาท</td>
+            </tr>
+
+            <tr class="row-cat"><td colspan="5">💰 เบี้ยประกันปัจจุบัน (ปี 2568)</td></tr>
+            <tr>
+              <td>เบี้ยหลัก</td>
+              <td class="num">55,050</td>
+              <td class="num" style="color:var(--teal);font-weight:700">ชำระครบแล้ว</td>
+              <td class="num total">55,050</td>
+              <td>บาท/ปี</td>
+            </tr>
+            <tr>
+              <td>เบี้ยสุขภาพ (Riders รวม)</td>
+              <td class="num">58,761</td>
+              <td class="num">67,024</td>
+              <td class="num total">125,785</td>
+              <td>บาท/ปี</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td><strong>เบี้ยรวมทั้งหมด / ปี</strong></td>
+              <td class="num">113,811</td>
+              <td class="num">67,024</td>
+              <td class="num" style="font-size:1.1em">180,835</td>
+              <td>บาท/ปี</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <div class="legend" style="margin-top:16px">
+        <div class="leg-item"><div class="leg-box" style="background:#eaf1fb;border:1px solid #b8d0f5"></div>กรมธรรม์ E445</div>
+        <div class="leg-item"><div class="leg-box" style="background:#e0f2f1;border:1px solid #a7d7d3"></div>กรมธรรม์ 10for80</div>
+        <div class="leg-item"><div class="leg-box" style="background:#fff8e8;border:1px solid #f0d080"></div>ข้อมูลรวม</div>
+        <div class="leg-item"><div class="leg-box" style="background:var(--primary)"></div>คอลัมน์หัวตาราง</div>
+      </div>
+    </div>
+
+    <!-- ════ TAB 2: E445 ANNUAL PREMIUM ════ -->
+    <div id="tab2" class="tab-pane">
+      <div class="print-tab-title">ตารางเบี้ยรายปี — E445 (T119709548)</div>
+      <div class="sec-title">ตารางเบี้ยประกันรายปี — E445 (T119709548) | เริ่ม ปี 2548 อายุ 42 ปี</div>
+      <p style="font-size:.85em;color:var(--muted);margin-bottom:14px">หมายเหตุ: ปีที่ 22 เป็นต้นไป เบี้ยหลักครบกำหนด (ชำระครบ 21 ปี) เหลือเฉพาะเบี้ยสัญญาเพิ่มเติม | เบี้ย H&S เพิ่มขึ้นตามอายุ</p>
+      <div class="yr-table-wrap">
+        <table id="e445-table">
+          <thead>
+            <tr>
+              <th>ปีที่</th>
+              <th>ปี พ.ศ.</th>
+              <th>อายุ</th>
+              <th>เบี้ยหลัก</th>
+              <th>AI/RCC</th>
+              <th>HB</th>
+              <th>H&S</th>
+              <th>CR</th>
+              <th>ECIR</th>
+              <th>เงินคืน</th>
+              <th>รวม (หักเงินคืน)</th>
+              <th>รวม (ไม่หักเงินคืน)</th>
+            </tr>
+          </thead>
+          <tbody id="e445-body"></tbody>
+          <tfoot id="e445-foot"></tfoot>
+        </table>
+      </div>
+      <div class="legend" style="margin-top:14px">
+        <div class="leg-item"><div class="leg-box" style="background:#fff8e8;border:1px solid #f0d080"></div>ปีที่มีเงินคืน</div>
+        <div class="leg-item"><div class="leg-box" style="outline:2px solid var(--accent);outline-offset:-2px;background:#fff"></div>ปีปัจจุบัน (2569)</div>
+        <div class="leg-item" style="color:var(--red)">⚠️ ตัวเลขสีแดง = ยอดติดลบ (เงินคืนมากกว่าเบี้ย)</div>
+      </div>
+    </div>
+
+    <!-- ════ TAB 3: 10FOR80 ANNUAL PREMIUM ════ -->
+    <div id="tab3" class="tab-pane">
+      <div class="print-tab-title">ตารางเบี้ยรายปี — 10for80 (T177945988)</div>
+      <div class="sec-title">ตารางเบี้ยประกันรายปี — 10for80 (T177945988) | เริ่ม ปี 2556 อายุ 49 ปี</div>
+      <p style="font-size:.85em;color:var(--muted);margin-bottom:14px">หมายเหตุ: ชำระเบี้ยหลักครบ 10 ปี (ปี 2556–2565) | ปีที่ 11 เป็นต้นไป เหลือเฉพาะเบี้ยสัญญาเพิ่มเติม | H&S เพิ่มตามอายุ</p>
+      <div class="yr-table-wrap">
+        <table id="t80-table">
+          <thead>
+            <tr>
+              <th>ปีที่</th>
+              <th>ปี พ.ศ.</th>
+              <th>อายุ</th>
+              <th>เบี้ยหลัก 10for80</th>
+              <th>AI/RCC</th>
+              <th>HB</th>
+              <th>H&S</th>
+              <th>CR</th>
+              <th>ECIR</th>
+              <th>เงินคืน</th>
+              <th>รวม (ไม่หักเงินคืน)</th>
+            </tr>
+          </thead>
+          <tbody id="t80-body"></tbody>
+          <tfoot id="t80-foot"></tfoot>
+        </table>
+      </div>
+      <div class="legend" style="margin-top:14px">
+        <div class="leg-item"><div class="leg-box" style="background:#fff8e8;border:1px solid #f0d080"></div>ปีที่มีเงินคืน</div>
+        <div class="leg-item"><div class="leg-box" style="outline:2px solid var(--accent);outline-offset:-2px;background:#fff"></div>ปีปัจจุบัน (2569)</div>
+      </div>
+    </div>
+
+  </div><!-- /tab-content -->
+</div><!-- /page-wrap -->
+
+<script>
+/* ── FONT SIZE ── */
+let fsBase = 14;
+function changeFont(dir) {
+  if (dir === 0) fsBase = 14;
+  else fsBase = Math.min(20, Math.max(10, fsBase + dir * 1));
+  document.documentElement.style.setProperty('--fs', fsBase + 'px');
+}
+
+/* ── ORIENTATION + PRINT ── */
+let printOrient = 'landscape'; // default
+function setOrient(o) {
+  printOrient = o;
+  document.getElementById('btn-portrait').classList.toggle('active', o === 'portrait');
+  document.getElementById('btn-landscape').classList.toggle('active', o === 'landscape');
+}
+function doPrint() {
+  // inject or update @page size rule
+  let styleEl = document.getElementById('print-orient-style');
+  if (!styleEl) {
+    styleEl = document.createElement('style');
+    styleEl.id = 'print-orient-style';
+    document.head.appendChild(styleEl);
+  }
+  styleEl.textContent = `@media print { @page { size: A4 ${printOrient}; } }`;
+  window.print();
+}
+
+/* ── TABS ── */
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ── FORMAT ── */
+const fmt = n => n === 0 ? '—' : n.toLocaleString('th-TH', {minimumFractionDigits:0,maximumFractionDigits:0});
+const fmtF = n => n === null || n === undefined ? '—' : Math.round(n).toLocaleString('th-TH');
+
+/* ── E445 DATA ── */
+const e445 = [
+  [1,2005,42,55050,4375,1500,7788,1627,6470,0,76810,76810],
+  [2,2006,43,55050,4375,1500,7788,1627,6470,0,76810,76810],
+  [3,2007,44,55050,4375,1500,7788,1627,6470,0,76810,76810],
+  [4,2008,45,55050,4375,1500,7788,1627,8860,25000,54200,79200],
+  [5,2009,46,55050,4375,1500,8382,2365,8860,0,80532,80532],
+  [6,2010,47,55050,4375,1500,8382,2365,8860,0,80532,80532],
+  [7,2011,48,55050,4375,1500,8382,2365,8860,25000,55532,80532],
+  [8,2012,49,55050,4375,1500,8382,2365,8860,0,80532,80532],
+  [9,2013,50,55050,4375,1500,8382,2365,9290,0,80962,80962],
+  [10,2014,51,55050,4375,1500,10758,3496,10390,25000,60569,85569],
+  [11,2015,52,55050,4375,1500,10758,3496,11540,0,86719,86719],
+  [12,2016,53,55050,4375,1500,10758,3496,12890,0,88069,88069],
+  [13,2017,54,55050,4375,1500,10758,3496,14430,25000,64609,89609],
+  [14,2018,55,55050,4375,1500,10758,3496,16070,0,91249,91249],
+  [15,2019,56,55050,4375,1500,14322,5025,17830,0,98102,98102],
+  [16,2020,57,55050,4375,1500,14322,5025,19680,25000,74952,99952],
+  [17,2021,58,55050,4375,1500,14322,5025,21430,0,101702,101702],
+  [18,2022,59,55050,4375,1500,14322,5025,23210,0,103482,103482],
+  [19,2023,60,55050,4375,1500,14322,5025,24860,25000,80132,105132],
+  [20,2024,61,55050,4375,0,19140,6876,26550,0,111991,111991],
+  [21,2025,62,55050,4375,0,19140,6876,28370,0,113811,113811],
+  [22,2026,63,0,4375,0,19140,6876,30340,300000,-239269,60731],
+  [23,2027,64,0,4375,0,19140,6876,32310,50000,12701,62701],
+  [24,2028,65,0,4375,0,19140,6876,34330,50000,14721,64721],
+  [25,2029,66,0,0,0,28688,7875,36860,50000,23423,73423],
+  [26,2030,67,0,0,0,28688,7875,38860,50000,25423,75423],
+  [27,2031,68,0,0,0,28688,7875,41420,50000,27983,77983],
+  [28,2032,69,0,0,0,28688,7875,44110,50000,30673,80673],
+  [29,2033,70,0,0,0,28688,7875,47000,50000,33563,83563],
+  [30,2034,71,0,0,0,46222,10350,50000,50000,56572,106572],
+  [31,2035,72,0,0,0,46222,10350,54000,50000,60572,110572],
+  [32,2036,73,0,0,0,46222,10350,58000,50000,64572,114572],
+  [33,2037,74,0,0,0,46222,10350,62000,50000,68572,118572],
+  [34,2038,75,0,0,0,46222,10350,66000,50000,72572,122572],
+  [35,2039,76,0,0,0,74426,12825,71000,50000,108251,158251],
+  [36,2040,77,0,0,0,74426,12825,76000,50000,113251,163251],
+  [37,2041,78,0,0,0,74426,12825,81000,50000,118251,168251],
+  [38,2042,79,0,0,0,74426,12825,87000,50000,124251,174251],
+  [39,2043,80,0,0,0,74426,12825,87000,50000,124251,174251],
+  [40,2044,81,0,0,0,0,0,0,50000,-50000,0],
+  [41,2045,82,0,0,0,0,0,0,50000,-50000,0],
+  [42,2046,83,0,0,0,0,0,0,50000,-50000,0],
+  [43,2047,84,0,0,0,0,0,0,1050000,-1050000,0],
+];
+
+/* ── 10FOR80 DATA ── */
+const t80 = [
+  [1,2013,49,19650,6250,5550,13120,4730,5316,0,54616],
+  [2,2014,50,19650,6250,5550,13120,4730,5574,0,54874],
+  [3,2015,51,19650,6250,5550,16840,6991,6234,0,61515],
+  [4,2016,52,19650,6250,5550,16840,6991,6924,25000,62205],
+  [5,2017,53,19650,6250,5550,16840,6991,7734,0,63015],
+  [6,2018,54,19650,6250,5550,16840,6991,8658,0,63939],
+  [7,2019,55,19650,6250,5550,16840,6991,9642,25000,64923],
+  [8,2020,56,19650,6250,5550,22520,10050,10698,0,74718],
+  [9,2021,57,19650,6250,5550,22520,10050,11808,0,75828],
+  [10,2022,58,19650,6250,5550,22520,10050,12858,25000,76878],
+  [11,2023,59,0,6250,5550,22520,10050,13926,0,58296],
+  [12,2024,60,0,6250,0,22520,10050,14916,0,53736],
+  [13,2025,61,0,6250,0,30000,13752,15930,25000,65932],
+  [14,2026,62,0,6250,0,30000,13752,17022,0,67024],
+  [15,2027,63,0,6250,0,30000,13752,18204,0,68206],
+  [16,2028,64,0,6250,0,30000,13752,19386,25000,69388],
+  [17,2029,65,0,6250,0,30000,13752,20598,0,70600],
+  [18,2030,66,0,0,0,45040,15750,20598,0,81388],
+  [19,2031,67,0,0,0,45040,15750,20598,25000,81388],
+  [20,2032,68,0,0,0,45040,15750,20598,0,81388],
+  [21,2033,69,0,0,0,45040,15750,26466,0,87256],
+  [22,2034,70,0,0,0,45040,15750,28200,300000,88990],
+  [23,2035,71,0,0,0,72560,20700,30000,50000,123260],
+  [24,2036,72,0,0,0,72560,20700,32400,50000,125660],
+  [25,2037,73,0,0,0,72560,20700,34800,50000,128060],
+  [26,2038,74,0,0,0,72560,20700,37200,50000,130460],
+  [27,2039,75,0,0,0,72560,20700,39600,50000,132860],
+  [28,2040,76,0,0,0,116840,25650,42600,50000,185090],
+  [29,2041,77,0,0,0,116840,25650,45600,50000,188090],
+  [30,2042,78,0,0,0,116840,25650,48600,50000,191090],
+  [31,2043,79,0,0,0,116840,25650,52200,50000,194690],
+  [32,2044,80,0,0,0,116840,25650,52200,50000,194690],
+];
+
+/* ── RENDER E445 ── */
+(function(){
+  const tbody = document.getElementById('e445-body');
+  let totMain=0,totAI=0,totHB=0,totHS=0,totCR=0,totECIR=0,totReturn=0,totNet=0,totGross=0;
+  e445.forEach(r => {
+    const [yr,be,age,main,ai,hb,hs,cr,ecir,ret,net,gross] = r;
+    const isCurrent = be === 2026;
+    const hasReturn = ret > 0;
+    totMain+=main; totAI+=ai; totHB+=hb; totHS+=hs; totCR+=cr; totECIR+=ecir;
+    totReturn+=ret; totNet+=net; totGross+=gross;
+    const cls = (isCurrent ? ' current-year' : '') + (hasReturn ? ' has-return' : '');
+    tbody.innerHTML += `<tr class="${cls.trim()}">
+      <td>${yr}</td>
+      <td>${be}</td>
+      <td>${age}</td>
+      <td class="num">${main>0?fmt(main):'<span style="color:var(--teal);font-weight:700">ครบแล้ว</span>'}</td>
+      <td class="num">${ai>0?fmt(ai):'—'}</td>
+      <td class="num">${hb>0?fmt(hb):'—'}</td>
+      <td class="num">${fmt(hs)}</td>
+      <td class="num">${fmt(cr)}</td>
+      <td class="num">${fmt(ecir)}</td>
+      <td class="num">${ret>0?`<strong style="color:#b07000">${fmt(ret)}</strong>${hasReturn?'<span class="badge-return">คืน</span>':''}` :'—'}</td>
+      <td class="num ${net<0?'negative':''}">${fmtF(net)}</td>
+      <td class="num">${fmtF(gross)}</td>
+    </tr>`;
+  });
+  document.getElementById('e445-foot').innerHTML = `<tr>
+    <td colspan="3">รวมตลอดสัญญา</td>
+    <td class="num">${fmt(totMain)}</td>
+    <td class="num">${fmt(totAI)}</td>
+    <td class="num">${fmt(totHB)}</td>
+    <td class="num">${fmt(totHS)}</td>
+    <td class="num">${fmt(totCR)}</td>
+    <td class="num">${fmt(totECIR)}</td>
+    <td class="num">${fmt(totReturn)}</td>
+    <td class="num">${fmtF(totNet)}</td>
+    <td class="num">${fmtF(totGross)}</td>
+  </tr>`;
+})();
+
+/* ── RENDER 10FOR80 ── */
+(function(){
+  const tbody = document.getElementById('t80-body');
+  let totMain=0,totAI=0,totHB=0,totHS=0,totCR=0,totECIR=0,totReturn=0,totGross=0;
+  t80.forEach(r => {
+    const [yr,be,age,main,ai,hb,hs,cr,ecir,ret,gross] = r;
+    const isCurrent = be === 2026;
+    const hasReturn = ret > 0;
+    totMain+=main; totAI+=ai; totHB+=hb; totHS+=hs; totCR+=cr; totECIR+=ecir;
+    totReturn+=ret; totGross+=gross;
+    const cls = (isCurrent ? ' current-year' : '') + (hasReturn ? ' has-return' : '');
+    tbody.innerHTML += `<tr class="${cls.trim()}">
+      <td>${yr}</td>
+      <td>${be}</td>
+      <td>${age}</td>
+      <td class="num">${main>0?fmt(main):'<span style="color:var(--teal);font-weight:700">ครบแล้ว</span>'}</td>
+      <td class="num">${ai>0?fmt(ai):'—'}</td>
+      <td class="num">${hb>0?fmt(hb):'—'}</td>
+      <td class="num">${fmt(hs)}</td>
+      <td class="num">${fmt(cr)}</td>
+      <td class="num">${fmt(ecir)}</td>
+      <td class="num">${ret>0?`<strong style="color:#b07000">${fmt(ret)}</strong><span class="badge-return">คืน</span>` :'—'}</td>
+      <td class="num">${fmtF(gross)}</td>
+    </tr>`;
+  });
+  document.getElementById('t80-foot').innerHTML = `<tr>
+    <td colspan="3">รวมตลอดสัญญา</td>
+    <td class="num">${fmt(totMain)}</td>
+    <td class="num">${fmt(totAI)}</td>
+    <td class="num">${fmt(totHB)}</td>
+    <td class="num">${fmt(totHS)}</td>
+    <td class="num">${fmt(totCR)}</td>
+    <td class="num">${fmt(totECIR)}</td>
+    <td class="num">${fmt(totReturn)}</td>
+    <td class="num">${fmtF(totGross)}</td>
+  </tr>`;
+})();
+</script>
+</body>
+</html>

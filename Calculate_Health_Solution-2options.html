@@ -32,7 +32,7 @@
         .compare-table td.data-cell { text-align: center; border-right: 1px solid #eee; }
         .compare-table tr:hover td { background-color: #f9fbfd; }
         .sub-header-row td { background-color: #e3e8ee !important; font-weight: bold; color: var(--primary-color); text-align: left !important; padding-top: 18px; border-top: 2px solid #ccc; }
-        .total-row td { font-weight: bold; font-size: 22px; background-color: #fff4f4 !important; color: var(--accent-color); border-top: 2px solid var(--accent-color); }
+        .total-row td { font-weight: bold; font-size: 22px; background-color: #fff4f4; color: var(--accent-color); border-top: 2px solid var(--accent-color); }
 
         .badge { display: inline-block; padding: 3px 9px; border-radius: 20px; font-size: 13px; font-weight: bold; color: white; vertical-align: middle; margin-left: 6px; }
         .badge-tax { background-color: #28a745; }
@@ -288,6 +288,56 @@
             </div>
         </div>
 
+        <!-- Additional Products (CI PC + MTL EC) -->
+        <div class="col-span-4 grid grid-cols-3 gap-3 mt-1">
+            <div class="bg-orange-50 p-3 rounded-xl border border-orange-200">
+                <h3 class="font-bold text-orange-800 text-sm mb-2">🔶 CI Perfect Care (MTL)</h3>
+                <div class="space-y-1.5">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-gray-600">ทุนประกัน (บาท)</span>
+                        <input type="number" id="cipc-sum" value="0" step="100000" oninput="calcAddons()"
+                            class="w-28 border border-orange-300 p-1 rounded text-xs text-right font-bold">
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <input type="checkbox" id="cipc-show" class="w-3 h-3" onchange="calcAddons()">
+                        <label for="cipc-show" class="text-xs text-gray-600">แสดงความคุ้มครองในรายงาน</label>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-green-50 p-3 rounded-xl border border-green-200">
+                <h3 class="font-bold text-green-800 text-sm mb-2">🟢 MTL Extra Care</h3>
+                <div class="space-y-1.5">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-gray-600">แบบแผน</span>
+                        <select id="mtlec-plan" onchange="calcAddons()" class="w-24 border border-green-300 p-1 rounded text-xs">
+                            <option value="0">ไม่เลือก</option>
+                            <option value="1">แบบ 1 (ห้อง 1,000)</option>
+                            <option value="2">แบบ 2 (ห้อง 1,500)</option>
+                            <option value="3">แบบ 3 (ห้อง 2,000)</option>
+                            <option value="4">แบบ 4 (ห้อง 4,000)</option>
+                            <option value="5">แบบ 5 (ห้อง 6,000)</option>
+                        </select>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-gray-600">จำนวนชุด (สูงสุด 2)</span>
+                        <select id="mtlec-copies" onchange="calcAddons()" class="w-24 border border-green-300 p-1 rounded text-xs">
+                            <option value="1">1 ชุด</option>
+                            <option value="2">2 ชุด</option>
+                        </select>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <input type="checkbox" id="mtlec-show" class="w-3 h-3" onchange="calcAddons()">
+                        <label for="mtlec-show" class="text-xs text-gray-600">แสดงความคุ้มครองในรายงาน</label>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 p-3 rounded-xl border border-gray-200 text-xs text-gray-500">
+                <p class="font-bold text-gray-700 mb-1">📋 หมายเหตุ</p>
+                <p>MTL Extra Care สามารถซื้อได้สูงสุด <strong>2 ชุด</strong> เพื่อรับความคุ้มครองเป็น 2 เท่า</p>
+                <p class="mt-1">CI Perfect Care: กลุ่มอาชีพ 1-2, คุ้มครองถึงอายุ 85 ปี, 36 โรคร้ายแรง</p>
+            </div>
+        </div>
+
         <!-- Legend -->
         <div class="col-span-1 bg-purple-50 p-4 rounded-xl border border-purple-200 text-xs text-gray-600">
             <h3 class="font-bold text-purple-800 mb-2">📌 AIA Health Cancer</h3>
@@ -380,10 +430,39 @@
                     <td class="data-cell col-opt-1 text-red-600"><div id="name-adb-1" class="text-xs text-gray-400 mb-1"></div><span id="sum-adb-1">-</span></td>
                     <td class="data-cell col-opt-2 text-red-600"><div id="name-adb-2" class="text-xs text-gray-400 mb-1"></div><span id="sum-adb-2">-</span></td>
                 </tr>
-                <tr class="total-row">
-                    <td class="row-header" style="background-color:transparent;">รวมเบี้ยประกันภัยสุทธิ (บาท/ปี)</td>
-                    <td class="data-cell col-opt-1" id="sum-total-1">0</td>
-                    <td class="data-cell col-opt-2" id="sum-total-2">0</td>
+                <tr style="background-color:#dbeafe;border-top:3px solid #1d4ed8;">
+                    <td class="row-header" style="color:#1e40af;font-weight:700;background-color:#dbeafe;font-size:17px;border-left:5px solid #1d4ed8;padding-left:12px;">
+                        🔵 รวมเบี้ย AIA ทั้งสิ้น
+                        <div style="font-size:12px;color:#3b82f6;font-weight:normal;margin-top:2px;">(ประกันชีวิต + สุขภาพ + สัญญาเพิ่มเติม AIA ทุกรายการ)</div>
+                    </td>
+                    <td class="data-cell col-opt-1" style="font-weight:700;font-size:21px;color:#1e40af;background-color:#dbeafe;" id="sum-aia-total-1">0</td>
+                    <td class="data-cell col-opt-2" style="font-weight:700;font-size:21px;color:#1e40af;background-color:#dbeafe;" id="sum-aia-total-2">0</td>
+                </tr>
+                <tr id="row-cipc" style="display:none;">
+                    <td class="row-header">CI Perfect Care (MTL)<br><span style="font-size:13px;color:#555;">36 โรคร้ายแรง ทุกระยะ</span></td>
+                    <td class="data-cell col-opt-1 text-orange-600 font-bold" id="sum-cipc-1">-</td>
+                    <td class="data-cell col-opt-2 text-orange-600 font-bold" id="sum-cipc-2">-</td>
+                </tr>
+                <tr id="row-mtlec" style="display:none;">
+                    <td class="row-header">MTL Extra Care <span id="sum-mtlec-label" style="font-size:13px;color:#555;"></span></td>
+                    <td class="data-cell col-opt-1 text-green-700 font-bold" id="sum-mtlec-1">-</td>
+                    <td class="data-cell col-opt-2 text-green-700 font-bold" id="sum-mtlec-2">-</td>
+                </tr>
+                <tr id="row-mtl-subtotal" style="display:none;background-color:#dcfce7;border-top:3px solid #15803d;">
+                    <td class="row-header" style="color:#14532d;font-weight:700;background-color:#dcfce7;font-size:17px;border-left:5px solid #15803d;padding-left:12px;">
+                        🟢 รวมเบี้ย MTL ทั้งสิ้น
+                        <div style="font-size:12px;color:#16a34a;font-weight:normal;margin-top:2px;">(CI Perfect Care + MTL Extra Care)</div>
+                    </td>
+                    <td class="data-cell col-opt-1" style="font-weight:700;font-size:21px;color:#14532d;background-color:#dcfce7;" id="sum-mtl-total-1">-</td>
+                    <td class="data-cell col-opt-2" style="font-weight:700;font-size:21px;color:#14532d;background-color:#dcfce7;" id="sum-mtl-total-2">-</td>
+                </tr>
+                <tr class="total-row" id="row-grand-total" style="border-top:3px solid #d31145;">
+                    <td class="row-header" style="background-color:#fff0f3;color:#9f1239;font-size:17px;border-left:5px solid #d31145;padding-left:12px;" id="grand-total-label">
+                        💰 เบี้ยสุทธิรวม AIA + MTL (บาท/ปี)
+                        <div id="grand-total-sublabel" style="font-size:12px;color:#be123c;font-weight:normal;margin-top:2px;"></div>
+                    </td>
+                    <td class="data-cell col-opt-1" style="font-weight:700;font-size:23px;color:#9f1239;background-color:#fff0f3;" id="sum-total-1">0</td>
+                    <td class="data-cell col-opt-2" style="font-weight:700;font-size:23px;color:#9f1239;background-color:#fff0f3;" id="sum-total-2">0</td>
                 </tr>
             </tbody>
         </table>
@@ -435,6 +514,145 @@
         </div>
     </div>
 
+    <!-- ═══ CI PERFECT CARE SECTION ═══ -->
+    <div id="sec-cipc" style="display:none; margin-top:30px; border:2px solid #ea580c; border-radius:12px; padding:25px; background:#fff7ed;">
+        <h2 style="font-size:24px;color:#ea580c;border-bottom:2px solid #fed7aa;padding-bottom:8px;margin-top:0;margin-bottom:15px;font-weight:700;">
+            🔶 ซีไอ เพอร์เฟค แคร์ (CI Perfect Care) — บริษัท เมืองไทยประกันชีวิต
+        </h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;">
+            <div>
+                <p style="font-size:16px;color:#555;margin-bottom:10px;"><strong>ลักษณะผลิตภัณฑ์:</strong> สัญญาเพิ่มเติม 36 โรคร้ายแรง 3 ระยะ | อายุรับประกัน 30 วัน–65 ปี | คุ้มครองถึงอายุ 85 ปี | กลุ่มอาชีพ 1-2</p>
+                <table style="width:100%;border-collapse:collapse;font-size:15px;">
+                    <tr style="background:#fed7aa;"><th style="padding:8px 12px;text-align:left;font-weight:bold;color:#7c2d12;">ความคุ้มครอง</th><th style="padding:8px 12px;text-align:center;color:#7c2d12;">% ของทุนประกัน</th></tr>
+                    <tr style="border-bottom:1px solid #fed7aa;"><td style="padding:8px 12px;">เสียชีวิตทุกกรณี*</td><td style="text-align:center;font-weight:bold;color:#ea580c;">100%</td></tr>
+                    <tr style="background:#fff7ed;border-bottom:1px solid #fed7aa;"><td style="padding:8px 12px;">โรคร้ายแรง ระยะเริ่มต้น (Early Stage)</td><td style="text-align:center;font-weight:bold;color:#ea580c;">25%</td></tr>
+                    <tr style="border-bottom:1px solid #fed7aa;"><td style="padding:8px 12px;">โรคร้ายแรง ระยะกลาง (Intermediate Stage)**</td><td style="text-align:center;font-weight:bold;color:#ea580c;">50%</td></tr>
+                    <tr style="background:#fff7ed;border-bottom:1px solid #fed7aa;"><td style="padding:8px 12px;">โรคร้ายแรง ระยะรุนแรง (Late Stage)*</td><td style="text-align:center;font-weight:bold;color:#ea580c;">100%</td></tr>
+                    <tr style="border-bottom:1px solid #fed7aa;"><td style="padding:8px 12px;">ผ่าตัดขยายหลอดเลือดแดงหัวใจ (Balloon)</td><td style="text-align:center;font-weight:bold;">10%</td></tr>
+                    <tr style="background:#fff7ed;"><td style="padding:8px 12px;">โรคแทรกซ้อนเบาหวาน (3 กรณี)</td><td style="text-align:center;font-weight:bold;">10%</td></tr>
+                </table>
+                <p style="font-size:13px;color:#777;margin-top:8px;">* หักผลประโยชน์ที่ได้รับแล้ว ** หักผลประโยชน์ข้อ 2.1 รวมสูงสุดตลอดสัญญา 100%</p>
+            </div>
+            <div>
+                <p style="font-size:15px;font-weight:bold;color:#7c2d12;margin-bottom:8px;">โรคร้ายแรงที่คุ้มครอง (36 โรค):</p>
+                <p style="font-size:13px;color:#555;line-height:1.7;">มะเร็ง, กล้ามเนื้อหัวใจตายเฉียบพลัน, โรคหลอดเลือดสมอง, ผ่าตัดเส้นเลือดเลี้ยงหัวใจ, ผ่าตัดลิ้นหัวใจ, ไตวายเรื้อรัง, โคม่า, โรคระบบประสาท MS, กล้ามเนื้อเสื่อม, โปลิโอ, ตับวาย, ตับแข็ง, ผ่าตัดเปลี่ยนอวัยวะ, โรคปอดระยะสุดท้าย, ทุพพลภาพถาวร, อัมพาต, ตาบอด, สูญเสียการได้ยิน, แผลไหม้ฉกรรจ์, สมองเสื่อมอัลไซเมอร์, เนื้องอกสมอง, เยื่อหุ้มสมองอักเสบ, พาร์กินสัน, ภาวะอะแพลลิก, สมองอักเสบไวรัส, ถุงน้ำในไต, หนังแข็งลุกลาม, ลูปัส, ผ่าตัดเส้นเลือดแดงใหญ่, ความดันปอดสูง, โลหิตจาง (ไขกระดูก), ภาวะเจ็บป่วยระยะสุดท้าย และอื่นๆ</p>
+                <div style="background:#fff3e0;padding:12px;border-radius:8px;margin-top:12px;border:1px solid #ffcc80;">
+                    <p style="font-size:15px;font-weight:bold;color:#e65100;margin:0 0 5px;">ทุนประกัน & เบี้ยปีแรก:</p>
+                    <p style="font-size:17px;color:#ea580c;font-weight:bold;margin:0;" id="cipc-display">—</p>
+                </div>
+                <p style="font-size:13px;color:#777;margin-top:8px;">ระยะเวลารอคอย: 30 วัน | เบี้ยเปลี่ยนตามช่วงอายุ</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ MTL EXTRA CARE SECTION ═══ -->
+    <div id="sec-mtlec" style="display:none; margin-top:25px; border:2px solid #16a34a; border-radius:12px; padding:25px; background:#f0fdf4;">
+        <h2 style="font-size:24px;color:#15803d;border-bottom:2px solid #bbf7d0;padding-bottom:8px;margin-top:0;margin-bottom:15px;font-weight:700;">
+            🟢 MTL Extra Care — บริษัท เมืองไทยประกันชีวิต
+        </h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;">
+            <div>
+                <p style="font-size:15px;color:#555;margin-bottom:10px;"><strong>ระบบ 80:20</strong> — ลูกค้าจ่ายส่วนแรก (Deductible) + 20% ของส่วนเกิน | บริษัทจ่าย 80%</p>
+                <table style="width:100%;border-collapse:collapse;font-size:14px;">
+                    <tr style="background:#bbf7d0;"><th style="padding:7px 10px;color:#14532d;">รายการ</th><th style="padding:7px 10px;color:#14532d;text-align:center;">แบบ 1</th><th style="padding:7px 10px;color:#14532d;text-align:center;">แบบ 2</th><th style="padding:7px 10px;color:#14532d;text-align:center;">แบบ 3</th><th style="padding:7px 10px;color:#14532d;text-align:center;">แบบ 4</th><th style="padding:7px 10px;color:#14532d;text-align:center;">แบบ 5</th></tr>
+                    <tr style="border-bottom:1px solid #bbf7d0;"><td style="padding:7px 10px;font-weight:600;">ค่าห้อง/วัน</td><td style="text-align:center;">1,000</td><td style="text-align:center;">1,500</td><td style="text-align:center;">2,000</td><td style="text-align:center;">4,000</td><td style="text-align:center;">6,000</td></tr>
+                    <tr style="background:#f0fdf4;border-bottom:1px solid #bbf7d0;"><td style="padding:7px 10px;font-weight:600;">ความรับผิดส่วนแรก</td><td style="text-align:center;">20,000</td><td style="text-align:center;">30,000</td><td style="text-align:center;">40,000</td><td style="text-align:center;">40,000</td><td style="text-align:center;">40,000</td></tr>
+                    <tr style="border-bottom:1px solid #bbf7d0;"><td style="padding:7px 10px;font-weight:600;">บริษัทจ่าย (ส่วนเกิน)</td><td colspan="5" style="text-align:center;color:#16a34a;font-weight:bold;">80% ของส่วนที่เกิน Deductible</td></tr>
+                    <tr style="background:#f0fdf4;"><td style="padding:7px 10px;font-weight:600;">สูงสุด/ครั้ง</td><td style="text-align:center;">200,000</td><td style="text-align:center;">300,000</td><td style="text-align:center;">400,000</td><td style="text-align:center;">400,000</td><td style="text-align:center;">400,000</td></tr>
+                </table>
+                <div style="background:#dcfce7;padding:10px;border-radius:8px;margin-top:12px;border:1px solid #86efac;">
+                    <p style="font-size:15px;font-weight:bold;color:#14532d;margin:0 0 4px;">แผนที่เลือก & เบี้ยปีแรก:</p>
+                    <p style="font-size:17px;color:#15803d;font-weight:bold;margin:0;" id="mtlec-display">—</p>
+                </div>
+            </div>
+            <div>
+                <p style="font-size:14px;color:#777;font-style:italic;padding-top:20px;">ดูตารางเบี้ยรวมด้านล่าง</p>
+            </div>
+        </div>
+
+        <!-- ═══ FLOWCHART: MTL Extra Care Claim Process ═══ -->
+        <h3 style="font-size:18px;font-weight:bold;color:#14532d;border-top:1px solid #bbf7d0;padding-top:15px;margin-top:15px;">วิธีการเบิกค่ารักษาพยาบาล — MTL Extra Care</h3>
+        <div style="display:flex;align-items:flex-start;gap:8px;margin-top:15px;overflow-x:auto;padding-bottom:10px;">
+            <!-- Step 1 -->
+            <div style="min-width:155px;text-align:center;">
+                <div style="background:#1d4ed8;color:white;border-radius:10px;padding:14px 10px;font-size:14px;font-weight:bold;line-height:1.5;">
+                    🏥 ขั้นที่ 1<br>เข้ารับการรักษา<br>เป็นผู้ป่วยใน
+                </div>
+                <div style="font-size:12px;color:#555;margin-top:6px;">ผู้ป่วยใน (IPD)<br>ทุกโรค</div>
+            </div>
+            <!-- Arrow -->
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:20px;">
+                <div style="font-size:22px;color:#64748b;">→</div>
+            </div>
+            <!-- Step 2 -->
+            <div style="min-width:175px;text-align:center;">
+                <div style="background:#0891b2;color:white;border-radius:10px;padding:14px 10px;font-size:14px;font-weight:bold;line-height:1.5;">
+                    💊 ขั้นที่ 2<br>เบิกจากประกันสุขภาพ<br>หลักก่อน
+                </div>
+                <div style="font-size:12px;color:#555;margin-top:6px;">เช่น AIA HS, Health Saver<br>หรือ Health Happy</div>
+            </div>
+            <!-- Arrow -->
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:20px;">
+                <div style="font-size:22px;color:#64748b;">→</div>
+            </div>
+            <!-- Step 3 -->
+            <div style="min-width:190px;text-align:center;">
+                <div style="background:#16a34a;color:white;border-radius:10px;padding:14px 10px;font-size:14px;font-weight:bold;line-height:1.5;">
+                    📋 ขั้นที่ 3<br>MTL Extra Care ฉ.1<br>จ่าย 80% ของส่วนเกิน
+                </div>
+                <div style="font-size:12px;color:#555;margin-top:6px;">หักค่ารักษาจาก HS ก่อน<br>ส่วนที่เหลือ Deductible<br>MTL EC จ่าย <strong style="color:#16a34a;">80%</strong></div>
+            </div>
+            <!-- Arrow (conditional) -->
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:20px;">
+                <div style="font-size:22px;color:#64748b;">→</div>
+                <div style="font-size:11px;color:#f97316;font-weight:bold;text-align:center;">หากซื้อ<br>2 ชุด</div>
+            </div>
+            <!-- Step 4 -->
+            <div style="min-width:190px;text-align:center;">
+                <div style="background:#15803d;color:white;border-radius:10px;padding:14px 10px;font-size:14px;font-weight:bold;line-height:1.5;">
+                    📋 ขั้นที่ 4<br>MTL Extra Care ฉ.2<br>จ่าย 80% ที่เหลืออีก
+                </div>
+                <div style="font-size:12px;color:#555;margin-top:6px;">ส่วนที่เหลือหลังจาก ฉ.1<br>MTL EC ฉบับที่ 2 จ่าย<br>อีก <strong style="color:#15803d;">80%</strong></div>
+            </div>
+            <!-- Result -->
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:20px;">
+                <div style="font-size:22px;color:#64748b;">→</div>
+            </div>
+            <div style="min-width:155px;text-align:center;">
+                <div style="background:#f59e0b;color:white;border-radius:10px;padding:14px 10px;font-size:14px;font-weight:bold;line-height:1.5;">
+                    💰 ผลลัพธ์<br>ลูกค้าจ่ายเอง<br>น้อยที่สุด
+                </div>
+                <div style="font-size:12px;color:#555;margin-top:6px;">ส่วนที่เหลือ = 20% × 20%<br>= <strong>4%</strong> ของค่ารักษาส่วนเกิน</div>
+            </div>
+        </div>
+        <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:12px;margin-top:15px;font-size:14px;color:#14532d;">
+            <strong>ตัวอย่าง:</strong> ค่ารักษาทั้งหมด 500,000 บาท | HS จ่าย 300,000 บาท | ส่วนเกิน 200,000 บาท
+            → MTL Extra Care (แบบ 3: Deductible 40,000) | ส่วนที่ MTL EC รับผิดชอบ = 200,000 - 40,000 = 160,000 บาท
+            → ฉบับที่ 1 จ่าย 80% = 128,000 บาท | ส่วนเหลือ 32,000 บาท → ฉบับที่ 2 จ่าย 80% = 25,600 บาท
+            → ลูกค้าจ่ายเองเพียง 40,000 + 6,400 + 6,400 = <strong>52,800 บาท</strong>
+        </div>
+
+        <!-- ═══ COMBINED PREMIUM PROJECTION TABLE ═══ -->
+        <div style="margin-top:25px;border-top:2px solid #bbf7d0;padding-top:20px;">
+            <h3 style="font-size:18px;font-weight:bold;color:#14532d;margin:0 0 12px;">
+                📊 ตารางเบี้ยประกันรวม CI Perfect Care + MTL Extra Care ตามช่วงอายุ
+            </h3>
+            <p style="font-size:14px;color:#555;margin-bottom:12px;">
+                แสดงเบี้ยเริ่มจากอายุที่เลือก | เบี้ยปรับตามช่วงอายุ | กลุ่มอาชีพ 1-2
+                <span id="combined-proj-info" style="font-weight:bold;color:#15803d;margin-left:10px;"></span>
+            </p>
+            <div style="overflow-x:auto;">
+                <table id="combined-proj-table" style="width:100%;border-collapse:collapse;font-size:14px;">
+                    <thead id="combined-proj-thead" style="position:sticky;top:0;z-index:5;"></thead>
+                    <tbody id="combined-proj-tbody"></tbody>
+                </table>
+            </div>
+            <p style="font-size:12px;color:#888;margin-top:10px;">
+                * 71-75 และ 76-80 เป็นอัตราต่ออายุเท่านั้น | CI Perfect Care คุ้มครองถึงอายุ 84 ปี (แสดงเป็น "สิ้นสุด" เมื่อพ้นอายุ) | MTL Extra Care คุ้มครองถึงอายุ 80 ปี
+            </p>
+        </div>
+    </div>
+
     <!-- ═══ REMARKS SECTION ═══ -->
     <div id="remarks-section" style="display:none; margin-top:30px; border:2px solid #dc2626; border-radius:10px; background:#fff5f5; padding:20px 25px;">
         <h2 style="font-size:22px; color:#dc2626; border-bottom:1px solid #dc2626; padding-bottom:8px; margin-top:0; margin-bottom:15px; font-weight:700;">⚠ หมายเหตุ / ข้อความเพิ่มเติม</h2>
@@ -461,6 +679,10 @@ const APP_DATA = {
             {name:"แผน 1000", k:"1000"},{name:"แผน 1600", k:"1600"},{name:"แผน 2200", k:"2200"},
             {name:"แผน 2800", k:"2800"},{name:"แผน 3400", k:"3400"},{name:"แผน 4000", k:"4000"},{name:"แผน 5000", k:"5000"}
         ]},
+        HSO: { name:"AIA HS (รุ่นก่อน New Standard)", options:[
+            {name:"แผน 1000",k:"1000"},{name:"แผน 1600",k:"1600"},{name:"แผน 2200",k:"2200"},
+            {name:"แผน 2800",k:"2800"},{name:"แผน 3400",k:"3400"},{name:"แผน 4000",k:"4000"},{name:"แผน 5000",k:"5000"}
+        ]},
         HSX: { name:"AIA HS Extra", options:[
             {name:"แผน 1500", k:"1500"},{name:"แผน 2000", k:"2000"},{name:"แผน 2500", k:"2500"},
             {name:"แผน 3500", k:"3500"},{name:"แผน 4500", k:"4500"},{name:"แผน 5500", k:"5500"},{name:"แผน 6500", k:"6500"}
@@ -484,6 +706,13 @@ const APP_DATA = {
         "HS_3400": {max:"แยกหมวด",r1:"3,400",r2:"20,000",r3:"800",  r4:"80,000", r5:"จ่ายตามจริง",r6:"6,000",r7:"6,500",r11:"ไม่คุ้มครอง",opd:"-"},
         "HS_4000": {max:"แยกหมวด",r1:"4,000",r2:"25,000",r3:"1,000",r4:"90,000", r5:"จ่ายตามจริง",r6:"7,000",r7:"7,000",r11:"ไม่คุ้มครอง",opd:"-"},
         "HS_5000": {max:"แยกหมวด",r1:"5,000",r2:"25,000",r3:"1,200",r4:"100,000",r5:"จ่ายตามจริง",r6:"8,000",r7:"8,000",r11:"ไม่คุ้มครอง",opd:"-"},
+        "HSO_1000":{max:"แยกหมวด",r1:"1,000",r2:"16,000",r3:"550",r4:"40,000",r5:"จ่ายตามจริง",r6:"3,000",r7:"3,000",r11:"ไม่คุ้มครอง",opd:"-"},
+        "HSO_1600":{max:"แยกหมวด",r1:"1,600",r2:"20,000",r3:"750",r4:"50,000",r5:"จ่ายตามจริง",r6:"3,000",r7:"4,000",r11:"ไม่คุ้มครอง",opd:"-"},
+        "HSO_2200":{max:"แยกหมวด",r1:"2,200",r2:"20,000",r3:"800",r4:"60,000",r5:"จ่ายตามจริง",r6:"3,000",r7:"5,000",r11:"ไม่คุ้มครอง",opd:"-"},
+        "HSO_2800":{max:"แยกหมวด",r1:"2,800",r2:"25,000",r3:"850",r4:"70,000",r5:"จ่ายตามจริง",r6:"3,000",r7:"5,500",r11:"ไม่คุ้มครอง",opd:"-"},
+        "HSO_3400":{max:"แยกหมวด",r1:"3,400",r2:"20,000",r3:"900",r4:"80,000",r5:"จ่ายตามจริง",r6:"3,400",r7:"6,500",r11:"ไม่คุ้มครอง",opd:"-"},
+        "HSO_4000":{max:"แยกหมวด",r1:"4,000",r2:"25,000",r3:"950",r4:"90,000",r5:"จ่ายตามจริง",r6:"4,000",r7:"7,500",r11:"ไม่คุ้มครอง",opd:"-"},
+        "HSO_5000":{max:"แยกหมวด",r1:"5,000",r2:"25,000",r3:"1,000",r4:"100,000",r5:"จ่ายตามจริง",r6:"5,000",r7:"9,000",r11:"ไม่คุ้มครอง",opd:"-"},
         "HSX_1500":{max:"แยกหมวด",r1:"1,500",r2:"30,000",r3:"600",  r4:"90,000", r5:"จ่ายตามจริง",r6:"5,000",r7:"3,000",r11:"ไม่คุ้มครอง",opd:"3,000/ปี"},
         "HSX_2000":{max:"แยกหมวด",r1:"2,000",r2:"25,000",r3:"800",  r4:"100,000",r5:"จ่ายตามจริง",r6:"5,500",r7:"4,000",r11:"ไม่คุ้มครอง",opd:"4,000/ปี"},
         "HSX_2500":{max:"แยกหมวด",r1:"2,500",r2:"20,000",r3:"900",  r4:"50,000", r5:"จ่ายตามจริง",r6:"6,000",r7:"5,000",r11:"ไม่คุ้มครอง",opd:"5,000/ปี"},
@@ -511,6 +740,27 @@ const APP_DATA = {
         HSX: {
             male:   {"1500":[7370,7280,6820,6920,7060,7330,7780,8540,10890,15270,22410,31530,47040,67730,94820,104300,114730,126200],"2000":[9380,8630,8320,8520,8900,9200,9710,10530,13680,18830,26510,37460,55280,79600,111430,122570,134830,148310],"2500":[10600,9880,9770,9850,10270,10780,11550,12470,16800,21820,29820,42550,62490,89980,125970,138570,152430,167670],"3500":[13280,12150,12050,12920,13040,13070,13800,15620,21580,31900,44080,62140,85460,123060,172280,189510,208460,229310],"4500":[15900,14750,14680,15630,15680,15720,16550,18860,26530,38650,54090,77250,106810,153800,215320,236850,260540,286590],"5500":[17420,16500,16460,17700,17690,17850,18290,21060,29750,44240,61730,88020,121700,175250,245340,269870,296860,326550],"6500":[18730,17930,17910,19210,19280,19270,19860,22660,32010,48190,67360,96040,132630,190980,267370,294110,323520,355870]},
             female: {"1500":[7690,7370,8510,9050,9170,9420,10050,11080,13790,17970,23990,33060,47540,68460,95840,105420,115960,127560],"2000":[9810,9690,10550,11300,11330,11800,12610,13760,16730,21880,28910,39360,56580,81480,114060,125470,138020,151820],"2500":[11620,11170,12420,12890,13030,14070,15070,16880,20160,25290,34030,45860,64620,93050,130270,143300,157630,173390],"3500":[15410,15190,16390,17030,17330,17970,19310,22380,26830,34000,46090,62780,86810,125010,175010,192510,211760,232940],"4500":[18380,18380,20120,20740,21030,21500,23190,27160,32920,42170,57150,77480,108830,156720,219400,241340,265470,292020],"5500":[20120,19950,22260,23250,23550,23820,25720,30190,36760,48190,67060,96040,132630,178070,249300,274230,301650,331820],"6500":[21600,21550,24050,24760,25080,25510,27580,32400,39370,51340,71040,96180,134860,194200,271880,299070,328980,361880]}
+        },
+
+        HSO: {
+            male: {
+                "1000":[3470,3470,3020,3020,3020,3620,3920,4220,5430,7240,9650,14480,23320,37560,0,0,0,0],
+                "1600":[4656,4656,4048,4048,4048,4864,5264,5680,7296,9712,12960,19440,31312,50432,0,0,0,0],
+                "2200":[5280,5280,4598,4598,4598,5522,5984,6446,8272,11022,14718,22066,35552,57244,0,0,0,0],
+                "2800":[5908,5908,5124,5124,5124,6160,6664,7196,9240,12292,16408,24612,39648,63840,0,0,0,0],
+                "3400":[7072,7072,6154,6154,6154,7378,8024,8636,11084,14790,19754,29614,47702,76840,0,0,0,0],
+                "4000":[8280,8280,7200,7200,7200,8640,9360,10080,12960,17320,23080,34640,55800,89880,0,0,0,0],
+                "5000":[10400,10400,9050,9050,9050,10850,11750,12650,16250,21700,28950,43450,70000,112700,0,0,0,0]
+            },
+            female: {
+                "1000":[3470,3470,3930,3930,3930,4710,5100,5490,7060,9410,12550,18820,30310,48820,0,0,0,0],
+                "1600":[4656,4656,5264,5264,5264,6320,6848,7392,9488,12624,16848,25280,40720,65584,0,0,0,0],
+                "2200":[5280,5280,5984,5984,5984,7172,7788,8382,10758,14322,19120,28688,46222,74426,0,0,0,0],
+                "2800":[5908,5908,6664,6664,6664,8008,8652,9352,12012,15988,21336,32004,51548,83020,0,0,0,0],
+                "3400":[7072,7072,7990,7990,7990,9588,10438,11220,14416,19244,25670,38488,62016,99858,0,0,0,0],
+                "4000":[8280,8280,9360,9360,9360,11240,12160,13120,16840,22520,30000,45040,72560,116840,0,0,0,0],
+                "5000":[10400,10400,11750,11750,11750,14100,15300,16450,21150,28200,37650,56500,91000,146550,0,0,0,0]
+            }
         },
         HS: { male:{}, female:{} }
     },
@@ -546,6 +796,45 @@ const APP_DATA = {
     RATE_ADD_RCC: { 1: 3.00, 2: 4.00, 3: 5.00, 4: 6.00 },
     // ADD เดี่ยว (ไม่รวม RCC)
     RATE_ADD: { 1: 2.00, 2: 3.00, 3: 4.00, 4: 5.00 },
+
+    // CI Perfect Care (MTL) — อัตราต่อ 1,000 บาท ทุนประกัน/ปี, คุ้มครองถึงอายุ 85 ปี
+    RATE_CI_PC: {
+        male: {
+            "0-1":4.70,"2-11":2.10,"12-14":2.30,"15-17":2.80,"18-18":3.70,"19-19":3.90,
+            "20-24":4.30,"25-29":4.60,"30-34":5.00,"35-39":6.60,"40-44":9.60,
+            "45-49":14.90,"50-54":21.50,"55-57":34.10,"58-58":35.00,"59-59":38.00,
+            "60-63":56.60,"64-64":57.40,"65-68":88.50,"69-69":96.00,
+            "70-73":152.60,"74-74":173.00,"75-79":277.80,"80-84":391.30
+        },
+        female: {
+            "0-1":2.40,"2-3":1.50,"4-14":1.40,"15-17":1.80,"18-19":2.40,
+            "20-24":2.80,"25-29":3.50,"30-33":4.00,"34-34":4.10,"35-39":6.40,
+            "40-44":9.30,"45-49":12.80,"50-54":16.90,"55-59":20.70,
+            "60-63":27.90,"64-64":30.00,"65-68":46.30,"69-69":50.20,
+            "70-73":76.70,"74-74":80.50,"75-79":127.40,"80-84":187.60
+        }
+    },
+    // MTL Extra Care — อัตรารายปี กลุ่มอาชีพ 1-2 (index 0-4 = แบบ1-5)
+    RATE_MTL_EC: {
+        male: {
+            "0-5":[5801,6267,7291,13889,20487],"6-10":[2914,3078,3443,6141,8839],
+            "11-20":[2036,2146,2358,3974,5590],"21-30":[2432,2577,2795,4443,6091],
+            "31-35":[2718,2881,3095,4717,6339],"36-40":[3109,3308,3546,5292,7038],
+            "41-45":[3374,3616,3880,5704,7528],"46-50":[3818,4120,4427,6427,8427],
+            "51-55":[4806,5209,5597,8001,10405],"56-60":[6509,7088,7619,10743,13867],
+            "61-65":[9928,10651,11251,15029,18807],"66-70":[11114,12202,13118,18004,22890],
+            "71-75":[21228,23305,25055,34387,43719],"76-80":[37899,41608,44733,61395,78057]
+        },
+        female: {
+            "0-5":[5801,6267,7291,13889,20487],"6-10":[2208,2433,2825,5211,7597],
+            "11-20":[1975,2095,2332,4052,5772],"21-30":[3122,3249,3520,5830,8140],
+            "31-35":[3122,3249,3520,5830,8140],"36-40":[3405,3505,3734,5962,8190],
+            "41-45":[3905,4045,4321,6889,9457],"46-50":[4617,4798,5131,8155,11179],
+            "51-55":[5492,5694,6072,9572,13072],"56-60":[5492,5694,6072,9572,13072],
+            "61-65":[8079,8290,8755,13503,18251],"66-70":[8847,9309,10033,15857,21681],
+            "71-75":[16898,17780,19163,30287,41411],"76-80":[30168,31744,34213,54073,73933]
+        }
+    },
     // ADB/RCC — เสียชีวิตจากอุบัติเหตุ (อายุ 15 วัน–64 ปี) ต่อ 1,000 บาท ทุนประกัน/ปี
     // Source: Benefits Plus 2025 หน้า 46, class 1: 1.50 / class 2: 2.25 / class 3: 3.00
     RATE_ADB_RCC: { 1: 1.50, 2: 2.25, 3: 3.00 },
@@ -689,6 +978,27 @@ const app = {
         const rate = APP_DATA.RATE_ADB_RCC[c]||1.50;
         return (sum/1000) * rate;
     },
+    // CI Perfect Care — rate per 1,000 baht, per age
+    calcCIPC(sum, age, gender) {
+        if(!sum || age>84) return 0;
+        const tbl = APP_DATA.RATE_CI_PC[gender];
+        for(const [rng, rate] of Object.entries(tbl)) {
+            const [a,b] = rng.split('-').map(Number);
+            if(age>=a && age<=b) return (sum/1000)*rate;
+        }
+        return 0;
+    },
+    // MTL Extra Care — rate per plan by age band
+    calcMTLEC(plan, age, gender, copies=1) {
+        if(!plan || plan==='0') return 0;
+        const pi = parseInt(plan)-1;
+        const tbl = APP_DATA.RATE_MTL_EC[gender];
+        for(const [rng, arr] of Object.entries(tbl)) {
+            const [a,b] = rng.split('-').map(Number);
+            if(age>=a && age<=b) return (arr[pi]||0)*copies;
+        }
+        return 0;
+    },
 
     // ═══ MAIN CALCULATE ═══
     calculate() {
@@ -777,6 +1087,7 @@ const app = {
             document.getElementById(`sum-adb-${id}`).textContent    = adbSum>0 ? this.fmt(pADB) : '-';
 
             document.getElementById(`sum-total-${id}`).textContent = this.fmt(pTot);
+            document.getElementById(`sum-aia-total-${id}`).textContent = this.fmt(pTot);
 
             // Update header labels
             document.getElementById(`th-opt-${id}`).textContent = `Option ${id}`;
@@ -785,6 +1096,8 @@ const app = {
 
         this.renderBenefitTable(age, gender);
         this.renderProjectionTable(age, gender, pMain);
+        // Sync addon displays without triggering loop
+        if(window._addonSync !== true) { window._addonSync=true; calcAddons(); window._addonSync=false; }
     },
 
     // ═══ BENEFIT TABLE ═══
@@ -1015,6 +1328,241 @@ const app = {
     }
 };
 
+function calcAddons() {
+    const gender = document.getElementById('inp-gender').value;
+    const age    = parseInt(document.getElementById('inp-age').value)||0;
+    const cipcSum  = parseInt(document.getElementById('cipc-sum').value)||0;
+    const cipcShow = document.getElementById('cipc-show').checked;
+    const mtlecPlan  = document.getElementById('mtlec-plan').value;
+    const mtlecCopies= parseInt(document.getElementById('mtlec-copies').value)||1;
+    const mtlecShow  = document.getElementById('mtlec-show').checked;
+
+    // CI PC premium
+    const pCIPC = app.calcCIPC(cipcSum, age, gender);
+    // MTL EC premium
+    const pMTLEC = app.calcMTLEC(mtlecPlan, age, gender, mtlecCopies);
+
+    // Update CI PC row
+    const rowCIPC = document.getElementById('row-cipc');
+    if(cipcSum>0) {
+        rowCIPC.style.display='table-row';
+        document.getElementById('sum-cipc-1').textContent = app.fmt(pCIPC);
+        document.getElementById('sum-cipc-2').textContent = app.fmt(pCIPC);
+    } else { rowCIPC.style.display='none'; }
+
+    // Update MTL EC row
+    const rowMTLEC = document.getElementById('row-mtlec');
+    if(mtlecPlan!=='0') {
+        rowMTLEC.style.display='table-row';
+        const planNames = ['','แบบ 1','แบบ 2','แบบ 3','แบบ 4','แบบ 5'];
+        document.getElementById('sum-mtlec-label').textContent = `(${planNames[mtlecPlan]||''} × ${mtlecCopies} ชุด)`;
+        document.getElementById('sum-mtlec-1').textContent = app.fmt(pMTLEC);
+        document.getElementById('sum-mtlec-2').textContent = app.fmt(pMTLEC);
+    } else { rowMTLEC.style.display='none'; }
+
+    // MTL subtotal row + grand total
+    const hasMTLAny = cipcSum>0 || mtlecPlan!=='0';
+    const pMTLTotal = pCIPC + pMTLEC;
+    const rowMTLSub = document.getElementById('row-mtl-subtotal');
+    const grandLabel = document.getElementById('grand-total-label');
+
+    if(hasMTLAny) {
+        rowMTLSub.style.display='table-row';
+        document.getElementById('sum-mtl-total-1').textContent = app.fmt(pMTLTotal);
+        document.getElementById('sum-mtl-total-2').textContent = app.fmt(pMTLTotal);
+        grandLabel.innerHTML = '💰 เบี้ยสุทธิรวม AIA + MTL (บาท/ปี)';
+        const subLbl = document.getElementById('grand-total-sublabel');
+        if(subLbl) {
+            let parts = [];
+            if(cipcSum>0) parts.push(`CI PC ${app.fmt(pCIPC)} บ.`);
+            if(mtlecPlan!=='0') parts.push(`MTL EC ${app.fmt(pMTLEC)} บ.`);
+            subLbl.textContent = `เบี้ย AIA + เบี้ย MTL (${parts.join(' + ')})`;
+        }
+        // Update grand totals = AIA + MTL
+        [1,2].forEach(id => {
+            const aiaEl = document.getElementById(`sum-aia-total-${id}`);
+            if(aiaEl) {
+                const aiaVal = parseInt((aiaEl.textContent||'0').replace(/,/g,''))||0;
+                document.getElementById(`sum-total-${id}`).textContent = app.fmt(aiaVal + pMTLTotal);
+            }
+        });
+    } else {
+        rowMTLSub.style.display='none';
+        grandLabel.innerHTML = '💰 รวมเบี้ยประกันภัยสุทธิ AIA (บาท/ปี)';
+        const subLbl = document.getElementById('grand-total-sublabel');
+        if(subLbl) subLbl.textContent = '(ไม่ได้เลือกสัญญา MTL)';
+        // Reset grand totals = AIA only
+        [1,2].forEach(id => {
+            const aiaEl = document.getElementById(`sum-aia-total-${id}`);
+            if(aiaEl) document.getElementById(`sum-total-${id}`).textContent = aiaEl.textContent;
+        });
+    }
+
+    // Show/hide sections
+    document.getElementById('sec-cipc').style.display = (cipcSum>0 && cipcShow) ? 'block' : 'none';
+    document.getElementById('sec-mtlec').style.display = (mtlecPlan!=='0' && mtlecShow) ? 'block' : 'none';
+
+    // Update CI PC display
+    if(cipcSum>0) {
+        document.getElementById('cipc-display').textContent = `ทุนประกัน ${app.fmt(cipcSum)} บาท — เบี้ยปีแรก: ${app.fmt(pCIPC)} บาท/ปี (${gender==='male'?'ชาย':'หญิง'} อายุ ${age} ปี)`;
+    }
+
+    // Update MTL EC display
+    if(mtlecPlan!=='0') {
+        const planNames = ['','แบบ 1 (D20,000/R1,000)','แบบ 2 (D30,000/R1,500)','แบบ 3 (D40,000/R2,000)','แบบ 4 (D40,000/R4,000)','แบบ 5 (D40,000/R6,000)'];
+        document.getElementById('mtlec-display').textContent = `${planNames[mtlecPlan]||''} × ${mtlecCopies} ชุด — เบี้ยปีแรก: ${app.fmt(pMTLEC)} บาท/ปี (${gender==='male'?'ชาย':'หญิง'} อายุ ${age} ปี)`;
+    }
+
+    // Build combined projection (shown when MTL EC section is visible)
+    if((cipcSum>0 && cipcShow) || (mtlecPlan!=='0' && mtlecShow)) {
+        buildCombinedProjection(
+            cipcShow ? cipcSum : 0,
+            mtlecShow ? mtlecPlan : '0',
+            mtlecCopies, age, gender
+        );
+    }
+
+    // Trigger main calculate to update totals
+    app.calculate();
+}
+
+function buildCombinedProjection(cipcSum, mtlecPlan, mtlecCopies, startAge, gender) {
+    const thead = document.getElementById('combined-proj-thead');
+    const tbody = document.getElementById('combined-proj-tbody');
+    const infoEl = document.getElementById('combined-proj-info');
+    if (!thead || !tbody) return;
+
+    const hasCI   = cipcSum > 0;
+    const hasMTL  = mtlecPlan && mtlecPlan !== '0';
+    const hasMTLAny = hasCI || hasMTL;
+    const planNames = ['','แบบ 1','แบบ 2','แบบ 3','แบบ 4','แบบ 5'];
+
+    // ── Info label ──
+    let info = [];
+    if(hasCI)  info.push(`CI PC ทุน ${app.fmt(cipcSum)} บ.`);
+    if(hasMTL) info.push(`MTL EC ${planNames[mtlecPlan]||''} × ${mtlecCopies} ชุด`);
+    infoEl.textContent = info.length ? `(MTL: ${info.join(' + ')})` : '';
+
+    // ── Read AIA Option data from DOM ──
+    const age    = parseInt(document.getElementById('inp-age').value)||0;
+    const mainSum = parseInt(document.getElementById('inp-main-sum').value)||0;
+    const mainMode = app.mainMode;
+    const manualPrem = parseInt(document.getElementById('inp-main-prem-manual').value)||0;
+
+    // base main prem for auto mode
+    let baseMainAuto;
+    {
+        const b = APP_DATA.rate20PLN[gender][age]||0;
+        const d = mainSum>=600000?2:(mainSum>=250000?1:0);
+        baseMainAuto = (mainSum/1000)*Math.max(0,b-d);
+    }
+    const baseMainPrem = mainMode==='manual' ? manualPrem : baseMainAuto;
+
+    const opts = [1,2].map(id => ({
+        st:       app.state[id],
+        hcSum:    parseInt(document.getElementById(`hc-${id}`).value)||0,
+        hcNS:     document.getElementById(`hc-ns-${id}`).checked,
+        cfcSum:   parseInt(document.getElementById(`cfc-${id}`).value)||0,
+        hbSum:    parseInt(document.getElementById(`hb-${id}`).value)||0,
+        hbStdSum: parseInt(document.getElementById(`hbstd-${id}`).value)||0,
+        addSum:   parseInt(document.getElementById(`add-${id}`).value)||0,
+        adbSum:   parseInt(document.getElementById(`adb-${id}`).value)||0,
+        occClass: parseInt(document.getElementById(`occ-${id}`).value)||1
+    }));
+
+    // ── Helper: calculate AIA premium for one option at a given band age ──
+    function calcAIABand(o, bandAge, isMainStopped) {
+        const pMain  = isMainStopped ? 0 : baseMainPrem;
+        const hlArr  = APP_DATA.rateTable[o.st.type]?.[gender]?.[APP_DATA.plans[o.st.type].options[o.st.idx].k];
+        const pHl    = hlArr ? (hlArr[app.getBandIdx(bandAge)]||0) : 0;
+        const pHC    = app.calcHC(o.hcSum, bandAge, gender, o.hcNS);
+        const pCFC   = app.calcCFC(o.cfcSum, bandAge, gender);
+        const pHB    = app.calcHB(o.hbSum, bandAge, gender);
+        const pHBStd = (o.hbStdSum>0 && bandAge<=59) ? app.calcHBStd(o.hbStdSum, o.occClass) : 0;
+        const pADD   = (o.addSum>0  && bandAge<=64) ? app.calcADD(o.addSum, o.occClass) : 0;
+        const pADB   = (o.adbSum>0  && bandAge<=64) ? app.calcADB(o.adbSum, o.occClass) : 0;
+        return pMain + pHl + pHC + pCFC + pHB + pHBStd + pADD + pADB;
+    }
+
+    // ── Build header rows (2-row merged) ──
+    const opt1Name = APP_DATA.plans[opts[0].st.type].options[opts[0].st.idx].name;
+    const opt2Name = APP_DATA.plans[opts[1].st.type].options[opts[1].st.idx].name;
+    const opt1Type = APP_DATA.plans[opts[0].st.type].name;
+    const opt2Type = APP_DATA.plans[opts[1].st.type].name;
+
+    const mtlColCount = (hasCI?1:0) + (hasMTL?1:0) + (hasMTLAny?1:0); // ci + ec + mtltotal
+    const showMTL = hasMTLAny;
+
+    let hdr = `<tr>
+        <th rowspan="2" style="background:#374151;color:white;padding:8px 10px;text-align:center;font-size:12px;border-right:2px solid #6b7280;min-width:65px;">ช่วงอายุ</th>
+        <th colspan="2" style="background:#1d4ed8;color:white;padding:7px 10px;text-align:center;font-size:12px;border-right:1px solid #3b82f6;">AIA — Option 1<br><span style="font-size:11px;font-weight:normal;">${opt1Type}</span></th>
+        <th colspan="2" style="background:#0e7490;color:white;padding:7px 10px;text-align:center;font-size:12px;border-right:${showMTL?'3px solid #a21caf':'none'};">AIA — Option 2<br><span style="font-size:11px;font-weight:normal;">${opt2Type}</span></th>`;
+    if(showMTL) {
+        hdr += `<th colspan="${mtlColCount}" style="background:#7e22ce;color:white;padding:7px 10px;text-align:center;font-size:12px;">MTL Products<br><span style="font-size:11px;font-weight:normal;">${info.join(' + ')}</span></th>`;
+    }
+    hdr += `</tr><tr>
+        <th style="background:#2563eb;color:white;padding:6px 9px;text-align:right;font-size:11px;">เบี้ย AIA รวม</th>
+        <th style="background:#1e40af;color:white;padding:6px 9px;text-align:right;font-size:11px;border-right:1px solid #6b7280;">รวม AIA+MTL</th>
+        <th style="background:#0891b2;color:white;padding:6px 9px;text-align:right;font-size:11px;">เบี้ย AIA รวม</th>
+        <th style="background:#075985;color:white;padding:6px 9px;text-align:right;font-size:11px;border-right:${showMTL?'3px solid #a21caf':'none'};">รวม AIA+MTL</th>`;
+    if(showMTL) {
+        if(hasCI)  hdr += `<th style="background:#c2410c;color:white;padding:6px 9px;text-align:right;font-size:11px;">CI Perfect Care</th>`;
+        if(hasMTL) hdr += `<th style="background:#15803d;color:white;padding:6px 9px;text-align:right;font-size:11px;">MTL Extra Care</th>`;
+        hdr += `<th style="background:#7e22ce;color:white;padding:6px 9px;text-align:right;font-size:11px;">รวมเบี้ย MTL</th>`;
+    }
+    hdr += `</tr>`;
+    thead.innerHTML = hdr;
+
+    // ── Band definitions ──
+    const allBands = [
+        ["0-5",0],["6-10",6],["11-20",11],["21-30",21],["31-35",31],
+        ["36-40",36],["41-45",41],["46-50",46],["51-55",51],
+        ["56-60",56],["61-65",61],["66-70",66],
+        ["71-75 *",71],["76-80 *",76],["81-84 **",81]
+    ];
+
+    const filtered = allBands.filter(([,ba]) => {
+        if(ba >= startAge) return true;
+        return (ba + (ba<10?5:4)) >= startAge;
+    });
+
+    const na  = `<span style="color:#ccc;font-size:11px;">—</span>`;
+    const end = `<span style="color:#aaa;font-size:11px;">(สิ้นสุด)</span>`;
+
+    let rows = '';
+    filtered.forEach(([lbl, bandAge], idx) => {
+        const isMainStopped = bandAge >= (age + 20);
+        const pAIA1 = calcAIABand(opts[0], bandAge, isMainStopped);
+        const pAIA2 = calcAIABand(opts[1], bandAge, isMainStopped);
+        const pCI   = hasCI  ? app.calcCIPC(cipcSum, bandAge, gender) : 0;
+        const pEC   = hasMTL ? app.calcMTLEC(mtlecPlan, bandAge, gender, mtlecCopies) : 0;
+        const pMTL  = pCI + pEC;
+        const ciEnd = hasCI  && pCI===0 && bandAge>0;
+        const ecEnd = hasMTL && pEC===0;
+
+        const isFirst = idx === 0;
+        const rowBg  = isFirst ? '#eff6ff' : (idx%2===0 ? '#f9fafb' : 'white');
+        const fwBold = isFirst ? 'font-weight:800;' : '';
+
+        rows += `<tr style="border-bottom:1px solid #e5e7eb;background:${rowBg};${fwBold}">`;
+        rows += `<td style="padding:8px 10px;text-align:center;font-weight:bold;font-size:13px;border-right:2px solid #d1d5db;">${lbl}${isFirst?'<br><span style="font-size:10px;color:#3b82f6;font-weight:normal;">▲ อายุปัจจุบัน</span>':''}</td>`;
+        // AIA Option 1
+        rows += `<td style="padding:8px 10px;text-align:right;color:#1d4ed8;font-weight:bold;">${app.fmt(pAIA1)}</td>`;
+        rows += `<td style="padding:8px 10px;text-align:right;font-weight:bold;color:#1e40af;border-right:1px solid #d1d5db;font-size:15px;">${app.fmt(pAIA1+pMTL)}</td>`;
+        // AIA Option 2
+        rows += `<td style="padding:8px 10px;text-align:right;color:#0891b2;font-weight:bold;">${app.fmt(pAIA2)}</td>`;
+        rows += `<td style="padding:8px 10px;text-align:right;font-weight:bold;color:#075985;font-size:15px;${showMTL?'border-right:3px solid #a21caf;':''}">${app.fmt(pAIA2+pMTL)}</td>`;
+        // MTL columns
+        if(showMTL) {
+            if(hasCI)  rows += `<td style="padding:8px 10px;text-align:right;color:#c2410c;font-weight:bold;">${ciEnd?end:app.fmt(pCI)}</td>`;
+            if(hasMTL) rows += `<td style="padding:8px 10px;text-align:right;color:#15803d;font-weight:bold;">${ecEnd?end:app.fmt(pEC)}</td>`;
+            rows += `<td style="padding:8px 10px;text-align:right;font-weight:bold;font-size:15px;color:#7e22ce;">${app.fmt(pMTL)}</td>`;
+        }
+        rows += `</tr>`;
+    });
+    tbody.innerHTML = rows;
+}
+
 function updateRemarks() {
     const text = document.getElementById('inp-remarks').value.trim();
     const sec  = document.getElementById('remarks-section');
@@ -1027,7 +1575,7 @@ function updateRemarks() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => app.init());
+document.addEventListener('DOMContentLoaded', () => { app.init(); setTimeout(calcAddons, 100); });
 </script>
 </body>
 </html>

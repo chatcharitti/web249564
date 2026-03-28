@@ -53,7 +53,20 @@
 
         @media print {
             .no-print { display: none !important; }
+            /* Default: AIA tab = landscape */
             @page { size: A4 landscape; margin: 8mm 10mm; }
+            /* MTL tab = portrait */
+            body.print-mtl-mode { }
+            body.print-mtl-mode #tab-aia { display: none !important; }
+            body.print-mtl-mode .tab-nav { display: none !important; }
+            body.print-mtl-mode #tab-mtl { display: block !important; }
+            body.print-mtl-mode #mtl-report { max-width: 100% !important; box-shadow: none !important; }
+            body.print-mtl-mode @page { size: A4 portrait; margin: 10mm 12mm; }
+            body.print-sum-mode #tab-aia { display: none !important; }
+            body.print-sum-mode #tab-mtl { display: none !important; }
+            body.print-sum-mode .tab-nav { display: none !important; }
+            body.print-sum-mode #tab-sum { display: block !important; }
+            body.print-sum-mode #sum-report { max-width: 100% !important; box-shadow: none !important; }
             body { background-color: white; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             .report-container {
                 box-shadow: none; padding: 0; max-width: 100%; margin: 0; border: none;
@@ -71,11 +84,41 @@
             .badge { font-size: 10px; padding: 2px 6px; }
             .page-break { page-break-before: always; }
             #remarks-section { border: 2px solid #dc2626 !important; background: #fff5f5 !important; padding: 10px 14px !important; }
+            #plan-summary-section { margin-top: 0 !important; }
+            #plan-sum-table th, #plan-sum-table td { padding: 7px 10px !important; font-size: 12px !important; }
+            #plan-sum-table tfoot td { font-size: 14px !important; }
+            #psum-grand-total { font-size: 18px !important; }
+            #inp-hh-midyear { display: none !important; }
+            #hh-midyear-print { display: inline-block !important; }
             #remarks-content { color: #dc2626 !important; font-size: 12px !important; }
+            /* MTL report compact print */
+            .mtl-print-table th, .mtl-print-table td { padding: 5px 7px !important; font-size: 11px !important; }
+        }
+
+        /* ── Tab System ── */
+        .tab-nav { display:flex; gap:0; background:#1e3a5f; border-radius:10px 10px 0 0; overflow:hidden; max-width:1260px; margin:0 auto; }
+        .tab-btn { padding:12px 28px; font-size:15px; font-weight:700; color:#94a3b8; cursor:pointer; border:none; background:transparent; transition:all 0.2s; border-bottom:3px solid transparent; }
+        .tab-btn:hover { color:white; background:rgba(255,255,255,0.08); }
+        .tab-btn.active { color:white; border-bottom:3px solid #60a5fa; background:rgba(255,255,255,0.12); }
+        .tab-content { display:none; }
+        .tab-content.active { display:block; }
+        /* Print: show active tab normally, MTL uses print-active override */
+        @media print {
+            .tab-nav { display:none !important; }
+            .tab-content { display:none !important; }
+            .tab-content.active { display:block !important; }
+            .tab-content.print-active { display:block !important; }
         }
     </style>
 </head>
 <body class="p-4 md:p-8">
+
+<div class="tab-nav no-print">
+    <button class="tab-btn active" id="btn-aia" onclick="switchTab('aia')">📊 AIA Health Solution</button>
+    <button class="tab-btn" id="btn-mtl" onclick="switchTab('mtl')">🟢 MTL สรุปความคุ้มครอง</button>
+    <button class="tab-btn" id="btn-sum" onclick="switchTab('sum')">📋 สรุปการเปลี่ยนแปลง</button>
+</div>
+<div id="tab-aia" class="tab-content active">
 
 <!-- ═══════ CONTROL PANEL ═══════ -->
 <div class="max-w-6xl mx-auto bg-white rounded-xl shadow-lg p-6 mb-8 border border-gray-200 no-print">
@@ -376,7 +419,7 @@
 
     <!-- ═══ Section 1: สรุปเบี้ยปีแรก ═══ -->
     <div class="report-section">
-        <h2 class="report-h2">1. สรุปเบี้ยประกันภัยปีแรก (Premium Summary)</h2>
+        <h2 class="report-h2">1. สรุปเบี้ยประกันภัย (Premium Summary)</h2>
         <table class="compare-table">
             <thead>
                 <tr>
@@ -400,32 +443,32 @@
                     <td class="data-cell col-opt-1 text-emerald-600 font-bold"><div id="name-hl-1" class="text-xs font-normal mb-1"></div><span id="sum-hl-1">0</span></td>
                     <td class="data-cell col-opt-2 text-amber-600 font-bold"><div id="name-hl-2" class="text-xs font-normal mb-1"></div><span id="sum-hl-2">0</span></td>
                 </tr>
-                <tr>
+                <tr id="row-hc">
                     <td class="row-header">AIA Health Cancer<br><span class="badge badge-cancer" style="margin-left:0;margin-top:4px;">โรคร้ายแรง + ชดเชย IPD</span> <span class="badge badge-tax">ลดหย่อนภาษีได้</span></td>
                     <td class="data-cell col-opt-1 text-purple-700 font-bold"><div id="name-hc-1" class="text-xs font-normal mb-1 text-gray-400"></div><span id="sum-hc-1">-</span></td>
                     <td class="data-cell col-opt-2 text-purple-700 font-bold"><div id="name-hc-2" class="text-xs font-normal mb-1 text-gray-400"></div><span id="sum-hc-2">-</span></td>
                 </tr>
-                <tr>
+                <tr id="row-cfc">
                     <td class="row-header">โรคร้ายแรง Care for Cancer<br><span class="badge badge-vitality" style="margin-left:0;margin-top:4px;">Vitality</span></td>
                     <td class="data-cell col-opt-1"><div id="name-cfc-1" class="text-xs text-gray-400 mb-1"></div><span id="sum-cfc-1">-</span></td>
                     <td class="data-cell col-opt-2"><div id="name-cfc-2" class="text-xs text-gray-400 mb-1"></div><span id="sum-cfc-2">-</span></td>
                 </tr>
-                <tr>
+                <tr id="row-hb">
                     <td class="row-header">ชดเชยรายได้ HB Extra<br><span class="badge badge-vitality" style="margin-left:0;margin-top:4px;">Vitality</span></td>
                     <td class="data-cell col-opt-1"><div id="name-hb-1" class="text-xs text-gray-400 mb-1"></div><span id="sum-hb-1">-</span></td>
                     <td class="data-cell col-opt-2"><div id="name-hb-2" class="text-xs text-gray-400 mb-1"></div><span id="sum-hb-2">-</span></td>
                 </tr>
-                <tr>
+                <tr id="row-hbstd">
                     <td class="row-header">ชดเชยรายวัน HB <span style="font-size:13px;color:#666;">(IPD ทั่วไป)</span></td>
                     <td class="data-cell col-opt-1 text-teal-700"><div id="name-hbstd-1" class="text-xs text-gray-400 mb-1"></div><span id="sum-hbstd-1">-</span></td>
                     <td class="data-cell col-opt-2 text-teal-700"><div id="name-hbstd-2" class="text-xs text-gray-400 mb-1"></div><span id="sum-hbstd-2">-</span></td>
                 </tr>
-                <tr>
+                <tr id="row-add">
                     <td class="row-header">ADD/RCC <span style="font-size:13px;color:#666;">(อุบัติเหตุ)</span></td>
                     <td class="data-cell col-opt-1 text-orange-600"><div id="name-add-1" class="text-xs text-gray-400 mb-1"></div><span id="sum-add-1">-</span></td>
                     <td class="data-cell col-opt-2 text-orange-600"><div id="name-add-2" class="text-xs text-gray-400 mb-1"></div><span id="sum-add-2">-</span></td>
                 </tr>
-                <tr>
+                <tr id="row-adb">
                     <td class="row-header">ADB/RCC <span style="font-size:13px;color:#666;">(เสียชีวิตอุบัติเหตุ)</span></td>
                     <td class="data-cell col-opt-1 text-red-600"><div id="name-adb-1" class="text-xs text-gray-400 mb-1"></div><span id="sum-adb-1">-</span></td>
                     <td class="data-cell col-opt-2 text-red-600"><div id="name-adb-2" class="text-xs text-gray-400 mb-1"></div><span id="sum-adb-2">-</span></td>
@@ -653,6 +696,88 @@
         </div>
     </div>
 
+
+    <!-- ═══ PLAN SELECTION SUMMARY (page break on print) ═══ -->
+    <div id="plan-summary-section" style="margin-top:40px;" class="page-break">
+        <h2 style="font-size:26px;color:#1e40af;border-bottom:3px solid #1e40af;padding-bottom:10px;margin-bottom:20px;font-weight:700;">
+            📋 สรุปการเลือกแผนประกันภัย
+        </h2>
+
+        <!-- Selection controls (no-print) -->
+        <div class="no-print" style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:10px;padding:14px 18px;margin-bottom:18px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;">
+            <span style="font-weight:700;color:#0369a1;font-size:15px;">เลือกรายการเพิ่มเติมจาก Option 2 + MTL:</span>
+            <label style="display:flex;align-items:center;gap:6px;font-size:14px;cursor:pointer;">
+                <input type="checkbox" id="sel-cipc" class="w-4 h-4" onchange="buildPlanSummary()">
+                <span>CI Perfect Care (MTL)</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:6px;font-size:14px;cursor:pointer;">
+                <span style="color:#15803d;font-weight:600;">MTL Extra Care:</span>
+                <select id="sel-mtlec-qty" onchange="buildPlanSummary()" class="border border-green-300 rounded px-2 py-1 text-sm">
+                    <option value="0">ไม่เลือก</option>
+                    <option value="1">1 ชุด</option>
+                    <option value="2">2 ชุด</option>
+                </select>
+            </label>
+            <label style="display:flex;align-items:center;gap:6px;font-size:14px;cursor:pointer;">
+                <input type="checkbox" id="sel-opt2-health" class="w-4 h-4" checked onchange="buildPlanSummary()">
+                <span>รวม Option 2 (Health + สัญญา AIA)</span>
+            </label>
+        </div>
+
+        <!-- Summary Table -->
+        <div style="overflow-x:auto;">
+            <table style="width:100%;border-collapse:collapse;font-size:16px;" id="plan-sum-table">
+                <thead>
+                    <tr>
+                        <th style="background:#1e3a5f;color:white;padding:11px 14px;text-align:left;width:38%;font-size:15px;">รายการ</th>
+                        <th style="background:#1d4ed8;color:white;padding:11px 14px;text-align:center;width:20%;font-size:15px;">
+                            Option 1<br><span id="psum-opt1-label" style="font-size:12px;font-weight:normal;">(ปัจจุบัน)</span>
+                        </th>
+                        <th style="background:#0e7490;color:white;padding:11px 14px;text-align:center;width:20%;font-size:15px;">
+                            Option 2 (AIA)<br><span id="psum-opt2-label" style="font-size:12px;font-weight:normal;"></span>
+                        </th>
+                        <th style="background:#7e22ce;color:white;padding:11px 14px;text-align:center;width:22%;font-size:15px;">
+                            รายการเพิ่มเติม MTL<br><span id="psum-mtl-label" style="font-size:12px;font-weight:normal;"></span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="plan-sum-tbody">
+                    <!-- Dynamic rows -->
+                </tbody>
+                <tfoot>
+                    <tr style="background:#1e3a5f;border-top:3px solid #1e3a5f;">
+                        <td style="padding:13px 14px;font-weight:800;font-size:17px;color:white;">เบี้ยสุทธิรวมทั้งสิ้น (บาท/ปี)</td>
+                        <td style="padding:13px 14px;text-align:right;font-weight:800;font-size:22px;color:#fde68a;" id="psum-total-1">0</td>
+                        <td style="padding:13px 14px;text-align:right;font-weight:800;font-size:22px;color:#fde68a;" id="psum-total-2">0</td>
+                        <td style="padding:13px 14px;text-align:right;font-weight:800;font-size:22px;color:#fde68a;" id="psum-total-mtl">0</td>
+                    </tr>
+                    <tr style="background:#1e40af;">
+                        <td style="padding:11px 14px;font-weight:800;font-size:16px;color:white;">รวมเบี้ยที่ต้องจ่ายทั้งหมด (Option 2 + MTL)</td>
+                        <td style="padding:11px 14px;text-align:center;color:#93c5fd;font-size:13px;">(Option 1 ปัจจุบัน)</td>
+                        <td colspan="2" style="padding:11px 14px;text-align:right;font-weight:800;font-size:24px;color:#fbbf24;" id="psum-grand-total">0</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <!-- Note -->
+        <div style="margin-top:16px;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:14px 18px;">
+            <p style="font-size:15px;color:#92400e;margin:0 0 6px;font-weight:700;">📌 หมายเหตุสำคัญ</p>
+            <p style="font-size:15px;color:#78350f;margin:0 0 8px;">
+                กรณีสัญญา Health Happy การเพิ่มครั้งนี้เป็นการเพิ่มระหว่างปี จะจ่ายเบี้ยเพียง
+                <input type="number" id="inp-hh-midyear" placeholder="0"
+                    style="display:inline-block;border:none;border-bottom:2px solid #92400e;background:transparent;width:90px;margin:0 4px;text-align:center;font-size:15px;color:#92400e;font-weight:bold;outline:none;"
+                    class="no-print-border"
+                    oninput="const v=this.value?Number(this.value).toLocaleString('en-US'):'____________'; document.getElementById('hh-midyear-print').textContent=v;">
+                <span id="hh-midyear-print" style="display:none;border-bottom:1px solid #92400e;min-width:80px;display:inline-block;"></span>
+                บาท (คำนวณตามสัดส่วนเดือนที่เหลือในปีกรมธรรม์)
+            </p>
+            <p style="font-size:14px;color:#a16207;margin:0;">
+                * เบี้ยประกันภัยที่แสดงเป็นอัตรารายปีเต็ม | อัตราปรับตามช่วงอายุในปีต่ออายุ | ยังไม่หักส่วนลด AIA Vitality Bonus
+            </p>
+        </div>
+    </div>
+
     <!-- ═══ REMARKS SECTION ═══ -->
     <div id="remarks-section" style="display:none; margin-top:30px; border:2px solid #dc2626; border-radius:10px; background:#fff5f5; padding:20px 25px;">
         <h2 style="font-size:22px; color:#dc2626; border-bottom:1px solid #dc2626; padding-bottom:8px; margin-top:0; margin-bottom:15px; font-weight:700;">⚠ หมายเหตุ / ข้อความเพิ่มเติม</h2>
@@ -793,6 +918,7 @@ const APP_DATA = {
 
     // ADD/RCC — อัตราต่อ 1,000 บาท ทุนประกัน/ปี, flat ตามชั้นอาชีพ (อายุ 15 วัน–64 ปี)
     // ADD: class 1=2, 2=3, 3=4, 4=5 บาท/1,000 + RCC: class 1=1, 2=1, 3=1, 4=1 บาท/1,000
+    // ADD/RCC รวม ✓ (รวม RCC แล้ว): class 1=3.00, 2=4.00, 3=5.00, 4=6.00
     RATE_ADD_RCC: { 1: 3.00, 2: 4.00, 3: 5.00, 4: 6.00 },
     // ADD เดี่ยว (ไม่รวม RCC)
     RATE_ADD: { 1: 2.00, 2: 3.00, 3: 4.00, 4: 5.00 },
@@ -836,8 +962,11 @@ const APP_DATA = {
         }
     },
     // ADB/RCC — เสียชีวิตจากอุบัติเหตุ (อายุ 15 วัน–64 ปี) ต่อ 1,000 บาท ทุนประกัน/ปี
-    // Source: Benefits Plus 2025 หน้า 46, class 1: 1.50 / class 2: 2.25 / class 3: 3.00
-    RATE_ADB_RCC: { 1: 1.50, 2: 2.25, 3: 3.00 },
+    // Source: Benefits Plus 2025 หน้า 46
+    // ADB เดี่ยว: class 1=1.50, 2=2.25, 3=3.00 | RCC สำหรับ ADB: class 1≈0.34, 2≈0.27, 3≈0.20 (ประมาณการจากตาราง)
+    // ADB/RCC รวม: class 1=1.84, 2=2.52, 3=3.20 ✓
+    RATE_ADB: { 1: 1.50, 2: 2.25, 3: 3.00 },
+    RATE_ADB_RCC: { 1: 1.84, 2: 2.52, 3: 3.20 },
 
     AGE_BANDS: ["11-15","16-20","21-25","26-30","31-35","36-40","41-45","46-50","51-55","56-60","61-65","66-70","71-75","76-80","81-85","86-90","91-95","96-98"]
 };
@@ -1096,8 +1225,26 @@ const app = {
 
         this.renderBenefitTable(age, gender);
         this.renderProjectionTable(age, gender, pMain);
+
+        // ── Hide/show premium rows based on selection ──
+        const hcAny    = (parseInt(document.getElementById('hc-1').value)||0)>0  || (parseInt(document.getElementById('hc-2').value)||0)>0;
+        const cfcAny   = (parseInt(document.getElementById('cfc-1').value)||0)>0 || (parseInt(document.getElementById('cfc-2').value)||0)>0;
+        const hbAny    = (parseInt(document.getElementById('hb-1').value)||0)>0  || (parseInt(document.getElementById('hb-2').value)||0)>0;
+        const hbstdAny = (parseInt(document.getElementById('hbstd-1').value)||0)>0 || (parseInt(document.getElementById('hbstd-2').value)||0)>0;
+        const addAny   = (parseInt(document.getElementById('add-1').value)||0)>0 || (parseInt(document.getElementById('add-2').value)||0)>0;
+        const adbAny   = (parseInt(document.getElementById('adb-1').value)||0)>0 || (parseInt(document.getElementById('adb-2').value)||0)>0;
+        const showRow = (id, visible) => { const el=document.getElementById(id); if(el) el.style.display = visible?'':'none'; };
+        showRow('row-hc',    hcAny);
+        showRow('row-cfc',   cfcAny);
+        showRow('row-hb',    hbAny);
+        showRow('row-hbstd', hbstdAny);
+        showRow('row-add',   addAny);
+        showRow('row-adb',   adbAny);
+
         // Sync addon displays without triggering loop
         if(window._addonSync !== true) { window._addonSync=true; calcAddons(); window._addonSync=false; }
+        // Rebuild plan summary
+        if(window._addonSync !== true) buildPlanSummary();
     },
 
     // ═══ BENEFIT TABLE ═══
@@ -1115,7 +1262,41 @@ const app = {
             {id:"opd", label:"ค่ารักษาพยาบาลผู้ป่วยนอก (OPD)"}
         ];
 
-        let html = `<tr class="sub-header-row"><td colspan="3">ส่วนที่ 1: ความคุ้มครองสุขภาพเหมาจ่าย / แยกหมวด</td></tr>`;
+        // Read main sum assured & plan names
+        const mainSum = parseInt(document.getElementById('inp-main-sum').value)||0;
+        const opt1Name = APP_DATA.plans[this.state[1].type]?.options[this.state[1].idx]?.name || '-';
+        const opt2Name = APP_DATA.plans[this.state[2].type]?.options[this.state[2].idx]?.name || '-';
+        const opt1TypeName = APP_DATA.plans[this.state[1].type]?.name || '-';
+        const opt2TypeName = APP_DATA.plans[this.state[2].type]?.name || '-';
+
+        let html = `<tr class="sub-header-row" style="background:#1e3a5f;"><td colspan="3" style="color:white;padding:10px 14px;font-weight:700;font-size:16px;">ส่วนที่ 1: ประกันชีวิตหลัก 20PLN (สัญญาบังคับ — จำเป็นต้องมี)</td></tr>`;
+        html += `<tr style="background:#eff6ff;">
+            <td class="row-header" style="color:#1e3a8a;font-weight:600;">ทุนประกันชีวิต (จำนวนเงินเอาประกันภัย)</td>
+            <td class="data-cell col-opt-1" style="font-size:18px;font-weight:700;color:#1d4ed8;text-align:center;">${this.fmt(mainSum)} บาท</td>
+            <td class="data-cell col-opt-2" style="font-size:18px;font-weight:700;color:#1d4ed8;text-align:center;">${this.fmt(mainSum)} บาท</td>
+        </tr>`;
+        html += `<tr>
+            <td class="row-header" style="color:#374151;">แผนประกันสุขภาพที่เลือก</td>
+            <td class="data-cell col-opt-1" style="font-weight:600;color:#065f46;text-align:center;">${opt1TypeName}<br><span style="font-size:13px;color:#6b7280;">${opt1Name}</span></td>
+            <td class="data-cell col-opt-2" style="font-weight:600;color:#92400e;text-align:center;">${opt2TypeName}<br><span style="font-size:13px;color:#6b7280;">${opt2Name}</span></td>
+        </tr>`;
+        html += `<tr style="background:#eff6ff;">
+            <td class="row-header" style="color:#374151;">ระยะเวลาชำระเบี้ย</td>
+            <td colspan="2" class="data-cell" style="text-align:center;color:#1e40af;font-weight:600;">20 ปี (คุ้มครองตลอดชีพ ถึงอายุ 99 ปี)</td>
+        </tr>`;
+        html += `<tr>
+            <td class="row-header" style="color:#374151;">ผลประโยชน์เมื่อครบ 20 ปี / เสียชีวิต</td>
+            <td colspan="2" class="data-cell" style="text-align:center;color:#1e40af;font-weight:600;">รับทุนประกัน ${this.fmt(mainSum)} บาท</td>
+        </tr>`;
+        html += `<tr style="background:#fef3c7;"><td colspan="3" style="padding:8px 14px;font-size:13px;color:#92400e;">
+            <strong>📌 หมายเหตุ:</strong> สัญญาหลักต้องมี เช่น 20PLN &nbsp;|&nbsp;
+            สัญญาเพิ่มเติมสุขภาพ อุบัติเหตุ โรคร้ายแรง สามารถเลือกหรือไม่เลือกได้ตามความต้องการ
+        </td></tr>`;
+
+        // Section 2: Health Plan — show only if a plan is selected (not NONE)
+        const anyHealth = this.state[1].type !== 'NONE' || this.state[2].type !== 'NONE';
+        if(anyHealth) {
+        html += `<tr class="sub-header-row"><td colspan="3">ส่วนที่ 2: ความคุ้มครองสุขภาพเหมาจ่าย / แยกหมวด</td></tr>`;
         rows.forEach(r => {
             html += `<tr><td class="row-header">${r.label}</td>`;
             [1,2].forEach(id => {
@@ -1127,16 +1308,27 @@ const app = {
             });
             html += `</tr>`;
         });
+        } // end anyHealth
 
         // AIA Health Cancer section
-        html += `<tr class="sub-header-row"><td colspan="3">ส่วนที่ 2: AIA Health Cancer (โรคมะเร็งและโรคร้ายแรง)</td></tr>`;
+        html += `<tr class="sub-header-row"><td colspan="3">ส่วนที่ 3: AIA Health Cancer (โรคมะเร็งและโรคร้ายแรง)</td></tr>`;
         html += `<tr><td class="row-header" style="font-size:13px;color:#555;padding-top:6px;padding-bottom:6px;" colspan="3">โรคที่คุ้มครอง: มะเร็ง (ระยะไม่ลุกลาม + ลุกลาม), โปลิโอ, ถุงลมโป่งพอง, กล้ามเนื้อเสื่อม, Multiple Sclerosis, ตับแข็ง | Waiting Period: 30 วัน</td></tr>`;
 
+        // ── Determine which riders are active (either option) ──
+        const anyHC    = (parseInt(document.getElementById('hc-1').value)||0)>0    || (parseInt(document.getElementById('hc-2').value)||0)>0;
+        const anyCFC   = (parseInt(document.getElementById('cfc-1').value)||0)>0   || (parseInt(document.getElementById('cfc-2').value)||0)>0;
+        const anyHB    = (parseInt(document.getElementById('hb-1').value)||0)>0    || (parseInt(document.getElementById('hb-2').value)||0)>0;
+        const anyHBStd = (parseInt(document.getElementById('hbstd-1').value)||0)>0 || (parseInt(document.getElementById('hbstd-2').value)||0)>0;
+        const anyADD   = (parseInt(document.getElementById('add-1').value)||0)>0   || (parseInt(document.getElementById('add-2').value)||0)>0;
+        const anyADB   = (parseInt(document.getElementById('adb-1').value)||0)>0   || (parseInt(document.getElementById('adb-2').value)||0)>0;
+
+        // Section 2: AIA Health Cancer
+        if(anyHC) {
         const hcRows = [
             {label:"ทุนประกัน (มรณกรรมจากโรคร้ายแรง)", fn:(id)=>{ const s=parseInt(document.getElementById(`hc-${id}`).value)||0; return s>0?this.fmt(s)+' บ.':'-'; }},
             {label:"ชดเชยรายวัน (ผู้ป่วยใน IPD) เนื่องจากโรคร้ายแรง", fn:(id)=>{ const s=parseInt(document.getElementById(`hc-${id}`).value)||0; return s>0?this.fmt((s/100000)*1000)+' บ./วัน':'-'; }},
             {label:"สถานะการสูบบุหรี่", fn:(id)=>{ const s=parseInt(document.getElementById(`hc-${id}`).value)||0; if(!s)return '-'; return document.getElementById(`hc-ns-${id}`).checked?'ไม่สูบบุหรี่ (-10%, อายุ 16-65)':'สูบบุหรี่ (อัตรามาตรฐาน)'; }},
-            {label:"เบี้ยประกันภัย (ปีแรก)", fn:(id)=>{ const s=parseInt(document.getElementById(`hc-${id}`).value)||0; const ns=document.getElementById(`hc-ns-${id}`).checked; return s>0?this.fmt(this.calcHC(s,age,gender,ns))+' บ./ปี':'-'; }}
+            {label:"เบี้ยประกันภัย", fn:(id)=>{ const s=parseInt(document.getElementById(`hc-${id}`).value)||0; const ns=document.getElementById(`hc-ns-${id}`).checked; return s>0?this.fmt(this.calcHC(s,age,gender,ns))+' บ./ปี':'-'; }}
         ];
         hcRows.forEach(r => {
             html += `<tr><td class="row-header">${r.label}</td>`;
@@ -1148,8 +1340,11 @@ const app = {
             html += `</tr>`;
         });
 
+        } // end anyHC
+
         // Care for Cancer
-        html += `<tr class="sub-header-row"><td colspan="3">ส่วนที่ 3: Care for Cancer — มะเร็ง (เจอ-จ่าย-จบ)</td></tr>`;
+        if(anyCFC) {
+        html += `<tr class="sub-header-row"><td colspan="3">ส่วนที่ 4: Care for Cancer — มะเร็ง (เจอ-จ่าย-จบ)</td></tr>`;
         [
             {label:"เงินก้อนเมื่อตรวจพบมะเร็ง (ทุกระยะ)", fn:(id)=>{ const s=parseInt(document.getElementById(`cfc-${id}`).value)||0; return s>0?this.fmt(s)+' บ.':'-'; }},
             {label:"ชดเชยรายวันแอดมิทด้วยมะเร็ง", fn:(id)=>{ const s=parseInt(document.getElementById(`cfc-${id}`).value)||0; return s>0?this.fmt((s/100000)*2000)+' บ./วัน':'-'; }},
@@ -1163,24 +1358,47 @@ const app = {
             html += `</tr>`;
         });
 
+        } // end anyCFC
+
         // HB Extra
-        html += `<tr class="sub-header-row"><td colspan="3">ส่วนที่ 4: ชดเชยรายได้ HB Extra</td></tr>`;
+        if(anyHB) {
+        html += `<tr class="sub-header-row"><td colspan="3">ส่วนที่ 5: ชดเชยรายได้ HB Extra — สัญญาเพิ่มเติม AIA HB Extra (ต่อทุนประกัน 100 บาท/วัน)</td></tr>`;
         [
-            {label:"ชดเชยรายวันทั่วไป (IPD)", fn:(id)=>{ const s=parseInt(document.getElementById(`hb-${id}`).value)||0; return s>0?this.fmt(s)+' บ./วัน':'-'; }},
-            {label:"ห้อง ICU (3 เท่า)", fn:(id)=>{ const s=parseInt(document.getElementById(`hb-${id}`).value)||0; return s>0?this.fmt(s*3)+' บ./วัน':'-'; }},
-            {label:"ผ่าตัด วางยาสลบ/บล็อกหลัง (5 เท่า)", fn:(id)=>{ const s=parseInt(document.getElementById(`hb-${id}`).value)||0; return s>0?this.fmt(s*5)+' บ.':'-'; }},
-            {label:"โรคร้ายแรงเฉียบพลัน 13 โรค (25 เท่า)", fn:(id)=>{ const s=parseInt(document.getElementById(`hb-${id}`).value)||0; return s>0?this.fmt(s*25)+' บ.':'-'; }}
+            {label:"1. ชดเชยรายวัน IPD (ผู้ป่วยใน)", fn:(id)=>{ const s=parseInt(document.getElementById(`hb-${id}`).value)||0; return s>0?this.fmt(s)+' บ./วัน (สูงสุด 1,260 วัน ตลอดสัญญา)':'-'; }},
+            {label:"2. ห้อง ICU (3 เท่า)", fn:(id)=>{ const s=parseInt(document.getElementById(`hb-${id}`).value)||0; return s>0?this.fmt(s*3)+' บ./วัน (สูงสุด 365 วัน ต่อการเข้าพัก)':'-'; }},
+            {label:"3. ผ่าตัด — วางยาสลบ / บล็อกหลัง (5 เท่า)", fn:(id)=>{ const s=parseInt(document.getElementById(`hb-${id}`).value)||0; return s>0?this.fmt(s*5)+' บ./ครั้ง (General/Spinal Anesthesia, 1 ครั้ง/การนอน)':'-'; }},
+            {label:"4. โรคร้ายแรงเฉียบพลัน 13 โรค (25 เท่า)", fn:(id)=>{ const s=parseInt(document.getElementById(`hb-${id}`).value)||0; return s>0?this.fmt(s*25)+' บ./ครั้ง (จ่ายครั้งเดียว ต่อการนอน รพ. แต่ละครั้ง)':'-'; }},
+            {label:"5. Day Case (สลายนิ่ว/ส่องกลอง/ผ่าตัดต้อ ฯลฯ)", fn:(id)=>{ const s=parseInt(document.getElementById(`hb-${id}`).value)||0; return s>0?this.fmt(s)+' บ./ครั้ง':'-'; }},
+            {label:"6. ค่ายากลับบ้าน (หลัง IPD หรือ Day Case)", fn:(id)=>{ const s=parseInt(document.getElementById(`hb-${id}`).value)||0; return s>0?this.fmt(s)+' บ./ครั้ง':'-'; }}
         ].forEach(r => {
-            html += `<tr><td class="row-header">${r.label}</td>`;
+            html += `<tr><td class="row-header" style="font-size:15px;">${r.label}</td>`;
             [1,2].forEach(id => {
                 const val = r.fn(id);
-                html += `<td class="data-cell col-opt-${id} ${val!=='-'?'text-amber-600 font-bold':'text-gray-500'}">${val}</td>`;
+                html += `<td class="data-cell col-opt-${id} ${val!=='-'?'text-amber-600 font-bold':'text-gray-500'}" style="font-size:15px;">${val}</td>`;
             });
             html += `</tr>`;
         });
+        // 13 critical diseases note
+        {
+            const hb1 = parseInt(document.getElementById('hb-1').value)||0;
+            const hb2 = parseInt(document.getElementById('hb-2').value)||0;
+            if(hb1>0||hb2>0) {
+                html += `<tr><td colspan="3" style="padding:8px 14px;background:#fffbeb;border-left:4px solid #f59e0b;font-size:13px;color:#78350f;">
+                    <strong>📋 13 โรคร้ายแรงเฉียบพลัน ที่ได้รับความคุ้มครอง:</strong><br>
+                    1.กล้ามเนื้อหัวใจตายเฉียบพลัน &nbsp; 2.โรคหลอดเลือดสมอง &nbsp; 3.ผ่าตัดหัวใจ Bypass &nbsp;
+                    4.เปลี่ยนอวัยวะ/ไขกระดูก &nbsp; 5.ไวรัสตับอักเสบขั้นรุนแรง &nbsp; 6.เยื่อหุ้มสมองอักเสบ (แบคทีเรีย) &nbsp;
+                    7.แผลไหม้ฉกรรจ์ &nbsp; 8.ภาวะโคมา &nbsp; 9.สมองอักเสบ (ไวรัส) &nbsp;
+                    10.ผ่าตัดลิ้นหัวใจเปิดหัวใจ &nbsp; 11.บาดเจ็บศีรษะอย่างรุนแรง &nbsp; 12.ผ่าตัดเส้นเลือดใหญ่ Aorta &nbsp;
+                    13.โรคคาวาซากิ (มีภาวะแทรกซ้อนหัวใจ)
+                </td></tr>`;
+            }
+        }
+
+        } // end anyHB
 
         // HB standard
-        html += `<tr class="sub-header-row"><td colspan="3">ส่วนที่ 5: ชดเชยรายวัน HB (ผู้ป่วยในทั่วไป, คุ้มครองถึงอายุ 59 ปี)</td></tr>`;
+        if(anyHBStd) {
+        html += `<tr class="sub-header-row"><td colspan="3">ส่วนที่ 6: ชดเชยรายวัน HB (ผู้ป่วยในทั่วไป, คุ้มครองถึงอายุ 59 ปี)</td></tr>`;
         [
             {label:"ชดเชยรายวัน IPD", fn:(id)=>{ const s=parseInt(document.getElementById(`hbstd-${id}`).value)||0; return s>0?this.fmt(s)+' บ./วัน':'-'; }},
             {label:"ชั้นอาชีพ / อัตราเบี้ย (ต่อ 100 บ./วัน)", fn:(id)=>{ const s=parseInt(document.getElementById(`hbstd-${id}`).value)||0; if(!s)return '-'; const oc=parseInt(document.getElementById(`occ-${id}`).value)||1; const r=APP_DATA.RATE_HB_STD[oc]||90; return `ชั้น ${oc} — อัตรา ${r} บ./ปี`; }}
@@ -1193,8 +1411,11 @@ const app = {
             html += `</tr>`;
         });
 
+        } // end anyHBStd
+
         // ADD/RCC
-        html += `<tr class="sub-header-row"><td colspan="3">ส่วนที่ 6: ADD/RCC — อุบัติเหตุ (คุ้มครองถึงอายุ 64 ปี) คุ้มครองเสียชีวิต + สูญเสียอวัยวะ</td></tr>`;
+        if(anyADD) {
+        html += `<tr class="sub-header-row"><td colspan="3">ส่วนที่ 7: ADD/RCC — อุบัติเหตุ (คุ้มครองถึงอายุ 64 ปี) คุ้มครองเสียชีวิต + สูญเสียอวัยวะ</td></tr>`;
         [
             {label:"ทุนประกัน ADD/RCC", fn:(id)=>{ const s=parseInt(document.getElementById(`add-${id}`).value)||0; return s>0?this.fmt(s)+' บ.':'-'; }},
             {label:"ชั้นอาชีพ / อัตราเบี้ย (ต่อ 1,000 บ.)", fn:(id)=>{ const s=parseInt(document.getElementById(`add-${id}`).value)||0; if(!s)return '-'; const oc=parseInt(document.getElementById(`occ-${id}`).value)||1; const r=APP_DATA.RATE_ADD_RCC[oc]||3; return `ชั้น ${oc} — ${r} บ./1,000/ปี`; }}
@@ -1206,9 +1427,11 @@ const app = {
             });
             html += `</tr>`;
         });
+        } // end anyADD
 
         // ADB/RCC
-        html += `<tr class="sub-header-row"><td colspan="3">ส่วนที่ 7: ADB/RCC — เสียชีวิตจากอุบัติเหตุ (คุ้มครองถึงอายุ 64 ปี) คุ้มครองเสียชีวิตเท่านั้น</td></tr>`;
+        if(anyADB) {
+        html += `<tr class="sub-header-row"><td colspan="3">ส่วนที่ 8: ADB/RCC — เสียชีวิตจากอุบัติเหตุ (คุ้มครองถึงอายุ 64 ปี) คุ้มครองเสียชีวิตเท่านั้น</td></tr>`;
         [
             {label:"ทุนประกัน ADB/RCC", fn:(id)=>{ const s=parseInt(document.getElementById(`adb-${id}`).value)||0; return s>0?this.fmt(s)+' บ.':'-'; }},
             {label:"ชั้นอาชีพ / อัตราเบี้ย (ต่อ 1,000 บ.)", fn:(id)=>{ const s=parseInt(document.getElementById(`adb-${id}`).value)||0; if(!s)return '-'; const oc=Math.min(parseInt(document.getElementById(`occ-${id}`).value)||1,3); const r=APP_DATA.RATE_ADB_RCC[oc]||1.5; return `ชั้น ${oc} — ${r} บ./1,000/ปี`; }}
@@ -1220,6 +1443,7 @@ const app = {
             });
             html += `</tr>`;
         });
+        } // end anyADB
 
         document.getElementById('benefit-body').innerHTML = html;
     },
@@ -1422,6 +1646,9 @@ function calcAddons() {
         );
     }
 
+    // Rebuild plan summary
+    if(window._addonSync !== true) buildPlanSummary();
+
     // Trigger main calculate to update totals
     app.calculate();
 }
@@ -1563,6 +1790,134 @@ function buildCombinedProjection(cipcSum, mtlecPlan, mtlecCopies, startAge, gend
     tbody.innerHTML = rows;
 }
 
+function buildPlanSummary() {
+    const tbody  = document.getElementById('plan-sum-tbody');
+    if (!tbody) return;
+
+    // ── Read current values from DOM ──
+    const gender   = document.getElementById('inp-gender').value;
+    const age      = parseInt(document.getElementById('inp-age').value)||0;
+    const cipcSum  = parseInt(document.getElementById('cipc-sum').value)||0;
+    const mtlecPlan= document.getElementById('mtlec-plan').value;
+    const mtlecCopies = parseInt(document.getElementById('mtlec-copies').value)||1;
+
+    const selCIPC   = document.getElementById('sel-cipc')?.checked ?? false;
+    const selMTLQty = parseInt(document.getElementById('sel-mtlec-qty')?.value||'0');
+    const selOpt2   = document.getElementById('sel-opt2-health')?.checked ?? true;
+
+    // ── Helper: read displayed text from an element (parse number) ──
+    const getNum = id => {
+        const el = document.getElementById(id);
+        if(!el) return 0;
+        const t = (el.textContent||'').replace(/[^0-9.]/g,'');
+        return parseFloat(t)||0;
+    };
+    const getText = id => {
+        const el = document.getElementById(id);
+        return el ? (el.textContent||'').trim() : '';
+    };
+
+    // ── Build header labels ──
+    document.getElementById('psum-opt1-label').textContent =
+        `(${getText('name-hl-1')||'Option 1 ปัจจุบัน'})`;
+    document.getElementById('psum-opt2-label').textContent =
+        selOpt2 ? `(${getText('name-hl-2')||''})` : '(ไม่เลือก)';
+
+    let mtlLabelParts = [];
+    if(selCIPC && cipcSum>0) mtlLabelParts.push(`CI PC ${app.fmt(cipcSum)} บ.`);
+    if(selMTLQty>0 && mtlecPlan!=='0') mtlLabelParts.push(`MTL EC ×${selMTLQty}`);
+    document.getElementById('psum-mtl-label').textContent =
+        mtlLabelParts.length ? `(${mtlLabelParts.join(' + ')})` : '(ยังไม่เลือก)';
+
+    // ── Row definitions ──
+    // Each row: { label, id1, id2, colorClass, alwaysShow }
+    const rows = [
+        { label:'ประกันชีวิตหลัก (20PLN)', ids:['sum-main-1','sum-main-2'], color:'#1d4ed8', alwaysShow:true },
+        { label:'ประกันสุขภาพ (Health)', ids:['sum-hl-1','sum-hl-2'], nameIds:['name-hl-1','name-hl-2'], color:'#0891b2', alwaysShow:true },
+        { label:'AIA Health Cancer', ids:['sum-hc-1','sum-hc-2'], color:'#7e22ce', showIf:() => getNum('sum-hc-1')>0 || getNum('sum-hc-2')>0 },
+        { label:'Care for Cancer', ids:['sum-cfc-1','sum-cfc-2'], color:'#be185d', showIf:() => getNum('sum-cfc-1')>0 || getNum('sum-cfc-2')>0 },
+        { label:'HB Extra', ids:['sum-hb-1','sum-hb-2'], nameIds:['name-hb-1','name-hb-2'], color:'#b45309', showIf:() => getNum('sum-hb-1')>0 || getNum('sum-hb-2')>0 },
+        { label:'HB (ชดเชยรายวัน)', ids:['sum-hbstd-1','sum-hbstd-2'], color:'#0d9488', showIf:() => getNum('sum-hbstd-1')>0 || getNum('sum-hbstd-2')>0 },
+        { label:'ADD/RCC', ids:['sum-add-1','sum-add-2'], color:'#ea580c', showIf:() => getNum('sum-add-1')>0 || getNum('sum-add-2')>0 },
+        { label:'ADB/RCC', ids:['sum-adb-1','sum-adb-2'], color:'#dc2626', showIf:() => getNum('sum-adb-1')>0 || getNum('sum-adb-2')>0 },
+    ];
+
+    const cellStyle = (color, right=true) =>
+        `padding:10px 14px;text-align:${right?'right':'left'};font-weight:bold;color:${color};font-size:15px;border-bottom:1px solid #e5e7eb;`;
+    const labelStyle = `padding:10px 14px;color:#374151;font-size:15px;border-bottom:1px solid #e5e7eb;background:#f9fafb;`;
+
+    // ── MTL premiums — always calc at current age/gender ──
+    const pCIPC_cur = cipcSum>0 ? app.calcCIPC(cipcSum, age, gender) : 0;
+    const pEC_cur   = mtlecPlan!=='0' ? app.calcMTLEC(mtlecPlan, age, gender, mtlecCopies) : 0;
+    const pCI_sel   = (selCIPC && cipcSum>0) ? app.calcCIPC(cipcSum, age, gender) : 0;
+    const pEC_sel   = (selMTLQty>0 && mtlecPlan!=='0') ? app.calcMTLEC(mtlecPlan, age, gender, selMTLQty) : 0;
+    const pMTLTot   = pCI_sel + pEC_sel;
+
+    let html = '';
+    let tot1=0, tot2=0;
+
+    rows.forEach(r => {
+        const show = r.alwaysShow || (r.showIf && r.showIf());
+        if(!show) return;
+        const v1 = getNum(r.ids[0]);
+        const v2 = getNum(r.ids[1]);
+        tot1 += v1;
+        if(selOpt2) tot2 += v2;
+        const name1 = r.nameIds ? getText(r.nameIds[0]) : '';
+        const name2 = r.nameIds ? getText(r.nameIds[1]) : '';
+        const v1txt = v1>0 ? app.fmt(v1) : '-';
+        const v2txt = v2>0 && selOpt2 ? app.fmt(v2) : (selOpt2?'-':'—');
+        html += `<tr>
+            <td style="${labelStyle}">${r.label}${name1?`<div style="font-size:12px;color:#888;">${name1}</div>`:''}</td>
+            <td style="${cellStyle(r.color)}">${v1txt}</td>
+            <td style="${cellStyle('#0e7490')}">${v2txt}${name2&&selOpt2?`<div style="font-size:12px;color:#999;">${name2}</div>`:''}</td>
+            <td style="${cellStyle('#7e22ce')}">—</td>
+        </tr>`;
+    });
+
+    // ── CI Perfect Care row — show in both Opt1 (current) and MTL col (selected) ──
+    if(cipcSum > 0) {
+        tot1 += pCIPC_cur;  // always add to opt1 total (it's already being paid)
+        html += `<tr style="background:#fff7ed;">
+            <td style="${labelStyle}background:#fff7ed;">CI Perfect Care (MTL)<br>
+                <span style="font-size:12px;color:#888;">ทุน ${app.fmt(cipcSum)} บ. — เบี้ยปัจจุบัน</span></td>
+            <td style="${cellStyle('#c2410c')}">${app.fmt(pCIPC_cur)}</td>
+            <td style="${cellStyle('#aaa')}">—</td>
+            <td style="${cellStyle('#c2410c')}">${selCIPC ? app.fmt(pCI_sel) : '<span style="color:#bbb;font-size:13px;">ยังไม่เลือก</span>'}</td>
+        </tr>`;
+    }
+
+    // ── MTL Extra Care row — show in Opt1 (current copies) and MTL col (selected qty) ──
+    if(mtlecPlan !== '0') {
+        const planNames=['','แบบ 1','แบบ 2','แบบ 3','แบบ 4','แบบ 5'];
+        const fullPrem1 = app.calcMTLEC(mtlecPlan, age, gender, 1);
+        const fullPrem2 = app.calcMTLEC(mtlecPlan, age, gender, 2);
+        tot1 += pEC_cur;  // current (existing copies)
+        html += `<tr style="background:#f0fdf4;">
+            <td style="${labelStyle}background:#f0fdf4;">MTL Extra Care ${planNames[mtlecPlan]||''}<br>
+                <span style="font-size:12px;color:#888;">1 ชุด = ${app.fmt(fullPrem1)} บ. | 2 ชุด = ${app.fmt(fullPrem2)} บ. (ปัจจุบัน ×${mtlecCopies} ชุด)</span></td>
+            <td style="${cellStyle('#15803d')}">${app.fmt(pEC_cur)}
+                <div style="font-size:11px;color:#888;">×${mtlecCopies} ชุด (ปัจจุบัน)</div></td>
+            <td style="${cellStyle('#aaa')}">—</td>
+            <td style="${cellStyle('#15803d')}">
+                ${selMTLQty===0 ? '<span style="color:#bbb;font-size:13px;">ยังไม่เลือก</span>' :
+                  `${app.fmt(pEC_sel)}<div style="font-size:12px;color:#888;">× ${selMTLQty} ชุด (ใหม่)</div>`}
+            </td>
+        </tr>`;
+    }
+
+    tbody.innerHTML = html;
+
+    // ── Totals ──
+    // tot1 includes CI PC + MTL EC (current); tot2 = AIA opt2 riders only
+    const tot2WithMTL = selOpt2 ? tot2 : 0;
+    const grand2 = (selOpt2 ? tot2 : tot1) + pMTLTot;
+    document.getElementById('psum-total-1').textContent = app.fmt(tot1);
+    document.getElementById('psum-total-2').textContent = selOpt2 ? app.fmt(tot2WithMTL) : '—';
+    document.getElementById('psum-total-mtl').textContent = pMTLTot>0 ? app.fmt(pMTLTot) : '—';
+    document.getElementById('psum-grand-total').textContent = app.fmt(grand2);
+}
+
 function updateRemarks() {
     const text = document.getElementById('inp-remarks').value.trim();
     const sec  = document.getElementById('remarks-section');
@@ -1575,7 +1930,1458 @@ function updateRemarks() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => { app.init(); setTimeout(calcAddons, 100); });
+document.addEventListener('DOMContentLoaded', () => { app.init(); setTimeout(()=>{ calcAddons(); buildPlanSummary(); }, 150); });
+
+// ═══════════════════════════════════════════════
+// MTL DATA TABLES
+// ═══════════════════════════════════════════════
+const MTL_DATA = {
+    MCI: {
+        male:   {"18-34":1.50,"35-39":2.65,"40-44":4.12,"45-49":7.62,"50-54":12.53,"55-59":21.39,"60-64":35.77,"65-69":48.17,"70-70":66.00,"71-71":72.00,"72-72":78.00,"73-73":84.00,"74-74":93.00,"75-75":102.00,"76-76":112.00,"77-77":124.00,"78-78":134.00,"79-79":152.00},
+        female: {"18-34":1.50,"35-39":3.47,"40-44":4.50,"45-49":6.91,"50-54":9.37,"55-59":11.45,"60-64":16.76,"65-69":25.42,"70-70":35.00,"71-71":38.00,"72-72":41.00,"73-73":44.00,"74-74":48.00,"75-75":52.00,"76-76":56.00,"77-77":61.00,"78-78":65.00,"79-79":71.00}
+    },
+    SH: {
+        male: {
+            "0-5":[32900,56750,76200,94550,111650],"6-10":[20800,35650,47450,58150,68200],
+            "11-15":[11700,20200,26550,32200,37550],"16-20":[10850,18450,23900,28700,33100],
+            "21-25":[11350,19850,25450,30250,34650],"26-30":[11800,20500,26300,31350,35950],
+            "31-35":[12100,21000,26900,31950,36600],"36-40":[13100,22700,28700,33800,38400],
+            "41-45":[14500,24700,31050,36350,41100],"46-50":[17450,30350,37650,43650,48950],
+            "51-55":[21800,37200,46400,53900,60600],"56-60":[29250,50800,62250,71250,79050],
+            "61-65":[39600,68800,84700,97300,108350],"66-70":[51000,86100,107350,124700,140000],
+            "71-75":[73450,123950,154550,179500,201550],"76-80":[104400,176150,219700,255100,286450]
+        },
+        female: {
+            "0-5":[28300,51800,70000,86150,100950],"6-10":[19550,35100,46700,56850,65950],
+            "11-15":[11100,19800,26000,31450,36300],"16-20":[12000,21100,27600,33150,38100],
+            "21-25":[13200,23500,30200,35850,40800],"26-30":[14650,26200,33700,40150,45700],
+            "31-35":[15950,28550,36700,43600,49600],"36-40":[17150,30250,37700,43800,49000],
+            "41-45":[18550,32550,40550,47050,52600],"46-50":[21850,38600,47800,55250,61550],
+            "51-55":[24450,42850,53250,61550,68600],"56-60":[30750,54000,66200,75750,83750],
+            "61-65":[38450,67100,82250,94150,103950],"66-70":[51200,87500,107950,124100,137450],
+            "71-75":[73700,125950,155450,178600,197850],"76-80":[104700,179050,220900,253800,281200]
+        }
+    },
+    HB_RATE_PER_100: 160,
+    EC_PLANS: [
+        {name:"แบบ 1",d:20000,r:1000,max:200000},{name:"แบบ 2",d:30000,r:1500,max:300000},
+        {name:"แบบ 3",d:40000,r:2000,max:400000},{name:"แบบ 4",d:40000,r:4000,max:400000},
+        {name:"แบบ 5",d:40000,r:6000,max:400000}
+    ],
+    SH_PLANS: [
+        {name:"แบบ 1",room:2000,opd:1000,dialysis:36000,annual:1000000},
+        {name:"แบบ 2",room:4000,opd:2000,dialysis:72000,annual:2000000},
+        {name:"แบบ 3",room:6000,opd:3000,dialysis:108000,annual:3000000},
+        {name:"แบบ 4",room:8000,opd:4000,dialysis:144000,annual:4000000},
+        {name:"แบบ 5",room:10000,opd:5000,dialysis:180000,annual:5000000}
+    ],
+    AGE_BANDS_MTL: [
+        ["0-5",0],["6-10",6],["11-15",11],["16-20",16],["21-25",21],
+        ["26-30",26],["31-35",31],["36-40",36],["41-45",41],["46-50",46],
+        ["51-55",51],["56-60",56],["61-65",61],["66-70",66],
+        ["71-75 *",71],["76-80 *",76]
+    ]
+};
+
+function getRangeMCI(age,gender) {
+    const tbl = MTL_DATA.MCI[gender];
+    for(const [k,v] of Object.entries(tbl)) {
+        const pts = k.split('-').map(Number);
+        if(age>=pts[0] && age<=(pts[1]!==undefined?pts[1]:pts[0])) return v;
+    }
+    return 0;
+}
+
+function getSHRate(bandAge,gender,planIdx) {
+    const tbl = MTL_DATA.SH[gender];
+    for(const [rng,arr] of Object.entries(tbl)) {
+        const [a,b] = rng.split('-').map(Number);
+        if(bandAge>=a && bandAge<=b) return arr[planIdx]||0;
+    }
+    return 0;
+}
+
+function switchTab(tab) {
+    ['aia','mtl'].forEach(t => {
+        document.getElementById('tab-'+t).classList.toggle('active', t===tab);
+        document.getElementById('btn-'+t).classList.toggle('active', t===tab);
+    });
+    if(tab==='mtl') buildMTLReport();
+}
+
+function printMTL() {
+    document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('print-active'));
+    document.getElementById('tab-mtl').classList.add('print-active');
+    document.getElementById('tab-aia').classList.remove('active');
+    window.print();
+    document.getElementById('tab-aia').classList.add('active');
+    document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('print-active'));
+}
+
+function buildMTLReport() {
+    const name=document.getElementById('mtl-name').value||'ผู้เอาประกันภัย';
+    const gender=document.getElementById('mtl-gender').value;
+    const age=parseInt(document.getElementById('mtl-age').value)||35;
+    const gTh=gender==='male'?'ชาย':'หญิง';
+    const useCIPC=document.getElementById('mtl-use-cipc').checked;
+    const cipcSum=parseInt(document.getElementById('mtl-cipc-sum').value)||0;
+    const useEC=document.getElementById('mtl-use-ec').checked;
+    const ecPlan=parseInt(document.getElementById('mtl-ec-plan').value)||1;
+    const ecCopies=parseInt(document.getElementById('mtl-ec-copies').value)||1;
+    const useMCI=document.getElementById('mtl-use-mci').checked;
+    const mciSum=parseInt(document.getElementById('mtl-mci-sum').value)||0;
+    const useSH=document.getElementById('mtl-use-sh').checked;
+    const shPlan=parseInt(document.getElementById('mtl-sh-plan').value)||0;
+    const useHB=document.getElementById('mtl-use-hb').checked;
+    const hbDaily=parseInt(document.getElementById('mtl-hb-daily').value)||1000;
+
+    if(!useCIPC&&!useEC&&!useMCI&&!useSH&&!useHB){
+        document.getElementById('mtl-report-content').innerHTML='<p style="color:#999;text-align:center;padding:40px;">เลือกสัญญาอย่างน้อย 1 รายการ</p>';
+        return;
+    }
+
+    const fmt=n=>Math.round(n).toLocaleString('en-US');
+    const today=new Date();
+    const dateStr=`${today.getDate().toString().padStart(2,'0')}/${(today.getMonth()+1).toString().padStart(2,'0')}/${today.getFullYear()}`;
+
+    const pCIPC=useCIPC&&cipcSum>0?app.calcCIPC(cipcSum,age,gender):0;
+    const pEC=useEC?app.calcMTLEC(String(ecPlan),age,gender,ecCopies):0;
+    const pMCI=useMCI&&mciSum>0?(mciSum/1000)*getRangeMCI(age,gender):0;
+    const pSH=useSH?getSHRate(age,gender,shPlan):0;
+    const pHB=useHB?(hbDaily/100)*MTL_DATA.HB_RATE_PER_100:0;
+    const pTotal=pCIPC+pEC+pMCI+pSH+pHB;
+
+    const ecPD=MTL_DATA.EC_PLANS[ecPlan-1];
+    const shPD=MTL_DATA.SH_PLANS[shPlan];
+
+    let covHTML='';
+    if(useCIPC&&cipcSum>0){covHTML+=`<div class="mtl-section" style="margin-bottom:18px;padding:14px 16px;border:1px solid #fed7aa;border-radius:8px;background:#fffbf5;">
+        <h3 style="font-size:16px;font-weight:700;color:#c2410c;margin:0 0 8px;">🔶 CI Perfect Care — ทุน ${fmt(cipcSum)} บาท</h3>
+        <p style="font-size:12px;color:#777;margin-bottom:8px;">36 โรคร้ายแรง 3 ระยะ | อายุรับ 30วัน-65ปี | คุ้มครองถึง 85 ปี | กลุ่มอาชีพ 1-2 | Waiting 30 วัน</p>
+        <table class="mtl-print-table" style="width:100%;border-collapse:collapse;font-size:13px;">
+            <tr style="background:#fed7aa;"><th style="padding:6px 10px;text-align:left;">ความคุ้มครอง</th><th style="padding:6px 10px;text-align:right;">วงเงิน</th></tr>
+            <tr style="border-bottom:1px solid #fed7aa;"><td style="padding:6px 10px;">เสียชีวิตทุกกรณี*</td><td style="padding:6px 10px;text-align:right;">${fmt(cipcSum)} บ. (100%)</td></tr>
+            <tr style="background:#fff7ed;border-bottom:1px solid #fed7aa;"><td style="padding:6px 10px;">โรคร้ายแรง ระยะเริ่มต้น (Early)</td><td style="padding:6px 10px;text-align:right;">${fmt(cipcSum*0.25)} บ. (25%)</td></tr>
+            <tr style="border-bottom:1px solid #fed7aa;"><td style="padding:6px 10px;">โรคร้ายแรง ระยะกลาง (Intermediate)**</td><td style="padding:6px 10px;text-align:right;">${fmt(cipcSum*0.5)} บ. (50%)</td></tr>
+            <tr style="background:#fff7ed;border-bottom:1px solid #fed7aa;"><td style="padding:6px 10px;">โรคร้ายแรง ระยะรุนแรง (Late)*</td><td style="padding:6px 10px;text-align:right;">${fmt(cipcSum)} บ. (100%)</td></tr>
+            <tr style="border-bottom:1px solid #fed7aa;"><td style="padding:6px 10px;">ผ่าตัดขยายหลอดเลือดหัวใจ (Balloon)</td><td style="padding:6px 10px;text-align:right;">${fmt(cipcSum*0.1)} บ. (10%)</td></tr>
+            <tr><td style="padding:6px 10px;">โรคแทรกซ้อนเบาหวาน (3 กรณี)</td><td style="padding:6px 10px;text-align:right;">${fmt(cipcSum*0.1)} บ. (10%)</td></tr>
+        </table>
+        <div style="text-align:right;margin-top:6px;font-weight:bold;color:#c2410c;">เบี้ย: ${fmt(pCIPC)} บ./ปี</div></div>`;}
+
+    if(useEC){covHTML+=`<div class="mtl-section" style="margin-bottom:18px;padding:14px 16px;border:1px solid #bbf7d0;border-radius:8px;background:#f0fdf4;">
+        <h3 style="font-size:16px;font-weight:700;color:#15803d;margin:0 0 8px;">🟢 MTL Extra Care ${ecPD.name} ×${ecCopies} ชุด</h3>
+        <p style="font-size:12px;color:#777;margin-bottom:8px;">ระบบ 80:20 | กลุ่มอาชีพ 1-2 | เบี้ยเปลี่ยนตามอายุ</p>
+        <table class="mtl-print-table" style="width:100%;border-collapse:collapse;font-size:13px;">
+            <tr style="background:#bbf7d0;"><th style="padding:6px 10px;text-align:left;">รายละเอียด</th><th style="padding:6px 10px;text-align:right;">วงเงิน</th></tr>
+            <tr style="border-bottom:1px solid #bbf7d0;"><td style="padding:6px 10px;">ค่าห้องสูงสุด/วัน (ไม่เกิน 120 วัน)</td><td style="padding:6px 10px;text-align:right;">${fmt(ecPD.r)} บ./วัน</td></tr>
+            <tr style="background:#f0fdf4;border-bottom:1px solid #bbf7d0;"><td style="padding:6px 10px;">ความรับผิดส่วนแรก (Deductible)</td><td style="padding:6px 10px;text-align:right;">${fmt(ecPD.d)} บ./ครั้ง</td></tr>
+            <tr style="border-bottom:1px solid #bbf7d0;"><td style="padding:6px 10px;">บริษัทจ่าย (ส่วนเกิน Deductible) ฉ.1</td><td style="padding:6px 10px;text-align:right;color:#15803d;font-weight:bold;">80% สูงสุด ${fmt(ecPD.max)} บ.</td></tr>
+            ${ecCopies===2?`<tr><td style="padding:6px 10px;">ฉบับที่ 2 จ่ายอีก 80% ของส่วนเหลือ</td><td style="padding:6px 10px;text-align:right;color:#15803d;font-weight:bold;">สูงสุด ${fmt(ecPD.max)} บ.เพิ่มเติม</td></tr>`:''}
+        </table>
+        <div style="text-align:right;margin-top:6px;font-weight:bold;color:#15803d;">เบี้ย: ${fmt(pEC)} บ./ปี</div></div>`;}
+
+    if(useMCI&&mciSum>0){covHTML+=`<div class="mtl-section" style="margin-bottom:18px;padding:14px 16px;border:1px solid #e9d5ff;border-radius:8px;background:#faf5ff;">
+        <h3 style="font-size:16px;font-weight:700;color:#7c3aed;margin:0 0 8px;">🟣 Multiple CI — ทุน ${fmt(mciSum)} บาท (4 กลุ่ม 35 โรค)</h3>
+        <p style="font-size:12px;color:#777;margin-bottom:8px;">อายุรับ 18-65 ปี | คุ้มครองถึง 80 ปี | กลุ่มอาชีพ 1-2 | รับสูงสุด 4 ครั้ง (400%) | Waiting 90 วัน</p>
+        <table class="mtl-print-table" style="width:100%;border-collapse:collapse;font-size:13px;">
+            <tr style="background:#e9d5ff;"><th style="padding:6px 10px;text-align:left;">กลุ่มโรค</th><th style="padding:6px 10px;text-align:right;">ผลประโยชน์</th></tr>
+            <tr style="border-bottom:1px solid #e9d5ff;"><td style="padding:6px 10px;">กลุ่ม 1: หลอดเลือดและหัวใจ (8 โรค)</td><td style="padding:6px 10px;text-align:right;">${fmt(mciSum)} บ.</td></tr>
+            <tr style="background:#faf5ff;border-bottom:1px solid #e9d5ff;"><td style="padding:6px 10px;">กลุ่ม 2: มะเร็ง (2 โรค)</td><td style="padding:6px 10px;text-align:right;">${fmt(mciSum)} บ.</td></tr>
+            <tr style="border-bottom:1px solid #e9d5ff;"><td style="padding:6px 10px;">กลุ่ม 3: เปลี่ยนอวัยวะ &amp; ตับ/ปอด/ไต (6 โรค)</td><td style="padding:6px 10px;text-align:right;">${fmt(mciSum)} บ.</td></tr>
+            <tr style="background:#faf5ff;border-bottom:1px solid #e9d5ff;"><td style="padding:6px 10px;">กลุ่ม 4: โรคร้ายแรงอื่นๆ (19 โรค)</td><td style="padding:6px 10px;text-align:right;">${fmt(mciSum)} บ.</td></tr>
+            <tr><td style="padding:6px 10px;font-weight:bold;">วงเงินสูงสุดตลอดชีพ</td><td style="padding:6px 10px;text-align:right;font-weight:bold;color:#7c3aed;">${fmt(mciSum*4)} บ. (400%)</td></tr>
+        </table>
+        <p style="font-size:11px;color:#888;margin-top:5px;">* หลังรับครั้งที่ 1 ไม่ต้องจ่ายเบี้ยสัญญานี้ แต่ยังได้รับความคุ้มครองกลุ่มอื่น ไม่เกิน 10 ปี</p>
+        <div style="text-align:right;margin-top:6px;font-weight:bold;color:#7c3aed;">เบี้ย: ${fmt(pMCI)} บ./ปี</div></div>`;}
+
+    if(useSH){covHTML+=`<div class="mtl-section" style="margin-bottom:18px;padding:14px 16px;border:1px solid #bae6fd;border-radius:8px;background:#f0f9ff;">
+        <h3 style="font-size:16px;font-weight:700;color:#0369a1;margin:0 0 8px;">🔵 Smart Health — ${shPD.name}</h3>
+        <p style="font-size:12px;color:#777;margin-bottom:8px;">อายุรับ 1เดือน-70ปี | คุ้มครองถึง 80 ปี | กลุ่มอาชีพ 1-2,3 | Waiting 30 วัน</p>
+        <table class="mtl-print-table" style="width:100%;border-collapse:collapse;font-size:13px;">
+            <tr style="background:#bae6fd;"><th style="padding:6px 10px;text-align:left;">ผลประโยชน์</th><th style="padding:6px 10px;text-align:right;">วงเงิน</th></tr>
+            <tr style="border-bottom:1px solid #bae6fd;"><td style="padding:6px 10px;">วงเงินสูงสุดต่อปี</td><td style="padding:6px 10px;text-align:right;font-weight:bold;color:#0369a1;">${fmt(shPD.annual)} บ.</td></tr>
+            <tr style="background:#f0f9ff;border-bottom:1px solid #bae6fd;"><td style="padding:6px 10px;">ค่าห้อง ค่าอาหาร (สูงสุด 150 วัน)</td><td style="padding:6px 10px;text-align:right;">${fmt(shPD.room)} บ./วัน</td></tr>
+            <tr style="border-bottom:1px solid #bae6fd;"><td style="padding:6px 10px;">ICU (2 เท่า สูงสุด 30 วัน)</td><td style="padding:6px 10px;text-align:right;">${fmt(shPD.room*2)} บ./วัน</td></tr>
+            <tr style="background:#f0f9ff;border-bottom:1px solid #bae6fd;"><td style="padding:6px 10px;">OPD ต่อเนื่อง (สูงสุด 2 ครั้ง)</td><td style="padding:6px 10px;text-align:right;">${fmt(shPD.opd)} บ./ครั้ง</td></tr>
+            <tr style="border-bottom:1px solid #bae6fd;"><td style="padding:6px 10px;">ล้างไต / เคมีบำบัด / ฉายแสง (ต่อปี)</td><td style="padding:6px 10px;text-align:right;">${fmt(shPD.dialysis)} บ./ปี</td></tr>
+            <tr><td style="padding:6px 10px;">เงินช่วยเหลือกรณีเสียชีวิต</td><td style="padding:6px 10px;text-align:right;">10,000 บ.</td></tr>
+        </table>
+        <div style="text-align:right;margin-top:6px;font-weight:bold;color:#0369a1;">เบี้ย: ${fmt(pSH)} บ./ปี</div></div>`;}
+
+    if(useHB){covHTML+=`<div class="mtl-section" style="margin-bottom:18px;padding:14px 16px;border:1px solid #99f6e4;border-radius:8px;background:#f0fdfa;">
+        <h3 style="font-size:16px;font-weight:700;color:#0f766e;margin:0 0 8px;">🩵 HB วงเงินแน่นอน — ชดเชย ${fmt(hbDaily)} บ./วัน</h3>
+        <p style="font-size:12px;color:#777;margin-bottom:8px;">อายุรับ 16-64 ปี | คุ้มครองถึง 65 ปี | กลุ่มอาชีพ 1-2-3 | <strong>เบี้ยคงที่ตลอดสัญญา</strong> | Waiting 30 วัน</p>
+        <table class="mtl-print-table" style="width:100%;border-collapse:collapse;font-size:13px;">
+            <tr style="background:#99f6e4;"><th style="padding:6px 10px;text-align:left;">กรณี</th><th style="padding:6px 10px;text-align:right;">ชดเชย</th></tr>
+            <tr style="border-bottom:1px solid #99f6e4;"><td style="padding:6px 10px;">ผู้ป่วยใน (สูงสุด 365 วัน)</td><td style="padding:6px 10px;text-align:right;font-weight:bold;color:#0f766e;">${fmt(hbDaily)} บ./วัน</td></tr>
+            <tr style="background:#f0fdfa;border-bottom:1px solid #99f6e4;"><td style="padding:6px 10px;">ICU หรือโรงพยาบาลต่างประเทศ (สูงสุด 30 วัน)</td><td style="padding:6px 10px;text-align:right;">${fmt(hbDaily*2)} บ./วัน (2 เท่า)</td></tr>
+            <tr><td style="padding:6px 10px;">ผ่าตัดที่ต้องรักษาตัว IPD</td><td style="padding:6px 10px;text-align:right;">${fmt(hbDaily*0.5)} บ./วัน (ครึ่งเท่า)</td></tr>
+        </table>
+        <div style="text-align:right;margin-top:6px;font-weight:bold;color:#0f766e;">เบี้ย (คงที่): ${fmt(pHB)} บ./ปี</div></div>`;}
+
+    // Projection
+    const bands=MTL_DATA.AGE_BANDS_MTL;
+    const filtered=bands.filter(([,ba])=>ba>=age||(ba+(ba<10?5:4)>=age));
+    let projRows='';
+    filtered.forEach(([lbl,ba],i)=>{
+        const _pCI=useCIPC&&cipcSum>0?app.calcCIPC(cipcSum,ba,gender):0;
+        const _pEC=useEC?app.calcMTLEC(String(ecPlan),ba,gender,ecCopies):0;
+        const _pMCI=useMCI&&mciSum>0?(mciSum/1000)*getRangeMCI(ba,gender):0;
+        const _pSH=useSH?getSHRate(ba,gender,shPlan):0;
+        const _pHB=useHB?(hbDaily/100)*MTL_DATA.HB_RATE_PER_100:0;
+        const tot=_pCI+_pEC+_pMCI+_pSH+_pHB;
+        const bg=i===0?'#eff6ff':(i%2===0?'#f9fafb':'white');
+        const end='<span style="color:#aaa;font-size:10px;">(สิ้นสุด)</span>';
+        projRows+=`<tr style="background:${bg};border-bottom:1px solid #e5e7eb;">
+            <td style="padding:7px 9px;font-weight:bold;text-align:center;font-size:13px;">${lbl}${i===0?'<br><span style="font-size:9px;color:#3b82f6;">▲ปัจจุบัน</span>':''}</td>
+            ${useCIPC?`<td style="padding:7px 9px;text-align:right;color:#c2410c;">${_pCI>0?fmt(_pCI):end}</td>`:''}
+            ${useEC?`<td style="padding:7px 9px;text-align:right;color:#15803d;">${_pEC>0?fmt(_pEC):'—'}</td>`:''}
+            ${useMCI?`<td style="padding:7px 9px;text-align:right;color:#7c3aed;">${_pMCI>0?fmt(_pMCI):end}</td>`:''}
+            ${useSH?`<td style="padding:7px 9px;text-align:right;color:#0369a1;">${_pSH>0?fmt(_pSH):end}</td>`:''}
+            ${useHB?`<td style="padding:7px 9px;text-align:right;color:#0f766e;">${ba>=65?end:fmt(_pHB)}</td>`:''}
+            <td style="padding:7px 9px;text-align:right;font-weight:800;font-size:15px;color:#1e40af;">${fmt(tot)}</td>
+        </tr>`;
+    });
+
+    document.getElementById('mtl-report-content').innerHTML=`
+    <div style="border-bottom:3px solid #15803d;padding-bottom:12px;margin-bottom:18px;">
+        <h1 style="font-size:24px;color:#15803d;font-weight:800;margin:0 0 8px;">รายงานสรุปความคุ้มครอง MTL — เมืองไทยประกันชีวิต</h1>
+        <div style="background:#f0fdf4;border-left:5px solid #15803d;padding:10px 14px;border-radius:6px;font-size:14px;">
+            <strong>สำหรับ:</strong> ${name} &nbsp;|&nbsp; <strong>อายุ:</strong> ${age} ปี (${gTh}) &nbsp;|&nbsp; <strong>วันที่:</strong> ${dateStr}
+        </div>
+    </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px 14px;margin-bottom:20px;">
+        <h3 style="font-size:15px;font-weight:700;color:#334155;margin:0 0 8px;">สรุปเบี้ยประกันภัย (รวมทุกสัญญา)</h3>
+        <table style="width:100%;border-collapse:collapse;font-size:13px;">
+            ${useCIPC&&cipcSum>0?`<tr><td style="padding:4px 8px;color:#c2410c;">CI Perfect Care (ทุน ${fmt(cipcSum)} บ.)</td><td style="padding:4px 8px;text-align:right;font-weight:bold;color:#c2410c;">${fmt(pCIPC)} บ./ปี</td></tr>`:''}
+            ${useEC?`<tr><td style="padding:4px 8px;color:#15803d;">MTL Extra Care ${ecPD.name} ×${ecCopies} ชุด</td><td style="padding:4px 8px;text-align:right;font-weight:bold;color:#15803d;">${fmt(pEC)} บ./ปี</td></tr>`:''}
+            ${useMCI&&mciSum>0?`<tr><td style="padding:4px 8px;color:#7c3aed;">Multiple CI (ทุน ${fmt(mciSum)} บ.)</td><td style="padding:4px 8px;text-align:right;font-weight:bold;color:#7c3aed;">${fmt(pMCI)} บ./ปี</td></tr>`:''}
+            ${useSH?`<tr><td style="padding:4px 8px;color:#0369a1;">Smart Health ${shPD.name}</td><td style="padding:4px 8px;text-align:right;font-weight:bold;color:#0369a1;">${fmt(pSH)} บ./ปี</td></tr>`:''}
+            ${useHB?`<tr><td style="padding:4px 8px;color:#0f766e;">HB วงเงินแน่นอน (${fmt(hbDaily)} บ./วัน)</td><td style="padding:4px 8px;text-align:right;font-weight:bold;color:#0f766e;">${fmt(pHB)} บ./ปี</td></tr>`:''}
+            <tr style="border-top:2px solid #334155;background:#1e3a5f;">
+                <td style="padding:8px 8px;font-weight:800;font-size:15px;color:white;">รวมเบี้ยทั้งสิ้น</td>
+                <td style="padding:8px 8px;text-align:right;font-weight:800;font-size:19px;color:#fde68a;">${fmt(pTotal)} บาท/ปี</td>
+            </tr>
+        </table>
+    </div>
+    ${covHTML}
+    <div style="margin-top:20px;border-top:2px solid #e2e8f0;padding-top:14px;">
+        <h3 style="font-size:16px;font-weight:700;color:#334155;margin:0 0 10px;">ตารางเบี้ยตามช่วงอายุ (กลุ่มอาชีพ 1-2) — เริ่มจากอายุ ${age} ปี</h3>
+        <div style="overflow-x:auto;">
+        <table class="mtl-print-table" style="width:100%;border-collapse:collapse;font-size:13px;">
+            <thead><tr>
+                <th style="padding:7px 9px;background:#374151;color:white;text-align:center;">ช่วงอายุ</th>
+                ${useCIPC?'<th style="padding:7px 9px;background:#c2410c;color:white;text-align:right;font-size:11px;">CI PC</th>':''}
+                ${useEC?`<th style="padding:7px 9px;background:#15803d;color:white;text-align:right;font-size:11px;">EC${ecCopies===2?' ×2':''}</th>`:''}
+                ${useMCI?'<th style="padding:7px 9px;background:#7c3aed;color:white;text-align:right;font-size:11px;">Multi CI</th>':''}
+                ${useSH?'<th style="padding:7px 9px;background:#0369a1;color:white;text-align:right;font-size:11px;">Smart Health</th>':''}
+                ${useHB?'<th style="padding:7px 9px;background:#0f766e;color:white;text-align:right;font-size:11px;">HB</th>':''}
+                <th style="padding:7px 9px;background:#1e40af;color:white;text-align:right;">รวม/ปี</th>
+            </tr></thead>
+            <tbody>${projRows}</tbody>
+        </table></div>
+        <p style="font-size:11px;color:#888;margin-top:6px;">* ต่ออายุ | (สิ้นสุด) = พ้นอายุรับประกัน | HB เบี้ยคงที่ตลอดสัญญา</p>
+    </div>
+    <div style="margin-top:24px;padding:12px 14px;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;font-size:12px;color:#78350f;">
+        <strong>⚠ หมายเหตุ:</strong> รายงานนี้เป็นสรุปเพื่อเพิ่มความเข้าใจ ไม่ใช่สัญญาของบริษัท รายละเอียดต่างๆ จะมีในกรมธรรม์อย่างครบถ้วน อัตราเบี้ยประกันภัยอาจมีการเปลี่ยนแปลงตามเงื่อนไขของบริษัท &nbsp;|&nbsp; สงวนลิขสิทธิ์โดย บริษัท เมืองไทยประกันชีวิต จำกัด (มหาชน)
+    </div>`;
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+    const d=new Date();
+    const ds=`${d.getDate().toString().padStart(2,'0')}/${(d.getMonth()+1).toString().padStart(2,'0')}/${d.getFullYear()}`;
+    if(document.getElementById('mtl-date')) document.getElementById('mtl-date').value=ds;
+});
+</script>
+
+</div><!-- end tab-aia -->
+
+<div id="tab-mtl" class="tab-content p-4 md:p-8">
+
+<!-- MTL Control Panel -->
+<div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-5 mb-6 border border-green-200 no-print">
+    <div class="flex justify-between items-center mb-4 border-b border-green-100 pb-3">
+        <h2 class="text-xl font-bold text-green-800">🟢 รายงานความคุ้มครอง MTL — เมืองไทยประกันชีวิต</h2>
+        <button onclick="printMTL()" class="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg font-bold shadow flex items-center gap-2 text-sm">
+            🖨 พิมพ์รายงาน MTL (A4)
+        </button>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+        <div>
+            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">ชื่อ-นามสกุล</label>
+            <input type="text" id="mtl-name" value="ผู้เอาประกันภัย" class="w-full border border-gray-300 p-2 rounded text-sm focus:ring-2 focus:ring-green-400 outline-none" oninput="buildMTLReport()">
+        </div>
+        <div>
+            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">เพศ</label>
+            <select id="mtl-gender" class="w-full border border-gray-300 p-2 rounded text-sm focus:ring-2 focus:ring-green-400 outline-none" onchange="buildMTLReport()">
+                <option value="female">หญิง</option>
+                <option value="male">ชาย</option>
+            </select>
+        </div>
+        <div>
+            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">อายุ (ปี)</label>
+            <input type="number" id="mtl-age" value="35" min="1" max="79" class="w-full border border-gray-300 p-2 rounded text-sm focus:ring-2 focus:ring-green-400 outline-none" oninput="buildMTLReport()">
+        </div>
+        <div>
+            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">วันที่จัดทำ</label>
+            <input type="text" id="mtl-date" class="w-full border border-gray-300 p-2 rounded text-sm border-gray-200 bg-gray-50" readonly>
+        </div>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <!-- CI Perfect Care -->
+        <div class="bg-orange-50 p-3 rounded-lg border border-orange-200">
+            <div class="flex items-center gap-2 mb-2">
+                <input type="checkbox" id="mtl-use-cipc" class="w-4 h-4" onchange="buildMTLReport()">
+                <label for="mtl-use-cipc" class="font-bold text-orange-800 text-sm">CI Perfect Care</label>
+            </div>
+            <div>
+                <label class="text-xs text-gray-500">ทุนประกัน (บาท)</label>
+                <input type="number" id="mtl-cipc-sum" value="500000" step="100000" class="w-full border border-orange-200 p-1.5 rounded text-sm font-bold" oninput="buildMTLReport()">
+            </div>
+        </div>
+        <!-- MTL Extra Care -->
+        <div class="bg-green-50 p-3 rounded-lg border border-green-200">
+            <div class="flex items-center gap-2 mb-2">
+                <input type="checkbox" id="mtl-use-ec" class="w-4 h-4" onchange="buildMTLReport()">
+                <label for="mtl-use-ec" class="font-bold text-green-800 text-sm">MTL Extra Care</label>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+                <div>
+                    <label class="text-xs text-gray-500">แบบแผน</label>
+                    <select id="mtl-ec-plan" class="w-full border border-green-200 p-1.5 rounded text-xs" onchange="buildMTLReport()">
+                        <option value="1">แบบ 1 (D20k/R1k)</option>
+                        <option value="2">แบบ 2 (D30k/R1.5k)</option>
+                        <option value="3" selected>แบบ 3 (D40k/R2k)</option>
+                        <option value="4">แบบ 4 (D40k/R4k)</option>
+                        <option value="5">แบบ 5 (D40k/R6k)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="text-xs text-gray-500">จำนวนชุด</label>
+                    <select id="mtl-ec-copies" class="w-full border border-green-200 p-1.5 rounded text-xs" onchange="buildMTLReport()">
+                        <option value="1" selected>1 ชุด</option>
+                        <option value="2">2 ชุด</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!-- Multiple CI -->
+        <div class="bg-purple-50 p-3 rounded-lg border border-purple-200">
+            <div class="flex items-center gap-2 mb-2">
+                <input type="checkbox" id="mtl-use-mci" class="w-4 h-4" onchange="buildMTLReport()">
+                <label for="mtl-use-mci" class="font-bold text-purple-800 text-sm">Multiple CI (4 กลุ่มโรค)</label>
+            </div>
+            <div>
+                <label class="text-xs text-gray-500">ทุนประกัน (บาท)</label>
+                <input type="number" id="mtl-mci-sum" value="500000" step="100000" class="w-full border border-purple-200 p-1.5 rounded text-sm font-bold" oninput="buildMTLReport()">
+            </div>
+        </div>
+        <!-- Smart Health -->
+        <div class="bg-blue-50 p-3 rounded-lg border border-blue-200">
+            <div class="flex items-center gap-2 mb-2">
+                <input type="checkbox" id="mtl-use-sh" class="w-4 h-4" onchange="buildMTLReport()">
+                <label for="mtl-use-sh" class="font-bold text-blue-800 text-sm">Smart Health</label>
+            </div>
+            <div>
+                <label class="text-xs text-gray-500">แบบแผน</label>
+                <select id="mtl-sh-plan" class="w-full border border-blue-200 p-1.5 rounded text-xs" onchange="buildMTLReport()">
+                    <option value="0">แบบ 1 (ห้อง 2,000)</option>
+                    <option value="1">แบบ 2 (ห้อง 4,000)</option>
+                    <option value="2" selected>แบบ 3 (ห้อง 6,000)</option>
+                    <option value="3">แบบ 4 (ห้อง 8,000)</option>
+                    <option value="4">แบบ 5 (ห้อง 10,000)</option>
+                </select>
+            </div>
+        </div>
+        <!-- HB วงเงินแน่นอน -->
+        <div class="bg-teal-50 p-3 rounded-lg border border-teal-200">
+            <div class="flex items-center gap-2 mb-2">
+                <input type="checkbox" id="mtl-use-hb" class="w-4 h-4" onchange="buildMTLReport()">
+                <label for="mtl-use-hb" class="font-bold text-teal-800 text-sm">HB วงเงินแน่นอน</label>
+            </div>
+            <div>
+                <label class="text-xs text-gray-500">ค่าชดเชยรายวัน (บาท) — ทีละ 500</label>
+                <div class="flex items-center gap-1 mt-1">
+                    <input type="number" id="mtl-hb-daily"
+                        value="1000" min="500" max="10000" step="500"
+                        class="w-full border border-teal-300 p-1.5 rounded text-sm font-bold text-teal-800 focus:ring-2 focus:ring-teal-400 outline-none"
+                        oninput="this.value=Math.round(this.value/500)*500||500; buildMTLReport()">
+                    <span class="text-xs text-gray-500 whitespace-nowrap">บ./วัน</span>
+                </div>
+                <p class="text-xs text-gray-400 mt-1">สูงสุด 10,000 บ./วัน</p>
+            </div>
+            <!-- อัตราเบี้ยตามอายุที่เริ่มสัญญา -->
+            <div class="mt-2">
+                <label class="text-xs text-gray-500 font-semibold">อัตราเบี้ย (ตามอายุที่เริ่มสัญญา)</label>
+                <div class="mt-1 space-y-1">
+                    <label class="flex items-center gap-2 cursor-pointer text-xs bg-teal-50 border border-teal-200 rounded px-2 py-1 hover:bg-teal-100">
+                        <input type="radio" name="hb-rate" id="hb-rate-160" value="160" checked onchange="buildMTLReport()">
+                        <span class="font-bold text-teal-800">160</span>
+                        <span class="text-gray-500">บ./100 | อายุ 16–35 ปี</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer text-xs bg-teal-50 border border-teal-200 rounded px-2 py-1 hover:bg-teal-100">
+                        <input type="radio" name="hb-rate" id="hb-rate-180" value="180" onchange="buildMTLReport()">
+                        <span class="font-bold text-teal-800">180</span>
+                        <span class="text-gray-500">บ./100 | อายุ 36–45 ปี</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer text-xs bg-teal-50 border border-teal-200 rounded px-2 py-1 hover:bg-teal-100">
+                        <input type="radio" name="hb-rate" id="hb-rate-210" value="210" onchange="buildMTLReport()">
+                        <span class="font-bold text-teal-800">210</span>
+                        <span class="text-gray-500">บ./100 | อายุ 46–64 ปี</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!-- Cancer ความคุ้มครองโรคมะเร็ง -->
+        <div class="bg-red-50 p-3 rounded-lg border border-red-200">
+            <div class="flex items-center gap-2 mb-2">
+                <input type="checkbox" id="mtl-use-cancer" class="w-4 h-4" onchange="buildMTLReport()">
+                <label for="mtl-use-cancer" class="font-bold text-red-800 text-sm">ความคุ้มครองโรคมะเร็ง</label>
+            </div>
+            <div>
+                <label class="text-xs text-gray-500">แผนความคุ้มครอง</label>
+                <select id="mtl-cancer-plan" class="w-full border border-red-200 p-1.5 rounded text-xs" onchange="buildMTLReport()">
+                    <option value="0">แบบ 300,000 บ.</option>
+                    <option value="1">แบบ 500,000 บ.</option>
+                    <option value="2" selected>แบบ 1,000,000 บ.</option>
+                    <option value="3">แบบ 2,000,000 บ.</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MTL Report Output -->
+<div id="mtl-report" class="max-w-4xl mx-auto" style="background:white;border-radius:12px;padding:35px;box-shadow:0 4px 20px rgba(0,0,0,0.08);">
+    <div id="mtl-report-content">
+        <p style="color:#999;text-align:center;padding:40px;font-size:16px;">เลือกสัญญาและกรอกข้อมูลด้านบน รายงานจะแสดงอัตโนมัติ</p>
+    </div>
+</div>
+
+</div><!-- end tab-mtl -->
+
+<!-- ═══ TAB: สรุปการเปลี่ยนแปลง ═══ -->
+<div id="tab-sum" class="tab-content p-4 md:p-8">
+
+<!-- Control Panel (no-print) -->
+<div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-5 mb-6 border border-indigo-200 no-print">
+    <div class="flex justify-between items-center mb-4 border-b border-indigo-100 pb-3">
+        <h2 class="text-xl font-bold text-indigo-800">📋 สรุปการเปลี่ยนแปลงแผนประกัน</h2>
+        <button onclick="printSumReport()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-lg font-bold shadow flex items-center gap-2 text-sm">
+            🖨 พิมพ์รายงาน (A4 แนวตั้ง)
+        </button>
+    </div>
+
+    <!-- Client info row -->
+    <div class="grid grid-cols-3 gap-3 mb-4">
+        <div>
+            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">ชื่อผู้เอาประกัน</label>
+            <input type="text" id="sum-name" value="" placeholder="กรอกชื่อ" class="w-full border border-gray-300 p-2 rounded text-sm focus:ring-2 focus:ring-indigo-400 outline-none" oninput="buildSumReport()">
+        </div>
+        <div>
+            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">วันที่จัดทำ</label>
+            <input type="text" id="sum-date" class="w-full border border-gray-200 p-2 rounded text-sm bg-gray-50" readonly>
+        </div>
+        <div>
+            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">หมายเหตุ</label>
+            <input type="text" id="sum-note" placeholder="ข้อความเพิ่มเติม (ถ้ามี)" class="w-full border border-gray-300 p-2 rounded text-sm focus:ring-2 focus:ring-indigo-400 outline-none" oninput="buildSumReport()">
+        </div>
+    </div>
+
+    <!-- Checkbox selection -->
+    <p class="text-sm font-semibold text-indigo-700 mb-2">เลือกรายการที่ต้องการแสดงในรายงาน:</p>
+    <div id="sum-checkboxes" class="grid grid-cols-2 gap-2">
+        <!-- Populated by JS from Tab AIA selections -->
+        <p class="text-gray-400 text-sm col-span-2">กลับไปที่ Tab AIA Health Solution เพื่อกรอกข้อมูลก่อน แล้วกลับมาที่ Tab นี้</p>
+    </div>
+    <div class="mt-3">
+        <button onclick="sumSelectAll(true)" class="text-xs px-3 py-1 bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200 mr-2">เลือกทั้งหมด</button>
+        <button onclick="sumSelectAll(false)" class="text-xs px-3 py-1 bg-gray-100 text-gray-600 rounded hover:bg-gray-200">ยกเลิกทั้งหมด</button>
+    </div>
+</div>
+
+<!-- Report output -->
+<div id="sum-report" class="max-w-4xl mx-auto" style="background:white;border-radius:12px;padding:30px;box-shadow:0 4px 20px rgba(0,0,0,0.08);">
+    <div id="sum-report-content">
+        <p style="color:#999;text-align:center;padding:40px;font-size:16px;">เลือกรายการที่ต้องการ รายงานจะแสดงอัตโนมัติ</p>
+    </div>
+</div>
+
+</div><!-- end tab-sum -->
+
+<script>
+// ═══ TAB SWITCHING ═══
+function switchTab(tab) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById('tab-'+tab).classList.add('active');
+    document.getElementById('btn-'+tab).classList.add('active');
+    if(tab==='mtl') buildMTLReport();
+    if(tab==='sum') { sumInitCheckboxes(); buildSumReport(); }
+}
+
+// ═══ MTL RATE DATA ═══
+const MTL = {
+    // CI Perfect Care — บาทต่อ 1,000 บาท ทุนประกัน/ปี (กลุ่มอาชีพ 1-2)
+    CIPC: {
+        male: {
+            "0-1":4.70,"2-11":2.10,"12-14":2.30,"15-17":2.80,"18-18":3.70,"19-19":3.90,
+            "20-24":4.30,"25-29":4.60,"30-34":5.00,"35-39":6.60,"40-44":9.60,
+            "45-49":14.90,"50-54":21.50,"55-57":34.10,"58-58":35.00,"59-59":38.00,
+            "60-63":56.60,"64-64":57.40,"65-68":88.50,"69-69":96.00,
+            "70-73":152.60,"74-74":173.00,"75-79":277.80,"80-84":391.30
+        },
+        female: {
+            "0-1":2.40,"2-3":1.50,"4-14":1.40,"15-17":1.80,"18-19":2.40,
+            "20-24":2.80,"25-29":3.50,"30-33":4.00,"34-34":4.10,"35-39":6.40,
+            "40-44":9.30,"45-49":12.80,"50-54":16.90,"55-59":20.70,
+            "60-63":27.90,"64-64":30.00,"65-68":46.30,"69-69":50.20,
+            "70-73":76.70,"74-74":80.50,"75-79":127.40,"80-84":187.60
+        }
+    },
+    // MTL Extra Care — อัตรารายปี กลุ่มอาชีพ 1-2 [แบบ1..5]
+    EC: {
+        male: {
+            "0-5":[5801,6267,7291,13889,20487],"6-10":[2914,3078,3443,6141,8839],
+            "11-20":[2036,2146,2358,3974,5590],"21-30":[2432,2577,2795,4443,6091],
+            "31-35":[2718,2881,3095,4717,6339],"36-40":[3109,3308,3546,5292,7038],
+            "41-45":[3374,3616,3880,5704,7528],"46-50":[3818,4120,4427,6427,8427],
+            "51-55":[4806,5209,5597,8001,10405],"56-60":[6509,7088,7619,10743,13867],
+            "61-65":[9928,10651,11251,15029,18807],"66-70":[11114,12202,13118,18004,22890],
+            "71-75":[21228,23305,25055,34387,43719],"76-80":[37899,41608,44733,61395,78057]
+        },
+        female: {
+            "0-5":[5801,6267,7291,13889,20487],"6-10":[2208,2433,2825,5211,7597],
+            "11-20":[1975,2095,2332,4052,5772],"21-30":[3122,3249,3520,5830,8140],
+            "31-35":[3122,3249,3520,5830,8140],"36-40":[3405,3505,3734,5962,8190],
+            "41-45":[3905,4045,4321,6889,9457],"46-50":[4617,4798,5131,8155,11179],
+            "51-55":[5492,5694,6072,9572,13072],"56-60":[5492,5694,6072,9572,13072],
+            "61-65":[8079,8290,8755,13503,18251],"66-70":[8847,9309,10033,15857,21681],
+            "71-75":[16898,17780,19163,30287,41411],"76-80":[30168,31744,34213,54073,73933]
+        },
+        planNames:['แบบ 1 (ค่าห้อง 1,000)','แบบ 2 (ค่าห้อง 1,500)','แบบ 3 (ค่าห้อง 2,000)','แบบ 4 (ค่าห้อง 4,000)','แบบ 5 (ค่าห้อง 6,000)'],
+        deduct:[20000,30000,40000,40000,40000],
+        room:[1000,1500,2000,4000,6000],
+        maxPerAdmit:[200000,300000,400000,400000,400000]
+    },
+    // Multiple CI — บาทต่อ 1,000 บาท ทุนประกัน/ปี กลุ่มอาชีพ 1-2
+    MCI: {
+        male:  {"18-34":1.50,"35-39":2.65,"40-44":4.12,"45-49":7.62,"50-54":12.53,"55-59":21.39,"60-64":35.77,"65-69":48.17,"70-70":66.00,"71-71":72.00,"72-72":78.00,"73-73":83.00,"74-74":88.00,"75-75":95.00,"76-76":99.00,"77-77":105.00,"78-78":113.00,"79-79":120.00},
+        female:{"18-34":1.50,"35-39":3.47,"40-44":4.50,"45-49":6.91,"50-54":9.37,"55-59":11.45,"60-64":16.76,"65-69":25.42,"70-70":35.00,"71-71":38.00,"72-72":41.00,"73-73":44.00,"74-74":48.00,"75-75":52.00,"76-76":56.00,"77-77":61.00,"78-78":65.00,"79-79":71.00},
+        maxAge:79
+    },
+    // Smart Health — อัตรารายปี กลุ่มอาชีพ 1-2 [แบบ1..5]
+    SH: {
+        male: {
+            "0-5":[32900,56750,76200,94550,111650],"6-10":[20800,35650,47450,58150,68200],
+            "11-15":[11700,20200,26550,32200,37550],"16-20":[10850,18450,23900,28700,33100],
+            "21-25":[11350,19850,25450,30250,34650],"26-30":[11800,20500,26300,31350,35950],
+            "31-35":[12100,21000,26900,31950,36600],"36-40":[13100,22700,28700,33800,38400],
+            "41-45":[14500,24700,31050,36350,41100],"46-50":[17450,30350,37650,43650,48950],
+            "51-55":[21800,37200,46400,53900,60600],"56-60":[29250,50800,62250,71250,79050],
+            "61-65":[39600,68800,84700,97300,108350],"66-70":[51000,86100,107350,124700,140000],
+            "71-75":[73450,123950,154550,179500,201550],"76-80":[104400,176150,219700,255100,286450]
+        },
+        female: {
+            "0-5":[28300,51800,70000,86150,100950],"6-10":[19550,35100,46700,56850,65950],
+            "11-15":[11100,19800,26000,31450,36300],"16-20":[12000,21100,27600,33150,38100],
+            "21-25":[13200,23500,30200,35850,40800],"26-30":[14650,26200,33700,40150,45700],
+            "31-35":[15950,28550,36700,43600,49600],"36-40":[17150,30250,37700,43800,49000],
+            "41-45":[18550,32550,40550,47050,52600],"46-50":[21850,38600,47800,55250,61550],
+            "51-55":[24450,42850,53250,61550,68600],"56-60":[30750,54000,66200,75750,83750],
+            "61-65":[38450,67100,82250,94150,103950],"66-70":[51200,87500,107950,124100,137450],
+            "71-75":[73700,125950,155450,178600,197850],"76-80":[104700,179050,220900,253800,281200]
+        },
+        planNames:['แบบ 1 (ห้อง 2,000)','แบบ 2 (ห้อง 4,000)','แบบ 3 (ห้อง 6,000)','แบบ 4 (ห้อง 8,000)','แบบ 5 (ห้อง 10,000)'],
+        room:[2000,4000,6000,8000,10000],
+        maxPerYear:[1000000,2000000,3000000,4000000,5000000]
+    },
+    // HB วงเงินแน่นอน — เบี้ยคงที่ ไม่แบ่งตามอายุ/เพศ = 160 บาท/ปี ต่อ 100 บาท/วัน
+    HB_RATE_PER_100: 160,
+
+    // ความคุ้มครองโรคมะเร็ง (Cancer) — อัตรารายปี กลุ่มอาชีพ 1-2
+    // อายุรับประกัน 18-60 ปี | ต่ออายุถึง 70 ปี | คุ้มครองถึง 71 ปี
+    // [แบบ300k, แบบ500k, แบบ1M, แบบ2M]
+    CANCER: {
+        male: {
+            "18-25":[265,457,809,1486],"26-30":[313,569,933,1739],
+            "31-35":[475,839,1430,2667],"36-40":[694,1224,2081,3880],
+            "41-45":[1172,2065,3671,6824],"46-50":[1887,3320,5891,10952],
+            "51-55":[3828,6582,10772,20087],"56-60":[5707,9760,15855,29564],
+            "61-65":[7731,13221,21476,40047],"66-70":[10441,17889,29135,54328]
+        },
+        female: {
+            "18-25":[385,674,1249,2425],"26-30":[528,919,1579,2968],
+            "31-35":[812,1404,2412,4543],"36-40":[1225,2112,3615,6810],
+            "41-45":[1780,3072,5268,9923],"46-50":[2408,4163,7151,13472],
+            "51-55":[3374,5824,10214,19101],"56-60":[4730,8163,14313,26766],
+            "61-65":[6324,10911,17942,33457],"66-70":[7094,12225,20073,37431]
+        },
+        // [มะเร็งยังไม่แพร่กระจาย, มะเร็งระยะลุกลาม, ชดเชยรายวัน IPD]
+        planNames:['แบบ 300,000','แบบ 500,000','แบบ 1,000,000','แบบ 2,000,000'],
+        nonInvasive:[45000,75000,150000,300000],
+        invasive:[300000,500000,1000000,2000000],
+        dailyIPD:[1000,2000,5000,10000],
+        CANCER_BANDS: [
+            ["18-25",18],["26-30",26],["31-35",31],["36-40",36],
+            ["41-45",41],["46-50",46],["51-55",51],["56-60",56],
+            ["61-65 *",61],["66-70 *",66]
+        ]
+    },
+
+    // Age bands for EC and SH projections
+    BANDS: [
+        ["0-5",0],["6-10",6],["11-15",11],["16-20",16],["21-25",21],
+        ["26-30",26],["31-35",31],["36-40",36],["41-45",41],["46-50",46],
+        ["51-55",51],["56-60",56],["61-65",61],["66-70",66],
+        ["71-75 *",71],["76-80 *",76],["81-84 **",81]
+    ],
+    CIPC_BANDS: [
+        ["0-1",0],["2-11",2],["12-14",12],["15-17",15],["18-19",18],
+        ["20-24",20],["25-29",25],["30-34",30],["35-39",35],["40-44",40],
+        ["45-49",45],["50-54",50],["55-59",55],["60-64",60],["65-69",65],
+        ["70-74",70],["75-79",75],["80-84 *",80]
+    ],
+    MCI_BANDS: [
+        ["18-34",18],["35-39",35],["40-44",40],["45-49",45],["50-54",50],
+        ["55-59",55],["60-64",60],["65-69",65],["70",70],["71",71],
+        ["72",72],["73",73],["74",74],["75",75],["76",76],["77",77],["78",78],["79 *",79]
+    ]
+};
+
+// ═══ HELPERS ═══
+function mfmt(n) { return Math.round(n).toLocaleString('en-US'); }
+function getRangeRate(tbl, age) {
+    for(const [k,v] of Object.entries(tbl)) {
+        const [a,b] = k.split('-').map(Number);
+        if(age>=a && age<=(b||a)) return v;
+    }
+    return 0;
+}
+function getECBandRate(gender, plan, age) {
+    const tbl = MTL.EC[gender];
+    for(const [k,arr] of Object.entries(tbl)) {
+        const [a,b] = k.split('-').map(Number);
+        if(age>=a && age<=b) return arr[plan]||0;
+    }
+    return 0;
+}
+function getSHBandRate(gender, plan, age) {
+    const tbl = MTL.SH[gender];
+    for(const [k,arr] of Object.entries(tbl)) {
+        const [a,b] = k.split('-').map(Number);
+        if(age>=a && age<=b) return arr[plan]||0;
+    }
+    return 0;
+}
+function getCancerRate(gender, planIdx, age) {
+    if(age < 18 || age > 70) return 0;
+    const tbl = MTL.CANCER[gender];
+    for(const [k,arr] of Object.entries(tbl)) {
+        const [a,b] = k.split('-').map(Number);
+        if(age>=a && age<=b) return arr[planIdx]||0;
+    }
+    return 0;
+}
+
+// ═══ BUILD MTL REPORT ═══
+function buildMTLReport() {
+    const name   = document.getElementById('mtl-name').value||'ผู้เอาประกันภัย';
+    const gender = document.getElementById('mtl-gender').value;
+    const age    = parseInt(document.getElementById('mtl-age').value)||35;
+    const gTh    = gender==='male'?'ชาย':'หญิง';
+    const today  = new Date().toLocaleDateString('th-TH');
+    document.getElementById('mtl-date').value = today;
+
+    // Read selections
+    const useCIPC = document.getElementById('mtl-use-cipc').checked;
+    const cipcSum = parseInt(document.getElementById('mtl-cipc-sum').value)||0;
+    const useEC   = document.getElementById('mtl-use-ec').checked;
+    const ecPlanI = parseInt(document.getElementById('mtl-ec-plan').value)-1;
+    const ecCopies= parseInt(document.getElementById('mtl-ec-copies').value)||1;
+    const useMCI  = document.getElementById('mtl-use-mci').checked;
+    const mciSum  = parseInt(document.getElementById('mtl-mci-sum').value)||0;
+    const useSH   = document.getElementById('mtl-use-sh').checked;
+    const shPlanI = parseInt(document.getElementById('mtl-sh-plan').value);
+    const useHB   = document.getElementById('mtl-use-hb').checked;
+    const hbDaily = parseInt(document.getElementById('mtl-hb-daily').value)||1000;
+    const hbRatePerHundred = parseInt(document.querySelector('input[name="hb-rate"]:checked')?.value||'160');
+    const hbRateLabel = hbRatePerHundred===160?'อายุ 16–35 ปี':hbRatePerHundred===180?'อายุ 36–45 ปี':'อายุ 46–64 ปี';
+    const useCancer   = document.getElementById('mtl-use-cancer').checked;
+    const cancerPlanI = parseInt(document.getElementById('mtl-cancer-plan').value);
+
+    if(!useCIPC && !useEC && !useMCI && !useSH && !useHB && !useCancer) {
+        document.getElementById('mtl-report-content').innerHTML = `<p style="color:#999;text-align:center;padding:40px;font-size:16px;">เลือกสัญญาอย่างน้อย 1 รายการ</p>`;
+        return;
+    }
+
+    // ── Compute current premiums ──
+    const pCIPC = useCIPC && cipcSum>0 ? (cipcSum/1000)*getRangeRate(MTL.CIPC[gender],age) : 0;
+    const pEC   = useEC  ? getECBandRate(gender,ecPlanI,age)*ecCopies : 0;
+    const pMCI  = useMCI && mciSum>0 ? (mciSum/1000)*getRangeRate(MTL.MCI[gender],age) : 0;
+    const pSH   = useSH  ? getSHBandRate(gender,shPlanI,age) : 0;
+    const pHB   = useHB  ? (hbDaily/100)*hbRatePerHundred : 0;
+    const pCancer = useCancer ? getCancerRate(gender, cancerPlanI, age) : 0;
+    const pTotal= pCIPC+pEC+pMCI+pSH+pHB+pCancer;
+
+    // ── Coverage summary rows ──
+    const thS = 'padding:9px 12px;text-align:left;font-weight:700;font-size:14px;';
+    const tdS = 'padding:9px 12px;font-size:14px;border-bottom:1px solid #e5e7eb;';
+    const tdR = tdS+'text-align:right;font-weight:bold;';
+    const subH = 'background:#1e3a5f;color:white;';
+    const subH2= 'background:#374151;color:white;';
+
+    let covRows = '';
+
+    // ── Coverage rows: SH → EC → HB → MCI → Cancer → CIPC ──
+
+    if(useSH) {
+        const sh=MTL.SH;
+        covRows += `<tr style="${subH}"><td colspan="3" style="${thS}">🔵 Smart Health ${sh.planNames[shPlanI]} — เหมาจ่ายสูงสุด ${mfmt(sh.maxPerYear[shPlanI])} บาท/ปี</td></tr>`;
+        const items = [
+            ['ค่าห้อง ค่าอาหาร (สูงสุด 150 วัน)',`${mfmt(sh.room[shPlanI])} บาท/วัน | ไอซียู = 2 เท่า (สูงสุด 30 วัน)`],
+            ['วงเงินรวมสูงสุดต่อปี',`${mfmt(sh.maxPerYear[shPlanI])} บาท`],
+            ['ค่าล้างไต/เคมีบำบัด/ฉายแสง','สูงสุด 180,000 บาท/ปี (แบบ 5)'],
+            ['ค่ารักษาต่อเนื่องหลังออก รพ.','สูงสุด 5,000 บาท/ครั้ง (สูงสุด 2 ครั้ง/การพัก)'],
+            ['เงินช่วยเหลือกรณีเสียชีวิต','10,000 บาท'],
+            ['อายุรับประกัน','1 เดือน–70 ปี | คุ้มครองถึง 80 ปี'],
+            ['กลุ่มอาชีพ','1, 2 และ 3'],
+            ['ระยะเวลารอคอย','30 วัน (เจ็บป่วย)'],
+            ['เบี้ยประกันภัย',`${mfmt(pSH)} บาท/ปี`]
+        ];
+        items.forEach(([k,v])=>{ covRows+=`<tr><td style="${tdS}color:#1e3a8a;font-weight:600;">${k}</td><td colspan="2" style="${tdR}color:#1d4ed8;">${v}</td></tr>`; });
+    }
+
+    if(useEC) {
+        const p=ecPlanI, ec=MTL.EC;
+        covRows += `<tr style="${subH}"><td colspan="3" style="${thS}">🟢 MTL Extra Care ${ec.planNames[p]} × ${ecCopies} ชุด (80:20)</td></tr>`;
+        const items = [
+            ['ค่าห้อง/วัน (สูงสุด 120 วัน)',`${mfmt(ec.room[p])} บาท/วัน`],
+            ['ความรับผิดส่วนแรก (Deductible/ครั้ง)',`${mfmt(ec.deduct[p])} บาท`],
+            ['บริษัทจ่ายส่วนเกิน Deductible','80% ของส่วนที่เหลือ'],
+            ['สูงสุดต่อการเข้าพักรักษาตัว',`${mfmt(ec.maxPerAdmit[p])} บาท/ครั้ง`],
+            ['จำนวนชุดที่เลือก',`${ecCopies} ชุด (คุ้มครองซ้อน)`],
+            ['กลุ่มอาชีพ','1 และ 2 เท่านั้น'],
+            ['เบี้ยประกันภัย',`${mfmt(pEC)} บาท/ปี${ecCopies>1?' (รวม '+ecCopies+' ชุด)':''}`]
+        ];
+        items.forEach(([k,v])=>{ covRows+=`<tr><td style="${tdS}color:#14532d;font-weight:600;">${k}</td><td colspan="2" style="${tdR}color:#15803d;">${v}</td></tr>`; });
+
+        // ── หมายเหตุค่าห้องรวม ──
+        if(useSH) {
+            const shRoom  = MTL.SH.room[shPlanI];
+            const ecRoom  = MTL.EC.room[p];
+            const totalRoom = shRoom + ecRoom;
+            covRows += `<tr style="background:#dcfce7;"><td colspan="3" style="padding:10px 14px;font-size:14px;color:#14532d;">
+                <strong>📌 หมายเหตุ — ค่าห้องรวมเมื่อใช้ทั้ง Smart Health + Extra Care:</strong><br>
+                ค่าห้อง Smart Health (${MTL.SH.planNames[shPlanI]}): <strong>${mfmt(shRoom)} บาท/วัน</strong>
+                &nbsp;+&nbsp; ค่าห้อง Extra Care (${MTL.EC.planNames[p]}): <strong>${mfmt(ecRoom)} บาท/วัน</strong>
+                &nbsp;=&nbsp; <span style="font-size:17px;font-weight:800;color:#166534;">รวม ${mfmt(totalRoom)} บาท/วัน</span>
+                <br><span style="font-size:12px;color:#166534;">(Smart Health จ่ายส่วนค่าห้อง ${mfmt(shRoom)} บ. และ Extra Care ชดเชยส่วนที่เกินจาก Deductible ${mfmt(MTL.EC.deduct[p])} บ.)</span>
+            </td></tr>`;
+        }
+
+        // ── Flowchart ──
+        const boxStyle = (bg, border) => `display:inline-block;background:${bg};border:2px solid ${border};border-radius:10px;padding:11px 14px;min-width:130px;text-align:center;font-size:13px;font-weight:700;color:white;line-height:1.5;`;
+        const subStyle = `font-size:11px;color:#555;text-align:center;margin-top:5px;max-width:130px;`;
+        const arrow    = `<td style="text-align:center;vertical-align:middle;font-size:22px;color:#64748b;padding:0 6px;">→</td>`;
+        const condArrow= `<td style="text-align:center;vertical-align:middle;padding:0 4px;"><div style="font-size:20px;color:#64748b;">→</div><div style="font-size:10px;color:#f97316;font-weight:bold;">2 ชุด</div></td>`;
+
+        let flowCells = `
+            <td style="text-align:center;vertical-align:top;">
+                <div style="${boxStyle('#1d4ed8','#1e40af')}">🏥 ขั้นที่ 1<br>เข้าพักรักษา<br>เป็นผู้ป่วยใน</div>
+                <div style="${subStyle}">IPD ทุกโรค</div>
+            </td>
+            ${arrow}
+            <td style="text-align:center;vertical-align:top;">
+                <div style="${boxStyle('#0891b2','#0e7490')}">💊 ขั้นที่ 2<br>เบิกจาก<br>Smart Health ก่อน</div>
+                <div style="${subStyle}">หรือ Health Saver<br>หรือสิทธิ์อื่น</div>
+            </td>
+            ${arrow}
+            <td style="text-align:center;vertical-align:top;">
+                <div style="${boxStyle('#15803d','#14532d')}">📋 ขั้นที่ 3<br>Extra Care ฉ.1<br>จ่าย 80%</div>
+                <div style="${subStyle}">ส่วนเกิน D=${mfmt(ec.deduct[p])}<br>ฉ.1 จ่าย <b>80%</b></div>
+            </td>`;
+
+        if(ecCopies === 2) {
+            flowCells += `
+            ${condArrow}
+            <td style="text-align:center;vertical-align:top;">
+                <div style="${boxStyle('#166534','#14532d')}">📋 ขั้นที่ 4<br>Extra Care ฉ.2<br>จ่าย 80% อีก</div>
+                <div style="${subStyle}">ส่วนที่เหลือจาก ฉ.1<br>ฉ.2 จ่ายอีก <b>80%</b></div>
+            </td>
+            ${arrow}
+            <td style="text-align:center;vertical-align:top;">
+                <div style="${boxStyle('#d97706','#b45309')}">💰 ขั้นที่ 5<br>ลูกค้าจ่ายเอง<br>เพียง 4%</div>
+                <div style="${subStyle}">20%×20% = <b>4%</b><br>ของส่วนเกิน D</div>
+            </td>`;
+        } else {
+            flowCells += `
+            ${arrow}
+            <td style="text-align:center;vertical-align:top;">
+                <div style="${boxStyle('#d97706','#b45309')}">💰 ขั้นที่ 4<br>ลูกค้าจ่ายเอง<br>เพียง 20%</div>
+                <div style="${subStyle}">ส่วนที่เหลือ 20%<br>ของส่วนเกิน D</div>
+            </td>`;
+        }
+
+        covRows += `<tr>
+            <td colspan="3" style="padding:16px 12px;">
+                <div style="font-size:13px;font-weight:700;color:#14532d;margin-bottom:10px;">🔄 ขั้นตอนการเบิกค่ารักษาพยาบาล MTL Extra Care (${ecCopies} ชุด)</div>
+                <div style="overflow-x:auto;">
+                    <table style="border-collapse:collapse;margin:0 auto;">
+                        <tr style="vertical-align:top;">${flowCells}</tr>
+                    </table>
+                </div>
+                <div style="margin-top:12px;background:#f0fdf4;border:1px solid #86efac;border-radius:7px;padding:10px 14px;font-size:13px;color:#14532d;">
+                    <strong>ตัวอย่าง:</strong> ค่ารักษา 500,000 บ. | Smart Health จ่าย 300,000 บ. | ส่วนเกิน 200,000 บ.
+                    → หัก D=${mfmt(ec.deduct[p])} บ. → EC รับผิดชอบ ${mfmt(200000-ec.deduct[p])} บ.
+                    → Extra Care ฉ.1 จ่าย ${mfmt(Math.round((200000-ec.deduct[p])*0.8))} บ.
+                    ${ecCopies===2 ? `→ ส่วนเหลือ ${mfmt(Math.round((200000-ec.deduct[p])*0.2))} บ. → ฉ.2 จ่ายอีก ${mfmt(Math.round((200000-ec.deduct[p])*0.2*0.8))} บ. → <strong>ลูกค้าจ่ายเองเพียง ${mfmt(ec.deduct[p]+Math.round((200000-ec.deduct[p])*0.04))} บ.</strong>` : `→ <strong>ลูกค้าจ่ายเองเพียง ${mfmt(ec.deduct[p]+Math.round((200000-ec.deduct[p])*0.2))} บ.</strong>`}
+                </div>
+            </td>
+        </tr>`;
+    }
+
+    if(useHB) {
+        covRows += `<tr style="${subH}"><td colspan="3" style="${thS}">🩵 HB วงเงินแน่นอน — ชดเชยรายวัน ${mfmt(hbDaily)} บาท/วัน</td></tr>`;
+        const items = [
+            ['ค่าชดเชยรายวัน (ผู้ป่วยใน)',`${mfmt(hbDaily)} บาท/วัน (สูงสุด 365 วัน)`],
+            ['กรณีเข้า ICU',`${mfmt(hbDaily*2)} บาท/วัน (2 เท่า สูงสุด 30 วัน)`],
+            ['กรณีเข้า รพ. ต่างประเทศ',`${mfmt(hbDaily*2)} บาท/วัน (2 เท่า สูงสุด 30 วัน)`],
+            ['กรณีผ่าตัด',`+${mfmt(hbDaily*0.5)} บาท/วัน (ครึ่งเท่า)`],
+            ['เบี้ยประกันภัยคงที่','ไม่เปลี่ยนแปลงตามอายุ ตลอดสัญญา'],
+            ['อัตราเบี้ยที่ใช้คำนวณ',`${hbRatePerHundred} บาท/100 บาท/วัน (${hbRateLabel})`],
+            ['อายุรับประกัน','16–64 ปี | คุ้มครองถึง 65 ปี'],
+            ['ระยะเวลารอคอย','30 วัน (เจ็บป่วย)'],
+            ['เบี้ยประกันภัย',`${mfmt(pHB)} บาท/ปี (${mfmt(hbDaily)} ÷ 100 × ${hbRatePerHundred})`]
+        ];
+        items.forEach(([k,v])=>{ covRows+=`<tr><td style="${tdS}color:#134e4a;font-weight:600;">${k}</td><td colspan="2" style="${tdR}color:#0d9488;">${v}</td></tr>`; });
+    }
+
+    if(useMCI && mciSum>0) {
+        covRows += `<tr style="${subH}"><td colspan="3" style="${thS}">🟣 Multiple CI — 4 กลุ่ม 35 โรคร้ายแรง</td></tr>`;
+        const items = [
+            ['ทุนประกัน',`${mfmt(mciSum)} บาท`],
+            ['ผลประโยชน์รวมสูงสุด',`400% = ${mfmt(mciSum*4)} บาท (4 ครั้ง)`],
+            ['กลุ่มที่ 1: โรคหัวใจและหลอดเลือด',`100% = ${mfmt(mciSum)} บาท`],
+            ['กลุ่มที่ 2: โรคมะเร็ง',`100% = ${mfmt(mciSum)} บาท`],
+            ['กลุ่มที่ 3: เปลี่ยนอวัยวะ/ตับ/ปอด/ไต',`100% = ${mfmt(mciSum)} บาท`],
+            ['กลุ่มที่ 4: โรคร้ายแรงอื่นๆ (19 โรค)',`100% = ${mfmt(mciSum)} บาท`],
+            ['หลังรับผลประโยชน์ครั้งที่ 1','ไม่ต้องจ่ายเบี้ยอีก คุ้มครองต่อ 10 ปี'],
+            ['อายุรับประกัน','18–65 ปี | ต่ออายุได้ถึง 79 ปี | คุ้มครองถึง 80 ปี'],
+            ['ระยะเวลารอคอย','90 วัน'],
+            ['เบี้ยประกันภัย',`${mfmt(pMCI)} บาท/ปี (อัตรา ${getRangeRate(MTL.MCI[gender],age).toFixed(2)} บ./1,000)`]
+        ];
+        items.forEach(([k,v])=>{ covRows+=`<tr><td style="${tdS}color:#581c87;font-weight:600;">${k}</td><td colspan="2" style="${tdR}color:#7e22ce;">${v}</td></tr>`; });
+    }
+
+    if(useCancer) {
+        const ca = MTL.CANCER;
+        const isExpired = age > 70;
+        const isRenewOnly = age > 60;
+        covRows += `<tr style="background:#7f1d1d;"><td colspan="3" style="${thS}color:white;">🎗 ความคุ้มครองโรคมะเร็ง ${ca.planNames[cancerPlanI]}${isRenewOnly?' (อัตราต่ออายุ)':''}</td></tr>`;
+        const items = [
+            ['ทุนความคุ้มครอง',ca.planNames[cancerPlanI]],
+            ['มะเร็งที่ยังไม่แพร่กระจายถึงเยื่อบุฐาน',`${mfmt(ca.nonInvasive[cancerPlanI])} บาท (ครั้งเดียว)`],
+            ['มะเร็งระยะลุกลาม (Invasive)',`${mfmt(ca.invasive[cancerPlanI])} บาท (ครั้งเดียว สิ้นสุดสัญญา)`],
+            ['ชดเชยรายวัน IPD จากมะเร็ง',`${mfmt(ca.dailyIPD[cancerPlanI])} บาท/วัน (สูงสุด 180 วัน/ครั้ง)`],
+            ['ICU หรือ รพ. ต่างประเทศ',`${mfmt(ca.dailyIPD[cancerPlanI]*2)} บาท/วัน (+1 เท่า สูงสุด 30 วัน)`],
+            ['อายุรับประกัน','18–60 ปี | ต่ออายุได้ถึง 70 ปี | คุ้มครองถึง 71 ปี'],
+            ['ระยะเวลารอคอย','60 วัน'],
+            ['เบี้ยประกันภัย', isExpired
+                ? '(พ้นอายุคุ้มครอง 71 ปี)'
+                : `${mfmt(pCancer)} บาท/ปี${isRenewOnly?' (อัตราต่ออายุ)':''}`]
+        ];
+        items.forEach(([k,v])=>{ covRows+=`<tr><td style="${tdS}color:#7f1d1d;font-weight:600;">${k}</td><td colspan="2" style="${tdR}color:#b91c1c;">${v}</td></tr>`; });
+    }
+
+    if(useCIPC && cipcSum>0) {
+        covRows += `<tr style="${subH}"><td colspan="3" style="${thS}">🔶 CI Perfect Care — โรคร้ายแรง 36 โรค 3 ระยะ</td></tr>`;
+        const items = [
+            ['ทุนประกัน',`${mfmt(cipcSum)} บาท`],
+            ['เสียชีวิตทุกกรณี',`100% = ${mfmt(cipcSum)} บาท`],
+            ['โรคร้ายแรง ระยะเริ่มต้น (Early)',`25% = ${mfmt(cipcSum*0.25)} บาท`],
+            ['โรคร้ายแรง ระยะกลาง (Intermediate)',`50% = ${mfmt(cipcSum*0.50)} บาท`],
+            ['โรคร้ายแรง ระยะรุนแรง (Late)',`100% = ${mfmt(cipcSum)} บาท`],
+            ['Balloon / Stent หลอดเลือดหัวใจ',`10% = ${mfmt(cipcSum*0.10)} บาท`],
+            ['โรคแทรกซ้อนเบาหวาน (3 กรณี)',`10% = ${mfmt(cipcSum*0.10)} บาท`],
+            ['อายุรับประกัน','30 วัน – 65 ปี | คุ้มครองถึง 85 ปี'],
+            ['ระยะเวลารอคอย','30 วัน'],
+            ['เบี้ยประกันภัย',`${mfmt(pCIPC)} บาท/ปี (อัตรา ${getRangeRate(MTL.CIPC[gender],age).toFixed(2)} บ./1,000)`]
+        ];
+        items.forEach(([k,v])=>{ covRows+=`<tr><td style="${tdS}color:#92400e;font-weight:600;">${k}</td><td colspan="2" style="${tdR}color:#c2410c;">${v}</td></tr>`; });
+    }
+
+    // ── Projection table ──
+    // Determine union of bands to show (start from current age)
+    const projBands = MTL.BANDS.filter(([,ba])=>ba>=age||(ba<age&&ba+5>=age));
+    const cipcBands = MTL.CIPC_BANDS.filter(([,ba])=>ba>=age||(ba<age&&ba+5>=age));
+    const mciBands  = MTL.MCI_BANDS.filter(([,ba])=>ba>=age);
+
+    // Build unified band list (use BANDS as master, add CI PC and MCI rows within same age)
+    const allBands = projBands;
+
+    let projHead = `<tr style="background:#1e3a5f;">
+        <th style="padding:8px 10px;color:white;text-align:center;font-size:12px;">ช่วงอายุ</th>`;
+    if(useCIPC&&cipcSum>0) projHead+=`<th style="padding:8px 10px;color:#fed7aa;text-align:right;font-size:12px;">CI Perfect Care</th>`;
+    if(useEC)              projHead+=`<th style="padding:8px 10px;color:#bbf7d0;text-align:right;font-size:12px;">Extra Care ×${ecCopies}</th>`;
+    if(useMCI&&mciSum>0)   projHead+=`<th style="padding:8px 10px;color:#ddd6fe;text-align:right;font-size:12px;">Multiple CI</th>`;
+    if(useSH)              projHead+=`<th style="padding:8px 10px;color:#bfdbfe;text-align:right;font-size:12px;">Smart Health</th>`;
+    if(useHB)              projHead+=`<th style="padding:8px 10px;color:#99f6e4;text-align:right;font-size:12px;">HB วงเงินแน่นอน</th>`;
+    if(useCancer)          projHead+=`<th style="padding:8px 10px;color:#fca5a5;text-align:right;font-size:12px;">มะเร็ง ${MTL.CANCER.planNames[cancerPlanI]}</th>`;
+    projHead+=`<th style="padding:8px 10px;color:#fde68a;text-align:right;font-size:13px;">รวม/ปี (บาท)</th></tr>`;
+
+    const endTxt = `<span style="color:#aaa;font-size:11px;">(สิ้นสุด)</span>`;
+    let projRows=''; let isFirst=true;
+    allBands.forEach(([lbl,ba],idx) => {
+        const pc  = (useCIPC&&cipcSum>0) ? (cipcSum/1000)*getRangeRate(MTL.CIPC[gender],ba) : 0;
+        const ec  = useEC  ? getECBandRate(gender,ecPlanI,ba)*ecCopies : 0;
+        const mc  = (useMCI&&mciSum>0) ? (mciSum/1000)*getRangeRate(MTL.MCI[gender],ba) : 0;
+        const sh  = useSH  ? getSHBandRate(gender,shPlanI,ba) : 0;
+        const hb  = (useHB && ba<65) ? (hbDaily/100)*hbRatePerHundred : 0;
+        const ca  = useCancer ? getCancerRate(gender, cancerPlanI, ba) : 0;
+        const tot = pc+ec+mc+sh+hb+ca;
+        const bg  = isFirst?'#eff6ff':(idx%2===0?'#f9fafb':'white');
+        const fw  = isFirst?'font-weight:800;':'';
+        const lbl2= isFirst?lbl+' ▲':'lbl2';
+
+        projRows += `<tr style="background:${bg};border-bottom:1px solid #e5e7eb;${fw}">`;
+        projRows += `<td style="padding:8px 10px;text-align:center;font-weight:bold;font-size:13px;">${lbl}${isFirst?' ▲':''}</td>`;
+        if(useCIPC&&cipcSum>0) projRows+=`<td style="padding:8px 10px;text-align:right;color:#c2410c;">${pc>0?mfmt(pc):endTxt}</td>`;
+        if(useEC)              projRows+=`<td style="padding:8px 10px;text-align:right;color:#15803d;">${ec>0?mfmt(ec):endTxt}</td>`;
+        if(useMCI&&mciSum>0)   projRows+=`<td style="padding:8px 10px;text-align:right;color:#7e22ce;">${mc>0?mfmt(mc):endTxt}</td>`;
+        if(useSH)              projRows+=`<td style="padding:8px 10px;text-align:right;color:#1d4ed8;">${sh>0?mfmt(sh):endTxt}</td>`;
+        if(useHB)              projRows+=`<td style="padding:8px 10px;text-align:right;color:#0d9488;">${hb>0?mfmt(hb):ba>=65?endTxt:endTxt}</td>`;
+        if(useCancer)          projRows+=`<td style="padding:8px 10px;text-align:right;color:#b91c1c;">${ca>0?mfmt(ca):endTxt}</td>`;
+        projRows+=`<td style="padding:8px 10px;text-align:right;font-weight:bold;font-size:15px;color:#1e40af;">${mfmt(tot)}</td></tr>`;
+        isFirst=false;
+    });
+
+    // ── Assemble report ──
+    const html = `
+    <div style="border-bottom:3px solid #15803d;padding-bottom:15px;margin-bottom:20px;">
+        <h1 style="font-size:26px;color:#14532d;font-weight:800;margin:0 0 8px;">รายงานสรุปความคุ้มครอง — บริษัท เมืองไทยประกันชีวิต</h1>
+        <div style="background:#f0fdf4;border-left:5px solid #15803d;padding:12px 16px;border-radius:6px;font-size:15px;line-height:1.7;">
+            <strong>ชื่อ:</strong> ${name} &nbsp;|&nbsp; <strong>อายุ:</strong> ${age} ปี (เพศ${gTh}) &nbsp;|&nbsp; <strong>วันที่จัดทำ:</strong> ${today}<br>
+            <strong>กลุ่มอาชีพ:</strong> 1 และ 2 &nbsp;|&nbsp; <strong>เบี้ยที่แสดง:</strong> อัตรารายปี (ก่อนหักส่วนลด)
+        </div>
+    </div>
+
+    <h2 style="font-size:18px;font-weight:700;color:#1e3a5f;border-bottom:2px solid #e5e7eb;padding-bottom:8px;margin:20px 0 12px;">1. เบี้ยประกันภัย (อายุ ${age} ปี)</h2>
+    <table style="width:100%;border-collapse:collapse;font-size:15px;">
+        <tr style="background:#1e3a5f;">
+            <th style="padding:9px 12px;color:white;text-align:left;">สัญญา</th>
+            <th style="padding:9px 12px;color:white;text-align:right;">ทุน/วงเงิน</th>
+            <th style="padding:9px 12px;color:white;text-align:right;">เบี้ยรายปี (บาท)</th>
+        </tr>
+        ${useCIPC&&cipcSum>0?`<tr style="border-bottom:1px solid #e5e7eb;"><td style="padding:9px 12px;color:#92400e;font-weight:600;">CI Perfect Care</td><td style="padding:9px 12px;text-align:right;">${mfmt(cipcSum)} บาท</td><td style="padding:9px 12px;text-align:right;font-weight:bold;color:#c2410c;">${mfmt(pCIPC)}</td></tr>`:''}
+        ${useEC?`<tr style="border-bottom:1px solid #e5e7eb;background:#f0fdf4;"><td style="padding:9px 12px;color:#14532d;font-weight:600;">MTL Extra Care ${MTL.EC.planNames[ecPlanI]} × ${ecCopies}</td><td style="padding:9px 12px;text-align:right;">${MTL.EC.planNames[ecPlanI]}</td><td style="padding:9px 12px;text-align:right;font-weight:bold;color:#15803d;">${mfmt(pEC)}</td></tr>`:''}
+        ${useMCI&&mciSum>0?`<tr style="border-bottom:1px solid #e5e7eb;"><td style="padding:9px 12px;color:#581c87;font-weight:600;">Multiple CI (4 กลุ่ม 35 โรค)</td><td style="padding:9px 12px;text-align:right;">${mfmt(mciSum)} บาท</td><td style="padding:9px 12px;text-align:right;font-weight:bold;color:#7e22ce;">${mfmt(pMCI)}</td></tr>`:''}
+        ${useSH?`<tr style="border-bottom:1px solid #e5e7eb;background:#eff6ff;"><td style="padding:9px 12px;color:#1e3a8a;font-weight:600;">Smart Health ${MTL.SH.planNames[shPlanI]}</td><td style="padding:9px 12px;text-align:right;">เหมาจ่าย ${mfmt(MTL.SH.maxPerYear[shPlanI])} บ./ปี</td><td style="padding:9px 12px;text-align:right;font-weight:bold;color:#1d4ed8;">${mfmt(pSH)}</td></tr>`:''}
+        ${useHB?`<tr style="border-bottom:1px solid #e5e7eb;"><td style="padding:9px 12px;color:#134e4a;font-weight:600;">HB วงเงินแน่นอน (เบี้ยคงที่)</td><td style="padding:9px 12px;text-align:right;">${mfmt(hbDaily)} บาท/วัน</td><td style="padding:9px 12px;text-align:right;font-weight:bold;color:#0d9488;">${mfmt(pHB)}</td></tr>`:''}
+        ${useCancer?`<tr style="border-bottom:1px solid #e5e7eb;background:#fff5f5;"><td style="padding:9px 12px;color:#7f1d1d;font-weight:600;">ความคุ้มครองโรคมะเร็ง ${MTL.CANCER.planNames[cancerPlanI]}</td><td style="padding:9px 12px;text-align:right;">มะเร็งลุกลาม ${mfmt(MTL.CANCER.invasive[cancerPlanI])} บ.</td><td style="padding:9px 12px;text-align:right;font-weight:bold;color:#b91c1c;">${pCancer>0?mfmt(pCancer):'(พ้นอายุ)'}</td></tr>`:''}
+        <tr style="background:#1e3a5f;">
+            <td colspan="2" style="padding:10px 12px;color:white;font-weight:800;font-size:16px;">รวมเบี้ยทั้งสิ้น (บาท/ปี)</td>
+            <td style="padding:10px 12px;text-align:right;color:#fde68a;font-weight:800;font-size:20px;">${mfmt(pTotal)}</td>
+        </tr>
+    </table>
+
+    <h2 style="font-size:18px;font-weight:700;color:#1e3a5f;border-bottom:2px solid #e5e7eb;padding-bottom:8px;margin:24px 0 12px;">2. สรุปรายละเอียดความคุ้มครอง</h2>
+    <table style="width:100%;border-collapse:collapse;font-size:14px;">
+        ${covRows}
+    </table>
+
+    <h2 style="font-size:18px;font-weight:700;color:#1e3a5f;border-bottom:2px solid #e5e7eb;padding-bottom:8px;margin:24px 0 12px;">3. ตารางเบี้ยประกันภัยตามช่วงอายุ (เริ่มจากอายุ ${age} ปี)</h2>
+    <p style="font-size:13px;color:#555;margin-bottom:10px;">* อัตรารายปี กลุ่มอาชีพ 1-2 | ▲ = อายุปัจจุบัน | (สิ้นสุด) = พ้นระยะเวลาคุ้มครอง</p>
+    <div style="overflow-x:auto;">
+        <table class="mtl-print-table" style="width:100%;border-collapse:collapse;font-size:14px;">
+            <thead>${projHead}</thead>
+            <tbody>${projRows}</tbody>
+        </table>
+    </div>
+
+    <div style="margin-top:25px;padding:14px 18px;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;font-size:13px;color:#78350f;">
+        <strong>⚠ หมายเหตุ:</strong> รายงานนี้เป็นสรุปเพื่อเพิ่มความเข้าใจ ไม่ใช่สัญญาของบริษัท
+        รายละเอียดต่างๆ จะมีในกรมธรรม์อย่างครบถ้วน |
+        อัตราเบี้ยอาจเปลี่ยนแปลงได้ตามเงื่อนไขบริษัท |
+        เบี้ยที่แสดงเป็นอัตรารายปีกลุ่มอาชีพ 1-2 ก่อนหักส่วนลดใดๆ
+    </div>`;
+
+    document.getElementById('mtl-report-content').innerHTML = html;
+}
+
+// ═══ PRINT MTL ═══
+function printMTL() {
+    // Inject A4 portrait @page rule temporarily
+    const styleEl = document.createElement('style');
+    styleEl.id = 'mtl-print-style';
+    styleEl.textContent = '@page { size: A4 portrait; margin: 10mm 12mm; }';
+    document.head.appendChild(styleEl);
+
+    // Show only MTL tab
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('print-active'));
+    document.getElementById('tab-mtl').classList.add('print-active');
+    document.body.classList.add('print-mtl-mode');
+
+    window.print();
+
+    // Restore
+    document.body.classList.remove('print-mtl-mode');
+    document.getElementById('tab-mtl').classList.remove('print-active');
+    const injected = document.getElementById('mtl-print-style');
+    if(injected) injected.remove();
+}
+
+
+// ═══════════════════════════════════════════════
+// TAB: สรุปการเปลี่ยนแปลง — FUNCTIONS
+// ═══════════════════════════════════════════════
+
+// Read current selections from Tab AIA and build checkbox list
+function sumInitCheckboxes() {
+    const box = document.getElementById('sum-checkboxes');
+    if(!box) return;
+    // Set today date
+    const d = document.getElementById('sum-date');
+    if(d && !d.value) d.value = new Date().toLocaleDateString('th-TH');
+    // Pre-fill client name from AIA tab if available
+    const aiaName = document.getElementById('inp-name');
+    const sumName = document.getElementById('sum-name');
+    if(sumName && !sumName.value && aiaName) sumName.value = aiaName.value;
+
+    const age    = parseInt(document.getElementById('inp-age').value)||0;
+    const gender = document.getElementById('inp-gender').value;
+    const mainSum= parseInt(document.getElementById('inp-main-sum').value)||0;
+
+    // Build items list from AIA state
+    const items = [];
+
+    // 20PLN — always present
+    items.push({
+        key:'main', label:`ประกันชีวิตหลัก 20PLN (ทุน ${app.fmt(mainSum)} บ.)`,
+        type:'main', color:'#1d4ed8', badge:'สัญญาบังคับ', checked:true, locked:true
+    });
+
+    // Health plans
+    [1,2].forEach(id => {
+        const st = app.state[id];
+        if(st.type==='NONE') return;
+        const planName = APP_DATA.plans[st.type]?.name||'';
+        const optName  = APP_DATA.plans[st.type]?.options[st.idx]?.name||'';
+        items.push({
+            key:`hl${id}`, label:`Option ${id} — ${planName} ${optName}`,
+            type:'hl', optId:id, color:id===1?'#065f46':'#92400e', badge:`Option ${id}`
+        });
+    });
+
+    // Riders per option
+    const riders = [
+        {elem:'hc',    label:'AIA Health Cancer',     color:'#7e22ce'},
+        {elem:'cfc',   label:'Care for Cancer',        color:'#be185d'},
+        {elem:'hb',    label:'HB Extra',               color:'#b45309'},
+        {elem:'hbstd', label:'HB ชดเชยรายวัน',        color:'#0d9488'},
+        {elem:'add',   label:'ADD/RCC',                color:'#ea580c'},
+        {elem:'adb',   label:'ADB/RCC',                color:'#dc2626'},
+    ];
+    riders.forEach(r => {
+        const v1 = parseInt(document.getElementById(`${r.elem}-1`)?.value)||0;
+        const v2 = parseInt(document.getElementById(`${r.elem}-2`)?.value)||0;
+        if(v1>0||v2>0) {
+            items.push({
+                key:`rider_${r.elem}`, label:r.label,
+                type:'rider', elem:r.elem, color:r.color
+            });
+        }
+    });
+
+    // MTL Products — CI Perfect Care
+    const cipcSum = parseInt(document.getElementById('cipc-sum')?.value)||0;
+    if(cipcSum > 0) {
+        items.push({
+            key:'mtl_cipc', label:`CI Perfect Care (MTL) — ทุน ${app.fmt(cipcSum)} บ.`,
+            type:'mtl_cipc', color:'#c2410c', badge:'MTL'
+        });
+    }
+
+    // MTL Products — Extra Care
+    const ecPlan   = document.getElementById('mtlec-plan')?.value||'0';
+    const ecCopies = parseInt(document.getElementById('mtlec-copies')?.value)||1;
+    if(ecPlan !== '0') {
+        const planNames = ['','แบบ 1','แบบ 2','แบบ 3','แบบ 4','แบบ 5'];
+        items.push({
+            key:'mtl_ec', label:`MTL Extra Care ${planNames[ecPlan]||''} × ${ecCopies} ชุด`,
+            type:'mtl_ec', ecPlan, ecCopies, color:'#15803d', badge:'MTL'
+        });
+    }
+
+    // Store items on window for buildSumReport
+    window._sumItems = items;
+
+    // Render checkboxes
+    let html = '';
+    items.forEach(item => {
+        const chk = item.locked ? 'checked disabled' : `onchange="buildSumReport()" ${item.checked?'checked':''}`;
+        const id  = `sum-chk-${item.key}`;
+        html += `<label class="flex items-center gap-2 cursor-pointer text-sm py-1.5 px-3 rounded-lg border ${item.locked?'border-indigo-200 bg-indigo-50':'border-gray-200 hover:bg-gray-50'}">
+            <input type="checkbox" id="${id}" class="w-4 h-4" ${chk}>
+            <span style="color:${item.color};font-weight:600;">${item.label}</span>
+            ${item.badge?`<span style="font-size:10px;background:${item.color};color:white;border-radius:4px;padding:1px 6px;">${item.badge}</span>`:''}
+        </label>`;
+    });
+    box.innerHTML = html || '<p class="text-gray-400 text-sm col-span-2">ไม่พบรายการจาก Tab AIA — กรุณากรอกข้อมูลใน Tab AIA ก่อน</p>';
+}
+
+function sumSelectAll(v) {
+    document.querySelectorAll('#sum-checkboxes input[type=checkbox]:not([disabled])').forEach(el => el.checked=v);
+    buildSumReport();
+}
+
+function buildSumReport() {
+    const cont = document.getElementById('sum-report-content');
+    if(!cont) return;
+    const items = window._sumItems||[];
+    if(!items.length) { cont.innerHTML='<p style="color:#999;text-align:center;padding:40px;">กลับไปที่ Tab AIA เพื่อกรอกข้อมูลก่อน</p>'; return; }
+
+    const name   = document.getElementById('sum-name')?.value||'ผู้เอาประกัน';
+    const note   = document.getElementById('sum-note')?.value||'';
+    const today  = document.getElementById('sum-date')?.value||new Date().toLocaleDateString('th-TH');
+    const age    = parseInt(document.getElementById('inp-age').value)||0;
+    const gender = document.getElementById('inp-gender').value;
+    const gTh    = gender==='male'?'ชาย':'หญิง';
+
+    // Collect selected items
+    const selected = items.filter(it => document.getElementById(`sum-chk-${it.key}`)?.checked);
+    if(!selected.length) { cont.innerHTML='<p style="color:#999;text-align:center;padding:40px;">กรุณาเลือกรายการอย่างน้อย 1 รายการ</p>'; return; }
+
+    // ── Header ──
+    let html = `<div style="border-bottom:3px solid #4338ca;padding-bottom:14px;margin-bottom:20px;">
+        <h1 style="font-size:24px;color:#312e81;font-weight:800;margin:0 0 8px;">รายงานสรุปการเปลี่ยนแปลงแผนประกันภัย</h1>
+        <div style="background:#eef2ff;border-left:5px solid #4338ca;padding:10px 16px;border-radius:6px;font-size:15px;line-height:1.7;">
+            <strong>ชื่อ:</strong> ${name} &nbsp;|&nbsp;
+            <strong>อายุ:</strong> ${age} ปี (เพศ${gTh}) &nbsp;|&nbsp;
+            <strong>วันที่จัดทำ:</strong> ${today}
+            ${note?`<br><strong>หมายเหตุ:</strong> ${note}`:''}
+        </div>
+    </div>`;
+
+    // ── Section 1: Premium Table ──
+    html += `<h2 style="font-size:18px;font-weight:700;color:#312e81;border-bottom:2px solid #e0e7ff;padding-bottom:8px;margin:0 0 12px;">1. ตารางเบี้ยประกันภัย (บาท/ปี)</h2>`;
+    html += `<table style="width:100%;border-collapse:collapse;font-size:15px;margin-bottom:24px;">
+        <tr style="background:#312e81;">
+            <th style="padding:9px 12px;text-align:left;color:white;">รายการ</th>
+            <th style="padding:9px 12px;text-align:right;color:white;">เบี้ยประกัน (บาท/ปี)</th>
+        </tr>`;
+    let total = 0;
+    selected.forEach((it, i) => {
+        const prem = sumGetPremium(it, age, gender);
+        total += prem;
+        const bg = i%2===0?'#f5f3ff':'white';
+        html += `<tr style="background:${bg};border-bottom:1px solid #e0e7ff;">
+            <td style="padding:9px 12px;color:${it.color};font-weight:600;">${it.label}</td>
+            <td style="padding:9px 12px;text-align:right;font-weight:bold;color:${it.color};">${prem>0?app.fmt(prem):'-'}</td>
+        </tr>`;
+    });
+    html += `<tr style="background:#312e81;">
+        <td style="padding:10px 12px;color:white;font-weight:800;font-size:16px;">รวมเบี้ยประกันภัยทั้งสิ้น</td>
+        <td style="padding:10px 12px;text-align:right;color:#c7d2fe;font-weight:800;font-size:20px;">${app.fmt(total)}</td>
+    </tr></table>`;
+
+    // ── Section 2: Coverage Details ──
+    html += `<h2 style="font-size:18px;font-weight:700;color:#312e81;border-bottom:2px solid #e0e7ff;padding-bottom:8px;margin:0 0 12px;">2. รายละเอียดความคุ้มครอง</h2>`;
+    html += `<table style="width:100%;border-collapse:collapse;font-size:14px;margin-bottom:24px;">`;
+    selected.forEach(it => { html += sumCovRows(it, age, gender, app); });
+    html += `</table>`;
+
+    // ── Section 3: Age Projection ──
+    html += `<h2 style="font-size:18px;font-weight:700;color:#312e81;border-bottom:2px solid #e0e7ff;padding-bottom:8px;margin:0 0 12px;">3. ตารางเบี้ยปรับตามช่วงอายุ (เริ่มจากอายุ ${age} ปี)</h2>`;
+    html += sumBuildProjection(selected, age, gender);
+
+    // ── Disclaimer ──
+    html += `<div style="margin-top:20px;padding:12px 16px;background:#f5f3ff;border:1px solid #c7d2fe;border-radius:8px;font-size:13px;color:#4338ca;">
+        <strong>⚠ หมายเหตุ:</strong> รายงานนี้เป็นข้อมูลเพื่อประกอบการตัดสินใจ ไม่ใช่สัญญาของบริษัท
+        รายละเอียดและเงื่อนไขจะระบุในกรมธรรม์อย่างครบถ้วน | เบี้ยปรับตามช่วงอายุ ณ วันต่ออายุ
+    </div>`;
+
+    cont.innerHTML = html;
+}
+
+function sumGetPremium(item, age, gender) {
+    if(item.type==='main') {
+        const mainSum = parseInt(document.getElementById('inp-main-sum').value)||0;
+        const mode    = app.mainMode;
+        if(mode==='manual') return parseInt(document.getElementById('inp-main-prem-manual').value)||0;
+        const b = APP_DATA.rate20PLN[gender]?.[age]||0;
+        const d = mainSum>=600000?2:(mainSum>=250000?1:0);
+        return Math.round((mainSum/1000)*Math.max(0,b-d));
+    }
+    if(item.type==='hl') {
+        const id = item.optId;
+        return parseInt((document.getElementById(`sum-hl-${id}`)?.textContent||'0').replace(/,/g,''))||0;
+    }
+    if(item.type==='rider') {
+        const el = document.getElementById(`sum-${item.elem}-1`);
+        const v1 = parseInt((el?.textContent||'0').replace(/,/g,''))||0;
+        const el2 = document.getElementById(`sum-${item.elem}-2`);
+        const v2 = parseInt((el2?.textContent||'0').replace(/,/g,''))||0;
+        return Math.max(v1, v2);
+    }
+    if(item.type==='mtl_cipc') {
+        const cipcSum = parseInt(document.getElementById('cipc-sum')?.value)||0;
+        return cipcSum>0 ? Math.round(app.calcCIPC(cipcSum, age, gender)) : 0;
+    }
+    if(item.type==='mtl_ec') {
+        const ecPlan   = item.ecPlan||document.getElementById('mtlec-plan')?.value||'0';
+        const ecCopies = item.ecCopies||parseInt(document.getElementById('mtlec-copies')?.value)||1;
+        return ecPlan!=='0' ? Math.round(app.calcMTLEC(ecPlan, age, gender, ecCopies)) : 0;
+    }
+    return 0;
+}
+
+function sumCovRows(item, age, gender, app) {
+    const sub = (bg,txt) => `<tr style="background:${bg};"><td colspan="2" style="padding:9px 12px;font-weight:700;color:white;font-size:15px;">${txt}</td></tr>`;
+    const row = (k,v,color='#374151') => `<tr style="border-bottom:1px solid #e0e7ff;"><td style="padding:8px 12px;color:${color};font-weight:600;width:55%;">${k}</td><td style="padding:8px 12px;text-align:right;font-weight:bold;color:${color};">${v}</td></tr>`;
+    let h='';
+
+    if(item.type==='main') {
+        const mainSum = parseInt(document.getElementById('inp-main-sum').value)||0;
+        h += sub('#312e81', '🔵 ประกันชีวิตหลัก 20 Payment Life (20PLN)');
+        h += row('ทุนประกันชีวิต', app.fmt(mainSum)+' บาท','#1d4ed8');
+        h += row('ระยะเวลาชำระเบี้ย','20 ปี','#374151');
+        h += row('ความคุ้มครอง','ตลอดชีพ (ถึงอายุ 99 ปี)','#374151');
+        h += row('ผลประโยชน์ครบ 20 ปี / เสียชีวิต', app.fmt(mainSum)+' บาท','#1d4ed8');
+        h += row('สัญญาบังคับ','ต้องมีเพื่อแนบสัญญาเพิ่มเติม','#6b7280');
+    }
+    if(item.type==='hl') {
+        const id  = item.optId;
+        const st  = app.state[id];
+        const planName = APP_DATA.plans[st.type]?.name||'';
+        const optName  = APP_DATA.plans[st.type]?.options[st.idx]?.name||'';
+        const key = `${st.type}_${APP_DATA.plans[st.type].options[st.idx].k}`;
+        const ben = APP_DATA.benefits[key]||{};
+        const c = id===1?'#065f46':'#92400e';
+        h += sub(id===1?'#064e3b':'#78350f', `🔹 ประกันสุขภาพ Option ${id} — ${planName} ${optName}`);
+        const fields = [
+            ['วงเงินสูงสุดต่อปี','max'],['ค่าห้อง/วัน','r1'],['ค่ารักษาทั่วไป','r2'],
+            ['ค่าแพทย์ตรวจรักษา/วัน','r3'],['ค่าผ่าตัด','r4'],['Day Surgery','r5'],
+            ['ค่าตรวจวินิจฉัย','r6'],['อุบัติเหตุฉุกเฉิน','r7'],['เคมีบำบัด/รังสี','r11'],['OPD','opd']
+        ];
+        fields.forEach(([lbl,k]) => { if(ben[k]&&ben[k]!=='-') h+=row(lbl,ben[k],c); });
+    }
+    if(item.type==='rider' && item.elem==='hc') {
+        const s1=parseInt(document.getElementById('hc-1')?.value)||0;
+        const s2=parseInt(document.getElementById('hc-2')?.value)||0;
+        const s=Math.max(s1,s2);
+        if(s>0) {
+            h += sub('#581c87','🟣 AIA Health Cancer');
+            h += row('ทุนประกัน',app.fmt(s)+' บ.','#7e22ce');
+            h += row('เงินมรณกรรม (จากโรคร้ายแรง)',app.fmt(s)+' บ.','#7e22ce');
+            h += row('ชดเชยรายวัน IPD',app.fmt((s/100000)*1000)+' บ./วัน','#7e22ce');
+        }
+    }
+    if(item.type==='rider' && item.elem==='cfc') {
+        const s=Math.max(parseInt(document.getElementById('cfc-1')?.value)||0,parseInt(document.getElementById('cfc-2')?.value)||0);
+        if(s>0) {
+            h += sub('#881337','🎗 Care for Cancer');
+            h += row('เงินก้อนเมื่อตรวจพบมะเร็ง',app.fmt(s)+' บ.','#be185d');
+            h += row('ชดเชยรายวัน IPD มะเร็ง',app.fmt((s/100000)*2000)+' บ./วัน','#be185d');
+        }
+    }
+    if(item.type==='rider' && item.elem==='hb') {
+        const s=Math.max(parseInt(document.getElementById('hb-1')?.value)||0,parseInt(document.getElementById('hb-2')?.value)||0);
+        if(s>0) {
+            h += sub('#78350f','🔶 HB Extra');
+            h += row('ชดเชยรายวัน IPD',app.fmt(s)+' บ./วัน (สูงสุด 1,260 วัน)','#b45309');
+            h += row('ห้อง ICU',app.fmt(s*3)+' บ./วัน','#b45309');
+            h += row('ผ่าตัด (5 เท่า)',app.fmt(s*5)+' บ./ครั้ง','#b45309');
+            h += row('โรคร้ายแรงเฉียบพลัน 13 โรค (25 เท่า)',app.fmt(s*25)+' บ./ครั้ง','#b45309');
+        }
+    }
+    if(item.type==='rider' && item.elem==='hbstd') {
+        const s=Math.max(parseInt(document.getElementById('hbstd-1')?.value)||0,parseInt(document.getElementById('hbstd-2')?.value)||0);
+        if(s>0) {
+            h += sub('#134e4a','🩵 HB ชดเชยรายวัน');
+            h += row('ชดเชยรายวัน IPD',app.fmt(s)+' บ./วัน (ถึงอายุ 59 ปี)','#0d9488');
+        }
+    }
+    if(item.type==='rider' && item.elem==='add') {
+        const s=Math.max(parseInt(document.getElementById('add-1')?.value)||0,parseInt(document.getElementById('add-2')?.value)||0);
+        if(s>0) {
+            const oc=parseInt(document.getElementById('occ-1')?.value)||1;
+            h += sub('#7c2d12','🟠 ADD/RCC');
+            h += row('ทุนประกัน',app.fmt(s)+' บ.','#ea580c');
+            h += row('ความคุ้มครอง','เสียชีวิต + สูญเสียอวัยวะ (อุบัติเหตุ ถึงอายุ 64 ปี)','#ea580c');
+            h += row('อัตราเบี้ย',`ชั้น ${oc} — ${APP_DATA.RATE_ADD_RCC[oc]||3} บ./1,000/ปี`,'#6b7280');
+        }
+    }
+    if(item.type==='rider' && item.elem==='adb') {
+        const s=Math.max(parseInt(document.getElementById('adb-1')?.value)||0,parseInt(document.getElementById('adb-2')?.value)||0);
+        if(s>0) {
+            const oc=Math.min(parseInt(document.getElementById('occ-1')?.value)||1,3);
+            h += sub('#7f1d1d','🔴 ADB/RCC');
+            h += row('ทุนประกัน',app.fmt(s)+' บ.','#dc2626');
+            h += row('ความคุ้มครอง','เสียชีวิตจากอุบัติเหตุ (ถึงอายุ 64 ปี)','#dc2626');
+            h += row('อัตราเบี้ย',`ชั้น ${oc} — ${APP_DATA.RATE_ADB_RCC[oc]||1.84} บ./1,000/ปี`,'#6b7280');
+        }
+    }
+    if(item.type==='mtl_cipc') {
+        const cipcSum = parseInt(document.getElementById('cipc-sum')?.value)||0;
+        if(cipcSum>0) {
+            const age2   = parseInt(document.getElementById('inp-age')?.value)||0;
+            const gender2= document.getElementById('inp-gender')?.value||'male';
+            const prem   = Math.round(app.calcCIPC(cipcSum, age2, gender2));
+            h += sub('#7c2d12','🔶 CI Perfect Care (MTL) — โรคร้ายแรง 36 โรค 3 ระยะ');
+            h += row('ทุนประกัน', app.fmt(cipcSum)+' บาท', '#c2410c');
+            h += row('เสียชีวิตทุกกรณี*', '100% = '+app.fmt(cipcSum)+' บาท', '#c2410c');
+            h += row('โรคร้ายแรง ระยะเริ่มต้น (Early)', '25% = '+app.fmt(cipcSum*0.25)+' บาท', '#c2410c');
+            h += row('โรคร้ายแรง ระยะกลาง (Intermediate)', '50% = '+app.fmt(cipcSum*0.5)+' บาท', '#c2410c');
+            h += row('โรคร้ายแรง ระยะรุนแรง (Late)*', '100% = '+app.fmt(cipcSum)+' บาท', '#c2410c');
+            h += row('Balloon / Stent หลอดเลือดหัวใจ', '10% = '+app.fmt(cipcSum*0.1)+' บาท', '#6b7280');
+            h += row('โรคแทรกซ้อนเบาหวาน (3 กรณี)', '10% = '+app.fmt(cipcSum*0.1)+' บาท', '#6b7280');
+            h += row('อายุรับประกัน', '30 วัน–65 ปี | คุ้มครองถึง 85 ปี', '#6b7280');
+            h += row('ระยะเวลารอคอย', '30 วัน', '#6b7280');
+            h += row('เบี้ยประกันภัย', app.fmt(prem)+' บาท/ปี (กลุ่มอาชีพ 1-2)', '#c2410c');
+        }
+    }
+    if(item.type==='mtl_ec') {
+        const ecPlan   = item.ecPlan||document.getElementById('mtlec-plan')?.value||'0';
+        const ecCopies = item.ecCopies||parseInt(document.getElementById('mtlec-copies')?.value)||1;
+        if(ecPlan!=='0') {
+            const age2    = parseInt(document.getElementById('inp-age')?.value)||0;
+            const gender2 = document.getElementById('inp-gender')?.value||'male';
+            const p       = parseInt(ecPlan)-1;
+            const ec      = MTL.EC;
+            const prem    = Math.round(app.calcMTLEC(ecPlan, age2, gender2, ecCopies));
+            h += sub('#14532d','🟢 MTL Extra Care '+ec.planNames[p]+' × '+ecCopies+' ชุด (80:20)');
+            h += row('ค่าห้อง/วัน (สูงสุด 120 วัน)', app.fmt(ec.room[p])+' บาท/วัน', '#15803d');
+            h += row('ความรับผิดส่วนแรก (Deductible)', app.fmt(ec.deduct[p])+' บาท/ครั้ง', '#15803d');
+            h += row('บริษัทจ่ายส่วนเกิน', '80% ของส่วนที่เกิน Deductible', '#15803d');
+            h += row('สูงสุดต่อการเข้าพัก', app.fmt(ec.maxPerAdmit[p])+' บาท/ครั้ง', '#15803d');
+            h += row('จำนวนชุดที่เลือก', ecCopies+' ชุด'+( ecCopies>1?' (คุ้มครองซ้อน)':''), '#15803d');
+            h += row('กลุ่มอาชีพ', '1 และ 2 เท่านั้น', '#6b7280');
+            h += row('เบี้ยประกันภัย', app.fmt(prem)+' บาท/ปี'+(ecCopies>1?' (รวม '+ecCopies+' ชุด)':''), '#15803d');
+        }
+    }
+    return h;
+}
+
+function sumBuildProjection(selected, startAge, gender) {
+    const bands = APP_DATA.AGE_BANDS;
+    const mainSum = parseInt(document.getElementById('inp-main-sum').value)||0;
+    const mode    = app.mainMode;
+    const manualPrem = parseInt(document.getElementById('inp-main-prem-manual').value)||0;
+    let baseMainPrem;
+    {
+        const b = APP_DATA.rate20PLN[gender]?.[startAge]||0;
+        const d = mainSum>=600000?2:(mainSum>=250000?1:0);
+        baseMainPrem = mode==='manual' ? manualPrem : Math.round((mainSum/1000)*Math.max(0,b-d));
+    }
+
+    // Collect rider sums
+    const getSum = (elem) => Math.max(parseInt(document.getElementById(`${elem}-1`)?.value)||0, parseInt(document.getElementById(`${elem}-2`)?.value)||0);
+    const occClass = parseInt(document.getElementById('occ-1')?.value)||1;
+
+    // Build header cols from ALL selected items (including MTL types)
+    const cols = selected;
+
+    let thead = `<tr style="background:#312e81;">
+        <th style="padding:7px 9px;color:white;text-align:center;font-size:12px;">ช่วงอายุ</th>`;
+    cols.forEach(it => {
+        const shortLabel = it.label.replace(/Option \d — /,'').replace(/\(MTL\) — /,'');
+        thead += `<th style="padding:7px 9px;color:#c7d2fe;text-align:right;font-size:11px;">${shortLabel}</th>`;
+    });
+    thead += `<th style="padding:7px 9px;color:#fde68a;text-align:right;font-size:13px;">รวม/ปี</th></tr>`;
+
+    // Find band that contains startAge (no -1 offset)
+    const startBandIdx = APP_DATA.AGE_BANDS.findIndex(b => {
+        const parts = b.split('-').map(Number);
+        const bEnd = parts.length>1 ? parts[1] : parts[0];
+        return bEnd >= startAge;
+    });
+
+    let rows = '';
+    const endTxt = `<span style="color:#ccc;font-size:11px;">สิ้นสุด</span>`;
+    const filteredBands = bands.slice(Math.max(0, startBandIdx));
+
+    filteredBands.forEach((band, idx) => {
+        const bandAgeMatch = band.match(/(\d+)/);
+        const bandAge = bandAgeMatch ? parseInt(bandAgeMatch[1]) : startAge;
+        const isFirst = idx===0;
+        const bg = isFirst?'#eff6ff':(idx%2===0?'#f9fafb':'white');
+
+        let rowTotal = 0;
+        let rowCells = '';
+
+        cols.forEach(it => {
+            let prem = 0;
+            if(it.type==='main') {
+                const mainStopped = bandAge >= (startAge+20);
+                if(!mainStopped) {
+                    prem = baseMainPrem; // ใช้เบี้ยคงที่ตามที่เลือกจาก Tab AIA ไม่ปรับตามอายุ
+                }
+            } else if(it.type==='hl') {
+                const id = it.optId;
+                const st = app.state[id];
+                if(st.type!=='NONE') {
+                    const hlArr = APP_DATA.rateTable[st.type]?.[gender]?.[APP_DATA.plans[st.type].options[st.idx].k];
+                    const bi    = app.getBandIdx(bandAge);
+                    prem = hlArr ? (hlArr[bi]||0) : 0;
+                }
+            } else if(it.type==='rider') {
+                const s = getSum(it.elem);
+                if(it.elem==='hc') prem = s>0 ? app.calcHC(s, bandAge, gender, document.getElementById('hc-ns-1')?.checked||false) : 0;
+                else if(it.elem==='cfc') prem = s>0 ? app.calcCFC(s, bandAge, gender) : 0;
+                else if(it.elem==='hb')  prem = s>0 ? app.calcHB(s, bandAge, gender) : 0;
+                else if(it.elem==='hbstd') prem = (s>0&&bandAge<=59) ? app.calcHBStd(s, occClass) : 0;
+                else if(it.elem==='add') prem = (s>0&&bandAge<=64) ? app.calcADD(s, occClass) : 0;
+                else if(it.elem==='adb') prem = (s>0&&bandAge<=64) ? app.calcADB(s, occClass) : 0;
+            } else if(it.type==='mtl_cipc') {
+                const cipcSum2 = parseInt(document.getElementById('cipc-sum')?.value)||0;
+                prem = cipcSum2>0 ? Math.round(app.calcCIPC(cipcSum2, bandAge, gender)) : 0;
+            } else if(it.type==='mtl_ec') {
+                const ep = it.ecPlan||document.getElementById('mtlec-plan')?.value||'0';
+                const ec = it.ecCopies||parseInt(document.getElementById('mtlec-copies')?.value)||1;
+                prem = ep!=='0' ? Math.round(app.calcMTLEC(ep, bandAge, gender, ec)) : 0;
+            }
+            rowTotal += prem;
+            rowCells += `<td style="padding:7px 9px;text-align:right;font-size:13px;${prem===0?'color:#ccc;':''}">${prem>0?app.fmt(prem):endTxt}</td>`;
+        });
+
+        rows += `<tr style="background:${bg};border-bottom:1px solid #e0e7ff;">
+            <td style="padding:7px 9px;text-align:center;font-weight:bold;font-size:13px;">${band}${isFirst?' ▲':''}</td>
+            ${rowCells}
+            <td style="padding:7px 9px;text-align:right;font-weight:bold;font-size:15px;color:#312e81;">${app.fmt(rowTotal)}</td>
+        </tr>`;
+    });
+
+    return `<div style="overflow-x:auto;margin-bottom:20px;">
+        <p style="font-size:13px;color:#555;margin-bottom:8px;">▲ = อายุปัจจุบัน | "สิ้นสุด" = พ้นอายุคุ้มครอง | เบี้ยหลักสิ้นสุดหลังชำระครบ 20 ปี</p>
+        <table style="width:100%;border-collapse:collapse;font-size:13px;">
+            <thead>${thead}</thead>
+            <tbody>${rows}</tbody>
+        </table>
+    </div>`;
+}
+
+function printSumReport() {
+    const styleEl = document.createElement('style');
+    styleEl.id = 'sum-print-style';
+    styleEl.textContent = '@page { size: A4 portrait; margin: 10mm 12mm; }';
+    document.head.appendChild(styleEl);
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('print-active'));
+    document.getElementById('tab-sum').classList.add('print-active');
+    document.body.classList.add('print-sum-mode');
+    window.print();
+    document.body.classList.remove('print-sum-mode');
+    document.getElementById('tab-sum').classList.remove('print-active');
+    const injected = document.getElementById('sum-print-style');
+    if(injected) injected.remove();
+}
+
+// Init sum tab date
+document.addEventListener('DOMContentLoaded', () => {
+    const d = document.getElementById('sum-date');
+    if(d) d.value = new Date().toLocaleDateString('th-TH');
+});
 </script>
 </body>
 </html>

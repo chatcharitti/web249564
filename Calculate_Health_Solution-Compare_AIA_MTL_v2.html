@@ -12,336 +12,895 @@
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        :root {
-            --primary-color: #0056b3; 
-            --accent-color: #d31145;  
-            --bg-color: #f4f7f6;      
-            --card-bg: #ffffff;       
-            --text-color: #333333;    
-            --border-color: #e0e0e0;
+        /* ============================================
+           PREMIUM DESIGN SYSTEM v3
+           Theme 1: Executive Banking (Dark Navy + Gold) — DEFAULT
+           Theme 2: Light (Cream + Navy)
+           ============================================ */
+
+        :root,
+        [data-theme="dark"] {
+            /* Brand Tokens */
+            --c-primary:        #d4af37;         /* Gold */
+            --c-primary-soft:   #b89530;
+            --c-primary-faint:  rgba(212,175,55,0.14);
+            --c-accent:         #c8a04f;
+            --c-aia:            #d4af37;
+            --c-mtl:            #ec4899;
+            --c-mtl-soft:       rgba(236,72,153,0.12);
+
+            /* Surfaces — เข้มขึ้นทุกระดับ */
+            --bg-page:          #050d1a;
+            --bg-elevated:      #0a1628;
+            --bg-surface:       #0f1f3d;
+            --bg-surface-2:     #15294a;
+            --bg-input:         rgba(255,255,255,0.05);
+            --bg-input-focus:   rgba(255,255,255,0.10);
+
+            /* Text — สว่างขึ้นเพื่อ contrast กับ navy เข้ม */
+            --t-primary:        #f5f8fc;
+            --t-secondary:      rgba(245,248,252,0.78);
+            --t-tertiary:       rgba(245,248,252,0.55);
+            --t-muted:          rgba(245,248,252,0.35);
+            --t-on-primary:     #050d1a;
+
+            /* Borders */
+            --b-hairline:       rgba(212,175,55,0.10);
+            --b-soft:           rgba(212,175,55,0.18);
+            --b-medium:         rgba(212,175,55,0.30);
+            --b-gold:           rgba(212,175,55,0.40);
+
+            /* Semantic */
+            --c-success:        #4ade80;
+            --c-success-bg:     rgba(74,222,128,0.12);
+            --c-danger:         #f87171;
+            --c-danger-bg:      rgba(248,113,113,0.12);
+            --c-warning:        #fbbf24;
+            --c-warning-bg:     rgba(251,191,36,0.12);
+            --c-info:           #60a5fa;
+            --c-info-bg:        rgba(96,165,250,0.10);
+
+            /* Shadows */
+            --shadow-sm:        0 1px 2px rgba(0,0,0,0.30);
+            --shadow-md:        0 4px 12px rgba(0,0,0,0.40);
+            --shadow-lg:        0 16px 40px rgba(0,0,0,0.50);
+            --shadow-gold:      0 0 0 1px rgba(212,175,55,0.25), 0 8px 24px rgba(212,175,55,0.12);
+
+            /* Radius */
+            --r-xs: 4px; --r-sm: 6px; --r-md: 10px; --r-lg: 14px; --r-xl: 20px;
         }
+
+        [data-theme="light"] {
+            --c-primary:        #0a1628;             /* deep navy */
+            --c-primary-soft:   #15294a;
+            --c-primary-faint:  rgba(10,22,40,0.06);
+            --c-accent:         #8b6914;             /* deeper gold for contrast */
+            --c-aia:            #0a1628;
+            --c-mtl:            #9d174d;             /* deeper pink */
+            --c-mtl-soft:       rgba(157,23,77,0.08);
+
+            --bg-page:          #f5f1e8;
+            --bg-elevated:      #ffffff;
+            --bg-surface:       #ffffff;
+            --bg-surface-2:     #faf5e9;
+            --bg-input:         #ffffff;
+            --bg-input-focus:   #fffdf5;
+
+            /* Text — เข้มขึ้นทั้งหมดเพื่ออ่านง่าย */
+            --t-primary:        #0a0a0a;             /* near-black */
+            --t-secondary:      #2c2c2c;             /* dark charcoal — เคยเป็น 0.65 */
+            --t-tertiary:       #4a4a4a;             /* medium dark — เคยเป็น 0.45 */
+            --t-muted:          #6b6b6b;             /* dark gray — เคยเป็น 0.30 */
+            --t-on-primary:     #ffffff;
+
+            --b-hairline:       rgba(10,22,40,0.10);
+            --b-soft:           rgba(10,22,40,0.18);
+            --b-medium:         rgba(10,22,40,0.30);
+            --b-gold:           rgba(139,105,20,0.45);
+
+            --c-success:        #14532d;
+            --c-success-bg:     rgba(20,83,45,0.08);
+            --c-danger:         #991b1b;
+            --c-danger-bg:      rgba(153,27,27,0.06);
+            --c-warning:        #92400e;
+            --c-warning-bg:     rgba(146,64,14,0.08);
+            --c-info:           #1e3a8a;
+            --c-info-bg:        rgba(30,58,138,0.06);
+
+            --shadow-sm:        0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md:        0 2px 8px rgba(10,22,40,0.08);
+            --shadow-lg:        0 8px 24px rgba(10,22,40,0.10);
+            --shadow-gold:      0 0 0 1px rgba(139,105,20,0.30), 0 4px 16px rgba(139,105,20,0.10);
+        }
+
+        * { box-sizing: border-box; }
 
         body {
-            font-family: 'Sarabun', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            font-family: 'Sarabun', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--t-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transition: background-color 0.3s, color 0.3s;
+            font-feature-settings: "tnum" 1;
+            font-size: 18px;
+            line-height: 1.65;
+        }
+        /* Font scaling — applied via inline style on body */
+        body[data-fs="1"]    { font-size: 16px; }
+        body[data-fs="2"]    { font-size: 17px; }
+        body[data-fs="3"]    { font-size: 18px; }   /* default */
+        body[data-fs="4"]    { font-size: 19px; }
+        body[data-fs="5"]    { font-size: 20px; }
+        body[data-fs="6"]    { font-size: 22px; }
+
+        /* All text elements scale relative to body using em — for elements that should scale */
+        .panel-title-h1     { font-size: 1.40em !important; }
+        .panel-title-eyebrow { font-size: 0.72em !important; }
+        .input-card-header  { font-size: 0.72em !important; }
+        .input-card-title   { font-size: 0.92em !important; }
+        .opt-badge          { font-size: 0.68em !important; }
+        .field-label, .field-label-row { font-size: 0.70em !important; }
+        .premium-input, .premium-select { font-size: 0.92em !important; }
+        .premium-select.compact { font-size: 0.80em !important; }
+        .rider-row span     { font-size: 0.78em; }
+        .rider-row .rider-tag { font-size: 0.60em; }
+        .cp-checkbox-label  { font-size: 0.78em; }
+        .dhl-warn           { font-size: 0.68em; }
+        .btn                { font-size: 0.85em; }
+        .notice             { font-size: 0.74em; }
+
+        /* Report text scaling */
+        .report-h1          { font-size: 1.85em !important; }
+        .report-eyebrow     { font-size: 0.68em !important; }
+        .report-h2          { font-size: 1.30em !important; }
+        .report-meta-badge  { font-size: 0.68em !important; }
+        .client-info-box    { font-size: 1em !important; }
+        .compare-table      { font-size: 0.90em !important; }
+        .compare-table th   { font-size: 0.70em !important; }
+        .compare-table td.row-header { font-size: 0.85em !important; }
+        .proj-table         { font-size: 0.88em !important; }
+        .proj-table th      { font-size: 0.70em !important; }
+        .proj-table td:first-child { font-size: 0.78em !important; }
+        .cv-table           { font-size: 0.90em !important; }
+        .cv-table th        { font-size: 0.74em !important; }
+        .cv-table td:nth-child(2) { font-size: 0.95em !important; }
+        .cv-table td:last-child { font-size: 1em !important; }
+        .cv-input           { font-size: 0.90em !important; }
+        .total-row td       { font-size: 1.40em !important; }
+        .total-row td.row-header { font-size: 0.82em !important; }
+        .sub-header-row td  { font-size: 0.78em !important; }
+        .badge              { font-size: 0.62em; }
+
+        /* Tabular numbers */
+        input[type="number"], .tnum, .compare-table td.data-cell, .proj-table td,
+        .cv-table td, .cv-input { font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
+
+        /* Font size control buttons */
+        .font-size-control {
+            display: inline-flex; align-items: center; gap: 2px;
+            background: var(--bg-surface); border: 1px solid var(--b-soft);
+            border-radius: var(--r-md); padding: 3px;
+        }
+        .font-size-btn {
+            width: 32px; height: 32px;
+            display: inline-flex; align-items: center; justify-content: center;
+            background: transparent; border: none; cursor: pointer;
+            color: var(--t-secondary); font-family: inherit;
+            border-radius: var(--r-sm); transition: all 0.15s;
+            font-weight: 600;
+        }
+        .font-size-btn:hover { background: var(--bg-surface-2); color: var(--t-primary); }
+        .font-size-btn.fs-minus { font-size: 14px; }
+        .font-size-btn.fs-plus { font-size: 18px; }
+        .font-size-btn.fs-reset { font-size: 11px; padding: 0 8px; width: auto; min-width: 36px; }
+        .font-size-display {
+            font-size: 11px; color: var(--t-tertiary);
+            padding: 0 6px; min-width: 36px; text-align: center;
+            font-variant-numeric: tabular-nums;
         }
 
-        /* Report Styles */
+        /* ============================================
+           CONTROL PANEL (input area)
+           ============================================ */
+        .control-panel {
+            max-width: 1280px;
+            margin: 0 auto 32px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--b-hairline);
+            border-radius: var(--r-xl);
+            padding: 28px 32px;
+            box-shadow: var(--shadow-lg);
+        }
+        .control-panel-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding-bottom: 20px; margin-bottom: 24px;
+            border-bottom: 1px solid var(--b-hairline);
+        }
+        .panel-title-eyebrow {
+            font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--c-primary); font-weight: 600; margin-bottom: 4px;
+        }
+        .panel-title-h1 {
+            font-size: 22px; font-weight: 600; color: var(--t-primary);
+            letter-spacing: -0.01em; margin: 0;
+        }
+        .panel-actions { display: flex; gap: 10px; align-items: center; }
+
+        /* Input card (Personal info / Options) */
+        .input-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--b-hairline);
+            border-radius: var(--r-lg);
+            padding: 20px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .input-card.opt-card { position: relative; padding-top: 22px; }
+        .input-card.opt-card::before {
+            content: ""; position: absolute; top: 0; left: 16px; right: 16px; height: 2px;
+            border-radius: 0 0 2px 2px;
+        }
+        .input-card.opt-1::before { background: var(--c-primary); }
+        .input-card.opt-2::before { background: var(--c-mtl); }
+        .input-card.opt-3::before { background: var(--c-mtl); opacity: 0.6; }
+
+        .input-card-header {
+            font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--t-secondary); font-weight: 600;
+            padding-bottom: 12px; margin-bottom: 14px;
+            border-bottom: 1px solid var(--b-hairline);
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .input-card-title { color: var(--t-primary); font-size: 14px; letter-spacing: 0; text-transform: none; font-weight: 600; }
+        .opt-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 3px 10px; border-radius: var(--r-sm);
+            font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600;
+        }
+        .opt-badge.opt-1 { background: var(--c-primary-faint); color: var(--c-primary); }
+        .opt-badge.opt-2 { background: var(--c-mtl-soft); color: var(--c-mtl); }
+        .opt-badge.opt-3 { background: var(--c-mtl-soft); color: var(--c-mtl); opacity: 0.85; }
+
+        /* Form fields — borderless underline style */
+        .field { margin-bottom: 14px; }
+        .field-label {
+            display: block; font-size: 10px; letter-spacing: 0.10em;
+            text-transform: uppercase; color: var(--t-tertiary);
+            font-weight: 600; margin-bottom: 6px;
+        }
+        .field-label-row {
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 10px; letter-spacing: 0.10em; text-transform: uppercase;
+            color: var(--t-tertiary); font-weight: 600; margin-bottom: 6px;
+        }
+        .field-label-row span:last-child {
+            text-transform: none; letter-spacing: 0; font-size: 10px;
+            color: var(--t-secondary); font-weight: 400;
+        }
+
+        .premium-input, .premium-select {
+            width: 100%; padding: 9px 12px;
+            background: var(--bg-input);
+            border: 1px solid var(--b-hairline);
+            border-radius: var(--r-md);
+            color: var(--t-primary);
+            font-size: 14px; font-family: inherit;
+            transition: all 0.2s ease;
+            outline: none;
+        }
+        .premium-input:hover, .premium-select:hover { border-color: var(--b-soft); }
+        .premium-input:focus, .premium-select:focus {
+            border-color: var(--c-primary);
+            background: var(--bg-input-focus);
+            box-shadow: 0 0 0 3px var(--c-primary-faint);
+        }
+        .premium-input[readonly] {
+            background: var(--bg-surface-2);
+            color: var(--c-primary); font-weight: 600;
+            cursor: default;
+        }
+        .premium-input.mtl-manual {
+            background: var(--bg-input-focus);
+            color: var(--c-mtl); font-weight: 600;
+            border-color: var(--c-mtl-soft);
+        }
+        .premium-select { cursor: pointer; appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 10px center;
+            padding-right: 30px;
+        }
+        .premium-select.compact { padding: 6px 28px 6px 10px; font-size: 12px; }
+
+        /* Sub-section divider */
+        .field-section {
+            padding-top: 14px; margin-top: 14px;
+            border-top: 1px solid var(--b-hairline);
+        }
+        .rider-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; }
+        .rider-row span { font-size: 12px; color: var(--t-secondary); }
+        .rider-row .rider-tag { font-size: 9px; color: var(--t-muted); margin-left: 4px; letter-spacing: 0.05em; text-transform: uppercase; }
+        .rider-row select { width: 130px; }
+
+        /* Care Plus checkbox */
+        #cp-container-1, #cp-container-2, #cp-container-3 {
+            margin-top: 10px; padding-top: 12px;
+            border-top: 1px dashed var(--b-soft);
+        }
+        .cp-checkbox-label {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 12px; color: var(--c-mtl); font-weight: 600; cursor: pointer;
+        }
+        .cp-checkbox-label input[type="checkbox"] {
+            width: 14px; height: 14px; accent-color: var(--c-mtl);
+        }
+        .dhl-warn {
+            font-size: 10px; color: var(--c-warning);
+            background: var(--c-warning-bg);
+            padding: 6px 8px; margin-top: 8px;
+            border-radius: var(--r-sm);
+            border-left: 2px solid var(--c-warning);
+            line-height: 1.5;
+        }
+
+        /* Buttons */
+        .btn { display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 18px; font-size: 13px; font-weight: 600;
+            border-radius: var(--r-md); cursor: pointer;
+            transition: all 0.15s ease; font-family: inherit; border: 1px solid transparent;
+            letter-spacing: 0.02em;
+        }
+        .btn-primary { background: var(--c-primary); color: var(--t-on-primary); border-color: var(--c-primary); }
+        .btn-primary:hover { background: var(--c-primary-soft); border-color: var(--c-primary-soft); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+        .btn-ghost { background: transparent; color: var(--t-secondary); border-color: var(--b-soft); }
+        .btn-ghost:hover { background: var(--bg-surface-2); color: var(--t-primary); border-color: var(--b-medium); }
+        .theme-toggle-btn { width: 38px; height: 38px; padding: 0; justify-content: center; border-radius: 50%; }
+
+        /* Notice box (warning under personal info) */
+        .notice {
+            font-size: 11px; padding: 10px 12px;
+            border-radius: var(--r-sm); line-height: 1.55;
+            background: var(--c-danger-bg); color: var(--c-danger);
+            border-left: 2px solid var(--c-danger);
+        }
+
+        /* ============================================
+           REPORT
+           ============================================ */
         .report-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background-color: var(--card-bg);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            font-size: 18px;
-            line-height: 1.6;
+            max-width: 1280px; margin: 0 auto;
+            background-color: var(--bg-elevated);
+            color: var(--t-primary);
+            padding: 48px 56px; border-radius: var(--r-xl);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--b-hairline);
+            font-size: 16px; line-height: 1.65;
         }
 
         .report-header {
-            border-bottom: 3px solid var(--primary-color);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
+            border-bottom: 1px solid var(--b-gold);
+            padding-bottom: 24px; margin-bottom: 32px;
+            display: flex; align-items: flex-end; justify-content: space-between; gap: 24px;
+        }
+        .report-eyebrow {
+            font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--c-primary); font-weight: 600; margin-bottom: 6px;
+        }
+        .report-h1 {
+            font-size: 30px; font-weight: 600; letter-spacing: -0.01em;
+            color: var(--t-primary); margin: 0;
+        }
+        .report-meta-badge {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 8px 16px; border: 1px solid var(--b-gold);
+            border-radius: var(--r-sm); font-size: 11px;
+            color: var(--c-primary); letter-spacing: 0.10em;
+            background: var(--c-primary-faint);
+        }
+        .report-h2 {
+            font-size: 20px; font-weight: 600; color: var(--t-primary);
+            margin: 0 0 20px 0;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .report-h2::before {
+            content: ""; width: 3px; height: 22px; background: var(--c-primary);
+            border-radius: 2px;
         }
 
-        .report-h1 { font-size: 32px; color: var(--primary-color); margin: 0 0 10px 0; font-weight: 700; }
-        .report-h2 { font-size: 24px; color: var(--primary-color); border-bottom: 1px solid #ddd; padding-bottom: 8px; margin-top: 0; margin-bottom: 20px; font-weight: 600;}
-        
         .client-info-box {
-            background-color: #eef5fa;
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 6px solid var(--primary-color);
-            font-size: 20px;
+            background: var(--bg-surface);
+            border: 1px solid var(--b-hairline);
+            border-left: 3px solid var(--c-primary);
+            padding: 22px 26px;
+            border-radius: var(--r-md);
+            font-size: 16px; color: var(--t-secondary);
         }
+        .client-info-box strong { color: var(--t-primary); font-weight: 600; }
 
         .report-section {
-            margin-bottom: 40px;
-            padding: 25px;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
+            margin-bottom: 36px;
+            padding: 28px;
+            background: var(--bg-surface);
+            border: 1px solid var(--b-hairline);
+            border-radius: var(--r-lg);
         }
 
-        /* Tables */
-        .compare-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 16px; }
-        .compare-table th, .compare-table td { padding: 12px 15px; border-bottom: 1px solid #ddd; vertical-align: top; }
-        .compare-table th { background-color: #f1f4f8; color: var(--primary-color); font-weight: bold; text-align: center; border-bottom: 2px solid var(--primary-color); }
-        .compare-table td.row-header { font-weight: 600; color: #444; background-color: #fafafa; text-align: left; width: 25%; border-right: 1px solid #ddd;}
-        .compare-table td.data-cell { text-align: center; border-right: 1px solid #eee; }
-        .compare-table tr:hover td { background-color: #f9fbfd; }
-        .sub-header-row td { background-color: #e3e8ee !important; font-weight: bold; color: var(--primary-color); text-align: left !important; padding-top: 20px; border-top: 2px solid #ccc;}
+        /* ============================================
+           TABLES
+           ============================================ */
+        .compare-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 14px; }
+        .compare-table th, .compare-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--b-hairline);
+            vertical-align: top;
+        }
+        .compare-table th {
+            background: transparent;
+            color: var(--t-tertiary);
+            font-weight: 600; font-size: 11px;
+            letter-spacing: 0.10em; text-transform: uppercase;
+            text-align: center;
+            border-bottom: 1px solid var(--b-soft);
+            padding-bottom: 10px;
+        }
+        .compare-table td.row-header {
+            font-weight: 500; color: var(--t-secondary);
+            text-align: left; width: 28%;
+            background: transparent;
+            border-right: 1px solid var(--b-hairline);
+            font-size: 13px;
+        }
+        .compare-table td.data-cell {
+            text-align: center;
+            border-right: 1px solid var(--b-hairline);
+            color: var(--t-primary);
+            transition: background-color 0.15s;
+        }
+        .compare-table td:last-child { border-right: none; }
+        .compare-table tr:hover td { background-color: var(--bg-surface-2); }
 
-        /* Total Highlights */
-        .total-row td { font-weight: bold; font-size: 22px; background-color: #fff4f4 !important; color: var(--accent-color); border-top: 2px solid var(--accent-color);}
-        
+        .sub-header-row td {
+            background: var(--c-primary-faint) !important;
+            font-weight: 600 !important; color: var(--c-primary) !important;
+            text-align: left !important;
+            padding: 14px 16px !important;
+            font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+            border-top: 1px solid var(--b-gold);
+            border-bottom: 1px solid var(--b-gold);
+        }
+
+        .total-row td {
+            font-weight: 600 !important; font-size: 22px !important;
+            background: var(--c-primary-faint) !important;
+            color: var(--c-primary) !important;
+            border-top: 2px solid var(--c-primary) !important;
+            border-bottom: 2px solid var(--c-primary) !important;
+            padding: 18px 16px !important;
+        }
+        .total-row td.row-header {
+            font-size: 13px !important; letter-spacing: 0.10em; text-transform: uppercase;
+            font-weight: 600 !important;
+        }
+
         /* Badges */
-        .badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 14px; font-weight: bold; color: white; vertical-align: middle; margin-left: 8px; }
-        .badge-tax { background-color: #28a745; }
-        .badge-vitality { background-color: #ff9800; }
-        .badge-mtl { background-color: #e81d76; }
+        .badge {
+            display: inline-block; padding: 3px 10px;
+            border-radius: var(--r-sm); font-size: 10px;
+            font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+            vertical-align: middle; margin-left: 6px;
+        }
+        .badge-tax { background: var(--c-success-bg); color: var(--c-success); }
+        .badge-vitality { background: var(--c-warning-bg); color: var(--c-warning); }
+        .badge-mtl { background: var(--c-mtl-soft); color: var(--c-mtl); }
 
         /* Projection Table */
-        .proj-table { width: 100%; border-collapse: collapse; font-size: 16px; }
-        .proj-table th { background-color: #f1f4f8; color: var(--primary-color); padding: 12px; text-align: right; border-bottom: 2px solid var(--primary-color); }
+        .proj-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        .proj-table th {
+            background: transparent;
+            color: var(--t-tertiary);
+            padding: 12px 14px; text-align: right;
+            border-bottom: 1px solid var(--b-soft);
+            font-size: 11px; letter-spacing: 0.10em;
+            text-transform: uppercase; font-weight: 600;
+        }
         .proj-table th:first-child { text-align: center; }
-        .proj-table td { padding: 10px 12px; border-bottom: 1px solid #eee; text-align: right; }
-        .proj-table td:first-child { text-align: center; font-weight: bold; background-color: #fafafa; border-right: 1px solid #ddd;}
-        .proj-table tr:hover td { background-color: #f9fbfd; }
+        .proj-table td {
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--b-hairline);
+            text-align: right; color: var(--t-primary);
+        }
+        .proj-table td:first-child {
+            text-align: center; font-weight: 600;
+            color: var(--t-secondary);
+            background: var(--bg-surface-2);
+            border-right: 1px solid var(--b-hairline);
+            font-size: 12px; letter-spacing: 0.05em;
+        }
+        .proj-table tr:hover td { background-color: var(--bg-surface-2); }
 
-        /* Dynamic Columns Hide */
         .hide-col { display: none !important; }
         .hidden { display: none !important; }
 
         /* CV Table */
-        .cv-table { width: 100%; border-collapse: collapse; font-size: 16px; margin-bottom: 20px; }
-        .cv-table th { background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%); color: white; padding: 14px 18px; text-align: center; font-weight: 600; }
-        .cv-table th:first-child { text-align: left; border-radius: 8px 0 0 0; }
-        .cv-table th:last-child { border-radius: 0 8px 0 0; }
-        .cv-table td { padding: 16px 18px; border-bottom: 1px solid #e5e7eb; vertical-align: middle; }
-        .cv-table td:first-child { font-weight: 600; color: #374151; }
-        .cv-table td:nth-child(2) { text-align: right; font-weight: 600; color: #1e40af; font-size: 17px; }
-        .cv-table td:nth-child(3) { text-align: center; }
-        .cv-table td:last-child { text-align: right; font-weight: 700; font-size: 18px; }
-        .cv-table tr:hover td { background-color: #f0f7ff; }
-        .cv-input { 
-            width: 140px; padding: 8px 12px; text-align: right; font-size: 16px; font-weight: 600; color: #1e40af;
-            border: 2px solid #fbbf24; border-radius: 8px; background: #fffbeb; outline: none;
-            transition: all 0.2s;
+        .cv-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 20px; }
+        .cv-table th {
+            background: var(--c-primary);
+            color: var(--t-on-primary);
+            padding: 14px 16px; text-align: center;
+            font-weight: 600; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
         }
-        .cv-input:focus { border-color: #f59e0b; box-shadow: 0 0 0 3px rgba(245,158,11,0.2); background: #fff; }
-        .cv-profit { color: #16a34a; }
-        .cv-loss { color: #dc2626; }
+        .cv-table th:first-child { text-align: left; border-radius: var(--r-md) 0 0 0; }
+        .cv-table th:last-child { border-radius: 0 var(--r-md) 0 0; }
+        .cv-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--b-hairline);
+            vertical-align: middle;
+        }
+        .cv-table td:first-child { font-weight: 600; color: var(--t-primary); }
+        .cv-table td:nth-child(2) {
+            text-align: right; font-weight: 600;
+            color: var(--c-info); font-size: 15px;
+        }
+        .cv-table td:nth-child(3) { text-align: center; }
+        .cv-table td:last-child { text-align: right; font-weight: 600; font-size: 16px; }
+        .cv-table tr:hover td { background-color: var(--bg-surface-2); }
+
+        .cv-input {
+            width: 140px; padding: 8px 12px; text-align: right;
+            font-size: 14px; font-weight: 600; color: var(--c-primary);
+            border: 1px solid var(--b-gold); border-radius: var(--r-sm);
+            background: var(--c-primary-faint); outline: none;
+            transition: all 0.2s; font-family: inherit;
+            font-variant-numeric: tabular-nums;
+        }
+        .cv-input:focus {
+            border-color: var(--c-primary);
+            box-shadow: 0 0 0 3px var(--c-primary-faint);
+            background: var(--bg-input-focus);
+        }
+        .cv-profit { color: var(--c-success); font-weight: 600; }
+        .cv-loss { color: var(--c-danger); font-weight: 600; }
         .cv-option-header {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            border-left: 4px solid; padding: 12px 16px; border-radius: 8px; margin-bottom: 12px;
+            background: var(--bg-surface-2);
+            border-left: 3px solid;
+            padding: 12px 16px; border-radius: var(--r-sm);
+            margin-bottom: 12px; color: var(--t-primary);
         }
 
-        /* Print Settings */
+        /* Tailwind override helpers — make Tailwind utilities behave with dark theme */
+        .bg-white { background-color: var(--bg-elevated) !important; }
+        .bg-gray-50 { background-color: var(--bg-surface) !important; }
+        .bg-gray-100, .bg-gray-200 { background-color: var(--bg-surface-2) !important; }
+        .text-gray-400, .text-gray-500, .text-gray-600 { color: var(--t-secondary) !important; }
+        .text-gray-700, .text-gray-800 { color: var(--t-primary) !important; }
+        .border-gray-200, .border-gray-300 { border-color: var(--b-hairline) !important; }
+        .text-blue-700, .text-blue-800 { color: var(--c-primary) !important; }
+        .text-emerald-600, .text-emerald-700, .text-emerald-800 { color: var(--c-primary) !important; }
+        .text-amber-600, .text-amber-700, .text-amber-800 { color: var(--c-mtl) !important; }
+        .text-rose-500, .text-rose-600, .text-rose-700, .text-rose-800 { color: var(--c-mtl) !important; }
+        .text-pink-400, .text-pink-500, .text-pink-600 { color: var(--c-mtl) !important; }
+        .bg-emerald-50 { background: transparent !important; }
+        .bg-emerald-200 { background: var(--c-primary-faint) !important; color: var(--c-primary) !important; }
+        .bg-amber-50 { background: transparent !important; }
+        .bg-rose-50 { background: transparent !important; }
+        .border-emerald-200, .border-emerald-300 { border-color: var(--b-hairline) !important; }
+        .border-amber-200, .border-amber-300 { border-color: var(--b-hairline) !important; }
+        .border-rose-200, .border-rose-300 { border-color: var(--b-hairline) !important; }
+        .text-red-600 { color: var(--c-danger) !important; }
+        .bg-red-50 { background-color: var(--c-danger-bg) !important; }
+        .border-red-200 { border-color: var(--c-danger) !important; }
+
+        /* ============================================
+           PRINT — Always render in light theme
+           ============================================ */
         @media print {
-            .no-print { display: none !important; }
-            body { background-color: white; padding: 0; }
-            .report-container { box-shadow: none; padding: 0; max-width: 100%; margin: 0; border: none; }
-            .page-break { page-break-before: always; }
-            .report-section { padding: 10px 0; border: none; }
-            
-            /* CV Table Print */
-            .cv-input { 
-                border: none !important; background: transparent !important; 
-                box-shadow: none !important; padding: 0 !important;
-                font-weight: 700; color: #1e40af; text-align: right;
+            :root, [data-theme="dark"], [data-theme="light"] {
+                --c-primary: #1a2f4f; --c-primary-soft: #1a2f4f;
+                --c-primary-faint: rgba(26,47,79,0.06);
+                --c-aia: #1a2f4f; --c-mtl: #c2185b;
+                --c-mtl-soft: rgba(194,24,91,0.06);
+                --bg-page: #ffffff; --bg-elevated: #ffffff;
+                --bg-surface: #ffffff; --bg-surface-2: #f5f1e8;
+                --bg-input: #ffffff; --bg-input-focus: #ffffff;
+                --t-primary: #0a0a0a; --t-secondary: #2c2c2c;
+                --t-tertiary: #5a5a5a; --t-muted: #888;
+                --t-on-primary: #ffffff;
+                --b-hairline: #ddd6c4; --b-soft: #c4b896; --b-medium: #8b7355;
+                --b-gold: #c4a76a;
+                --c-success: #15803d; --c-danger: #b91c1c;
+                --c-warning: #b45309; --c-info: #1d4ed8;
+                --c-mtl: #9d174d; --c-mtl-soft: rgba(157,23,77,0.06);
+                --c-primary: #0a1628; --c-primary-faint: rgba(10,22,40,0.05);
+                --shadow-sm: none; --shadow-md: none; --shadow-lg: none; --shadow-gold: none;
             }
-            .cv-table { font-size: 14px; }
-            .cv-table th { background: #1e3a5f !important; color: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-            .cv-option-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-            .cv-profit { color: #16a34a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-            .cv-loss { color: #dc2626 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+            /* Layout */
+            .no-print { display: none !important; }
+            body { background: white !important; padding: 0 !important; font-size: 13px !important; }
+            .report-container {
+                box-shadow: none !important; padding: 12px 0 !important;
+                max-width: 100% !important; margin: 0 !important;
+                border: none !important; border-radius: 0 !important;
+            }
+            .page-break { page-break-before: always; }
+
+            /* Sections */
+            .report-section {
+                padding: 10px 0 !important; border: none !important;
+                background: transparent !important; margin-bottom: 16px !important;
+            }
+            .report-header { padding-bottom: 12px !important; margin-bottom: 16px !important; }
+            .report-h2 { margin-bottom: 12px !important; font-size: 1.05em !important; }
+            .report-h2::before { width: 2px !important; height: 16px !important; }
+            .client-info-box { padding: 12px 14px !important; }
+
+            /* Tables */
+            .compare-table { font-size: 0.88em !important; }
+            .compare-table th, .compare-table td { padding: 7px 9px !important; }
+            .compare-table td.row-header { font-size: 0.80em !important; }
+            .sub-header-row td {
+                padding: 8px 10px !important; font-size: 0.75em !important;
+                -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            }
+            .total-row td {
+                font-size: 1.10em !important; padding: 12px 10px !important;
+                -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            }
+            .proj-table { font-size: 0.85em !important; }
+            .proj-table th, .proj-table td { padding: 7px 9px !important; }
+
+            /* CV Table */
+            .cv-table { font-size: 0.85em !important; }
+            .cv-table th {
+                background: #0a1628 !important; color: white !important;
+                -webkit-print-color-adjust: exact; print-color-adjust: exact;
+                padding: 9px 12px !important;
+            }
+            .cv-table td { padding: 9px 12px !important; }
+            .cv-input {
+                border: none !important; background: transparent !important;
+                box-shadow: none !important; padding: 0 !important;
+                font-weight: 700 !important; color: #0a1628 !important;
+                text-align: right !important; font-size: 1em !important;
+            }
+            .cv-option-header {
+                border-width: 2px !important; padding: 8px 12px !important;
+                -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            }
+            .cv-profit { color: #15803d !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .cv-loss { color: #b91c1c !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+            /* Badges & special elements */
+            .badge { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .report-meta-badge { display: none !important; }
+            .dhl-warn { border-left-width: 2px !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+            /* Font size control — ไม่มีผลตอน print */
+            body[data-fs="1"], body[data-fs="2"], body[data-fs="3"],
+            body[data-fs="4"], body[data-fs="5"], body[data-fs="6"] {
+                font-size: 13px !important;
+            }
         }
     </style>
 </head>
-<body class="p-4 md:p-8">
+<body data-theme="dark" class="p-4 md:p-8">
 
     <!-- Control Panel -->
-    <div class="max-w-6xl mx-auto bg-white rounded-xl shadow-lg p-6 mb-8 border border-gray-200 no-print">
-        <div class="flex justify-between items-center mb-6 border-b pb-4">
-            <h2 class="text-2xl font-bold text-blue-800">โปรแกรมเปรียบเทียบประกันสุขภาพ </h2>
-            <p>&nbsp;</p>
-<button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-bold shadow transition flex items-center gap-2">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
-                พิมพ์รายงาน (PDF)
-            </button>
+    <div class="control-panel no-print">
+        <div class="control-panel-header">
+            <div>
+                <div class="panel-title-eyebrow">Health Insurance Solution</div>
+                <h2 class="panel-title-h1">เปรียบเทียบประกันสุขภาพ AIA &amp; MTL</h2>
+            </div>
+            <div class="panel-actions">
+                <div class="font-size-control" title="ปรับขนาดตัวอักษร">
+                    <button onclick="changeFontSize(-1)" class="font-size-btn fs-minus" aria-label="ลดขนาดตัวอักษร">A−</button>
+                    <span id="fs-display" class="font-size-display">100%</span>
+                    <button onclick="changeFontSize(1)" class="font-size-btn fs-plus" aria-label="เพิ่มขนาดตัวอักษร">A+</button>
+                    <button onclick="resetFontSize()" class="font-size-btn fs-reset" aria-label="รีเซ็ต">Reset</button>
+                </div>
+                <button id="theme-toggle" onclick="toggleTheme()" class="btn btn-ghost theme-toggle-btn" aria-label="Toggle theme" title="สลับธีม Dark / Light">
+                    <svg id="theme-icon-dark" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    <svg id="theme-icon-light" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+                <button onclick="window.print()" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                    พิมพ์รายงาน (PDF)
+                </button>
+            </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
-            <!-- 1. ข้อมูลหลัก (เปลี่ยนเป็นรับแค่ข้อมูลบุคคล) -->
-            <div class="col-span-1 bg-gray-50 p-4 rounded-xl border border-gray-200">
-                <h3 class="font-bold text-gray-800 mb-3 border-b pb-2">ข้อมูลผู้เอาประกัน</h3>
-                <div class="flex flex-col gap-3">
-                    <div>
-                        <label class="block text-xs text-gray-500 font-bold uppercase mb-1">ชื่อ-นามสกุล</label>
-                        <input type="text" id="inp-name" value="คุณลูกค้า ประกันสุขภาพ" class="w-full border border-gray-300 p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none" oninput="app.calculate()">
-                    </div>
-                    <div>
-                        <label class="block text-xs text-gray-500 font-bold uppercase mb-1">เพศ</label>
-                        <select id="inp-gender" class="w-full border border-gray-300 p-2 rounded focus:ring-2 focus:ring-blue-400 outline-none" onchange="app.calculate()">
-                            <option value="female" selected>หญิง</option>
-                            <option value="male">ชาย</option>
-                        </select>
-                    </div>
-                    <p class="text-[10px] text-gray-400 mt-2">* กรุณาระบุอายุ และ ทุนประกันหลัก แยกกันในแต่ละ Option ด้านขวา</p>
-                    <p class="text-[11px] text-red-600 font-bold mt-2 bg-red-50 p-2 rounded border border-red-200">
-                        ** ข้อควรระวัง: กรณีเปรียบเทียบข้ามบริษัท อาจจะต้องคำนวณอายุเริ่มต้นที่ต่างกันตามวิธีนับอายุของแต่ละบริษัท
-                    </p>
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-5">
+            <!-- 1. ข้อมูลผู้เอาประกัน -->
+            <div class="col-span-1 input-card">
+                <div class="input-card-header">
+                    <span class="input-card-title">ข้อมูลผู้เอาประกัน</span>
                 </div>
+                <div class="field">
+                    <label class="field-label">ชื่อ-นามสกุล</label>
+                    <input type="text" id="inp-name" value="คุณลูกค้า ประกันสุขภาพ" class="premium-input" oninput="app.calculate()">
+                </div>
+                <div class="field">
+                    <label class="field-label">เพศ</label>
+                    <select id="inp-gender" class="premium-select" onchange="app.calculate()">
+                        <option value="female" selected>หญิง</option>
+                        <option value="male">ชาย</option>
+                    </select>
+                </div>
+                <p style="font-size: 11px; color: var(--t-tertiary); margin-top: 14px; line-height: 1.5;">
+                    กรุณาระบุอายุและทุนประกันแยกกันในแต่ละ Option ด้านขวา
+                </p>
+                <p class="notice" style="margin-top: 10px;">
+                    <strong>ข้อควรระวัง:</strong> กรณีเปรียบเทียบข้ามบริษัท อาจต้องคำนวณอายุเริ่มต้นที่ต่างกันตามวิธีนับอายุของแต่ละบริษัท
+                </p>
             </div>
 
             <!-- 2. Options -->
             <div class="col-span-1 lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-4">
-                
+
                 <!-- Option 1 -->
-                <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200">
-                    <h3 class="font-bold text-emerald-800 text-center mb-3 bg-emerald-200 py-1 rounded">Option 1</h3>
-                    
-                    <!-- ข้อมูลอายุและประกันหลัก -->
-                    <div class="border-b border-emerald-200 pb-3 mb-3">
-                        <div class="mb-2">
-                            <label class="block text-[10px] font-bold text-emerald-600 uppercase mb-1">แบบประกันหลัก</label>
-                            <select id="main-type-1" onchange="app.changeMainType(1)" class="w-full border border-emerald-300 p-1.5 rounded text-sm font-bold outline-none bg-emerald-50">
-                                <option value="20PLN">AIA 20 Pay Life (20PLN)</option>
-                                <option value="CIProCare">AIA CI ProCare (20/99)</option>
-                            </select>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2 mb-2">
-                            <div>
-                                <label class="block text-[10px] font-bold text-emerald-600 uppercase mb-1">อายุ (ปี)</label>
-                                <input type="number" id="age-1" value="35" min="1" max="80" class="w-full border border-emerald-300 p-1.5 rounded text-sm outline-none" oninput="app.calculate()">
-                            </div>
-                            <div>
-                                <label class="block text-[10px] font-bold text-emerald-600 uppercase mb-1">ทุนหลัก (บาท)</label>
-                                <input type="number" id="main-sum-1" value="150000" step="10000" class="w-full border border-emerald-300 p-1.5 rounded text-sm outline-none" oninput="app.calculate()">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="flex justify-between text-[10px] font-bold text-emerald-600 uppercase mb-1">
-                                เบี้ยประกันหลัก <span id="main-prem-label-1" class="font-normal text-emerald-500">(Auto AIA 20PLN)</span>
-                            </label>
-                            <input type="number" id="main-prem-1" class="w-full border border-emerald-300 p-1.5 rounded text-sm font-bold text-blue-700 bg-gray-100 outline-none" readonly oninput="app.calculate()">
-                        </div>
+                <div class="input-card opt-card opt-1">
+                    <div class="input-card-header">
+                        <span class="opt-badge opt-1">Option 1</span>
+                        <span class="input-card-title" style="font-size: 12px; color: var(--t-tertiary); font-weight: 500;">AIA</span>
                     </div>
 
-                    <div class="flex flex-col gap-2 text-sm">
-                        <div>
-                            <label class="block text-[10px] font-bold text-emerald-600 uppercase mb-1">แผนสุขภาพ (Health)</label>
-                            <select id="type-1" onchange="app.changeType(1,this.value)" class="w-full border border-emerald-300 p-1.5 rounded mb-1"></select>
-                            <select id="idx-1" onchange="app.changeOption(1,this.value)" class="w-full border border-emerald-300 p-1.5 rounded font-bold"></select>
+                    <div class="field">
+                        <label class="field-label">แบบประกันหลัก</label>
+                        <select id="main-type-1" onchange="app.changeMainType(1)" class="premium-select">
+                            <option value="20PLN">AIA 20 Pay Life (20PLN)</option>
+                            <option value="CIProCare">AIA CI ProCare (20/99)</option>
+                        </select>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div class="field">
+                            <label class="field-label">อายุ (ปี)</label>
+                            <input type="number" id="age-1" value="35" min="1" max="80" class="premium-input" oninput="app.calculate()">
                         </div>
-                        <div class="border-t border-emerald-200 pt-2 mt-1">
-                            <label class="block text-[10px] font-bold text-emerald-600 uppercase mb-1">สัญญาเพิ่มเติม</label>
-                            <div class="flex justify-between items-center mb-1">
-                                <span class="text-xs">มะเร็ง (CFC) <span class="text-[9px] text-gray-400">AIA</span></span>
-                                <select id="cfc-1" onchange="app.calculate()" class="w-24 border border-emerald-300 p-1 rounded text-xs cfc-dropdown"></select>
-                            </div>
-                            <div class="flex justify-between items-center mb-1">
-                                <span class="text-xs">ชดเชย (HB) <span class="text-[9px] text-gray-400">AIA</span></span>
-                                <select id="hb-1" onchange="app.calculate()" class="w-24 border border-emerald-300 p-1 rounded text-xs hb-dropdown"></select>
-                            </div>
-                            <div id="cp-container-1" class="flex justify-between items-center mt-2 pt-2 border-t border-emerald-200 hidden">
-                                <label class="text-xs text-pink-600 font-bold flex items-center gap-1 cursor-pointer">
-                                    <input type="checkbox" id="cp-1" onchange="app.calculate()" class="w-3 h-3"> + Care Plus 5M <span class="text-[9px] text-pink-400 font-normal">(มะเร็ง/ไต)</span>
-                                </label>
-                            </div>
+                        <div class="field">
+                            <label class="field-label">ทุนหลัก (บาท)</label>
+                            <input type="number" id="main-sum-1" value="150000" step="10000" class="premium-input" oninput="app.calculate()">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="field-label-row">
+                            <span>เบี้ยประกันหลัก</span>
+                            <span id="main-prem-label-1">(Auto AIA 20PLN)</span>
+                        </div>
+                        <input type="number" id="main-prem-1" class="premium-input" readonly oninput="app.calculate()">
+                    </div>
+
+                    <div class="field-section">
+                        <label class="field-label">แผนสุขภาพ (Health)</label>
+                        <select id="type-1" onchange="app.changeType(1,this.value)" class="premium-select" style="margin-bottom: 6px;"></select>
+                        <select id="idx-1" onchange="app.changeOption(1,this.value)" class="premium-select" style="font-weight: 600;"></select>
+                    </div>
+
+                    <div class="field-section">
+                        <label class="field-label">สัญญาเพิ่มเติม</label>
+                        <div class="rider-row">
+                            <span>มะเร็ง (CFC)<span class="rider-tag">AIA</span></span>
+                            <select id="cfc-1" onchange="app.calculate()" class="premium-select compact cfc-dropdown"></select>
+                        </div>
+                        <div class="rider-row">
+                            <span>ชดเชย (HB)<span class="rider-tag">AIA</span></span>
+                            <select id="hb-1" onchange="app.calculate()" class="premium-select compact hb-dropdown"></select>
+                        </div>
+                        <div id="cp-container-1" class="hidden">
+                            <label class="cp-checkbox-label">
+                                <input type="checkbox" id="cp-1" onchange="app.calculate()"> + Care Plus 5M <span style="color: var(--t-tertiary); font-weight: 400; font-size: 10px;">(มะเร็ง/ไต)</span>
+                            </label>
                         </div>
                     </div>
                 </div>
 
                 <!-- Option 2 -->
-                <div class="bg-amber-50 p-4 rounded-xl border border-amber-200">
-                    <h3 class="font-bold text-amber-800 text-center mb-3 bg-amber-200 py-1 rounded">Option 2</h3>
-                    
-                    <!-- ข้อมูลอายุและประกันหลัก -->
-                    <div class="border-b border-amber-200 pb-3 mb-3">
-                        <div class="mb-2">
-                            <label class="block text-[10px] font-bold text-amber-600 uppercase mb-1">แบบประกันหลัก</label>
-                            <select id="main-type-2" onchange="app.changeMainType(2)" class="w-full border border-amber-300 p-1.5 rounded text-sm font-bold outline-none bg-amber-50">
-                                <option value="20PLN">AIA 20 Pay Life (20PLN)</option>
-                                <option value="CIProCare">AIA CI ProCare (20/99)</option>
-                            </select>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2 mb-2">
-                            <div>
-                                <label class="block text-[10px] font-bold text-amber-600 uppercase mb-1">อายุ (ปี)</label>
-                                <input type="number" id="age-2" value="35" min="1" max="80" class="w-full border border-amber-300 p-1.5 rounded text-sm outline-none" oninput="app.calculate()">
-                            </div>
-                            <div>
-                                <label class="block text-[10px] font-bold text-amber-600 uppercase mb-1">ทุนหลัก (บาท)</label>
-                                <input type="number" id="main-sum-2" value="150000" step="10000" class="w-full border border-amber-300 p-1.5 rounded text-sm outline-none" oninput="app.calculate()">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="flex justify-between text-[10px] font-bold text-amber-600 uppercase mb-1">
-                                เบี้ยประกันหลัก <span id="main-prem-label-2" class="font-normal text-amber-500">(Auto AIA 20PLN)</span>
-                            </label>
-                            <input type="number" id="main-prem-2" class="w-full border border-amber-300 p-1.5 rounded text-sm font-bold text-blue-700 bg-gray-100 outline-none" readonly oninput="app.calculate()">
-                        </div>
+                <div class="input-card opt-card opt-2">
+                    <div class="input-card-header">
+                        <span class="opt-badge opt-2">Option 2</span>
+                        <span class="input-card-title" style="font-size: 12px; color: var(--t-tertiary); font-weight: 500;">เปรียบเทียบ</span>
                     </div>
 
-                    <div class="flex flex-col gap-2 text-sm">
-                        <div>
-                            <label class="block text-[10px] font-bold text-amber-600 uppercase mb-1">แผนสุขภาพ (Health)</label>
-                            <select id="type-2" onchange="app.changeType(2,this.value)" class="w-full border border-amber-300 p-1.5 rounded mb-1"></select>
-                            <select id="idx-2" onchange="app.changeOption(2,this.value)" class="w-full border border-amber-300 p-1.5 rounded font-bold"></select>
+                    <div class="field">
+                        <label class="field-label">แบบประกันหลัก</label>
+                        <select id="main-type-2" onchange="app.changeMainType(2)" class="premium-select">
+                            <option value="20PLN">AIA 20 Pay Life (20PLN)</option>
+                            <option value="CIProCare">AIA CI ProCare (20/99)</option>
+                        </select>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div class="field">
+                            <label class="field-label">อายุ (ปี)</label>
+                            <input type="number" id="age-2" value="35" min="1" max="80" class="premium-input" oninput="app.calculate()">
                         </div>
-                        <div class="border-t border-amber-200 pt-2 mt-1">
-                            <label class="block text-[10px] font-bold text-amber-600 uppercase mb-1">สัญญาเพิ่มเติม</label>
-                            <div class="flex justify-between items-center mb-1">
-                                <span class="text-xs">มะเร็ง (CFC) <span class="text-[9px] text-gray-400">AIA</span></span>
-                                <select id="cfc-2" onchange="app.calculate()" class="w-24 border border-amber-300 p-1 rounded text-xs cfc-dropdown"></select>
-                            </div>
-                            <div class="flex justify-between items-center mb-1">
-                                <span class="text-xs">ชดเชย (HB) <span class="text-[9px] text-gray-400">AIA</span></span>
-                                <select id="hb-2" onchange="app.calculate()" class="w-24 border border-amber-300 p-1 rounded text-xs hb-dropdown"></select>
-                            </div>
-                            <div id="cp-container-2" class="flex justify-between items-center mt-2 pt-2 border-t border-amber-200 hidden">
-                                <label class="text-xs text-pink-600 font-bold flex items-center gap-1 cursor-pointer">
-                                    <input type="checkbox" id="cp-2" onchange="app.calculate()" class="w-3 h-3"> + Care Plus 5M <span class="text-[9px] text-pink-400 font-normal">(มะเร็ง/ไต)</span>
-                                </label>
-                            </div>
+                        <div class="field">
+                            <label class="field-label">ทุนหลัก (บาท)</label>
+                            <input type="number" id="main-sum-2" value="150000" step="10000" class="premium-input" oninput="app.calculate()">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="field-label-row">
+                            <span>เบี้ยประกันหลัก</span>
+                            <span id="main-prem-label-2">(Auto AIA 20PLN)</span>
+                        </div>
+                        <input type="number" id="main-prem-2" class="premium-input" readonly oninput="app.calculate()">
+                    </div>
+
+                    <div class="field-section">
+                        <label class="field-label">แผนสุขภาพ (Health)</label>
+                        <select id="type-2" onchange="app.changeType(2,this.value)" class="premium-select" style="margin-bottom: 6px;"></select>
+                        <select id="idx-2" onchange="app.changeOption(2,this.value)" class="premium-select" style="font-weight: 600;"></select>
+                    </div>
+
+                    <div class="field-section">
+                        <label class="field-label">สัญญาเพิ่มเติม</label>
+                        <div class="rider-row">
+                            <span>มะเร็ง (CFC)<span class="rider-tag">AIA</span></span>
+                            <select id="cfc-2" onchange="app.calculate()" class="premium-select compact cfc-dropdown"></select>
+                        </div>
+                        <div class="rider-row">
+                            <span>ชดเชย (HB)<span class="rider-tag">AIA</span></span>
+                            <select id="hb-2" onchange="app.calculate()" class="premium-select compact hb-dropdown"></select>
+                        </div>
+                        <div id="cp-container-2" class="hidden">
+                            <label class="cp-checkbox-label">
+                                <input type="checkbox" id="cp-2" onchange="app.calculate()"> + Care Plus 5M <span style="color: var(--t-tertiary); font-weight: 400; font-size: 10px;">(มะเร็ง/ไต)</span>
+                            </label>
                         </div>
                     </div>
                 </div>
 
                 <!-- Option 3 -->
-                <div class="bg-rose-50 p-4 rounded-xl border border-rose-200">
-                    <h3 class="font-bold text-rose-800 text-center mb-3 bg-rose-200 py-1 rounded">Option 3</h3>
-                    
-                    <!-- ข้อมูลอายุและประกันหลัก -->
-                    <div class="border-b border-rose-200 pb-3 mb-3">
-                        <div class="mb-2">
-                            <label class="block text-[10px] font-bold text-rose-600 uppercase mb-1">แบบประกันหลัก</label>
-                            <select id="main-type-3" onchange="app.changeMainType(3)" class="w-full border border-rose-300 p-1.5 rounded text-sm font-bold outline-none bg-rose-50">
-                                <option value="20PLN">AIA 20 Pay Life (20PLN)</option>
-                                <option value="CIProCare">AIA CI ProCare (20/99)</option>
-                            </select>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2 mb-2">
-                            <div>
-                                <label class="block text-[10px] font-bold text-rose-600 uppercase mb-1">อายุ (ปี)</label>
-                                <input type="number" id="age-3" value="35" min="1" max="80" class="w-full border border-rose-300 p-1.5 rounded text-sm outline-none" oninput="app.calculate()">
-                            </div>
-                            <div>
-                                <label class="block text-[10px] font-bold text-rose-600 uppercase mb-1">ทุนหลัก (บาท)</label>
-                                <input type="number" id="main-sum-3" value="150000" step="10000" class="w-full border border-rose-300 p-1.5 rounded text-sm outline-none" oninput="app.calculate()">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="flex justify-between text-[10px] font-bold text-rose-600 uppercase mb-1">
-                                เบี้ยประกันหลัก <span id="main-prem-label-3" class="font-normal text-rose-500">(Auto AIA 20PLN)</span>
-                            </label>
-                            <input type="number" id="main-prem-3" class="w-full border border-rose-300 p-1.5 rounded text-sm font-bold text-blue-700 bg-gray-100 outline-none" readonly oninput="app.calculate()">
-                        </div>
+                <div class="input-card opt-card opt-3">
+                    <div class="input-card-header">
+                        <span class="opt-badge opt-3">Option 3</span>
+                        <span class="input-card-title" style="font-size: 12px; color: var(--t-tertiary); font-weight: 500;">ทางเลือก</span>
                     </div>
 
-                    <div class="flex flex-col gap-2 text-sm">
-                        <div>
-                            <label class="block text-[10px] font-bold text-rose-600 uppercase mb-1">แผนสุขภาพ (Health)</label>
-                            <select id="type-3" onchange="app.changeType(3,this.value)" class="w-full border border-rose-300 p-1.5 rounded mb-1"></select>
-                            <select id="idx-3" onchange="app.changeOption(3,this.value)" class="w-full border border-rose-300 p-1.5 rounded font-bold"></select>
+                    <div class="field">
+                        <label class="field-label">แบบประกันหลัก</label>
+                        <select id="main-type-3" onchange="app.changeMainType(3)" class="premium-select">
+                            <option value="20PLN">AIA 20 Pay Life (20PLN)</option>
+                            <option value="CIProCare">AIA CI ProCare (20/99)</option>
+                        </select>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div class="field">
+                            <label class="field-label">อายุ (ปี)</label>
+                            <input type="number" id="age-3" value="35" min="1" max="80" class="premium-input" oninput="app.calculate()">
                         </div>
-                        <div class="border-t border-rose-200 pt-2 mt-1">
-                            <label class="block text-[10px] font-bold text-rose-600 uppercase mb-1">สัญญาเพิ่มเติม</label>
-                            <div class="flex justify-between items-center mb-1">
-                                <span class="text-xs">มะเร็ง (CFC) <span class="text-[9px] text-gray-400">AIA</span></span>
-                                <select id="cfc-3" onchange="app.calculate()" class="w-24 border border-rose-300 p-1 rounded text-xs cfc-dropdown"></select>
-                            </div>
-                            <div class="flex justify-between items-center mb-1">
-                                <span class="text-xs">ชดเชย (HB) <span class="text-[9px] text-gray-400">AIA</span></span>
-                                <select id="hb-3" onchange="app.calculate()" class="w-24 border border-rose-300 p-1 rounded text-xs hb-dropdown"></select>
-                            </div>
-                            <div id="cp-container-3" class="flex justify-between items-center mt-2 pt-2 border-t border-rose-200 hidden">
-                                <label class="text-xs text-pink-600 font-bold flex items-center gap-1 cursor-pointer">
-                                    <input type="checkbox" id="cp-3" onchange="app.calculate()" class="w-3 h-3"> + Care Plus 5M <span class="text-[9px] text-pink-400 font-normal">(มะเร็ง/ไต)</span>
-                                </label>
-                            </div>
+                        <div class="field">
+                            <label class="field-label">ทุนหลัก (บาท)</label>
+                            <input type="number" id="main-sum-3" value="150000" step="10000" class="premium-input" oninput="app.calculate()">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="field-label-row">
+                            <span>เบี้ยประกันหลัก</span>
+                            <span id="main-prem-label-3">(Auto AIA 20PLN)</span>
+                        </div>
+                        <input type="number" id="main-prem-3" class="premium-input" readonly oninput="app.calculate()">
+                    </div>
+
+                    <div class="field-section">
+                        <label class="field-label">แผนสุขภาพ (Health)</label>
+                        <select id="type-3" onchange="app.changeType(3,this.value)" class="premium-select" style="margin-bottom: 6px;"></select>
+                        <select id="idx-3" onchange="app.changeOption(3,this.value)" class="premium-select" style="font-weight: 600;"></select>
+                    </div>
+
+                    <div class="field-section">
+                        <label class="field-label">สัญญาเพิ่มเติม</label>
+                        <div class="rider-row">
+                            <span>มะเร็ง (CFC)<span class="rider-tag">AIA</span></span>
+                            <select id="cfc-3" onchange="app.calculate()" class="premium-select compact cfc-dropdown"></select>
+                        </div>
+                        <div class="rider-row">
+                            <span>ชดเชย (HB)<span class="rider-tag">AIA</span></span>
+                            <select id="hb-3" onchange="app.calculate()" class="premium-select compact hb-dropdown"></select>
+                        </div>
+                        <div id="cp-container-3" class="hidden">
+                            <label class="cp-checkbox-label">
+                                <input type="checkbox" id="cp-3" onchange="app.calculate()"> + Care Plus 5M <span style="color: var(--t-tertiary); font-weight: 400; font-size: 10px;">(มะเร็ง/ไต)</span>
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -353,60 +912,81 @@
     <!-- Report Output -->
     <div class="report-container" id="report-output">
         <div class="report-header">
-            <h1 class="report-h1">รายงานเปรียบเทียบข้อเสนอประกันสุขภาพ</h1>
-            <div class="client-info-box">
-              <p><strong>พิเศษสำหรับ:</strong> <span id="out-name">-</span></p>
-                <p><strong>อายุที่เปรียบเทียบ:</strong> <span id="out-age">-</span> ปี (เพศ<span id="out-gender">-</span>)</p>
-                <p><strong>วันที่จัดทำ:</strong> <span id="out-date">-</span></p>
-                <p><strong>** รายงานนี้ไม่ใช่ข้อเสนอทางการของบริษัท จัดทำขึ้นเพื่อประกอบการพิจารณาเปรียบเทียบแผนเท่านั้น</strong></p>
+            <div>
+                <div class="report-eyebrow">Health Insurance Solution · Comparative Analysis</div>
+                <h1 class="report-h1">รายงานเปรียบเทียบข้อเสนอประกันสุขภาพ</h1>
+            </div>
+            <div class="report-meta-badge">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                CONFIDENTIAL
+            </div>
+        </div>
+
+        <div class="client-info-box" style="margin-bottom: 32px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                <div>
+                    <div style="font-size: 0.65em; letter-spacing: 0.10em; text-transform: uppercase; color: var(--t-tertiary); font-weight: 600; margin-bottom: 4px;">พิเศษสำหรับ</div>
+                    <div style="font-size: 1.05em; color: var(--t-primary); font-weight: 600;"><span id="out-name">-</span></div>
+                </div>
+                <div>
+                    <div style="font-size: 0.65em; letter-spacing: 0.10em; text-transform: uppercase; color: var(--t-tertiary); font-weight: 600; margin-bottom: 4px;">อายุ / เพศ</div>
+                    <div style="font-size: 1.05em; color: var(--t-primary); font-weight: 600;"><span id="out-age">-</span> ปี · <span id="out-gender">-</span></div>
+                </div>
+                <div>
+                    <div style="font-size: 0.65em; letter-spacing: 0.10em; text-transform: uppercase; color: var(--t-tertiary); font-weight: 600; margin-bottom: 4px;">วันที่จัดทำ</div>
+                    <div style="font-size: 1.05em; color: var(--t-primary); font-weight: 600;"><span id="out-date">-</span></div>
+                </div>
+            </div>
+            <div style="margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--b-hairline); font-size: 0.78em; color: var(--t-secondary); line-height: 1.55;">
+                <strong style="color: var(--c-warning);">หมายเหตุ:</strong> รายงานนี้ไม่ใช่ข้อเสนอทางการของบริษัท จัดทำขึ้นเพื่อประกอบการพิจารณาเปรียบเทียบแผนเท่านั้น
             </div>
         </div>
 
         <!-- 1. สรุปเบี้ยประกัน -->
         <div class="report-section">
-            <h2 class="report-h2">1. สรุปเบี้ยประกันภัยปีแรก (Premium Summary)</h2>
+            <h2 class="report-h2">สรุปเบี้ยประกันภัยปีแรก <span style="font-weight: 400; color: var(--t-tertiary); font-size: 0.65em; letter-spacing: 0.05em;">PREMIUM SUMMARY</span></h2>
             <table class="compare-table">
                 <thead>
                     <tr>
-                        <th style="width: 25%; text-align: left; background-color: white; border: none;"></th>
-                        <th id="th-opt-1" class="w-[25%] bg-emerald-50 text-emerald-800 text-lg col-opt-1">Option 1</th>
-                        <th id="th-opt-2" class="w-[25%] bg-amber-50 text-amber-800 text-lg col-opt-2">Option 2</th>
-                        <th id="th-opt-3" class="w-[25%] bg-rose-50 text-rose-800 text-lg col-opt-3">Option 3</th>
+                        <th style="width: 25%; text-align: left; background: transparent; border: none;"></th>
+                        <th id="th-opt-1" class="col-opt-1">Option 1</th>
+                        <th id="th-opt-2" class="col-opt-2">Option 2</th>
+                        <th id="th-opt-3" class="col-opt-3">Option 3</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td class="row-header">ประกันชีวิตหลัก (ฐานคำนวณ)</td>
-                        <td class="data-cell col-opt-1"><div id="disp-sum-main-1" class="text-xs text-gray-500 mb-1"></div><span id="sum-main-1" class="text-blue-600 font-bold">0</span></td>
-                        <td class="data-cell col-opt-2"><div id="disp-sum-main-2" class="text-xs text-gray-500 mb-1"></div><span id="sum-main-2" class="text-blue-600 font-bold">0</span></td>
-                        <td class="data-cell col-opt-3"><div id="disp-sum-main-3" class="text-xs text-gray-500 mb-1"></div><span id="sum-main-3" class="text-blue-600 font-bold">0</span></td>
+                        <td class="data-cell col-opt-1"><div id="disp-sum-main-1" style="font-size: 0.72em; color: var(--t-tertiary); margin-bottom: 4px;"></div><span id="sum-main-1" style="color: var(--c-primary); font-weight: 600;">0</span></td>
+                        <td class="data-cell col-opt-2"><div id="disp-sum-main-2" style="font-size: 0.72em; color: var(--t-tertiary); margin-bottom: 4px;"></div><span id="sum-main-2" style="color: var(--c-primary); font-weight: 600;">0</span></td>
+                        <td class="data-cell col-opt-3"><div id="disp-sum-main-3" style="font-size: 0.72em; color: var(--t-tertiary); margin-bottom: 4px;"></div><span id="sum-main-3" style="color: var(--c-primary); font-weight: 600;">0</span></td>
                     </tr>
                     <tr>
-                        <td class="row-header">ประกันสุขภาพ (Health) <br><span class="badge badge-tax" style="margin-left:0; margin-top: 4px;">ลดหย่อนภาษีได้</span></td>
-                        <td class="data-cell col-opt-1 font-bold"><div id="name-hl-1" class="text-xs font-normal mb-1"></div><span id="sum-hl-1" class="text-emerald-600">0</span></td>
-                        <td class="data-cell col-opt-2 font-bold"><div id="name-hl-2" class="text-xs font-normal mb-1"></div><span id="sum-hl-2" class="text-amber-600">0</span></td>
-                        <td class="data-cell col-opt-3 font-bold"><div id="name-hl-3" class="text-xs font-normal mb-1"></div><span id="sum-hl-3" class="text-rose-600">0</span></td>
+                        <td class="row-header">ประกันสุขภาพ (Health) <span class="badge badge-tax" style="margin-left:6px;">ลดหย่อนภาษีได้</span></td>
+                        <td class="data-cell col-opt-1"><div id="name-hl-1" style="font-size: 0.72em; color: var(--t-tertiary); margin-bottom: 4px;"></div><span id="sum-hl-1" style="color: var(--t-primary); font-weight: 600;">0</span></td>
+                        <td class="data-cell col-opt-2"><div id="name-hl-2" style="font-size: 0.72em; color: var(--t-tertiary); margin-bottom: 4px;"></div><span id="sum-hl-2" style="color: var(--t-primary); font-weight: 600;">0</span></td>
+                        <td class="data-cell col-opt-3"><div id="name-hl-3" style="font-size: 0.72em; color: var(--t-tertiary); margin-bottom: 4px;"></div><span id="sum-hl-3" style="color: var(--t-primary); font-weight: 600;">0</span></td>
                     </tr>
                     <tr>
-                        <td class="row-header">มะเร็ง และ ไตวาย (Care Plus) <br><span class="badge badge-mtl" style="margin-left: 0; margin-top: 4px;">เฉพาะ MTL</span></td>
-                        <td class="data-cell col-opt-1"><div id="name-cp-1" class="text-xs text-pink-500 mb-1"></div><span id="sum-cp-1" class="text-pink-600 font-bold">0</span></td>
-                        <td class="data-cell col-opt-2"><div id="name-cp-2" class="text-xs text-pink-500 mb-1"></div><span id="sum-cp-2" class="text-pink-600 font-bold">0</span></td>
-                        <td class="data-cell col-opt-3"><div id="name-cp-3" class="text-xs text-pink-500 mb-1"></div><span id="sum-cp-3" class="text-pink-600 font-bold">0</span></td>
+                        <td class="row-header">มะเร็ง และ ไตวาย (Care Plus) <span class="badge badge-mtl" style="margin-left:6px;">เฉพาะ MTL</span></td>
+                        <td class="data-cell col-opt-1"><div id="name-cp-1" style="font-size: 0.72em; color: var(--c-mtl); margin-bottom: 4px;"></div><span id="sum-cp-1" style="color: var(--c-mtl); font-weight: 600;">0</span></td>
+                        <td class="data-cell col-opt-2"><div id="name-cp-2" style="font-size: 0.72em; color: var(--c-mtl); margin-bottom: 4px;"></div><span id="sum-cp-2" style="color: var(--c-mtl); font-weight: 600;">0</span></td>
+                        <td class="data-cell col-opt-3"><div id="name-cp-3" style="font-size: 0.72em; color: var(--c-mtl); margin-bottom: 4px;"></div><span id="sum-cp-3" style="color: var(--c-mtl); font-weight: 600;">0</span></td>
                     </tr>
                     <tr>
                         <td class="row-header">โรคร้ายแรง (AIA CFC)</td>
-                        <td class="data-cell col-opt-1"><div id="name-cfc-1" class="text-xs text-gray-400 mb-1"></div><span id="sum-cfc-1">0</span></td>
-                        <td class="data-cell col-opt-2"><div id="name-cfc-2" class="text-xs text-gray-400 mb-1"></div><span id="sum-cfc-2">0</span></td>
-                        <td class="data-cell col-opt-3"><div id="name-cfc-3" class="text-xs text-gray-400 mb-1"></div><span id="sum-cfc-3">0</span></td>
+                        <td class="data-cell col-opt-1"><div id="name-cfc-1" style="font-size: 0.72em; color: var(--t-tertiary); margin-bottom: 4px;"></div><span id="sum-cfc-1" style="color: var(--t-primary);">0</span></td>
+                        <td class="data-cell col-opt-2"><div id="name-cfc-2" style="font-size: 0.72em; color: var(--t-tertiary); margin-bottom: 4px;"></div><span id="sum-cfc-2" style="color: var(--t-primary);">0</span></td>
+                        <td class="data-cell col-opt-3"><div id="name-cfc-3" style="font-size: 0.72em; color: var(--t-tertiary); margin-bottom: 4px;"></div><span id="sum-cfc-3" style="color: var(--t-primary);">0</span></td>
                     </tr>
                     <tr>
                         <td class="row-header">ชดเชยรายได้ (AIA HB Extra)</td>
-                        <td class="data-cell col-opt-1"><div id="name-hb-1" class="text-xs text-gray-400 mb-1"></div><span id="sum-hb-1">0</span></td>
-                        <td class="data-cell col-opt-2"><div id="name-hb-2" class="text-xs text-gray-400 mb-1"></div><span id="sum-hb-2">0</span></td>
-                        <td class="data-cell col-opt-3"><div id="name-hb-3" class="text-xs text-gray-400 mb-1"></div><span id="sum-hb-3">0</span></td>
+                        <td class="data-cell col-opt-1"><div id="name-hb-1" style="font-size: 0.72em; color: var(--t-tertiary); margin-bottom: 4px;"></div><span id="sum-hb-1" style="color: var(--t-primary);">0</span></td>
+                        <td class="data-cell col-opt-2"><div id="name-hb-2" style="font-size: 0.72em; color: var(--t-tertiary); margin-bottom: 4px;"></div><span id="sum-hb-2" style="color: var(--t-primary);">0</span></td>
+                        <td class="data-cell col-opt-3"><div id="name-hb-3" style="font-size: 0.72em; color: var(--t-tertiary); margin-bottom: 4px;"></div><span id="sum-hb-3" style="color: var(--t-primary);">0</span></td>
                     </tr>
                     <tr class="total-row">
-                        <td class="row-header" style="background-color: transparent;">รวมเบี้ยประกันภัยสุทธิ (บาท/ปี)</td>
+                        <td class="row-header">รวมเบี้ยประกันภัยสุทธิ (บาท/ปี)</td>
                         <td class="data-cell col-opt-1" id="sum-total-1">0</td>
                         <td class="data-cell col-opt-2" id="sum-total-2">0</td>
                         <td class="data-cell col-opt-3" id="sum-total-3">0</td>
@@ -414,11 +994,11 @@
                 </tbody>
             </table>
             <!-- AIA Vitality Note -->
-            <div style="margin-top: 14px; padding: 12px 16px; background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%); border-left: 4px solid #2e7d32; border-radius: 6px; display: flex; align-items: flex-start; gap: 10px;">
-                <span style="font-size: 20px; line-height: 1.4;">🌟</span>
-                <p style="margin: 0; font-size: 14px; color: #1b5e20; line-height: 1.6;">
-                    <strong>สิทธิพิเศษสำหรับแบบประกันของ AIA:</strong>
-                    ผู้เอาประกันจะได้รับสิทธิพิเศษจากโครงการ <strong>AIA Vitality</strong> ซึ่งเป็นโปรแกรมส่งเสริมสุขภาพที่ให้รางวัลและส่วนลดสำหรับการดูแลสุขภาพเชิงรุก เพื่อเพิ่มคุณภาพชีวิตและสุขภาพที่ดีในระยะยาว
+            <div style="margin-top: 18px; padding: 14px 18px; background: var(--c-success-bg); border-left: 3px solid var(--c-success); border-radius: var(--r-md); display: flex; align-items: flex-start; gap: 12px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--c-success); flex-shrink: 0; margin-top: 2px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <p style="margin: 0; font-size: 0.85em; color: var(--t-secondary); line-height: 1.65;">
+                    <strong style="color: var(--c-success);">สิทธิพิเศษสำหรับแบบประกันของ AIA:</strong>
+                    ผู้เอาประกันจะได้รับสิทธิพิเศษจากโครงการ <strong style="color: var(--t-primary);">AIA Vitality</strong> ซึ่งเป็นโปรแกรมส่งเสริมสุขภาพที่ให้รางวัลและส่วนลดสำหรับการดูแลสุขภาพเชิงรุก เพื่อเพิ่มคุณภาพชีวิตและสุขภาพที่ดีในระยะยาว
                 </p>
             </div>
         </div>
@@ -428,49 +1008,55 @@
         <!-- 2. เปรียบเทียบความคุ้มครอง -->
         <div class="report-section">
             <h2 class="report-h2">2. ตารางเปรียบเทียบผลประโยชน์ความคุ้มครอง (Benefit Comparison)</h2>
-            <table class="compare-table" style="font-size: 15px;">
+        <!-- 2. ตารางเปรียบเทียบผลประโยชน์ -->
+        <div class="report-section">
+            <h2 class="report-h2">ตารางเปรียบเทียบผลประโยชน์ความคุ้มครอง <span style="font-weight: 400; color: var(--t-tertiary); font-size: 0.65em; letter-spacing: 0.05em;">BENEFIT COMPARISON</span></h2>
+            <table class="compare-table">
                 <thead>
                     <tr>
                         <th style="text-align: left; width: 34%;">รายละเอียดความคุ้มครอง</th>
-                        <th class="w-[22%] col-opt-1 bg-emerald-50 text-emerald-800" id="ben-head-1">Option 1</th>
-                        <th class="w-[22%] col-opt-2 bg-amber-50 text-amber-800" id="ben-head-2">Option 2</th>
-                        <th class="w-[22%] col-opt-3 bg-rose-50 text-rose-800" id="ben-head-3">Option 3</th>
+                        <th class="col-opt-1" id="ben-head-1">Option 1</th>
+                        <th class="col-opt-2" id="ben-head-2">Option 2</th>
+                        <th class="col-opt-3" id="ben-head-3">Option 3</th>
                     </tr>
                 </thead>
                 <tbody id="benefit-body">
                     <!-- Dynamic Rows -->
                 </tbody>
             </table>
-            <p class="text-sm text-gray-500 mt-4">* ค่ารักษาพยาบาลกลุ่มเหมาจ่าย จะนับรวมวงเงินผลประโยชน์ต่อรอบปีกรมธรรม์</p>
+            <p style="font-size: 0.78em; color: var(--t-tertiary); margin-top: 14px; line-height: 1.55;">* ค่ารักษาพยาบาลกลุ่มเหมาจ่าย จะนับรวมวงเงินผลประโยชน์ต่อรอบปีกรมธรรม์</p>
         </div>
 
         <div class="page-break"></div>
 
         <!-- 3. ตารางเบี้ยล่วงหน้า (Lifetime Projection) -->
-        <div class="report-section" style="background-color: #f8fbff; border-color: var(--primary-color);">
-            <h2 class="report-h2">3. ตารางประมาณการเบี้ยประกันภัยตามช่วงอายุ (Lifetime Projection)</h2>
+        <div class="report-section" style="border-color: var(--b-gold);">
+            <h2 class="report-h2">ตารางประมาณการเบี้ยประกันภัยตามช่วงอายุ <span style="font-weight: 400; color: var(--t-tertiary); font-size: 0.65em; letter-spacing: 0.05em;">LIFETIME PROJECTION</span></h2>
 
             <!-- AIA Vitality Hyperlink Box -->
-            <div style="margin-bottom: 18px; padding: 13px 18px; background: #fff8e1; border: 1.5px solid #f9a825; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <span style="font-size: 22px;">🏅</span>
-                    <span style="font-size: 14px; color: #5d4037; font-weight: 600;">เกี่ยวกับโครงการ AIA Vitality</span>
+            <div style="margin-bottom: 20px; padding: 14px 20px; background: var(--c-warning-bg); border: 1px solid var(--c-warning); border-radius: var(--r-md); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--c-warning); flex-shrink: 0;"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+                    <span style="font-size: 0.88em; color: var(--t-primary); font-weight: 600;">เกี่ยวกับโครงการ AIA Vitality</span>
                 </div>
-                <a href="AIA_Vitality_Report.html" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; background: #f9a825; color: #fff; font-size: 14px; font-weight: 600; border-radius: 6px; text-decoration: none; transition: background 0.2s;"
-                   onmouseover="this.style.background='#e65100'" onmouseout="this.style.background='#f9a825'">
-                    📄 คลิกเพื่อดูสรุปข้อมูลสิทธิประโยชน์
+                <a href="AIA_Vitality_Report.html" target="_blank" class="btn btn-primary" style="text-decoration: none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    คลิกเพื่อดูสรุปข้อมูลสิทธิประโยชน์
                 </a>
             </div>
-            <p class="text-base text-gray-700 mb-4">แสดงเบี้ยประกันรวมที่ต้องชำระรายปีตามช่วงอายุ (รวมทุกสัญญาของแต่ละ Option) <br><span class="text-sm text-gray-500">*สำหรับ Care Plus ของ MTL เบี้ยจะคำนวณตามอายุจริง ณ ปีนั้นๆ (ในตารางจะแสดงเบี้ยของอายุเริ่มต้นในแต่ละช่วง)</span></p>
-            
+            <p style="font-size: 0.92em; color: var(--t-secondary); margin-bottom: 16px; line-height: 1.6;">
+                แสดงเบี้ยประกันรวมที่ต้องชำระรายปีตามช่วงอายุ (รวมทุกสัญญาของแต่ละ Option)
+                <br><span style="font-size: 0.85em; color: var(--t-tertiary);">* สำหรับ Care Plus ของ MTL เบี้ยจะคำนวณตามอายุจริง ณ ปีนั้นๆ (ในตารางจะแสดงเบี้ยของอายุเริ่มต้นในแต่ละช่วง)</span>
+            </p>
+
             <div style="overflow-x: auto;">
                 <table class="proj-table">
                     <thead>
                         <tr>
                             <th style="width: 15%;">ช่วงอายุ</th>
-                            <th class="w-[28%] col-opt-1 bg-emerald-50 text-emerald-800 border-b-emerald-600"><span id="proj-th-opt-1">Option 1</span> รวม<br><span class="text-[11px] font-normal" id="proj-head-1"></span></th>
-                            <th class="w-[28%] col-opt-2 bg-amber-50 text-amber-800 border-b-amber-600"><span id="proj-th-opt-2">Option 2</span> รวม<br><span class="text-[11px] font-normal" id="proj-head-2"></span></th>
-                            <th class="w-[28%] col-opt-3 bg-rose-50 text-rose-800 border-b-rose-600"><span id="proj-th-opt-3">Option 3</span> รวม<br><span class="text-[11px] font-normal" id="proj-head-3"></span></th>
+                            <th class="col-opt-1"><span id="proj-th-opt-1">Option 1</span> รวม<br><span style="font-size: 0.85em; font-weight: 400; color: var(--t-tertiary); text-transform: none; letter-spacing: 0;" id="proj-head-1"></span></th>
+                            <th class="col-opt-2"><span id="proj-th-opt-2">Option 2</span> รวม<br><span style="font-size: 0.85em; font-weight: 400; color: var(--t-tertiary); text-transform: none; letter-spacing: 0;" id="proj-head-2"></span></th>
+                            <th class="col-opt-3"><span id="proj-th-opt-3">Option 3</span> รวม<br><span style="font-size: 0.85em; font-weight: 400; color: var(--t-tertiary); text-transform: none; letter-spacing: 0;" id="proj-head-3"></span></th>
                         </tr>
                     </thead>
                     <tbody id="projection-tbody">
@@ -481,42 +1067,41 @@
         </div>
 
         <!-- 4. สรุปผลประโยชน์ AIA CI ProCare (แสดงเฉพาะเมื่อมี Option ที่เลือก CI ProCare) -->
-        <div class="report-section" id="ciprocare-benefit-section" style="background-color: #fff5f5; border-color: var(--accent-color); display:none;">
-            <h2 class="report-h2" style="color: var(--accent-color); border-color: #ffcccc;">4. สรุปผลประโยชน์ AIA CI ProCare (เอไอเอ ซีไอ โปรแคร)</h2>
-            <p class="text-base text-gray-700 mb-2">ชำระเบี้ย 20 ปี คุ้มครองถึงอายุ 99 ปี | โรคร้ายแรง 62 โรค/การรักษา (ระดับต้นถึงปานกลาง 18 โรค, ระดับรุนแรง 44 โรค)</p>
-            <p class="text-sm text-gray-500 mb-4">*แสดงผลประโยชน์ตามทุนประกันที่เลือกไว้ในแต่ละ Option (เฉพาะ Option ที่เลือก CI ProCare เท่านั้น)</p>
-            
-            <table class="compare-table" style="font-size: 15px;">
+        <div class="report-section" id="ciprocare-benefit-section" style="border-color: var(--c-mtl); display:none;">
+            <h2 class="report-h2" style="color: var(--c-mtl);">สรุปผลประโยชน์ AIA CI ProCare <span style="font-weight: 400; color: var(--t-tertiary); font-size: 0.65em; letter-spacing: 0.05em;">CRITICAL ILLNESS COVERAGE</span></h2>
+            <p style="font-size: 0.92em; color: var(--t-secondary); margin-bottom: 12px; line-height: 1.6;">ชำระเบี้ย 20 ปี คุ้มครองถึงอายุ 99 ปี | โรคร้ายแรง 62 โรค/การรักษา (ระดับต้นถึงปานกลาง 18 โรค, ระดับรุนแรง 44 โรค)</p>
+
+            <table class="compare-table">
                 <thead>
                     <tr>
-                        <th style="text-align: left; width: 40%; color: var(--accent-color);">ผลประโยชน์</th>
-                        <th class="col-opt-1 bg-emerald-50 text-emerald-800 cipc-col-1" id="cipc-head-1" style="display:none;">Option 1</th>
-                        <th class="col-opt-2 bg-amber-50 text-amber-800 cipc-col-2" id="cipc-head-2" style="display:none;">Option 2</th>
-                        <th class="col-opt-3 bg-rose-50 text-rose-800 cipc-col-3" id="cipc-head-3" style="display:none;">Option 3</th>
+                        <th style="text-align: left; width: 40%; color: var(--c-mtl);">ผลประโยชน์</th>
+                        <th class="col-opt-1 cipc-col-1" id="cipc-head-1" style="display:none;">Option 1</th>
+                        <th class="col-opt-2 cipc-col-2" id="cipc-head-2" style="display:none;">Option 2</th>
+                        <th class="col-opt-3 cipc-col-3" id="cipc-head-3" style="display:none;">Option 3</th>
                     </tr>
                 </thead>
                 <tbody id="ciprocare-benefit-body">
                 </tbody>
             </table>
-            <div class="mt-4 p-3 bg-red-50 rounded-lg border border-red-200 text-sm text-gray-600">
-                <p class="font-bold text-red-700 mb-1">หมายเหตุ:</p>
-                <p>* ผลประโยชน์กรณีเสียชีวิต/ครบสัญญา = จำนวนใดที่มากกว่าระหว่าง 100% ทุนประกัน, เงินค่าเวนคืน, หรือ เบี้ยที่ชำระแล้วทั้งหมด หักผลประโยชน์ที่จ่ายไปแล้ว</p>
-                <p>* ผลประโยชน์ CI สูงสุดก่อนอายุ 85 = 800% / อายุ 85-99 = สูงสุด 140% ของทุนประกัน</p>
-                <p>* Waiting Period 60 วัน / โบนัสสุขภาพจาก AIA Vitality จ่ายทุก 3 ปี (0%, 1%, 4%, 9% ตามสถานะ)</p>
+            <div style="margin-top: 18px; padding: 14px 18px; background: var(--c-danger-bg); border-left: 3px solid var(--c-danger); border-radius: var(--r-md); font-size: 0.82em; color: var(--t-secondary); line-height: 1.65;">
+                <p style="font-weight: 600; color: var(--c-danger); margin: 0 0 6px 0;">หมายเหตุ:</p>
+                <p style="margin: 2px 0;">* ผลประโยชน์กรณีเสียชีวิต/ครบสัญญา = จำนวนใดที่มากกว่าระหว่าง 100% ทุนประกัน, เงินค่าเวนคืน, หรือ เบี้ยที่ชำระแล้วทั้งหมด หักผลประโยชน์ที่จ่ายไปแล้ว</p>
+                <p style="margin: 2px 0;">* ผลประโยชน์ CI สูงสุดก่อนอายุ 85 = 800% / อายุ 85-99 = สูงสุด 140% ของทุนประกัน</p>
+                <p style="margin: 2px 0;">* Waiting Period 60 วัน / โบนัสสุขภาพจาก AIA Vitality จ่ายทุก 3 ปี (0%, 1%, 4%, 9% ตามสถานะ)</p>
             </div>
         </div>
 
         <div class="page-break"></div>
 
         <!-- 5. ตารางมูลค่าเวนคืนกรมธรรม์ (Cash Surrender Value) - เฉพาะ CI ProCare -->
-        <div class="report-section" id="cv-table-section" style="background-color: #f8faff; border-color: var(--primary-color); display:none;">
-            <div class="flex items-start gap-3 mb-4">
-                <div class="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center flex-shrink-0">
-                    <i data-lucide="calculator" class="w-5 h-5 text-white"></i>
+        <div class="report-section" id="cv-table-section" style="border-color: var(--b-gold); display:none;">
+            <div style="display: flex; align-items: flex-start; gap: 14px; margin-bottom: 18px;">
+                <div style="width: 42px; height: 42px; border-radius: var(--r-md); background: var(--c-primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--t-on-primary);"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
                 </div>
                 <div>
-                    <h2 class="report-h2" style="margin-top:0; margin-bottom:4px;">5. ตารางมูลค่าเวนคืนกรมธรรม์ (Cash Surrender Value)</h2>
-                    <p class="text-sm text-gray-500 m-0">*กรุณากรอกมูลค่าเวนคืน (CV) จากตารางในใบเสนอขายลงในช่องสีเหลือง เพื่อวิเคราะห์ผลตอบแทน (กำไร/ขาดทุน)</p>
+                    <h2 class="report-h2" style="margin: 0 0 4px 0; padding: 0;">ตารางมูลค่าเวนคืนกรมธรรม์ <span style="font-weight: 400; color: var(--t-tertiary); font-size: 0.65em; letter-spacing: 0.05em;">CASH SURRENDER VALUE</span></h2>
+                    <p style="font-size: 0.82em; color: var(--t-tertiary); margin: 0; line-height: 1.55;">* กรุณากรอกมูลค่าเวนคืน (CV) จากตารางในใบเสนอขายลงในช่องสีทอง เพื่อวิเคราะห์ผลตอบแทน (กำไร/ขาดทุน)</p>
                 </div>
             </div>
             <div id="cv-tables-container"></div>
@@ -586,15 +1171,112 @@ const APP_DATA = {
         "NONE_none": { max:"-", r1:"-", r2:"-", r3:"-", r4:"-", r5:"-", r6:"-", r7:"-", r8:"-", r9:"-", r10:"-", r11:"-", r12:"-", r13:"-", d:"-", opd:"-" },
         
         // AIA Benefits
-        "HH_1m": {max:"1,000,000 บ.", r1:"1,500", r2:"จ่ายตามจริง", r3:"1,000", r4:"จ่ายตามจริง", r5:"จ่ายตามจริง", r6:"จ่ายตามจริง", r7:"จ่ายตามจริง", r8:"จ่ายตามจริง", r9:"จ่ายตามจริง", r10:"จ่ายตามจริง", r11:"จ่ายตามจริง", r12:"จ่ายตามจริง", r13:"จ่ายตามจริง", d:"10,000", opd:"-"},
-        "HH_5m": {max:"5,000,000 บ.", r1:"3,000", r2:"จ่ายตามจริง", r3:"2,000", r4:"จ่ายตามจริง", r5:"จ่ายตามจริง", r6:"จ่ายตามจริง", r7:"จ่ายตามจริง", r8:"จ่ายตามจริง", r9:"จ่ายตามจริง", r10:"จ่ายตามจริง", r11:"จ่ายตามจริง", r12:"จ่ายตามจริง", r13:"จ่ายตามจริง", d:"10,000", opd:"-"},
-        "HH_15m": {max:"15,000,000 บ.", r1:"6,000", r2:"จ่ายตามจริง", r3:"4,000", r4:"จ่ายตามจริง", r5:"จ่ายตามจริง", r6:"จ่ายตามจริง", r7:"จ่ายตามจริง", r8:"จ่ายตามจริง", r9:"จ่ายตามจริง", r10:"จ่ายตามจริง", r11:"จ่ายตามจริง", r12:"จ่ายตามจริง", r13:"จ่ายตามจริง", d:"10,000", opd:"-"},
-        "HH_25m": {max:"25,000,000 บ.", r1:"9,000", r2:"จ่ายตามจริง", r3:"6,000", r4:"จ่ายตามจริง", r5:"จ่ายตามจริง", r6:"จ่ายตามจริง", r7:"จ่ายตามจริง", r8:"จ่ายตามจริง", r9:"จ่ายตามจริง", r10:"จ่ายตามจริง", r11:"จ่ายตามจริง", r12:"จ่ายตามจริง", r13:"จ่ายตามจริง", d:"10,000", opd:"2,000 (30/ปี)"},
+        // ── AIA Health Happy ─────────────────────────────────────────────────
+        // Fields: max, r1(ค่าห้อง/วัน), r1_icu, r2_1, r2_2, r2_3, r2_4(ยากลับบ้าน),
+        //         r3(ค่าแพทย์/วัน), r4_1, r4_2, r4_3, r4_4, r4_5,
+        //         r5(Day Surgery), r6_1, r6_2, r7, r8, r9, r10, r11, r12, r13,
+        //         opd, ci2x(โรคร้ายแรง 2x), d(ชดเชยเสียชีวิต)
+        "HH_1m": {
+            max:"1,000,000 บ./ปี",
+            r1:"1,500 บ./วัน", r1_icu:"จ่ายตามจริง (สูงสุด 365 วัน)",
+            r2_1:"จ่ายตามจริง", r2_2:"จ่ายตามจริง", r2_3:"จ่ายตามจริง", r2_4:"20,000 บ./ครั้ง (จำกัด 7 วัน)",
+            r3:"1,000 บ./วัน (สูงสุด 365 วัน)",
+            r4_1:"จ่ายตามจริง", r4_2:"จ่ายตามจริง", r4_3:"จ่ายตามจริง", r4_4:"จ่ายตามจริง", r4_5:"จ่ายตามจริง",
+            r5:"จ่ายตามจริง",
+            r6_1:"จ่ายตามจริง (ภายใน 30 วัน)", r6_2:"จ่ายตามจริง (2 ครั้ง/การ Admit)",
+            r7:"จ่ายตามจริง", r8:"จ่ายตามจริง (ไม่เกิน 2 ครั้ง/ปี)",
+            r9:"จ่ายตามจริง", r10:"จ่ายตามจริง", r11:"จ่ายตามจริง",
+            r12:"จ่ายตามจริง", r13:"จ่ายตามจริง",
+            opd:"ไม่คุ้มครอง", ci2x:"เพิ่ม 2 เท่า (6 โรคร้ายแรง)", d:"10,000 บ."
+        },
+        "HH_5m": {
+            max:"5,000,000 บ./ปี",
+            r1:"3,000 บ./วัน", r1_icu:"จ่ายตามจริง (สูงสุด 365 วัน)",
+            r2_1:"จ่ายตามจริง", r2_2:"จ่ายตามจริง", r2_3:"จ่ายตามจริง", r2_4:"จ่ายตามจริง (จำกัด 7 วัน)",
+            r3:"2,000 บ./วัน (สูงสุด 365 วัน)",
+            r4_1:"จ่ายตามจริง", r4_2:"จ่ายตามจริง", r4_3:"จ่ายตามจริง", r4_4:"จ่ายตามจริง", r4_5:"จ่ายตามจริง",
+            r5:"จ่ายตามจริง",
+            r6_1:"จ่ายตามจริง (ภายใน 30 วัน)", r6_2:"จ่ายตามจริง (2 ครั้ง/การ Admit)",
+            r7:"จ่ายตามจริง", r8:"จ่ายตามจริง (ไม่เกิน 2 ครั้ง/ปี)",
+            r9:"จ่ายตามจริง", r10:"จ่ายตามจริง", r11:"จ่ายตามจริง",
+            r12:"จ่ายตามจริง", r13:"จ่ายตามจริง",
+            opd:"ไม่คุ้มครอง", ci2x:"เพิ่ม 2 เท่า (6 โรคร้ายแรง)", d:"10,000 บ."
+        },
+        "HH_15m": {
+            max:"15,000,000 บ./ปี",
+            r1:"6,000 บ./วัน", r1_icu:"จ่ายตามจริง (สูงสุด 365 วัน)",
+            r2_1:"จ่ายตามจริง", r2_2:"จ่ายตามจริง", r2_3:"จ่ายตามจริง", r2_4:"จ่ายตามจริง (จำกัด 7 วัน)",
+            r3:"4,000 บ./วัน (สูงสุด 365 วัน)",
+            r4_1:"จ่ายตามจริง", r4_2:"จ่ายตามจริง", r4_3:"จ่ายตามจริง", r4_4:"จ่ายตามจริง", r4_5:"จ่ายตามจริง",
+            r5:"จ่ายตามจริง",
+            r6_1:"จ่ายตามจริง (ภายใน 30 วัน)", r6_2:"จ่ายตามจริง (2 ครั้ง/การ Admit)",
+            r7:"จ่ายตามจริง", r8:"จ่ายตามจริง (ไม่เกิน 2 ครั้ง/ปี)",
+            r9:"จ่ายตามจริง", r10:"จ่ายตามจริง", r11:"จ่ายตามจริง",
+            r12:"จ่ายตามจริง", r13:"จ่ายตามจริง",
+            opd:"ไม่คุ้มครอง", ci2x:"เพิ่ม 2 เท่า (6 โรคร้ายแรง)", d:"10,000 บ."
+        },
+        "HH_25m": {
+            max:"25,000,000 บ./ปี",
+            r1:"9,000 บ./วัน", r1_icu:"จ่ายตามจริง (สูงสุด 365 วัน)",
+            r2_1:"จ่ายตามจริง", r2_2:"จ่ายตามจริง", r2_3:"จ่ายตามจริง", r2_4:"จ่ายตามจริง (จำกัด 7 วัน)",
+            r3:"6,000 บ./วัน (สูงสุด 365 วัน)",
+            r4_1:"จ่ายตามจริง", r4_2:"จ่ายตามจริง", r4_3:"จ่ายตามจริง", r4_4:"จ่ายตามจริง", r4_5:"จ่ายตามจริง",
+            r5:"จ่ายตามจริง",
+            r6_1:"จ่ายตามจริง (ภายใน 30 วัน)", r6_2:"จ่ายตามจริง (2 ครั้ง/การ Admit)",
+            r7:"จ่ายตามจริง", r8:"จ่ายตามจริง (ไม่เกิน 2 ครั้ง/ปี)",
+            r9:"จ่ายตามจริง", r10:"จ่ายตามจริง", r11:"จ่ายตามจริง",
+            r12:"จ่ายตามจริง", r13:"จ่ายตามจริง",
+            opd:"2,000 บ./ครั้ง (สูงสุด 30 ครั้ง/ปี)", ci2x:"เพิ่ม 2 เท่า (6 โรคร้ายแรง)", d:"10,000 บ."
+        },
 
-        "HSV_200k": {max:"200,000 บ.", r1:"1,500", r2:"25,000", r3:"จ่ายตามจริง", r4:"จ่ายตามจริง", r5:"จ่ายตามจริง", r6:"จ่ายตามจริง", r7:"7,000", r8:"ไม่คุ้มครอง", r9:"จ่ายร่วม (Copay)", r10:"จ่ายร่วม (Copay)", r11:"จ่ายร่วม (Copay)", r12:"จ่ายตามจริง", r13:"10,000", d:"10,000", opd:"-"},
-        "HSV_300k": {max:"300,000 บ.", r1:"2,000", r2:"35,000", r3:"จ่ายตามจริง", r4:"จ่ายตามจริง", r5:"จ่ายตามจริง", r6:"จ่ายตามจริง", r7:"8,000", r8:"ไม่คุ้มครอง", r9:"จ่ายร่วม (Copay)", r10:"จ่ายร่วม (Copay)", r11:"จ่ายร่วม (Copay)", r12:"จ่ายตามจริง", r13:"15,000", d:"10,000", opd:"-"},
-        "HSV_400k": {max:"400,000 บ.", r1:"3,000", r2:"40,000", r3:"จ่ายตามจริง", r4:"จ่ายตามจริง", r5:"จ่ายตามจริง", r6:"จ่ายตามจริง", r7:"10,000", r8:"ไม่คุ้มครอง", r9:"จ่ายร่วม (Copay)", r10:"จ่ายร่วม (Copay)", r11:"จ่ายร่วม (Copay)", r12:"จ่ายตามจริง", r13:"20,000", d:"10,000", opd:"1,000 (30/ปี)"},
-        "HSV_500k": {max:"500,000 บ.", r1:"4,000", r2:"50,000", r3:"จ่ายตามจริง", r4:"จ่ายตามจริง", r5:"จ่ายตามจริง", r6:"จ่ายตามจริง", r7:"9,000", r8:"ไม่คุ้มครอง", r9:"จ่ายร่วม (Copay)", r10:"จ่ายร่วม (Copay)", r11:"จ่ายร่วม (Copay)", r12:"จ่ายตามจริง", r13:"25,000", d:"10,000", opd:"1,500 (30/ปี)"},
+        // ── AIA Health Saver ───────────────────────────────────────────────────
+        // วงเงิน: ต่อการรักษาครั้งใดครั้งหนึ่ง (ไม่ใช่ต่อปีกรมธรรม์)
+        // r3-r6, r12 รวมกันไม่เกินวงเงินสูงสุดต่อครั้ง (เหมาจ่าย*)
+        // r9-r11 คุ้มครองเท่ากับวงเงินสูงสุด (ต่อรอบปีกรมธรรม์)
+        "HSV_200k": {
+            max:"200,000 บ./ครั้ง",
+            r1:"1,500 บ./วัน", r1_icu:"9,000 บ./วัน (6× ค่าห้องปกติ)",
+            r2:"25,000 บ./ครั้ง", r2_4:"5,000 บ./ครั้ง (สูงสุด 7 วัน)",
+            r3:"เหมาจ่าย* (ในวงเงิน)", r4:"เหมาจ่าย* (ในวงเงิน)",
+            r5:"เหมาจ่าย* (ในวงเงิน)", r6:"เหมาจ่าย* (ในวงเงิน)",
+            r7:"7,000 บ./ครั้ง", r8:"ไม่คุ้มครอง",
+            r9:"200,000 บ./ปี", r10:"200,000 บ./ปี", r11:"200,000 บ./ปี",
+            r12:"เหมาจ่าย* (ในวงเงิน)", r13:"10,000 บ./ครั้ง",
+            opd:"ไม่คุ้มครอง", ci2x:"เพิ่ม 2 เท่า (6 โรคร้ายแรง)", d:"10,000 บ."
+        },
+        "HSV_300k": {
+            max:"300,000 บ./ครั้ง",
+            r1:"2,000 บ./วัน", r1_icu:"12,000 บ./วัน (6× ค่าห้องปกติ)",
+            r2:"35,000 บ./ครั้ง", r2_4:"5,000 บ./ครั้ง (สูงสุด 7 วัน)",
+            r3:"เหมาจ่าย* (ในวงเงิน)", r4:"เหมาจ่าย* (ในวงเงิน)",
+            r5:"เหมาจ่าย* (ในวงเงิน)", r6:"เหมาจ่าย* (ในวงเงิน)",
+            r7:"8,000 บ./ครั้ง", r8:"ไม่คุ้มครอง",
+            r9:"300,000 บ./ปี", r10:"300,000 บ./ปี", r11:"300,000 บ./ปี",
+            r12:"เหมาจ่าย* (ในวงเงิน)", r13:"15,000 บ./ครั้ง",
+            opd:"1,000 บ./ครั้ง (สูงสุด 30 ครั้ง/ปี)", ci2x:"เพิ่ม 2 เท่า (6 โรคร้ายแรง)", d:"10,000 บ."
+        },
+        "HSV_400k": {
+            max:"400,000 บ./ครั้ง",
+            r1:"3,000 บ./วัน", r1_icu:"18,000 บ./วัน (6× ค่าห้องปกติ)",
+            r2:"40,000 บ./ครั้ง", r2_4:"5,000 บ./ครั้ง (สูงสุด 7 วัน)",
+            r3:"เหมาจ่าย* (ในวงเงิน)", r4:"เหมาจ่าย* (ในวงเงิน)",
+            r5:"เหมาจ่าย* (ในวงเงิน)", r6:"เหมาจ่าย* (ในวงเงิน)",
+            r7:"9,000 บ./ครั้ง", r8:"ไม่คุ้มครอง",
+            r9:"400,000 บ./ปี", r10:"400,000 บ./ปี", r11:"400,000 บ./ปี",
+            r12:"เหมาจ่าย* (ในวงเงิน)", r13:"20,000 บ./ครั้ง",
+            opd:"ไม่คุ้มครอง", ci2x:"เพิ่ม 2 เท่า (6 โรคร้ายแรง)", d:"10,000 บ."
+        },
+        "HSV_500k": {
+            max:"500,000 บ./ครั้ง",
+            r1:"4,000 บ./วัน", r1_icu:"24,000 บ./วัน (6× ค่าห้องปกติ)",
+            r2:"50,000 บ./ครั้ง", r2_4:"5,000 บ./ครั้ง (สูงสุด 7 วัน)",
+            r3:"เหมาจ่าย* (ในวงเงิน)", r4:"เหมาจ่าย* (ในวงเงิน)",
+            r5:"เหมาจ่าย* (ในวงเงิน)", r6:"เหมาจ่าย* (ในวงเงิน)",
+            r7:"10,000 บ./ครั้ง", r8:"ไม่คุ้มครอง",
+            r9:"500,000 บ./ปี", r10:"500,000 บ./ปี", r11:"500,000 บ./ปี",
+            r12:"เหมาจ่าย* (ในวงเงิน)", r13:"25,000 บ./ครั้ง",
+            opd:"1,500 บ./ครั้ง (สูงสุด 30 ครั้ง/ปี)", ci2x:"เพิ่ม 2 เท่า (6 โรคร้ายแรง)", d:"10,000 บ."
+        },
 
         "HS_1000": {max:"แยกหมวด", r1:"1,000", r2:"16,000", r3:"550", r4:"40,000", r5:"จ่ายตามจริง", r6:"4,500", r7:"3,000", r8:"ไม่คุ้มครอง", r9:"ไม่คุ้มครอง", r10:"15,000", r11:"ไม่คุ้มครอง", r12:"3,000", r13:"4,500", d:"10,000", opd:"-"},
         "HS_1600": {max:"แยกหมวด", r1:"1,600", r2:"20,000", r3:"750", r4:"50,000", r5:"จ่ายตามจริง", r6:"5,000", r7:"4,000", r8:"ไม่คุ้มครอง", r9:"ไม่คุ้มครอง", r10:"20,000", r11:"ไม่คุ้มครอง", r12:"3,500", r13:"5,000", d:"10,000", opd:"-"},
@@ -621,20 +1303,154 @@ const APP_DATA = {
         "DHP_5M_50k": {max:"5,000,000 บ.", r1:"จ่ายตามจริง (เดี่ยว Std)", r2:"จ่ายตามจริง", r3:"จ่ายตามจริง", r4:"จ่ายตามจริง", r5:"จ่ายตามจริง", r6:"จ่ายตามจริง", r7:"จ่ายตามจริง", r8:"จ่ายตามจริง", r9:"ไม่คุ้มครอง", r10:"ไม่คุ้มครอง", r11:"ไม่คุ้มครอง", r12:"จ่ายตามจริง", r13:"จ่ายตามจริง", d:"-", opd:"-"},
         "DHP_5M_100k": {max:"5,000,000 บ.", r1:"จ่ายตามจริง (เดี่ยว Std)", r2:"จ่ายตามจริง", r3:"จ่ายตามจริง", r4:"จ่ายตามจริง", r5:"จ่ายตามจริง", r6:"จ่ายตามจริง", r7:"จ่ายตามจริง", r8:"จ่ายตามจริง", r9:"ไม่คุ้มครอง", r10:"ไม่คุ้มครอง", r11:"ไม่คุ้มครอง", r12:"จ่ายตามจริง", r13:"จ่ายตามจริง", d:"-", opd:"-"},
 
-        // MTL D Health Lite Benefits — แผน 1 ล้าน (ค่าห้อง 2,000 บ./วัน)
-        "DHL_1M_0":   {max:"1,000,000 บ./ครั้ง", r1:"2,000", r2:"จ่ายตามจริง", r3:"จ่ายตามจริง", r4:"จ่ายตามจริง", r5:"จ่ายตามจริง", r6:"จ่ายตามจริง", r7:"จ่ายตามจริง", r8:"จ่ายตามจริง", r9:"ไม่คุ้มครอง", r10:"ไม่คุ้มครอง", r11:"ไม่คุ้มครอง", r12:"จ่ายตามจริง", r13:"จ่ายตามจริง", d:"-", opd:"-"},
-        "DHL_1M_20k": {max:"1,000,000 บ./ครั้ง (Ded 20K)", r1:"2,000", r2:"จ่ายตามจริง", r3:"จ่ายตามจริง", r4:"จ่ายตามจริง", r5:"จ่ายตามจริง", r6:"จ่ายตามจริง", r7:"จ่ายตามจริง", r8:"จ่ายตามจริง", r9:"ไม่คุ้มครอง", r10:"ไม่คุ้มครอง", r11:"ไม่คุ้มครอง", r12:"จ่ายตามจริง", r13:"จ่ายตามจริง", d:"-", opd:"-"},
-        "DHL_1M_50k": {max:"1,000,000 บ./ครั้ง (Ded 50K)", r1:"2,000", r2:"จ่ายตามจริง", r3:"จ่ายตามจริง", r4:"จ่ายตามจริง", r5:"จ่ายตามจริง", r6:"จ่ายตามจริง", r7:"จ่ายตามจริง", r8:"จ่ายตามจริง", r9:"ไม่คุ้มครอง", r10:"ไม่คุ้มครอง", r11:"ไม่คุ้มครอง", r12:"จ่ายตามจริง", r13:"จ่ายตามจริง", d:"-", opd:"-"},
-        "DHL_1M_C20": {max:"1,000,000 บ./ครั้ง (Copay 20%)", r1:"2,000", r2:"จ่ายตามจริง", r3:"จ่ายตามจริง", r4:"จ่ายตามจริง", r5:"จ่ายตามจริง", r6:"จ่ายตามจริง", r7:"จ่ายตามจริง", r8:"จ่ายตามจริง", r9:"ไม่คุ้มครอง", r10:"ไม่คุ้มครอง", r11:"ไม่คุ้มครอง", r12:"จ่ายตามจริง", r13:"จ่ายตามจริง", d:"-", opd:"-"},
-        "DHL_1M_C10": {max:"1,000,000 บ./ครั้ง (Copay 10%)", r1:"2,000", r2:"จ่ายตามจริง", r3:"จ่ายตามจริง", r4:"จ่ายตามจริง", r5:"จ่ายตามจริง", r6:"จ่ายตามจริง", r7:"จ่ายตามจริง", r8:"จ่ายตามจริง", r9:"ไม่คุ้มครอง", r10:"ไม่คุ้มครอง", r11:"ไม่คุ้มครอง", r12:"จ่ายตามจริง", r13:"จ่ายตามจริง", d:"-", opd:"-"},
+        // ── MTL D Health Lite ─────────────────────────────────────────────────
+        // r1 = ค่าห้องจำกัด/วัน (ไม่ใช่เหมาจ่าย), r2_4 = ยากลับบ้าน 20K/14วัน,
+        // r3 = ค่าแพทย์จำกัด/วัน, r9-r11 = ไม่คุ้มครอง
+        "DHL_1M_0":   {
+            max:"1,000,000 บ./ครั้ง",
+            r1:"2,000 บ./วัน ⚠", r1_icu:"จ่ายตามจริง",
+            r2_1:"จ่ายตามจริง", r2_2:"จ่ายตามจริง", r2_3:"จ่ายตามจริง", r2_4:"20,000 บ./ครั้ง (สูงสุด 14 วัน)",
+            r3:"2,000 บ./วัน ⚠",
+            r4_1:"จ่ายตามจริง", r4_2:"จ่ายตามจริง", r4_3:"จ่ายตามจริง", r4_4:"จ่ายตามจริง", r4_5:"จ่ายตามจริง",
+            r5:"จ่ายตามจริง",
+            r6_1:"จ่ายตามจริง", r6_2:"จ่ายตามจริง",
+            r7:"จ่ายตามจริง", r8:"จ่ายตามจริง",
+            r9:"ไม่คุ้มครอง", r10:"ไม่คุ้มครอง", r11:"ไม่คุ้มครอง",
+            r12:"จ่ายตามจริง", r13:"จ่ายตามจริง",
+            opd:"-", ci2x:"-", d:"-"
+        },
+        "DHL_1M_20k": {
+            max:"1,000,000 บ./ครั้ง (Ded 20K)",
+            r1:"2,000 บ./วัน ⚠", r1_icu:"จ่ายตามจริง",
+            r2_1:"จ่ายตามจริง", r2_2:"จ่ายตามจริง", r2_3:"จ่ายตามจริง", r2_4:"20,000 บ./ครั้ง (สูงสุด 14 วัน)",
+            r3:"2,000 บ./วัน ⚠",
+            r4_1:"จ่ายตามจริง", r4_2:"จ่ายตามจริง", r4_3:"จ่ายตามจริง", r4_4:"จ่ายตามจริง", r4_5:"จ่ายตามจริง",
+            r5:"จ่ายตามจริง",
+            r6_1:"จ่ายตามจริง", r6_2:"จ่ายตามจริง",
+            r7:"จ่ายตามจริง", r8:"จ่ายตามจริง",
+            r9:"ไม่คุ้มครอง", r10:"ไม่คุ้มครอง", r11:"ไม่คุ้มครอง",
+            r12:"จ่ายตามจริง", r13:"จ่ายตามจริง",
+            opd:"-", ci2x:"-", d:"-"
+        },
+        "DHL_1M_50k": {
+            max:"1,000,000 บ./ครั้ง (Ded 50K)",
+            r1:"2,000 บ./วัน ⚠", r1_icu:"จ่ายตามจริง",
+            r2_1:"จ่ายตามจริง", r2_2:"จ่ายตามจริง", r2_3:"จ่ายตามจริง", r2_4:"20,000 บ./ครั้ง (สูงสุด 14 วัน)",
+            r3:"2,000 บ./วัน ⚠",
+            r4_1:"จ่ายตามจริง", r4_2:"จ่ายตามจริง", r4_3:"จ่ายตามจริง", r4_4:"จ่ายตามจริง", r4_5:"จ่ายตามจริง",
+            r5:"จ่ายตามจริง",
+            r6_1:"จ่ายตามจริง", r6_2:"จ่ายตามจริง",
+            r7:"จ่ายตามจริง", r8:"จ่ายตามจริง",
+            r9:"ไม่คุ้มครอง", r10:"ไม่คุ้มครอง", r11:"ไม่คุ้มครอง",
+            r12:"จ่ายตามจริง", r13:"จ่ายตามจริง",
+            opd:"-", ci2x:"-", d:"-"
+        },
+        "DHL_1M_C20": {
+            max:"1,000,000 บ./ครั้ง (Copay 20%)",
+            r1:"2,000 บ./วัน ⚠", r1_icu:"จ่ายตามจริง",
+            r2_1:"จ่ายตามจริง", r2_2:"จ่ายตามจริง", r2_3:"จ่ายตามจริง", r2_4:"20,000 บ./ครั้ง (สูงสุด 14 วัน)",
+            r3:"2,000 บ./วัน ⚠",
+            r4_1:"จ่ายตามจริง", r4_2:"จ่ายตามจริง", r4_3:"จ่ายตามจริง", r4_4:"จ่ายตามจริง", r4_5:"จ่ายตามจริง",
+            r5:"จ่ายตามจริง",
+            r6_1:"จ่ายตามจริง", r6_2:"จ่ายตามจริง",
+            r7:"จ่ายตามจริง", r8:"จ่ายตามจริง",
+            r9:"ไม่คุ้มครอง", r10:"ไม่คุ้มครอง", r11:"ไม่คุ้มครอง",
+            r12:"จ่ายตามจริง", r13:"จ่ายตามจริง",
+            opd:"-", ci2x:"-", d:"-"
+        },
+        "DHL_1M_C10": {
+            max:"1,000,000 บ./ครั้ง (Copay 10%)",
+            r1:"2,000 บ./วัน ⚠", r1_icu:"จ่ายตามจริง",
+            r2_1:"จ่ายตามจริง", r2_2:"จ่ายตามจริง", r2_3:"จ่ายตามจริง", r2_4:"20,000 บ./ครั้ง (สูงสุด 14 วัน)",
+            r3:"2,000 บ./วัน ⚠",
+            r4_1:"จ่ายตามจริง", r4_2:"จ่ายตามจริง", r4_3:"จ่ายตามจริง", r4_4:"จ่ายตามจริง", r4_5:"จ่ายตามจริง",
+            r5:"จ่ายตามจริง",
+            r6_1:"จ่ายตามจริง", r6_2:"จ่ายตามจริง",
+            r7:"จ่ายตามจริง", r8:"จ่ายตามจริง",
+            r9:"ไม่คุ้มครอง", r10:"ไม่คุ้มครอง", r11:"ไม่คุ้มครอง",
+            r12:"จ่ายตามจริง", r13:"จ่ายตามจริง",
+            opd:"-", ci2x:"-", d:"-"
+        },
 
         // MTL D Health Lite Benefits — แผน 5 ล้าน (ค่าห้อง 4,000 บ./วัน)
-        "DHL_5M_0":    {max:"5,000,000 บ./ครั้ง", r1:"4,000", r2:"จ่ายตามจริง", r3:"จ่ายตามจริง", r4:"จ่ายตามจริง", r5:"จ่ายตามจริง", r6:"จ่ายตามจริง", r7:"จ่ายตามจริง", r8:"จ่ายตามจริง", r9:"ไม่คุ้มครอง", r10:"ไม่คุ้มครอง", r11:"ไม่คุ้มครอง", r12:"จ่ายตามจริง", r13:"จ่ายตามจริง", d:"-", opd:"-"},
-        "DHL_5M_30k":  {max:"5,000,000 บ./ครั้ง (Ded 30K)", r1:"4,000", r2:"จ่ายตามจริง", r3:"จ่ายตามจริง", r4:"จ่ายตามจริง", r5:"จ่ายตามจริง", r6:"จ่ายตามจริง", r7:"จ่ายตามจริง", r8:"จ่ายตามจริง", r9:"ไม่คุ้มครอง", r10:"ไม่คุ้มครอง", r11:"ไม่คุ้มครอง", r12:"จ่ายตามจริง", r13:"จ่ายตามจริง", d:"-", opd:"-"},
-        "DHL_5M_50k":  {max:"5,000,000 บ./ครั้ง (Ded 50K)", r1:"4,000", r2:"จ่ายตามจริง", r3:"จ่ายตามจริง", r4:"จ่ายตามจริง", r5:"จ่ายตามจริง", r6:"จ่ายตามจริง", r7:"จ่ายตามจริง", r8:"จ่ายตามจริง", r9:"ไม่คุ้มครอง", r10:"ไม่คุ้มครอง", r11:"ไม่คุ้มครอง", r12:"จ่ายตามจริง", r13:"จ่ายตามจริง", d:"-", opd:"-"},
-        "DHL_5M_100k": {max:"5,000,000 บ./ครั้ง (Ded 100K)", r1:"4,000", r2:"จ่ายตามจริง", r3:"จ่ายตามจริง", r4:"จ่ายตามจริง", r5:"จ่ายตามจริง", r6:"จ่ายตามจริง", r7:"จ่ายตามจริง", r8:"จ่ายตามจริง", r9:"ไม่คุ้มครอง", r10:"ไม่คุ้มครอง", r11:"ไม่คุ้มครอง", r12:"จ่ายตามจริง", r13:"จ่ายตามจริง", d:"-", opd:"-"},
-        "DHL_5M_C20":  {max:"5,000,000 บ./ครั้ง (Copay 20%)", r1:"4,000", r2:"จ่ายตามจริง", r3:"จ่ายตามจริง", r4:"จ่ายตามจริง", r5:"จ่ายตามจริง", r6:"จ่ายตามจริง", r7:"จ่ายตามจริง", r8:"จ่ายตามจริง", r9:"ไม่คุ้มครอง", r10:"ไม่คุ้มครอง", r11:"ไม่คุ้มครอง", r12:"จ่ายตามจริง", r13:"จ่ายตามจริง", d:"-", opd:"-"},
-        "DHL_5M_C10":  {max:"5,000,000 บ./ครั้ง (Copay 10%)", r1:"4,000", r2:"จ่ายตามจริง", r3:"จ่ายตามจริง", r4:"จ่ายตามจริง", r5:"จ่ายตามจริง", r6:"จ่ายตามจริง", r7:"จ่ายตามจริง", r8:"จ่ายตามจริง", r9:"ไม่คุ้มครอง", r10:"ไม่คุ้มครอง", r11:"ไม่คุ้มครอง", r12:"จ่ายตามจริง", r13:"จ่ายตามจริง", d:"-", opd:"-"}
+        "DHL_5M_0":    {
+            max:"5,000,000 บ./ครั้ง",
+            r1:"4,000 บ./วัน ⚠", r1_icu:"จ่ายตามจริง",
+            r2_1:"จ่ายตามจริง", r2_2:"จ่ายตามจริง", r2_3:"จ่ายตามจริง", r2_4:"20,000 บ./ครั้ง (สูงสุด 14 วัน)",
+            r3:"4,000 บ./วัน ⚠",
+            r4_1:"จ่ายตามจริง", r4_2:"จ่ายตามจริง", r4_3:"จ่ายตามจริง", r4_4:"จ่ายตามจริง", r4_5:"จ่ายตามจริง",
+            r5:"จ่ายตามจริง",
+            r6_1:"จ่ายตามจริง", r6_2:"จ่ายตามจริง",
+            r7:"จ่ายตามจริง", r8:"จ่ายตามจริง",
+            r9:"ไม่คุ้มครอง", r10:"ไม่คุ้มครอง", r11:"ไม่คุ้มครอง",
+            r12:"จ่ายตามจริง", r13:"จ่ายตามจริง",
+            opd:"-", ci2x:"-", d:"-"
+        },
+        "DHL_5M_30k":  {
+            max:"5,000,000 บ./ครั้ง (Ded 30K)",
+            r1:"4,000 บ./วัน ⚠", r1_icu:"จ่ายตามจริง",
+            r2_1:"จ่ายตามจริง", r2_2:"จ่ายตามจริง", r2_3:"จ่ายตามจริง", r2_4:"20,000 บ./ครั้ง (สูงสุด 14 วัน)",
+            r3:"4,000 บ./วัน ⚠",
+            r4_1:"จ่ายตามจริง", r4_2:"จ่ายตามจริง", r4_3:"จ่ายตามจริง", r4_4:"จ่ายตามจริง", r4_5:"จ่ายตามจริง",
+            r5:"จ่ายตามจริง",
+            r6_1:"จ่ายตามจริง", r6_2:"จ่ายตามจริง",
+            r7:"จ่ายตามจริง", r8:"จ่ายตามจริง",
+            r9:"ไม่คุ้มครอง", r10:"ไม่คุ้มครอง", r11:"ไม่คุ้มครอง",
+            r12:"จ่ายตามจริง", r13:"จ่ายตามจริง",
+            opd:"-", ci2x:"-", d:"-"
+        },
+        "DHL_5M_50k":  {
+            max:"5,000,000 บ./ครั้ง (Ded 50K)",
+            r1:"4,000 บ./วัน ⚠", r1_icu:"จ่ายตามจริง",
+            r2_1:"จ่ายตามจริง", r2_2:"จ่ายตามจริง", r2_3:"จ่ายตามจริง", r2_4:"20,000 บ./ครั้ง (สูงสุด 14 วัน)",
+            r3:"4,000 บ./วัน ⚠",
+            r4_1:"จ่ายตามจริง", r4_2:"จ่ายตามจริง", r4_3:"จ่ายตามจริง", r4_4:"จ่ายตามจริง", r4_5:"จ่ายตามจริง",
+            r5:"จ่ายตามจริง",
+            r6_1:"จ่ายตามจริง", r6_2:"จ่ายตามจริง",
+            r7:"จ่ายตามจริง", r8:"จ่ายตามจริง",
+            r9:"ไม่คุ้มครอง", r10:"ไม่คุ้มครอง", r11:"ไม่คุ้มครอง",
+            r12:"จ่ายตามจริง", r13:"จ่ายตามจริง",
+            opd:"-", ci2x:"-", d:"-"
+        },
+        "DHL_5M_100k": {
+            max:"5,000,000 บ./ครั้ง (Ded 100K)",
+            r1:"4,000 บ./วัน ⚠", r1_icu:"จ่ายตามจริง",
+            r2_1:"จ่ายตามจริง", r2_2:"จ่ายตามจริง", r2_3:"จ่ายตามจริง", r2_4:"20,000 บ./ครั้ง (สูงสุด 14 วัน)",
+            r3:"4,000 บ./วัน ⚠",
+            r4_1:"จ่ายตามจริง", r4_2:"จ่ายตามจริง", r4_3:"จ่ายตามจริง", r4_4:"จ่ายตามจริง", r4_5:"จ่ายตามจริง",
+            r5:"จ่ายตามจริง",
+            r6_1:"จ่ายตามจริง", r6_2:"จ่ายตามจริง",
+            r7:"จ่ายตามจริง", r8:"จ่ายตามจริง",
+            r9:"ไม่คุ้มครอง", r10:"ไม่คุ้มครอง", r11:"ไม่คุ้มครอง",
+            r12:"จ่ายตามจริง", r13:"จ่ายตามจริง",
+            opd:"-", ci2x:"-", d:"-"
+        },
+        "DHL_5M_C20":  {
+            max:"5,000,000 บ./ครั้ง (Copay 20%)",
+            r1:"4,000 บ./วัน ⚠", r1_icu:"จ่ายตามจริง",
+            r2_1:"จ่ายตามจริง", r2_2:"จ่ายตามจริง", r2_3:"จ่ายตามจริง", r2_4:"20,000 บ./ครั้ง (สูงสุด 14 วัน)",
+            r3:"4,000 บ./วัน ⚠",
+            r4_1:"จ่ายตามจริง", r4_2:"จ่ายตามจริง", r4_3:"จ่ายตามจริง", r4_4:"จ่ายตามจริง", r4_5:"จ่ายตามจริง",
+            r5:"จ่ายตามจริง",
+            r6_1:"จ่ายตามจริง", r6_2:"จ่ายตามจริง",
+            r7:"จ่ายตามจริง", r8:"จ่ายตามจริง",
+            r9:"ไม่คุ้มครอง", r10:"ไม่คุ้มครอง", r11:"ไม่คุ้มครอง",
+            r12:"จ่ายตามจริง", r13:"จ่ายตามจริง",
+            opd:"-", ci2x:"-", d:"-"
+        },
+        "DHL_5M_C10":  {
+            max:"5,000,000 บ./ครั้ง (Copay 10%)",
+            r1:"4,000 บ./วัน ⚠", r1_icu:"จ่ายตามจริง",
+            r2_1:"จ่ายตามจริง", r2_2:"จ่ายตามจริง", r2_3:"จ่ายตามจริง", r2_4:"20,000 บ./ครั้ง (สูงสุด 14 วัน)",
+            r3:"4,000 บ./วัน ⚠",
+            r4_1:"จ่ายตามจริง", r4_2:"จ่ายตามจริง", r4_3:"จ่ายตามจริง", r4_4:"จ่ายตามจริง", r4_5:"จ่ายตามจริง",
+            r5:"จ่ายตามจริง",
+            r6_1:"จ่ายตามจริง", r6_2:"จ่ายตามจริง",
+            r7:"จ่ายตามจริง", r8:"จ่ายตามจริง",
+            r9:"ไม่คุ้มครอง", r10:"ไม่คุ้มครอง", r11:"ไม่คุ้มครอง",
+            r12:"จ่ายตามจริง", r13:"จ่ายตามจริง",
+            opd:"-", ci2x:"-", d:"-"
+        }
     },
 
     // Rate Tables (Age Bands up to 98)
@@ -896,7 +1712,6 @@ const app = {
     },
 
     renderTypeSelector(id) {
-
         const sel = document.getElementById(`type-${id}`);
         sel.innerHTML = Object.keys(APP_DATA.plans).map(k => `<option value="${k}" ${k===this.state[id].type?'selected':''}>${APP_DATA.plans[k].name}</option>`).join("");
         this.updateUIOptions(id);
@@ -951,12 +1766,11 @@ const app = {
         if (this.isMTL(this.state[id].type)) {
             cpContainer.classList.remove("hidden");
             mainPremInput.readOnly = false;
-            mainPremInput.classList.remove("bg-gray-100", "text-blue-700");
-            mainPremInput.classList.add("bg-white", "text-pink-600");
+            mainPremInput.classList.add("mtl-manual");
             mainPremLabel.textContent = "(MTL ป้อนเอง)";
-            mainPremLabel.className = "font-normal text-pink-500";
+            mainPremLabel.style.color = "var(--c-mtl)";
             // Hide main type dropdown for MTL
-            if (mainTypeSelect) mainTypeSelect.closest('.mb-2').classList.add('hidden');
+            if (mainTypeSelect) mainTypeSelect.closest('.field').classList.add('hidden');
 
             // เพิ่ม warning note เมื่อเลือก DHL: แจ้งให้ทราบว่า Care Plus เป็น add-on แยก
             const cpLabel = cpContainer.querySelector('label');
@@ -967,32 +1781,30 @@ const app = {
 
                 if (this.state[id].type === "DHL") {
                     const warn = document.createElement('div');
-                    warn.className = 'dhl-warn text-[10px] text-orange-600 mt-1 leading-tight';
+                    warn.className = 'dhl-warn';
                     warn.innerHTML = '⚠ <b>D Health Lite</b> ไม่คุ้มครองมะเร็ง/ไตวายเหมือน DHP — Care Plus เป็น <b>add-on แยกขาย</b>';
                     cpContainer.appendChild(warn);
-                    cpContainer.classList.remove('items-center');
-                    cpContainer.classList.add('flex-col', 'items-start');
-                } else {
-                    cpContainer.classList.remove('flex-col', 'items-start');
-                    cpContainer.classList.add('items-center');
                 }
             }
         } else {
             cpContainer.classList.add("hidden");
             document.getElementById(`cp-${id}`).checked = false;
             mainPremInput.readOnly = true;
-            mainPremInput.classList.add("bg-gray-100", "text-blue-700");
-            mainPremInput.classList.remove("bg-white", "text-pink-600");
+            mainPremInput.classList.remove("mtl-manual");
             // Show main type dropdown for AIA
-            if (mainTypeSelect) mainTypeSelect.closest('.mb-2').classList.remove('hidden');
-            
+            if (mainTypeSelect) mainTypeSelect.closest('.field').classList.remove('hidden');
+
             if (mainType === 'CIProCare') {
                 mainPremLabel.textContent = "(Auto AIA CI ProCare)";
-                mainPremLabel.className = "font-normal text-rose-500";
+                mainPremLabel.style.color = "var(--c-mtl)";
             } else {
                 mainPremLabel.textContent = "(Auto AIA 20PLN)";
-                mainPremLabel.className = "font-normal text-emerald-500";
+                mainPremLabel.style.color = "var(--c-primary)";
             }
+
+            // ลบ DHL warning ถ้ามี
+            const oldWarn = cpContainer.querySelector('.dhl-warn');
+            if (oldWarn) oldWarn.remove();
         }
     },
 
@@ -1141,7 +1953,7 @@ const app = {
 
             // Summary Table Update
             const mainTypeName = this.isMTL(st.type) ? "MTL" : (mainType === 'CIProCare' ? 'CI ProCare' : '20PLN');
-            document.getElementById(`disp-sum-main-${id}`).innerHTML = `ทุน ${this.formatMoney(mainSum)} <span class="text-[10px] ${mainType === 'CIProCare' ? 'text-rose-500 font-bold' : ''}">(${mainTypeName})</span>`;
+            document.getElementById(`disp-sum-main-${id}`).innerHTML = `ทุน ${this.formatMoney(mainSum)} <span style="font-size: 0.85em; ${mainType === 'CIProCare' ? 'color: var(--c-mtl); font-weight: 600;' : 'color: var(--t-tertiary);'}">(${mainTypeName})</span>`;
             document.getElementById(`sum-main-${id}`).textContent = this.formatMoney(pMain);
             
             document.getElementById(`name-hl-${id}`).textContent = `${APP_DATA.plans[st.type].name} (${opt.name})`;
@@ -1150,7 +1962,7 @@ const app = {
             // เพิ่ม note สำหรับ Care Plus เมื่อเลือก DHL (เพราะ DHL ก็ไม่คุ้มครองมะเร็ง+ไตวายเช่นกัน เป็น add-on แยก)
             const cpNameEl = document.getElementById(`name-cp-${id}`);
             if (pCP > 0) {
-                const cpNote = (st.type === "DHL") ? `แผน 5 ล้าน (ตามอายุจริง) <span class="text-[10px] text-orange-600 font-bold">⚠ Add-on แยก</span>` : `แผน 5 ล้าน (ตามอายุจริง)`;
+                const cpNote = (st.type === "DHL") ? `แผน 5 ล้าน (ตามอายุจริง) <span style="font-size:0.78em;color:var(--c-warning);font-weight:700;">⚠ Add-on แยก</span>` : `แผน 5 ล้าน (ตามอายุจริง)`;
                 cpNameEl.innerHTML = cpNote;
             } else {
                 cpNameEl.textContent = "-";
@@ -1174,170 +1986,198 @@ const app = {
 
     renderBenefitTable(activeOptions) {
         let html = '';
-        
-        // Rows config (Using data format and icons from the new source)
-        const cats = [
-            { id: "max", name: "วงเงินสูงสุดต่อรอบปีกรมธรรม์", icon: "shield" },
-            { id: "r1", name: "1. ค่าห้อง ค่าอาหาร (ต่อวัน)", icon: "bed" },
-            { id: "r2", name: "2. ค่าบริการทางการแพทย์ (ต่อการรักษาเป็นผู้ป่วยในครั้งใดครั้งหนึ่ง //แต่ Health Happy จำกัดต่อปีกรมธรรม์ ตามวงเงินเหมาจ่าย)", icon: "stethoscope" },
-            { id: "r3", name: "3. ค่าแพทย์ตรวจรักษา (ต่อวัน)", icon: "user-round-check" },
-            { id: "r4", name: "4. ค่าผ่าตัดและหัตถการ", icon: "scalpel" },
-            { id: "r5", name: "5. ผ่าตัดใหญ่ไม่ต้องนอน (Day Surgery)", icon: "activity" },
-            { id: "r6", name: "6. ตรวจวินิจฉัยก่อน/หลัง แอดมิท", icon: "file-search" },
-            { id: "r7", name: "7. อุบัติเหตุฉุกเฉิน (ภายใน 24 ชม.)", icon: "ambulance" },
-            { id: "r8", name: "8. เวชศาสตร์ฟื้นฟู (ต่อรอบปีกรมธรรม์)", icon: "heart-handshake" },
-            { id: "r9", name: "9. ล้างไต (ต่อรอบปีกรมธรรม์)", icon: "droplets" },
-            { id: "r10", name: "10. รังสีรักษา/มะเร็ง (ต่อรอบปีกรมธรรม์)", icon: "zap" },
-            { id: "r11", name: "11. เคมีบำบัด/Targeted Therapy (ต่อรอบปีกรมธรรม์)", icon: "flask-conical" },
-            { id: "r12", name: "12. รถพยาบาลฉุกเฉิน", icon: "truck" },
-            { id: "r13", name: "13. ผ่าตัดเล็ก", icon: "scissors" },
-            { id: "opd", name: "OPD (ผู้ป่วยนอก)", icon: "users" },
-            { id: "d", name: "เงินชดเชยกรณีเสียชีวิต", icon: "heart-crack" }
-        ];
 
-        html += `<tr class="sub-header-row"><td colspan="4">ส่วนที่ 1: ความคุ้มครองสุขภาพเหมาจ่าย / แยกหมวด</td></tr>`;
-        cats.forEach(c => {
-            html += `<tr><td class="row-header">
-                <div class="flex items-center gap-2">
-                    <i data-lucide="${c.icon}" class="w-4 h-4" style="color: var(--primary-color);"></i>
-                    <span>${c.name}</span>
-                </div>
-            </td>`;
-            
+        // helper — แสดงค่าพร้อม styling
+        const cell = (val, id) => {
+            if (!activeOptions[id-1]) return `<td class="data-cell col-opt-${id} hide-col"></td>`;
+            const isNone  = !val || val === '-' || val === 'ไม่คุ้มครอง';
+            const isLimit = val && val.includes('⚠');
+            const isPink  = val && val.includes('Care Plus');
+            const isGood  = val && (val.includes('จ่ายตามจริง') || val.includes('เหมาจ่าย') || val.includes('คุ้มครอง'));
+            const isMid   = val && !isNone && !isLimit && !isPink && !isGood;
+
+            let style = '';
+            if (isPink)   style = 'color:var(--c-mtl);font-weight:600;';
+            else if (isLimit) style = 'color:var(--c-warning);font-weight:600;';
+            else if (isNone && val === 'ไม่คุ้มครอง') style = 'color:var(--c-danger);font-style:italic;';
+            else if (isNone) style = 'color:var(--t-muted);';
+            else if (isGood) style = 'color:var(--c-success);font-weight:600;';
+            else if (isMid) style = 'color:var(--t-primary);font-weight:600;';
+
+            const display = (val === '-') ? '—' : (val || '—');
+            return `<td class="data-cell col-opt-${id}" style="${style}">${display}</td>`;
+        };
+
+        const subHead = (label) => { html += `<tr class="sub-header-row"><td colspan="4">${label}</td></tr>`; };
+
+        const row = (label, fieldId, note = '') => {
+            html += `<tr><td class="row-header">${label}${note ? `<div style="font-size:0.72em;color:var(--t-tertiary);margin-top:3px;line-height:1.4;">${note}</div>` : ''}</td>`;
             [1,2,3].forEach(id => {
-                if (!activeOptions[id-1]) {
-                    html += `<td class="data-cell col-opt-${id} hide-col"></td>`;
-                    return;
-                }
+                if (!activeOptions[id-1]) { html += `<td class="data-cell col-opt-${id} hide-col"></td>`; return; }
                 const st = this.state[id];
                 const key = `${st.type}_${APP_DATA.plans[st.type].options[st.idx].k}`;
-                let val = APP_DATA.benefits[key] ? (APP_DATA.benefits[key][c.id] || "-") : "-";
-                
-                // Override for MTL Care Plus (ในตารางหลักจะแสดงข้อความเพื่อให้เห็นว่าหมวดนี้โยนไปให้ Care Plus ครอบคลุมแทน)
-                const cpChecked = document.getElementById(`cp-${id}`).checked;
-                if (cpChecked && this.isMTL(st.type) && (c.id === 'r9' || c.id === 'r10' || c.id === 'r11')) {
-                    val = "คุ้มครอง 5 ล้าน (Care Plus)";
+                const bData = APP_DATA.benefits[key] || {};
+                // Fallback: ถ้าไม่มี sub-field (เช่น r2_1) ให้ลอง field หลัก (r2)
+                let val = bData[fieldId];
+                if (!val && fieldId.includes('_')) {
+                    const parentField = fieldId.split('_')[0];
+                    val = bData[parentField];
                 }
-
-                const isHighlight = val && (val.includes("จ่ายตามจริง") || val.includes("เหมาจ่าย") || val.includes("คุ้มครอง"));
-                const isMTLPink = val && val.includes("Care Plus");
-                
-                let cssClass = 'text-gray-600';
-                if (isMTLPink) cssClass = 'text-pink-600 font-bold';
-                else if (isHighlight) cssClass = 'text-emerald-600 font-bold';
-                
-                html += `<td class="data-cell col-opt-${id} ${cssClass}">${val}</td>`;
+                val = val || '-';
+                const cpChecked = document.getElementById(`cp-${id}`).checked;
+                if (cpChecked && this.isMTL(st.type) && (fieldId === 'r9' || fieldId === 'r10' || fieldId === 'r11')) {
+                    val = 'คุ้มครอง 5 ล้าน (Care Plus)';
+                }
+                html += cell(val, id);
             });
             html += `</tr>`;
-        });
+        };
 
-        html += `<tr class="sub-header-row"><td colspan="4">ส่วนที่ 2: โรคร้ายแรง Care for Cancer (CFC)</td></tr>`;
-        
+        // ── วงเงินสูงสุด ──────────────────────────────────────────────────────
+        subHead('วงเงินสูงสุดและความคุ้มครองหลัก');
+        row('วงเงินสูงสุดต่อรอบปีกรมธรรม์ / ต่อครั้ง', 'max',
+            'AIA: ต่อรอบปีกรมธรรม์ (รวมทุกหมวด) · DHL: ต่อการเข้าพักรักษาตัวครั้งใดครั้งหนึ่ง');
+
+        // ── หมวด 1: ค่าห้อง ────────────────────────────────────────────────
+        subHead('หมวดที่ 1 — ค่าห้อง ค่าอาหาร และค่าบริการพยาบาล (ผู้ป่วยใน)');
+        row('ค่าห้อง ค่าอาหาร ค่าบริการพยาบาล (ต่อวัน)', 'r1',
+            'AIA: จ่ายตามจริงถึงขั้นห้องเดี่ยวมาตรฐาน · DHL ⚠: วงเงินจำกัดต่อวัน ไม่ใช่จ่ายตามจริง');
+        row('ห้องผู้ป่วยวิกฤติ ICU', 'r1_icu',
+            'จ่ายตามจริง นับรวมกับวงเงินหมวดที่ 1 · สูงสุดไม่เกิน 365 วัน');
+
+        // ── หมวด 2: ค่ายา/การแพทย์ ────────────────────────────────────────
+        subHead('หมวดที่ 2 — ค่าบริการทางการแพทย์ ค่ายา และเวชภัณฑ์');
+        row('2.1  ค่าตรวจวินิจฉัย (Lab, X-ray, MRI, CT, ฯลฯ)', 'r2_1');
+        row('2.2  ค่าบำบัดรักษา ค่าโลหิต และค่าบริการพยาบาล', 'r2_2');
+        row('2.3  ค่ายา ค่าสารอาหารทางหลอดเลือด และเวชภัณฑ์', 'r2_3');
+        row('2.4  ค่ายาและเวชภัณฑ์กลับบ้าน', 'r2_4',
+            'AIA 1M: จำกัด 20,000 บ. (7 วัน) · AIA 5M+: จ่ายตามจริง (7 วัน) · DHL: 20,000 บ./ครั้ง (14 วัน)');
+
+        // ── หมวด 3: ค่าแพทย์ ───────────────────────────────────────────────
+        subHead('หมวดที่ 3 — ค่าแพทย์ตรวจรักษา (ผู้ป่วยใน)');
+        row('ค่าผู้ประกอบวิชาชีพเวชกรรม ตรวจรักษา (ต่อวัน)', 'r3',
+            'AIA: จำกัดตามแผน สูงสุดไม่เกิน 365 วัน · DHL ⚠: วงเงินจำกัดต่อวัน ไม่ใช่จ่ายตามจริง');
+
+        // ── หมวด 4: ผ่าตัด ─────────────────────────────────────────────────
+        subHead('หมวดที่ 4 — ค่ารักษาโดยการผ่าตัดและหัตถการ');
+        row('4.1  ค่าห้องผ่าตัด และค่าห้องทำหัตถการ', 'r4_1');
+        row('4.2  ค่ายา เวชภัณฑ์ และอุปกรณ์การผ่าตัด', 'r4_2');
+        row('4.3  ค่าแพทย์ผ่าตัด / หัตถการ (รวมแพทย์ผู้ช่วย)', 'r4_3');
+        row('4.4  ค่าวิสัญญีแพทย์', 'r4_4');
+        row('4.5  ค่าผ่าตัดเปลี่ยนอวัยวะ', 'r4_5');
+
+        // ── หมวด 5: Day Surgery ─────────────────────────────────────────────
+        subHead('หมวดที่ 5 — การผ่าตัดใหญ่ที่ไม่ต้องเข้าพักรักษา (Day Surgery)');
+        row('Day Surgery — ผ่าตัดใหญ่ไม่ต้องนอนโรงพยาบาล', 'r5',
+            'ครอบคลุมการผ่าตัดใหญ่และหัตถการทดแทนผ่าตัดใหญ่ที่ไม่ต้อง Admit');
+
+        // ── หมวด 6: OPD ก่อน/หลัง IPD ──────────────────────────────────────
+        subHead('หมวดที่ 6 — ค่าบริการก่อน/หลัง Admit และ OPD ต่อเนื่อง');
+        row('6.1  ตรวจวินิจฉัยก่อน/หลัง Admit (ภายใน 30 วัน)', 'r6_1');
+        row('6.2  OPD ติดตามหลัง Admit (สูงสุด 2 ครั้ง / การนอน 1 ครั้ง)', 'r6_2',
+            'ภายใน 30 วันหลังออกจากโรงพยาบาล ไม่รวมค่าตรวจวินิจฉัย');
+
+        // ── หมวด 7-8 ─────────────────────────────────────────────────────────
+        subHead('หมวดที่ 7-8 — อุบัติเหตุ และเวชศาสตร์ฟื้นฟู');
+        row('หมวด 7: ค่ารักษาพยาบาลอุบัติเหตุ (OPD ภายใน 24 ชม.)', 'r7');
+        row('หมวด 8: ค่าเวชศาสตร์ฟื้นฟูหลัง Admit (สูงสุด 2 ครั้ง/ปี)', 'r8');
+
+        // ── หมวด 9-11: โรคเฉพาะ ─────────────────────────────────────────────
+        subHead('หมวดที่ 9-11 — โรคไตวายเรื้อรัง และโรคมะเร็ง');
+        row('หมวด 9: ล้างไต / บำบัดโรคไตวายเรื้อรัง (ต่อรอบปี)', 'r9',
+            'DHL ไม่คุ้มครอง — ต้องซื้อ Care Plus เพิ่มเติม');
+        row('หมวด 10: รังสีรักษา / รังสีร่วมรักษา / เวชศาสตร์นิวเคลียร์ (ต่อรอบปี)', 'r10',
+            'DHL ไม่คุ้มครอง — ต้องซื้อ Care Plus เพิ่มเติม');
+        row('หมวด 11: เคมีบำบัด / Targeted Therapy / ภูมิคุ้มกันบำบัด (ต่อรอบปี)', 'r11',
+            'DHL ไม่คุ้มครอง — ต้องซื้อ Care Plus เพิ่มเติม');
+
+        // ── หมวด 12-13 ───────────────────────────────────────────────────────
+        subHead('หมวดที่ 12-13 — บริการเสริม');
+        row('หมวด 12: ค่ารถพยาบาลฉุกเฉิน', 'r12');
+        row('หมวด 13: ค่ารักษาพยาบาลโดยการผ่าตัดเล็ก (Minor Surgery)', 'r13',
+            'ผ่าตัดระดับผิวหนัง/เยื่อบุ โดยใช้ยาชาเฉพาะที่');
+
+        // ── OPD + ผลประโยชน์พิเศษ HH ─────────────────────────────────────────
+        subHead('ผลประโยชน์ผู้ป่วยนอก (OPD) และผลประโยชน์พิเศษ');
+        row('OPD ผู้ป่วยนอกทั่วไป (ไม่เกี่ยวกับ Admit)', 'opd',
+            'เฉพาะ AIA HH แผน 25M: 2,000 บ./ครั้ง สูงสุด 30 ครั้ง/ปี');
+        row('ผลประโยชน์โรคร้ายแรง — วงเงินเพิ่ม 2 เท่า (สูงสุด 4 ปีกรมธรรม์)', 'ci2x',
+            'AIA HH เท่านั้น: หัวใจ, หลอดเลือดสมอง, บายพาส, มะเร็งลุกลาม, ปลูกถ่ายอวัยวะ, ผ่าตัดเส้นเลือดแดงใหญ่');
+        row('เงินช่วยเหลือกรณีเสียชีวิต', 'd');
+
+        // ── CFC ──────────────────────────────────────────────────────────────
+        html += `<tr class="sub-header-row"><td colspan="4">สัญญาเพิ่มเติมโรคร้ายแรง — AIA Care for Cancer (CFC)</td></tr>`;
         html += `<tr><td class="row-header">เงินก้อนเมื่อตรวจพบมะเร็ง (ทุกระยะ)</td>`;
         [1,2,3].forEach(id => {
-            if (!activeOptions[id-1]) {
-                html += `<td class="data-cell col-opt-${id} hide-col"></td>`;
-                return;
-            }
+            if (!activeOptions[id-1]) { html += `<td class="data-cell col-opt-${id} hide-col"></td>`; return; }
             const sum = parseInt(document.getElementById(`cfc-${id}`).value) || 0;
-            html += `<td class="data-cell col-opt-${id} font-bold text-rose-600">${sum>0 ? this.formatMoney(sum) : "-"}</td>`;
+            html += `<td class="data-cell col-opt-${id}" style="color:var(--c-mtl);font-weight:600;">${sum>0 ? this.formatMoney(sum)+' บ.' : '—'}</td>`;
         });
         html += `</tr>`;
-
-        html += `<tr><td class="row-header">ชดเชยรายวันกรณีแอดมิทด้วยโรคมะเร็ง</td>`;
+        html += `<tr><td class="row-header">ชดเชยรายวันกรณีแอดมิทด้วยโรคมะเร็ง<div style="font-size:0.72em;color:var(--t-tertiary);margin-top:3px;">ทุน CFC ÷ 100,000 × 2,000 บ./วัน</div></td>`;
         [1,2,3].forEach(id => {
-            if (!activeOptions[id-1]) {
-                html += `<td class="data-cell col-opt-${id} hide-col"></td>`;
-                return;
-            }
+            if (!activeOptions[id-1]) { html += `<td class="data-cell col-opt-${id} hide-col"></td>`; return; }
             const sum = parseInt(document.getElementById(`cfc-${id}`).value) || 0;
-            html += `<td class="data-cell col-opt-${id} text-gray-600">${sum>0 ? this.formatMoney((sum/100000)*2000) : "-"}</td>`;
+            html += `<td class="data-cell col-opt-${id}" style="color:var(--t-primary);">${sum>0 ? this.formatMoney((sum/100000)*2000)+' บ./วัน' : '—'}</td>`;
         });
         html += `</tr>`;
-
-        html += `<tr><td class="row-header">ชดเชยกรณีรับเคมีบำบัด / รังสีรักษา (OPD)</td>`;
+        html += `<tr><td class="row-header">ชดเชยกรณีรับเคมีบำบัด / รังสีรักษา (OPD)<div style="font-size:0.72em;color:var(--t-tertiary);margin-top:3px;">ทุน CFC ÷ 100,000 × 500 บ./ครั้ง</div></td>`;
         [1,2,3].forEach(id => {
-            if (!activeOptions[id-1]) {
-                html += `<td class="data-cell col-opt-${id} hide-col"></td>`;
-                return;
-            }
+            if (!activeOptions[id-1]) { html += `<td class="data-cell col-opt-${id} hide-col"></td>`; return; }
             const sum = parseInt(document.getElementById(`cfc-${id}`).value) || 0;
-            html += `<td class="data-cell col-opt-${id} text-gray-600">${sum>0 ? this.formatMoney((sum/100000)*500) : "-"}</td>`;
+            html += `<td class="data-cell col-opt-${id}" style="color:var(--t-primary);">${sum>0 ? this.formatMoney((sum/100000)*500)+' บ./ครั้ง' : '—'}</td>`;
         });
         html += `</tr>`;
 
-        html += `<tr class="sub-header-row"><td colspan="4">ส่วนที่ 3: ชดเชยรายได้ HB Extra</td></tr>`;
-        
+        // ── HB Extra ─────────────────────────────────────────────────────────
+        html += `<tr class="sub-header-row"><td colspan="4">สัญญาเพิ่มเติมชดเชยรายได้ — AIA HB Extra</td></tr>`;
         html += `<tr><td class="row-header">ชดเชยรายวันทั่วไป (IPD)</td>`;
         [1,2,3].forEach(id => {
-            if (!activeOptions[id-1]) {
-                html += `<td class="data-cell col-opt-${id} hide-col"></td>`;
-                return;
-            }
+            if (!activeOptions[id-1]) { html += `<td class="data-cell col-opt-${id} hide-col"></td>`; return; }
             const sum = parseInt(document.getElementById(`hb-${id}`).value) || 0;
-            html += `<td class="data-cell col-opt-${id} font-bold text-amber-600">${sum>0 ? this.formatMoney(sum) : "-"}</td>`;
+            html += `<td class="data-cell col-opt-${id}" style="color:var(--c-primary);font-weight:600;">${sum>0 ? this.formatMoney(sum)+' บ./วัน' : '—'}</td>`;
         });
         html += `</tr>`;
-
-        html += `<tr><td class="row-header">ชดเชยห้อง ICU (3 เท่า)</td>`;
+        html += `<tr><td class="row-header">ชดเชยห้อง ICU (3 เท่าของรายวันทั่วไป)</td>`;
         [1,2,3].forEach(id => {
-            if (!activeOptions[id-1]) {
-                html += `<td class="data-cell col-opt-${id} hide-col"></td>`;
-                return;
-            }
+            if (!activeOptions[id-1]) { html += `<td class="data-cell col-opt-${id} hide-col"></td>`; return; }
             const sum = parseInt(document.getElementById(`hb-${id}`).value) || 0;
-            html += `<td class="data-cell col-opt-${id} text-gray-600">${sum>0 ? this.formatMoney(sum*3) : "-"}</td>`;
+            html += `<td class="data-cell col-opt-${id}" style="color:var(--t-primary);">${sum>0 ? this.formatMoney(sum*3)+' บ./วัน' : '—'}</td>`;
         });
         html += `</tr>`;
-
         html += `<tr><td class="row-header">โรคร้ายแรงเฉียบพลัน 13 โรค (25 เท่า)</td>`;
         [1,2,3].forEach(id => {
-            if (!activeOptions[id-1]) {
-                html += `<td class="data-cell col-opt-${id} hide-col"></td>`;
-                return;
-            }
+            if (!activeOptions[id-1]) { html += `<td class="data-cell col-opt-${id} hide-col"></td>`; return; }
             const sum = parseInt(document.getElementById(`hb-${id}`).value) || 0;
-            html += `<td class="data-cell col-opt-${id} text-gray-600">${sum>0 ? this.formatMoney(sum*25) : "-"}</td>`;
+            html += `<td class="data-cell col-opt-${id}" style="color:var(--t-primary);">${sum>0 ? this.formatMoney(sum*25)+' บ.' : '—'}</td>`;
         });
         html += `</tr>`;
 
-        // Section 4: Care Plus Detail based on PDF
-        html += `<tr class="sub-header-row"><td colspan="4">ส่วนที่ 4: สัญญาเพิ่มเติม แคร์ พลัส (Care Plus) - คุ้มครองรักษามะเร็งและไตวายเรื้อรัง (ครอบคลุมการเหมาจ่ายหมวด 9, 10, 11)</td></tr>`;
-        
+        // ── Care Plus ─────────────────────────────────────────────────────────
+        html += `<tr class="sub-header-row"><td colspan="4">สัญญาเพิ่มเติม MTL Care Plus 5M — คุ้มครองมะเร็งและไตวายเรื้อรัง (หมวด 9, 10, 11)</td></tr>`;
         const cpRows = [
-            { label: "วงเงินความคุ้มครองโรคมะเร็ง และไตวายเรื้อรัง (ต่อโรค / ต่อปี)", valFn: (cpChecked) => cpChecked ? "5,000,000 บาท" : "-" },
-            { label: "ค่าบำบัดรักษาโรคทางจิตเวช (สูงสุด 5 ปี / ต่อโรค)", valFn: (cpChecked) => cpChecked ? "50,000 บาท" : "-" },
-            { label: "ค่ายา/เวชภัณฑ์ กลับบ้าน (สูงสุด 30 วัน)", valFn: (cpChecked) => cpChecked ? "100,000 บาท/ครั้ง" : "-" },
-            { label: "การรักษาแบบมุ่งเป้า (Targeted Therapy) / ภูมิคุ้มกันบำบัด", valFn: (cpChecked) => cpChecked ? "จ่ายตามจริง (ในวงเงิน)" : "-" },
-            { label: "การล้างไตทุกรูปแบบ / การปลูกถ่ายไต", valFn: (cpChecked) => cpChecked ? "จ่ายตามจริง (ในวงเงิน)" : "-" },
+            { label: "วงเงินความคุ้มครองโรคมะเร็ง และไตวายเรื้อรัง (ต่อโรค / ต่อปี)", valFn: (cp) => cp ? "5,000,000 บาท" : "—" },
+            { label: "ค่ายา/เวชภัณฑ์กลับบ้าน (สูงสุด 30 วัน)", valFn: (cp) => cp ? "100,000 บาท/ครั้ง" : "—" },
+            { label: "การรักษาแบบมุ่งเป้า (Targeted Therapy) / ภูมิคุ้มกันบำบัด", valFn: (cp) => cp ? "จ่ายตามจริง (ในวงเงิน)" : "—" },
+            { label: "การล้างไตทุกรูปแบบ / การปลูกถ่ายไต", valFn: (cp) => cp ? "จ่ายตามจริง (ในวงเงิน)" : "—" },
         ];
-
         cpRows.forEach(r => {
             html += `<tr><td class="row-header">${r.label}</td>`;
             [1,2,3].forEach(id => {
-                if (!activeOptions[id-1]) {
-                    html += `<td class="data-cell col-opt-${id} hide-col"></td>`;
-                    return;
-                }
+                if (!activeOptions[id-1]) { html += `<td class="data-cell col-opt-${id} hide-col"></td>`; return; }
                 const st = this.state[id];
                 const cpChecked = document.getElementById(`cp-${id}`).checked;
-                
-                // จะแสดงความคุ้มครองก็ต่อเมื่อเลือกแผน MTL (DHP/DHL) และติ๊ก Care Plus เท่านั้น
-                const val = this.isMTL(st.type) ? r.valFn(cpChecked) : "-";
-                const isPink = val !== "-";
-                
-                html += `<td class="data-cell col-opt-${id} ${isPink ? 'text-pink-600 font-bold' : 'text-gray-400'}">${val}</td>`;
+                const val = this.isMTL(st.type) ? r.valFn(cpChecked) : '—';
+                const isPink = val !== '—';
+                html += `<td class="data-cell col-opt-${id}" style="${isPink ? 'color:var(--c-mtl);font-weight:600;' : 'color:var(--t-muted);'}">${val}</td>`;
             });
             html += `</tr>`;
         });
 
         document.getElementById('benefit-body').innerHTML = html;
-
-        // เรียกใช้งานคำสั่ง Render Icons ของ Lucide ใหม่หลังจากที่สร้าง Element ลงในหน้าเว็บ
-        if (window.lucide) {
-            window.lucide.createIcons();
-        }
+        if (window.lucide) window.lucide.createIcons();
     },
+
 
     renderProjectionTable(gender, activeOptions) {
         // หาช่วงอายุที่น้อยที่สุดจาก Options ทั้งหมดที่เปิดใช้งาน เพื่อใช้เป็นจุดเริ่มต้นของตาราง
@@ -1411,7 +2251,7 @@ const app = {
                         pMain = this.calculateMainPremiumForPlan(mainSum, optAge, gender, mainType);
                     }
                 } else {
-                    mainDesc = `<br><span style="font-size: 11px; color: #aaa;">(ประกันหลักครบชำระ 20ปี)</span>`;
+                    mainDesc = `<br><span style="font-size: 11px; color: var(--t-tertiary);">(ประกันหลักครบชำระ 20ปี)</span>`;
                 }
 
                 const optK = APP_DATA.plans[st.type].options[st.idx].k;
@@ -1441,12 +2281,12 @@ const app = {
                 const pTotal = pMain + pHl + pCFC + pHB + pCP;
                 let termHtml = mainDesc;
                 if(termDesc.length > 0) {
-                    termHtml += `<br><span style="font-size: 11px; color: #aaa;">(${termDesc.join(', ')})</span>`;
+                    termHtml += `<br><span style="font-size: 11px; color: var(--t-tertiary);">(${termDesc.join(', ')})</span>`;
                 }
                 
-                let colorClass = id===1 ? 'text-emerald-700' : (id===2 ? 'text-amber-700' : 'text-rose-700');
+                const colorVar = id===1 ? 'var(--c-primary)' : 'var(--c-mtl)';
 
-                html += `<td class="col-opt-${id} font-bold ${colorClass}">${this.formatMoney(pTotal)}${termHtml}</td>`;
+                html += `<td class="col-opt-${id}" style="color: ${colorVar}; font-weight: 600;">${this.formatMoney(pTotal)}${termHtml}</td>`;
             });
 
             html += `</tr>`;
@@ -1479,7 +2319,7 @@ const app = {
             document.querySelectorAll(`.cipc-col-${id}`).forEach(el => el.style.display = show ? '' : 'none');
             if (show) {
                 const mainSum = parseInt(document.getElementById(`main-sum-${id}`).value) || 0;
-                document.getElementById(`cipc-head-${id}`).innerHTML = `Option ${id}<br><span style="font-size:12px; font-weight:normal;">ทุน ${this.formatMoney(mainSum)} บ.</span>`;
+                document.getElementById(`cipc-head-${id}`).innerHTML = `Option ${id}<br><span style="font-size: 0.78em; font-weight: 400; color: var(--t-tertiary); text-transform: none; letter-spacing: 0;">ทุน ${this.formatMoney(mainSum)} บ.</span>`;
             }
         });
 
@@ -1506,14 +2346,14 @@ const app = {
         benefitRows.forEach(r => {
             const isSectionHeader = (r.pctFn === null);
             const isHighlight = r.highlight;
-            
-            html += `<tr ${isHighlight ? 'style="background-color:#fff0f0;"' : ''}>`;
-            html += `<td class="row-header" style="${isSectionHeader ? 'font-weight:700; color:var(--accent-color);' : ''}">
-                <div class="flex items-start gap-2">
-                    ${r.icon ? `<i data-lucide="${r.icon}" class="w-4 h-4 mt-1 flex-shrink-0" style="color: var(--accent-color);"></i>` : '<span class="w-4"></span>'}
+
+            html += `<tr ${isHighlight ? 'style="background-color: var(--c-mtl-soft);"' : ''}>`;
+            html += `<td class="row-header" style="${isSectionHeader ? 'font-weight: 600; color: var(--c-mtl);' : ''}">
+                <div style="display: flex; align-items: flex-start; gap: 10px;">
+                    ${r.icon ? `<i data-lucide="${r.icon}" style="width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; color: var(--c-mtl);"></i>` : '<span style="width: 16px;"></span>'}
                     <div>
                         <span>${r.label}</span>
-                        ${r.sub ? `<div class="text-[11px] text-gray-400 mt-1">${r.sub}</div>` : ''}
+                        ${r.sub ? `<div style="font-size: 0.75em; color: var(--t-tertiary); margin-top: 4px; line-height: 1.5;">${r.sub}</div>` : ''}
                     </div>
                 </div>
             </td>`;
@@ -1524,14 +2364,17 @@ const app = {
                     return;
                 }
                 const mainSum = parseInt(document.getElementById(`main-sum-${id}`).value) || 0;
-                
+
                 if (isSectionHeader) {
-                    html += `<td class="data-cell cipc-col-${id} font-bold text-red-700">${r.desc}</td>`;
+                    html += `<td class="data-cell cipc-col-${id}" style="font-weight: 600; color: var(--c-mtl);">${r.desc}</td>`;
                 } else {
                     const val = r.pctFn ? r.pctFn(mainSum) : '-';
-                    html += `<td class="data-cell cipc-col-${id} ${isHighlight ? 'font-bold text-red-700 text-lg' : 'text-gray-700'}">
+                    const valStyle = isHighlight
+                        ? 'font-weight: 600; color: var(--c-mtl); font-size: 1.10em;'
+                        : 'color: var(--t-primary);';
+                    html += `<td class="data-cell cipc-col-${id}" style="${valStyle}">
                         ${val}
-                        <div class="text-[11px] text-gray-400">${r.desc}</div>
+                        <div style="font-size: 0.72em; color: var(--t-tertiary); margin-top: 3px;">${r.desc}</div>
                     </td>`;
                 }
             });
@@ -1562,9 +2405,9 @@ const app = {
         const gender = document.getElementById('inp-gender').value;
         const fmt = (n) => this.formatMoney(n);
         let containerHtml = '';
-        const optColors = { 1: '#10b981', 2: '#f59e0b', 3: '#f43f5e' };
+        // ใช้ CSS variable แทนสีฮาร์ดโค้ด
+        const optColors = { 1: 'var(--c-primary)', 2: 'var(--c-mtl)', 3: 'var(--c-mtl)' };
         const optNames = { 1: 'Option 1', 2: 'Option 2', 3: 'Option 3' };
-        const optBg = { 1: 'emerald', 2: 'amber', 3: 'rose' };
 
         [1,2,3].forEach(id => {
             if (!cipcActive[id]) return;
@@ -1580,14 +2423,14 @@ const app = {
 
             containerHtml += `
             <div class="cv-option-header" style="border-color: ${optColors[id]};">
-                <div class="flex justify-between items-center">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
                     <div>
-                        <span class="font-bold text-lg" style="color: ${optColors[id]};">${optNames[id]} — AIA CI ProCare</span>
-                        <span class="text-sm text-gray-500 ml-3">อายุแรกเข้า ${age} ปี | ทุน ${fmt(mainSum)} บาท</span>
+                        <span style="font-weight: 600; font-size: 1.05em; color: ${optColors[id]};">${optNames[id]} — AIA CI ProCare</span>
+                        <span style="font-size: 0.85em; color: var(--t-tertiary); margin-left: 12px;">อายุแรกเข้า ${age} ปี · ทุน ${fmt(mainSum)} บาท</span>
                     </div>
-                    <div class="text-right">
-                        <div class="text-xs text-gray-400">เบี้ยรายปี</div>
-                        <div class="font-bold text-blue-700">${fmt(annualPrem)} บ./ปี</div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 0.72em; color: var(--t-tertiary); letter-spacing: 0.08em; text-transform: uppercase;">เบี้ยรายปี</div>
+                        <div style="font-weight: 600; color: var(--c-primary); font-size: 1.05em;">${fmt(annualPrem)} <span style="font-size: 0.78em; color: var(--t-tertiary); font-weight: 400;">บ./ปี</span></div>
                     </div>
                 </div>
             </div>
@@ -1596,7 +2439,7 @@ const app = {
                     <tr>
                         <th style="width: 22%;">สิ้นปีกรมธรรม์ที่</th>
                         <th style="width: 24%;">เบี้ยฯ สะสม (ทุนหลัก)</th>
-                        <th style="width: 28%;">มูลค่าเวนคืน (CV)<br><span style="font-size:11px; font-weight:400; opacity:0.8;">(กรอกตัวเลขเพื่อคำนวณ)</span></th>
+                        <th style="width: 28%;">มูลค่าเวนคืน (CV)<br><span style="font-size: 0.85em; font-weight: 400; opacity: 0.85;">(กรอกตัวเลขเพื่อคำนวณ)</span></th>
                         <th style="width: 26%;">กำไร / ขาดทุนสุทธิ</th>
                     </tr>
                 </thead>
@@ -1604,9 +2447,8 @@ const app = {
 
             yearPoints.forEach(yr => {
                 const targetAge = age + yr;
-                if (targetAge > 99) return; // ข้ามถ้าอายุเกิน 99
+                if (targetAge > 99) return;
 
-                // เบี้ยสะสม: ถ้ายังไม่ครบ 20 ปี ให้คูณตามจำนวนปีที่ชำระ, ถ้าครบแล้วให้เป็น 20 ปีเต็ม
                 const yearsPayable = Math.min(yr, 20);
                 const accumPrem = annualPrem * yearsPayable;
                 const cvInputId = `cv-input-${id}-${yr}`;
@@ -1620,10 +2462,10 @@ const app = {
 
                 containerHtml += `
                     <tr>
-                        <td>ปีที่ ${yr} <span style="color:#6b7280; font-weight:400;">(อายุ ${targetAge})</span></td>
+                        <td>ปีที่ ${yr} <span style="color: var(--t-tertiary); font-weight: 400;">(อายุ ${targetAge})</span></td>
                         <td id="${accumId}">${fmt(accumPrem)}</td>
                         <td>
-                            <input type="text" id="${cvInputId}" class="cv-input" value="${savedCV}" 
+                            <input type="text" id="${cvInputId}" class="cv-input" value="${savedCV}"
                                    inputmode="numeric"
                                    onfocus="this.select()"
                                    oninput="app.updateCVRow(${id}, ${yr})">
@@ -1673,6 +2515,53 @@ const app = {
 
 // Start App
 document.addEventListener('DOMContentLoaded', () => app.init());
+
+// Theme toggle (Dark / Light) — preference persists via localStorage
+function toggleTheme() {
+    const body = document.body;
+    const next = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    body.setAttribute('data-theme', next);
+    try { localStorage.setItem('hs_theme', next); } catch(e) {}
+    document.getElementById('theme-icon-dark').style.display = next === 'dark' ? '' : 'none';
+    document.getElementById('theme-icon-light').style.display = next === 'light' ? '' : 'none';
+}
+(function initTheme() {
+    let saved = 'dark';
+    try { saved = localStorage.getItem('hs_theme') || 'dark'; } catch(e) {}
+    document.body.setAttribute('data-theme', saved);
+    document.addEventListener('DOMContentLoaded', () => {
+        const dark = document.getElementById('theme-icon-dark');
+        const light = document.getElementById('theme-icon-light');
+        if (dark && light) {
+            dark.style.display = saved === 'dark' ? '' : 'none';
+            light.style.display = saved === 'light' ? '' : 'none';
+        }
+    });
+})();
+
+// Font Size Control (6 levels: 1=88%, 2=94%, 3=100% default, 4=106%, 5=111%, 6=122%)
+const FS_LEVELS = { 1: '88%', 2: '94%', 3: '100%', 4: '106%', 5: '111%', 6: '122%' };
+const FS_DEFAULT = 3;
+let _fsLevel = FS_DEFAULT;
+function _applyFontSize(lvl) {
+    _fsLevel = Math.min(6, Math.max(1, lvl));
+    document.body.setAttribute('data-fs', _fsLevel);
+    const display = document.getElementById('fs-display');
+    if (display) display.textContent = FS_LEVELS[_fsLevel];
+    try { localStorage.setItem('hs_fs', _fsLevel); } catch(e) {}
+}
+function changeFontSize(delta) { _applyFontSize(_fsLevel + delta); }
+function resetFontSize() { _applyFontSize(FS_DEFAULT); }
+(function initFontSize() {
+    let saved = FS_DEFAULT;
+    try { saved = parseInt(localStorage.getItem('hs_fs')) || FS_DEFAULT; } catch(e) {}
+    document.body.setAttribute('data-fs', saved);
+    _fsLevel = saved;
+    document.addEventListener('DOMContentLoaded', () => {
+        const display = document.getElementById('fs-display');
+        if (display) display.textContent = FS_LEVELS[saved];
+    });
+})();
 </script>
 </body>
 </html>

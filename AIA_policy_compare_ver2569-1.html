@@ -1191,14 +1191,6 @@ function renderProjSummary(){
       html+=`</tr></table></td></tr>`;
     });
 
-    // Cumulative running row (every 5 bands)
-    if((bi-startBi+1)%5===0){
-      html+=`<tr class="annual-row"><td class="ac" style="font-size:9px;color:#888">สะสม</td><td></td>`;
-      [0,1,2,3].forEach(ci=>{
-        html+=`<td style="text-align:right;font-size:11px;font-weight:700;color:${['var(--p1)','var(--p2)','var(--p3)','var(--p4)'][ci]}">${bc[ci]?FZ(cumTotals[ci]):'—'}</td>`;
-      });
-      html+=`</tr>`;
-    }
   }
   document.getElementById('pt-sum-tbody').innerHTML=html;
 
@@ -1275,17 +1267,6 @@ function renderProjDetail(ci){
       else html+=`<td style="${c.style||''};text-align:right">${v>0?FZ(v):'—'}</td>`;
     });
     html+=`</tr>`;
-
-    // Cumulative row every 5 bands
-    if((bi-startBi+1)%5===0){
-      html+=`<tr class="cum-row">
-        <td class="ac" style="font-size:10px;color:#92400e">สะสม</td>`;
-      cols.forEach(c=>{
-        const v=cumByCol[c.k]||0;
-        html+=`<td style="text-align:right;font-weight:600;color:#92400e;font-size:11px">${v>0?FZ(v):'—'}</td>`;
-      });
-      html+=`</tr>`;
-    }
   }
   // Grand total row
   html+=`<tr style="background:${pColors[ci]}1a;font-weight:800;border-top:2px solid ${pColors[ci]}">

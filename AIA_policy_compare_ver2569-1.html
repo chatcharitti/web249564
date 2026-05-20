@@ -19,17 +19,18 @@
   --p3:#7c3aed;--p3l:#f5f3ff;
   --p4:#b8860b;--p4l:#fef9e7;
   --fs:16px;
+  --scale:1;
 }
 *{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
 body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);font-size:var(--fs);line-height:1.65}
-body.fs-sm{font-size:13px} body.fs-md{font-size:16px} body.fs-lg{font-size:19px} body.fs-xl{font-size:22px}
 
 /* ── TOP BAR ── */
 .topbar{background:var(--pri);color:#fff;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:300;box-shadow:0 3px 12px rgba(0,0,0,.22)}
 .tb-brand{display:flex;align-items:center;gap:10px}
 .tb-logo{width:34px;height:34px;border-radius:7px;background:linear-gradient(135deg,#fff,#c8e0ff);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:900;color:var(--pri)}
-.tb-title{font-size:18px;font-weight:800}
-.tb-sub{font-size:12px;opacity:.72;margin-top:1px}
+.tb-title{font-size:1.125em;font-weight:800}
+.tb-sub{font-size:0.75em;opacity:.72;margin-top:1px}
 .tb-actions{display:flex;align-items:center;gap:8px}
 .fs-wrap{display:flex;gap:3px;align-items:center}
 .fs-lbl{font-size:11px;opacity:.65;margin-right:3px}
@@ -46,12 +47,12 @@ body.fs-sm{font-size:13px} body.fs-md{font-size:16px} body.fs-lg{font-size:19px}
 /* ── CARD ── */
 .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:18px}
 .card-hd{padding:14px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
-.card-title{font-size:17px;font-weight:700;color:var(--pri);display:flex;align-items:center;gap:7px}
+.card-title{font-size:1.0625em;font-weight:700;color:var(--pri);display:flex;align-items:center;gap:7px}
 .card-body{padding:18px 22px}
 
 /* ── SECTION ANCHOR NAV ── */
 .sec-nav{display:flex;gap:6px;flex-wrap:wrap;padding:10px 22px;background:var(--pri-light);border-bottom:1px solid var(--border)}
-.sec-nav a{font-size:12px;font-weight:700;color:var(--pri);text-decoration:none;padding:4px 10px;border-radius:6px;border:1px solid var(--pri-light);background:#fff;transition:all .12s}
+.sec-nav a{font-size:0.75em;font-weight:700;color:var(--pri);text-decoration:none;padding:4px 10px;border-radius:6px;border:1px solid var(--pri-light);background:#fff;transition:all .12s}
 .sec-nav a:hover{background:var(--pri);color:#fff}
 
 /* ── 4-POLICY GRID ── */
@@ -83,6 +84,36 @@ body.fs-sm{font-size:13px} body.fs-md{font-size:16px} body.fs-lg{font-size:19px}
 .tog{display:flex;border:1.5px solid var(--border);border-radius:7px;overflow:hidden;margin-top:3px}
 .tog button{flex:1;padding:5px 0;font-family:'Sarabun',sans-serif;font-size:12px;font-weight:700;border:none;background:#f8fafc;color:var(--muted);cursor:pointer;transition:all .13s}
 .tog button.on{background:var(--pri);color:#fff}
+
+/* ── EM-BASED FONT SCALING — all text scales with body font-size ── */
+.pc-hd{font-size:0.875em!important}
+.card-title{font-size:1.0625em!important}
+.fl{font-size:0.6875em!important}
+.fi,.fs2{font-size:0.8125em!important}
+.sl{font-size:0.625em!important}
+.tog button{font-size:0.75em!important}
+.rn{font-size:0.75em!important}
+.rn small{font-size:0.625em!important}
+.rs,.ri{font-size:0.6875em!important}
+.ck{font-size:0.6875em!important}
+.pbl{font-size:0.75em!important}
+.pbv{font-size:1.0625em!important}
+.ct,.ben-table{font-size:0.875em!important}
+.ct .rh,.ben-table .rh{font-size:0.8125em!important}
+.ct .dc,.ben-table .dc{font-size:0.8125em!important}
+.ct .tr td{font-size:1em!important}
+.gt-bar .gtc-amt{font-size:1.5em!important}
+.gtc-lbl{font-size:0.75em!important}
+.gtc-name{font-size:0.6875em!important}
+.gtc-sub{font-size:0.6875em!important}
+.pt-sum,.pt-det{font-size:0.8125em!important}
+.bdc-hd{font-size:0.8125em!important}
+.bdt{font-size:0.75em!important}
+.di-group-title{font-size:0.75em!important}
+.di-tag{font-size:0.6875em!important}
+.sec-nav a{font-size:0.75em!important}
+.tb-title{font-size:1.125em!important}
+.tb-sub{font-size:0.75em!important}
 
 /* rider row */
 .rr{display:flex;align-items:flex-start;justify-content:space-between;gap:6px;padding:5px 0;border-bottom:1px dotted #e2e8f0}
@@ -618,6 +649,41 @@ const D = {
     female:{"0-15":1.95,"16-20":1.81,"21-25":2.29,"26-30":2.88,"31-35":4.04,"36-40":4.90,"41-45":6.40,"46-50":10.37,"51-55":16.36,"56-60":26.26,"61-65":36.37,"66-70":49.77,"71-75":68.29,"76-79":90.08}
   },
 
+  // ── AIA CI Plus — rate per 1,000 บ. (สิ้นสุดอายุ 79 ปี = band idx 0-13) ──
+  RATE_CI_PLUS:{
+    male:{"0-15":2.62,"16-20":2.76,"21-25":2.89,"26-30":3.16,"31-35":3.84,"36-40":5.23,"41-45":10.19,"46-50":15.92,"51-55":25.38,"56-60":42.31,"61-65":61.04,"66-70":81.76,"71-75":112.64,"76-80":142.38,"81-85":183.10,"86-90":261.54,"91-95":386.58,"96-98":503.41},
+    female:{"0-15":2.27,"16-20":2.06,"21-25":2.15,"26-30":2.55,"31-35":3.53,"36-40":4.60,"41-45":6.38,"46-50":10.17,"51-55":15.92,"56-60":26.09,"61-65":35.81,"66-70":51.71,"71-75":73.52,"76-80":104.55,"81-85":139.66,"86-90":240.90,"91-95":384.25,"96-98":497.74}
+  },
+
+  // ── AIA CI Top Up (แนบกับ CI Plus) — rate per 1,000 บ. ──
+  RATE_CI_TOPUP:{
+    male:{"0-15":0.65,"16-20":0.57,"21-25":0.66,"26-30":1.14,"31-35":1.65,"36-40":2.52,"41-45":7.07,"46-50":12.52,"51-55":23.25,"56-60":35.62,"61-65":44.95,"66-70":59.23,"71-75":68.73,"76-80":70.72,"81-85":78.68,"86-90":102.93,"91-95":137.74,"96-98":173.51},
+    female:{"0-15":0.46,"16-20":1.04,"21-25":2.02,"26-30":2.68,"31-35":3.51,"36-40":3.26,"41-45":3.82,"46-50":5.34,"51-55":8.25,"56-60":12.14,"61-65":14.97,"66-70":20.50,"71-75":25.72,"76-80":28.32,"81-85":34.04,"86-90":44.52,"91-95":59.59,"96-98":75.05}
+  },
+
+  // ── AIA Multi-Pay CI Plus (Multi-Pay CI + Total Care) — rate per 1,000 บ. ──
+  // คุ้มครองถึง 99 ปี — ใช้ตาราง "รวม" จาก MD
+  RATE_MULTIPAY_CI:{
+    male:{"0-5":6.31,"6-10":4.61,"11-15":4.55,"16-20":4.52,"21-25":5.05,"26-30":5.56,"31-35":6.61,"36-40":8.75,"41-45":16.87,"46-50":27.70,"51-55":49.73,"56-60":83.62,"61-65":130.07,"66-70":163.89,"71-75":235.83,"76-80":326.64,"81-85":381.57,"86-90":621.28,"91-95":909.63,"96-99":1043.30},
+    female:{"0-5":5.13,"6-10":3.83,"11-15":3.76,"16-20":3.49,"21-25":4.18,"26-30":4.73,"31-35":6.23,"36-40":7.35,"41-45":10.04,"46-50":16.31,"51-55":29.16,"56-60":45.37,"61-65":69.55,"66-70":102.32,"71-75":157.17,"76-80":232.32,"81-85":480.75,"86-90":571.36,"91-95":855.28,"96-99":1065.97}
+  },
+
+  // ── Calc functions for new riders ──
+  calcCIPlus(sum,age,g){
+    if(!sum||age>98)return 0;
+    return Math.round((sum/1000)*this.getRR(this.RATE_CI_PLUS[g],age));
+  },
+  calcCITopUp(sum,age,g){
+    // sum = 40% ของ CI Plus sum (คำนวณอัตโนมัติ) แต่เก็บ sum เป็นทุน CI Plus
+    if(!sum||age>98)return 0;
+    const topupSum=sum*0.4;
+    return Math.round((topupSum/1000)*this.getRR(this.RATE_CI_TOPUP[g],age));
+  },
+  calcMultiPayCI(sum,age,g){
+    if(!sum||age>99)return 0;
+    return Math.round((sum/1000)*this.getRR(this.RATE_MULTIPAY_CI[g],age));
+  },
+
   // ── CALC FUNCTIONS ──
   calcMain(age,g,sum){const r=this.rate20PLN[g][age]||0;const d=sum>=600000?2:sum>=250000?1:0;return Math.round((sum/1000)*Math.max(0,r-d))},
   calcHealth(type,k,age,g){if(type==='NONE')return 0;const arr=this.rateTable[type]?.[g]?.[k];return arr?(arr[this.getBandIdx(age)]||0):0},
@@ -662,10 +728,20 @@ const ST=[1,2,3,4].map(i=>({
   hbSum:0,hbStdSum:0,
   aiSum:0,aiRCC:true,addSum:0,addRCC:true,adbSum:0,adbRCC:true,occClass:1,
   ecirSum:0,ciCareSum:0,
+  ciPlusSum:0,ciTopUp:false,multiPayCISum:0,
   result:{}
 }));
 
-function su(pi,f,v){ST[pi][f]=v;calcOne(pi);updatePB(pi)}
+function su(pi,f,v){
+  ST[pi][f]=v;
+  // CI Top Up row enable/disable follows ciPlusSum
+  if(f==='ciPlusSum'){
+    const row=document.getElementById(`citopup-row-${pi}`);
+    if(row) row.style.cssText=v>0?'':'opacity:.4;pointer-events:none';
+    if(v===0){ST[pi].ciTopUp=false;const cb=document.getElementById(`citopup-${pi}`);if(cb)cb.checked=false;}
+  }
+  calcOne(pi);updatePB(pi);
+}
 
 // ════════════════════════════════════════════════════════════
 //  RENDER INPUT PANELS
@@ -803,6 +879,23 @@ function renderInputs(){
         <div class="rn">CI Care (18+44 โรค)<small>อายุ 1 เดือน-79 ปี</small></div>
         <input type="number" class="ri" placeholder="ทุนประกัน (บ.)" step="100000" value="${s.ciCareSum||''}" oninput="su(${ci},'ciCareSum',+this.value||0)">
       </div>
+      <div class="rr">
+        <div class="rn">CI Plus (44 โรคร้ายแรง)<small>อายุ 15 วัน-98 ปี</small></div>
+        <div class="rr-right">
+          <input type="number" class="ri" placeholder="ทุนประกัน (บ.)" step="100000" value="${s.ciPlusSum||''}" oninput="su(${ci},'ciPlusSum',+this.value||0)">
+        </div>
+      </div>
+      <div class="rr" id="citopup-row-${ci}" style="${s.ciPlusSum>0?'':'opacity:.4;pointer-events:none'}">
+        <div class="rn">CI Top Up (18 โรคระดับต้น, 40%)<small>แนบกับ CI Plus เท่านั้น | ทุน = 40% ของ CI Plus อัตโนมัติ</small></div>
+        <div class="ck" style="margin-top:4px">
+          <input type="checkbox" id="citopup-${ci}" ${s.ciTopUp?'checked':''} onchange="su(${ci},'ciTopUp',this.checked)">
+          <label for="citopup-${ci}">เพิ่ม CI Top Up</label>
+        </div>
+      </div>
+      <div class="rr">
+        <div class="rn">MultiPay CI Plus (จ่ายหลายครั้ง)<small>อายุ 15 วัน-99 ปี | จ่ายสูงสุด 6 ครั้ง</small></div>
+        <input type="number" class="ri" placeholder="ทุนประกัน (บ.)" step="100000" value="${s.multiPayCISum||''}" oninput="su(${ci},'multiPayCISum',+this.value||0)">
+      </div>
 
       <div class="pb" id="pb-${ci}">
         <span class="pbl">เบี้ยรวม (บาท/ปี)</span>
@@ -858,8 +951,11 @@ function calcOne(pi){
   const pADB=D.calcADB(s.adbSum,occ,s.adbRCC);
   const pECIR=D.calcECIR(s.ecirSum,age,g,occ);
   const pCIC=D.calcCICare(s.ciCareSum,age,g);
-  const total=pMain+pH+pHC+pCFC+pHB+pHBStd+pAI+pADD+pADB+pECIR+pCIC;
-  s.result={pMainAuto,pMain,pH,pHC,pCFC,pHB,pHBStd,pAI,pADD,pADB,pECIR,pCIC,total,
+  const pCIPlus=D.calcCIPlus(s.ciPlusSum,age,g);
+  const pCITopUp=s.ciTopUp?D.calcCITopUp(s.ciPlusSum,age,g):0;
+  const pMultiPay=D.calcMultiPayCI(s.multiPayCISum,age,g);
+  const total=pMain+pH+pHC+pCFC+pHB+pHBStd+pAI+pADD+pADB+pECIR+pCIC+pCIPlus+pCITopUp+pMultiPay;
+  s.result={pMainAuto,pMain,pH,pHC,pCFC,pHB,pHBStd,pAI,pADD,pADB,pECIR,pCIC,pCIPlus,pCITopUp,pMultiPay,total,
     hName:D.plans[s.healthType].name,hOName:D.plans[s.healthType].opts[s.healthOpt]?.name||'-'};
 }
 
@@ -888,6 +984,9 @@ function renderCompare(){
     {label:(ci)=>{const s=ST[ci];return `Care for Cancer (CFC) ${s.cfcSum?s.cfcSum.toLocaleString()+' บ.':''}`;},key:'pCFC'},
     {label:(ci)=>{const s=ST[ci];return `ECIR — 44 โรคร้ายแรง ${s.ecirSum?s.ecirSum.toLocaleString()+' บ.':''}`;},key:'pECIR'},
     {label:(ci)=>{const s=ST[ci];return `CI Care — 18+44 โรค ${s.ciCareSum?s.ciCareSum.toLocaleString()+' บ.':''}`;},key:'pCIC'},
+    {label:(ci)=>{const s=ST[ci];return `CI Plus — 44 โรค ${s.ciPlusSum?s.ciPlusSum.toLocaleString()+' บ.':''}`;},key:'pCIPlus'},
+    {label:(ci)=>{const s=ST[ci];return `CI Top Up — 18 โรคระดับต้น ${s.ciTopUp&&s.ciPlusSum?(s.ciPlusSum*0.4).toLocaleString()+' บ.(40%)':''}`;},key:'pCITopUp'},
+    {label:(ci)=>{const s=ST[ci];return `MultiPay CI Plus ${s.multiPayCISum?s.multiPayCISum.toLocaleString()+' บ.':''}`;},key:'pMultiPay'},
     {sub:true,label:'สัญญาเพิ่มเติม — อุบัติเหตุ'},
     {label:(ci)=>{const s=ST[ci];return `AI/RCC ${s.aiSum?s.aiSum.toLocaleString()+' บ.':''} ชั้น ${s.occClass}`;},key:'pAI'},
     {label:(ci)=>{const s=ST[ci];return `ADD/RCC ${s.addSum?s.addSum.toLocaleString()+' บ.':''} ชั้น ${s.occClass}`;},key:'pADD'},
@@ -1013,6 +1112,45 @@ function renderBenefit(){
     ].forEach(([lbl,fn])=>{h+=`<tr><td class="rh">${lbl}</td>${[0,1,2,3].map(ci=>`<td class="dc hi-red">${fn(ci)}</td>`).join('')}</tr>`;});
   }
 
+  // ── Section: CI Plus ──
+  const anyCIPlus=[0,1,2,3].some(ci=>ST[ci].ciPlusSum>0);
+  if(anyCIPlus){
+    h+=`<tr class="shr"><td colspan="5">ส่วนที่ 6ข: AIA CI Plus — 44 โรคร้ายแรง (เจอจ่าย 100% ครั้งเดียว | สิ้นสุดอายุ 98 ปี)</td></tr>`;
+    h+=`<tr><td class="rh" colspan="5" style="background:#ecfeff;color:#0e7490;font-size:11px">จ่าย 100% ของทุนประกันเมื่อวินิจฉัยครั้งแรก | สัญญาสิ้นสุดหลังจ่าย | Waiting Period 60 วัน | ดูดัชนีโรคร้ายแรง (CI Plus) ด้านล่าง</td></tr>`;
+    [['ทุนประกัน CI Plus',ci=>ST[ci].ciPlusSum>0?ST[ci].ciPlusSum.toLocaleString()+' บ.':'—'],
+     ['ผลประโยชน์',ci=>ST[ci].ciPlusSum>0?'100% ของทุนประกัน (จ่ายครั้งเดียว สัญญาสิ้นสุด)':'—'],
+     ['ระยะเวลารอคอย',ci=>ST[ci].ciPlusSum>0?'60 วัน':'—'],
+     ['เบี้ยประกันภัย (บาท/ปี)',ci=>ST[ci].ciPlusSum>0?FZ(ST[ci].result.pCIPlus||0)+' บาท':'—']
+    ].forEach(([lbl,fn])=>{h+=`<tr><td class="rh">${lbl}</td>${[0,1,2,3].map(ci=>`<td class="dc" style="color:#0891b2;font-weight:600">${fn(ci)}</td>`).join('')}</tr>`;});
+  }
+
+  // ── Section: CI Top Up ──
+  const anyCITopUp=[0,1,2,3].some(ci=>ST[ci].ciTopUp&&ST[ci].ciPlusSum>0);
+  if(anyCITopUp){
+    h+=`<tr class="shr"><td colspan="5">ส่วนที่ 6ค: AIA CI Top Up (บันทึกสลักหลัง แนบกับ CI Plus) — 18 โรคระดับต้น-ปานกลาง จ่าย 40%</td></tr>`;
+    h+=`<tr><td class="rh" colspan="5" style="background:#ecfeff;color:#0e7490;font-size:11px">จ่าย 40% ของทุน CI Plus เมื่อวินิจฉัยโรคระดับต้น-ปานกลาง | จ่ายครั้งเดียวตลอดสัญญา | Waiting Period 60 วัน | ดูดัชนีโรคร้ายแรง (CI Top Up) ด้านล่าง</td></tr>`;
+    [['ทุนประกัน CI Top Up (40% ของ CI Plus อัตโนมัติ)',ci=>ST[ci].ciTopUp&&ST[ci].ciPlusSum>0?(ST[ci].ciPlusSum*0.4).toLocaleString()+' บ.':'—'],
+     ['ผลประโยชน์',ci=>ST[ci].ciTopUp&&ST[ci].ciPlusSum>0?'40% ของทุน CI Plus (จ่ายครั้งเดียว บันทึกสิ้นสุด)':'—'],
+     ['เบี้ยประกันภัย (บาท/ปี)',ci=>ST[ci].ciTopUp&&ST[ci].ciPlusSum>0?FZ(ST[ci].result.pCITopUp||0)+' บาท':'—']
+    ].forEach(([lbl,fn])=>{h+=`<tr><td class="rh">${lbl}</td>${[0,1,2,3].map(ci=>`<td class="dc" style="color:#0e7490;font-weight:600">${fn(ci)}</td>`).join('')}</tr>`;});
+  }
+
+  // ── Section: MultiPay CI Plus ──
+  const anyMCI=[0,1,2,3].some(ci=>ST[ci].multiPayCISum>0);
+  if(anyMCI){
+    h+=`<tr class="shr"><td colspan="5">ส่วนที่ 6ง: AIA MultiPay CI Plus — จ่ายหลายครั้งสูงสุด 6 ครั้ง (รวม 600%) | คุ้มครองถึง 99 ปี</td></tr>`;
+    h+=`<tr><td class="rh" colspan="5" style="background:#faf5ff;color:#7c3aed;font-size:11px">โรคระดับรุนแรง (S): 100% × 6 ครั้ง | โรคระดับต้น-ปานกลาง (E): 40% × 5 ครั้ง | ยกเว้นเบี้ยหลังพบโรคระดับรุนแรง | Relapsed CI: มะเร็ง/หัวใจ/สมอง | CCB: 10%ก้อน + 1.5%/เดือน x 60 เดือน</td></tr>`;
+    [['ทุนประกัน MultiPay CI',ci=>ST[ci].multiPayCISum>0?ST[ci].multiPayCISum.toLocaleString()+' บ.':'—'],
+     ['โรคระดับรุนแรง (S) สูงสุด 6 ครั้ง',ci=>ST[ci].multiPayCISum>0?ST[ci].multiPayCISum.toLocaleString()+' บ./ครั้ง (รวม '+( ST[ci].multiPayCISum*6).toLocaleString()+' บ.)':'—'],
+     ['โรคระดับต้น-ปานกลาง (E) สูงสุด 5 ครั้ง',ci=>ST[ci].multiPayCISum>0?(ST[ci].multiPayCISum*0.4).toLocaleString()+' บ./ครั้ง':'—'],
+     ['Relapsed CI (3 โรค: มะเร็ง/หัวใจ/สมอง)',ci=>ST[ci].multiPayCISum>0?ST[ci].multiPayCISum.toLocaleString()+' บ. (100% เพิ่มเติม)':'—'],
+     ['CCB จ่ายครั้งเดียว',ci=>ST[ci].multiPayCISum>0?(ST[ci].multiPayCISum*0.1).toLocaleString()+' บ. (10%)':'—'],
+     ['CCB รายเดือน (60 เดือน)',ci=>ST[ci].multiPayCISum>0?(ST[ci].multiPayCISum*0.015).toLocaleString()+' บ./เดือน x 60 เดือน':'—'],
+     ['ระยะเวลารอคอย',ci=>ST[ci].multiPayCISum>0?'60 วัน | No claim period 1 ปี (หลังโรคระดับรุนแรง)':'—'],
+     ['เบี้ยประกันภัย (บาท/ปี)',ci=>ST[ci].multiPayCISum>0?FZ(ST[ci].result.pMultiPay||0)+' บาท':'—']
+    ].forEach(([lbl,fn])=>{h+=`<tr><td class="rh">${lbl}</td>${[0,1,2,3].map(ci=>`<td class="dc hi-purple">${fn(ci)}</td>`).join('')}</tr>`;});
+  }
+
   // ── Section: HB Extra ──
   const anyHB=[0,1,2,3].some(ci=>ST[ci].hbSum>0);
   if(anyHB){
@@ -1074,12 +1212,16 @@ function bandCalc(s,bandAge){
   const pADB=s.adbSum>0&&bandAge<=64?D.calcADB(s.adbSum,occ,s.adbRCC):0;
   const pECIR=s.ecirSum>0&&bandAge<=79?D.calcECIR(s.ecirSum,bandAge,g,occ):0;
   const pCIC=s.ciCareSum>0&&bandAge<=79?D.calcCICare(s.ciCareSum,bandAge,g):0;
-  const total=pM+pH+pHC+pCFC+pHB+pHBStd+pAI+pADD+pADB+pECIR+pCIC;
-  return{pM,pH,pHC,pCFC,pHB,pHBStd,pAI,pADD,pADB,pECIR,pCIC,total,mainStopped,
+  const pCIPlus=s.ciPlusSum>0&&bandAge<=98?D.calcCIPlus(s.ciPlusSum,bandAge,g):0;
+  const pCITopUp=s.ciTopUp&&s.ciPlusSum>0&&bandAge<=98?D.calcCITopUp(s.ciPlusSum,bandAge,g):0;
+  const pMultiPay=s.multiPayCISum>0&&bandAge<=99?D.calcMultiPayCI(s.multiPayCISum,bandAge,g):0;
+  const total=pM+pH+pHC+pCFC+pHB+pHBStd+pAI+pADD+pADB+pECIR+pCIC+pCIPlus+pCITopUp+pMultiPay;
+  return{pM,pH,pHC,pCFC,pHB,pHBStd,pAI,pADD,pADB,pECIR,pCIC,pCIPlus,pCITopUp,pMultiPay,total,mainStopped,
     ended:{H:pH===0&&s.healthType!=='NONE',HC:bandAge>79&&s.hcSum>0,CFC:bandAge>79&&s.cfcSum>0,
            HB:bandAge>79&&s.hbSum>0,HBStd:bandAge>59&&s.hbStdSum>0,
            AI:(bandAge>64||bandAge<16)&&s.aiSum>0,ADD:bandAge>64&&s.addSum>0,
-           ADB:bandAge>64&&s.adbSum>0,ECIR:bandAge>79&&s.ecirSum>0,CIC:bandAge>79&&s.ciCareSum>0}};
+           ADB:bandAge>64&&s.adbSum>0,ECIR:bandAge>79&&s.ecirSum>0,CIC:bandAge>79&&s.ciCareSum>0,
+           CIPlus:bandAge>98&&s.ciPlusSum>0,CITopUp:bandAge>98&&s.ciTopUp,MultiPay:bandAge>99&&s.multiPayCISum>0}};
 }
 
 const eT='<span style="color:#aaa;font-size:10px;font-style:italic">(สิ้นสุด)</span>';
@@ -1114,6 +1256,9 @@ function renderProjSummary(){
     if(s.adbSum>0) list.push({k:'pADB',lbl:`ADB/RCC (${s.adbSum.toLocaleString()} บ.)`,color:'#dc2626'});
     if(s.ecirSum>0) list.push({k:'pECIR',lbl:`ECIR (${s.ecirSum.toLocaleString()} บ.)`,color:'#7c3aed'});
     if(s.ciCareSum>0) list.push({k:'pCIC',lbl:`CI Care (${s.ciCareSum.toLocaleString()} บ.)`,color:'#c8102e'});
+    if(s.ciPlusSum>0) list.push({k:'pCIPlus',lbl:`CI Plus (${s.ciPlusSum.toLocaleString()} บ.)`,color:'#0891b2'});
+    if(s.ciTopUp&&s.ciPlusSum>0) list.push({k:'pCITopUp',lbl:`CI Top Up (${(s.ciPlusSum*0.4).toLocaleString()} บ.)`,color:'#0e7490'});
+    if(s.multiPayCISum>0) list.push({k:'pMultiPay',lbl:`MultiPay CI (${s.multiPayCISum.toLocaleString()} บ.)`,color:'#7c3aed'});
     return list;
   };
 
@@ -1182,7 +1327,7 @@ function renderProjSummary(){
           return;
         }
         const v=bc[ci][k];
-        const ended=(k==='pH'&&bc[ci].ended.H)||(k==='pHC'&&bc[ci].ended.HC)||(k==='pCFC'&&bc[ci].ended.CFC)||(k==='pHB'&&bc[ci].ended.HB)||(k==='pHBStd'&&bc[ci].ended.HBStd)||(k==='pAI'&&bc[ci].ended.AI)||(k==='pADD'&&bc[ci].ended.ADD)||(k==='pADB'&&bc[ci].ended.ADB)||(k==='pECIR'&&bc[ci].ended.ECIR)||(k==='pCIC'&&bc[ci].ended.CIC);
+        const ended=(k==='pH'&&bc[ci].ended.H)||(k==='pHC'&&bc[ci].ended.HC)||(k==='pCFC'&&bc[ci].ended.CFC)||(k==='pHB'&&bc[ci].ended.HB)||(k==='pHBStd'&&bc[ci].ended.HBStd)||(k==='pAI'&&bc[ci].ended.AI)||(k==='pADD'&&bc[ci].ended.ADD)||(k==='pADB'&&bc[ci].ended.ADB)||(k==='pECIR'&&bc[ci].ended.ECIR)||(k==='pCIC'&&bc[ci].ended.CIC)||(k==='pCIPlus'&&bc[ci].ended.CIPlus)||(k==='pCITopUp'&&bc[ci].ended.CITopUp)||(k==='pMultiPay'&&bc[ci].ended.MultiPay);
         const paid=k==='pM'&&bc[ci].mainStopped;
         let disp=ended?'(สิ้นสุด)':paid?'(ครบชำระ)':v>0?FZ(v):'—';
         const clr=ended||paid?'#aaa':(color||'var(--text)');
@@ -1231,6 +1376,9 @@ function renderProjDetail(ci){
   if(s.adbSum>0) cols.push({k:'pADB',lbl:'ADB/RCC',style:'color:#dc2626'});
   if(s.ecirSum>0) cols.push({k:'pECIR',lbl:'ECIR',style:'color:#7c3aed'});
   if(s.ciCareSum>0) cols.push({k:'pCIC',lbl:'CI Care',style:'color:#c8102e'});
+  if(s.ciPlusSum>0) cols.push({k:'pCIPlus',lbl:'CI Plus',style:'color:#0891b2'});
+  if(s.ciTopUp&&s.ciPlusSum>0) cols.push({k:'pCITopUp',lbl:'CI TopUp',style:'color:#0e7490'});
+  if(s.multiPayCISum>0) cols.push({k:'pMultiPay',lbl:'MultiPay CI',style:'color:#7c3aed'});
   cols.push({k:'total',lbl:'รวม/ปี',isTot:true});
 
   // Header
@@ -1260,7 +1408,7 @@ function renderProjDetail(ci){
         return;
       }
       const v=bc[c.k];
-      const ended=(c.k==='pH'&&bc.ended.H)||(c.k==='pHC'&&bc.ended.HC)||(c.k==='pCFC'&&bc.ended.CFC)||(c.k==='pHB'&&bc.ended.HB)||(c.k==='pHBStd'&&bc.ended.HBStd)||(c.k==='pAI'&&bc.ended.AI)||(c.k==='pADD'&&bc.ended.ADD)||(c.k==='pADB'&&bc.ended.ADB)||(c.k==='pECIR'&&bc.ended.ECIR)||(c.k==='pCIC'&&bc.ended.CIC);
+      const ended=(c.k==='pH'&&bc.ended.H)||(c.k==='pHC'&&bc.ended.HC)||(c.k==='pCFC'&&bc.ended.CFC)||(c.k==='pHB'&&bc.ended.HB)||(c.k==='pHBStd'&&bc.ended.HBStd)||(c.k==='pAI'&&bc.ended.AI)||(c.k==='pADD'&&bc.ended.ADD)||(c.k==='pADB'&&bc.ended.ADB)||(c.k==='pECIR'&&bc.ended.ECIR)||(c.k==='pCIC'&&bc.ended.CIC)||(c.k==='pCIPlus'&&bc.ended.CIPlus)||(c.k==='pCITopUp'&&bc.ended.CITopUp)||(c.k==='pMultiPay'&&bc.ended.MultiPay);
       const paid=c.k==='pM'&&bc.mainStopped;
       if(ended) html+=`<td>${eT}</td>`;
       else if(paid) html+=`<td>${pT}</td>`;
@@ -1340,7 +1488,10 @@ function renderBreakdown(){
       s.addSum>0?{lbl:`ADD/RCC ${s.addSum.toLocaleString()} บ. ชั้น ${s.occClass}`,v:r.pADD}:null,
       s.adbSum>0?{lbl:`ADB/RCC ${s.adbSum.toLocaleString()} บ. ชั้น ${Math.min(s.occClass,3)}`,v:r.pADB}:null,
       s.ecirSum>0?{lbl:`ECIR ${s.ecirSum.toLocaleString()} บ. ชั้น ${s.occClass}`,v:r.pECIR}:null,
-      s.ciCareSum>0?{lbl:`CI Care ${s.ciCareSum.toLocaleString()} บ.`,v:r.pCIC}:null
+      s.ciCareSum>0?{lbl:`CI Care ${s.ciCareSum.toLocaleString()} บ.`,v:r.pCIC}:null,
+      s.ciPlusSum>0?{lbl:`CI Plus ${s.ciPlusSum.toLocaleString()} บ.`,v:r.pCIPlus}:null,
+      s.ciTopUp&&s.ciPlusSum>0?{lbl:`CI Top Up ${(s.ciPlusSum*0.4).toLocaleString()} บ. (40%)`,v:r.pCITopUp}:null,
+      s.multiPayCISum>0?{lbl:`MultiPay CI ${s.multiPayCISum.toLocaleString()} บ.`,v:r.pMultiPay}:null
     ].filter(Boolean);
     const rows=items.map(it=>`<tr><td class="bn">${it.lbl}</td><td class="ba ${it.v===0?'z':''}">${it.v>0?FZ(it.v):'—'}</td></tr>`).join('');
     return`<div class="bdc"><div class="bdc-hd">${COLS[ci].icon} ${s.name} — อายุ ${s.age} ปี (${s.gender==='male'?'ชาย':'หญิง'})</div><table class="bdt">${rows}<tr class="btot"><td class="bn" style="font-weight:800">รวมเบี้ยทั้งหมด (บาท/ปี)</td><td class="ba btot-v" style="font-size:14px">${FZ(r.total||0)}</td></tr></table></div>`;
@@ -1554,6 +1705,148 @@ function renderDiseaseIndex(){
         </div>
       </div>
     </div>
+
+    <!-- CI PLUS CARD -->
+    <div class="di-card" style="border-color:#0891b2">
+      <div class="di-hd" style="background:#0891b2">🔷 AIA CI Plus — 44 โรคร้ายแรง (จ่าย 100% ครั้งเดียว | สิ้นสุดอายุ 98 ปี)</div>
+      <div class="di-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+          <div style="background:#ecfeff;border:1px solid #a5f3fc;border-radius:7px;padding:8px;font-size:12px"><strong style="color:#0e7490">CI Plus (44 โรค)</strong><br>จ่าย 100% เมื่อวินิจฉัยครั้งแรก สัญญาสิ้นสุด</div>
+          <div style="background:#f0fdfa;border:1px solid #99f6e4;border-radius:7px;padding:8px;font-size:12px"><strong style="color:#0f766e">CI Top Up (18 โรคระดับต้น)</strong><br>จ่าย 40% ของทุน CI Plus แนบกับ CI Plus</div>
+        </div>
+        <p style="font-size:11px;color:#0e7490;margin-bottom:8px">โรคที่คุ้มครองภายใต้ <strong>CI Plus</strong> (44 โรค) เหมือนกับ ECIR ทุกโรค ดูรายชื่อที่การ์ด ECIR ด้านบน</p>
+        <div class="di-group">
+          <div class="di-group-title" style="color:#0e7490">โรคร้ายแรงระดับต้น-ปานกลาง 18 โรค (เฉพาะ CI Top Up จ่าย 40%)</div>
+          <div class="di-list">
+            <span class="di-tag" style="background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc">มะเร็งระยะไม่ลุกลาม</span>
+            <span class="di-tag" style="background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc">ผ่าตัดเนื้องอกต่อมใต้สมอง</span>
+            <span class="di-tag" style="background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc">หลอดเลือดหัวใจตีบ (สวนหลอดเลือด)</span>
+            <span class="di-tag" style="background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc">ผ่าตัดลอกเยื่อหุ้มหัวใจ</span>
+            <span class="di-tag" style="background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc">รักษาลิ้นหัวใจ (สวนสาย)</span>
+            <span class="di-tag" style="background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc">รักษา Aorta (ใส่สายสวน)</span>
+            <span class="di-tag" style="background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc">ใส่เครื่องกรองลิ่มเลือด</span>
+            <span class="di-tag" style="background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc">ผ่าตัดลอกหลอดเลือด Carotid</span>
+            <span class="di-tag" style="background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc">สวนสายหลอดเลือดแดงคอ</span>
+            <span class="di-tag" style="background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc">สมองโป่งพอง (ขดลวดสวนสาย)</span>
+            <span class="di-tag" style="background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc">ฝังท่อระบายโพรงสมอง</span>
+            <span class="di-tag" style="background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc">ผ่าตัดตับ 1 กลีบ</span>
+            <span class="di-tag" style="background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc">ผ่าตัดไต 1 ข้าง</span>
+            <span class="di-tag" style="background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc">ผ่าตัดปอด 1 ข้าง</span>
+            <span class="di-tag" style="background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc">แผลไหม้ระดับ 2</span>
+            <span class="di-tag" style="background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc">เลือดคั่งใต้เยื่อหุ้มสมอง (อุบัติเหตุ)</span>
+            <span class="di-tag" style="background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc">สูญเสียแขน/ขา/ตา 1 ข้าง</span>
+            <span class="di-tag" style="background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc">เบาหวานขึ้นจอประสาทตา</span>
+          </div>
+        </div>
+        <div style="margin-top:10px;background:#ecfeff;border:1px solid #a5f3fc;border-radius:7px;padding:10px;font-size:11px;color:#0e7490">
+          <strong>หมายเหตุ CI Plus:</strong> Waiting Period 60 วัน | จ่าย 100% ครั้งเดียวแล้วสัญญาสิ้นสุด | คุ้มครองถึงอายุ 98 ปี<br>
+          <strong>CI Top Up:</strong> แนบกับ CI Plus เท่านั้น | ทุน = 40% ของทุน CI Plus (อัตโนมัติ) | จ่ายครั้งเดียว 40% แล้วบันทึกสลักหลังสิ้นสุด
+        </div>
+      </div>
+    </div>
+
+    <!-- MULTIPAY CI CARD -->
+    <div class="di-card" style="border-color:#7c3aed;grid-column:1/-1">
+      <div class="di-hd" style="background:#7c3aed">🔄 AIA MultiPay CI Plus — จ่ายหลายครั้งสูงสุด 6 ครั้ง | คุ้มครองถึงอายุ 99 ปี</div>
+      <div class="di-body">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px">
+          <div style="background:#faf5ff;border:1px solid #e9d5ff;border-radius:7px;padding:8px;font-size:11px"><strong style="color:#7c3aed">ระดับรุนแรง (S)</strong><br>จ่าย 100% × สูงสุด 6 ครั้ง<br>รอคอย 1 ปี (No claim period)</div>
+          <div style="background:#faf5ff;border:1px solid #e9d5ff;border-radius:7px;padding:8px;font-size:11px"><strong style="color:#6d28d9">ระดับต้น-ปานกลาง (E)</strong><br>จ่าย 40% × สูงสุด 5 ครั้ง/กลุ่ม<br>ไม่นับ No claim period</div>
+          <div style="background:#faf5ff;border:1px solid #e9d5ff;border-radius:7px;padding:8px;font-size:11px"><strong style="color:#5b21b6">Relapsed CI</strong><br>จ่าย 100% เพิ่มอีกครั้ง<br>มะเร็ง / หัวใจ / สมอง</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px">
+          <div class="di-group" style="grid-column:1/3">
+            <div class="di-group-title" style="color:#7c3aed">กลุ่ม 1: เนื้องอก</div>
+            <div class="di-list">
+              <span class="di-tag ecir-t">1.1E มะเร็งระยะไม่ลุกลาม (40%)</span>
+              <span class="di-tag ecir-t">1.2E เนื้องอกต่อมใต้สมอง (40%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">1.1S มะเร็งระยะลุกลาม (100%) ★Relapsed</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">1.2S เนื้องอกในสมอง (100%)</span>
+            </div>
+          </div>
+          <div class="di-group" style="grid-column:3/6">
+            <div class="di-group-title" style="color:#7c3aed">กลุ่ม 2: หัวใจ ระบบหายใจ และโลหิต</div>
+            <div class="di-list">
+              <span class="di-tag ecir-t">2.1E หลอดเลือดหัวใจตีบ (สวนสาย)</span>
+              <span class="di-tag ecir-t">2.2E ผ่าตัดลอกเยื่อหุ้มหัวใจ</span>
+              <span class="di-tag ecir-t">2.3E ลิ้นหัวใจ (สวนสาย)</span>
+              <span class="di-tag ecir-t">2.4E Aorta (ใส่สายสวน)</span>
+              <span class="di-tag ecir-t">2.5E ใส่เครื่องกรองลิ่มเลือด</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">2.1S กล้ามเนื้อหัวใจตาย (100%) ★Relapsed</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">2.2S Bypass หัวใจ (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">2.3S โรคกล้ามเนื้อหัวใจ (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">2.4S ผ่าตัดลิ้นหัวใจ (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">2.5S ผ่าตัด Aorta (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">2.6S ความดันปอดสูง (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">2.7S โรคปอดระยะสุดท้าย (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">2.8S โลหิตจางไขกระดูก (100%)</span>
+            </div>
+          </div>
+          <div class="di-group" style="grid-column:1/4">
+            <div class="di-group-title" style="color:#7c3aed">กลุ่ม 3: สมอง ประสาท กล้ามเนื้อ</div>
+            <div class="di-list">
+              <span class="di-tag ecir-t">3.1E ลอกหลอดเลือด Carotid</span>
+              <span class="di-tag ecir-t">3.2E สวนสายหลอดเลือดคอ</span>
+              <span class="di-tag ecir-t">3.3E สมองโป่งพอง (ขดลวด)</span>
+              <span class="di-tag ecir-t">3.4E ฝังท่อระบายโพรงสมอง</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">3.1S Stroke (100%) ★Relapsed</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">3.2S สมองโป่งพอง (ผ่าตัด) (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">3.3S โคม่า (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">3.4S อัลไซเมอร์ (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">3.5S เยื่อหุ้มสมองอักเสบ (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">3.6S สมองอักเสบไวรัส (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">3.7S พาร์กินสัน (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">3.8S Multiple Sclerosis (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">3.9S Motor Neurone (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">3.10S อะแพลลิก (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">3.11S อัมพาต (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">3.12S โปลิโอ (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">3.13S กล้ามเนื้อเสื่อม (100%)</span>
+            </div>
+          </div>
+          <div class="di-group" style="grid-column:4/6">
+            <div class="di-group-title" style="color:#7c3aed">กลุ่ม 4: อวัยวะสำคัญ</div>
+            <div class="di-list">
+              <span class="di-tag ecir-t">4.1E ผ่าตัดตับ 1 กลีบ</span>
+              <span class="di-tag ecir-t">4.2E ผ่าตัดไต 1 ข้าง</span>
+              <span class="di-tag ecir-t">4.3E ผ่าตัดปอด 1 ข้าง</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">4.1S ตับวาย (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">4.2S ไตวาย (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">4.3S ลำไส้อักเสบ (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">4.4S ปลูกถ่ายอวัยวะ (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">4.5S ตับอักเสบรุนแรง (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">4.6S ตับอ่อนอักเสบ (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">4.7S ลูปัส SLE (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">4.8S ข้ออักเสบรูมาตอยด์ (100%)</span>
+            </div>
+          </div>
+          <div class="di-group" style="grid-column:1/6">
+            <div class="di-group-title" style="color:#7c3aed">กลุ่ม 5: การบาดเจ็บ ทุพพลภาพ | กลุ่ม 6: ผู้เยาว์ (คุ้มครองถึงอายุก่อน 17 ปี)</div>
+            <div class="di-list">
+              <span class="di-tag ecir-t">5.1E แผลไหม้ระดับ 2 (E)</span>
+              <span class="di-tag ecir-t">5.2E เลือดคั่งสมอง (อุบัติเหตุ)</span>
+              <span class="di-tag ecir-t">5.3E สูญเสียแขน/ขา/ตา 1 ข้าง</span>
+              <span class="di-tag ecir-t">5.4E เบาหวานขึ้นจอตา</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">5.1S แผลไหม้ฉกรรจ์ (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">5.2S บาดเจ็บศีรษะรุนแรง (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">5.3S สูญเสียดำรงชีพ (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">5.4S ทุพพลภาพถาวร (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">5.5S ตาบอด (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">5.6S รากประสาทต้นแขนขาด (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">5.7S สูญเสียความสามารถพูด (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">5.8S Necrotising Fasciitis (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">5.9S โรคเท้าช้าง (100%)</span>
+              <span class="di-tag" style="background:#faf5ff;color:#7c3aed;border:1px solid #e9d5ff">ผู้เยาว์: ไข้รูมาติก | คาวาซากิ | เบาหวานชนิด 1 | น้ำไขสันหลังคั่ง</span>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:10px;background:#faf5ff;border:1px solid #e9d5ff;border-radius:7px;padding:10px;font-size:11px;color:#7c3aed">
+          <strong>★ Relapsed CI</strong> (จ่ายได้อีก 100%): มะเร็งระยะลุกลาม | กล้ามเนื้อหัวใจตาย | Stroke — เงื่อนไข: กลับมาเป็นซ้ำหลัง 1-2 ปี<br>
+          <strong>No claim period:</strong> 1 ปี หลังจ่ายโรคระดับรุนแรง | CCB (Continuing Care) คุ้มครองถึงอายุ 80 ปีเท่านั้น | ยกเว้นเบี้ยเมื่อพบโรคระดับรุนแรง
+        </div>
+      </div>
+    </div>
+
   </div>`;
 }
 
@@ -1569,7 +1862,13 @@ function calculateAll(){
 }
 
 function setFS(size){
-  document.body.className=`fs-${size}`;
+  const scales={sm:0.82,md:1,lg:1.2,xl:1.4};
+  const base=16;
+  const scale=scales[size]||1;
+  document.documentElement.style.setProperty('--scale',scale);
+  document.documentElement.style.setProperty('--fs',(base*scale)+'px');
+  // Also directly set font-size on body so em/rem cascade works
+  document.body.style.fontSize=(base*scale)+'px';
   document.querySelectorAll('.fsb').forEach(b=>b.classList.remove('on'));
   const lbl={sm:'เล็ก',md:'กลาง',lg:'ใหญ่',xl:'ใหญ่มาก'};
   document.querySelectorAll('.fsb').forEach(b=>{if(b.textContent.trim()===lbl[size])b.classList.add('on');});
@@ -1600,7 +1899,8 @@ function stateToRow(ci){
     aiSum:s.aiSum, aiRCC:s.aiRCC?1:0,
     addSum:s.addSum, addRCC:s.addRCC?1:0,
     adbSum:s.adbSum, adbRCC:s.adbRCC?1:0,
-    occClass:s.occClass, ecirSum:s.ecirSum, ciCareSum:s.ciCareSum
+    occClass:s.occClass, ecirSum:s.ecirSum, ciCareSum:s.ciCareSum,
+    ciPlusSum:s.ciPlusSum, ciTopUp:s.ciTopUp?1:0, multiPayCISum:s.multiPayCISum
   };
 }
 
@@ -1626,6 +1926,9 @@ function buildProjRows(ci){
     r.pADB=bc.ended.ADB?'สิ้นสุด':bc.pADB;
     r.pECIR=bc.ended.ECIR?'สิ้นสุด':bc.pECIR;
     r.pCIC=bc.ended.CIC?'สิ้นสุด':bc.pCIC;
+    r.pCIPlus=bc.ended.CIPlus?'สิ้นสุด':bc.pCIPlus;
+    r.pCITopUp=bc.ended.CITopUp?'สิ้นสุด':bc.pCITopUp;
+    r.pMultiPay=bc.ended.MultiPay?'สิ้นสุด':bc.pMultiPay;
     r.total=bc.total; r.cumulative=cum;
     rows.push(r);
   }
@@ -1728,6 +2031,9 @@ function importExcel(input){
           if(row.occClass!==undefined) s.occClass=+row.occClass||1;
           if(row.ecirSum!==undefined) s.ecirSum=+row.ecirSum||0;
           if(row.ciCareSum!==undefined) s.ciCareSum=+row.ciCareSum||0;
+          if(row.ciPlusSum!==undefined) s.ciPlusSum=+row.ciPlusSum||0;
+          if(row.ciTopUp!==undefined) s.ciTopUp=+row.ciTopUp===1;
+          if(row.multiPayCISum!==undefined) s.multiPayCISum=+row.multiPayCISum||0;
         });
         // Validate healthType exists
         [0,1,2,3].forEach(ci=>{

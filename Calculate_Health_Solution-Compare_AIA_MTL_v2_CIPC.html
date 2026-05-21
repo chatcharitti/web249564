@@ -752,8 +752,9 @@
            ============================================ */
         @media print {
             .main-tab-nav { display: none !important; }
-            /* Show all CI slides when printing */
+            /* Show all CI slides when printing — ยกเว้น slide ที่ถูกซ่อน */
             .ci-slide { display: block !important; page-break-after: always; }
+            .ci-slide.ci-slide-hidden { display: none !important; page-break-after: auto; }
             .ci-slide:last-child { page-break-after: auto; }
             .ci-slide-header { display: none !important; }
             .ci-slide-dots { display: none !important; }
@@ -3199,12 +3200,12 @@ function updateCIVitalitySlides() {
         const dot = document.getElementById(`ci-dot-${n}`);
         if (hideVitality) {
             CI_HIDDEN.add(n);
-            if (el) el.style.display = 'none';
+            if (el)  { el.classList.add('ci-slide-hidden');  el.style.display = 'none'; }
             if (dot) dot.style.display = 'none';
             if (ciCurrent === n) ciGoTo(n - 1);
         } else {
             CI_HIDDEN.delete(n);
-            if (el) el.style.display = '';
+            if (el)  { el.classList.remove('ci-slide-hidden'); el.style.display = ''; }
             if (dot) dot.style.display = '';
         }
     });
@@ -3276,8 +3277,15 @@ function printCISlides() {
         cipcTab.style.display = '';
         if (tabNav) tabNav.style.display = '';
         allSlides.forEach((s, i) => {
-            s.style.display = '';
-            s.classList.toggle('active', i + 1 === ciCurrent);
+            const slideNum = i + 1;
+            if (CI_HIDDEN.has(slideNum)) {
+                s.style.display = 'none';
+                s.classList.add('ci-slide-hidden');
+            } else {
+                s.style.display = '';
+                s.classList.remove('ci-slide-hidden');
+                s.classList.toggle('active', slideNum === ciCurrent);
+            }
         });
     }, 800);
 }

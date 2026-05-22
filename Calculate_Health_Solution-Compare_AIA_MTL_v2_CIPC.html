@@ -349,8 +349,43 @@
             transition: all 0.15s ease; font-family: inherit; border: 1px solid transparent;
             letter-spacing: 0.02em;
         }
-        .btn-primary { background: var(--c-primary); color: var(--t-on-primary); border-color: var(--c-primary); }
-        .btn-primary:hover { background: var(--c-primary-soft); border-color: var(--c-primary-soft); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+        .btn-export {
+            background: rgba(34,197,94,0.12);
+            color: #22c55e;
+            border-color: rgba(34,197,94,0.35);
+        }
+        .btn-export:hover {
+            background: rgba(34,197,94,0.22);
+            border-color: rgba(34,197,94,0.6);
+            transform: translateY(-1px);
+        }
+        .btn-import {
+            background: rgba(59,130,246,0.12);
+            color: #60a5fa;
+            border-color: rgba(59,130,246,0.35);
+        }
+        .btn-import:hover {
+            background: rgba(59,130,246,0.22);
+            border-color: rgba(59,130,246,0.6);
+            transform: translateY(-1px);
+        }
+        [data-theme="light"] .btn-export { color: #16a34a; background: rgba(22,163,74,0.08); border-color: rgba(22,163,74,0.3); }
+        [data-theme="light"] .btn-import { color: #2563eb; background: rgba(37,99,235,0.08); border-color: rgba(37,99,235,0.3); }
+
+        /* Toast notification */
+        #toast-msg {
+            position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+            background: var(--bg-surface-2); color: var(--t-primary);
+            border: 1px solid var(--b-gold); border-radius: var(--r-md);
+            padding: 10px 24px; font-size: 0.88em; font-weight: 600;
+            box-shadow: var(--shadow-lg); z-index: 9999;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+        #toast-msg.show { opacity: 1; }
+
+        /* Hidden file input */
+        #import-file-input { display: none; }
         .btn-ghost { background: transparent; color: var(--t-secondary); border-color: var(--b-soft); }
         .btn-ghost:hover { background: var(--bg-surface-2); color: var(--t-primary); border-color: var(--b-medium); }
         .theme-toggle-btn { width: 38px; height: 38px; padding: 0; justify-content: center; border-radius: 50%; }
@@ -887,6 +922,16 @@
                     <button onclick="changeFontSize(1)" class="font-size-btn fs-plus" aria-label="เพิ่มขนาดตัวอักษร">A+</button>
                     <button onclick="resetFontSize()" class="font-size-btn fs-reset" aria-label="รีเซ็ต">Reset</button>
                 </div>
+                <!-- Export / Import Data -->
+                <button onclick="exportData()" class="btn btn-ghost btn-export" title="บันทึกข้อมูลทั้งหมดเป็นไฟล์ .json">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    บันทึกข้อมูล
+                </button>
+                <button onclick="document.getElementById('import-file-input').click()" class="btn btn-ghost btn-import" title="โหลดข้อมูลจากไฟล์ .json">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    โหลดข้อมูล
+                </button>
+                <input type="file" id="import-file-input" accept=".json" onchange="importData(event)">
                 <button id="theme-toggle" onclick="toggleTheme()" class="btn btn-ghost theme-toggle-btn" aria-label="Toggle theme" title="สลับธีม Dark / Light">
                     <svg id="theme-icon-dark" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
                     <svg id="theme-icon-light" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -1495,10 +1540,10 @@
 
     </div><!-- end main-tab-wrapper -->
 
+<!-- Toast Notification -->
+<div id="toast-msg"></div>
+
 <script>
-// ==========================================
-// 1. DATA & RATES CONFIGURATION
-// ==========================================
 const APP_DATA = {
     plans: {
         NONE: { name: "ไม่เลือก (None)", color: "gray", options: [{name:"-", k:"none", limit:"-"}] },
@@ -3319,6 +3364,133 @@ document.addEventListener('DOMContentLoaded', () => {
         el.addEventListener('change', handler);
     });
 });
+
+// ==========================================
+// EXPORT / IMPORT DATA
+// ==========================================
+
+// รายการ fields ทั้งหมดที่ต้อง export/import
+const EXPORT_FIELDS = [
+    // ข้อมูลผู้เอาประกัน
+    { id: 'inp-name',   type: 'value' },
+    { id: 'inp-gender', type: 'value' },
+    // Option 1
+    { id: 'main-type-1', type: 'value' },
+    { id: 'age-1',       type: 'value' },
+    { id: 'main-sum-1',  type: 'value' },
+    { id: 'main-prem-1', type: 'value' },
+    { id: 'type-1',      type: 'value' },
+    { id: 'cfc-1',       type: 'value' },
+    { id: 'hb-1',        type: 'value' },
+    { id: 'mpci-sum-1',  type: 'value' },
+    { id: 'cp-1',        type: 'checked' },
+    // Option 2
+    { id: 'main-type-2', type: 'value' },
+    { id: 'age-2',       type: 'value' },
+    { id: 'main-sum-2',  type: 'value' },
+    { id: 'main-prem-2', type: 'value' },
+    { id: 'type-2',      type: 'value' },
+    { id: 'cfc-2',       type: 'value' },
+    { id: 'hb-2',        type: 'value' },
+    { id: 'mpci-sum-2',  type: 'value' },
+    { id: 'cp-2',        type: 'checked' },
+    // Option 3
+    { id: 'main-type-3', type: 'value' },
+    { id: 'age-3',       type: 'value' },
+    { id: 'main-sum-3',  type: 'value' },
+    { id: 'main-prem-3', type: 'value' },
+    { id: 'type-3',      type: 'value' },
+    { id: 'cfc-3',       type: 'value' },
+    { id: 'hb-3',        type: 'value' },
+    { id: 'mpci-sum-3',  type: 'value' },
+    { id: 'cp-3',        type: 'checked' },
+    // CI Procare slide 1 — manual inputs
+    { id: 'cipc-bk-yr1',  type: 'value' },
+    { id: 'cipc-bk-amt1', type: 'value' },
+    { id: 'cipc-mx-yr1',  type: 'value' },
+    { id: 'cipc-mx-amt1', type: 'value' },
+    { id: 'cipc-bk-yr2',  type: 'value' },
+    { id: 'cipc-bk-amt2', type: 'value' },
+    { id: 'cipc-mx-yr2',  type: 'value' },
+    { id: 'cipc-mx-amt2', type: 'value' },
+];
+
+function showToast(msg, duration = 2800) {
+    const el = document.getElementById('toast-msg');
+    if (!el) return;
+    el.textContent = msg;
+    el.classList.add('show');
+    setTimeout(() => el.classList.remove('show'), duration);
+}
+
+function exportData() {
+    const data = { _version: 1, _exported: new Date().toISOString() };
+    EXPORT_FIELDS.forEach(({ id, type }) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        data[id] = type === 'checked' ? el.checked : el.value;
+    });
+
+    // สร้างชื่อไฟล์จากชื่อลูกค้าและวันที่
+    const name    = (document.getElementById('inp-name')?.value || 'ลูกค้า').replace(/\s+/g, '_');
+    const dateStr = new Date().toLocaleDateString('th-TH', { year:'numeric', month:'2-digit', day:'2-digit' }).replace(/\//g, '-');
+    const filename = `HealthSolution_${name}_${dateStr}.json`;
+
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href = url; a.download = filename; a.click();
+    URL.revokeObjectURL(url);
+
+    showToast(`✅ บันทึกข้อมูลแล้ว: ${filename}`);
+}
+
+function importData(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        try {
+            const data = JSON.parse(e.target.result);
+            if (!data._version) throw new Error('รูปแบบไฟล์ไม่ถูกต้อง');
+
+            // กู้คืนค่าทุก field
+            EXPORT_FIELDS.forEach(({ id, type }) => {
+                if (!(id in data)) return;
+                const el = document.getElementById(id);
+                if (!el) return;
+                if (type === 'checked') {
+                    el.checked = data[id];
+                } else {
+                    el.value = data[id];
+                }
+            });
+
+            // Trigger re-render ตาม field ที่สำคัญ (main type, health type)
+            [1, 2, 3].forEach(id => {
+                const mainTypeEl = document.getElementById(`main-type-${id}`);
+                if (mainTypeEl) app.changeMainType(id);
+
+                const typeEl = document.getElementById(`type-${id}`);
+                if (typeEl && typeEl.value) app.changeType(id, typeEl.value);
+            });
+
+            // คำนวณใหม่ทั้งหมด
+            app.calculate();
+
+            // อัปเดต theme (ถ้ามี) — ไม่ export theme เพื่อ UX ที่ดี
+            showToast(`✅ โหลดข้อมูลสำเร็จ: ${file.name}`);
+
+        } catch (err) {
+            showToast(`❌ โหลดไฟล์ไม่สำเร็จ: ${err.message}`, 4000);
+        } finally {
+            // reset input เพื่อให้เลือกไฟล์เดิมซ้ำได้
+            event.target.value = '';
+        }
+    };
+    reader.readAsText(file);
+}
 </script>
 </body>
 </html>

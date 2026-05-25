@@ -689,6 +689,7 @@ const nowY=new Date().getFullYear()+543;
 const ST=[1,2,3,4].map(i=>({
   name:`คุณลูกค้า ${i}`,gender:'female',age:30+(i-1)*5,
   startYear:nowY,stopPayYear:nowY+20,
+  policyDate:'',
   mainMode:'20PLN',// '20PLN' | 'custom'
   mainSum:150000,mainName:'20PLN',mainPrem:0,
   healthType:i===1?'HH':'NONE',healthOpt:0,
@@ -746,6 +747,9 @@ function renderInputs(){
         <div class="fg"><label class="fl">หยุดจ่ายเบี้ย (พ.ศ.)</label>
           <input type="number" class="fi" value="${s.stopPayYear}" oninput="su(${ci},'stopPayYear',+this.value)">
         </div>
+      </div>
+      <div class="fg"><label class="fl">📅 วันที่กรมธรรม์</label>
+        <input type="text" class="fi" placeholder="วว/ดด/ปปปป เช่น 01/03/2568" value="${s.policyDate||''}" oninput="su(${ci},'policyDate',this.value)">
       </div>
 
       <div class="dv"></div>
@@ -938,7 +942,7 @@ function renderCompare(){
     const s=ST[ci];
     [`th-p${ci+1}`,`ben-th-p${ci+1}`].forEach(id=>{
       const el=document.getElementById(id);
-      if(el)el.innerHTML=`${COLS[ci].icon} ${s.name}<br><span style="font-size:11px;font-weight:400">อายุ ${s.age} ปี | ${s.gender==='male'?'ชาย':'หญิง'} | พ.ศ.${s.startYear}</span>`;
+      if(el)el.innerHTML=`${COLS[ci].icon} ${s.name}<br><span style="font-size:11px;font-weight:400">อายุ ${s.age} ปี | ${s.gender==='male'?'ชาย':'หญิง'} | วันที่ ${s.policyDate||'—'}</span>`;
     });
   });
 
@@ -1060,6 +1064,7 @@ function renderBenefit(){
   // ────────────────────────────────
   h+=`<tr class="shr"><td colspan="5">ส่วนที่ 1 — ประกันหลัก (คุ้มครองกรณีเสียชีวิต)</td></tr>`;
   [['ประเภท / ชื่อแบบ',ci=>{const s=ST[ci];return`<span class="hi-blue">${s.mainMode==='20PLN'?'20PLN':s.mainName||'—'}</span>`}],
+   ['📅 วันที่กรมธรรม์',ci=>`<strong>${ST[ci].policyDate||'—'}</strong>`],
    ['ทุนประกันชีวิต',ci=>`<span class="hi-blue">${ST[ci].mainSum.toLocaleString()} บาท</span>`],
    ['ระยะชำระเบี้ย',ci=>{const s=ST[ci];return`${Math.max(s.stopPayYear-s.startYear,0)} ปี (${s.startYear}–${s.stopPayYear})`}],
    ['เบี้ยประกันหลัก (บ./ปี)',ci=>`<strong>${FZ(ST[ci].result.pMain||0)}</strong>`]
@@ -1347,7 +1352,8 @@ function renderProjSummary(){
   // Update tab labels
   [0,1,2,3].forEach(ci=>{
     const el=document.getElementById(`ptab-${ci+1}`);
-    if(el) el.textContent=`${COLS[ci].icon} ${ST[ci].name}`;
+    const s=ST[ci];
+    if(el) el.innerHTML=`${COLS[ci].icon} ${s.name}${s.policyDate?`<br><small style="font-size:9px;opacity:.85">${s.policyDate}</small>`:''}`;
   });
 
   // Build rider name list for each policy (for sub-rows)
@@ -1379,7 +1385,7 @@ function renderProjSummary(){
     <th class="ac" rowspan="2" style="background:#f1f5f9;border-right:2px solid var(--border)">ช่วงอายุ</th>
     <th rowspan="2" style="background:#f1f5f9;color:var(--muted);font-size:11px;width:28px"></th>`;
   [0,1,2,3].forEach(ci=>{
-    th+=`<th style="background:${pColors[ci]};color:#fff;font-size:12px">${COLS[ci].icon} ${ST[ci].name}<br><span style="font-weight:400;font-size:10px">อายุ ${ST[ci].age} | ${ST[ci].gender==='male'?'ชาย':'หญิง'}</span></th>`;
+    th+=`<th style="background:${pColors[ci]};color:#fff;font-size:12px">${COLS[ci].icon} ${ST[ci].name}<br><span style="font-weight:400;font-size:10px">อายุ ${ST[ci].age} | ${ST[ci].gender==='male'?'ชาย':'หญิง'} | วันที่ ${ST[ci].policyDate||'—'}</span></th>`;
   });
   th+=`</tr>`;
   thead.innerHTML=th;
@@ -1493,6 +1499,13 @@ function renderProjDetail(ci){
   // Header
   const thead=document.getElementById(`pt-det-thead-${pn}`);
   let th=`<tr>
+    <th colspan="${cols.length+1}" class="${hdClsArr[ci]}" style="text-align:left;padding:8px 12px">
+      ${COLS[ci].icon} ${s.name} &nbsp;|&nbsp; อายุ ${s.age} ปี (${s.gender==='male'?'ชาย':'หญิง'})
+      ${s.policyDate?`&nbsp;|&nbsp; 📅 วันที่ ${s.policyDate}`:''}
+      &nbsp;|&nbsp; จ่ายเบี้ยหลัก ${Math.max(s.stopPayYear-s.startYear,0)} ปี (พ.ศ.${s.startYear}–${s.stopPayYear})
+    </th>
+  </tr>
+  <tr>
     <th class="ac ${hdClsArr[ci]}">ช่วงอายุ</th>`;
   cols.forEach(c=>{th+=`<th class="${subClsArr[ci]}" style="${c.style||''};font-size:11px">${c.lbl}</th>`;});
   th+=`</tr>`;
@@ -1603,7 +1616,7 @@ function renderBreakdown(){
       s.multiPayCISum>0?{lbl:`MultiPay CI ${s.multiPayCISum.toLocaleString()} บ.`,v:r.pMultiPay}:null
     ].filter(Boolean);
     const rows=items.map(it=>`<tr><td class="bn">${it.lbl}</td><td class="ba ${it.v===0?'z':''}">${it.v>0?FZ(it.v):'—'}</td></tr>`).join('');
-    return`<div class="bdc"><div class="bdc-hd">${COLS[ci].icon} ${s.name} — อายุ ${s.age} ปี (${s.gender==='male'?'ชาย':'หญิง'})</div><table class="bdt">${rows}<tr class="btot"><td class="bn" style="font-weight:800">รวมเบี้ยทั้งหมด (บาท/ปี)</td><td class="ba btot-v" style="font-size:14px">${FZ(r.total||0)}</td></tr></table></div>`;
+    return`<div class="bdc"><div class="bdc-hd">${COLS[ci].icon} ${s.name} — อายุ ${s.age} ปี (${s.gender==='male'?'ชาย':'หญิง'})${s.policyDate?' | 📅 '+s.policyDate:''}</div><table class="bdt">${rows}<tr class="btot"><td class="bn" style="font-weight:800">รวมเบี้ยทั้งหมด (บาท/ปี)</td><td class="ba btot-v" style="font-size:14px">${FZ(r.total||0)}</td></tr></table></div>`;
   }).join('');
 }
 
@@ -2009,7 +2022,8 @@ function stateToRow(ci){
     addSum:s.addSum, addRCC:s.addRCC?1:0,
     adbSum:s.adbSum, adbRCC:s.adbRCC?1:0,
     occClass:s.occClass, ecirSum:s.ecirSum, ciCareSum:s.ciCareSum,
-    ciPlusSum:s.ciPlusSum, ciTopUp:s.ciTopUp?1:0, multiPayCISum:s.multiPayCISum
+    ciPlusSum:s.ciPlusSum, ciTopUp:s.ciTopUp?1:0, multiPayCISum:s.multiPayCISum,
+    policyDate:s.policyDate||''
   };
 }
 
@@ -2023,7 +2037,7 @@ function buildProjRows(ci){
     const bandAge=parseInt(BANDS[bi].split('-')[0]);
     const bc=bandCalc(s,bandAge);
     cum+=bc.total;
-    const r={policy_no:ci+1,name:s.name,age_band:BANDS[bi],bandAge};
+    const r={policy_no:ci+1,name:s.name,policyDate:s.policyDate||'',age_band:BANDS[bi],bandAge};
     r.pMain=bc.mainStopped?'ครบชำระ':bc.pM;
     r.pH=bc.ended.H?'สิ้นสุด':bc.pH;
     r.pHC=bc.ended.HC?'สิ้นสุด':bc.pHC;
@@ -2051,7 +2065,7 @@ function exportExcel(){
     // ── Sheet 1: ข้อมูลกรมธรรม์ (for re-import) ──
     const policyRows=[0,1,2,3].map(ci=>stateToRow(ci));
     const wsPol=XLSX.utils.json_to_sheet(policyRows,{header:[
-      'policy_no','name','gender','age','startYear','stopPayYear',
+      'policy_no','name','gender','age','startYear','stopPayYear','policyDate',
       'mainMode','mainName','mainSum','mainPrem',
       'healthType','healthOpt','hcSum','hcNS','cfcSum','hbSum','hbStdSum',
       'aiSum','aiRCC','addSum','addRCC','adbSum','adbRCC','occClass','ecirSum','ciCareSum'
@@ -2065,7 +2079,7 @@ function exportExcel(){
     [0,1,2,3].forEach(ci=>{
       const s=ST[ci];const r=s.result||{};
       sumRows.push({
-        'กรมธรรม์':COLS[ci].label,'ชื่อ':s.name,'อายุเริ่ม':s.age,'เพศ':s.gender==='male'?'ชาย':'หญิง',
+        'กรมธรรม์':COLS[ci].label,'ชื่อ':s.name,'วันที่กรมธรรม์':s.policyDate||'—','อายุเริ่ม':s.age,'เพศ':s.gender==='male'?'ชาย':'หญิง',
         'ประกันหลัก':r.pMain||0,'สัญญาสุขภาพ':r.pH||0,
         'HC':r.pHC||0,'CFC':r.pCFC||0,'HB Extra':r.pHB||0,'HB Std':r.pHBStd||0,
         'AI/RCC':r.pAI||0,'ADD/RCC':r.pADD||0,'ADB/RCC':r.pADB||0,
@@ -2082,13 +2096,13 @@ function exportExcel(){
       const projRows=buildProjRows(ci);
       if(!projRows.length) return;
       const wsProj=XLSX.utils.json_to_sheet(projRows,{header:[
-        'policy_no','name','age_band','bandAge',
+        'policy_no','name','policyDate','age_band','bandAge',
         'pMain','pH','pHC','pCFC','pHB','pHBStd','pAI','pADD','pADB','pECIR','pCIC',
         'total','cumulative'
       ]});
       // Thai headers row (insert above)
       XLSX.utils.sheet_add_aoa(wsProj,[
-        ['กรมธรรม์','ชื่อ','ช่วงอายุ','อายุเริ่มต้น',
+        ['กรมธรรม์','ชื่อ','วันที่กรมธรรม์','ช่วงอายุ','อายุเริ่มต้น',
          'ประกันหลัก','สุขภาพ','HC','CFC','HB Extra','HB Std','AI/RCC','ADD/RCC','ADB/RCC','ECIR','CI Care',
          'รวม/ปี','สะสม']
       ],{origin:'A1',skipHeader:true});
@@ -2143,6 +2157,7 @@ function importExcel(input){
           if(row.ciPlusSum!==undefined) s.ciPlusSum=+row.ciPlusSum||0;
           if(row.ciTopUp!==undefined) s.ciTopUp=+row.ciTopUp===1;
           if(row.multiPayCISum!==undefined) s.multiPayCISum=+row.multiPayCISum||0;
+          if(row.policyDate!==undefined) s.policyDate=String(row.policyDate||'');
         });
         // Validate healthType exists
         [0,1,2,3].forEach(ci=>{

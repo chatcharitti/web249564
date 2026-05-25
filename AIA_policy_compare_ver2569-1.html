@@ -794,13 +794,13 @@ function renderInputs(){
       <div class="rr">
         <div class="rn">🔬 Health Cancer (HC)<small>หน่วย = 100,000 บ.</small></div>
         <div class="rr-right">
-          <select class="rs" onchange="su(${ci},'hcSum',+this.value)">${[0,1,2,3,5,10,15,20].map(u=>`<option value="${u*100000}"${s.hcSum===u*100000?' selected':''}>${u===0?'ไม่เลือก':u+' หน่วย'}</option>`).join('')}</select>
+          <input type="number" class="ri" placeholder="จำนวนหน่วย" min="0" step="1" value="${s.hcSum>0?s.hcSum/100000:''}" oninput="su(${ci},'hcSum',(+this.value||0)*100000)" style="width:115px" title="1 หน่วย = 100,000 บาท">
           <div class="ck"><input type="checkbox" id="hc-ns-${ci}" ${s.hcNS?'checked':''} onchange="su(${ci},'hcNS',this.checked)"><label for="hc-ns-${ci}">ไม่สูบบุหรี่ (-10%)</label></div>
         </div>
       </div>
       <div class="rr">
         <div class="rn">🌸 Care for Cancer (CFC)</div>
-        <select class="rs" onchange="su(${ci},'cfcSum',+this.value)">${[0,100000,200000,300000,500000,1000000,2000000].map(v=>`<option value="${v}"${s.cfcSum===v?' selected':''}>${v===0?'ไม่เลือก':v.toLocaleString()+' บ.'}</option>`).join('')}</select>
+        <input type="number" class="ri" placeholder="ทุนประกัน (บ.)" min="0" step="100000" value="${s.cfcSum||''}" oninput="su(${ci},'cfcSum',+this.value||0)" style="width:115px">
       </div>
       <div class="rr">
         <div class="rn">💊 HB Extra (ชดเชยรายวัน)</div>
@@ -808,7 +808,7 @@ function renderInputs(){
       </div>
       <div class="rr">
         <div class="rn">🏥 HB Standard (IPD ทั่วไป)</div>
-        <select class="rs" onchange="su(${ci},'hbStdSum',+this.value)">${[0,100,200,300,500,1000,2000].map(v=>`<option value="${v}"${s.hbStdSum===v?' selected':''}>${v===0?'ไม่เลือก':v.toLocaleString()+' บ./วัน'}</option>`).join('')}</select>
+        <input type="number" class="ri" placeholder="บ./วัน" min="0" step="100" value="${s.hbStdSum||''}" oninput="su(${ci},'hbStdSum',+this.value||0)" style="width:115px">
       </div>
 
       <div class="sl" style="margin-top:6px">🚨 อุบัติเหตุ (AI)</div>

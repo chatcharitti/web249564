@@ -308,6 +308,35 @@ body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);fon
 .cum-card:nth-child(3) .cum-total{color:var(--p3)}
 .cum-card:nth-child(4) .cum-total{color:var(--p4)}
 
+/* ── ECIR Year-by-Year table ── */
+.ecir-yby-wrap{margin-top:12px}
+.ecir-yby-toggle{
+  background:none;border:1.5px solid #7c3aed;color:#7c3aed;
+  border-radius:6px;padding:5px 14px;font-size:12px;font-weight:700;
+  cursor:pointer;font-family:'Sarabun',sans-serif;transition:all .15s;
+  display:flex;align-items:center;gap:6px;
+}
+.ecir-yby-toggle:hover{background:#7c3aed;color:#fff}
+.ecir-yby-toggle.open{background:#7c3aed;color:#fff}
+.ecir-yby-inner{display:none;margin-top:8px;overflow-x:auto;max-height:500px;overflow-y:auto}
+.ecir-yby-inner.open{display:block}
+.ecir-tbl{width:100%;border-collapse:collapse;font-size:12px}
+.ecir-tbl th{position:sticky;top:0;z-index:5;padding:6px 10px;font-size:11px;font-weight:700;text-align:right;background:#f5f3ff;color:#5b21b6;border-bottom:2px solid #ddd6fe}
+.ecir-tbl th:first-child{text-align:center}
+.ecir-tbl td{padding:5px 10px;border-bottom:1px solid #f3f0ff;text-align:right}
+.ecir-tbl td:first-child{text-align:center;font-weight:700;color:#5b21b6;background:#faf5ff}
+.ecir-tbl .yr-hi{background:#faf5ff;font-weight:600;color:#6d28d9}
+.ecir-tbl .yr-lo{color:#9ca3af}
+.ecir-tbl .yr-end td{color:#aaa;font-style:italic;font-size:10px}
+.ecir-tbl .yr-tot td{font-weight:800;color:#7c3aed;background:#f5f3ff;border-top:2px solid #ddd6fe}
+.ecir-note{font-size:11px;color:#7c3aed;margin-top:6px;padding:6px 10px;background:#faf5ff;border-left:3px solid #7c3aed;border-radius:0 6px 6px 0}
+
+/* band range display in projection */
+.ecir-range{display:flex;flex-direction:column;align-items:flex-end;gap:1px}
+.ecir-range .er-lo{font-size:11px;color:#9ca3af}
+.ecir-range .er-hi{font-size:13px;font-weight:700;color:#7c3aed}
+.ecir-range .er-sum{font-size:10px;color:#6d28d9;font-style:italic}
+
 /* ── PRINT ── */
 @media print{
   .no-print{display:none!important}
@@ -332,6 +361,11 @@ body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);fon
   .proj-panel .cum-bar{grid-template-columns:repeat(4,1fr);gap:6px;margin-top:6px}
   .pt-sum .sub-row{display:none!important}/* hide expandable in print — too long */
   #pp-1 .cum-bar,#pp-2 .cum-bar,#pp-3 .cum-bar,#pp-4 .cum-bar{grid-template-columns:1fr}
+  /* Show ECIR year-by-year expanded on print */
+  .ecir-yby-toggle{display:none}
+  .ecir-yby-inner{display:block!important}
+  .ecir-tbl{font-size:9px} .ecir-tbl th,.ecir-tbl td{padding:2px 6px}
+  .ecir-note{font-size:9px;padding:4px 8px}
   .page-break{page-break-before:always}
   @page{size:A4 landscape;margin:7mm 9mm}
   body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -491,10 +525,10 @@ body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);fon
     </div>
 
     <!-- PANEL 1-4: Detail per policy -->
-    <div class="proj-panel" id="pp-1"><div style="overflow-x:auto;max-height:680px"><table class="pt-det" id="pt-det-1"><thead id="pt-det-thead-1"></thead><tbody id="pt-det-tbody-1"></tbody></table></div><div class="cum-bar" id="cum-bar-1" style="margin-top:14px;grid-template-columns:1fr"></div></div>
-    <div class="proj-panel" id="pp-2"><div style="overflow-x:auto;max-height:680px"><table class="pt-det" id="pt-det-2"><thead id="pt-det-thead-2"></thead><tbody id="pt-det-tbody-2"></tbody></table></div><div class="cum-bar" id="cum-bar-2" style="margin-top:14px;grid-template-columns:1fr"></div></div>
-    <div class="proj-panel" id="pp-3"><div style="overflow-x:auto;max-height:680px"><table class="pt-det" id="pt-det-3"><thead id="pt-det-thead-3"></thead><tbody id="pt-det-tbody-3"></tbody></table></div><div class="cum-bar" id="cum-bar-3" style="margin-top:14px;grid-template-columns:1fr"></div></div>
-    <div class="proj-panel" id="pp-4"><div style="overflow-x:auto;max-height:680px"><table class="pt-det" id="pt-det-4"><thead id="pt-det-thead-4"></thead><tbody id="pt-det-tbody-4"></tbody></table></div><div class="cum-bar" id="cum-bar-4" style="margin-top:14px;grid-template-columns:1fr"></div></div>
+    <div class="proj-panel" id="pp-1"><div style="overflow-x:auto;max-height:680px"><table class="pt-det" id="pt-det-1"><thead id="pt-det-thead-1"></thead><tbody id="pt-det-tbody-1"></tbody></table></div><div id="ecir-yby-1"></div><div class="cum-bar" id="cum-bar-1" style="margin-top:14px;grid-template-columns:1fr"></div></div>
+    <div class="proj-panel" id="pp-2"><div style="overflow-x:auto;max-height:680px"><table class="pt-det" id="pt-det-2"><thead id="pt-det-thead-2"></thead><tbody id="pt-det-tbody-2"></tbody></table></div><div id="ecir-yby-2"></div><div class="cum-bar" id="cum-bar-2" style="margin-top:14px;grid-template-columns:1fr"></div></div>
+    <div class="proj-panel" id="pp-3"><div style="overflow-x:auto;max-height:680px"><table class="pt-det" id="pt-det-3"><thead id="pt-det-thead-3"></thead><tbody id="pt-det-tbody-3"></tbody></table></div><div id="ecir-yby-3"></div><div class="cum-bar" id="cum-bar-3" style="margin-top:14px;grid-template-columns:1fr"></div></div>
+    <div class="proj-panel" id="pp-4"><div style="overflow-x:auto;max-height:680px"><table class="pt-det" id="pt-det-4"><thead id="pt-det-thead-4"></thead><tbody id="pt-det-tbody-4"></tbody></table></div><div id="ecir-yby-4"></div><div class="cum-bar" id="cum-bar-4" style="margin-top:14px;grid-template-columns:1fr"></div></div>
 
   </div>
 </div>
@@ -1310,6 +1344,41 @@ function renderBenefit(){
 // ════════════════════════════════════════════════════════════
 
 // Per-band breakdown for one policy at one band age
+// ════════════════════════════════════════════════════════════
+//  ECIR YEAR-BY-YEAR HELPERS
+// ════════════════════════════════════════════════════════════
+
+// Returns {sum, min, max, byAge:[{age,prem}]} for the 5-year band starting at bandAge
+function calcECIRBand(s, bandAge){
+  if(!s.ecirSum || bandAge>79) return {sum:0,min:0,max:0,byAge:[]};
+  const g=s.gender, occ=s.occClass;
+  const bandEnd=Math.min(bandAge+4, 79);
+  const byAge=[];
+  let sum=0, mn=Infinity, mx=0;
+  for(let a=Math.max(bandAge, s.age); a<=bandEnd; a++){
+    const p=D.calcECIR(s.ecirSum, a, g, occ);
+    byAge.push({age:a, prem:p});
+    sum+=p; if(p>mx)mx=p; if(p<mn&&p>0)mn=p;
+  }
+  if(mn===Infinity) mn=0;
+  return {sum, min:mn, max:mx, byAge};
+}
+
+// Returns full year-by-year table from startAge to 79
+function calcECIRYearTable(s){
+  if(!s.ecirSum) return [];
+  const g=s.gender, occ=s.occClass;
+  const rows=[];
+  let cumSum=0;
+  const startAge=Math.max(s.age, 1);
+  for(let a=startAge; a<=79; a++){
+    const p=D.calcECIR(s.ecirSum, a, g, occ);
+    cumSum+=p;
+    rows.push({age:a, rate:D.RATE_ECIR[g][a]??0, prem:p, cumSum});
+  }
+  return rows;
+}
+
 function bandCalc(s,bandAge){
   const g=s.gender,occ=s.occClass;
   const paidYrs=s.stopPayYear-s.startYear;
@@ -1324,13 +1393,16 @@ function bandCalc(s,bandAge){
   const pAI=s.aiSum>0&&bandAge<=64&&bandAge>=16?D.calcAI(s.aiSum,occ,s.aiRCC):0;
   const pADD=s.addSum>0&&bandAge<=64?D.calcADD(s.addSum,occ,s.addRCC):0;
   const pADB=s.adbSum>0&&bandAge<=64?D.calcADB(s.adbSum,occ,s.adbRCC):0;
-  const pECIR=s.ecirSum>0&&bandAge<=79?D.calcECIR(s.ecirSum,bandAge,g,occ):0;
+  // ECIR: use true per-year sum across the band (not bandAge × 5)
+  const ecirBand=calcECIRBand(s, bandAge);
+  const pECIR=ecirBand.sum;  // true 5-year sum
+  const pECIR_display={min:ecirBand.min, max:ecirBand.max, sum:ecirBand.sum, byAge:ecirBand.byAge};
   const pCIC=s.ciCareSum>0&&bandAge<=79?D.calcCICare(s.ciCareSum,bandAge,g):0;
   const pCIPlus=s.ciPlusSum>0&&bandAge<=98?D.calcCIPlus(s.ciPlusSum,bandAge,g):0;
   const pCITopUp=s.ciTopUp&&s.ciPlusSum>0&&bandAge<=98?D.calcCITopUp(s.ciPlusSum,bandAge,g):0;
   const pMultiPay=s.multiPayCISum>0&&bandAge<=99?D.calcMultiPayCI(s.multiPayCISum,bandAge,g):0;
   const total=pM+pH+pHC+pCFC+pHB+pHBStd+pAI+pADD+pADB+pECIR+pCIC+pCIPlus+pCITopUp+pMultiPay;
-  return{pM,pH,pHC,pCFC,pHB,pHBStd,pAI,pADD,pADB,pECIR,pCIC,pCIPlus,pCITopUp,pMultiPay,total,mainStopped,
+  return{pM,pH,pHC,pCFC,pHB,pHBStd,pAI,pADD,pADB,pECIR,pECIR_display,pCIC,pCIPlus,pCITopUp,pMultiPay,total,mainStopped,
     ended:{H:pH===0&&s.healthType!=='NONE',HC:bandAge>79&&s.hcSum>0,CFC:bandAge>79&&s.cfcSum>0,
            HB:bandAge>79&&s.hbSum>0,HBStd:bandAge>59&&s.hbStdSum>0,
            AI:(bandAge>64||bandAge<16)&&s.aiSum>0,ADD:bandAge>64&&s.addSum>0,
@@ -1444,8 +1516,16 @@ function renderProjSummary(){
         const v=bc[ci][k];
         const ended=(k==='pH'&&bc[ci].ended.H)||(k==='pHC'&&bc[ci].ended.HC)||(k==='pCFC'&&bc[ci].ended.CFC)||(k==='pHB'&&bc[ci].ended.HB)||(k==='pHBStd'&&bc[ci].ended.HBStd)||(k==='pAI'&&bc[ci].ended.AI)||(k==='pADD'&&bc[ci].ended.ADD)||(k==='pADB'&&bc[ci].ended.ADB)||(k==='pECIR'&&bc[ci].ended.ECIR)||(k==='pCIC'&&bc[ci].ended.CIC)||(k==='pCIPlus'&&bc[ci].ended.CIPlus)||(k==='pCITopUp'&&bc[ci].ended.CITopUp)||(k==='pMultiPay'&&bc[ci].ended.MultiPay);
         const paid=k==='pM'&&bc[ci].mainStopped;
-        let disp=ended?'(สิ้นสุด)':paid?'(ครบชำระ)':v>0?FZ(v):'—';
-        const clr=ended||paid?'#aaa':(color||'var(--text)');
+        let disp, clr;
+        if(ended){ disp='(สิ้นสุด)'; clr='#aaa'; }
+        else if(paid){ disp='(ครบชำระ)'; clr='#3b82f6'; }
+        else if(k==='pECIR'&&bc[ci]&&bc[ci].pECIR_display&&bc[ci].pECIR_display.sum>0){
+          const d=bc[ci].pECIR_display;
+          const same=(d.min===d.max);
+          disp=same?FZ(d.min)+'/ปี':`${FZ(d.min)}–${FZ(d.max)}/ปี`;
+          clr='#7c3aed';
+        }
+        else{ disp=v>0?FZ(v):'—'; clr=v>0?(color||'var(--text)'):'#aaa'; }
         html+=`<td style="text-align:right;padding:4px 12px;font-size:11px;color:${clr};width:17.5%;font-weight:${v>0&&!ended&&!paid?'600':'400'}">${disp}</td>`;
       });
       html+=`</tr></table></td></tr>`;
@@ -1532,9 +1612,27 @@ function renderProjDetail(ci){
       const v=bc[c.k];
       const ended=(c.k==='pH'&&bc.ended.H)||(c.k==='pHC'&&bc.ended.HC)||(c.k==='pCFC'&&bc.ended.CFC)||(c.k==='pHB'&&bc.ended.HB)||(c.k==='pHBStd'&&bc.ended.HBStd)||(c.k==='pAI'&&bc.ended.AI)||(c.k==='pADD'&&bc.ended.ADD)||(c.k==='pADB'&&bc.ended.ADB)||(c.k==='pECIR'&&bc.ended.ECIR)||(c.k==='pCIC'&&bc.ended.CIC)||(c.k==='pCIPlus'&&bc.ended.CIPlus)||(c.k==='pCITopUp'&&bc.ended.CITopUp)||(c.k==='pMultiPay'&&bc.ended.MultiPay);
       const paid=c.k==='pM'&&bc.mainStopped;
-      if(ended) html+=`<td>${eT}</td>`;
-      else if(paid) html+=`<td>${pT}</td>`;
-      else html+=`<td style="${c.style||''};text-align:right">${v>0?FZ(v):'—'}</td>`;
+      if(ended){ html+=`<td>${eT}</td>`; }
+      else if(paid){ html+=`<td>${pT}</td>`; }
+      else if(c.k==='pECIR' && s.ecirSum>0 && !bc.ended.ECIR){
+        // ECIR: show range (min–max per year) + true 5-yr sum
+        const d=bc.pECIR_display;
+        if(d && d.sum>0){
+          const sameRate=(d.min===d.max);
+          html+=`<td style="text-align:right;padding:4px 8px">
+            <div class="ecir-range">
+              ${sameRate
+                ?`<span class="er-hi">${FZ(d.min)}</span><span class="er-lo">ต่อปี</span>`
+                :`<span class="er-lo">${FZ(d.min)}–${FZ(d.max)}</span><span class="er-lo">(ต่อปี)</span>`
+              }
+              <span class="er-sum">รวม ${FZ(d.sum)} / ${d.byAge.length} ปี</span>
+            </div>
+          </td>`;
+        } else {
+          html+=`<td style="text-align:right;color:#aaa">—</td>`;
+        }
+      }
+      else{ html+=`<td style="${c.style||''};text-align:right">${v>0?FZ(v):'—'}</td>`; }
     });
     html+=`</tr>`;
   }
@@ -1543,19 +1641,71 @@ function renderProjDetail(ci){
     <td class="ac" style="font-size:11px;color:${pColors[ci]}">รวมทั้งหมด</td>`;
   cols.forEach(c=>{
     const v=cumByCol[c.k]||0;
-    html+=`<td style="text-align:right;font-size:13px;font-weight:800;color:${pColors[ci]}">${v>0?FZ(v):'—'}</td>`;
+    const lbl=c.k==='pECIR'&&s.ecirSum>0?`<small style="display:block;font-size:9px;font-weight:400;color:#6d28d9">(ยอดรายปีจริง)</small>`:'';
+    html+=`<td style="text-align:right;font-size:13px;font-weight:800;color:${pColors[ci]}">${v>0?FZ(v):'—'}${lbl}</td>`;
   });
   html+=`</tr>`;
   document.getElementById(`pt-det-tbody-${pn}`).innerHTML=html;
 
+  // ── ECIR Year-by-Year table ──
+  const ecirWrap=document.getElementById(`ecir-yby-${pn}`);
+  if(ecirWrap){
+    if(s.ecirSum>0){
+      const yRows=calcECIRYearTable(s);
+      const occ=s.occClass;
+      let ytbl=`<table class="ecir-tbl">
+        <thead><tr>
+          <th style="text-align:center">อายุ</th>
+          <th>อัตรา/1,000 บ.</th>
+          <th>Loading ชั้นอาชีพ</th>
+          <th>เบี้ย ECIR/ปี (บ.)</th>
+          <th>สะสม (บ.)</th>
+        </tr></thead><tbody>`;
+      yRows.forEach(r=>{
+        ytbl+=`<tr>
+          <td>${r.age}</td>
+          <td style="color:#6d28d9">${r.rate.toFixed(2)}</td>
+          <td style="color:${occ===4?'#ea580c':'#9ca3af'}">${occ===4?'+25%':'—'}</td>
+          <td class="yr-hi">${FZ(r.prem)}</td>
+          <td style="color:#9ca3af">${FZ(r.cumSum)}</td>
+        </tr>`;
+      });
+      const totalSum=yRows.reduce((a,r)=>a+r.prem,0);
+      ytbl+=`<tr class="yr-tot">
+        <td>รวม</td><td>—</td><td>—</td>
+        <td>${FZ(totalSum)} บาท</td>
+        <td>${FZ(totalSum)} บาท</td>
+      </tr></tbody></table>`;
+      ecirWrap.innerHTML=`
+        <div class="ecir-yby-wrap">
+          <button class="ecir-yby-toggle" onclick="toggleECIRYby(${pn})">
+            🔬 ดู / ซ่อน ตาราง ECIR รายปี (${yRows.length} ปี | ทุน ${s.ecirSum.toLocaleString()} บ. | ชั้น ${occ})
+          </button>
+          <div class="ecir-yby-inner" id="ecir-yby-inner-${pn}">
+            <p class="ecir-note">⚠️ เบี้ย ECIR ปรับทุกปี — ตารางนี้แสดงเบี้ยจริงรายปี | อัตราคิดที่ทุนประกัน ${s.ecirSum.toLocaleString()} บาท</p>
+            ${ytbl}
+          </div>
+        </div>`;
+    } else {
+      ecirWrap.innerHTML='';
+    }
+  }
+
   // Cum bar for single policy
   const cumBarEl=document.getElementById(`cum-bar-${pn}`);
   cumBarEl.style.gridTemplateColumns='1fr';
+  const ecirTrueTotal=s.ecirSum>0?calcECIRYearTable(s).reduce((a,r)=>a+r.prem,0):0;
+  const displayCum=s.ecirSum>0?(cumTotal-cumByCol['pECIR']+ecirTrueTotal):cumTotal;
   cumBarEl.innerHTML=`
     <div class="cum-card">
       <h4>${COLS[ci].icon} ${s.name} — สรุปเบี้ยสะสมตลอดระยะเวลา</h4>
-      ${cols.filter(c=>!c.isTot).map(c=>{const v=cumByCol[c.k]||0;return v>0?`<div class="cum-row2"><span>${c.lbl}</span><b>${FZ(v)} บาท</b></div>`:''}).join('')}
-      <div class="cum-total">${COLS[ci].icon} รวมเบี้ยทั้งหมด: ${FZ(cumTotal)} บาท</div>
+      ${cols.filter(c=>!c.isTot).map(c=>{
+        const v=cumByCol[c.k]||0;
+        if(!v) return '';
+        const note=c.k==='pECIR'?` <small style="color:#7c3aed">(คำนวณรายปีจริง)</small>`:'';
+        return `<div class="cum-row2"><span>${c.lbl}${note}</span><b>${FZ(c.k==='pECIR'?ecirTrueTotal:v)} บาท</b></div>`;
+      }).join('')}
+      <div class="cum-total">${COLS[ci].icon} รวมเบี้ยทั้งหมด: ${FZ(displayCum)} บาท</div>
     </div>`;
 }
 
@@ -1565,13 +1715,28 @@ function renderProjDetail(ci){
 function renderCumBar(elId, cis, cumTotals){
   const el=document.getElementById(elId);
   const pColors=['var(--p1)','var(--p2)','var(--p3)','var(--p4)'];
-  el.innerHTML=cis.map(ci=>`
+  el.innerHTML=cis.map(ci=>{
+    const s=ST[ci];
+    // Recalculate true ECIR total for this policy
+    const ecirTrue=s.ecirSum>0?calcECIRYearTable(s).reduce((a,r)=>a+r.prem,0):0;
+    // bandCalc ECIR already uses true sums, so cumTotals[ci] is already correct
+    return `
     <div class="cum-card">
-      <h4>${COLS[ci].icon} ${ST[ci].name}</h4>
-      <div class="cum-row2"><span>ช่วงอายุ</span><b>${ST[ci].age} – 79 ปี</b></div>
-      <div class="cum-row2"><span>ระยะจ่ายเบี้ยหลัก</span><b>${Math.max(ST[ci].stopPayYear-ST[ci].startYear,0)} ปี</b></div>
+      <h4>${COLS[ci].icon} ${s.name}</h4>
+      <div class="cum-row2"><span>ช่วงอายุ</span><b>${s.age} – 79 ปี</b></div>
+      <div class="cum-row2"><span>ระยะจ่ายเบี้ยหลัก</span><b>${Math.max(s.stopPayYear-s.startYear,0)} ปี</b></div>
+      ${s.ecirSum>0?`<div class="cum-row2"><span style="color:#7c3aed">ECIR (รายปีจริง อายุ ${s.age}–79)</span><b style="color:#7c3aed">${FZ(ecirTrue)} บ.</b></div>`:''}
       <div class="cum-total">${COLS[ci].icon} เบี้ยสะสม: ${FZ(cumTotals[ci])} บาท</div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
+}
+
+function toggleECIRYby(pn){
+  const inner=document.getElementById(`ecir-yby-inner-${pn}`);
+  const btn=inner?.previousElementSibling;
+  if(!inner) return;
+  const open=inner.classList.toggle('open');
+  if(btn) btn.classList.toggle('open', open);
 }
 
 // ════════════════════════════════════════════════════════════
@@ -2047,7 +2212,7 @@ function buildProjRows(ci){
     r.pAI=bc.ended.AI?'สิ้นสุด':bc.pAI;
     r.pADD=bc.ended.ADD?'สิ้นสุด':bc.pADD;
     r.pADB=bc.ended.ADB?'สิ้นสุด':bc.pADB;
-    r.pECIR=bc.ended.ECIR?'สิ้นสุด':bc.pECIR;
+    r.pECIR=bc.ended.ECIR?'สิ้นสุด':bc.pECIR; // true 5-yr sum
     r.pCIC=bc.ended.CIC?'สิ้นสุด':bc.pCIC;
     r.pCIPlus=bc.ended.CIPlus?'สิ้นสุด':bc.pCIPlus;
     r.pCITopUp=bc.ended.CITopUp?'สิ้นสุด':bc.pCITopUp;

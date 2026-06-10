@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ตารางผ่อนชำระแบบลดต้นลดดอก — จ่าย 2% ของยอดคงเหลือ + ชำระเพิ่มรายงวด</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1b2a24;
+  --ink-soft:#5b6e66;
+  --paper:#fbfcfa;
+  --card:#ffffff;
+  --line:#e3eae5;
+  --accent:#0f6b4f;
+  --accent-soft:#e6f3ed;
+  --extra:#1d5a8a;
+  --extra-soft:#e8f1f8;
+  --warn:#a4541a;
+  --warn-soft:#fdf1e6;
+  --fs:15px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Sarabun',sans-serif;
+  font-size:var(--fs);
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.65;
+  padding:28px 16px 60px;
+}
+.wrap{max-width:980px;margin:0 auto}
+
+header{border-bottom:3px solid var(--accent);padding-bottom:18px;margin-bottom:22px}
+.eyebrow{font-size:.8em;letter-spacing:.12em;color:var(--accent);font-weight:600;text-transform:uppercase}
+h1{font-size:1.7em;font-weight:700;margin:4px 0 2px}
+.subtitle{color:var(--ink-soft);font-size:.95em}
+
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:18px}
+.toolbar .spacer{flex:1}
+button{
+  font-family:inherit;font-size:.9em;font-weight:600;
+  border:1px solid var(--line);background:var(--card);color:var(--ink);
+  padding:7px 14px;border-radius:8px;cursor:pointer;
+}
+button:hover{border-color:var(--accent);color:var(--accent)}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+button.primary:hover{background:#0c5a43;color:#fff}
+button.ghost-extra{border-color:var(--extra);color:var(--extra)}
+button.ghost-extra:hover{background:var(--extra-soft)}
+
+.panel{
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:18px 20px;margin-bottom:22px;
+}
+.panel h2{font-size:1.05em;font-weight:700;margin-bottom:12px;color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+.field label{display:block;font-size:.82em;font-weight:600;color:var(--ink-soft);margin-bottom:4px}
+.field input{
+  width:100%;font-family:inherit;font-size:1em;font-weight:600;
+  padding:8px 10px;border:1px solid var(--line);border-radius:8px;color:var(--ink);
+  background:#fff;
+}
+.field input:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.hint{font-size:.78em;color:var(--ink-soft);margin-top:10px}
+
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:14px}
+.stat{
+  background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);
+  border-radius:10px;padding:12px 16px;
+}
+.stat .label{font-size:.78em;color:var(--ink-soft);font-weight:600}
+.stat .value{font-size:1.3em;font-weight:700;color:var(--accent)}
+.stat .sub{font-size:.78em;color:var(--ink-soft)}
+.stat.neutral{border-left-color:var(--ink-soft)}
+.stat.neutral .value{color:var(--ink)}
+.stat.extra{border-left-color:var(--extra)}
+.stat.extra .value{color:var(--extra)}
+
+.compare{
+  background:var(--extra-soft);border:1px solid #cfe1ef;border-radius:10px;
+  padding:12px 16px;font-size:.9em;color:var(--extra);margin-bottom:22px;display:none;font-weight:600;
+}
+.compare.show{display:block}
+
+.alert{
+  background:var(--warn-soft);border:1px solid #efd9c2;border-radius:10px;
+  padding:12px 16px;font-size:.9em;color:var(--warn);margin-bottom:22px;display:none;
+}
+.alert.show{display:block}
+
+.table-card{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.9em;min-width:760px}
+thead th{
+  background:var(--accent);color:#fff;font-weight:600;
+  padding:9px 8px;text-align:right;white-space:nowrap;
+}
+thead th:first-child{text-align:center}
+thead th.col-extra{background:var(--extra)}
+tbody td{padding:5px 8px;text-align:right;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+tbody td:first-child{text-align:center;color:var(--ink-soft)}
+tbody td.cell-extra{background:#f6fafd}
+tbody td.cell-extra input{
+  width:92px;font-family:inherit;font-size:.95em;font-weight:600;text-align:right;
+  padding:3px 6px;border:1px solid #c9dcea;border-radius:6px;color:var(--extra);background:#fff;
+}
+tbody td.cell-extra input:focus{outline:2px solid var(--extra-soft);border-color:var(--extra)}
+tbody tr.has-extra td{background:var(--extra-soft)}
+tbody tr.has-extra td.cell-extra{background:#dcebf6}
+tbody tr.year td{background:var(--accent-soft);font-weight:600}
+tbody tr.final td{background:#dcefe6;font-weight:700;color:var(--accent)}
+tfoot td{padding:10px 8px;font-weight:700;text-align:right;background:#f2f6f3;border-top:2px solid var(--accent)}
+tfoot td:first-child{text-align:left}
+
+footer{margin-top:26px;font-size:.78em;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:12px}
+
+@media print{
+  @page{size:A4 landscape;margin:12mm 10mm}
+  body{padding:0;background:#fff;font-size:11px}
+  .toolbar,.panel .hint{display:none}
+  .panel,.stat,.table-card{border-color:#ccc;break-inside:avoid}
+  .summary,.compare{break-inside:avoid}
+  .table-card{overflow:visible}
+  table{min-width:0}
+  thead{display:table-header-group}
+  tbody tr{break-inside:avoid}
+  tbody td.cell-extra input{border:none;background:transparent;padding:0;width:auto}
+  button{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Payment Schedule · Reducing Balance · What-if Extra Payment</div>
+  <h1>ตารางผ่อนชำระแบบลดต้นลดดอก</h1>
+  <div class="subtitle">ชำระงวดละ 2% ของยอดคงเหลือ · ดอกเบี้ย 15% ต่อปี · จำลองการชำระเพิ่มเป็นรายงวดได้</div>
+</header>
+
+<div class="toolbar">
+  <button onclick="adjustFont(-1)">A−</button>
+  <button onclick="adjustFont(1)">A+</button>
+  <button class="ghost-extra" onclick="clearExtras()">↺ ล้างยอดชำระเพิ่มทั้งหมด</button>
+  <span class="spacer"></span>
+  <button class="primary" onclick="window.print()">🖨 พิมพ์ / บันทึก PDF</button>
+</div>
+
+<div class="panel">
+  <h2>เงื่อนไขการคำนวณ (ปรับค่าได้)</h2>
+  <div class="grid">
+    <div class="field">
+      <label>เงินต้น (บาท)</label>
+      <input type="number" id="inPrincipal" value="25200" min="1" step="100" onchange="calc()">
+    </div>
+    <div class="field">
+      <label>อัตราชำระต่อเดือน (% ของยอดคงเหลือ)</label>
+      <input type="number" id="inPayPct" value="2" min="0.1" step="0.1" onchange="calc()">
+    </div>
+    <div class="field">
+      <label>ดอกเบี้ย (% ต่อปี)</label>
+      <input type="number" id="inRate" value="15" min="0" step="0.25" onchange="calc()">
+    </div>
+    <div class="field">
+      <label>ยอดชำระขั้นต่ำ (บาท/งวด)</label>
+      <input type="number" id="inMinPay" value="200" min="0" step="50" onchange="calc()">
+    </div>
+  </div>
+  <div class="hint">วิธีใช้ช่อง "ชำระเพิ่ม" ในตาราง: กรอกจำนวนเงินที่ต้องการโปะเพิ่มในงวดนั้น ๆ ระบบจะคำนวณงวดถัดไปทั้งหมดใหม่ทันที — งวดที่ไม่ได้กรอกจะชำระตามค่างวดปกติ (2% ของยอดคงเหลือ หรือยอดขั้นต่ำ แล้วแต่ค่าใดสูงกว่า)</div>
+</div>
+
+<div class="alert" id="alertBox"></div>
+
+<div class="summary" id="summaryBox"></div>
+
+<div class="compare" id="compareBox"></div>
+
+<div class="table-card">
+  <table>
+    <thead>
+      <tr>
+        <th>งวดที่</th>
+        <th>ยอดยกมา</th>
+        <th>ดอกเบี้ย</th>
+        <th>ค่างวดปกติ</th>
+        <th class="col-extra">ชำระเพิ่ม ✎</th>
+        <th>ชำระรวมงวดนี้</th>
+        <th>ตัดเงินต้น</th>
+        <th>ยอดคงเหลือ</th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+    <tfoot id="tfoot"></tfoot>
+  </table>
+</div>
+
+<footer>
+  วิธีคำนวณ: ดอกเบี้ยรายงวด = ยอดคงเหลือ × (อัตราดอกเบี้ยต่อปี ÷ 12) · ค่างวดปกติ = ค่าที่มากกว่าระหว่าง (ยอดคงเหลือ × อัตราชำระ) กับยอดขั้นต่ำ · ชำระรวม = ค่างวดปกติ + ชำระเพิ่ม · ตัดเงินต้น = ชำระรวม − ดอกเบี้ย · งวดสุดท้ายชำระเท่ายอดคงเหลือบวกดอกเบี้ย<br>
+  ตารางนี้เป็นการประมาณการเพื่อการวางแผนเท่านั้น เงื่อนไขจริงขึ้นอยู่กับสัญญาของผู้ให้สินเชื่อแต่ละราย
+</footer>
+
+</div>
+
+<script>
+let fs = 15;
+let extras = {};   // {เลขงวด: ยอดชำระเพิ่ม}
+
+function adjustFont(d){
+  fs = Math.min(20, Math.max(11, fs + d));
+  document.documentElement.style.setProperty('--fs', fs + 'px');
+}
+const fmt = n => n.toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2});
+
+function readParams(){
+  return {
+    P0: parseFloat(document.getElementById('inPrincipal').value) || 0,
+    payPct: (parseFloat(document.getElementById('inPayPct').value) || 0) / 100,
+    mRate: (parseFloat(document.getElementById('inRate').value) || 0) / 100 / 12,
+    minPay: parseFloat(document.getElementById('inMinPay').value) || 0
+  };
+}
+
+// จำลองตาราง: useExtras = true จะนำยอดชำระเพิ่มรายงวดมารวม
+function simulate(p, useExtras){
+  let bal = p.P0, m = 0, totInt = 0, totPay = 0, totExtra = 0;
+  const MAX = 600, rows = [];
+  let stuck = false;
+  while (bal > 0.005 && m < MAX){
+    m++;
+    const open = bal;
+    const interest = open * p.mRate;
+    let basePay = Math.max(open * p.payPct, p.minPay);
+    let extra = useExtras ? (extras[m] || 0) : 0;
+    let pay = basePay + extra;
+    if (pay >= open + interest){            // งวดปิดบัญชี
+      pay = open + interest;
+      if (extra > 0) extra = Math.max(0, pay - basePay);
+      basePay = pay - extra;
+    }
+    const principal = pay - interest;
+    if (principal <= 0.005){ stuck = true; m--; break; }
+    bal = open - principal;
+    totInt += interest; totPay += pay; totExtra += extra;
+    rows.push({m, open, interest, basePay, extra, pay, principal, bal: Math.max(bal,0)});
+  }
+  return {rows, months: m, totInt, totPay, totExtra, bal, stuck};
+}
+
+function calc(){
+  const p = readParams();
+  const base = simulate(p, false);   // เส้นฐาน: ไม่มีการชำระเพิ่ม
+  const r = simulate(p, true);       // ตามแผนจริง (รวมชำระเพิ่ม)
+
+  const tbody = document.getElementById('tbody');
+  const tfoot = document.getElementById('tfoot');
+  const alertBox = document.getElementById('alertBox');
+  const compareBox = document.getElementById('compareBox');
+  const summaryBox = document.getElementById('summaryBox');
+
+  let html = '';
+  for (const row of r.rows){
+    const isFinal = row.bal <= 0.005;
+    let cls = isFinal ? 'final' : (row.m % 12 === 0 ? 'year' : '');
+    if (row.extra > 0) cls += ' has-extra';
+    const extraVal = extras[row.m] ? extras[row.m] : '';
+    html += `<tr class="${cls.trim()}">
+      <td>${row.m}</td>
+      <td>${fmt(row.open)}</td>
+      <td>${fmt(row.interest)}</td>
+      <td>${fmt(row.basePay)}</td>
+      <td class="cell-extra"><input type="number" min="0" step="100" inputmode="numeric" placeholder="0" value="${extraVal}" data-m="${row.m}" onchange="setExtra(this)"></td>
+      <td>${fmt(row.pay)}</td>
+      <td>${fmt(row.principal)}</td>
+      <td>${fmt(row.bal)}</td>
+    </tr>`;
+  }
+  tbody.innerHTML = html;
+
+  alertBox.className = 'alert'; alertBox.textContent = '';
+  if (r.stuck){
+    alertBox.className = 'alert show';
+    alertBox.textContent = '⚠ ด้วยเงื่อนไขนี้ ยอดชำระต่อเดือนไม่เพียงพอครอบคลุมดอกเบี้ย หนี้จะไม่มีวันปิดได้ — กรุณาเพิ่มอัตราชำระ ยอดขั้นต่ำ หรือยอดชำระเพิ่ม';
+  } else if (r.months >= 600 && r.bal > 0.005){
+    alertBox.className = 'alert show';
+    alertBox.textContent = `⚠ คำนวณถึง 600 งวดแล้วยังเหลือยอด ${fmt(r.bal)} บาท — กรุณาเพิ่มอัตราชำระ ยอดขั้นต่ำ หรือยอดชำระเพิ่ม`;
+  }
+
+  const years = Math.floor(r.months/12), months = r.months%12;
+  const closed = !r.stuck && r.bal <= 0.005;
+  summaryBox.innerHTML = `
+    <div class="stat neutral"><div class="label">เงินต้น</div><div class="value">${fmt(p.P0)}</div><div class="sub">บาท</div></div>
+    <div class="stat"><div class="label">${closed ? 'ระยะเวลาปิดหนี้' : 'จำนวนงวดที่แสดง'}</div><div class="value">${r.months} งวด</div><div class="sub">≈ ${years} ปี ${months} เดือน</div></div>
+    <div class="stat"><div class="label">ดอกเบี้ยรวม</div><div class="value">${fmt(r.totInt)}</div><div class="sub">คิดเป็น ${p.P0>0?(r.totInt/p.P0*100).toFixed(1):0}% ของเงินต้น</div></div>
+    <div class="stat extra"><div class="label">ชำระเพิ่มรวม</div><div class="value">${fmt(r.totExtra)}</div><div class="sub">บาท</div></div>
+    <div class="stat"><div class="label">ยอดชำระรวม</div><div class="value">${fmt(r.totPay)}</div><div class="sub">บาท</div></div>`;
+
+  // เปรียบเทียบกับเส้นฐาน (ไม่ชำระเพิ่ม)
+  compareBox.className = 'compare';
+  if (r.totExtra > 0 && closed && !base.stuck){
+    const saveInt = base.totInt - r.totInt;
+    const saveMonths = base.months - r.months;
+    compareBox.className = 'compare show';
+    compareBox.innerHTML = `📊 เปรียบเทียบกับการจ่ายตามปกติ (ไม่ชำระเพิ่ม): ปิดหนี้เร็วขึ้น <u>${saveMonths} งวด</u> (จาก ${base.months} → ${r.months} งวด) และประหยัดดอกเบี้ย <u>${fmt(saveInt)} บาท</u> (จาก ${fmt(base.totInt)} → ${fmt(r.totInt)} บาท)`;
+  }
+
+  tfoot.innerHTML = `<tr><td colspan="2">รวมทั้งสิ้น</td><td>${fmt(r.totInt)}</td><td>${fmt(r.totPay - r.totExtra - 0)}</td><td>${fmt(r.totExtra)}</td><td>${fmt(r.totPay)}</td><td>${fmt(r.totPay - r.totInt)}</td><td>—</td></tr>`;
+}
+
+function setExtra(el){
+  const m = parseInt(el.dataset.m, 10);
+  const v = parseFloat(el.value);
+  if (!v || v <= 0) delete extras[m]; else extras[m] = v;
+  calc();
+}
+
+function clearExtras(){
+  extras = {};
+  calc();
+}
+
+calc();
+</script>
+</body>
+</html>

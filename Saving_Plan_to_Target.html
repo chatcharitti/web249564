@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แผนออมเงินตามเป้าหมาย — Goal-Based Saving Planner</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ธีมจิตวิทยาการออม: เขียวมรกต = ความมั่นคง/เติบโต · ทอง = ความมั่งคั่ง/รางวัล · ครีมอุ่น = ความสบายใจ */
+:root{
+  --ink:#173326;
+  --ink-soft:#5e7468;
+  --paper:#f7f6ef;
+  --card:#ffffff;
+  --line:#e5e7da;
+  --green:#0e7a4e;
+  --green-deep:#0a5c3b;
+  --green-soft:#e3f3ea;
+  --gold:#b8860b;
+  --gold-bright:#d4a017;
+  --gold-soft:#fbf3dd;
+  --blue:#1d5a8a;
+  --blue-soft:#e8f1f8;
+  --warn:#a4541a;
+  --warn-soft:#fdf1e6;
+  --fs:15px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Sarabun',sans-serif;font-size:var(--fs);
+  background:var(--paper);color:var(--ink);line-height:1.65;
+  padding:28px 16px 60px;
+}
+.wrap{max-width:1000px;margin:0 auto}
+
+header{
+  background:linear-gradient(135deg,var(--green-deep) 0%,var(--green) 70%,#13905e 100%);
+  color:#fff;border-radius:16px;padding:26px 28px;margin-bottom:22px;
+  position:relative;overflow:hidden;
+}
+header::after{
+  content:'';position:absolute;right:-40px;top:-40px;width:180px;height:180px;
+  border-radius:50%;background:radial-gradient(circle,rgba(212,160,23,.45),transparent 70%);
+}
+.eyebrow{font-size:.78em;letter-spacing:.14em;color:#ffe9b0;font-weight:600;text-transform:uppercase}
+h1{font-size:1.75em;font-weight:800;margin:4px 0 2px}
+header .subtitle{color:#d6ecdf;font-size:.95em;max-width:640px}
+
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:18px}
+.toolbar .spacer{flex:1}
+button{
+  font-family:inherit;font-size:.9em;font-weight:600;
+  border:1px solid var(--line);background:var(--card);color:var(--ink);
+  padding:7px 14px;border-radius:8px;cursor:pointer;transition:.15s;
+}
+button:hover{border-color:var(--green);color:var(--green)}
+button.primary{background:var(--green);border-color:var(--green);color:#fff}
+button.primary:hover{background:var(--green-deep);color:#fff}
+button.gold{background:var(--gold-bright);border-color:var(--gold-bright);color:#fff}
+button.gold:hover{background:var(--gold);color:#fff}
+button.ghost-blue{border-color:var(--blue);color:var(--blue)}
+button.ghost-blue:hover{background:var(--blue-soft)}
+button:disabled{opacity:.55;cursor:wait}
+
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:22px}
+.panel h2{font-size:1.05em;font-weight:700;margin-bottom:12px;color:var(--green-deep)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:14px}
+.field label{display:block;font-size:.82em;font-weight:600;color:var(--ink-soft);margin-bottom:4px}
+.field input{
+  width:100%;font-family:inherit;font-size:1em;font-weight:600;
+  padding:8px 10px;border:1px solid var(--line);border-radius:8px;color:var(--ink);background:#fff;
+}
+.field input:focus{outline:2px solid var(--green-soft);border-color:var(--green)}
+.hint{font-size:.78em;color:var(--ink-soft);margin-top:10px}
+
+/* แถบความคืบหน้า — แรงจูงใจหลัก */
+.progress-card{
+  background:linear-gradient(180deg,#fffdf6,var(--gold-soft));
+  border:1px solid #efe2bd;border-radius:14px;padding:18px 20px;margin-bottom:14px;
+}
+.progress-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px}
+.progress-head .big{font-size:1.5em;font-weight:800;color:var(--gold)}
+.progress-head .goal-label{font-weight:600;color:var(--ink-soft);font-size:.9em}
+.bar{height:22px;background:#efe9d4;border-radius:999px;overflow:hidden;margin:10px 0 6px;position:relative}
+.bar .fill{
+  height:100%;border-radius:999px;width:0%;
+  background:linear-gradient(90deg,var(--green),#19a86b 60%,var(--gold-bright));
+  transition:width .6s ease;
+}
+.milestones{display:flex;justify-content:space-between;font-size:.75em;color:var(--ink-soft);font-weight:600}
+.cheer{font-size:.9em;font-weight:600;color:var(--green-deep);margin-top:6px}
+
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:12px;margin-bottom:14px}
+.stat{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--green);border-radius:10px;padding:12px 16px}
+.stat .label{font-size:.78em;color:var(--ink-soft);font-weight:600}
+.stat .value{font-size:1.28em;font-weight:700;color:var(--green-deep)}
+.stat .sub{font-size:.78em;color:var(--ink-soft)}
+.stat.gold{border-left-color:var(--gold-bright)}
+.stat.gold .value{color:var(--gold)}
+.stat.blue{border-left-color:var(--blue)}
+.stat.blue .value{color:var(--blue)}
+
+.compare{
+  background:var(--blue-soft);border:1px solid #cfe1ef;border-radius:10px;
+  padding:12px 16px;font-size:.9em;color:var(--blue);margin-bottom:22px;display:none;font-weight:600;
+}
+.compare.show{display:block}
+.alert{background:var(--warn-soft);border:1px solid #efd9c2;border-radius:10px;padding:12px 16px;font-size:.9em;color:var(--warn);margin-bottom:22px;display:none}
+.alert.show{display:block}
+
+/* การ์ดผลตอบแทนตลาด */
+.market-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.market-head h2{margin:0}
+.market-asof{font-size:.78em;color:var(--ink-soft)}
+.vehicles{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px}
+.vehicle{
+  border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#fffefb;
+  display:flex;flex-direction:column;gap:4px;
+}
+.vehicle .v-name{font-weight:700;font-size:.95em}
+.vehicle .v-rate{font-size:1.45em;font-weight:800;color:var(--green-deep)}
+.vehicle .v-rate small{font-size:.55em;font-weight:600;color:var(--ink-soft)}
+.vehicle .v-note{font-size:.76em;color:var(--ink-soft);flex:1}
+.vehicle .v-risk{font-size:.72em;font-weight:700}
+.risk-low{color:var(--green)} .risk-mid{color:var(--gold)} .risk-high{color:#b3541e}
+.vehicle button{margin-top:6px;font-size:.8em;padding:5px 10px}
+.market-status{font-size:.82em;margin-top:10px;color:var(--ink-soft)}
+.market-status.err{color:var(--warn)}
+
+/* ตาราง */
+.table-card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.9em;min-width:780px}
+thead th{background:var(--green-deep);color:#fff;font-weight:600;padding:9px 8px;text-align:right;white-space:nowrap}
+thead th:first-child{text-align:center}
+thead th.col-extra{background:var(--gold-bright)}
+tbody td{padding:5px 8px;text-align:right;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+tbody td:first-child{text-align:center;color:var(--ink-soft)}
+tbody td.cell-extra{background:#fdf9ec}
+tbody td.cell-extra input{
+  width:92px;font-family:inherit;font-size:.95em;font-weight:600;text-align:right;
+  padding:3px 6px;border:1px solid #e3d3a3;border-radius:6px;color:var(--gold);background:#fff;
+}
+tbody td.cell-extra input:focus{outline:2px solid var(--gold-soft);border-color:var(--gold-bright)}
+tbody tr.has-extra td{background:var(--gold-soft)}
+tbody tr.year td{background:var(--green-soft);font-weight:600}
+tbody tr.milestone td{background:#fff3cd;font-weight:600}
+tbody tr.final td{background:linear-gradient(90deg,#e3f3ea,#fbf3dd);font-weight:800;color:var(--green-deep)}
+tfoot td{padding:10px 8px;font-weight:700;text-align:right;background:#f1f4ec;border-top:2px solid var(--green)}
+tfoot td:first-child{text-align:left}
+
+footer{margin-top:26px;font-size:.78em;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:12px}
+
+@media print{
+  @page{size:A4 landscape;margin:12mm 10mm}
+  body{padding:0;background:#fff;font-size:11px}
+  .toolbar{display:none}
+  header{border-radius:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .panel,.stat,.table-card,.vehicle,.progress-card{border-color:#ccc;break-inside:avoid}
+  .summary,.compare,.vehicles{break-inside:avoid}
+  .table-card{overflow:visible} table{min-width:0}
+  thead{display:table-header-group} tbody tr{break-inside:avoid}
+  tbody td.cell-extra input{border:none;background:transparent;padding:0;width:auto}
+  button{display:none}
+  .hint{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Goal-Based Saving Planner</div>
+  <h1>🌱 แผนออมเงินตามเป้าหมาย</h1>
+  <div class="subtitle">เห็นเส้นทางสู่เป้าหมายชัดเจนทุกเดือน — ออมเพิ่มพิเศษเมื่อไหร่ เป้าหมายก็ใกล้เข้ามาเท่านั้น</div>
+</header>
+
+<div class="toolbar">
+  <button onclick="adjustFont(-1)">A−</button>
+  <button onclick="adjustFont(1)">A+</button>
+  <button class="ghost-blue" onclick="clearExtras()">↺ ล้างยอดออมเพิ่มทั้งหมด</button>
+  <span class="spacer"></span>
+  <button class="primary" onclick="window.print()">🖨 พิมพ์ / บันทึก PDF</button>
+</div>
+
+<div class="panel">
+  <h2>⚙️ เงื่อนไขแผนการออม (ปรับค่าได้)</h2>
+  <div class="grid">
+    <div class="field">
+      <label>ยอดเงินเป้าหมาย (บาท)</label>
+      <input type="number" id="inGoal" value="100000" min="1" step="1000" onchange="calc()">
+    </div>
+    <div class="field">
+      <label>เงินตั้งต้น (บาท)</label>
+      <input type="number" id="inStart" value="0" min="0" step="500" onchange="calc()">
+    </div>
+    <div class="field">
+      <label>ผลตอบแทนคาดหวัง (% ต่อปี)</label>
+      <input type="number" id="inRate" value="2" min="0" step="0.25" onchange="calc()">
+    </div>
+    <div class="field">
+      <label>เงินออมรายเดือน (บาท)</label>
+      <input type="number" id="inMonthly" value="2000" min="0" step="100" onchange="calc()">
+    </div>
+    <div class="field">
+      <label>อัตราเงินออมขั้นต่ำ (บาท/เดือน)</label>
+      <input type="number" id="inMinSave" value="500" min="0" step="100" onchange="calc()">
+    </div>
+  </div>
+  <div class="hint">วิธีใช้ช่อง "ออมเพิ่มพิเศษ ✨" ในตาราง: กรอกยอดที่ตั้งใจออมเพิ่มในเดือนนั้น (เช่น เดือนโบนัส คอมมิชชั่นพิเศษ) ระบบคำนวณใหม่ทันทีและบอกว่าถึงเป้าเร็วขึ้นกี่เดือน — เดือนที่ไม่ได้กรอกจะออมตามเงินออมรายเดือน (ไม่ต่ำกว่าอัตราขั้นต่ำ) · กดปุ่ม "ใช้อัตรานี้" ที่การ์ดผลตอบแทนด้านล่างเพื่อนำอัตราตลาดมาใส่ในแผนได้ทันที</div>
+</div>
+
+<div class="progress-card">
+  <div class="progress-head">
+    <div><span class="big" id="pgPct">0%</span> <span class="goal-label">ของเป้าหมาย</span></div>
+    <div class="goal-label" id="pgAmount"></div>
+  </div>
+  <div class="bar"><div class="fill" id="pgFill"></div></div>
+  <div class="milestones"><span>เริ่มต้น</span><span>25%</span><span>50%</span><span>75%</span><span>🏆 เป้าหมาย</span></div>
+  <div class="cheer" id="pgCheer"></div>
+</div>
+
+<div class="alert" id="alertBox"></div>
+<div class="summary" id="summaryBox"></div>
+<div class="compare" id="compareBox"></div>
+
+<div class="panel">
+  <div class="market-head">
+    <h2>📈 อัตราผลตอบแทนการออม-ลงทุนรูปแบบต่าง ๆ</h2>
+    <span class="market-asof" id="marketAsof">ข้อมูลตั้งต้น ณ มิถุนายน 2569</span>
+    <span style="flex:1"></span>
+    <button class="gold" id="btnUpdate" onclick="updateMarket()">🔄 อัพเดตผลตอบแทนตามตลาดปัจจุบัน</button>
+  </div>
+  <div class="vehicles" id="vehicles"></div>
+  <div class="market-status" id="marketStatus"></div>
+</div>
+
+<div class="table-card">
+  <table>
+    <thead>
+      <tr>
+        <th>เดือนที่</th>
+        <th>ยอดยกมา</th>
+        <th>ผลตอบแทน</th>
+        <th>ออมประจำ</th>
+        <th class="col-extra">ออมเพิ่มพิเศษ ✨</th>
+        <th>รวมออมเดือนนี้</th>
+        <th>ยอดเงินสะสม</th>
+        <th>% เป้าหมาย</th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+    <tfoot id="tfoot"></tfoot>
+  </table>
+</div>
+
+<footer>
+  วิธีคำนวณ: ผลตอบแทนรายเดือน = ยอดยกมา × (อัตราผลตอบแทนต่อปี ÷ 12) ทบต้นรายเดือน · เงินออมประจำ = ค่าที่มากกว่าระหว่างเงินออมรายเดือนกับอัตราขั้นต่ำ · ยอดสะสม = ยอดยกมา + ผลตอบแทน + ออมประจำ + ออมเพิ่มพิเศษ<br>
+  อัตราผลตอบแทนของแต่ละช่องทางเป็นข้อมูลอ้างอิงจากสภาวะตลาด อาจเปลี่ยนแปลงได้ และผลตอบแทนในอดีตมิได้เป็นเครื่องยืนยันผลตอบแทนในอนาคต · กองทุนรวมและทองคำมีความเสี่ยง ผู้ลงทุนควรศึกษาข้อมูลก่อนตัดสินใจลงทุน · เครื่องมือนี้เป็นการประมาณการเพื่อการวางแผนเท่านั้น
+</footer>
+
+</div>
+
+<script>
+let fs = 15;
+let extras = {};   // {เดือนที่: ยอดออมเพิ่ม}
+
+// ค่าตั้งต้นผลตอบแทนตลาด ณ มิ.ย. 2569 (อัพเดตได้ด้วยปุ่มด้านบน)
+let vehicles = [
+  {id:'savings',  name:'🏦 ออมทรัพย์ทั่วไป',        rate:0.40, risk:'low',  note:'สภาพคล่องสูงสุด ถอนได้ทุกเมื่อ คุ้มครองเงินฝาก'},
+  {id:'digital',  name:'📱 เงินฝากดิจิทัลดอกสูง',   rate:1.40, risk:'low',  note:'ดอกเบี้ยสูงกว่าออมทรัพย์ปกติ เปิดผ่านแอป มีเพดานวงเงิน'},
+  {id:'mmf',      name:'💧 กองทุนตลาดเงิน (MMF)',   rate:1.50, risk:'low',  note:'ความผันผวนต่ำมาก เหมาะพักเงินระยะสั้น T+1'},
+  {id:'bond',     name:'📜 กองทุนตราสารหนี้',       rate:2.20, risk:'mid',  note:'ปี 2569 ถูกมองเป็นปีทองของตราสารหนี้ ผันผวนน้อยกว่าหุ้น'},
+  {id:'equity',   name:'📊 กองทุนหุ้น (เฉลี่ยระยะยาว)', rate:6.00, risk:'high', note:'โอกาสเติบโตสูง เหมาะเป้าหมาย 5 ปีขึ้นไป รับความผันผวนได้'},
+  {id:'goldsave', name:'🪙 ออมทอง / ทองคำ',         rate:8.00, risk:'high', note:'ทองแท่งขายออก ~65,100 บาท · YTD 2569 ขึ้นแล้ว ~2,550 บาท (~+4%)'}
+];
+
+function adjustFont(d){
+  fs = Math.min(20, Math.max(11, fs + d));
+  document.documentElement.style.setProperty('--fs', fs + 'px');
+}
+const fmt = n => n.toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2});
+const fmt0 = n => n.toLocaleString('th-TH',{maximumFractionDigits:0});
+
+function readParams(){
+  return {
+    goal: parseFloat(document.getElementById('inGoal').value) || 0,
+    start: parseFloat(document.getElementById('inStart').value) || 0,
+    mRate: (parseFloat(document.getElementById('inRate').value) || 0) / 100 / 12,
+    monthly: parseFloat(document.getElementById('inMonthly').value) || 0,
+    minSave: parseFloat(document.getElementById('inMinSave').value) || 0
+  };
+}
+
+function simulate(p, useExtras){
+  let bal = p.start, m = 0, totSave = 0, totExtra = 0, totReturn = 0;
+  const MAX = 600, rows = [];
+  const regular = Math.max(p.monthly, p.minSave);
+  if (p.goal <= 0) return {rows, months:0, totSave, totExtra, totReturn, bal, reached:false, stuck:true};
+  if (bal >= p.goal) return {rows, months:0, totSave, totExtra, totReturn, bal, reached:true, stuck:false};
+  if (regular <= 0 && p.mRate <= 0) return {rows, months:0, totSave, totExtra, totReturn, bal, reached:false, stuck:true};
+  while (bal < p.goal && m < MAX){
+    m++;
+    const open = bal;
+    const ret = open * p.mRate;
+    const extra = useExtras ? (extras[m] || 0) : 0;
+    const save = regular + extra;
+    bal = open + ret + save;
+    totReturn += ret; totSave += regular; totExtra += extra;
+    rows.push({m, open, ret, regular, extra, saveTotal:save, bal, pct: Math.min(bal/p.goal*100,100)});
+  }
+  return {rows, months:m, totSave, totExtra, totReturn, bal, reached: bal >= p.goal, stuck:false};
+}
+
+function calc(){
+  const p = readParams();
+  const base = simulate(p, false);
+  const r = simulate(p, true);
+
+  const tbody = document.getElementById('tbody');
+  const tfoot = document.getElementById('tfoot');
+  const alertBox = document.getElementById('alertBox');
+  const compareBox = document.getElementById('compareBox');
+  const summaryBox = document.getElementById('summaryBox');
+
+  // ตาราง — ไฮไลต์เดือนที่ข้ามหลัก 25/50/75%
+  let html = '', prevPct = p.goal>0 ? (p.start/p.goal*100) : 0;
+  for (const row of r.rows){
+    const isFinal = row.bal >= p.goal;
+    let cls = '';
+    if (isFinal) cls = 'final';
+    else if ([25,50,75].some(t => prevPct < t && row.pct >= t)) cls = 'milestone';
+    else if (row.m % 12 === 0) cls = 'year';
+    if (row.extra > 0) cls += ' has-extra';
+    prevPct = row.pct;
+    const extraVal = extras[row.m] ? extras[row.m] : '';
+    html += `<tr class="${cls.trim()}">
+      <td>${row.m}</td>
+      <td>${fmt(row.open)}</td>
+      <td>${fmt(row.ret)}</td>
+      <td>${fmt(row.regular)}</td>
+      <td class="cell-extra"><input type="number" min="0" step="100" inputmode="numeric" placeholder="0" value="${extraVal}" data-m="${row.m}" onchange="setExtra(this)"></td>
+      <td>${fmt(row.saveTotal)}</td>
+      <td>${fmt(row.bal)}</td>
+      <td>${row.pct.toFixed(1)}%</td>
+    </tr>`;
+  }
+  tbody.innerHTML = html;
+
+  alertBox.className = 'alert'; alertBox.textContent = '';
+  if (r.stuck){
+    alertBox.className = 'alert show';
+    alertBox.textContent = '⚠ กรุณากำหนดยอดเป้าหมายและเงินออมรายเดือน (หรือผลตอบแทน) ให้มากกว่าศูนย์';
+  } else if (!r.reached && r.months >= 600){
+    alertBox.className = 'alert show';
+    alertBox.textContent = `⚠ ด้วยเงื่อนไขนี้ ใช้เวลาเกิน 50 ปีจึงจะถึงเป้า — ลองเพิ่มเงินออมรายเดือน ออมเพิ่มพิเศษ หรือเลือกช่องทางผลตอบแทนสูงขึ้น`;
+  }
+
+  // แถบความคืบหน้า: แสดง % ที่ทำได้ ณ สิ้นแผน (ถึงเป้า = 100%)
+  const lastPct = r.reached ? 100 : (r.rows.length ? r.rows[r.rows.length-1].pct : (p.goal>0 ? p.start/p.goal*100 : 0));
+  document.getElementById('pgFill').style.width = lastPct.toFixed(1) + '%';
+  document.getElementById('pgPct').textContent = lastPct.toFixed(0) + '%';
+  document.getElementById('pgAmount').textContent = `เป้าหมาย ${fmt0(p.goal)} บาท`;
+  const cheer = document.getElementById('pgCheer');
+  if (r.reached){
+    const y = Math.floor(r.months/12), mm = r.months%12;
+    const target = new Date(); target.setMonth(target.getMonth() + r.months);
+    const thMonths = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+    cheer.textContent = `🎯 ตามแผนนี้ คุณจะถึงเป้าหมายใน ${r.months} เดือน (≈ ${y} ปี ${mm} เดือน) ประมาณ ${thMonths[target.getMonth()]} ${target.getFullYear()+543} — ทุกบาทที่ออมเพิ่มวันนี้ คือเวลาที่ได้คืนในวันหน้า`;
+  } else cheer.textContent = '';
+
+  const years = Math.floor(r.months/12), months = r.months%12;
+  summaryBox.innerHTML = `
+    <div class="stat gold"><div class="label">🏆 ถึงเป้าหมายใน</div><div class="value">${r.reached ? r.months + ' เดือน' : '—'}</div><div class="sub">${r.reached ? '≈ '+years+' ปี '+months+' เดือน' : 'ยังไม่ถึงในกรอบคำนวณ'}</div></div>
+    <div class="stat"><div class="label">เงินออมประจำรวม</div><div class="value">${fmt(r.totSave)}</div><div class="sub">บาท</div></div>
+    <div class="stat gold"><div class="label">✨ ออมเพิ่มพิเศษรวม</div><div class="value">${fmt(r.totExtra)}</div><div class="sub">บาท</div></div>
+    <div class="stat blue"><div class="label">ผลตอบแทนที่เงินทำงานให้</div><div class="value">${fmt(r.totReturn)}</div><div class="sub">บาท (ทบต้นรายเดือน)</div></div>
+    <div class="stat"><div class="label">ยอดเงินปลายแผน</div><div class="value">${fmt(r.bal)}</div><div class="sub">บาท</div></div>`;
+
+  compareBox.className = 'compare';
+  if (r.totExtra > 0 && r.reached && base.reached){
+    const saveMonths = base.months - r.months;
+    compareBox.className = 'compare show';
+    compareBox.innerHTML = `📊 พลังของการออมเพิ่ม: ถึงเป้าหมายเร็วขึ้น <u>${saveMonths} เดือน</u> (จาก ${base.months} → ${r.months} เดือน) — ความสม่ำเสมอ + การโปะเพิ่ม คือทางลัดสู่เป้าหมาย`;
+  }
+
+  tfoot.innerHTML = `<tr><td colspan="2">รวมทั้งสิ้น</td><td>${fmt(r.totReturn)}</td><td>${fmt(r.totSave)}</td><td>${fmt(r.totExtra)}</td><td>${fmt(r.totSave + r.totExtra)}</td><td>${fmt(r.bal)}</td><td>${lastPct.toFixed(1)}%</td></tr>`;
+}
+
+function setExtra(el){
+  const m = parseInt(el.dataset.m, 10);
+  const v = parseFloat(el.value);
+  if (!v || v <= 0) delete extras[m]; else extras[m] = v;
+  calc();
+}
+function clearExtras(){ extras = {}; calc(); }
+
+/* ===== การ์ดผลตอบแทนตลาด ===== */
+function renderVehicles(){
+  const riskLabel = {low:'● ความเสี่ยงต่ำ', mid:'● ความเสี่ยงปานกลาง', high:'● ความเสี่ยงสูง'};
+  document.getElementById('vehicles').innerHTML = vehicles.map(v => `
+    <div class="vehicle">
+      <div class="v-name">${v.name}</div>
+      <div class="v-rate">${(+v.rate).toFixed(2)}<small> % ต่อปี*</small></div>
+      <div class="v-note">${v.note}</div>
+      <div class="v-risk risk-${v.risk}">${riskLabel[v.risk] || ''}</div>
+      <button onclick="applyRate(${(+v.rate).toFixed(2)})">ใช้อัตรานี้ในแผน →</button>
+    </div>`).join('');
+}
+function applyRate(rate){
+  document.getElementById('inRate').value = rate;
+  calc();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+/* ปุ่มอัพเดตผลตอบแทนตามตลาดปัจจุบัน — ค้นหาข้อมูลล่าสุดผ่าน AI + web search */
+async function updateMarket(){
+  const btn = document.getElementById('btnUpdate');
+  const status = document.getElementById('marketStatus');
+  btn.disabled = true; btn.textContent = '⏳ กำลังค้นหาข้อมูลตลาดล่าสุด...';
+  status.className = 'market-status'; status.textContent = 'กำลังค้นหา: ดอกเบี้ยเงินฝาก กองทุน และราคาทองคำล่าสุดจากแหล่งข้อมูลสาธารณะ อาจใช้เวลา 30-60 วินาที';
+  try{
+    const prompt = `ค้นหาข้อมูลล่าสุดของไทย ณ วันนี้ แล้วตอบกลับเป็น JSON เท่านั้น (ห้ามมีข้อความอื่นหรือ markdown):
+{"asof":"<วันที่ข้อมูล เช่น มิ.ย. 2569>","items":[
+{"id":"savings","rate":<อัตราดอกเบี้ยออมทรัพย์ทั่วไปธนาคารใหญ่ % ต่อปี>,"note":"<สั้นๆ>"},
+{"id":"digital","rate":<ดอกเบี้ยเงินฝากดิจิทัลสูงสุดโดยประมาณ % ต่อปี>,"note":"<สั้นๆ ระบุตัวอย่างธนาคาร>"},
+{"id":"mmf","rate":<ผลตอบแทนกองทุนตลาดเงินเฉลี่ยย้อนหลัง 1 ปี %>,"note":"<สั้นๆ>"},
+{"id":"bond","rate":<ผลตอบแทนกองทุนตราสารหนี้ไทยเฉลี่ยย้อนหลัง 1 ปี %>,"note":"<สั้นๆ>"},
+{"id":"equity","rate":<ผลตอบแทนกองทุนหุ้นเฉลี่ยระยะยาว 5-10 ปี % ต่อปี>,"note":"<สั้นๆ>"},
+{"id":"goldsave","rate":<ผลตอบแทนทองคำ % ต่อปีโดยประมาณจากแนวโน้มปัจจุบัน>,"note":"<ราคาทองแท่งขายออกล่าสุด บาท และ YTD>"}]}
+ใช้ตัวเลขจริงจากการค้นหา หากไม่พบให้ประมาณการอย่างระมัดระวังและระบุใน note`;
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        messages:[{role:'user', content:prompt}],
+        tools:[{type:'web_search_20250305', name:'web_search'}]
+      })
+    });
+    const data = await res.json();
+    const text = (data.content || []).filter(b => b.type==='text').map(b => b.text).join('\n');
+    const clean = text.replace(/```json|```/g,'').trim();
+    const jsonStart = clean.indexOf('{');
+    const parsed = JSON.parse(clean.slice(jsonStart));
+    if (!parsed.items || !parsed.items.length) throw new Error('no items');
+    for (const item of parsed.items){
+      const v = vehicles.find(x => x.id === item.id);
+      if (v && isFinite(+item.rate)){
+        v.rate = Math.max(0, Math.min(30, +item.rate));   // กรอบความสมเหตุสมผล 0-30%
+        if (item.note) v.note = String(item.note).slice(0, 140);
+      }
+    }
+    renderVehicles();
+    document.getElementById('marketAsof').textContent = 'อัพเดตล่าสุด: ' + (parsed.asof || new Date().toLocaleDateString('th-TH'));
+    status.textContent = '✅ อัพเดตผลตอบแทนเรียบร้อย — ตัวเลขเป็นค่าประมาณจากการค้นหาแหล่งข้อมูลสาธารณะ ควรตรวจสอบกับสถาบันการเงินก่อนตัดสินใจ';
+  } catch(err){
+    status.className = 'market-status err';
+    status.textContent = '⚠ ไม่สามารถดึงข้อมูลอัตโนมัติได้ในขณะนี้ (ต้องเปิดผ่าน Claude.ai หรือเครือข่ายอาจไม่พร้อม) — ยังคงใช้ค่าตั้งต้น ณ มิ.ย. 2569 และสามารถแก้อัตราในช่อง "ผลตอบแทนคาดหวัง" เองได้';
+  }
+  btn.disabled = false; btn.textContent = '🔄 อัพเดตผลตอบแทนตามตลาดปัจจุบัน';
+}
+
+renderVehicles();
+calc();
+</script>
+</body>
+</html>

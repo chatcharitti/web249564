@@ -820,7 +820,28 @@
             --ig-red: #D31145; --ig-maroon: #8E0E33; --ig-cream: #FBF5EA;
             --ig-gold: #C9962E; --ig-gold-lt: #E8B84B; --ig-ink: #2B2230;
             --ig-mint: #0E7C66; --ig-paper: #FFFFFF;
+            transform-origin: top center;
+            transition: transform 0.2s ease;
         }
+        /* ปุ่มปรับขนาด Infographic */
+        .ig-zoom-bar {
+            display: flex; align-items: center; gap: 6px;
+            background: var(--bg-surface);
+            border: 1px solid var(--b-soft);
+            border-radius: var(--r-md);
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+        .ig-zoom-btn {
+            width: 28px; height: 28px; border-radius: var(--r-sm);
+            border: 1px solid var(--b-soft);
+            background: var(--bg-surface-2); color: var(--t-primary);
+            cursor: pointer; font-weight: 700; font-size: 13px;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.15s; font-family: inherit;
+        }
+        .ig-zoom-btn:hover { background: var(--c-primary-faint); color: var(--c-primary); border-color: var(--b-gold); }
+        .ig-zoom-label { min-width: 38px; text-align: center; font-weight: 700; color: var(--t-secondary); font-variant-numeric: tabular-nums; }
         .ig-artboard {
             width: 540px; background: var(--ig-cream); position: relative; overflow: hidden;
             box-shadow: 0 8px 30px rgba(43,34,48,.22);
@@ -1722,6 +1743,15 @@
                         <span style="color:var(--t-muted);">แสดงเบี้ยปัจจุบัน · สะสม +20ปี · สะสม +30ปี</span>
                     </div>
                 </div>
+            </div>
+
+            <!-- Zoom bar -->
+            <div class="ig-zoom-bar">
+                <span style="color:var(--t-tertiary);font-size:11px;">ขนาด Infographic</span>
+                <button class="ig-zoom-btn" onclick="igZoom(-1)" title="ย่อ">A−</button>
+                <span class="ig-zoom-label" id="ig-zoom-label">100%</span>
+                <button class="ig-zoom-btn" onclick="igZoom(1)" title="ขยาย">A+</button>
+                <button class="ig-zoom-btn" onclick="igZoomReset()" title="รีเซ็ต" style="font-size:11px;width:auto;padding:0 8px;">Reset</button>
             </div>
 
             <!-- Boards -->
@@ -3624,6 +3654,27 @@ function renderMPCIComparison(age, gender, mpciSum, cipcAge, cipcPrem, cipcSum) 
     }
 }
 
+// ==========================================
+// INFOGRAPHIC ZOOM CONTROL
+// ==========================================
+const IG_SCALES = [0.55, 0.65, 0.75, 0.85, 1.0, 1.1, 1.2, 1.35, 1.5];
+let _igScaleIdx = 4; // default = 1.0
+
+function _applyIGScale(idx) {
+    _igScaleIdx = Math.max(0, Math.min(IG_SCALES.length - 1, idx));
+    const scale = IG_SCALES[_igScaleIdx];
+    const pct   = Math.round(scale * 100) + '%';
+    // apply ให้ทุก artboard scope
+    document.querySelectorAll('.ig-artboard-scope').forEach(el => {
+        el.style.transform = `scale(${scale})`;
+    });
+    const lbl = document.getElementById('ig-zoom-label');
+    if (lbl) lbl.textContent = pct;
+}
+
+function igZoom(delta)  { _applyIGScale(_igScaleIdx + delta); }
+function igZoomReset()  { _applyIGScale(4); }
+
 async function exportIGBoard(id, filename, btn) {
     const el = document.getElementById(id);
     if (!el) return;
@@ -3640,6 +3691,10 @@ async function exportIGBoard(id, filename, btn) {
     btn.disabled = true;
     const old = btn.textContent;
     btn.textContent = 'กำลังสร้างภาพ...';
+    // Reset scale ชั่วคราวเพื่อให้ export ได้ขนาดเต็ม
+    const scopeEls = document.querySelectorAll('.ig-artboard-scope');
+    const prevTransforms = [...scopeEls].map(e => e.style.transform);
+    scopeEls.forEach(e => e.style.transform = 'scale(1)');
     try {
         await document.fonts.ready;
         const canvas = await html2canvas(el, { scale: 2, useCORS: true, backgroundColor: null });
@@ -3651,6 +3706,8 @@ async function exportIGBoard(id, filename, btn) {
     } catch(e) {
         showToast('❌ สร้างภาพไม่สำเร็จ: ' + e.message, 4000);
     } finally {
+        // restore scale เดิม
+        scopeEls.forEach((e, i) => e.style.transform = prevTransforms[i] || '');
         btn.disabled = false; btn.textContent = old;
     }
 }

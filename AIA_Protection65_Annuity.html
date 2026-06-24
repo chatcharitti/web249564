@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIA ตารางผลประโยชน์</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&family=Prompt:wght@400;600;700;800&display=swap');
+:root{
+  --red:#D0021B;--red-dark:#9B0014;--red-mid:#E8213A;
+  --gold:#F5A623;--gold-lt:#FFF3D6;
+  --teal:#00A79D;--navy:#1A2B4A;--navy-lt:#EBF0F8;
+  --green:#16A34A;--green-lt:#DCFCE7;
+  --purple:#7C3AED;--purple-lt:#EDE9FE;
+  --blue:#0369A1;--blue-lt:#E0F2FE;
+  --white:#FFFFFF;--gray-50:#F8F9FA;--gray-100:#F1F3F5;
+  --gray-200:#DEE2E6;--gray-400:#868E96;--gray-700:#495057;--gray-900:#212529;
+  --font-th:'Sarabun',sans-serif;--font-hd:'Prompt',sans-serif;
+  --table-fs:11.5px;--table-fs-sm:10.5px;--table-fs-xs:10px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-th);background:var(--gray-50);color:var(--gray-900);font-size:14px;line-height:1.5;}
+
+/* ── HERO ── */
+.hero{padding:18px 24px 14px;display:flex;align-items:center;gap:16px;position:relative;overflow:hidden;}
+.hero.p65{background:linear-gradient(135deg,var(--red-dark) 0%,var(--red) 45%,var(--red-mid) 100%);}
+.hero.fix{background:linear-gradient(135deg,#0c4a6e 0%,var(--blue) 55%,#0284c7 100%);}
+.hero::after{content:'';position:absolute;right:-40px;top:-40px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,0.06);}
+.hero-logo{background:var(--white);border-radius:10px;padding:6px 13px;font-family:var(--font-hd);font-weight:800;font-size:18px;flex-shrink:0;box-shadow:0 4px 12px rgba(0,0,0,0.2);}
+.hero.p65 .hero-logo{color:var(--red);}
+.hero.fix .hero-logo{color:var(--blue);}
+.hero-text h1{font-family:var(--font-hd);font-size:20px;font-weight:700;color:var(--white);}
+.hero-text p{font-size:11.5px;color:rgba(255,255,255,0.82);margin-top:2px;}
+.hero-badge{margin-left:auto;background:var(--gold);color:var(--navy);font-family:var(--font-hd);font-weight:700;font-size:11px;padding:4px 11px;border-radius:20px;flex-shrink:0;z-index:1;}
+
+/* ── TABS ── */
+.tab-bar{display:flex;gap:0;margin:0 16px;border-bottom:2px solid var(--gray-200);position:relative;top:0;}
+.tab-btn{font-family:var(--font-hd);font-size:13px;font-weight:700;padding:10px 22px;border:none;background:transparent;cursor:pointer;color:var(--gray-400);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;display:flex;align-items:center;gap:6px;border-radius:6px 6px 0 0;}
+.tab-btn:hover{background:var(--gray-100);color:var(--gray-700);}
+.tab-btn.active.p65{color:var(--red);border-bottom-color:var(--red);background:#FFF5F5;}
+.tab-btn.active.fix{color:var(--blue);border-bottom-color:var(--blue);background:#EFF8FF;}
+.tab-pill{font-size:9px;font-weight:800;padding:2px 7px;border-radius:10px;letter-spacing:0.3px;}
+.tab-btn.active.p65 .tab-pill{background:var(--red);color:var(--white);}
+.tab-btn.active.fix .tab-pill{background:var(--blue);color:var(--white);}
+.tab-btn:not(.active) .tab-pill{background:var(--gray-200);color:var(--gray-400);}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+/* ── INPUT ── */
+.input-card{background:var(--white);border-radius:0 0 12px 12px;box-shadow:0 2px 14px rgba(0,0,0,0.08);margin:0 16px 0;padding:14px 20px 12px;}
+.input-card h2{font-family:var(--font-hd);font-size:13px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.input-card h2::before{content:'';display:inline-block;width:4px;height:14px;border-radius:2px;}
+.p65 .input-card h2,.p65-h2::before{color:var(--red)!important;}
+.p65 .input-card h2::before{background:var(--red);}
+.fix .input-card h2::before{background:var(--blue);}
+.input-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+@media(max-width:800px){.input-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:480px){.input-grid{grid-template-columns:1fr;}}
+.field label{display:block;font-size:10px;font-weight:700;color:var(--gray-700);margin-bottom:3px;text-transform:uppercase;letter-spacing:.4px;}
+.field input,.field select{width:100%;padding:7px 10px;border:1.5px solid var(--gray-200);border-radius:7px;font-family:var(--font-th);font-size:13px;color:var(--gray-900);background:var(--gray-50);transition:border-color .2s,box-shadow .2s;outline:none;}
+.p65-panel .field input:focus,.p65-panel .field select:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(208,2,27,.10);background:var(--white);}
+.fix-panel .field input:focus,.fix-panel .field select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(3,105,161,.10);background:var(--white);}
+
+/* ── ACTION BAR ── */
+.action-bar{display:flex;align-items:center;gap:8px;margin:10px 16px 0;flex-wrap:wrap;}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 16px;border-radius:7px;font-family:var(--font-hd);font-size:12px;font-weight:700;cursor:pointer;border:none;transition:all .18s;}
+.btn-p65{background:linear-gradient(135deg,var(--red),var(--red-dark));color:var(--white);box-shadow:0 3px 10px rgba(208,2,27,.28);}
+.btn-p65:hover{transform:translateY(-1px);box-shadow:0 5px 16px rgba(208,2,27,.38);}
+.btn-fix{background:linear-gradient(135deg,var(--blue),#0c4a6e);color:var(--white);box-shadow:0 3px 10px rgba(3,105,161,.28);}
+.btn-fix:hover{transform:translateY(-1px);box-shadow:0 5px 16px rgba(3,105,161,.38);}
+.btn-navy{background:var(--navy);color:var(--white);}
+.btn-navy:hover{background:#253659;}
+.btn-outline{background:var(--white);color:var(--gray-700);border:1.5px solid var(--gray-200);}
+.btn-outline:hover{border-color:var(--navy);color:var(--navy);}
+.font-ctrl{display:flex;align-items:center;gap:4px;margin-left:auto;background:var(--white);border:1.5px solid var(--gray-200);border-radius:7px;padding:3px 8px;}
+.font-ctrl-lbl{font-size:10px;color:var(--gray-400);font-weight:600;margin-right:2px;}
+.btn-fs{width:22px;height:22px;border-radius:4px;border:none;background:transparent;cursor:pointer;font-size:13px;font-weight:700;color:var(--gray-700);display:flex;align-items:center;justify-content:center;transition:all .15s;}
+.btn-fs:hover{background:var(--navy-lt);color:var(--navy);}
+.fs-val{font-size:11px;font-weight:700;color:var(--navy);min-width:28px;text-align:center;font-family:var(--font-hd);}
+.btn-fs-reset{background:var(--navy-lt);color:var(--navy);border-radius:4px;font-size:10px;font-weight:700;padding:2px 6px;border:none;cursor:pointer;}
+
+/* ── PILLS ── */
+.summary-row{display:flex;gap:8px;margin:10px 16px 0;flex-wrap:wrap;}
+.pill{background:var(--white);border-radius:10px;padding:8px 13px;box-shadow:0 1px 6px rgba(0,0,0,.07);flex:1;min-width:110px;}
+.pill-label{font-size:10px;font-weight:700;color:var(--gray-400);text-transform:uppercase;letter-spacing:.5px;}
+.pill-value{font-family:var(--font-hd);font-size:15px;font-weight:700;color:var(--navy);margin-top:1px;}
+.pill-value.red{color:var(--red);}.pill-value.gold{color:#B45309;}.pill-value.teal{color:var(--teal);}
+.pill-value.green{color:var(--green);}.pill-value.blue{color:var(--blue);}
+
+/* ── TABLE ── */
+.table-section{margin:10px 16px 20px;background:var(--white);border-radius:12px;box-shadow:0 2px 14px rgba(0,0,0,.08);overflow:hidden;}
+.table-header{padding:10px 16px;}
+.p65-panel .table-header{background:linear-gradient(135deg,var(--navy),#253659);}
+.fix-panel .table-header{background:linear-gradient(135deg,#0c4a6e,var(--blue));}
+.table-header h3{font-family:var(--font-hd);font-size:12px;font-weight:600;color:var(--white);}
+.table-header small{font-size:10px;color:rgba(255,255,255,.55);}
+.table-scroll{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;}
+thead th{padding:7px 6px;text-align:center;font-family:var(--font-hd);font-size:var(--table-fs-sm);font-weight:700;color:rgba(255,255,255,.92);white-space:nowrap;border-right:1px solid rgba(255,255,255,.08);background:var(--navy);}
+.th-purple{background:#1A1040;color:#C4B5FD!important;}
+.th-blue{background:#0c3660;color:#BAE6FD!important;}
+tbody tr{border-bottom:1px solid var(--gray-100);transition:background .12s;}
+tbody tr:hover{background:var(--navy-lt);}
+tr.phase-lbl td{color:var(--white)!important;font-family:var(--font-hd);font-size:var(--table-fs-xs);font-weight:700;text-align:center;padding:3px 8px;letter-spacing:.3px;}
+.p65-panel tr.phase-lbl td{background:var(--red);}
+.fix-panel tr.phase-lbl td{background:var(--blue);}
+tr.highlight-mat{background:linear-gradient(90deg,#FFF8E1,#FFFDE7);}
+tr.breakeven-cv{background:linear-gradient(90deg,#DCFCE7,#F0FDF4)!important;border-left:3px solid var(--green);}
+tr.breakeven-cv td.c-wd{font-weight:800!important;color:var(--green)!important;}
+tr.breakeven-tax{background:linear-gradient(90deg,#EDE9FE,#F5F3FF)!important;border-left:3px solid var(--purple);}
+tr.sum-row{background:linear-gradient(90deg,var(--navy),#253659);}
+tr.sum-row td{color:var(--white)!important;font-weight:700;}
+.p65-panel tr.sum-row{background:linear-gradient(90deg,var(--red),var(--red-dark));}
+.fix-panel  tr.sum-row{background:linear-gradient(90deg,var(--blue),#0c4a6e);}
+td{padding:5px 6px;text-align:right;color:var(--gray-700);white-space:nowrap;border-right:1px solid var(--gray-100);font-size:var(--table-fs);}
+td.c-idx{text-align:center;font-weight:700;color:var(--navy);background:var(--navy-lt);position:sticky;left:0;z-index:1;min-width:28px;font-size:var(--table-fs-sm);}
+td.c-age{text-align:center;font-weight:700;color:var(--red);}
+td.c-prem{color:var(--navy);font-weight:500;}
+td.c-ret{color:var(--teal);font-weight:600;}
+td.c-ann{color:var(--blue);font-weight:600;}
+td.c-cv{color:var(--purple);font-weight:600;}
+td.c-life{color:var(--red);font-weight:600;}
+td.c-wd{color:var(--navy);font-weight:700;}
+td.c-wd-tax{color:var(--purple);font-weight:700;}
+td.c-pct{color:var(--teal);font-weight:700;text-align:center;font-size:var(--table-fs-sm);}
+td.c-dash{color:var(--gray-400);text-align:center;}
+.badge-be{display:inline-block;font-size:9px;font-weight:800;padding:1px 4px;border-radius:3px;vertical-align:middle;margin-left:3px;font-family:var(--font-hd);white-space:nowrap;}
+.badge-be-cv{background:var(--green);color:var(--white);}
+.badge-be-tax{background:var(--purple);color:var(--white);}
+.legend{display:flex;gap:12px;flex-wrap:wrap;margin:8px 16px 0;}
+/* ── TOGGLE TAX COLUMNS ── */
+.tax-hidden .tax-col{display:none;}
+.btn-toggle-tax{font-size:11px;font-weight:700;padding:5px 12px;border-radius:6px;border:1.5px solid var(--gray-200);background:var(--white);color:var(--gray-700);cursor:pointer;font-family:var(--font-hd);transition:all .18s;white-space:nowrap;}
+.btn-toggle-tax.hidden-mode{background:var(--navy);color:var(--white);border-color:var(--navy);}
+.btn-toggle-tax:hover{border-color:var(--navy);color:var(--navy);}
+.legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--gray-700);}
+.legend-dot{width:11px;height:11px;border-radius:2px;flex-shrink:0;}
+.note-box{background:var(--gold-lt);border-left:4px solid var(--gold);border-radius:0 8px 8px 0;padding:9px 13px;margin:0 16px 10px;font-size:11px;color:var(--gray-700);line-height:1.7;}
+.note-box strong{color:var(--navy);}
+.disclaimer{background:#FFF5F5;border:1px solid #FFD0D0;border-radius:8px;padding:9px 13px;margin:0 16px 16px;font-size:10.5px;color:#8B3333;line-height:1.7;}
+.empty-state{text-align:center;padding:50px 20px;color:var(--gray-400);}
+.empty-state .icon{font-size:40px;margin-bottom:10px;}
+/* ── HYBRID TAB ── */
+.hero.hybrid{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);}
+.hero.hybrid .hero-logo{color:#e94560;}
+.tab-btn.active.hybrid{color:#e94560;border-bottom-color:#e94560;background:#fff0f3;}
+.tab-btn.active.hybrid .tab-pill{background:#e94560;color:var(--white);}
+.hybrid-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 16px 0;}
+@media(max-width:900px){.hybrid-grid{grid-template-columns:1fr;}}
+.hybrid-card{background:var(--white);border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.08);overflow:hidden;}
+.hybrid-card-hdr{padding:8px 14px;font-family:var(--font-hd);font-size:12px;font-weight:700;color:var(--white);}
+.hybrid-card-hdr.p65{background:linear-gradient(90deg,var(--red-dark),var(--red));}
+.hybrid-card-hdr.fix{background:linear-gradient(90deg,#0c4a6e,var(--blue));}
+.hybrid-card-hdr.total{background:linear-gradient(90deg,#1a1a2e,#16213e);}
+.hybrid-card-body{padding:10px 14px;}
+.hybrid-stat{display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid var(--gray-100);}
+.hybrid-stat:last-child{border-bottom:none;}
+.hybrid-stat-lbl{font-size:11px;color:var(--gray-700);}
+.hybrid-stat-val{font-family:var(--font-hd);font-size:13px;font-weight:700;}
+.hybrid-stat-val.red{color:var(--red);}
+.hybrid-stat-val.blue{color:var(--blue);}
+.hybrid-stat-val.teal{color:var(--teal);}
+.hybrid-stat-val.green{color:var(--green);}
+.hybrid-stat-val.gold{color:#B45309;}
+.hybrid-note{background:linear-gradient(90deg,#FFF8E1,#FFFDE7);border-left:3px solid var(--gold);padding:8px 12px;font-size:11px;color:var(--gray-700);line-height:1.6;margin:10px 16px 0;border-radius:0 8px 8px 0;}
+/* Hybrid table: merged 2 products */
+.hybrid-tbl-wrap{margin:10px 16px 0;background:var(--white);border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.08);overflow:hidden;}
+.hybrid-tbl-hdr{background:linear-gradient(135deg,#1a1a2e,#0f3460);padding:10px 16px;}
+.hybrid-tbl-hdr h3{font-family:var(--font-hd);font-size:12px;font-weight:600;color:var(--white);}
+.hybrid-tbl-hdr small{font-size:10px;color:rgba(255,255,255,.55);}
+th.hd-p65{background:#9B0014!important;color:rgba(255,255,255,.92)!important;}
+th.hd-fix{background:#0c4a6e!important;color:rgba(255,255,255,.92)!important;}
+th.hd-total{background:#0f3460!important;color:#BAE6FD!important;}
+td.c-p65{color:var(--red);font-weight:600;}
+td.c-fix{color:var(--blue);font-weight:600;}
+td.c-total{color:#0f3460;font-weight:700;}
+tr.hybrid-phase td{background:#1a1a2e!important;color:rgba(255,255,255,.9)!important;font-family:var(--font-hd);font-size:var(--table-fs-xs);font-weight:700;text-align:center;padding:3px 8px;}
+tr.hybrid-be-cv{background:linear-gradient(90deg,#DCFCE7,#F0FDF4)!important;border-left:3px solid var(--green);}
+@media print{
+  body{background:white;}
+  .action-bar,.legend,.no-print,.tab-bar{display:none!important;}
+  .tab-panel{display:block!important;}
+  .hero,.table-header,.hybrid-tbl-hdr,.hybrid-card-hdr{print-color-adjust:exact;-webkit-print-color-adjust:exact;}
+  .table-section,.hybrid-tbl-wrap{box-shadow:none;border:1px solid #ccc;margin:4px 0;}
+  table{font-size:7pt;}
+  td,th{padding:2px 3px;}
+  @page{margin:6mm 5mm;size:A4 landscape;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     TAB BAR
+═══════════════════════════════════════════════ -->
+<div class="tab-bar no-print" style="margin-top:12px">
+  <button class="tab-btn active p65" onclick="switchTab('p65')">
+    🛡️ AIA Protection 65 <span class="tab-pill">Non Par</span>
+  </button>
+  <button class="tab-btn fix" onclick="switchTab('fix')">
+    💰 AIA Annuity FIX <span class="tab-pill">บำนาญมั่นคง</span>
+  </button>
+  <button class="tab-btn hybrid" onclick="switchTab('hybrid')">
+    🔗 Hybrid วางแผนเกษียณ <span class="tab-pill">P65 + FIX</span>
+  </button>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 1: AIA PROTECTION 65
+═══════════════════════════════════════════════ -->
+<div id="tab-p65" class="tab-panel p65-panel active">
+
+<header class="hero p65">
+  <div class="hero-logo">AIA</div>
+  <div class="hero-text">
+    <h1>Protection 65 (Non Par)</h1>
+    <p>ตารางผลประโยชน์และการวางแผนภาษี — คุ้มครองถึงอายุ 99 ปี</p>
+  </div>
+  <div class="hero-badge no-print">🛡️ เงินคืนรวม 760%</div>
+</header>
+
+<div class="input-card p65">
+  <h2 style="color:var(--red)"><span style="display:inline-block;width:4px;height:14px;background:var(--red);border-radius:2px;margin-right:8px"></span>ข้อมูลผู้เอาประกัน</h2>
+  <div class="input-grid">
+    <div class="field"><label>ชื่อ-นามสกุล</label><input type="text" id="p65-name" placeholder="ระบุชื่อลูกค้า"></div>
+    <div class="field"><label>เพศ</label><select id="p65-gender"><option value="male">ชาย</option><option value="female">หญิง</option></select></div>
+    <div class="field"><label>อายุปัจจุบัน (ปี)</label><input type="number" id="p65-age" min="1" max="60" value="35"></div>
+    <div class="field"><label>ทุนประกันภัย (บาท)</label><input type="number" id="p65-sa" min="100000" step="10000" value="400000"></div>
+  </div>
+</div>
+<div class="action-bar no-print">
+  <button class="btn btn-p65" onclick="calcP65()">📊 คำนวณ Protection 65</button>
+  <button class="btn btn-navy" onclick="window.print()">🖨️ พิมพ์</button>
+  <button class="btn btn-outline" onclick="resetP65()">↺ รีเซ็ต</button>
+  <button class="btn-toggle-tax" id="p65-tax-btn" onclick="toggleTax('p65')">🧾 ซ่อนคอลัมน์ภาษี</button>
+  <div class="font-ctrl">
+    <span class="font-ctrl-lbl">ตัวอักษร</span>
+    <button class="btn-fs" onclick="adjFS(-1)">−</button>
+    <span class="fs-val" id="fsLabel">11.5</span>
+    <button class="btn-fs" onclick="adjFS(1)">+</button>
+    <button class="btn-fs-reset" onclick="adjFS(0)">รีเซ็ต</button>
+  </div>
+</div>
+<div class="legend no-print" id="p65-legend" style="display:none">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>🟢 จุดคุ้มทุน: CV+เงินคืนสะสม ≥ เบี้ยสะสม</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div>🟣 จุดคุ้มทุน+ภาษี: CV+เงินคืนสะสม+ภาษีสะสม ≥ เบี้ยสะสม</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#F59E0B"></div>⭐ ปีครบกำหนดสัญญา</div>
+</div>
+<div class="summary-row" id="p65-pills" style="display:none"></div>
+<div class="table-section">
+  <div class="table-header p65"><h3 id="p65-title">ตารางผลประโยชน์ AIA Protection 65 (Non Par)</h3><small>CV ต่อทุน 1,000 บาท | ความคุ้มครองชีวิต = max(ทุนประกัน, CV, 105%×เบี้ยสะสม)</small></div>
+  <div class="empty-state" id="p65-empty"><div class="icon">📋</div><p>กรอกข้อมูลแล้วกด <strong>คำนวณ Protection 65</strong></p></div>
+  <div class="table-scroll" id="p65-scroll" style="display:none">
+    <table><thead id="p65-thead"></thead><tbody id="p65-tbody"></tbody></table>
+  </div>
+</div>
+<div class="note-box" id="p65-note" style="display:none">
+  <strong>หมายเหตุ Protection 65:</strong>
+  • เงินคืนรายงวดเริ่มจ่ายเมื่ออายุครบ 65 ปีขึ้นไป (12%–26% ของทุนประกัน)
+  • ความคุ้มครองชีวิต = max(ทุนประกัน, CV, 105%×เบี้ยสะสม)
+  • เงินถอน = CV + เงินคืนสะสม | เงินถอนรวมภาษี = CV + เงินคืนสะสม + ภาษีสะสม [min(เบี้ย,100k)×อัตรา×ปีที่จ่าย]
+</div>
+<div class="disclaimer" id="p65-discl" style="display:none">ข้อมูลเพื่อประกอบการนำเสนอเท่านั้น มูลค่าจริงขึ้นอยู่กับเงื่อนไขกรมธรรม์</div>
+
+</div><!-- /tab-p65 -->
+
+<!-- ══════════════════════════════════════════════
+     TAB 2: AIA ANNUITY FIX
+═══════════════════════════════════════════════ -->
+<div id="tab-fix" class="tab-panel fix-panel">
+
+<header class="hero fix">
+  <div class="hero-logo">AIA</div>
+  <div class="hero-text">
+    <h1>Annuity FIX — บำนาญมั่นคง</h1>
+    <p>ตารางผลประโยชน์บำนาญรายปี — รับบำนาญอายุ 60–85 ปี รวม 26 ครั้ง</p>
+  </div>
+  <div class="hero-badge no-print">💰 162.5% ของมูลค่าบำนาญตั้งต้น</div>
+</header>
+
+<div class="input-card fix">
+  <h2 style="color:var(--blue)"><span style="display:inline-block;width:4px;height:14px;background:var(--blue);border-radius:2px;margin-right:8px"></span>ข้อมูลผู้เอาประกัน</h2>
+  <div class="input-grid" style="grid-template-columns:repeat(5,1fr);">
+    <div class="field"><label>ชื่อ-นามสกุล</label><input type="text" id="fix-name" placeholder="ระบุชื่อลูกค้า"></div>
+    <div class="field"><label>เพศ</label><select id="fix-gender"><option value="male">ชาย</option><option value="female">หญิง</option></select></div>
+    <div class="field"><label>อายุปัจจุบัน (ปี)</label><input type="number" id="fix-age" min="20" max="55" value="35"></div>
+    <div class="field"><label>เงินบำนาญรายปีที่ต้องการ (บาท)</label><input type="number" id="fix-annuity" min="12500" step="1000" value="120000" placeholder="เช่น 120,000"></div>
+    <div class="field"><label>รายได้รวมทั้งปี (บาท) <span style="color:var(--blue);font-size:9px">— ใช้คำนวณสิทธิภาษี 15% ไม่เกิน 200,000</span></label><input type="number" id="fix-income" min="0" step="10000" value="800000" placeholder="เช่น 800,000"></div>
+  </div>
+</div>
+<div class="action-bar no-print">
+  <button class="btn btn-fix" onclick="calcFIX()">📊 คำนวณ Annuity FIX</button>
+  <button class="btn btn-navy" onclick="window.print()">🖨️ พิมพ์</button>
+  <button class="btn btn-outline" onclick="resetFIX()">↺ รีเซ็ต</button>
+  <button class="btn-toggle-tax" id="fix-tax-btn" onclick="toggleTax('fix')">🧾 ซ่อนคอลัมน์ภาษี</button>
+  <div class="font-ctrl">
+    <span class="font-ctrl-lbl">ตัวอักษร</span>
+    <button class="btn-fs" onclick="adjFS(-1)">−</button>
+    <span class="fs-val" id="fsLabel2">11.5</span>
+    <button class="btn-fs" onclick="adjFS(1)">+</button>
+    <button class="btn-fs-reset" onclick="adjFS(0)">รีเซ็ต</button>
+  </div>
+</div>
+<div class="legend no-print" id="fix-legend" style="display:none">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div>📌 ระยะชำระเบี้ย (ถึงอายุ 60 ปี)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--teal)"></div>💰 ระยะรับบำนาญ (อายุ 60–85 ปี รวม 26 ครั้ง)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>🟢 จุดคุ้มทุน: CV+บำนาญสะสม ≥ เบี้ยสะสม</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div>🟣 จุดคุ้มทุน+ภาษี: CV+บำนาญสะสม+ภาษีสะสม ≥ เบี้ยสะสม | ภาษีสะสม = 15%×รายได้รวม (ไม่เกิน 200,000/ปี) × จำนวนปี × อัตราภาษี</div>
+</div>
+<div class="summary-row" id="fix-pills" style="display:none"></div>
+<div class="table-section">
+  <div class="table-header fix"><h3 id="fix-title">ตารางผลประโยชน์ AIA Annuity FIX</h3><small>CV ต่อมูลค่าบำนาญตั้งต้น 1,000 บาท | ความคุ้มครองชีวิต = max(105%×เบี้ยสะสม, CV, มูลค่าบำนาญคงเหลือ)</small></div>
+  <div class="empty-state" id="fix-empty"><div class="icon">💰</div><p>กรอกข้อมูลแล้วกด <strong>คำนวณ Annuity FIX</strong></p></div>
+  <div class="table-scroll" id="fix-scroll" style="display:none">
+    <table><thead id="fix-thead"></thead><tbody id="fix-tbody"></tbody></table>
+  </div>
+</div>
+<div class="note-box" id="fix-note" style="display:none">
+  <strong>หมายเหตุ Annuity FIX:</strong>
+  • มูลค่าบำนาญตั้งต้น = เงินบำนาญรายปี ÷ 6.25% (ชาย) หรือ ÷ 5.95% (หญิง)
+  • เบี้ยประกัน = (มูลค่าบำนาญตั้งต้น ÷ 1,000) × อัตราเบี้ยตามอายุและเพศ
+  • CV ระยะชำระเบี้ย = ค่าจากตาราง × (มูลค่าบำนาญตั้งต้น ÷ 1,000)
+  • CV ระยะรับบำนาญ = มูลค่าปัจจุบันของบำนาญที่เหลือ × (มูลค่าบำนาญตั้งต้น ÷ 1,000)
+  • ความคุ้มครองชีวิต = max(105%×เบี้ยสะสม, CV, มูลค่าบำนาญคงเหลือ)
+  • เงินถอน = CV + บำนาญสะสม | รวมภาษี = CV + บำนาญสะสม + ภาษีสะสม
+</div>
+<div class="disclaimer" id="fix-discl" style="display:none">ข้อมูลเพื่อประกอบการนำเสนอเท่านั้น มูลค่าจริงขึ้นอยู่กับเงื่อนไขกรมธรรม์</div>
+
+</div><!-- /tab-fix -->
+
+
+<!-- ══════════════════════════════════════════════
+     TAB 3: HYBRID วางแผนเกษียณ P65 + AnnuityFIX
+═══════════════════════════════════════════════ -->
+<div id="tab-hybrid" class="tab-panel">
+
+<header class="hero hybrid">
+  <div class="hero-logo" style="color:#e94560">AIA</div>
+  <div class="hero-text">
+    <h1>Hybrid วางแผนเกษียณ — Protection 65 + Annuity FIX</h1>
+    <p>รวมความยืดหยุ่น (CV ถอนได้จาก P65) + บำนาญมั่นคง (FIX) เพื่อแผนเกษียณที่สมบูรณ์</p>
+  </div>
+  <div class="hero-badge no-print">🔗 แผนรวม 2 ผลิตภัณฑ์</div>
+</header>
+
+<div class="input-card" style="border-radius:0 0 12px 12px">
+  <h2 style="color:#e94560"><span style="display:inline-block;width:4px;height:14px;background:#e94560;border-radius:2px;margin-right:8px"></span>ข้อมูลผู้เอาประกัน (ใช้ร่วมกันทั้ง 2 แบบ)</h2>
+  <div class="input-grid" style="grid-template-columns:repeat(5,1fr);">
+    <div class="field"><label>ชื่อ-นามสกุล</label><input type="text" id="hyb-name" placeholder="ระบุชื่อลูกค้า"></div>
+    <div class="field"><label>เพศ</label><select id="hyb-gender"><option value="male">ชาย</option><option value="female">หญิง</option></select></div>
+    <div class="field"><label>อายุปัจจุบัน (ปี)</label><input type="number" id="hyb-age" min="20" max="55" value="35"></div>
+    <div class="field"><label>ทุนประกัน P65 (บาท)</label><input type="number" id="hyb-sa" min="100000" step="50000" value="400000"></div>
+    <div class="field"><label>บำนาญ FIX รายปี (บาท)</label><input type="number" id="hyb-annuity" min="12500" step="10000" value="120000"></div>
+  </div>
+  <div class="input-grid" style="grid-template-columns:repeat(3,1fr);margin-top:8px;">
+    <div class="field"><label>รายได้รวมทั้งปี (บาท) <span style="color:var(--blue);font-size:9px">— สิทธิภาษี FIX 15% ไม่เกิน 200,000</span></label><input type="number" id="hyb-income" min="0" step="10000" value="800000"></div>
+    <div class="field"><label>อัตราภาษีเงินได้ (%)</label>
+      <select id="hyb-taxrate">
+        <option value="0.10">10%</option>
+        <option value="0.15">15%</option>
+        <option value="0.20" selected>20%</option>
+        <option value="0.25">25%</option>
+        <option value="0.30">30%</option>
+      </select>
+    </div>
+    <div class="field" style="display:flex;align-items:flex-end;">
+      <div style="font-size:10px;color:var(--gray-400);line-height:1.5;padding-bottom:2px">
+        หมายเหตุ: ตาราง Hybrid แสดงผลประโยชน์รวม<br>P65 (CV+เงินคืนสะสม) + FIX (บำนาญสะสม) ต่อปี
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="action-bar no-print">
+  <button class="btn" style="background:linear-gradient(135deg,#e94560,#c73652);color:var(--white);box-shadow:0 3px 10px rgba(233,69,96,.28)" onclick="calcHybrid()">🔗 คำนวณแผน Hybrid</button>
+  <button class="btn btn-navy" onclick="window.print()">🖨️ พิมพ์</button>
+  <button class="btn btn-outline" onclick="resetHybrid()">↺ รีเซ็ต</button>
+  <button class="btn-toggle-tax" id="hyb-tax-btn" onclick="toggleTax('hyb')">🧾 ซ่อนคอลัมน์ภาษี</button>
+  <div class="font-ctrl">
+    <span class="font-ctrl-lbl">ตัวอักษร</span>
+    <button class="btn-fs" onclick="adjFS(-1)">−</button>
+    <span class="fs-val" id="fsLabel3">11.5</span>
+    <button class="btn-fs" onclick="adjFS(1)">+</button>
+    <button class="btn-fs-reset" onclick="adjFS(0)">รีเซ็ต</button>
+  </div>
+</div>
+
+<div class="hybrid-note no-print" id="hyb-insight" style="display:none"></div>
+
+<div class="summary-row" id="hyb-pills" style="display:none"></div>
+
+<div class="hybrid-tbl-wrap" id="hyb-tbl-wrap">
+  <div class="hybrid-tbl-hdr">
+    <h3 id="hyb-title">ตารางผลประโยชน์รวม Hybrid Plan</h3>
+    <small>P65: เน้นความยืดหยุ่น — ถอน CV ได้ทุกปี | FIX: บำนาญคงที่ อายุ 60–85 ปี (26 ครั้ง)</small>
+  </div>
+  <div class="empty-state" id="hyb-empty"><div class="icon">🔗</div><p>กรอกข้อมูลแล้วกด <strong>คำนวณแผน Hybrid</strong></p></div>
+  <div class="table-scroll" id="hyb-scroll" style="display:none">
+    <table><thead id="hyb-thead"></thead><tbody id="hyb-tbody"></tbody></table>
+  </div>
+</div>
+
+<div class="disclaimer" id="hyb-discl" style="display:none;margin-top:0">ข้อมูลเพื่อประกอบการนำเสนอเท่านั้น มูลค่าจริงขึ้นอยู่กับเงื่อนไขกรมธรรม์</div>
+</div><!-- /tab-hybrid -->
+
+<script>
+// ══════════════════════════════════════
+// SHARED UTILITIES
+// ══════════════════════════════════════
+const fmt  = n=>(n==null||isNaN(n)||n===0)?'—':n.toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2});
+const fmtI = n=>n?n.toLocaleString('th-TH'):'—';
+const fmtZ = n=>(n==null||isNaN(n))?'—':n.toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2});
+
+let curFS=11.5;
+function adjFS(d){
+  if(d===0){curFS=11.5;}else{curFS=parseFloat(Math.max(8,Math.min(18,curFS+d)).toFixed(1));}
+  document.documentElement.style.setProperty('--table-fs',  curFS+'px');
+  document.documentElement.style.setProperty('--table-fs-sm',(curFS-1)+'px');
+  document.documentElement.style.setProperty('--table-fs-xs',(curFS-1.5)+'px');
+  document.getElementById('fsLabel').textContent=curFS;
+  const l2=document.getElementById('fsLabel2'); if(l2)l2.textContent=curFS;
+  const l3=document.getElementById('fsLabel3'); if(l3)l3.textContent=curFS;
+}
+
+function switchTab(t){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active','p65','fix','hybrid'));
+  document.getElementById('tab-'+t).classList.add('active');
+  const btn=document.querySelector(`.tab-btn[onclick="switchTab('${t}')"]`);
+  btn.classList.add('active',t);
+}
+
+// ── Toggle ซ่อน/แสดงคอลัมน์ภาษี ──
+function toggleTax(tab){
+  const scroll=document.getElementById(tab+'-scroll')||document.getElementById(tab+'-tbl-wrap');
+  const btn=document.getElementById(tab+'-tax-btn');
+  if(!scroll||!btn)return;
+  const tbl=scroll.querySelector('table')||scroll;
+  tbl.classList.toggle('tax-hidden');
+  const hidden=tbl.classList.contains('tax-hidden');
+  btn.textContent=hidden?'🧾 แสดงคอลัมน์ภาษี':'🧾 ซ่อนคอลัมน์ภาษี';
+  btn.classList.toggle('hidden-mode',hidden);
+}
+
+// ══════════════════════════════════════════════════════════════════
+// ── AIA PROTECTION 65 DATA & LOGIC ──────────────────────────────
+// ══════════════════════════════════════════════════════════════════
+const P65_PREM={
+  0:29,1:30,2:31,3:32,4:33,5:34,6:35,7:36,8:37,9:39,10:40,
+  11:41,12:43,13:44,14:46,15:47,16:49,17:51,18:53,19:55,20:57,
+  21:59,22:61,23:63,24:66,25:69,26:71,27:74,28:77,29:81,30:84,
+  31:88,32:92,33:96,34:100,35:105,36:110,37:116,38:122,39:128,40:135,
+  41:143,42:151,43:160,44:170,45:181,46:193,47:206,48:221,49:238,50:258,
+  51:309,52:338,53:372,54:413,55:461,56:520,57:593,58:689,59:816,60:995
+};
+const P65_CV_M={
+  "15d":[0,12,35,60,85,113,144,170,196,223,250,277,305,334,363,392,422,453,484,516,548,581,614,649,684,719,756,793,831,869,909,949,990,1032,1075],
+  1:[0,12,36,62,88,117,149,175,202,230,258,286,315,344,374,405,435,467,499,532,565,599,634,669,705,742,779,818,857,897,938,979,1022,1065,1109],
+  2:[0,13,37,64,91,121,154,181,209,237,266,295,325,355,386,417,449,481,514,548,583,618,653,690,727,765,804,844,884,925,968,1010,1054,1099,1144],
+  3:[0,13,39,66,94,124,159,187,215,245,274,304,335,366,398,430,463,496,530,565,601,637,674,712,750,789,829,870,912,955,998,1042,1088,1134,1181],
+  4:[0,13,40,68,97,128,164,193,222,252,283,314,345,377,410,443,477,511,547,583,619,657,695,734,774,814,856,898,941,985,1030,1075,1122,1170,1218],
+  5:[0,14,41,70,100,133,169,199,229,260,291,323,356,389,422,457,492,527,564,601,639,677,717,757,798,840,883,926,971,1016,1062,1109,1158,1206,1256],
+  6:[0,14,42,72,103,137,174,205,236,268,300,333,366,401,435,471,507,544,581,619,659,698,739,781,823,866,911,956,1002,1048,1096,1145,1194,1245,1296],
+  7:[0,15,44,75,106,141,180,211,243,276,309,343,378,413,449,485,522,560,599,639,679,720,763,805,849,894,940,986,1033,1082,1131,1181,1232,1285,1338],
+  8:[0,15,45,77,109,145,185,218,251,284,319,354,389,425,462,500,539,578,618,659,701,743,787,831,876,922,969,1017,1066,1116,1167,1219,1272,1325,1380],
+  9:[0,16,47,80,113,151,192,226,260,295,330,367,404,441,480,519,559,600,642,684,728,772,817,863,910,958,1007,1057,1108,1159,1212,1266,1321,1377,1434],
+  10:[0,16,48,82,117,155,197,232,268,304,340,378,416,455,495,535,576,619,662,706,750,796,843,891,939,989,1039,1090,1143,1196,1251,1306,1363,1421,1479],
+  11:[0,17,50,85,120,160,203,239,276,313,351,389,429,469,510,552,594,638,683,728,774,821,870,919,969,1020,1072,1125,1179,1234,1291,1348,1406,1466,1527],
+  12:[0,17,51,88,124,165,211,248,286,324,364,404,445,487,529,573,617,663,709,756,804,854,904,955,1007,1060,1114,1169,1225,1283,1341,1400,1461,1523,1586],
+  13:[0,18,53,90,128,170,217,255,294,334,375,416,459,502,546,591,637,684,732,780,830,881,933,985,1039,1094,1150,1206,1264,1324,1384,1445,1508,1572,1637],
+  14:[0,18,55,93,133,177,225,265,305,347,389,432,476,521,567,614,662,710,760,811,862,915,969,1024,1079,1136,1194,1253,1313,1375,1437,1501,1566,1633,1700],
+  15:[0,19,56,96,137,182,232,273,315,358,401,446,491,538,585,633,683,733,784,837,890,945,1000,1057,1114,1173,1233,1294,1356,1419,1484,1550,1617,1685,1755],
+  16:[0,20,58,100,142,189,241,283,327,371,417,463,511,559,608,658,710,762,815,870,925,982,1039,1098,1158,1219,1281,1344,1409,1474,1541,1610,1680,1751,1824],
+  17:[0,20,60,103,147,196,250,294,340,386,433,481,530,581,632,684,737,792,847,904,961,1020,1080,1141,1203,1266,1331,1396,1463,1532,1601,1672,1745,1819,1894],
+  18:[0,21,63,107,153,203,259,306,353,401,450,500,551,603,656,711,766,823,880,939,999,1060,1122,1185,1249,1315,1382,1450,1520,1591,1663,1737,1812,1889,1967],
+  19:[0,22,65,111,159,211,269,317,366,417,468,520,573,627,682,739,796,855,915,976,1038,1101,1166,1231,1298,1366,1436,1507,1579,1652,1728,1804,1882,1962,2043],
+  20:[0,23,68,116,165,219,280,330,381,433,486,540,595,651,709,768,827,888,951,1014,1078,1144,1211,1279,1349,1419,1491,1565,1640,1716,1794,1874,1955,2038,2123],
+  21:[0,24,70,120,171,228,291,343,396,450,505,561,618,677,737,798,860,923,988,1053,1120,1188,1258,1330,1401,1474,1549,1625,1703,1783,1864,1946,2031,2117,2205],
+  22:[0,24,73,125,178,237,302,356,411,467,525,583,643,703,765,829,893,959,1026,1094,1164,1236,1306,1380,1455,1531,1609,1688,1769,1852,1936,2021,2109,2199,2290],
+  23:[0,25,76,130,185,246,314,370,427,485,545,606,668,731,795,861,928,996,1066,1136,1209,1282,1357,1433,1511,1590,1671,1753,1837,1923,2010,2099,2191,2284,2379],
+  24:[0,26,79,136,193,257,328,387,446,507,570,633,698,764,831,900,970,1041,1114,1187,1263,1339,1418,1497,1578,1661,1744,1830,1917,2007,2099,2192,2287,2384,2484],
+  25:[0,28,83,142,202,269,343,404,467,530,595,662,729,798,869,940,1013,1088,1163,1240,1319,1399,1481,1564,1648,1734,1822,1912,2003,2097,2192,2289,2388,2490,2593],
+  26:[0,29,86,147,210,279,356,420,485,551,618,687,758,829,902,977,1052,1130,1208,1288,1370,1453,1538,1624,1712,1801,1893,1986,2081,2178,2277,2378,2481,2586,2694],
+  27:[0,31,92,156,221,294,374,441,508,577,648,720,793,868,944,1022,1101,1181,1263,1346,1431,1518,1606,1696,1788,1881,1977,2074,2173,2274,2377,2482,2590,2700,2813],
+  28:[0,34,97,165,233,309,393,462,533,605,678,753,830,908,987,1068,1151,1236,1320,1407,1496,1586,1678,1772,1867,1964,2064,2165,2268,2374,2482,2592,2704,2819,2937],
+  29:[0,37,104,175,247,327,415,488,562,637,714,793,873,955,1038,1123,1209,1297,1387,1478,1571,1665,1762,1860,1960,2062,2166,2272,2380,2490,2603,2718,2836,2957,3081],
+  30:[0,40,110,184,259,343,435,511,588,667,748,830,913,999,1085,1174,1263,1355,1448,1543,1640,1739,1839,1941,2046,2152,2261,2371,2484,2599,2717,2838,2961,3087,3096],
+  31:[0,43,118,196,274,362,459,538,619,702,786,872,960,1049,1140,1232,1326,1422,1520,1619,1721,1824,1929,2036,2145,2257,2370,2486,2604,2725,2848,2974,3104,3116,3038],
+  32:[0,46,125,207,290,382,483,566,651,738,827,917,1008,1102,1197,1294,1392,1492,1595,1699,1805,1913,2023,2135,2249,2366,2485,2606,2730,2856,2986,3118,3133,3055,2978],
+  33:[0,49,133,219,306,402,509,596,685,776,869,963,1059,1157,1256,1357,1461,1566,1673,1782,1893,2006,2121,2238,2358,2480,2605,2732,2861,2994,3130,3148,3070,2992,2914],
+  34:[0,53,141,232,322,424,535,627,720,815,912,1011,1111,1214,1318,1424,1532,1642,1754,1868,1984,2102,2223,2346,2471,2599,2729,2863,2999,3138,3160,3082,3003,2925,2848],
+  35:[0,57,151,246,342,448,566,662,760,860,962,1066,1171,1279,1388,1500,1613,1729,1846,1966,2088,2213,2339,2468,2600,2734,2871,3011,3154,3181,3102,3023,2945,2867,2791],
+  36:[0,62,160,261,362,474,598,699,802,907,1014,1123,1234,1347,1462,1579,1698,1819,1943,2069,2197,2328,2461,2596,2735,2876,3020,3167,3197,3119,3040,2961,2883,2806,2711],
+  37:[0,66,172,278,385,503,634,741,850,961,1074,1189,1306,1425,1546,1669,1795,1923,2053,2186,2321,2459,2599,2742,2888,3036,3188,3223,3145,3065,2986,2908,2830,2734,2640],
+  38:[0,72,183,296,408,534,672,785,900,1017,1136,1257,1380,1505,1633,1763,1896,2030,2168,2308,2450,2595,2743,2894,3047,3206,3244,3165,3086,3006,2928,2849,2753,2657,2565],
+  39:[0,76,195,314,433,566,712,831,952,1075,1200,1328,1458,1590,1724,1861,2001,2143,2287,2435,2585,2738,2893,3052,3214,3259,3180,3101,3021,2942,2864,2766,2670,2577,2487],
+  40:[0,83,209,335,461,601,757,882,1010,1140,1273,1408,1545,1685,1827,1972,2119,2269,2422,2578,2736,2898,3062,3230,3281,3202,3122,3043,2963,2884,2786,2690,2595,2506,2417],
+  41:[0,90,224,359,493,642,807,940,1076,1214,1354,1497,1643,1791,1942,2095,2252,2411,2573,2738,2906,3077,3251,3309,3230,3150,3070,2990,2910,2812,2715,2619,2527,2438,2335],
+  42:[0,97,240,383,526,684,859,1000,1144,1290,1439,1591,1745,1902,2062,2224,2390,2559,2730,2905,3083,3264,3329,3250,3170,3089,3009,2929,2830,2733,2636,2543,2453,2349,2251],
+  43:[0,104,258,410,562,731,917,1068,1220,1375,1534,1695,1859,2025,2195,2368,2544,2723,2905,3090,3279,3352,3272,3192,3112,3031,2951,2852,2753,2656,2562,2465,2365,2265,2173],
+  44:[0,113,278,441,603,783,981,1141,1304,1470,1638,1810,1984,2162,2343,2527,2714,2904,3098,3296,3377,3297,3217,3137,3056,2975,2875,2776,2678,2583,2491,2383,2281,2187,2103],
+  45:[0,123,300,474,648,841,1053,1224,1397,1574,1754,1937,2124,2313,2506,2702,2902,3105,3312,3403,3323,3243,3163,3082,3001,2900,2800,2702,2606,2512,2403,2299,2203,2116,2042],
+  46:[0,133,326,511,698,904,1131,1314,1500,1689,1882,2077,2277,2479,2686,2895,3109,3326,3428,3348,3268,3187,3106,3024,2924,2823,2724,2627,2532,2422,2316,2218,2128,2051,1969],
+  47:[0,145,351,552,752,973,1217,1413,1612,1815,2021,2231,2445,2662,2883,3107,3336,3449,3369,3289,3208,3127,3045,2944,2843,2743,2645,2550,2438,2331,2231,2139,2059,1973,1907],
+  48:[0,158,381,599,814,1053,1316,1526,1741,1959,2181,2407,2636,2870,3108,3349,3475,3396,3315,3234,3153,3071,2969,2868,2768,2669,2572,2459,2351,2248,2154,2070,1981,1910,1862],
+  49:[0,174,416,652,885,1143,1427,1655,1887,2122,2362,2606,2854,3106,3363,3503,3424,3344,3262,3181,3099,2997,2895,2794,2694,2597,2483,2372,2268,2171,2085,1992,1916,1862,1821],
+  50:[0,191,456,713,967,1248,1557,1804,2056,2312,2572,2837,3106,3379,3538,3458,3378,3297,3215,3133,3030,2928,2826,2726,2627,2511,2399,2292,2192,2102,2005,1923,1862,1821,1785],
+  51:[0,228,575,889,1261,1539,1822,2109,2400,2697,2998,3304,3615,3810,3732,3652,3571,3489,3406,3302,3198,3092,2986,2881,2756,2633,2513,2395,2283,2158,2043,1939,1852,1788,1733],
+  52:[0,253,637,982,1391,1697,2007,2322,2642,2967,3298,3633,3854,3776,3697,3616,3534,3451,3347,3242,3136,3030,2926,2799,2674,2552,2433,2319,2191,2071,1963,1870,1798,1733,1684],
+  53:[0,283,709,1091,1544,1881,2224,2572,2925,3284,3649,3899,3821,3742,3662,3580,3497,3393,3288,3182,3075,2968,2862,2717,2593,2472,2355,2224,2100,1987,1888,1808,1733,1684,1636],
+  54:[0,319,796,1223,1728,2103,2485,2872,3265,3665,3950,3873,3794,3714,3632,3550,3446,3340,3234,3127,3020,2892,2766,2640,2517,2398,2266,2136,2018,1912,1823,1738,1684,1636,1592],
+  55:[0,362,899,1378,1945,2366,2793,3227,3668,3995,3918,3840,3760,3678,3596,3492,3386,3280,3173,3065,2937,2810,2683,2559,2437,2300,2170,2047,1937,1842,1748,1684,1636,1592,1553],
+  56:[0,414,1026,1569,2212,2689,3172,3663,4042,3965,3887,3807,3726,3644,3540,3435,3328,3220,3112,2984,2855,2728,2602,2478,2339,2205,2079,1963,1861,1759,1684,1636,1592,1553,1501],
+  57:[0,479,1182,1806,2544,3089,3643,4085,4009,3931,3852,3771,3688,3585,3479,3373,3265,3156,3027,2898,2769,2642,2517,2375,2239,2109,1989,1881,1772,1687,1636,1592,1553,1501,1451],
+  58:[0,564,1388,2117,2978,3614,4139,4064,3986,3907,3827,3745,3641,3536,3429,3321,3212,3083,2953,2823,2695,2568,2424,2285,2151,2026,1913,1796,1700,1636,1592,1553,1501,1451,1402],
+  59:[0,677,1661,2528,3554,4189,4114,4037,3959,3879,3797,3694,3588,3482,3374,3264,3136,3004,2873,2743,2615,2469,2327,2190,2061,1942,1817,1713,1636,1592,1553,1501,1451,1402,1354],
+  60:[0,836,2045,3108,4245,4170,4094,4016,3936,3854,3751,3646,3540,3431,3322,3192,3061,2929,2798,2668,2520,2375,2235,2102,1977,1846,1732,1643,1592,1553,1501,1451,1402,1354,1304]
+};
+const P65_CV_F={
+  "15d":[0,13,39,66,94,125,160,188,217,246,276,302,330,358,388,419,451,484,519,553,588,625,663,703,743,786,830,877,925,975,1027,1081,1138,1198,1262],
+  1:[0,14,40,68,97,129,164,194,223,254,285,316,348,381,414,448,483,518,554,591,628,666,705,745,786,830,874,921,969,1019,1071,1124,1180,1237,1298],
+  2:[0,14,41,70,100,133,169,199,230,261,293,326,359,392,427,462,497,534,571,608,647,686,726,767,808,851,894,938,983,1029,1075,1123,1171,1221,1271],
+  3:[0,14,42,72,103,137,174,205,237,269,302,335,369,404,439,475,512,550,588,626,666,707,748,790,833,876,921,966,1012,1060,1108,1157,1207,1257,1309],
+  4:[0,15,44,74,106,141,180,212,244,277,311,345,380,416,452,490,527,566,606,646,687,729,772,815,861,907,954,1002,1052,1103,1155,1208,1263,1319,1375],
+  5:[0,15,45,77,109,145,185,218,251,286,320,356,392,429,466,504,543,583,624,665,707,750,793,838,883,930,977,1025,1074,1124,1175,1227,1280,1334,1389],
+  6:[0,16,46,79,112,150,191,225,259,294,330,367,404,442,480,520,560,601,642,685,728,773,818,864,910,958,1007,1056,1107,1159,1211,1265,1319,1375,1432],
+  7:[0,16,48,81,116,154,197,231,267,303,340,378,416,455,495,535,577,619,662,706,751,796,843,890,938,987,1038,1089,1141,1194,1248,1303,1360,1417,1476],
+  8:[0,17,49,84,119,159,203,238,275,312,350,389,429,469,510,552,594,638,682,727,773,820,868,917,967,1018,1069,1122,1176,1231,1287,1343,1401,1461,1521],
+  9:[0,17,51,87,124,164,209,246,283,322,361,401,443,484,526,570,614,659,706,753,800,849,898,949,1000,1053,1106,1160,1215,1272,1329,1387,1447,1507,1568],
+  10:[0,18,52,89,127,169,215,252,292,332,372,413,456,499,543,589,634,681,730,779,828,879,930,982,1035,1089,1144,1200,1256,1315,1373,1433,1494,1556,1618],
+  11:[0,18,54,92,131,175,223,262,302,343,385,428,471,516,561,607,654,702,752,802,852,904,956,1009,1063,1119,1175,1232,1290,1350,1411,1472,1534,1598,1662],
+  12:[0,18,54,92,131,175,223,262,302,343,385,428,471,516,561,607,654,702,752,802,852,904,956,1009,1063,1119,1175,1232,1290,1350,1411,1472,1534,1598,1662],
+  13:[0,19,56,95,136,181,230,271,313,356,399,443,488,534,581,628,677,727,779,830,882,935,989,1044,1100,1157,1215,1273,1333,1394,1456,1519,1583,1648,1714],
+  14:[0,20,58,98,140,187,238,280,323,367,412,457,503,551,599,649,699,751,804,858,913,968,1024,1080,1138,1197,1257,1318,1380,1443,1507,1572,1638,1705,1774],
+  15:[0,20,60,102,145,193,246,289,334,380,426,473,521,570,621,673,724,778,833,888,944,1000,1057,1116,1176,1236,1298,1361,1424,1489,1555,1621,1689,1758,1828],
+  16:[0,21,61,105,150,199,254,299,345,392,440,489,538,589,641,695,749,805,861,919,977,1035,1095,1155,1216,1279,1342,1406,1471,1538,1605,1673,1742,1812,1883],
+  17:[0,22,64,109,155,206,263,310,357,406,455,506,557,610,663,719,773,831,888,947,1007,1068,1130,1193,1256,1321,1387,1453,1520,1588,1657,1728,1799,1871,1944],
+  18:[0,22,66,112,161,214,272,321,370,421,472,524,577,632,687,744,800,859,919,979,1041,1104,1168,1233,1299,1366,1434,1502,1571,1642,1713,1786,1859,1934,2010],
+  19:[0,23,68,117,166,221,281,332,383,436,489,543,598,655,712,771,830,891,953,1016,1080,1145,1212,1278,1346,1416,1486,1557,1629,1703,1778,1854,1932,2010,2091],
+  20:[0,24,71,119,172,229,292,344,397,452,507,563,620,679,738,799,860,922,986,1051,1117,1184,1253,1322,1392,1464,1536,1609,1684,1761,1839,1919,1999,2082,2165],
+  21:[0,24,73,126,179,238,303,358,414,471,529,588,647,708,770,833,897,963,1029,1096,1164,1234,1305,1377,1450,1524,1599,1676,1754,1834,1915,1998,2082,2168,2256],
+  22:[0,25,76,130,185,247,315,372,430,490,550,611,674,737,801,867,933,1001,1070,1140,1211,1284,1357,1432,1508,1585,1663,1743,1824,1907,1992,2079,2167,2257,2349],
+  23:[0,26,79,135,192,256,327,387,447,509,572,636,700,766,833,901,970,1040,1111,1184,1258,1333,1409,1487,1566,1647,1729,1812,1897,1984,2072,2162,2254,2348,2444],
+  24:[0,27,82,140,199,265,339,401,464,528,593,659,726,795,865,936,1007,1079,1153,1229,1306,1384,1463,1544,1626,1710,1795,1881,1969,2059,2152,2246,2342,2440,2541],
+  25:[0,28,85,146,208,277,354,418,484,551,619,688,759,830,904,978,1052,1127,1203,1281,1360,1441,1523,1607,1693,1780,1869,1959,2051,2146,2242,2340,2441,2544,2649],
+  26:[0,29,90,154,218,290,370,437,507,577,649,721,795,870,947,1024,1102,1181,1262,1344,1428,1513,1600,1689,1779,1871,1964,2059,2156,2255,2357,2460,2567,2676,2787],
+  27:[0,31,95,161,228,303,387,457,530,604,679,755,832,910,991,1072,1154,1238,1323,1410,1498,1588,1679,1773,1868,1964,2062,2163,2265,2370,2477,2587,2699,2814,2931],
+  28:[0,33,101,170,239,318,406,478,555,633,712,791,872,954,1038,1123,1209,1295,1384,1475,1568,1662,1759,1857,1957,2060,2165,2272,2381,2493,2607,2724,2844,2967,3093],
+  29:[0,35,107,179,252,334,426,501,581,663,745,828,913,1000,1090,1182,1275,1369,1465,1563,1664,1766,1871,1975,2081,2190,2301,2415,2531,2650,2771,2895,3022,3153,3286],
+  30:[0,38,113,189,265,352,448,527,612,699,788,879,970,1062,1157,1255,1352,1450,1551,1655,1762,1871,1982,2096,2213,2332,2453,2577,2704,2833,2966,3101,3240,3382,3283],
+  31:[0,41,120,199,279,370,472,556,646,738,832,928,1025,1123,1225,1329,1436,1545,1657,1772,1889,2010,2133,2259,2388,2520,2655,2794,2935,3080,3228,3379,3344,3270,3195],
+  32:[0,44,127,210,294,390,497,585,681,779,879,981,1084,1190,1299,1410,1524,1641,1761,1884,2010,2139,2271,2405,2542,2682,2825,2971,3121,3275,3429,3356,3282,3207,3132],
+  33:[0,47,135,222,310,411,523,617,717,820,927,1035,1146,1259,1375,1494,1616,1741,1869,2001,2135,2273,2413,2556,2702,2851,3003,3159,3319,3321,3247,3172,3097,3022,2948],
+  34:[0,51,143,234,327,434,552,651,756,865,977,1089,1205,1323,1445,1568,1696,1826,1960,2097,2237,2381,2527,2677,2829,2985,3143,3306,3329,3255,3181,3106,3031,2956,2882],
+  35:[0,57,151,246,342,448,566,662,760,860,962,1066,1171,1279,1388,1500,1613,1729,1846,1966,2088,2213,2339,2468,2600,2734,2871,3011,3154,3181,3102,3023,2945,2867,2791],
+  36:[0,62,160,261,361,473,596,697,799,904,1010,1118,1228,1341,1455,1572,1691,1812,1935,2061,2189,2320,2453,2589,2727,2868,3013,3160,3310,3344,3270,3195,3121,3047,2974],
+  37:[0,66,170,276,381,499,628,734,841,951,1062,1176,1292,1410,1530,1652,1777,1904,2033,2165,2300,2437,2576,2719,2864,3012,3164,3318,3356,3282,3208,3133,3059,2985,2893],
+  38:[0,72,181,293,406,528,665,776,889,1004,1121,1241,1363,1487,1614,1743,1875,2009,2147,2287,2431,2577,2726,2879,3035,3194,3356,3391,3317,3242,3167,3092,3018,2924,2832],
+  39:[0,76,193,311,428,559,703,819,939,1060,1183,1309,1437,1568,1701,1837,1975,2115,2259,2405,2554,2706,2861,3018,3179,3343,3391,3317,3242,3167,3092,3018,2924,2832,2742],
+  40:[0,81,206,330,453,591,743,866,991,1119,1249,1381,1516,1654,1794,1936,2082,2230,2381,2534,2691,2851,3013,3180,3349,3403,3328,3253,3178,3103,3029,2935,2842,2752,2664],
+  41:[0,87,219,351,481,627,787,917,1049,1184,1322,1461,1603,1749,1897,2047,2201,2357,2516,2679,2844,3013,3185,3360,3419,3345,3270,3195,3119,3044,2950,2857,2766,2677,2592],
+  42:[0,94,235,374,513,667,837,975,1116,1257,1401,1548,1699,1851,2006,2165,2327,2493,2661,2833,3008,3187,3369,3440,3366,3291,3215,3140,3065,2970,2876,2784,2695,2608,2507],
+  43:[0,101,251,399,546,709,889,1035,1183,1334,1488,1645,1805,1967,2133,2301,2473,2648,2827,3008,3194,3383,3455,3381,3306,3230,3155,3079,2984,2890,2798,2707,2620,2517,2420],
+  44:[0,109,269,426,582,756,948,1102,1259,1420,1583,1749,1919,2091,2267,2446,2628,2814,3003,3196,3392,3473,3398,3323,3248,3172,3096,3001,2906,2813,2722,2633,2529,2430,2338],
+  45:[0,118,288,456,623,808,1012,1176,1344,1514,1688,1865,2045,2228,2415,2605,2799,2997,3198,3403,3492,3418,3343,3267,3191,3115,3019,2924,2830,2738,2649,2544,2443,2349,2264],
+  46:[0,128,310,490,668,866,1083,1258,1437,1619,1804,1992,2186,2380,2579,2782,2989,3199,3414,3512,3438,3363,3287,3211,3135,3039,2943,2849,2756,2666,2559,2458,2362,2274,2196],
+  47:[0,138,335,527,717,929,1162,1349,1540,1734,1932,2133,2338,2547,2760,2977,3197,3422,3531,3457,3382,3306,3230,3154,3057,2961,2866,2773,2682,2574,2471,2373,2283,2203,2120],
+  48:[0,150,361,568,772,999,1248,1449,1653,1861,2073,2288,2508,2731,2959,3191,3427,3548,3474,3399,3323,3246,3170,3073,2977,2882,2787,2696,2587,2483,2384,2292,2210,2126,2047],
+  49:[0,163,392,614,834,1078,1346,1562,1782,2005,2233,2464,2700,2941,3186,3435,3591,3517,3442,3366,3290,3213,3116,3019,2922,2827,2733,2623,2515,2413,2319,2234,2143,2052,1988],
+  50:[0,178,426,667,905,1168,1458,1691,1928,2169,2414,2664,2919,3178,3442,3618,3544,3469,3393,3317,3240,3143,3045,2948,2852,2757,2645,2537,2432,2334,2244,2144,2057,1988,1935],
+  51:[0,229,578,893,1266,1545,1829,2118,2412,2711,3015,3325,3640,3840,3768,3694,3619,3542,3465,3367,3267,3167,3067,2967,2848,2729,2613,2500,2392,2269,2155,2051,1961,1890,1825],
+  52:[0,254,639,984,1394,1700,2012,2328,2651,2979,3312,3652,3877,3804,3731,3656,3580,3503,3404,3305,3205,3104,3003,2883,2764,2647,2532,2421,2296,2178,2070,1975,1898,1825,1765],
+  53:[0,284,709,1092,1545,1882,2226,2575,2931,3293,3660,3914,3862,3769,3695,3619,3542,3443,3344,3243,3142,3041,2920,2800,2681,2565,2452,2324,2203,2091,1990,1906,1825,1765,1707],
+  54:[0,319,795,1221,1725,2101,2483,2872,3267,3669,3958,3886,3813,3739,3663,3586,3488,3389,3288,3187,3085,2963,2842,2722,2603,2488,2358,2233,2116,2010,1919,1828,1765,1707,1654],
+  55:[0,361,896,1374,1940,2361,2788,3224,3666,3996,3925,3852,3778,3703,3626,3528,3429,3328,3226,3124,3002,2879,2758,2639,2522,2389,2261,2141,2031,1935,1837,1765,1707,1654,1607]
+};
+
+function p65GetCV(g,age,yr){
+  const t=g==='male'?P65_CV_M:P65_CV_F;
+  const r=t[age]||t["15d"];
+  if(!r)return 0;
+  const i=yr-1;
+  return(i<0||i>=r.length)?0:r[i];
+}
+function p65RetPct(yr,age){
+  const e=age+yr;
+  if(e>=99||e<65)return 0;
+  if(e===65)return 12;
+  if(e<=70)return 14;
+  if(e<=75)return 16;
+  if(e<=80)return 18;
+  if(e<=85)return 20;
+  if(e<=90)return 22;
+  if(e<=95)return 24;
+  if(e<=98)return 26;
+  return 0;
+}
+
+
+// ══════════════════════════════════════════════════════════════════
+// ── HYBRID PLAN ──────────────────────────────────────────────────
+// ══════════════════════════════════════════════════════════════════
+function calcHybrid(){
+  const name   =document.getElementById('hyb-name').value.trim()||'ผู้เอาประกัน';
+  const g      =document.getElementById('hyb-gender').value;
+  const age    =parseInt(document.getElementById('hyb-age').value);
+  const sa     =parseFloat(document.getElementById('hyb-sa').value);
+  const annuity=parseFloat(document.getElementById('hyb-annuity').value);
+  const income =parseFloat(document.getElementById('hyb-income').value)||0;
+  const taxRate=parseFloat(document.getElementById('hyb-taxrate').value);
+
+  if(!age||age<20||age>55){alert('อายุ 20–55 ปี');return;}
+  if(!sa||sa<100000){alert('ทุนประกัน P65 ขั้นต่ำ 100,000 บาท');return;}
+  if(!annuity||annuity<12500){alert('บำนาญ FIX ขั้นต่ำ 12,500 บาท/ปี');return;}
+
+  const gTH=g==='male'?'ชาย':'หญิง';
+
+  // ── P65 params ──
+  const p65Prem=(sa/1000)*(P65_PREM[age]||0);
+  const p65PayYrs=65-age;
+  const p65TotYrs=99-age;
+  const p65TaxBase=Math.min(p65Prem,100000);
+
+  // ── FIX params ──
+  const annRate=g==='male'?0.0625:0.0595;
+  const base=annuity/annRate;
+  const fixPremRate=g==='male'?(FIX_PREM_M[age]||0):(FIX_PREM_F[age]||0);
+  const fixPrem=(base/1000)*fixPremRate;
+  const fixPayYrs=60-age;
+  const fixTaxBase=Math.min(income*0.15,200000);
+
+  // ── รวมเบี้ยรายปี ──
+  const totalPayYrs=Math.max(p65PayYrs,fixPayYrs); // ชำระเบี้ยทั้งคู่ (P65 ถึง 65, FIX ถึง 60)
+  const totalYrs=p65TotYrs; // ตารางรวมยาวตาม P65
+
+  // ── Build rows ──
+  const rows=[]; let p65CumPrem=0,fixCumPrem=0,p65CumRet=0,fixCumAnn=0;
+  const p65CumTax=[0]; // เก็บภาษีสะสม P65 (อัตราเดียวที่เลือก)
+  const fixCumTax=[0]; // เก็บภาษีสะสม FIX
+
+  for(let yr=1;yr<=totalYrs;yr++){
+    const aeEnd=age+yr;
+
+    // P65
+    const p65Paying=yr<=p65PayYrs;
+    const p65Prem_yr=p65Paying?p65Prem:0;
+    p65CumPrem+=p65Prem_yr;
+    const p65RetPct_=p65RetPct(yr,age);
+    const p65RetAmt=sa*p65RetPct_/100;
+    p65CumRet+=p65RetAmt;
+    const p65Mat=aeEnd>=99?sa:0;
+    const p65CvPerK=p65GetCV(g,age,yr);
+    const p65Cv=(sa/1000)*p65CvPerK;
+    const p65Life=Math.max(sa,p65Cv,p65CumPrem*1.05);
+    const p65Wd=p65Cv>0?p65Cv+p65CumRet:(p65Mat>0?p65CumRet+p65Mat:0);
+    const p65TxYr=p65Paying?p65TaxBase:0;
+    p65CumTax[0]+=p65TxYr*taxRate;
+    const p65WdTax=p65Wd+p65CumTax[0];
+
+    // FIX
+    const fixPaying=yr<=fixPayYrs;
+    const fixPrem_yr=fixPaying?fixPrem:0;
+    fixCumPrem+=fixPrem_yr;
+    const fixRecvYr=yr-fixPayYrs;
+    const fixIsRecv=fixRecvYr>=1;
+    const fixAnn=fixIsRecv?annuity:0;
+    fixCumAnn+=fixAnn;
+    const fixCvPerK=fixGetCV(g,age,yr);
+    const fixCv=(base/1000)*fixCvPerK;
+    const fixLife=fixIsRecv?fixCv:Math.max(fixCumPrem*1.05,fixCv);
+    const fixWd=fixIsRecv?0:(fixCv>0?fixCv:0);
+    const fixTxYr=fixPaying?fixTaxBase:0;
+    fixCumTax[0]+=fixTxYr*taxRate;
+    const fixWdTax=fixIsRecv?(fixCumAnn+fixCumTax[0]):(fixWd+fixCumTax[0]);
+
+    // รวม
+    const totalPrem=p65Prem_yr+fixPrem_yr;
+    const totalCumPrem=p65CumPrem+fixCumPrem;
+    const totalWd=p65Wd+(fixIsRecv?fixCumAnn:fixWd); // P65 CV + FIX (บำนาญสะสมหรือ CV)
+    const totalWdTax=p65WdTax+(fixIsRecv?(fixCumAnn+fixCumTax[0]):fixWdTax);
+    const totalLife=p65Life+fixLife;
+
+    rows.push({yr,aeEnd,
+      p65Paying,p65Prem_yr,p65CumPrem,p65RetAmt,p65CumRet,p65Cv,p65Life,p65Wd,p65WdTax,p65RetPct_,
+      fixPaying,fixPrem_yr,fixCumPrem,fixIsRecv,fixAnn,fixCumAnn,fixCv,fixLife,fixWd,fixWdTax,
+      totalPrem,totalCumPrem,totalWd,totalWdTax,totalLife
+    });
+  }
+
+  // จุดคุ้มทุนรวม
+  let beHyb=-1;
+  rows.forEach(r=>{
+    if(beHyb<0&&r.totalWd>=r.totalCumPrem&&r.totalWd>0)beHyb=r.yr;
+  });
+  let beTaxHyb=-1;
+  rows.forEach(r=>{
+    if(beTaxHyb<0&&r.totalWdTax>=r.totalCumPrem&&r.totalWdTax>0)beTaxHyb=r.yr;
+  });
+
+  // ── Render thead ──
+  document.getElementById('hyb-thead').innerHTML=`
+    <tr>
+      <th rowspan="2" style="min-width:26px">ปีที่</th>
+      <th rowspan="2" style="min-width:34px">อายุ</th>
+      <th colspan="2" class="hd-p65">🛡️ Protection 65 — เบี้ย</th>
+      <th colspan="3" class="hd-p65">P65 — ผลประโยชน์</th>
+      <th colspan="2" class="hd-fix">💰 Annuity FIX — เบี้ย</th>
+      <th colspan="3" class="hd-fix">FIX — ผลประโยชน์</th>
+      <th colspan="2" class="hd-total">รวมทั้ง 2 แบบ</th>
+      <th colspan="2" class="hd-total tax-col">รวม + ภาษีสะสม (${(taxRate*100).toFixed(0)}%)</th>
+    </tr>
+    <tr>
+      <th class="hd-p65" style="min-width:72px">เบี้ยรายปี</th>
+      <th class="hd-p65" style="min-width:72px">เบี้ยสะสม</th>
+      <th class="hd-p65" style="min-width:66px">เงินคืน / CV</th>
+      <th class="hd-p65" style="min-width:78px">เงินถอน P65<br><small style="opacity:.7;font-weight:400">(CV+คืนสะสม)</small></th>
+      <th class="hd-p65" style="min-width:70px">คุ้มครอง P65</th>
+      <th class="hd-fix" style="min-width:72px">เบี้ยรายปี</th>
+      <th class="hd-fix" style="min-width:72px">เบี้ยสะสม</th>
+      <th class="hd-fix" style="min-width:72px">บำนาญ / CV</th>
+      <th class="hd-fix" style="min-width:78px">บำนาญสะสม / เงินถอน FIX</th>
+      <th class="hd-fix" style="min-width:70px">คุ้มครอง FIX</th>
+      <th class="hd-total" style="min-width:86px">รวมเงินถอน<br>(P65+FIX)</th>
+      <th class="hd-total" style="min-width:78px">คุ้มครองรวม</th>
+      <th class="hd-total tax-col" style="min-width:88px">รวมถอน+ภาษี</th>
+      <th class="hd-total tax-col" style="min-width:80px">ภาษีสะสมรวม</th>
+    </tr>`;
+
+  // ── Render tbody ──
+  let html='',lph='';
+  const phPay60=`📌 ระยะชำระเบี้ยทั้ง 2 แบบ — FIX ชำระถึงอายุ 59 | P65 ชำระถึงอายุ 64`;
+  const phFIXend=`📌 P65 ชำระเบี้ยต่อเนื่อง | 💰 FIX เริ่มรับบำนาญ ${fmt(annuity)} บ./ปี`;
+  const phP65ret=`💰 P65 เริ่มรับเงินคืน | 💰 FIX รับบำนาญต่อเนื่อง`;
+
+  rows.forEach(r=>{
+    let ph='';
+    if(r.aeEnd<=60)ph=phPay60;
+    else if(r.aeEnd<=65)ph=phFIXend;
+    else ph=phP65ret;
+    if(ph!==lph){html+=`<tr class="hybrid-phase"><td colspan="16">${ph}</td></tr>`;lph=ph;}
+
+    const isBE=r.yr===beHyb,isBET=r.yr===beTaxHyb;
+    let rc=isBE?'hybrid-be-cv':'';
+
+    const wdBadge=isBE?`<span class="badge-be badge-be-cv">🟢รวมคุ้มทุน</span>`:'';
+    const taxBadge=isBET&&!isBE?`<span class="badge-be badge-be-tax">🟣+ภาษี</span>`:'';
+
+    // P65 เงินคืน / CV display
+    const p65RetDisp=r.aeEnd>=99
+      ?`<span style="color:var(--red)">${fmt(sa)}</span>`
+      :r.p65RetAmt>0?fmt(r.p65RetAmt):(r.p65Cv>0?`<span style="font-size:10px;color:var(--purple)">${fmt(r.p65Cv)}</span>`:'—');
+    // FIX บำนาญ / CV display
+    const fixAnnDisp=r.fixIsRecv?fmt(r.fixAnn):(r.fixCv>0?`<span style="font-size:10px;color:var(--purple)">${fmt(r.fixCv)}</span>`:'—');
+    const fixWdDisp=r.fixIsRecv?fmt(r.fixCumAnn):(r.fixWd>0?fmt(r.fixWd):'—');
+
+    html+=`<tr class="${rc}">
+      <td class="c-idx">${r.yr}</td>
+      <td class="c-age">${r.aeEnd-1}</td>
+      <td class="c-prem">${r.p65Paying?fmt(r.p65Prem_yr):'<span style="opacity:.4">—</span>'}</td>
+      <td class="c-prem">${fmt(r.p65CumPrem)}</td>
+      <td class="c-ret">${p65RetDisp}</td>
+      <td class="c-p65">${r.p65Wd>0?fmt(r.p65Wd):'—'}${r.yr===beHyb&&r.p65Wd>0?'':''}</td>
+      <td class="c-life" style="font-size:10.5px">${fmt(r.p65Life)}</td>
+      <td class="c-prem">${r.fixPaying?fmt(r.fixPrem_yr):'<span style="opacity:.4">—</span>'}</td>
+      <td class="c-prem">${fmt(r.fixCumPrem)}</td>
+      <td class="c-ann">${fixAnnDisp}</td>
+      <td class="c-fix">${fixWdDisp}</td>
+      <td class="c-life" style="font-size:10.5px">${fmt(r.fixLife)}</td>
+      <td class="c-total">${r.totalWd>0?fmt(r.totalWd):'—'}${wdBadge}</td>
+      <td class="c-life" style="font-size:10.5px">${fmt(r.totalLife)}</td>
+      <td class="c-wd-tax tax-col">${r.totalWdTax>0?fmt(r.totalWdTax):'—'}${taxBadge}</td>
+      <td class="c-wd-tax tax-col" style="font-size:10.5px">${fmt((p65CumTax[0]||0)+(fixCumTax[0]||0))}</td>
+    </tr>`;
+  });
+
+  // Summary
+  const totP65Paid=rows.reduce((a,r)=>a+r.p65Prem_yr,0);
+  const totFIXPaid=rows.reduce((a,r)=>a+r.fixPrem_yr,0);
+  const totP65Ret=rows.reduce((a,r)=>a+r.p65RetAmt,0)+sa;
+  const totFIXAnn=rows.reduce((a,r)=>a+r.fixAnn,0);
+  const lastR=rows[rows.length-1];
+  html+=`<tr class="sum-row">
+    <td colspan="2" style="text-align:center">รวม</td>
+    <td></td><td>${fmt(totP65Paid)}</td>
+    <td colspan="3"></td>
+    <td></td><td>${fmt(totFIXPaid)}</td>
+    <td>${fmt(annuity)}</td><td>${fmt(totFIXAnn)}</td>
+    <td colspan="2"></td>
+    <td colspan="2" class="tax-col"></td>
+  </tr>`;
+
+  document.getElementById('hyb-tbody').innerHTML=html;
+
+  // Insight
+  const beTxt=beHyb>0?`ปีที่ ${beHyb} (อายุ ${age+beHyb-1} ปี)  🟢`:'ยังไม่คุ้มทุน';
+  const beTTxt=beTaxHyb>0?`ปีที่ ${beTaxHyb} (อายุ ${age+beTaxHyb-1} ปี) 🟣`:'—';
+  document.getElementById('hyb-insight').style.display='block';
+  document.getElementById('hyb-insight').innerHTML=`
+    <strong>💡 จุดเด่นแผน Hybrid:</strong>
+    Protection 65 ให้ความยืดหยุ่น — สามารถ<strong>ถอน CV ได้ทุกปี</strong>ก่อนอายุ 65 หากต้องการเงินก้อน
+    ขณะที่ Annuity FIX ให้<strong>บำนาญคงที่ ${fmt(annuity)} บาท/ปี</strong> ต่อเนื่อง 26 ปี (อายุ 60–85) 
+    | เบี้ยรวม: P65 <strong>${fmt(p65Prem)} บ./ปี</strong> + FIX <strong>${fmt(fixPrem)} บ./ปี</strong> = <strong>${fmt(p65Prem+fixPrem)} บ./ปี</strong>
+    | จุดคุ้มทุนรวม: <strong>${beTxt}</strong> | รวม+ภาษี: <strong>${beTTxt}</strong>`;
+
+  document.getElementById('hyb-pills').style.display='flex';
+  document.getElementById('hyb-pills').innerHTML=`
+    <div class="pill"><div class="pill-label">ชื่อ/เพศ/อายุ</div><div class="pill-value" style="font-size:12px">${name} (${gTH}) ${age} ปี</div></div>
+    <div class="pill"><div class="pill-label">เบี้ย P65 (${p65PayYrs} ปี)</div><div class="pill-value red">${fmt(p65Prem)} บ./ปี</div></div>
+    <div class="pill"><div class="pill-label">เบี้ย FIX (${fixPayYrs} ปี)</div><div class="pill-value blue">${fmt(fixPrem)} บ./ปี</div></div>
+    <div class="pill"><div class="pill-label">เบี้ยรวม/ปี</div><div class="pill-value">${fmt(p65Prem+fixPrem)} บ.</div></div>
+    <div class="pill"><div class="pill-label">บำนาญ FIX/ปี (26 ปี)</div><div class="pill-value blue">${fmt(annuity)} บ.</div></div>
+    <div class="pill"><div class="pill-label">P65 CV (ถอนได้)</div><div class="pill-value teal">ยืดหยุ่น ✓</div></div>
+    <div class="pill"><div class="pill-label">🟢 จุดคุ้มทุนรวม</div><div class="pill-value green">${beTxt}</div></div>`;
+
+  document.getElementById('hyb-title').textContent=`Hybrid Plan — ${name} | P65 ทุน ${fmtI(sa)} บ. + FIX บำนาญ ${fmtI(Math.round(annuity))} บ./ปี`;
+  document.getElementById('hyb-empty').style.display='none';
+  document.getElementById('hyb-scroll').style.display='block';
+  document.getElementById('hyb-discl').style.display='block';
+  document.getElementById('hyb-scroll').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function resetHybrid(){
+  document.getElementById('hyb-name').value='';
+  document.getElementById('hyb-age').value=35;
+  document.getElementById('hyb-sa').value=400000;
+  document.getElementById('hyb-annuity').value=120000;
+  document.getElementById('hyb-income').value=800000;
+  document.getElementById('hyb-gender').value='male';
+  document.getElementById('hyb-taxrate').value='0.20';
+  document.getElementById('hyb-pills').style.display='none';
+  document.getElementById('hyb-insight').style.display='none';
+  document.getElementById('hyb-empty').style.display='block';
+  document.getElementById('hyb-scroll').style.display='none';
+  document.getElementById('hyb-discl').style.display='none';
+}
+
+function calcP65(){
+  const name=document.getElementById('p65-name').value.trim()||'ผู้เอาประกัน';
+  const g   =document.getElementById('p65-gender').value;
+  const age =parseInt(document.getElementById('p65-age').value);
+  const sa  =parseFloat(document.getElementById('p65-sa').value);
+  if(!age||age<1||age>60){alert('อายุ 1–60 ปี');return;}
+  if(!sa||sa<100000){alert('ทุนประกันขั้นต่ำ 100,000 บาท');return;}
+
+  const gTH=g==='male'?'ชาย':'หญิง';
+  const annPrem=(sa/1000)*(P65_PREM[age]||0);
+  const payYrs=65-age, totalYrs=99-age;
+  const TAX=[.10,.15,.20,.25,.30], TL=['10%','15%','20%','25%','30%'];
+  const taxBase=Math.min(annPrem,100000);
+  const cumTax=TAX.map(()=>0);
+  const rows=[]; let cumPrem=0,cumRet=0;
+
+  for(let yr=1;yr<=totalYrs;yr++){
+    const ae=age+yr,paying=yr<=payYrs,prem=paying?annPrem:0;
+    cumPrem+=prem;
+    const rp=p65RetPct(yr,age),ra=sa*rp/100;
+    cumRet+=ra;
+    const mat=ae>=99?sa:0;
+    const cvPerK=p65GetCV(g,age,yr),cv=(sa/1000)*cvPerK;
+    const life=Math.max(sa,cv,cumPrem*1.05);
+    const wd=cv>0?cv+cumRet:mat>0?cumRet+mat:0;
+    const txYr=paying?taxBase:0;
+    TAX.forEach((rt,i)=>{cumTax[i]+=txYr*rt;});
+    const ctSnap=[...cumTax];
+    const wdTax=TAX.map((_,i)=>wd+ctSnap[i]);
+    rows.push({yr,ae,paying,prem,cumPrem,rp,ra,cumRet,cv,sa,life,wd,mat,ctSnap,wdTax});
+  }
+
+  let beCV=-1; const beTax=TAX.map(()=>-1);
+  rows.forEach(r=>{
+    // จุดคุ้มทุน CV: ระยะชำระเบี้ย=CV≥เบี้ยสะสม, ระยะรับบำนาญ=บำนาญสะสม≥เบี้ยสะสม
+    const wdChk=r.isRecv?r.cumAnn:r.wd;
+    if(beCV<0&&wdChk>=r.cumPrem&&wdChk>0)beCV=r.yr;
+    TAX.forEach((_,i)=>{if(beTax[i]<0&&r.wdTax[i]>=r.cumPrem&&r.wdTax[i]>0)beTax[i]=r.yr;});
+  });
+
+  document.getElementById('p65-thead').innerHTML=`
+    <tr>
+      <th rowspan="2" style="min-width:26px">ปีที่</th>
+      <th rowspan="2" style="min-width:34px">อายุ</th>
+      <th rowspan="2" style="min-width:74px">เบี้ยรายปี</th>
+      <th rowspan="2" style="min-width:74px">เบี้ยสะสม</th>
+      <th rowspan="2" style="min-width:40px">%คืน</th>
+      <th rowspan="2" style="min-width:74px">เงินคืน</th>
+      <th rowspan="2" style="min-width:80px">เงินคืนสะสม</th>
+      <th rowspan="2" style="min-width:80px">มูลค่าเวนคืน (CV)</th>
+      <th rowspan="2" style="min-width:80px">ความคุ้มครองชีวิต</th>
+      <th rowspan="2" style="min-width:86px">เงินถอน (CV+คืนสะสม)</th>
+      <th colspan="5" class="th-purple tax-col">เงินถอนรวมภาษีสะสม = CV+คืนสะสม+ภาษีสะสม</th>
+    </tr>
+    <tr>${TL.map(l=>`<th class="th-purple tax-col" style="min-width:76px">รวมภาษี ${l}</th>`).join('')}</tr>`;
+
+  let html='',lph='';
+  rows.forEach(r=>{
+    let ph='';
+    if(r.ae<65)ph='📌 ระยะชำระเบี้ย — ยังไม่มีเงินคืนรายงวด';
+    else if(r.ae===65)ph='💰 อายุครบ 65 ปี | เงินคืนรายงวด 12%';
+    else if(r.ae<=70)ph='💰 อายุครบ 66–70 ปี | เงินคืนรายงวด 14%';
+    else if(r.ae<=75)ph='💰 อายุครบ 71–75 ปี | เงินคืนรายงวด 16%';
+    else if(r.ae<=80)ph='💰 อายุครบ 76–80 ปี | เงินคืนรายงวด 18%';
+    else if(r.ae<=85)ph='💰 อายุครบ 81–85 ปี | เงินคืนรายงวด 20%';
+    else if(r.ae<=90)ph='💰 อายุครบ 86–90 ปี | เงินคืนรายงวด 22%';
+    else if(r.ae<=95)ph='💰 อายุครบ 91–95 ปี | เงินคืนรายงวด 24%';
+    else if(r.ae<=98)ph='💰 อายุครบ 96–98 ปี | เงินคืนรายงวด 26%';
+    else ph='⭐ ครบกำหนดสัญญา อายุ 99 ปี | รับเงินครบกำหนด 100%';
+    if(ph!==lph){html+=`<tr class="phase-lbl"><td colspan="15">${ph}</td></tr>`;lph=ph;}
+
+    const isMat=r.ae>=99,isBCV=r.yr===beCV,isBTax=beTax.includes(r.yr);
+    let rc=isMat?'highlight-mat':'';
+    if(isBCV)rc='breakeven-cv';
+    else if(isBTax)rc='breakeven-tax';
+
+    const rdis=isMat?`<span style="color:var(--red);font-weight:700">${fmt(r.mat)}</span>`:r.ra>0?fmt(r.ra):'—';
+    const rpdis=isMat?`<span style="color:var(--red)">100%*</span>`:r.rp>0?r.rp+'%':'—';
+    const wdBadge=isBCV?`<span class="badge-be badge-be-cv">🟢คุ้มทุน</span>`:'';
+    const wtx=TAX.map((_,i)=>{
+      const isBE=beTax[i]===r.yr;
+      return `<td class="c-wd-tax tax-col">${r.wdTax[i]>0?fmt(r.wdTax[i]):'—'}${isBE?`<span class="badge-be badge-be-tax">🟣</span>`:''}</td>`;
+    }).join('');
+
+    html+=`<tr class="${rc}">
+      <td class="c-idx">${r.yr}</td>
+      <td class="c-age">${r.ae-1}</td>
+      <td class="c-prem">${r.paying?fmt(r.prem):'<span style="opacity:.4">—</span>'}</td>
+      <td class="c-prem">${fmt(r.cumPrem)}</td>
+      <td class="c-pct">${rpdis}</td>
+      <td class="c-ret">${rdis}</td>
+      <td class="c-ret">${fmt(r.cumRet+(isMat?r.mat:0))}</td>
+      <td class="c-cv">${r.cv>0?fmt(r.cv):'—'}</td>
+      <td class="c-life">${fmt(r.life)}</td>
+      <td class="c-wd">${r.wd>0?fmt(r.wd):'—'}${wdBadge}</td>
+      ${wtx}
+    </tr>`;
+  });
+
+  const totRet=rows.reduce((s,r)=>s+r.ra,0),totPaid=rows.reduce((s,r)=>s+r.prem,0);
+  const totBen=totRet+sa,totPct=(totBen/sa*100).toFixed(0);
+  const lastRow=rows[rows.length-2];
+  html+=`<tr class="sum-row">
+    <td colspan="2" style="text-align:center">รวม</td><td></td>
+    <td>${fmt(totPaid)}</td><td class="c-pct">${totPct}%</td>
+    <td>${fmt(totRet)}</td><td>${fmt(totBen)}</td><td colspan="3"></td>
+    ${TAX.map((_,i)=>`<td>${lastRow?fmt(lastRow.wdTax[i]):''}</td>`).join('')}
+  </tr>`;
+
+  document.getElementById('p65-tbody').innerHTML=html;
+  const beTxt=beCV>0?`ปีที่ ${beCV} (อายุ ${age+beCV-1})`:'ยังไม่คุ้มทุน';
+  document.getElementById('p65-pills').style.display='flex';
+  document.getElementById('p65-pills').innerHTML=`
+    <div class="pill"><div class="pill-label">ชื่อ / เพศ</div><div class="pill-value" style="font-size:13px">${name} (${gTH})</div></div>
+    <div class="pill"><div class="pill-label">อายุ / ทุนประกัน</div><div class="pill-value">${age} ปี / ${fmtI(sa)} บ.</div></div>
+    <div class="pill"><div class="pill-label">เบี้ยรายปี (${payYrs} ปี)</div><div class="pill-value red">${fmt(annPrem)} บ.</div></div>
+    <div class="pill"><div class="pill-label">รวมผลประโยชน์ (${totPct}%)</div><div class="pill-value teal">${fmt(totBen)} บ.</div></div>
+    <div class="pill"><div class="pill-label">🟢 จุดคุ้มทุน CV</div><div class="pill-value green">${beTxt}</div></div>
+    <div class="pill"><div class="pill-label">ภาษีสะสม 30%</div><div class="pill-value gold">${fmt(payYrs*taxBase*.30)} บ.</div></div>`;
+  document.getElementById('p65-title').textContent=`AIA Protection 65 — ${name} | อายุ ${age} ปี | ทุน ${fmtI(sa)} บาท`;
+  document.getElementById('p65-empty').style.display='none';
+  document.getElementById('p65-scroll').style.display='block';
+  document.getElementById('p65-note').style.display='block';
+  document.getElementById('p65-discl').style.display='block';
+  document.getElementById('p65-legend').style.display='flex';
+  document.getElementById('p65-scroll').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function resetP65(){
+  ['p65-name','p65-age','p65-sa'].forEach(id=>document.getElementById(id).value=id==='p65-age'?35:id==='p65-sa'?400000:'');
+  document.getElementById('p65-gender').value='male';
+  document.getElementById('p65-pills').style.display='none';
+  document.getElementById('p65-empty').style.display='block';
+  document.getElementById('p65-scroll').style.display='none';
+  document.getElementById('p65-note').style.display='none';
+  document.getElementById('p65-discl').style.display='none';
+  document.getElementById('p65-legend').style.display='none';
+}
+
+// ══════════════════════════════════════════════════════════════════
+// ── AIA ANNUITY FIX DATA & LOGIC ────────────────────────────────
+// ══════════════════════════════════════════════════════════════════
+// อัตราเบี้ยต่อมูลค่าบำนาญตั้งต้น 1,000 บาท (จากเอกสาร หน้า 5)
+const FIX_PREM_M={
+  20:16.20,21:16.90,22:17.70,23:18.50,24:19.30,25:20.20,
+  26:21.20,27:22.20,28:23.30,29:24.40,30:25.70,
+  31:27.00,32:28.40,33:29.90,34:31.60,35:33.40,
+  36:35.40,37:37.50,38:39.90,39:42.40,40:45.30,
+  41:48.50,42:52.00,43:56.00,44:60.40,45:65.60,
+  46:71.50,47:78.30,48:86.30,49:95.83,50:107.20,
+  51:121.10,52:138.60,53:161.50,54:192.40,55:236.50
+};
+const FIX_PREM_F={
+  20:16.50,21:17.20,22:18.00,23:18.70,24:19.60,25:20.50,
+  26:21.40,27:22.40,28:23.50,29:24.60,30:25.80,
+  31:27.10,32:28.50,33:30.00,34:31.70,35:33.40,
+  36:35.40,37:37.50,38:39.80,39:42.40,40:45.20,
+  41:48.30,42:51.70,43:55.60,44:60.10,45:65.20,
+  46:70.90,47:77.60,48:85.60,49:95.07,50:106.33,
+  51:120.10,52:137.60,53:160.30,54:191.00,55:234.80
+};
+
+// CV ระยะชำระเบี้ย — ต่อมูลค่าบำนาญตั้งต้น 1,000 บาท (ชาย)
+// แถว=อายุ(20-55), คอลัมน์=ปีที่(1-40) [จากภาพ CV หน้า 1]
+const FIX_CV_M={
+  20:[0,8,23,39,55,73,94,110,128,146,164,182,202,221,242,262,284,306,328,351,375,399,424,450,477,504,532,561,591,622,654,687,721,756,793,831,870,912,955,1000],
+  21:[0,8,24,40,57,76,98,115,133,152,171,191,211,231,252,274,296,319,343,367,391,417,443,470,498,526,556,586,617,650,683,718,753,791,829,869,911,955,1000],
+  22:[0,8,25,42,60,80,102,120,139,159,179,199,220,242,264,286,310,334,358,383,409,436,463,492,521,551,581,613,646,680,715,751,788,827,868,910,954,1000],
+  23:[0,9,26,44,63,84,107,126,146,166,187,208,230,253,276,299,324,349,374,401,428,456,484,514,544,576,608,641,676,711,748,786,825,867,909,954,1000],
+  24:[0,9,27,46,65,87,112,132,152,174,195,218,241,264,288,313,339,365,392,419,448,477,507,538,570,602,636,671,707,745,783,823,865,908,953,1000],
+  25:[0,10,28,48,69,91,117,138,160,182,205,228,252,277,302,328,355,382,410,439,469,499,531,563,597,631,666,703,741,780,820,861,906,952,1000],
+  26:[0,10,29,50,72,96,122,145,167,191,215,239,264,290,317,344,372,400,430,460,491,523,556,590,625,662,699,737,777,819,861,906,952,1000],
+  27:[0,11,31,53,75,100,128,152,175,200,225,251,277,304,332,360,390,420,451,483,515,549,583,619,656,694,733,774,816,859,904,951,1000],
+  28:[0,11,32,55,79,105,134,159,184,210,236,263,291,319,348,378,409,441,474,508,542,578,614,652,691,732,774,817,862,909,957,1000],
+  29:[0,12,34,58,83,111,141,167,194,221,249,278,307,337,368,399,432,465,499,535,571,608,647,687,728,771,816,862,910,959,1000],
+  30:[0,12,36,61,87,116,148,175,203,232,261,292,323,355,388,421,456,491,528,566,604,644,685,728,773,819,867,917,969,1000],
+  31:[0,13,38,64,92,122,155,184,213,243,274,306,339,373,408,444,480,518,557,597,638,681,725,771,819,869,921,975,1000],
+  32:[0,13,40,68,97,129,163,194,224,256,288,322,357,393,429,467,506,546,588,631,675,721,768,818,869,923,979,1000],
+  33:[0,14,42,72,103,136,172,204,236,270,304,339,376,414,452,492,533,576,620,665,712,761,812,865,921,979,1000],
+  34:[0,15,44,76,108,144,181,215,249,284,320,357,396,436,477,519,563,608,655,703,754,806,861,918,978,1000],
+  35:[0,16,47,80,114,152,195,230,266,303,341,380,420,462,504,547,592,639,687,737,789,843,888,943,1000],
+  36:[0,17,50,85,121,162,207,244,282,322,362,403,446,489,534,580,627,677,728,781,835,892,942,1000],
+  37:[0,18,53,90,128,172,219,259,300,342,385,428,474,520,568,617,668,720,774,831,889,950,1000],
+  38:[0,19,56,96,137,183,233,275,319,364,410,456,504,553,604,656,710,766,824,885,948,1000],
+  39:[0,20,60,102,146,195,248,293,340,388,437,486,537,589,643,699,757,817,880,945,1000],
+  40:[0,21,64,109,156,208,265,313,363,414,466,519,573,629,687,747,809,874,941,1000],
+  41:[0,23,68,117,167,223,283,335,389,444,500,557,616,677,740,806,874,946,1000],
+  42:[0,24,73,126,179,239,303,359,417,477,538,600,664,730,799,871,946,1000],
+  43:[0,26,79,135,193,257,326,386,449,514,580,648,718,791,867,947,1000],
+  44:[0,28,85,146,209,278,353,419,487,558,631,706,784,866,951,1000],
+  45:[0,33,95,162,230,305,390,459,531,604,679,756,835,917,1000],
+  46:[1,38,114,190,282,354,428,504,581,661,742,826,912,1000],
+  47:[2,44,129,212,313,391,472,555,639,726,815,907,1000],
+  48:[3,51,146,238,349,435,524,614,707,803,900,1000],
+  49:[4,59,165,268,391,487,585,685,787,892,1000],
+  50:[4,69,189,304,442,549,658,769,883,1000],
+  51:[16,81,219,349,504,624,747,872,1000],
+  52:[21,96,255,404,582,718,858,1000],
+  53:[26,115,302,475,682,840,1000],
+  54:[34,141,365,570,815,1000],
+  55:[45,177,452,702,1000]
+};
+
+// CV ระยะชำระเบี้ย (หญิง) [จากภาพ CV หน้า 2]
+const FIX_CV_F={
+  20:[0,8,23,39,56,75,96,113,131,149,168,187,207,227,248,269,291,313,336,359,383,408,434,460,487,514,542,571,601,632,664,697,730,765,801,838,876,916,958,1000],
+  21:[0,8,24,41,59,78,100,118,137,156,175,195,215,237,258,280,303,326,350,375,400,426,452,479,507,536,566,596,627,660,693,727,762,798,836,875,915,957,1000],
+  22:[0,9,25,43,61,82,104,123,142,162,183,204,225,247,270,292,316,340,365,390,417,444,472,500,530,560,591,623,656,690,726,762,799,838,879,920,963,1000],
+  23:[0,9,26,45,64,85,109,128,149,169,191,212,235,258,281,305,330,355,381,408,436,464,493,522,553,584,617,651,686,722,759,797,837,879,922,966,1000],
+  24:[0,9,27,47,67,89,114,134,155,177,199,222,245,269,294,319,345,372,399,427,455,485,515,546,578,611,645,679,715,752,790,829,870,912,955,1000],
+  25:[0,10,29,49,70,93,119,140,162,185,208,232,256,281,307,333,361,389,417,447,477,508,540,572,606,641,676,713,750,789,829,870,913,957,1000],
+  26:[0,10,30,51,73,97,124,146,170,194,218,243,268,294,322,349,378,408,438,469,501,534,567,602,637,674,712,750,790,832,875,919,965,1000],
+  27:[0,11,31,54,77,102,130,154,178,203,228,254,281,309,337,366,396,427,459,491,525,559,595,631,669,708,748,789,831,875,921,968,1000],
+  28:[0,11,33,56,80,107,136,161,187,213,239,267,295,325,355,386,418,450,484,519,554,591,629,668,709,750,793,838,884,931,980,1000],
+  29:[0,12,34,59,84,112,143,169,196,223,251,280,309,340,371,404,437,471,507,543,581,620,659,700,743,787,833,880,929,980,1000],
+  30:[0,12,36,62,88,118,150,178,206,235,264,294,325,357,390,424,459,495,532,570,610,651,693,737,783,830,879,929,981,1000],
+  31:[0,13,38,65,93,124,158,187,217,247,278,310,342,376,411,447,484,522,561,601,643,686,731,778,826,876,928,982,1000],
+  32:[0,13,40,68,98,130,165,196,227,259,292,325,359,395,431,469,508,548,589,631,675,720,768,817,868,921,976,1000],
+  33:[0,14,42,72,103,137,174,207,240,273,307,342,378,416,454,494,535,577,620,665,711,759,809,861,915,971,1000],
+  34:[0,15,44,76,109,145,183,218,253,289,325,362,400,440,481,523,566,611,657,705,754,806,859,914,971,1000],
+  35:[0,16,47,80,115,153,196,231,268,305,343,382,422,464,507,551,597,644,693,743,795,849,905,962,1000],
+  36:[0,17,50,85,122,162,207,245,284,323,364,405,447,492,536,582,630,680,731,784,839,896,954,1000],
+  37:[0,18,53,90,129,172,219,260,301,343,386,430,475,521,568,617,668,720,774,830,888,948,1000],
+  38:[0,19,56,96,137,183,234,276,320,364,410,457,505,554,605,657,711,767,825,885,947,1000],
+  39:[0,20,60,102,146,195,249,294,341,388,437,487,538,590,644,700,758,817,879,943,1000],
+  40:[0,21,64,109,156,208,265,313,363,414,466,519,573,630,688,748,811,875,942,1000],
+  41:[0,23,68,117,167,223,284,336,390,445,501,558,617,678,741,806,874,945,1000],
+  42:[0,24,73,125,179,239,305,361,419,478,540,602,666,733,802,874,948,1000],
+  43:[0,26,79,135,193,257,328,388,451,515,581,649,720,793,869,948,1000],
+  44:[0,28,85,146,209,279,356,421,490,560,633,708,786,868,953,1000],
+  45:[0,33,95,161,229,305,390,461,537,614,693,776,862,950,1000],
+  46:[1,38,114,190,281,353,427,503,581,661,744,829,917,1000],
+  47:[2,44,128,212,312,391,471,554,639,726,815,907,1000],
+  48:[3,51,145,237,348,434,523,613,706,802,900,1000],
+  49:[3,59,165,267,390,486,584,684,787,892,1000],
+  50:[4,69,189,304,441,548,657,768,883,1000],
+  51:[16,81,218,348,503,623,746,872,1000],
+  52:[20,96,254,403,581,718,857,1000],
+  53:[26,115,301,474,681,839,1000],
+  54:[34,141,364,569,814,1000],
+  55:[44,177,451,702,1000]
+};
+
+// มูลค่าบำนาญปัจจุบัน (PV) ต่อมูลค่าบำนาญตั้งต้น 1,000 บาท
+// ระยะรับบำนาญ: อายุ 60-85 (26 ครั้ง)
+// แถว=อายุเริ่มรับบำนาญ(55-60), คอลัมน์=ปีที่รับบำนาญ(1-15) [จากภาพ หน้า 3]
+// ชาย
+const FIX_PV_M={
+  55:[0,672,629,584,539,492,443,395,344,292,238,183,126,67,0],
+  56:[0,680,637,594,550,504,458,411,364,315,265,214,162,109,55,0],
+  57:[0,704,660,615,570,523,475,426,377,326,275,222,168,113,57,0],
+  58:[0,729,683,637,589,541,492,441,390,338,284,230,174,117,59,0],
+  59:[0,754,707,658,609,559,508,456,403,349,294,237,180,121,61,0],
+  60:[0,772,724,675,624,573,521,467,413,358,301,243,184,124,63,0]
+};
+// หญิง
+const FIX_PV_F={
+  55:[0,612,572,531,489,445,401,356,309,261,212,161,109,56,0],
+  56:[0,636,595,556,515,472,429,385,340,295,248,201,152,102,52,0],
+  57:[0,661,619,578,535,491,446,400,354,306,258,208,158,106,54,0],
+  58:[0,686,643,599,555,509,463,415,367,318,267,216,164,110,56,0],
+  59:[0,711,666,621,574,527,479,430,380,329,277,224,170,114,58,0],
+  60:[0,735,689,642,594,546,496,445,393,340,287,232,176,118,60,0]
+};
+
+function fixGetCV(g,age,yr){
+  // ระยะชำระเบี้ย: ใช้ FIX_CV_M/F
+  // ระยะรับบำนาญ: ใช้ FIX_PV_M/F (PV ของบำนาญที่เหลือ)
+  const payYrs=60-age;
+  if(yr<=payYrs){
+    const t=g==='male'?FIX_CV_M:FIX_CV_F;
+    const row=t[age];
+    if(!row)return 0;
+    return(yr<1||yr>row.length)?0:row[yr-1];
+  } else {
+    // ปีที่รับบำนาญ: yr-payYrs = ปีที่รับบำนาญที่เท่าไหร่
+    const annYr=yr-payYrs; // 1=ปีแรกที่รับบำนาญ
+    // อายุที่เริ่มรับ = 60
+    const pv=g==='male'?FIX_PV_M:FIX_PV_F;
+    const startAge=Math.min(60,Math.max(55,60));
+    const pvRow=pv[startAge];
+    if(!pvRow||annYr<0||annYr>=pvRow.length)return 0;
+    return pvRow[annYr];
+  }
+}
+
+function calcFIX(){
+  const name  =document.getElementById('fix-name').value.trim()||'ผู้เอาประกัน';
+  const g     =document.getElementById('fix-gender').value;
+  const age   =parseInt(document.getElementById('fix-age').value);
+  const annuity=parseFloat(document.getElementById('fix-annuity').value);
+
+  if(!age||age<20||age>55){alert('อายุรับประกัน 20–55 ปี');return;}
+  if(!annuity||annuity<12500){alert('เงินบำนาญขั้นต่ำ 12,500 บาท/ปี (มูลค่าบำนาญตั้งต้น 200,000 บาท)');return;}
+
+  const income =parseFloat(document.getElementById('fix-income').value)||0;
+  const gTH    =g==='male'?'ชาย':'หญิง';
+  const annRate =g==='male'?0.0625:0.0595;   // 6.25% ชาย / 5.95% หญิง
+  const base    =annuity/annRate;              // มูลค่าบำนาญตั้งต้น
+  const premRate=g==='male'?(FIX_PREM_M[age]||0):(FIX_PREM_F[age]||0);
+  const annPrem =(base/1000)*premRate;
+  const payYrs  =60-age;                      // ชำระเบี้ยถึงอายุ 60
+  const recvYrs =26;                          // รับบำนาญ 26 ครั้ง (อายุ 60-85)
+  const totalYrs=payYrs+recvYrs;
+  const TAX=[.10,.15,.20,.25,.30], TL=['10%','15%','20%','25%','30%'];
+  // สิทธิลดหย่อนภาษี Annuity FIX: 15% ของรายได้รวม แต่ไม่เกิน 200,000 บาท/ปี
+  const taxBase=Math.min(income*0.15, 200000);
+  const cumTax=TAX.map(()=>0);
+  const rows=[]; let cumPrem=0,cumAnn=0;
+
+  for(let yr=1;yr<=totalYrs;yr++){
+    const ageEnd=age+yr;
+    const paying=yr<=payYrs;
+    const prem  =paying?annPrem:0;
+    cumPrem+=prem;
+
+    // เงินบำนาญรายงวด
+    const recvYr=yr-payYrs; // ≤0=ยังไม่รับ, 1+=รับแล้ว
+    const isRecv=recvYr>=1;
+    const ann   =isRecv?annuity:0;
+    cumAnn+=ann;
+
+    // CV ระยะชำระเบี้ย / PV บำนาญระยะรับบำนาญ
+    const cvPerK=fixGetCV(g,age,yr);
+    const cv    =(base/1000)*cvPerK;
+
+    // ภาษีสะสม: สะสมเฉพาะช่วงชำระเบี้ย
+    const txYr=paying?taxBase:0;
+    TAX.forEach((rt,i)=>{cumTax[i]+=txYr*rt;});
+    const ctSnap=[...cumTax];
+
+    // ── ความคุ้มครองชีวิต ──
+    // ระยะชำระเบี้ย: max(105%×เบี้ยสะสม, CV)
+    // ระยะรับบำนาญ: PV บำนาญที่เหลือ (= cv ในช่วงนี้)
+    const life=isRecv ? cv : Math.max(cumPrem*1.05, cv);
+
+    // ── เงินถอน ──
+    // ระยะชำระเบี้ย: CV + บำนาญสะสม (=0 ช่วงนี้)
+    // ระยะรับบำนาญ: ถอน CV/PV ไม่ได้แล้ว → wd = 0
+    const wd=isRecv ? 0 : (cv>0 ? cv : 0);
+
+    // ── เงินถอนรวมภาษี ──
+    // ระยะชำระเบี้ย: CV + ภาษีสะสม
+    // ระยะรับบำนาญ: บำนาญสะสม + ภาษีสะสม (ภาษีคงที่ = ภาษีสะสมณวันสิ้นการชำระเบี้ย)
+    const wdTax=isRecv
+      ? TAX.map((_,i)=>cumAnn+ctSnap[i])
+      : TAX.map((_,i)=>wd+ctSnap[i]);
+
+    rows.push({yr,ageEnd,paying,prem,cumPrem,isRecv,ann,cumAnn,cv,life,wd,ctSnap,wdTax,recvYr});
+  }
+
+  let beCV=-1; const beTax=TAX.map(()=>-1);
+  rows.forEach(r=>{
+    // จุดคุ้มทุน CV: ระยะชำระเบี้ย=CV≥เบี้ยสะสม, ระยะรับบำนาญ=บำนาญสะสม≥เบี้ยสะสม
+    const wdChk=r.isRecv?r.cumAnn:r.wd;
+    if(beCV<0&&wdChk>=r.cumPrem&&wdChk>0)beCV=r.yr;
+    TAX.forEach((_,i)=>{if(beTax[i]<0&&r.wdTax[i]>=r.cumPrem&&r.wdTax[i]>0)beTax[i]=r.yr;});
+  });
+
+  document.getElementById('fix-thead').innerHTML=`
+    <tr>
+      <th rowspan="2" style="min-width:26px">ปีที่</th>
+      <th rowspan="2" style="min-width:34px">อายุ</th>
+      <th rowspan="2" style="min-width:74px">เบี้ยรายปี</th>
+      <th rowspan="2" style="min-width:74px">เบี้ยสะสม</th>
+      <th rowspan="2" style="min-width:80px">บำนาญรายปี</th>
+      <th rowspan="2" style="min-width:80px">บำนาญสะสม</th>
+      <th rowspan="2" style="min-width:82px">CV / PV บำนาญคงเหลือ<br><small style="opacity:.7;font-weight:400">(ถอนได้ช่วงชำระเบี้ย)</small></th>
+      <th rowspan="2" style="min-width:82px">ความคุ้มครองชีวิต<br><small style="opacity:.7;font-weight:400">ระยะรับบำนาญ=PV</small></th>
+      <th rowspan="2" style="min-width:88px">เงินถอน<br><small style="opacity:.7;font-weight:400">(ได้เฉพาะช่วงชำระเบี้ย)</small></th>
+      <th colspan="5" class="th-blue tax-col">เงินถอนรวมภาษีสะสม | ช่วงรับบำนาญ = บำนาญสะสม+ภาษีสะสม</th>
+    </tr>
+    <tr>${TL.map(l=>`<th class="th-blue tax-col" style="min-width:76px">รวมภาษี ${l}</th>`).join('')}</tr>`;
+
+  // 2 phase ใหญ่: ชำระเบี้ย / รับบำนาญ
+  const phPay  = `📌 ระยะชำระเบี้ย — อายุ ${age}–${59} ปี (${payYrs} ปี) | เบี้ยรายปี ${fmt(annPrem)} บาท`;
+  const phRecv = `💰 ระยะรับบำนาญ — อายุ 60–85 ปี (26 ครั้ง) | บำนาญรายปี ${fmt(annuity)} บาท/ปี | รวมบำนาญตลอดสัญญา ${fmt(annuity*26)} บาท (162.5%)`;
+  let html='',lph='';
+  rows.forEach(r=>{
+    const ph=r.paying?phPay:phRecv;
+    if(ph!==lph){html+=`<tr class="phase-lbl"><td colspan="14">${ph}</td></tr>`;lph=ph;}
+
+    const isBCV=r.yr===beCV,isBTax=beTax.includes(r.yr);
+    let rc=isBCV?'breakeven-cv':isBTax?'breakeven-tax':'';
+
+    const wdBadge=isBCV?`<span class="badge-be badge-be-cv">🟢คุ้มทุน</span>`:'';
+    const wtx=TAX.map((_,i)=>{
+      const isBE=beTax[i]===r.yr;
+      return `<td class="c-wd-tax tax-col">${r.wdTax[i]>0?fmt(r.wdTax[i]):'—'}${isBE?`<span class="badge-be badge-be-tax">🟣</span>`:''}</td>`;
+    }).join('');
+
+    // CV label: ระยะชำระเบี้ย="มูลค่าเวนคืน", ระยะรับบำนาญ="PV บำนาญคงเหลือ"
+    const cvLabel=r.cv>0?fmt(r.cv):'—';
+    // wd: ระยะรับบำนาญ = 0 (ถอนไม่ได้)
+    const wdDisplay=r.isRecv?'<span style="color:var(--gray-400);font-size:10px">ถอนไม่ได้</span>':(r.wd>0?fmt(r.wd)+''+wdBadge:'—');
+    // ความคุ้มครองชีวิต: ระยะรับบำนาญ=PV (=cv)
+    const lifeDisplay=fmt(r.life);
+    html+=`<tr class="${rc}">
+      <td class="c-idx">${r.yr}</td>
+      <td class="c-age">${r.ageEnd-1}</td>
+      <td class="c-prem">${r.paying?fmt(r.prem):'<span style="opacity:.4">—</span>'}</td>
+      <td class="c-prem">${fmt(r.cumPrem)}</td>
+      <td class="c-ann">${r.ann>0?fmt(r.ann):'—'}</td>
+      <td class="c-ann">${r.cumAnn>0?fmt(r.cumAnn):'—'}</td>
+      <td class="c-cv">${cvLabel}</td>
+      <td class="c-life">${lifeDisplay}</td>
+      <td class="c-wd">${wdDisplay}</td>
+      ${wtx}
+    </tr>`;
+  });
+
+  const totPaid=rows.reduce((s,r)=>s+r.prem,0);
+  const totAnn =rows.reduce((s,r)=>s+r.ann,0);
+  const totPct =(totAnn/totPaid*100).toFixed(0);
+  const lastRow=rows[rows.length-1];
+  html+=`<tr class="sum-row">
+    <td colspan="2" style="text-align:center">รวม</td><td></td>
+    <td>${fmt(totPaid)}</td>
+    <td>${fmt(annuity)}</td>
+    <td>${fmt(totAnn)}</td>
+    <td colspan="3"></td>
+    ${TAX.map((_,i)=>`<td>${lastRow?fmt(lastRow.wdTax[i]):''}</td>`).join('')}
+  </tr>`;
+
+  document.getElementById('fix-tbody').innerHTML=html;
+  const beTxt=beCV>0?`ปีที่ ${beCV} (อายุ ${age+beCV-1})`:'ยังไม่คุ้มทุน';
+  const baseFmt=base.toLocaleString('th-TH',{maximumFractionDigits:0});
+  document.getElementById('fix-pills').style.display='flex';
+  const taxBenPerYr=taxBase>0?`${fmt(taxBase)} บ./ปี`:'ไม่ระบุรายได้';
+  document.getElementById('fix-pills').innerHTML=`
+    <div class="pill"><div class="pill-label">ชื่อ / เพศ</div><div class="pill-value" style="font-size:13px">${name} (${gTH})</div></div>
+    <div class="pill"><div class="pill-label">อายุ / มูลค่าบำนาญตั้งต้น</div><div class="pill-value">${age} ปี / ${baseFmt} บ.</div></div>
+    <div class="pill"><div class="pill-label">เบี้ยรายปี (${payYrs} ปี)</div><div class="pill-value red">${fmt(annPrem)} บ.</div></div>
+    <div class="pill"><div class="pill-label">บำนาญรายปี (26 ครั้ง)</div><div class="pill-value blue">${fmt(annuity)} บ./ปี</div></div>
+    <div class="pill"><div class="pill-label">รวมบำนาญตลอดสัญญา</div><div class="pill-value teal">${fmt(totAnn)} บ. (162.5%)</div></div>
+    <div class="pill"><div class="pill-label">สิทธิภาษี/ปี (15%×รายได้ ≤200k)</div><div class="pill-value gold">${taxBenPerYr}</div></div>
+    <div class="pill"><div class="pill-label">🟢 จุดคุ้มทุน</div><div class="pill-value green">${beTxt}</div></div>`;
+  document.getElementById('fix-title').textContent=`AIA Annuity FIX — ${name} | อายุ ${age} ปี | บำนาญ ${fmtI(Math.round(annuity))} บ./ปี`;
+  document.getElementById('fix-empty').style.display='none';
+  document.getElementById('fix-scroll').style.display='block';
+  document.getElementById('fix-note').style.display='block';
+  document.getElementById('fix-discl').style.display='block';
+  document.getElementById('fix-legend').style.display='flex';
+  document.getElementById('fix-scroll').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function resetFIX(){
+  document.getElementById('fix-name').value='';
+  document.getElementById('fix-age').value=35;
+  document.getElementById('fix-annuity').value=120000;
+  document.getElementById('fix-income').value=800000;
+  document.getElementById('fix-gender').value='male';
+  ['fix-pills','fix-empty','fix-scroll','fix-note','fix-discl','fix-legend'].forEach((id,i)=>{
+    document.getElementById(id).style.display=i===0?'none':i===1?'block':'none';
+  });
+}
+
+document.addEventListener('keydown',e=>{if(e.key==='Enter'){
+  const t=document.querySelector('.tab-panel.active');
+  if(t&&t.id==='tab-p65')calcP65(); else calcFIX();
+}});
+</script>
+</body>
+</html>

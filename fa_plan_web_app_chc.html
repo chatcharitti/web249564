@@ -101,7 +101,7 @@ tr:hover td{background:var(--tr-hov)}
 @media print{
   @page{size:A4 landscape;margin:10mm}
   body{background:#fff!important;color:#000!important;font-size:11px!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;width:100%!important}
-  .sidebar,.topbar,.menu-toggle,.btn,.fs-btn,.th-btn,.io-bar,.param-card .btn,.sep,#impFile,.no-print,.app-footer{display:none!important}
+  .sidebar,.topbar,.menu-toggle,.btn,.fs-btn,.th-btn,.io-bar,.param-card .btn,.sep,#impFile,.no-print{display:none!important}
   
   input, select, textarea {
       color: #000 !important;
@@ -145,12 +145,7 @@ tr:hover td{background:var(--tr-hov)}
   .print-hdr h1{font-size:18px;font-weight:700;color:#1e293b}.print-hdr p{font-size:11px;color:#475569}
 }
 .print-hdr{display:none}
-.app-footer{position:sticky;bottom:0;z-index:40;background:var(--bg2);border-top:1px solid var(--cb);padding:8px 24px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:calc(var(--fs) - 4px);color:var(--tx3);flex-wrap:wrap;transition:background .3s}
-.app-footer .sep-dot{color:var(--tx3);opacity:.5}
-
-/* About Section Styles */
-.about-block{padding:20px 24px;border-radius:16px;margin-bottom:20px;border-left:5px solid;box-shadow:0 4px 12px rgba(0,0,0,.05);transition:transform .2s,box-shadow .2s;text-indent:1.5em;line-height:1.8}
-.about-block:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.08)}
+.about-block{background:rgba(0,0,0,.08);border-left:4px solid var(--cb);border-radius:0 12px 12px 0;padding:16px 20px;margin-bottom:16px;line-height:1.9;text-indent:1.5em}
 .ab-blue{background:rgba(56,189,248,.08);border-left-color:var(--ac)}
 .ab-green{background:rgba(52,211,153,.08);border-left-color:var(--ac3)}
 .ab-purple{background:rgba(129,140,248,.08);border-left-color:var(--ac2)}
@@ -159,6 +154,9 @@ tr:hover td{background:var(--tr-hov)}
 .contact-item{display:flex;align-items:center;gap:12px;background:var(--card);padding:12px 16px;border-radius:12px;border:1px solid var(--cb);transition:transform .2s;text-indent:0}
 .contact-item:hover{transform:translateY(-2px);border-color:var(--ac)}
 .contact-icon{font-size:24px;background:var(--bg);width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:50%;flex-shrink:0}
+.app-footer{position:sticky;bottom:0;z-index:40;background:var(--bg2);border-top:1px solid var(--cb);padding:8px 24px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:calc(var(--fs) - 4px);color:var(--tx3);flex-wrap:wrap;transition:background .3s}
+.app-footer .sep-dot{color:var(--tx3);opacity:.5}
+
 </style>
 </head>
 <body>
@@ -172,14 +170,12 @@ tr:hover td{background:var(--tr-hov)}
 <div class="nav-i" data-s="retirement"><span class="ic">🏖️</span>แผนเกษียณอายุ</div>
 <div class="nav-i" data-s="retfund"><span class="ic">📈</span>กองทุนเกษียณที่พึงมี</div>
 <div class="nav-i" data-s="investment"><span class="ic">💎</span>แผนการลงทุน</div>
+<div class="nav-i" data-s="invlist"><span class="ic">📊</span>รายการสินทรัพย์ลงทุน</div>
 <div class="nav-i" data-s="about"><span class="ic">ℹ️</span>เกี่ยวกับแอพนี้</div>
-<!-- เปิดหน้คำนวณภาษี -->
-	<div class="ttl">--- ลิ้งค์น่าสนใจเพิ่มเติม ---</div>
- 	<div </span>💲<a href="Tax_Calculate_Mar2569.html" title="ตัวอย่างการคำนวณภาษี" target="new" style="text-decoration: underline; color: rgba(59,43,252,0.82)" >ตัวอย่างคำนวณภาษีบุคคล</a></div>	
-<!-- เปิดหน้คำนวณภาษี -->
-
-</div>
-<div class="sidebar-ft">วันที่วางแผน: 22 พ.ย. 2567</div>
+<!-- ลิ้งค์น่าสนใจเพิ่มเติม -->
+<div class="ttl" style="padding:12px 20px 4px;font-size:calc(var(--fs) - 5px);color:var(--tx3)">--- ลิ้งค์น่าสนใจเพิ่มเติม ---</div>
+<div style="padding:6px 20px"><span>💲</span><a href="Tax_Calculate_Mar2569.html" title="ตัวอย่างการคำนวณภาษี" target="_blank" style="text-decoration:underline;color:rgba(59,43,252,0.82);font-size:calc(var(--fs) - 4px)">ตัวอย่างคำนวณภาษีบุคคล</a></div>
+<!-- <div class="sidebar-ft">วันที่ใช้งาน: 22 พ.ย. 2567</div> -->
 </nav>
 <div class="main">
 <div class="topbar">
@@ -338,81 +334,113 @@ tr:hover td{background:var(--tr-hov)}
 <div class="card"><div class="card-h"><div class="bdg b-gr">📈</div><div><h2>Budget Projection 50 ปี</h2></div></div><div class="chart-box" style="height:380px"><canvas id="cBudget"></canvas></div></div>
 </div>
 
-<!-- ABOUT -->
-<div class="section" id="sec-about">
-<div class="print-hdr"><h1>เกี่ยวกับ Web App — FA Plan Tool v.1</h1><p id="ph-about"></p></div>
-<div class="card" style="padding: 32px;">
-
-<div style="text-align: center; margin-bottom: 36px;">
-  <div style="display:inline-flex; align-items:center; justify-content:center; width: 64px; height: 64px; border-radius: 20px; background: rgba(56,189,248,0.15); color: var(--ac); font-size: 32px; margin-bottom: 16px;">ℹ️</div>
-  <h2 style="font-size: calc(var(--fs) + 6px); font-weight: 700;">เกี่ยวกับ Web App — FA Plan Tool v.1</h2>
-  <div style="font-size: calc(var(--fs)); color: var(--tx2); margin-top: 4px;">ผู้พัฒนา: ชัฌฤทธินันท์ โชคชวัลพันทวี</div>
-  <div style="display:inline-block; margin-top: 16px; padding: 4px 16px; border-radius: 20px; background: var(--bg2); color: var(--ac); font-weight: 600; font-size: calc(var(--fs) - 2px);">อัปเดตข้อมูลล่าสุด: 1 มีนาคม 2026</div>
+<!-- INVESTMENT LIST (Phase 2) -->
+<div class="section" id="sec-invlist">
+<div class="print-hdr"><h1>รายการสินทรัพย์ลงทุน (Investment List)</h1><p id="ph-invlist"></p></div>
+<!-- Summary KPIs -->
+<div id="invSummaryKPI"></div>
+<!-- Summary chart -->
+<div class="card no-print">
+<div class="card-h"><div class="bdg b-pu">🍩</div><div><h2>สัดส่วน Asset Allocation</h2><div class="sub">รวมสินทรัพย์ลงทุนทุกกลุ่ม</div></div>
+<button class="btn btn-go btn-sm" onclick="syncInvToBS();renderBalanceSheet();renderDashKPI();renderRatioTable();renderInvSummary()">🔄 Sync ไปงบดุล</button>
+</div>
+<div class="chart-sm"><canvas id="cInvPie"></canvas></div>
+</div>
+<!-- Per-group tabs -->
+<div class="card">
+<div class="tabs" style="flex-wrap:wrap;gap:4px">
+<button class="tab-b active" data-t="invG0">💧 สภาพคล่อง</button>
+<button class="tab-b" data-t="invG1">🏦 เงินฝาก/สลาก</button>
+<button class="tab-b" data-t="invG2">📂 กองทุนรวม</button>
+<button class="tab-b" data-t="invG3">📈 หุ้น</button>
+<button class="tab-b" data-t="invG4">🏠 อสังหาฯ</button>
+<button class="tab-b" data-t="invG5">🥇 ทางเลือก</button>
+<button class="tab-b" data-t="invG6">🏢 PVD</button>
+<button class="tab-b" data-t="invG7">📋 หนี้สิน</button>
+</div>
+<!-- Group 0: Liquidity -->
+<div id="invG0" class="tab-c" style="margin-top:16px">
+<div class="card-h"><div class="bdg b-bl">💧</div><div style="flex:1"><h2>1. สินทรัพย์สภาพคล่อง</h2></div>
+<button class="btn btn-ac btn-sm" onclick="addInvRow('liq')">＋ เพิ่มรายการ</button></div>
+<div id="inv_body_liq"></div></div>
+<!-- Group 1: Deposit -->
+<div id="invG1" class="tab-c" style="display:none;margin-top:16px">
+<div class="card-h"><div class="bdg b-go">🏦</div><div style="flex:1"><h2>2. เงินฝาก / สลากออมทรัพย์</h2></div>
+<button class="btn btn-ac btn-sm" onclick="addInvRow('dep')">＋ เพิ่มรายการ</button></div>
+<div id="inv_body_dep"></div></div>
+<!-- Group 2: Fund -->
+<div id="invG2" class="tab-c" style="display:none;margin-top:16px">
+<div class="card-h"><div class="bdg b-pu">📂</div><div style="flex:1"><h2>3. กองทุนรวม</h2></div>
+<button class="btn btn-ac btn-sm" onclick="addInvRow('fund')">＋ เพิ่มรายการ</button></div>
+<div id="inv_body_fund"></div></div>
+<!-- Group 3: Stock -->
+<div id="invG3" class="tab-c" style="display:none;margin-top:16px">
+<div class="card-h"><div class="bdg b-gr">📈</div><div style="flex:1"><h2>4. หุ้นรายตัว</h2></div>
+<button class="btn btn-ac btn-sm" onclick="addInvRow('stock')">＋ เพิ่มรายการ</button></div>
+<div id="inv_body_stock"></div></div>
+<!-- Group 4: Property -->
+<div id="invG4" class="tab-c" style="display:none;margin-top:16px">
+<div class="card-h"><div class="bdg b-go">🏠</div><div style="flex:1"><h2>5. อสังหาริมทรัพย์เพื่อการลงทุน</h2></div>
+<button class="btn btn-ac btn-sm" onclick="addInvRow('prop')">＋ เพิ่มรายการ</button></div>
+<div id="inv_body_prop"></div></div>
+<!-- Group 5: Alternative -->
+<div id="invG5" class="tab-c" style="display:none;margin-top:16px">
+<div class="card-h"><div class="bdg b-go">🥇</div><div style="flex:1"><h2>6. สินทรัพย์ทางเลือก (ทองคำ ฯลฯ)</h2></div>
+<button class="btn btn-ac btn-sm" onclick="addInvRow('alt')">＋ เพิ่มรายการ</button></div>
+<div id="inv_body_alt"></div></div>
+<!-- Group 6: PVD -->
+<div id="invG6" class="tab-c" style="display:none;margin-top:16px">
+<div class="card-h"><div class="bdg b-bl">🏢</div><div style="flex:1"><h2>7. กองทุนสำรองเลี้ยงชีพ (PVD)</h2></div>
+<button class="btn btn-ac btn-sm" onclick="addInvRow('pvd')">＋ เพิ่มรายการ</button></div>
+<div id="inv_body_pvd"></div></div>
+<!-- Group 7: Liabilities -->
+<div id="invG7" class="tab-c" style="display:none;margin-top:16px">
+<div class="card-h"><div class="bdg b-rd">💳</div><div style="flex:1"><h2>8. รายการหนี้สิน</h2><div class="sub">Sync → งบดุลอัตโนมัติ</div></div>
+<button class="btn btn-ac btn-sm" onclick="addInvLiab()">＋ เพิ่มรายการ</button></div>
+<div id="inv_body_liab"></div></div>
+</div>
 </div>
 
-<div style="max-width: 900px; margin: 0 auto;">
-
+<!-- ABOUT -->
+<div class="section" id="sec-about">
+<div class="print-hdr"><h1>เกี่ยวกับ Web App — FA Plan Tool v.2</h1><p id="ph-about"></p></div>
+<div class="card" style="padding:32px">
+<div style="text-align:center;margin-bottom:36px">
+  <div style="display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:20px;background:rgba(56,189,248,0.15);color:var(--ac);font-size:32px;margin-bottom:16px">ℹ️</div>
+  <h2 style="font-size:calc(var(--fs) + 6px);font-weight:700">เกี่ยวกับ Web App — FA Plan Tool v.2</h2>
+  <div style="font-size:calc(var(--fs));color:var(--tx2);margin-top:4px">ผู้พัฒนา: ชัฌฤทธินันท์ โชคชวัลพันทวี</div>
+  <div style="display:inline-block;margin-top:16px;padding:4px 16px;border-radius:20px;background:var(--bg2);color:var(--ac);font-weight:600;font-size:calc(var(--fs) - 2px)">อัปเดตข้อมูลล่าสุด: 25 มิถุนายน 2026</div>
+</div>
+<div style="max-width:900px;margin:0 auto">
   <div class="about-block ab-blue">
-    <div style="font-weight: 600; color: var(--ac); margin-bottom: 8px; font-size: calc(var(--fs)); text-indent: 0;">🚀 จุดเริ่มต้นของการพัฒนา</div>
-    <p>Web App : FA Plan Tool v.1 ที่ท่านได้ลองใช้งานอยู่ชุดนี้ พัฒนาขึ้นด้วยเทคโนโลยี AI จาก claude.ai และ Gemini 3 จึงสามารถพัฒนาได้อย่างรวดเร็วในเวลาอันสั้น</p>
+    <div style="font-weight:600;color:var(--ac);margin-bottom:8px;font-size:calc(var(--fs));text-indent:0">🚀 จุดเริ่มต้นของการพัฒนา</div>
+    <p>Web App : FA Plan Tool v.2 ที่ท่านได้ลองใช้งานอยู่ชุดนี้ พัฒนาขึ้นด้วยเทคโนโลยี AI จาก claude.ai และ Gemini 3 จึงสามารถพัฒนาได้อย่างรวดเร็วในเวลาอันสั้น</p>
   </div>
-
   <div class="about-block ab-gold">
-    <div style="font-weight: 600; color: var(--gold); margin-bottom: 8px; font-size: calc(var(--fs)); text-indent: 0;">📊 จาก Excel สู่ Web Application</div>
+    <div style="font-weight:600;color:var(--gold);margin-bottom:8px;font-size:calc(var(--fs));text-indent:0">📊 จาก Excel สู่ Web Application</div>
     <p>เดิมทีผู้พัฒนาใช้วิธีคำนวณด้วย MS Excel ซึ่งเรียนรู้มาจากการฝึกอบรมต่างๆ ทั้งหลักสูตร IARFC แบบจ่ายเงินอบรมเอง และเรียนกับอาจารย์ที่เป็น CFP เมื่อครั้งเป็น รอง ผอ. ฝ่ายฝึกอบรมของบริษัทประกันอันดับต้นๆ ของไทย จากนั้นจึงนำความรู้และต้นแบบ Excel มาต่อยอดและปรับปรุง เพิ่มเติมสิ่งต่างๆ เพื่อใช้นำเสนอลูกค้า จนไฟล์มีขนาดใหญ่ สูตรซับซ้อน และข้อมูลมากขึ้นตามลำดับ</p>
   </div>
-
   <div class="about-block ab-purple">
-    <div style="font-weight: 600; color: var(--ac2); margin-bottom: 8px; font-size: calc(var(--fs)); text-indent: 0;">💡 แรงบันดาลใจในการต่อยอด</div>
-    <p>จุดเปลี่ยนเกิดขึ้นเมื่อได้พูดคุยกับพี่สาวที่น่ารักคนหนึ่ง ซึ่งมักให้คำแนะนำดีๆ อยู่เสมอ มีอยู่ครั้งหนึ่งเป็นเรื่องเกี่ยวกับการวางแผนการเงิน แม้ไม่รู้ว่าพี่เขาจำได้ไหมซึ่งเขาบอกว่าไฟล์ที่ผมใช้งานดูดีขึ้นมากเลย บางคนที่มี CFP ที่เคยพบยังทำไม่ได้เท่านี้ ถึงแม้ผมจะมีเพียงใบอนุญาตตัวแทนประกันและใบอนุญาตขายกองทุน (ทำเอาตัวลอยเลยทีเดียว) ซึ่งนั่นเองคือจุดเริ่มต้นของความตั้งใจที่จะทำโปรแกรมให้ทุกคนเข้าถึงได้ เพื่อใช้วางแผนการเงินส่วนบุคคลที่พัฒนาจากประสบการณ์การทำงานของตัวแทนประกันชีวิต และในที่สุดด้วยพลังของ AI แอพเวอร์ชัน 1 จึงได้เกิดขึ้น ถึงแม้ฟังก์ชั่นเพื่อการวางแผนการเงินจะยังไม่ครบทั้งหมด แต่เชื่อว่าจะทำให้ท่านได้เห็นภาพรวมการวางแผน เห็นความสำคัญของอัตราดอกเบั้ย และได้ตระหนักว่าเวลาเป็นสิ่งสำคัญ หากเริ่มช้าจะทำให้ต้องใช้เงินก้อนใหญ่ในการวางแผนระยะสั้นเพื่อเป้าหมายที่ต้องการ ซึ่งอาจจะทำให้ต้องเลื่อนการเกษียณออกไป</p>
-  </div>
+    <div style="font-weight:600;color:var(--ac2);margin-bottom:8px;font-size:calc(var(--fs));text-indent:0">💡 แรงบันดาลใจในการต่อยอด</div>
+    <p>จุดเปลี่ยนเกิดขึ้นเมื่อได้พูดคุยกับพี่สาวที่น่ารักคนหนึ่ง ซึ่งมักให้คำแนะนำดีๆ อยู่เสมอ มีอยู่ครั้งหนึ่งเป็นเรื่องเกี่ยวกับการวางแผนการเงิน แม้ไม่รู้ว่าพี่เขาจำได้ไหมซึ่งเขาบอกว่าไฟล์ที่ผมใช้งานดูดีขึ้นมากเลย บางคนที่มี CFP ที่เคยพบยังทำไม่ได้เท่านี้ ถึงแม้ผมจะมีเพียงใบอนุญาตตัวแทนประกันและใบอนุญาตขายกองทุน (ทำเอาตัวลอยเลยทีเดียว) ซึ่งนั่นเองคือจุดเริ่มต้นของความตั้งใจที่จะทำโปรแกรมให้ทุกคนเข้าถึงได้ เพื่อใช้วางแผนการเงินส่วนบุคคลที่พัฒนาจากประสบการณ์การทำงานของตัวแทนประกันชีวิต และในที่สุดด้วยพลังของ AI แอพเวอร์ชัน 1 จึงได้เกิดขึ้น </p>
+    <p> *--- Version update ---* </p>
+    <p> Version 2.1 25 มิถุนายน 2026 - เพิ่มรายการ Investment List และปรับปรุงการเชื่อมโยงข้อมูลต่าง ๆ * </p>
 
+	</div>
   <div class="about-block ab-green">
-    <div style="font-weight: 600; color: var(--ac3); margin-bottom: 8px; font-size: calc(var(--fs)); text-indent: 0;">🎁 เจตนารมณ์ในการแบ่งปัน</div>
+    <div style="font-weight:600;color:var(--ac3);margin-bottom:8px;font-size:calc(var(--fs));text-indent:0">🎁 เจตนารมณ์ในการแบ่งปัน</div>
     <p>ผมหวังว่าแอพนี้จะเป็นประโยชน์สำหรับผู้ที่ได้มาพบและทดลองใช้ ซึ่งผู้พัฒนาอนุญาตให้ท่านนำไปใช้สำหรับตนเองและครอบครัวได้อย่างอิสระ ไม่มีลิขสิทธิ์ใดๆ หรือถ้าจะอ้างถึงบ้างก็จะขอบคุณมากๆ ครับ</p>
   </div>
-
-  <div style="margin-top: 48px;">
-    <p style="text-align: center; margin-bottom: 24px; color: var(--tx2); text-indent: 0;">สำหรับคำแนะนำติชม หรือต้องการสอบถามเกี่ยวกับการวางแผน สินค้าประกันชีวิต สามารถติดต่อได้ตามข้อมูลด้านล่างนี้เลยครับ</p>
-    
+  <div style="margin-top:48px">
+    <p style="text-align:center;margin-bottom:24px;color:var(--tx2);text-indent:0">สำหรับคำแนะนำติชม หรือต้องการสอบถามเกี่ยวกับการวางแผน สินค้าประกันชีวิต สามารถติดต่อได้ตามข้อมูลด้านล่างนี้เลยครับ</p>
     <div class="contact-card">
-      <div style="grid-column: 1 / -1; font-weight: 700; color: var(--ac); font-size: calc(var(--fs) + 2px); text-align: center; margin-bottom: 8px;">📞 ช่องทางการติดต่อ</div>
-      
-      <div class="contact-item">
-        <div class="contact-icon">👤</div>
-        <div>
-          <div style="font-size: calc(var(--fs) - 4px); color: var(--tx3);">ชื่อ - สกุล</div>
-          <div style="font-weight: 600; color: var(--tx);">ชัฌฤทธินันท์ โชคชวัลพันทวี</div>
-        </div>
-      </div>
-
-      <div class="contact-item">
-        <div class="contact-icon">📱</div>
-        <div>
-          <div style="font-size: calc(var(--fs) - 4px); color: var(--tx3);">โทรศัพท์</div>
-          <div style="font-weight: 600; color: var(--tx);">061 645 9092</div>
-        </div>
-      </div>
-
-      <div class="contact-item">
-        <div class="contact-icon">📧</div>
-        <div>
-          <div style="font-size: calc(var(--fs) - 4px); color: var(--tx3);">Email</div>
-          <div style="font-weight: 600;"><a href="mailto:chatcharitti@ctk.co.th" style="color: var(--ac); text-decoration: none;">chatcharitti@ctk.co.th</a></div>
-        </div>
-      </div>
-
-      <div class="contact-item">
-        <div class="contact-icon">💬</div>
-        <div>
-          <div style="font-size: calc(var(--fs) - 4px); color: var(--tx3);">Line ID</div>
-          <div style="font-weight: 600; color: var(--tx);"><a href="https://line.me/ti/p/MeH_gnuj6j" title="chatcharitti_mobile" target="new">chatcharitti_mobile</a></div>
-        </div>
-      </div>
-      
+      <div style="grid-column:1/-1;font-weight:700;color:var(--ac);font-size:calc(var(--fs) + 2px);text-align:center;margin-bottom:8px">📞 ช่องทางการติดต่อ</div>
+      <div class="contact-item"><div class="contact-icon">👤</div><div><div style="font-size:calc(var(--fs) - 4px);color:var(--tx3)">ชื่อ - สกุล</div><div style="font-weight:600;color:var(--tx)">ชัฌฤทธินันท์ โชคชวัลพันทวี</div></div></div>
+      <div class="contact-item"><div class="contact-icon">📱</div><div><div style="font-size:calc(var(--fs) - 4px);color:var(--tx3)">โทรศัพท์</div><div style="font-weight:600;color:var(--tx)">061 645 9092</div></div></div>
+      <div class="contact-item"><div class="contact-icon">📧</div><div><div style="font-size:calc(var(--fs) - 4px);color:var(--tx3)">Email</div><div style="font-weight:600"><a href="mailto:chatcharitti@ctk.co.th" style="color:var(--ac);text-decoration:none">chatcharitti@ctk.co.th</a></div></div></div>
+      <div class="contact-item"><div class="contact-icon">💬</div><div><div style="font-size:calc(var(--fs) - 4px);color:var(--tx3)">Line ID</div><div style="font-weight:600"><a href="https://line.me/ti/p/MeH_gnuj6j" target="_blank" style="color:var(--ac)">chatcharitti_mobile</a></div></div></div>
     </div>
   </div>
-
 </div>
 </div>
 </div>
@@ -421,8 +449,7 @@ tr:hover td{background:var(--tr-hov)}
 <div class="app-footer">
 <span>👤 ชัฌฤทธินันท์ โชคชวัลพันทวี</span>
 <span class="sep-dot">•</span>
-<!--<span>💬 Line: chatcharitti_mobile</span> -->
-<span>💬 Line: <a href="https://line.me/ti/p/MeH_gnuj6j" title="chatcharitti_mobile" target="new">chatcharitti_mobile</a></span>
+<span>💬 Line: <a href="https://line.me/ti/p/MeH_gnuj6j" target="_blank" style="color:var(--ac)">chatcharitti_mobile</a></span>
 <span class="sep-dot">•</span>
 <span>📧 <a href="mailto:chatcharitti@ctk.co.th" style="color:var(--ac)">chatcharitti@ctk.co.th</a></span>
 </div>
@@ -475,9 +502,10 @@ document.querySelectorAll('.nav-i').forEach(n=>{
     document.querySelectorAll('.nav-i').forEach(x=>x.classList.remove('active'));n.classList.add('active');
     document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));
     document.getElementById('sec-'+s).classList.add('active');
-    const T={dashboard:'Dashboard — ภาพรวมแผนการเงิน',balance:'งบดุลส่วนบุคคล',cashflow:'กระแสเงินสด',ratio:'อัตราส่วนทางการเงิน',retirement:'แผนเกษียณอายุ',retfund:'กองทุนเกษียณที่พึงมี',investment:'แผนการลงทุน',about:'เกี่ยวกับแอพนี้'};
+    const T={dashboard:'Dashboard — ภาพรวมแผนการเงิน',balance:'งบดุลส่วนบุคคล',cashflow:'กระแสเงินสด',ratio:'อัตราส่วนทางการเงิน',retirement:'แผนเกษียณอายุ',retfund:'กองทุนเกษียณที่พึงมี',investment:'แผนการลงทุน',invlist:'รายการสินทรัพย์ลงทุน',about:'เกี่ยวกับแอพนี้'};
     document.getElementById('topT').textContent=T[s]||'';
     document.getElementById('sidebar').classList.remove('open');
+    if(s==='invlist')renderInvAll();
   });
 });
 document.querySelectorAll('.tab-b').forEach(b=>{
@@ -532,16 +560,114 @@ function saveAssumptions(){
   renderAssumptions();toggleEdit('assum');recalcAll();
 }
 
+// ===== INVESTMENT LIST DATA (Phase 1) =====
+// invData: 7 กลุ่ม sync → bsAssets อัตโนมัติ
+// แต่ละ item: {assetClass, name, institution, taxBenefit, qty, costPrice, mktPrice, mktVal, expReturn, owner}
+const invData=[
+  {
+    id:'liq', title:'1. สินทรัพย์สภาพคล่อง',
+    desc:'เงินฝากออมทรัพย์ / เงินสดที่ไม่ใช่เพื่อใช้จ่ายในปัจจุบัน',
+    bsGrp:'สินทรัพย์สภาพคล่อง', bsLine:'เงินฝากออมทรัพย์ (สภาพคล่อง)',
+    cols:['assetClass','name','institution','qty','mktPrice','mktVal','expReturn','owner'],
+    items:[
+      {assetClass:'Liquidity',name:'เงินฝากออมทรัพย์',institution:'ธนาคารกรุงเทพ',qty:1,costPrice:10000000,mktPrice:10000000,mktVal:10000000,expReturn:0.005,owner:'ตนเอง'}
+    ]
+  },
+  {
+    id:'dep', title:'2. เงินฝาก / สลากออมทรัพย์',
+    desc:'เงินฝากประจำ เงินฝากสหกรณ์ สลากออมทรัพย์ เงินตราต่างประเทศ',
+    bsGrp:'สินทรัพย์ลงทุน', bsLine:'เงินฝาก & สลากออมทรัพย์',
+    cols:['assetClass','name','institution','taxBenefit','mktVal','expReturn','owner'],
+    items:[
+      {assetClass:'Liquidity',name:'เงินฝากประจำ 12 เดือน',institution:'ธนาคารไทยพาณิชย์',taxBenefit:'-',qty:1,costPrice:10000000,mktPrice:10000000,mktVal:10000000,expReturn:0.01,owner:'ตนเอง'}
+    ]
+  },
+  {
+    id:'fund', title:'3. กองทุนรวม',
+    desc:'กองทุนรวมทุกประเภท รวม LTF / RMF / SSF',
+    bsGrp:'สินทรัพย์ลงทุน', bsLine:'กองทุนรวม (รวม LTF/RMF/SSF)',
+    cols:['assetClass','name','institution','taxBenefit','qty','costPrice','mktPrice','mktVal','expReturn','owner'],
+    items:[
+      {assetClass:'Thai EQ',name:'KDLTF',institution:'K BANK',taxBenefit:'LTF',qty:0.0000001,costPrice:0,mktPrice:0.00001,mktVal:0,expReturn:0.10,owner:'ตนเอง'}
+    ]
+  },
+  {
+    id:'stock', title:'4. หุ้นรายตัว',
+    desc:'หุ้นตลาดหลักทรัพย์ไทย และหุ้นต่างประเทศ',
+    bsGrp:'สินทรัพย์ลงทุน', bsLine:'ตราสารทุน / หุ้นรายตัว',
+    cols:['assetClass','name','institution','qty','costPrice','mktPrice','mktVal','expReturn','owner'],
+    items:[
+      {assetClass:'Thai Stock',name:'IMPACT',institution:'KKPS',taxBenefit:'-',qty:20000,costPrice:10.6,mktPrice:19.2,mktVal:384000,expReturn:0.08,owner:'ตนเอง'}
+    ]
+  },
+  {
+    id:'prop', title:'5. อสังหาริมทรัพย์เพื่อการลงทุน',
+    desc:'คอนโด บ้านให้เช่า ที่ดิน (ไม่รวมบ้านอยู่อาศัย)',
+    bsGrp:'สินทรัพย์ลงทุน', bsLine:'อสังหาริมทรัพย์เพื่อการลงทุน',
+    cols:['assetClass','name','costPrice','incomePerMonth','debtBalance','mktVal','expReturn','owner'],
+    items:[
+      {assetClass:'Property',name:'333 Riverside บางโพ',institution:'-',taxBenefit:'-',qty:1,costPrice:6300000,mktPrice:6500000,mktVal:6500000,incomePerMonth:0,debtBalance:3200000,expReturn:0.04,owner:'ตนเอง'}
+    ]
+  },
+  {
+    id:'alt', title:'6. สินทรัพย์ทางเลือก',
+    desc:'ทองคำ เงินตราต่างประเทศ สินค้าโภคภัณฑ์ Crypto ของสะสม',
+    bsGrp:'สินทรัพย์ลงทุน', bsLine:'ทองคำ & สินทรัพย์ทางเลือก',
+    cols:['assetClass','name','qty','costPrice','mktPrice','mktVal','expReturn','owner'],
+    items:[
+      {assetClass:'Alternative Asset',name:'ทองคำ 25 บาท',institution:'ห้างทองยักษ์ใหญ่',taxBenefit:'-',qty:25,costPrice:18000,mktPrice:20000,mktVal:500000,expReturn:0.05,owner:'ตนเอง'}
+    ]
+  },
+  {
+    id:'pvd', title:'7. กองทุนสำรองเลี้ยงชีพ',
+    desc:'Provident Fund ที่นายจ้างหักสมทบ',
+    bsGrp:'สินทรัพย์ลงทุน', bsLine:'กองทุนสำรองเลี้ยงชีพ (PVD)',
+    cols:['assetClass','name','institution','taxBenefit','qty','mktVal','expReturn','owner'],
+    items:[
+      {assetClass:'Provident fund',name:'PF1029',institution:'KA (กรุงศรี)',taxBenefit:'PVD',qty:19515,costPrice:0,mktPrice:0,mktVal:416949,expReturn:0.05,owner:'ตนเอง'}
+    ]
+  }
+];
+
+// หนี้สินจาก Investment list (section 9) — sync → bsLiabs
+const invLiabs=[
+  {grp:'หนี้สินระยะสั้น',name:'หนี้ผ่อนชำระสินค้าระยะสั้น',val:0,payPerMonth:0},
+  {grp:'หนี้สินระยะสั้น',name:'หนี้บัตรเครดิต',val:0,payPerMonth:0},
+  {grp:'หนี้สินระยะสั้น',name:'สินเชื่อส่วนบุคคล',val:0,payPerMonth:0},
+  {grp:'หนี้สินระยะยาว',name:'หนี้ผ่อนรถ',val:500000,rate:0.01,payPerMonth:10000},
+  {grp:'หนี้สินระยะยาว',name:'หนี้ผ่อนบ้าน',val:0,rate:0,payPerMonth:0},
+  {grp:'หนี้สินระยะยาว',name:'อื่นๆ',val:0,rate:0,payPerMonth:0}
+];
+
 // ===== BALANCE SHEET DATA =====
+// bsAssets: 4 กลุ่ม — บางบรรทัด auto-sync จาก invData
+// grpLock:true = sync อัตโนมัติ ห้ามแก้มือ
 const bsAssets=[
-  {grp:'สินทรัพย์สภาพคล่อง',name:'เงินสด / เงินฝาก',val:300000},
-  {grp:'สินทรัพย์ลงทุน',name:'สินทรัพย์ลงทุนรวม',val:0},
-  {grp:'สินทรัพย์ใช้ส่วนตัว',name:'รถยนต์',val:600000},
-  {grp:'สินทรัพย์ใช้ส่วนตัว',name:'บ้านอยู่อาศัย',val:2000000}
+  // กลุ่ม 1: สินทรัพย์สภาพคล่อง
+  {grp:'สินทรัพย์สภาพคล่อง',name:'เงินสด / เงินฝากเพื่อใช้จ่าย',val:300000,invId:null},
+  {grp:'สินทรัพย์สภาพคล่อง',name:'เงินฝากออมทรัพย์ (สภาพคล่อง)',val:10000000,invId:'liq',locked:true},
+  // กลุ่ม 2: สินทรัพย์ลงทุน (7 บรรทัด sync จาก invData)
+  {grp:'สินทรัพย์ลงทุน',name:'เงินฝาก & สลากออมทรัพย์',val:10000000,invId:'dep',locked:true},
+  {grp:'สินทรัพย์ลงทุน',name:'กองทุนรวม (รวม LTF/RMF/SSF)',val:0,invId:'fund',locked:true},
+  {grp:'สินทรัพย์ลงทุน',name:'ตราสารทุน / หุ้นรายตัว',val:384000,invId:'stock',locked:true},
+  {grp:'สินทรัพย์ลงทุน',name:'อสังหาริมทรัพย์เพื่อการลงทุน',val:6500000,invId:'prop',locked:true},
+  {grp:'สินทรัพย์ลงทุน',name:'ทองคำ & สินทรัพย์ทางเลือก',val:500000,invId:'alt',locked:true},
+  {grp:'สินทรัพย์ลงทุน',name:'กองทุนสำรองเลี้ยงชีพ (PVD)',val:416949,invId:'pvd',locked:true},
+  {grp:'สินทรัพย์ลงทุน',name:'มูลค่าเงินสดประกันชีวิต',val:0,invId:null},
+  // กลุ่ม 3: สินทรัพย์ใช้ส่วนตัว
+  {grp:'สินทรัพย์ใช้ส่วนตัว',name:'รถยนต์',val:600000,invId:null},
+  {grp:'สินทรัพย์ใช้ส่วนตัว',name:'บ้านอยู่อาศัย',val:2000000,invId:null},
+  {grp:'สินทรัพย์ใช้ส่วนตัว',name:'เครื่องประดับ / นาฬิกา',val:0,invId:null},
+  // กลุ่ม 4: สินทรัพย์ที่ไม่มีตัวตน
+  {grp:'สินทรัพย์ที่ไม่มีตัวตน',name:'ลิขสิทธิ์ / สิทธิบัตร / อื่นๆ',val:0,invId:null}
 ];
 const bsLiabs=[
-  {grp:'หนี้สินระยะสั้น',name:'หนี้ผ่อนชำระระยะสั้น',val:30000},
-  {grp:'หนี้สินระยะยาว',name:'หนี้ผ่อนรถ',val:500000}
+  {grp:'หนี้สินระยะสั้น',name:'หนี้ผ่อนชำระสินค้าระยะสั้น',val:0},
+  {grp:'หนี้สินระยะสั้น',name:'หนี้บัตรเครดิต',val:0},
+  {grp:'หนี้สินระยะสั้น',name:'สินเชื่อส่วนบุคคล',val:0},
+  {grp:'หนี้สินระยะยาว',name:'หนี้ผ่อนรถ',val:500000},
+  {grp:'หนี้สินระยะยาว',name:'หนี้ผ่อนบ้าน',val:0},
+  {grp:'หนี้สินระยะยาว',name:'อื่นๆ',val:0}
 ];
 function addBSRow(type){
   const name=prompt('ชื่อรายการ:');if(!name)return;
@@ -567,7 +693,9 @@ function renderBalanceSheet(){
   bsAssets.forEach((item,i)=>{
     if(item.grp!==lastG){lastG=item.grp;h+='<tr style="background:var(--hovbg)"><td colspan=4 style="font-weight:600;color:'+(gColors[item.grp]||'var(--tx)')+'">• '+item.grp+'</td></tr>';}
     const pct=totA>0?(item.val/totA*100).toFixed(1):'0';
-    h+='<tr><td><input class="bs-name" value="'+item.name+'" onchange="bsAssets['+i+'].name=this.value"></td><td class="tr"><input class="bs-input" id="bs_a_'+i+'" type="number" value="'+item.val+'" onchange="bsChanged()"></td><td class="tr num">'+pct+'%</td><td><button style="color:var(--dng);background:none;border:none;cursor:pointer" onclick="removeBSRow(\'asset\','+i+')">✕</button></td></tr>';
+    const lockIcon=item.locked?'<span title="Auto-sync จาก รายการสินทรัพย์ลงทุน" style="color:var(--tx3);font-size:12px">🔒</span> ':'';
+    const editCell=item.locked?'<td class="tr num" style="color:var(--tx3)">'+F(item.val)+'<input type="hidden" id="bs_a_'+i+'" value="'+item.val+'"></td>':'<td class="tr"><input class="bs-input" id="bs_a_'+i+'" type="number" value="'+item.val+'" onchange="bsChanged()"></td>';
+    h+='<tr><td>'+lockIcon+'<input class="bs-name" value="'+item.name+'" '+(item.locked?'readonly style="color:var(--tx2)"':'')+' onchange="bsAssets['+i+'].name=this.value"></td>'+editCell+'<td class="tr num">'+pct+'%</td><td>'+(item.locked?'':'<button style="color:var(--dng);background:none;border:none;cursor:pointer" onclick="removeBSRow(\'asset\','+i+')">✕</button>')+'</td></tr>';
   });
   h+='<tr style="font-weight:700;border-top:2px solid var(--ac)"><td>สินทรัพย์รวม</td><td class="tr num">'+F(totA)+'</td><td class="tr num">100%</td><td></td></tr></tbody>';
   document.getElementById('tblAsset').innerHTML=h;
@@ -589,6 +717,149 @@ function renderBSSummary(){
   const totL=bsLiabs.reduce((a,i)=>a+i.val,0);
   const nw=totA-totL;
   document.getElementById('bsNetWorth').innerHTML='<div style="display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:calc(var(--fs) - 4px);color:var(--tx3)">ความมั่งคั่งสุทธิ (Net Worth)</div><div style="font-size:calc(var(--fs) + 12px);font-weight:800;color:var(--ac3)">฿ '+F(nw)+'</div><div style="font-size:calc(var(--fs) - 4px);color:var(--tx3)">'+P(totA>0?nw/totA:0)+' ของสินทรัพย์รวม</div></div><div style="font-size:calc(var(--fs) + 16px)">🏆</div></div>';
+}
+
+// ===== INVESTMENT LIST FUNCTIONS (Phase 3) =====
+function invGroupTotal(id){
+  const g=invData.find(x=>x.id===id);
+  return g?g.items.reduce((s,i)=>s+(i.mktVal||0),0):0;
+}
+function syncInvToBS(){
+  // Sync สินทรัพย์ลงทุน → bsAssets (locked items)
+  invData.forEach(g=>{
+    const tot=invGroupTotal(g.id);
+    bsAssets.forEach(a=>{if(a.invId===g.id)a.val=tot;});
+  });
+  // Sync หนี้สิน → bsLiabs (by name match)
+  invLiabs.forEach(il=>{
+    const found=bsLiabs.find(b=>b.name===il.name&&b.grp===il.grp);
+    if(found)found.val=il.val;
+  });
+}
+function calcInvChanged(gid){
+  const g=invData.find(x=>x.id===gid);if(!g)return;
+  // Auto-calc mktVal = qty × mktPrice (for fund/stock groups)
+  g.items.forEach((item,i)=>{
+    if(gid==='stock'||gid==='fund'){
+      item.mktVal=Math.round((item.qty||0)*(item.mktPrice||0));
+    }
+    // Update mktVal display cell
+    const el=document.getElementById('inv_mv_'+gid+'_'+i);
+    if(el)el.textContent='฿'+F(item.mktVal||0);
+  });
+  // Recompute group total display
+  const tot=invGroupTotal(gid);
+  const totEl=document.getElementById('inv_tot_'+gid);
+  if(totEl)totEl.textContent='฿'+F(tot);
+  // Sync → BS → Dashboard
+  syncInvToBS();renderBalanceSheet();renderDashKPI();renderDashCharts();renderRatioSnap();renderRatioTable();
+}
+function renderInvGroup(gid){
+  const g=invData.find(x=>x.id===gid);if(!g)return;
+  const colLabels={
+    assetClass:'Asset Class',name:'ชื่อสินทรัพย์',institution:'สถาบัน',taxBenefit:'Tax',
+    qty:'จำนวนหน่วย',costPrice:'ต้นทุน/หน่วย',mktPrice:'ราคาตลาด',
+    mktVal:'มูลค่าตลาด',expReturn:'ผลตอบแทน%',owner:'ผู้ถือครอง',
+    incomePerMonth:'รายได้/เดือน',debtBalance:'หนี้ค้างชำระ'
+  };
+  let h='<div style="margin-bottom:8px;font-size:calc(var(--fs)-3px);color:var(--tx3)">'+g.desc+'</div>';
+  h+='<div class="tw"><table><thead><tr>';
+  g.cols.forEach(c=>{h+='<th'+(c==='mktVal'||c==='expReturn'?' class="tr"':'')+'>'+(colLabels[c]||c)+'</th>';});
+  h+='<th style="width:36px"></th></tr></thead><tbody>';
+  g.items.forEach((item,i)=>{
+    h+='<tr>';
+    g.cols.forEach(c=>{
+      if(c==='mktVal'){
+        h+='<td class="tr num" id="inv_mv_'+gid+'_'+i+'">฿'+F(item.mktVal||0)+'</td>';
+      }else if(c==='expReturn'){
+        h+='<td class="tr"><input class="bs-input" style="width:72px" type="number" step="0.1" value="'+(((item[c]||0)*100).toFixed(1))+'" onchange="invData.find(x=>x.id===\''+gid+'\').items['+i+'].expReturn=+this.value/100;calcInvChanged(\''+gid+'\')"> %</td>';
+      }else if(c==='qty'||c==='costPrice'||c==='mktPrice'||c==='incomePerMonth'||c==='debtBalance'){
+        h+='<td><input class="bs-input" style="width:110px" type="number" step="0.01" value="'+(item[c]||0)+'" onchange="invData.find(x=>x.id===\''+gid+'\').items['+i+'][\''+c+'\']=+this.value;calcInvChanged(\''+gid+'\')"></td>';
+      }else if(c==='name'||c==='institution'||c==='taxBenefit'||c==='owner'||c==='assetClass'){
+        h+='<td><input class="bs-name" value="'+(item[c]||'')+'" onchange="invData.find(x=>x.id===\''+gid+'\').items['+i+'][\''+c+'\']=this.value"></td>';
+      }else{
+        h+='<td>'+(item[c]||'-')+'</td>';
+      }
+    });
+    h+='<td><button style="color:var(--dng);background:none;border:none;cursor:pointer;font-size:16px" onclick="removeInvRow(\''+gid+'\','+i+')">✕</button></td>';
+    h+='</tr>';
+  });
+  // Total row
+  const tot=invGroupTotal(gid);
+  h+='<tr style="font-weight:700;border-top:2px solid var(--ac);background:var(--hovbg)">';
+  h+='<td colspan="'+(g.cols.length-1)+'">รวมมูลค่า</td>';
+  h+='<td class="tr num" id="inv_tot_'+gid+'">฿'+F(tot)+'</td><td></td></tr>';
+  h+='</tbody></table></div>';
+  // NAV data link button for this group
+  h+=navDataLinkBtn(gid);
+  document.getElementById('inv_body_'+gid).innerHTML=h;
+}
+function addInvRow(gid){
+  const g=invData.find(x=>x.id===gid);if(!g)return;
+  const defaults={assetClass:'-',name:'รายการใหม่',institution:'-',taxBenefit:'-',qty:0,costPrice:0,mktPrice:0,mktVal:0,expReturn:0.05,owner:'ตนเอง',incomePerMonth:0,debtBalance:0};
+  g.items.push({...defaults});renderInvGroup(gid);
+}
+function removeInvRow(gid,i){
+  const g=invData.find(x=>x.id===gid);if(!g)return;
+  if(confirm('ลบ "'+g.items[i].name+'" ?')){g.items.splice(i,1);calcInvChanged(gid);renderInvGroup(gid);}
+}
+function renderInvSummary(){
+  let h='<div class="g4" style="margin-bottom:20px">';
+  const grand=invData.reduce((s,g)=>s+invGroupTotal(g.id),0);
+  invData.forEach(g=>{
+    const tot=invGroupTotal(g.id);
+    const pct=grand>0?(tot/grand*100).toFixed(1):0;
+    h+='<div class="kpi"><div class="lb">'+g.title.replace(/^\d+\.\s*/,'')+'</div><div class="vl" style="font-size:calc(var(--fs)+2px)">฿'+F(tot)+'</div><div class="ch">'+pct+'% ของพอร์ต</div></div>';
+  });
+  h+='<div class="kpi" style="border-color:var(--gold)"><div class="lb">รวมสินทรัพย์ลงทุนทั้งหมด</div><div class="vl" style="font-size:calc(var(--fs)+4px);color:var(--gold)">฿'+F(grand)+'</div></div>';
+  h+='</div>';
+  document.getElementById('invSummaryKPI').innerHTML=h;
+  // Pie chart
+  const labels=invData.map(g=>g.title.replace(/^\d+\.\s*/,''));
+  const vals=invData.map(g=>invGroupTotal(g.id));
+  uChart('cInvPie','doughnut',{labels,datasets:[{data:vals,backgroundColor:['#38bdf8','#818cf8','#34d399','#fbbf24','#a78bfa','#fb923c','#94a3b8'],borderWidth:0}]},{cutout:'60%',plugins:{legend:{position:'bottom',labels:{padding:12,usePointStyle:true,font:{size:11}}}}});
+}
+
+// ===== PHASE 5: NAV DATA LINKS =====
+function navDataLinkBtn(gid){
+  const links={
+    stock:[
+      {label:'Settrade.com — ราคาหุ้น SET',url:'https://www.settrade.com/th/equities/quote/overview'},
+      {label:'SET.or.th — ข้อมูลตลาดหลักทรัพย์',url:'https://www.set.or.th/th/market/product/stock/quote/-.html'}
+    ],
+    fund:[
+      {label:'AIMC — NAV กองทุนรวม',url:'https://www.aimc.or.th/nav/'},
+      {label:'Finnomena — กองทุนรวม',url:'https://www.finnomena.com/fund/'},
+      {label:'Mornigstar TH — NAV/Performance',url:'https://www.morningstar.in.th/th/funds/'}
+    ],
+    alt:[
+      {label:'ราคาทองคำ — สมาคมค้าทองคำ',url:'https://www.goldtraders.or.th/'},
+      {label:'Goldprice.org — ราคาทองคำ USD',url:'https://goldprice.org/gold-price-thailand.html'}
+    ],
+    prop:[
+      {label:'DDProperty — ราคาอสังหาริมทรัพย์',url:'https://www.ddproperty.com/'},
+      {label:'REIC — ดัชนีราคาที่อยู่อาศัย',url:'https://www.reic.or.th/'}
+    ],
+    pvd:[
+      {label:'SEC — มูลค่าหน่วย PVD',url:'https://www.sec.or.th/TH/Pages/PVD/PVDFundInfo.aspx'},
+      {label:'ตรวจสอบกับฝ่าย HR',url:'#'}
+    ],
+    liq:[
+      {label:'อัตราดอกเบี้ยเงินฝาก — BOT',url:'https://www.bot.or.th/th/financial-institutions/banking-information/deposit-lending-rates.html'}
+    ],
+    dep:[
+      {label:'อัตราดอกเบี้ยเงินฝาก — BOT',url:'https://www.bot.or.th/th/financial-institutions/banking-information/deposit-lending-rates.html'},
+      {label:'ราคาสลากออมสิน',url:'https://www.gsb.or.th/products/saving/gsb-prize-bond/'}
+    ]
+  };
+  const ls=links[gid];if(!ls||!ls.length)return '';
+  let h='<div style="margin-top:12px;padding:10px 14px;background:var(--bg3);border:1px dashed var(--cb);border-radius:10px;font-size:calc(var(--fs)-4px)">';
+  h+='<span style="color:var(--tx3)">🔗 แหล่งข้อมูลตรวจสอบ NAV/ราคา: </span>';
+  ls.forEach(l=>{
+    h+='<a href="'+l.url+'" target="_blank" rel="noopener" style="color:var(--ac);margin-right:14px;text-decoration:underline">'+l.label+'</a>';
+  });
+  h+='</div>';
+  return h;
 }
 
 // ===== EXPORT / IMPORT =====
@@ -624,7 +895,6 @@ function importData(ev){
       if(d.retParams){
         document.getElementById('r_curExp').value=d.retParams.curExp;
         document.getElementById('r_inf').value=d.retParams.inf;
-
         document.getElementById('r_retAge').value=d.retParams.retAge;
         document.getElementById('r_endAge').value=d.retParams.endAge;
         document.getElementById('r_retRtn').value=d.retParams.retRtn;
@@ -1034,8 +1304,55 @@ function renderInvestment(){
 }
 
 // ===== RECALC & INIT =====
+function renderInvLiab(){
+  let h='<div style="margin-bottom:8px;font-size:calc(var(--fs)-3px);color:var(--tx3)">หนี้สินค้างชำระทั้งหมด — sync ไปงบดุลอัตโนมัติ</div>';
+  h+='<div class="tw"><table><thead><tr><th>กลุ่ม</th><th>รายการ</th><th class="tr">อัตราดอกเบี้ย%</th><th class="tr">ผ่อน/เดือน</th><th class="tr">ยอดค้างชำระ (฿)</th><th></th></tr></thead><tbody>';
+  invLiabs.forEach((item,i)=>{
+    h+='<tr>';
+    h+='<td><input class="bs-name" value="'+item.grp+'" onchange="invLiabs['+i+'].grp=this.value;syncInvLiabToBS()"></td>';
+    h+='<td><input class="bs-name" value="'+item.name+'" onchange="invLiabs['+i+'].name=this.value;syncInvLiabToBS()"></td>';
+    h+='<td><input class="bs-input" style="width:72px" type="number" step="0.01" value="'+((item.rate||0)*100).toFixed(2)+'" onchange="invLiabs['+i+'].rate=+this.value/100"> %</td>';
+    h+='<td><input class="bs-input" style="width:100px" type="number" value="'+(item.payPerMonth||0)+'" onchange="invLiabs['+i+'].payPerMonth=+this.value"></td>';
+    h+='<td><input class="bs-input" type="number" value="'+(item.val||0)+'" onchange="invLiabs['+i+'].val=+this.value;syncInvLiabToBS()"></td>';
+    h+='<td><button style="color:var(--dng);background:none;border:none;cursor:pointer;font-size:16px" onclick="removeInvLiab('+i+')">✕</button></td>';
+    h+='</tr>';
+  });
+  const totL=invLiabs.reduce((s,i)=>s+(i.val||0),0);
+  h+='<tr style="font-weight:700;border-top:2px solid var(--dng);background:var(--hovbg)"><td colspan=4>รวมหนี้สินทั้งหมด</td><td class="tr num">฿'+F(totL)+'</td><td></td></tr>';
+  h+='</tbody></table></div>';
+  h+='<div style="margin-top:12px;padding:10px 14px;background:var(--bg3);border:1px dashed var(--cb);border-radius:10px;font-size:calc(var(--fs)-4px)">';
+  h+='<span style="color:var(--tx3)">🔗 แหล่งข้อมูลหนี้สิน: </span>';
+  h+='<a href="https://app.bot.or.th/BTWS_STAT/statistics/BOTWEBSTAT.aspx?reportID=884&language=TH" target="_blank" rel="noopener" style="color:var(--ac);margin-right:14px;text-decoration:underline">BOT — อัตราดอกเบี้ยเงินกู้</a>';
+  h+='</div>';
+  document.getElementById('inv_body_liab').innerHTML=h;
+}
+function syncInvLiabToBS(){
+  invLiabs.forEach(il=>{
+    const found=bsLiabs.find(b=>b.name===il.name&&b.grp===il.grp);
+    if(found){found.val=il.val;}
+    else{
+      // Add new line if not found
+      const exist=bsLiabs.find(b=>b.name===il.name);
+      if(exist)exist.val=il.val;
+    }
+  });
+  renderBalanceSheet();renderDashKPI();renderRatioSnap();renderRatioTable();
+}
+function addInvLiab(){
+  invLiabs.push({grp:'หนี้สินระยะยาว',name:'รายการใหม่',val:0,rate:0,payPerMonth:0});
+  renderInvLiab();
+}
+function removeInvLiab(i){
+  if(confirm('ลบ "'+invLiabs[i].name+'" ?')){invLiabs.splice(i,1);syncInvLiabToBS();renderInvLiab();}
+}
+function renderInvAll(){
+  invData.forEach(g=>renderInvGroup(g.id));
+  renderInvLiab();
+  syncInvToBS();syncInvLiabToBS();
+  renderInvSummary();
+}
 function recalcAll(){renderDashKPI();renderDashCharts();renderRatioSnap();renderRatioTable();recalcRetirement();renderInvestment();}
-function initAll(){renderProfile();renderAssumptions();renderDashKPI();renderRatioSnap();renderDashCharts();renderBalanceSheet();renderCashFlow();renderRatioTable();recalcRetirement();renderInvestment();}
+function initAll(){renderProfile();renderAssumptions();renderDashKPI();renderRatioSnap();renderDashCharts();renderBalanceSheet();renderCashFlow();renderRatioTable();recalcRetirement();renderInvestment();renderInvAll();}
 initAll();
 </script>
 </body>

@@ -968,6 +968,7 @@
             /* Show all CI slides when printing — ยกเว้น slide ที่ถูกซ่อน */
             .ci-slide { display: block !important; page-break-after: always; }
             .ci-slide.ci-slide-hidden { display: none !important; page-break-after: auto; }
+            .ci-slide.ci-print-exclude { display: none !important; page-break-after: auto; }
             .ci-slide:last-child { page-break-after: auto; }
             .ci-slide-header { display: none !important; }
             .ci-slide-dots { display: none !important; }
@@ -3908,7 +3909,8 @@ function printCISlides(fromSlide, toSlide) {
     allSlides.forEach((s, i) => {
         const slideNum = i + 1;
         const inRange = (fromSlide == null) || (slideNum >= fromSlide && slideNum <= toSlide);
-        s.style.display = (CI_HIDDEN.has(slideNum) || !inRange) ? 'none' : 'block';
+        s.style.display = CI_HIDDEN.has(slideNum) ? 'none' : 'block';
+        s.classList.toggle('ci-print-exclude', !inRange);
     });
 
     window.print();
@@ -3920,6 +3922,7 @@ function printCISlides(fromSlide, toSlide) {
         if (tabNav) tabNav.style.display = '';
         allSlides.forEach((s, i) => {
             const slideNum = i + 1;
+            s.classList.remove('ci-print-exclude');
             if (CI_HIDDEN.has(slideNum)) {
                 s.style.display = 'none';
                 s.classList.add('ci-slide-hidden');

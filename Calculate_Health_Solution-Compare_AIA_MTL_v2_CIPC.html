@@ -1193,7 +1193,7 @@
                     <div class="grid grid-cols-2 gap-2">
                         <div class="field">
                             <label class="field-label">อายุ (ปี)</label>
-                            <input type="number" id="age-1" value="35" min="1" max="80" class="premium-input" oninput="app.calculate()">
+                            <input type="number" id="age-1" value="35" min="1" max="99" class="premium-input" oninput="app.calculate()">
                         </div>
                         <div class="field">
                             <label class="field-label">ทุนหลัก (บาท)</label>
@@ -1256,7 +1256,7 @@
                     <div class="grid grid-cols-2 gap-2">
                         <div class="field">
                             <label class="field-label">อายุ (ปี)</label>
-                            <input type="number" id="age-2" value="35" min="1" max="80" class="premium-input" oninput="app.calculate()">
+                            <input type="number" id="age-2" value="35" min="1" max="99" class="premium-input" oninput="app.calculate()">
                         </div>
                         <div class="field">
                             <label class="field-label">ทุนหลัก (บาท)</label>
@@ -1319,7 +1319,7 @@
                     <div class="grid grid-cols-2 gap-2">
                         <div class="field">
                             <label class="field-label">อายุ (ปี)</label>
-                            <input type="number" id="age-3" value="35" min="1" max="80" class="premium-input" oninput="app.calculate()">
+                            <input type="number" id="age-3" value="35" min="1" max="99" class="premium-input" oninput="app.calculate()">
                         </div>
                         <div class="field">
                             <label class="field-label">ทุนหลัก (บาท)</label>
@@ -3411,11 +3411,12 @@ const app = {
                 const cvInputId = `cv-input-${id}-${yr}`;
                 const plId = `cv-pl-${id}-${yr}`;
                 const accumId = `cv-accum-${id}-${yr}`;
-                const savedCV = this.state.cvValues[`${id}-${yr}`] || '0';
+                const savedCV = this.state.cvValues[`${id}-${yr}`] || '';
                 const savedCVNum = parseFloat(String(savedCV).replace(/,/g, '')) || 0;
+                const hasCVEntry = savedCV !== '' && savedCV !== '0' && savedCVNum > 0;
                 const initPL = savedCVNum - accumPrem;
-                const initPLClass = initPL >= 0 ? 'cv-profit' : 'cv-loss';
-                const initPLText = initPL >= 0 ? `+${fmt(initPL)} ▲` : `${fmt(initPL)} ▼`;
+                const initPLClass = !hasCVEntry ? '' : (initPL >= 0 ? 'cv-profit' : 'cv-loss');
+                const initPLText = !hasCVEntry ? '–' : (initPL >= 0 ? `+${fmt(initPL)} ▲` : `${fmt(initPL)} ▼`);
 
                 containerHtml += `
                     <tr>
@@ -3424,6 +3425,7 @@ const app = {
                         <td>
                             <input type="text" id="${cvInputId}" class="cv-input" value="${savedCV}"
                                    inputmode="numeric"
+                                   placeholder="กรอก CV"
                                    onfocus="this.select()"
                                    oninput="app.updateCVRow(${id}, ${yr})">
                         </td>
@@ -3457,15 +3459,21 @@ const app = {
         // บันทึกค่าไว้ใน state เพื่อกันหาย
         this.state.cvValues[`${id}-${yr}`] = cvInput.value;
 
-        const pl = cvVal - accumPrem;
         const plEl = document.getElementById(`cv-pl-${id}-${yr}`);
+        const hasValue = rawVal !== '' && cvVal > 0;
 
-        if (pl >= 0) {
-            plEl.className = 'cv-profit';
-            plEl.innerHTML = `+${this.formatMoney(pl)} ▲`;
+        if (!hasValue) {
+            plEl.className = '';
+            plEl.innerHTML = '–';
         } else {
-            plEl.className = 'cv-loss';
-            plEl.innerHTML = `${this.formatMoney(pl)} ▼`;
+            const pl = cvVal - accumPrem;
+            if (pl >= 0) {
+                plEl.className = 'cv-profit';
+                plEl.innerHTML = `+${this.formatMoney(pl)} ▲`;
+            } else {
+                plEl.className = 'cv-loss';
+                plEl.innerHTML = `${this.formatMoney(pl)} ▼`;
+            }
         }
     }
 };
@@ -3854,13 +3862,13 @@ function ciSlide(dir) {
     if (nextIdx >= 0 && nextIdx < visible.length) ciGoTo(visible[nextIdx]);
 }
 
-// ซ่อน/แสดง slide 7, 8 ตามเงื่อนไขอายุ
+// ซ่อน/แสดง slide 7, 8 ตามเงื่อนไขอายุ (ตรวจ 3 options)
 function updateCIVitalitySlides() {
-    const age1 = parseInt((document.getElementById('age-1') || {}).value) || 0;
-    const age2 = parseInt((document.getElementById('age-2') || {}).value) || 0;
-    // ซ่อน slide 7,8 เฉพาะเมื่อ ทั้ง option1 และ option2 มีอายุ < 16
+    const ages = [1, 2, 3].map(id => parseInt((document.getElementById(`age-${id}`) || {}).value) || 0);
+    // ซ่อน slide 7,8 เฉพาะเมื่อ ทุก option ที่กรอกอายุ (> 0) มีอายุ < 16
     // (ถ้ามีใครอายุ ≥ 16 แม้เพียงคนเดียว ให้แสดง)
-    const hideVitality = (age1 > 0 && age1 < 16) && (age2 > 0 && age2 < 16);
+    const activeAges = ages.filter(a => a > 0);
+    const hideVitality = activeAges.length > 0 && activeAges.every(a => a < 16);
     [7, 8].forEach(n => {
         const el = document.getElementById(`ci-s${n}`);
         const dot = document.getElementById(`ci-dot-${n}`);
@@ -3868,13 +3876,28 @@ function updateCIVitalitySlides() {
             CI_HIDDEN.add(n);
             if (el)  { el.classList.add('ci-slide-hidden');  el.style.display = 'none'; }
             if (dot) dot.style.display = 'none';
-            if (ciCurrent === n) ciGoTo(n - 1);
         } else {
             CI_HIDDEN.delete(n);
             if (el)  { el.classList.remove('ci-slide-hidden'); el.style.display = ''; }
             if (dot) dot.style.display = '';
         }
     });
+    // ถ้า slide ปัจจุบันถูกซ่อน ให้ไปที่ slide ที่ใกล้ที่สุด
+    if (CI_HIDDEN.has(ciCurrent)) {
+        const visible = getVisibleSlides();
+        if (visible.length > 0) {
+            const nearestLower = visible.filter(v => v < ciCurrent);
+            const target = nearestLower.length > 0 ? nearestLower[nearestLower.length - 1] : visible[0];
+            const prevEl = document.getElementById(`ci-s${ciCurrent}`);
+            if (prevEl) prevEl.classList.remove('active');
+            ciCurrent = target;
+            const nextEl = document.getElementById(`ci-s${ciCurrent}`);
+            if (nextEl) nextEl.classList.add('active');
+            document.querySelectorAll('.ci-dot').forEach((d, i) => {
+                d.classList.toggle('active', i + 1 === ciCurrent);
+            });
+        }
+    }
     // ซ่อน/แสดงข้อความ "หน้าที่ 7,8 จะเกี่ยวกับ Bonus สุขภาพ"
     const noteBonus   = document.getElementById('cipc-note-bonus');
     const noteNobonus = document.getElementById('cipc-note-nobonus');

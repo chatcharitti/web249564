@@ -771,29 +771,6 @@
         .cipc-slogan-main { font-size: 1.92em; font-weight: 800; line-height: 1.45; }
         .s-hl1 { color: #1a6dd4; } .s-hl2 { color: #e11d48; }
 
-        .cipc-growth-box {
-            margin-top: 16px; padding: 16px 24px;
-            background: linear-gradient(135deg, rgba(16,185,129,0.12), rgba(16,185,129,0.04));
-            border: 1.5px solid #10b981; border-radius: var(--r-md);
-            text-align: center;
-            -webkit-print-color-adjust: exact; print-color-adjust: exact;
-        }
-        .cipc-growth-title {
-            font-size: 1.14em; font-weight: 800; color: #047857; margin-bottom: 8px;
-        }
-        .cipc-growth-body {
-            font-size: 0.93em; color: var(--t-secondary); line-height: 1.7;
-        }
-        .cipc-growth-body mark {
-            background: #fde047; color: #78350f; padding: 0 4px;
-            border-radius: 3px; font-weight: 700;
-        }
-        .cipc-growth-tip {
-            margin-top: 10px; font-size: 0.92em; font-weight: 700; color: #b45309;
-            background: rgba(245,158,11,0.14);
-            padding: 9px 14px; border-radius: var(--r-sm);
-        }
-
         /* Image slides */
         .ci-img-slide {
             width: 100%; min-height: 600px;
@@ -986,6 +963,107 @@
         .ig-mpci-vs-note .hl-green { color: #4ade80; font-weight: 700; }
         .ig-mpci-vs-note .hl-red   { color: #f87171; font-weight: 700; }
         .ig-mpci-note { font-size: 9px; color: rgba(245,248,252,0.35); margin-top: 6px; text-align: center; font-family: 'Sarabun', sans-serif; }
+
+        /* ============================================
+           VITALITY BONUS TAB — Light Premium Theme
+           ============================================ */
+        .vb-container { max-width: 1200px; margin: 0 auto; padding: 0 0 40px; }
+        /* Header Card — Light with gold accent */
+        .vb-header-card {
+            background: linear-gradient(135deg, #f8f6f0 0%, #fdf8ee 100%);
+            border-radius: var(--r-xl); padding: 20px 26px 16px; margin-bottom: 18px;
+            border: 2px solid #d4af37;
+            -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            box-shadow: 0 2px 12px rgba(212,175,55,0.15);
+        }
+        .vb-header-title { font-size: 1.25em; font-weight: 800; color: #1a2f4f; margin-bottom: 3px; }
+        .vb-header-sub { font-size: 0.82em; color: #5a6a7e; margin-bottom: 14px; }
+        .vb-tier-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+        .vb-tier-pill { display: flex; align-items: center; gap: 7px; padding: 5px 12px; border-radius: 20px; font-size: 0.81em; font-weight: 700; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .vb-tier-pill.bronze  { background:#fef3e8; color:#92400e; border:1.5px solid #d97706; }
+        .vb-tier-pill.silver  { background:#f1f5f9; color:#475569; border:1.5px solid #94a3b8; }
+        .vb-tier-pill.gold    { background:#fffbeb; color:#92400e; border:1.5px solid #d4af37; }
+        .vb-tier-pill.plat    { background:#eff6ff; color:#1e40af; border:1.5px solid #3b82f6; }
+        .vb-info-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:10px; margin-top:12px; }
+        .vb-info-box { background:#fff; border-radius:var(--r-md); padding:10px 14px; border:1px solid #e5d9a3; }
+        .vb-info-label { font-size:0.72em; color:#6b7280; letter-spacing:0.08em; text-transform:uppercase; font-weight:600; }
+        .vb-info-value { font-size:1.05em; font-weight:800; color:#1a2f4f; margin-top:3px; }
+        .vb-info-value.gold { color:#92400e; }
+        /* Font-size control for Vitality tab */
+        .vb-font-ctrl { display:flex; align-items:center; gap:5px; }
+        .vb-font-btn { width:26px;height:26px;border-radius:var(--r-sm);border:1px solid var(--b-soft);background:var(--bg-surface-2);color:var(--t-primary);cursor:pointer;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;transition:all 0.15s;font-family:inherit; }
+        .vb-font-btn:hover { background:var(--c-primary-faint); color:var(--c-primary); }
+        .vb-font-lbl { min-width:34px;text-align:center;font-size:11px;font-weight:700;color:var(--t-secondary); }
+        /* Summary cards — Light */
+        .vb-summary { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:16px; }
+        .vb-sum-card { padding:12px 14px; border-radius:var(--r-md); border:1.5px solid; text-align:center; background:#fff; }
+        .vb-sum-card .sum-label { font-size:0.72em; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:5px; }
+        .vb-sum-card .sum-val   { font-size:1.1em; font-weight:800; font-variant-numeric:tabular-nums; }
+        .vb-sum-card .sum-sub   { font-size:0.71em; margin-top:3px; color:#6b7280; }
+        .vb-sum-card.plat   { border-color:#2563eb; background:#eff6ff; }
+        .vb-sum-card.plat   .sum-label,.vb-sum-card.plat   .sum-val { color:#1d4ed8; }
+        .vb-sum-card.gold   { border-color:#d97706; background:#fffbeb; }
+        .vb-sum-card.gold   .sum-label,.vb-sum-card.gold   .sum-val { color:#92400e; }
+        .vb-sum-card.silver { border-color:#64748b; background:#f8fafc; }
+        .vb-sum-card.silver .sum-label,.vb-sum-card.silver .sum-val { color:#334155; }
+        .vb-sum-card.rand   { border-color:#7c3aed; background:#f5f3ff; }
+        .vb-sum-card.rand   .sum-label,.vb-sum-card.rand   .sum-val { color:#5b21b6; }
+        /* Table — Light */
+        .vb-table-wrap { overflow-x:auto; border-radius:var(--r-lg); border:1.5px solid #d4af37; box-shadow:0 2px 8px rgba(212,175,55,0.1); }
+        .vb-table { width:100%; border-collapse:collapse; font-size:0.88em; background:#fff; }
+        .vb-table thead tr { background:#1a2f4f; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+        .vb-table thead th { padding:9px 11px; text-align:center; font-size:0.80em; font-weight:700; white-space:nowrap; border-bottom:2px solid #d4af37; }
+        .vb-table thead th.th-base   { color:#e2e8f0; }
+        .vb-table thead th.th-plat   { color:#93c5fd; }
+        .vb-table thead th.th-gold   { color:#fcd34d; }
+        .vb-table thead th.th-silver { color:#cbd5e1; }
+        .vb-table thead th.th-random { color:#c4b5fd; }
+        .vb-table tbody tr { border-bottom:1px solid #f1f5f9; transition:background 0.1s; }
+        .vb-table tbody tr:hover { background:#fafbfc; }
+        .vb-table td { padding:7px 11px; text-align:center; color:#1a2f4f; vertical-align:middle; }
+        .vb-table td.td-yr   { font-weight:600; color:#475569; font-size:0.85em; }
+        .vb-table td.td-age  { color:#94a3b8; font-size:0.83em; }
+        .vb-table td.td-prem { font-weight:600; font-variant-numeric:tabular-nums; color:#374151; }
+        .vb-table tr.payout-row { background:#fffbeb !important; }
+        .vb-table tr.payout-row td { font-weight:700; }
+        /* bonus colors — darker for light bg */
+        .td-plat-bonus   { color:#1d4ed8; font-weight:700; font-variant-numeric:tabular-nums; }
+        .td-gold-bonus   { color:#92400e; font-weight:700; font-variant-numeric:tabular-nums; }
+        .td-silver-bonus { color:#334155; font-weight:600; font-variant-numeric:tabular-nums; }
+        .td-rand-bonus   { color:#5b21b6; font-weight:700; font-variant-numeric:tabular-nums; }
+        .payout-badge { display:inline-block; padding:2px 6px; border-radius:4px; font-size:0.75em; font-weight:800; margin-left:3px; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+        .payout-badge.plat   { background:#dbeafe; color:#1d4ed8; }
+        .payout-badge.gold   { background:#fef3c7; color:#92400e; }
+        .payout-badge.silver { background:#f1f5f9; color:#334155; }
+        .payout-badge.rand   { background:#ede9fe; color:#5b21b6; }
+        .vb-note { font-size:0.75em; color:#6b7280; line-height:1.65; margin-top:12px; }
+        .vb-reshuffle-btn { padding:6px 14px; background:#f5f3ff; color:#5b21b6; border:1.5px solid #7c3aed; border-radius:var(--r-md); cursor:pointer; font-family:inherit; font-size:12px; font-weight:700; transition:all 0.15s; display:inline-flex; align-items:center; gap:6px; }
+        .vb-reshuffle-btn:hover { background:#ede9fe; }
+        /* Campaign banner — Light */
+        .vb-campaign-banner {
+            background: #fffbeb; border: 2px solid #d97706; border-radius: var(--r-md);
+            padding: 12px 18px; margin-bottom: 14px; display: none;
+            -webkit-print-color-adjust:exact; print-color-adjust:exact;
+        }
+        .vb-campaign-banner.show { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+        .vb-campaign-title { font-size: 0.92em; font-weight: 800; color: #92400e; }
+        .vb-campaign-detail { font-size: 0.82em; color: #374151; line-height: 1.55; }
+        .vb-campaign-val { font-size: 1.05em; font-weight: 800; color: #15803d; white-space: nowrap; }
+        /* IRR CSS removed */
+        /* Controls */
+        .vb-ctrl-bar { display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-bottom:12px; padding:9px 14px; background:#f8fafc; border-radius:var(--r-md); border:1px solid #e2e8f0; }
+        .vb-ctrl-label { display:flex; align-items:center; gap:7px; font-size:0.82em; color:#374151; cursor:pointer; user-select:none; font-weight:500; }
+        .vb-ctrl-label input[type=checkbox] { width:15px; height:15px; cursor:pointer; accent-color:#1a2f4f; }
+        .vb-print-btn { padding:6px 14px; background:#f0fdf4; color:#15803d; border:1.5px solid #16a34a; border-radius:var(--r-md); cursor:pointer; font-family:inherit; font-size:12px; font-weight:700; transition:all 0.15s; display:inline-flex; align-items:center; gap:6px; }
+        .vb-print-btn:hover { background:#dcfce7; }
+        @media print {
+            .vb-ctrl-bar { display:none !important; }
+            .vb-header-card { background:#fff8e1 !important; border:2px solid #d4af37 !important; }
+            .vb-campaign-banner.show { display:flex !important; }
+            .vb-table thead tr { background:#1a2f4f !important; }
+            .vb-table tr.payout-row { background:#fffbeb !important; }
+        }
+
         @media print {
             .main-tab-nav { display: none !important; }
             /* Show all CI slides when printing — ยกเว้น slide ที่ถูกซ่อน */
@@ -1106,6 +1184,10 @@
         <button class="main-tab-btn" onclick="switchMainTab('tab-infographic')" id="tab-btn-infographic">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
             CI Infographic
+        </button>
+        <button class="main-tab-btn" onclick="switchMainTab('tab-vitality')" id="tab-btn-vitality">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            Vitality Bonus
         </button>
     </div>
     <div class="main-tab-wrapper">
@@ -1646,65 +1728,138 @@
                 <!-- SLIDE 1: Premium Summary -->
                 <div class="ci-slide active" id="ci-s1">
                   <div class="cipc-slide1">
-                    <div class="cipc-s1-title">AIA CI Procare · ตัวอย่างเบี้ยและผลประโยชน์</div>
-                    <div class="cipc-s1-subtitle">ข้อมูลอ้างอิงจาก Option 1 และ Option 2 · ช่องสีทองสามารถกรอกข้อมูลเองได้</div>
 
-                    <table class="cipc-main-table">
-                      <thead>
-                        <tr>
-                          <th style="width:13%">เบี้ยต่อปี</th>
-                          <th style="width:14%">รวมเบี้ย<br>20 ปี</th>
-                          <th class="hl-col" style="width:15%">ซื้อก่อน 30 มิ.ย.<br><span style="font-size:0.85em;">เหลือเบี้ยรวม 19 ปี</span></th>
-                          <th style="width:12%">อายุที่เริ่ม<br>คุ้มทุน</th>
-                          <th style="width:16%">อายุที่ถอนได้<br>ณ ปีที่คุ้มทุน</th>
-                          <th style="width:12%">อายุที่ถอนได้<br>มากที่สุด</th>
-                          <th style="width:18%">ยอดเงิน<br>ณ อายุที่มากที่สุด</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr class="row-opt1">
-                          <td id="cipc-prem1">–</td>
-                          <td id="cipc-total20y1">–</td>
-                          <td class="val-hl" id="cipc-total19y1">–</td>
-                          <td class="cell-ed"><input class="cipc-edit-input" id="cipc-bk-yr1" type="text" placeholder="ปีที่…"></td>
-                          <td class="cell-ed"><input class="cipc-edit-input" id="cipc-bk-amt1" type="text" placeholder="0"></td>
-                          <td class="cell-ed"><input class="cipc-edit-input" id="cipc-mx-yr1" type="text" placeholder="ปีที่…"></td>
-                          <td class="cell-ed"><input class="cipc-edit-input" id="cipc-mx-amt1" type="text" placeholder="0"></td>
-                        </tr>
-                        <tr class="row-opt2">
-                          <td id="cipc-prem2">–</td>
-                          <td id="cipc-total20y2">–</td>
-                          <td class="val-hl" id="cipc-total19y2">–</td>
-                          <td class="cell-ed"><input class="cipc-edit-input" id="cipc-bk-yr2" type="text" placeholder="ปีที่…"></td>
-                          <td class="cell-ed"><input class="cipc-edit-input" id="cipc-bk-amt2" type="text" placeholder="0"></td>
-                          <td class="cell-ed"><input class="cipc-edit-input" id="cipc-mx-yr2" type="text" placeholder="ปีที่…"></td>
-                          <td class="cell-ed"><input class="cipc-edit-input" id="cipc-mx-amt2" type="text" placeholder="0"></td>
-                        </tr>
-                      </tbody>
-                    </table>
+                    <!-- Header + Version Toggle -->
+                    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
+                      <div>
+                        <div class="cipc-s1-title" style="margin-bottom:2px;">AIA CI ProCare · ตัวอย่างเบี้ยและผลประโยชน์</div>
+                        <div class="cipc-s1-subtitle" id="cipc-mode-subtitle">ข้อมูลอ้างอิงจาก Option 1 และ Option 2 · คำนวณอัตโนมัติจาก Rate Table</div>
+                      </div>
+                      <div style="display:flex;align-items:center;gap:5px;background:var(--bg-surface);border:1px solid var(--b-soft);border-radius:var(--r-md);padding:4px;flex-shrink:0;">
+                        <button id="cipc-mode-auto-btn" onclick="setCIPCMode('auto')"
+                          style="padding:5px 11px;border-radius:6px;border:none;cursor:pointer;font-family:inherit;font-size:11px;font-weight:700;background:var(--c-primary);color:#fff;transition:all 0.15s;">
+                          ⚡ อัตโนมัติ
+                        </button>
+                        <button id="cipc-mode-manual-btn" onclick="setCIPCMode('manual')"
+                          style="padding:5px 11px;border-radius:6px;border:none;cursor:pointer;font-family:inherit;font-size:11px;font-weight:700;background:transparent;color:var(--t-secondary);transition:all 0.15s;">
+                          ✏️ ใส่เองทั้งหมด
+                        </button>
+                        <button onclick="recalcCIPC()"
+                          style="padding:5px 10px;border-radius:6px;border:1px solid var(--b-gold);cursor:pointer;font-family:inherit;font-size:11px;font-weight:700;background:rgba(212,175,55,0.08);color:var(--c-primary);">
+                          🔄 คำนวณใหม่
+                        </button>
+                      </div>
+                    </div>
+
+                    <!-- TABLE: Auto Mode (Read-only display) -->
+                    <div id="cipc-table-auto">
+                      <table class="cipc-main-table">
+                        <thead>
+                          <tr>
+                            <th style="width:13%">เบี้ยต่อปี</th>
+                            <th style="width:14%">รวมเบี้ย<br>20 ปี</th>
+                            <th class="hl-col" style="width:15%">ซื้อก่อน 30 มิ.ย.<br><span style="font-size:0.85em;">เหลือเบี้ยรวม 19 ปี</span></th>
+                            <th style="width:12%">ปีที่เริ่ม<br>คุ้มทุน</th>
+                            <th style="width:16%">มูลค่า<br>ณ ปีคุ้มทุน</th>
+                            <th style="width:12%">อายุ<br>ณ ปีที่ 35</th>
+                            <th style="width:18%">มูลค่าเวนคืน<br>ณ ปีที่ 35</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr class="row-opt1">
+                            <td id="cipc-prem1">–</td>
+                            <td id="cipc-total20y1">–</td>
+                            <td class="val-hl" id="cipc-total19y1">–</td>
+                            <td style="font-weight:700;color:var(--c-primary);padding:8px 10px;" id="cipc-bk-yr1-disp">–</td>
+                            <td style="font-weight:700;color:var(--c-primary);padding:8px 10px;" id="cipc-bk-amt1-disp">–</td>
+                            <td style="font-weight:700;padding:8px 10px;" id="cipc-mx-yr1-cell">–</td>
+                            <td style="font-weight:800;font-size:1.08em;color:var(--c-primary);padding:8px 10px;" id="cipc-mx-amt1-disp">–</td>
+                          </tr>
+                          <tr class="row-opt2">
+                            <td id="cipc-prem2">–</td>
+                            <td id="cipc-total20y2">–</td>
+                            <td class="val-hl" id="cipc-total19y2">–</td>
+                            <td style="font-weight:700;color:var(--c-mtl);padding:8px 10px;" id="cipc-bk-yr2-disp">–</td>
+                            <td style="font-weight:700;color:var(--c-mtl);padding:8px 10px;" id="cipc-bk-amt2-disp">–</td>
+                            <td style="font-weight:700;padding:8px 10px;" id="cipc-mx-yr2-cell">–</td>
+                            <td style="font-weight:800;font-size:1.08em;color:var(--c-mtl);padding:8px 10px;" id="cipc-mx-amt2-disp">–</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <div style="font-size:0.70em;color:var(--t-muted);margin-top:3px;">⚡ CV คำนวณจาก Rate Table AIA CI ProCare · กด "คำนวณใหม่" หลังเปลี่ยนอายุ/ทุน</div>
+                    </div>
+
+                    <!-- TABLE: Manual Mode (Editable inputs) -->
+                    <div id="cipc-table-manual" style="display:none;">
+                      <table class="cipc-main-table">
+                        <thead>
+                          <tr>
+                            <th style="width:13%">เบี้ยต่อปี</th>
+                            <th style="width:14%">รวมเบี้ย<br>20 ปี</th>
+                            <th class="hl-col" style="width:15%">ซื้อก่อน 30 มิ.ย.<br><span style="font-size:0.85em;">เหลือเบี้ยรวม 19 ปี</span></th>
+                            <th style="width:12%">อายุที่เริ่ม<br>คุ้มทุน</th>
+                            <th style="width:16%">มูลค่า<br>ณ ปีคุ้มทุน</th>
+                            <th style="width:12%">อายุที่ถอนได้<br>มากที่สุด</th>
+                            <th style="width:18%">ยอดเงิน<br>ณ อายุมากที่สุด</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr class="row-opt1">
+                            <td id="cipc-prem1m">–</td>
+                            <td id="cipc-total20y1m">–</td>
+                            <td class="val-hl" id="cipc-total19y1m">–</td>
+                            <td class="cell-ed"><input class="cipc-edit-input" id="cipc-bk-yr1" type="text" placeholder="ปีที่…" oninput="this.dataset.manual='1'"></td>
+                            <td class="cell-ed"><input class="cipc-edit-input" id="cipc-bk-amt1" type="text" placeholder="0" oninput="this.dataset.manual='1'"></td>
+                            <td class="cell-ed"><input class="cipc-edit-input" id="cipc-mx-yr1" type="text" placeholder="ปีที่…" oninput="this.dataset.manual='1'"></td>
+                            <td class="cell-ed"><input class="cipc-edit-input" id="cipc-mx-amt1" type="text" placeholder="0" oninput="this.dataset.manual='1'" style="color:var(--c-primary);font-weight:800;font-size:1.05em;"></td>
+                          </tr>
+                          <tr class="row-opt2">
+                            <td id="cipc-prem2m">–</td>
+                            <td id="cipc-total20y2m">–</td>
+                            <td class="val-hl" id="cipc-total19y2m">–</td>
+                            <td class="cell-ed"><input class="cipc-edit-input" id="cipc-bk-yr2" type="text" placeholder="ปีที่…" oninput="this.dataset.manual='1'"></td>
+                            <td class="cell-ed"><input class="cipc-edit-input" id="cipc-bk-amt2" type="text" placeholder="0" oninput="this.dataset.manual='1'"></td>
+                            <td class="cell-ed"><input class="cipc-edit-input" id="cipc-mx-yr2" type="text" placeholder="ปีที่…" oninput="this.dataset.manual='1'"></td>
+                            <td class="cell-ed"><input class="cipc-edit-input" id="cipc-mx-amt2" type="text" placeholder="0" oninput="this.dataset.manual='1'" style="color:var(--c-mtl);font-weight:800;font-size:1.05em;"></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <!-- Highlight Box (Manual only) -->
+                      <div style="margin-top:12px;border-radius:10px;overflow:hidden;border:2px solid #0E7C66;-webkit-print-color-adjust:exact;print-color-adjust:exact;">
+                        <div style="background:#0E7C66;padding:9px 16px;">
+                          <span style="font-size:0.92em;font-weight:800;color:#fff;">มูลค่ากรมธรรม์เติบโตต่อเนื่อง แม้หยุดจ่ายเบี้ยแล้ว</span>
+                        </div>
+                        <div style="background:#f0fdf9;padding:11px 16px 10px;">
+                          <div style="font-size:0.84em;color:#134e3e;line-height:1.7;text-align:center;margin-bottom:8px;">
+                            หลังครบ 20 ปี ไม่ต้องจ่ายเบี้ยอีก แต่มูลค่าเวนคืน (<strong style="color:#0E7C66;">Cash Value</strong>) ยังคงเพิ่มขึ้นทุกปี<br>
+                            เสมือน <span style="background:#fef3c7;color:#92400e;font-weight:700;padding:1px 7px;border-radius:4px;">"การออมที่โตเองได้"</span>
+                            และยังมีความคุ้มครองโรคร้ายแรงต่อเนื่องถึงอายุ 99 ปี
+                          </div>
+                          <div style="background:#fffbeb;border:1.5px solid #f59e0b;border-radius:7px;padding:7px 12px;display:flex;align-items:center;gap:8px;">
+                            <span style="font-size:1.05em;flex-shrink:0;">💡</span>
+                            <span style="font-size:0.82em;color:#78350f;font-weight:600;line-height:1.5;">
+                              หากต้องการสภาพคล่องเมื่อยามจำเป็น สามารถเวนคืนกรมธรรม์รับเงินก้อนได้ทุกเมื่อ
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
                     <!-- Legend -->
                     <div style="display:flex;gap:22px;flex-wrap:wrap;margin:10px 0 4px;align-items:center;">
                       <div style="display:flex;align-items:center;gap:7px;font-size:0.84em;">
                         <div style="width:14px;height:14px;border-radius:3px;background:rgba(212,175,55,0.35);flex-shrink:0;"></div>
-                        <span style="color:var(--t-secondary);font-weight:600;">
-                          Option 1 · ทุน <span id="cipc-sum1-lbl" style="color:var(--c-primary);">–</span> บาท
-                          · อายุ <span id="cipc-age1-lbl" style="color:var(--c-primary);">–</span> ปี
-                        </span>
+                        <span style="color:var(--t-secondary);font-weight:600;">Option 1 · ทุน <span id="cipc-sum1-lbl" style="color:var(--c-primary);">–</span> บาท · อายุ <span id="cipc-age1-lbl" style="color:var(--c-primary);">–</span> ปี</span>
                       </div>
                       <div style="display:flex;align-items:center;gap:7px;font-size:0.84em;">
                         <div style="width:14px;height:14px;border-radius:3px;background:rgba(236,72,153,0.25);flex-shrink:0;"></div>
-                        <span style="color:var(--t-secondary);font-weight:600;">
-                          Option 2 · ทุน <span id="cipc-sum2-lbl" style="color:var(--c-mtl);">–</span> บาท
-                          · อายุ <span id="cipc-age2-lbl" style="color:var(--c-mtl);">–</span> ปี
-                        </span>
+                        <span style="color:var(--t-secondary);font-weight:600;">Option 2 · ทุน <span id="cipc-sum2-lbl" style="color:var(--c-mtl);">–</span> บาท · อายุ <span id="cipc-age2-lbl" style="color:var(--c-mtl);">–</span> ปี</span>
                       </div>
                     </div>
 
                     <div class="cipc-s1-note">
-                      * ตัวอย่างเบี้ยและมูลค่าคำนวณอัตโนมัติจากทุนและอายุใน Option 1 &amp; Option 2 (ฝั่งซ้าย) 
-                     <!--  ** ช่องสีทอง (ปีคุ้มทุน / จำนวนเงิน) กรอกเองจากตารางในใบเสนอขาย<br> -->
-                      *** Vitality Bonus ได้รับสำหรับผู้ที่อายุ 16 ปี ขึ้นไป
+                      * เบี้ยดึงจาก Option 1 &amp; 2 อัตโนมัติ · Mode อัตโนมัติ: CV คำนวณจาก Rate Table AIA CI ProCare<br>
+                      ** Mode ใส่เอง: กรอกค่าจากใบเสนอขาย (รองรับอายุ/ปีที่เกินตาราง CV) · *** Vitality Bonus ได้รับสำหรับผู้ที่อายุ 16 ปี ขึ้นไป
                     </div>
 
                     <div class="cipc-slogan-box">
@@ -1715,22 +1870,14 @@
                       </div>
                     </div>
 
-                    <div class="cipc-growth-box">
-                      <div class="cipc-growth-title">มูลค่ากรมธรรม์เติบโตต่อเนื่อง แม้หยุดจ่ายเบี้ยแล้ว</div>
-                      <div class="cipc-growth-body">
-                        หลังครบ 20 ปี ไม่ต้องจ่ายเบี้ยอีก แต่มูลค่าเวนคืน (<mark>Cash Value</mark>) ยังคงเพิ่มขึ้นทุกปี
-                        เสมือน <mark>"การออมที่โตเองได้"</mark> <br>
-						และยังมีความคุ้มครองโรคร้ายแรงต่อเนื่องถึงอายุ 99 ปี
-                      </div>
-                      <div class="cipc-growth-tip">💡 หากต้องการสภาพคล่องเมื่อยามจำเป็น สามารถเวนคืนกรมธรรม์รับเงินก้อนได้ทุกเมื่อ</div>
-                    </div>
-
                     <div style="text-align:right;margin-top:12px;font-size:0.73em;color:var(--t-muted);line-height:1.6;">
                       *** หน้าที่ 3 จะเป็นจุดเด่นสินค้า · หน้าที่ 4 จะเป็นสรุปภาพรวมอัตราผลประโยชน์ที่จะเบิกได้<br>
                       <span id="cipc-note-bonus">*** หน้าที่ 5,6 จะเป็นโรคที่คุ้มครอง ทั้ง 6 กลุ่ม รวม 62 โรค · หน้าที่ 7,8 จะเกี่ยวกับ Bonus สุขภาพ</span>
                       <span id="cipc-note-nobonus" style="display:none;">*** หน้าที่ 5,6 จะเป็นโรคที่คุ้มครอง ทั้ง 6 กลุ่ม รวม 62 โรค</span>
                     </div>
                   </div>
+                </div>
+
                 </div>
 
                 <!-- SLIDES 2–15: image slides -->
@@ -1900,6 +2047,189 @@
             </div><!-- end infographic-boards -->
         </div><!-- end infographic-tab-wrap -->
     </div><!-- end tab-infographic -->
+
+    <!-- ═══ TAB 4: Vitality Bonus ═══ -->
+    <div class="main-tab-panel" id="tab-vitality" style="display:none !important;">
+        <div class="vb-container">
+
+            <!-- Header Card -->
+            <div class="vb-header-card">
+                <div class="vb-header-title">🏃 AIA Vitality Bonus · ผลตอบแทนสุขภาพ CI ProCare</div>
+                <div class="vb-header-sub">คำนวณจาก Option 2 · เบี้ยสะสมตลอด 20 ปี · จ่าย Bonus ทุก 3 ปี · คุ้มครองถึงอายุ 99 ปี</div>
+                <div class="vb-tier-pills">
+                    <div class="vb-tier-pill bronze">🥉 Bronze · 0%</div>
+                    <div class="vb-tier-pill silver">🥈 Silver · 1%</div>
+                    <div class="vb-tier-pill gold">🥇 Gold · 4%</div>
+                    <div class="vb-tier-pill plat">💎 Platinum · 9%</div>
+                    <span style="color:rgba(255,255,255,0.45);font-size:0.78em;align-self:center;margin-left:4px;">* % ของเบี้ยสะสมรายปี · สะสมและจ่ายทุก 3 ปีกรมธรรม์</span>
+                </div>
+                <div class="vb-info-grid" id="vb-info-grid">
+                    <div class="vb-info-box">
+                        <div class="vb-info-label">Option 2 · อายุ</div>
+                        <div class="vb-info-value" id="vb-age">–</div>
+                    </div>
+                    <div class="vb-info-box">
+                        <div class="vb-info-label">ทุนประกัน</div>
+                        <div class="vb-info-value gold" id="vb-sum">–</div>
+                    </div>
+                    <div class="vb-info-box">
+                        <div class="vb-info-label">เบี้ยประกันหลัก/ปี</div>
+                        <div class="vb-info-value gold" id="vb-prem">–</div>
+                    </div>
+                    <div class="vb-info-box">
+                        <div class="vb-info-label">รวมเบี้ย 20 ปี</div>
+                        <div class="vb-info-value" id="vb-total20">–</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary Cards -->
+            <div class="vb-summary" id="vb-summary-cards">
+                <div class="vb-sum-card plat">
+                    <div class="sum-label">💎 Platinum (9%)</div>
+                    <div class="sum-val" id="vb-total-plat">–</div>
+                    <div class="sum-sub">รวม Bonus 20 ปี</div>
+                </div>
+                <div class="vb-sum-card gold">
+                    <div class="sum-label">🥇 Gold (4%)</div>
+                    <div class="sum-val" id="vb-total-gold">–</div>
+                    <div class="sum-sub">รวม Bonus 20 ปี</div>
+                </div>
+                <div class="vb-sum-card silver">
+                    <div class="sum-label">🥈 Silver (1%)</div>
+                    <div class="sum-val" id="vb-total-silver">–</div>
+                    <div class="sum-sub">รวม Bonus 20 ปี</div>
+                </div>
+                <div class="vb-sum-card rand">
+                    <div class="sum-label">🎲 สุ่มระดับ</div>
+                    <div class="sum-val" id="vb-total-rand">–</div>
+                    <div class="sum-sub">รวม Bonus 20 ปี (ประมาณ)</div>
+                </div>
+            </div>
+
+            <!-- Toolbar: checkboxes + buttons -->
+            <div class="vb-ctrl-bar no-print">
+                <label class="vb-ctrl-label">
+                    <input type="checkbox" id="vb-chk-campaign" onchange="vbRender()">
+                    🎁 แคมเปญ 30 มิ.ย. (ไม่ต้องจ่ายเบี้ยปีที่ 20)
+                </label>
+                <span style="width:1px;height:20px;background:#e2e8f0;"></span>
+                <label class="vb-ctrl-label">
+                    <input type="checkbox" id="vb-chk-savings" onchange="vbRender()">
+                    📊 เทียบออมทบต้น
+                </label>
+                <div id="vb-savings-rate-wrap" style="display:none;align-items:center;gap:6px;">
+                    <span style="font-size:0.80em;color:#6b7280;">อัตราดอกเบี้ย</span>
+                    <input type="number" id="vb-savings-rate" value="2.5" min="0.1" max="20" step="0.1"
+                        style="width:62px;padding:4px 7px;font-size:0.85em;font-weight:700;text-align:center;
+                               background:#fff;border:1.5px solid #d4af37;border-radius:var(--r-sm);
+                               color:#1a2f4f;font-family:inherit;outline:none;"
+                        oninput="vbRender()">
+                    <span style="font-size:0.80em;color:#6b7280;">%/ปี</span>
+                </div>
+                <span style="width:1px;height:20px;background:#e2e8f0;"></span>
+                <!-- Font-size control -->
+                <div class="vb-font-ctrl" title="ปรับขนาดตัวอักษร">
+                    <span style="font-size:0.78em;color:#6b7280;">ขนาด A</span>
+                    <button class="vb-font-btn" onclick="vbFontSize(-1)">A−</button>
+                    <span class="vb-font-lbl" id="vb-font-lbl">100%</span>
+                    <button class="vb-font-btn" onclick="vbFontSize(1)">A+</button>
+                    <button class="vb-font-btn" onclick="vbFontSize(0)" style="font-size:10px;width:auto;padding:0 6px;">Reset</button>
+                </div>
+                <div style="display:flex;gap:8px;margin-left:auto;flex-shrink:0;">
+                    <button class="vb-reshuffle-btn" onclick="vbReshuffle()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
+                        สุ่มระดับใหม่
+                    </button>
+                    <button class="vb-print-btn" onclick="vbPrint()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                        พิมพ์ A4
+                    </button>
+                </div>
+            </div>
+
+            <!-- Campaign Banner -->
+            <div class="vb-campaign-banner" id="vb-campaign-banner">
+                <div style="font-size:1.5em;">🎉</div>
+                <div style="flex:1;">
+                    <div class="vb-campaign-title">พิเศษ! แคมเปญซื้อภายใน 30 มิ.ย. — ไม่ต้องจ่ายเบี้ยปีที่ 20</div>
+                    <div class="vb-campaign-detail">
+                        เสมือนได้รับเงินคืนปีสุดท้าย · ลดเบี้ยรวมจาก <span id="vb-camp-before">–</span> บาท เหลือเพียง <span id="vb-camp-after" style="color:#22c55e;font-weight:700;">–</span> บาท
+                    </div>
+                </div>
+                <div class="vb-campaign-val" id="vb-camp-save">ประหยัด – บาท</div>
+            </div>
+
+            <!-- Health Value Box -->
+            <div style="margin-bottom:16px;padding:14px 18px;background:linear-gradient(135deg,rgba(34,197,94,0.07),rgba(16,185,129,0.04));border:1.5px solid rgba(34,197,94,0.35);border-radius:var(--r-md);">
+                <div style="display:flex;align-items:flex-start;gap:12px;">
+                    <div style="font-size:1.9em;flex-shrink:0;">🏃‍♂️</div>
+                    <div>
+                        <div style="font-size:0.88em;font-weight:800;color:#22c55e;margin-bottom:5px;">
+                            Vitality Bonus ≠ แค่เงิน · สิ่งที่ได้แน่นอนคือ <strong style="color:#4ade80;">"สุขภาพที่ดีขึ้น"</strong>
+                        </div>
+                        <div style="font-size:0.80em;color:var(--t-secondary);line-height:1.72;">
+                            การทำ AIA Vitality ไม่ได้แค่การรับ Bonus เงิน — แต่คือการสร้าง<strong style="color:var(--t-primary);"> นิสัยดูแลสุขภาพที่ยั่งยืน</strong>
+                            ซึ่งส่งผลต่อคุณภาพชีวิตในระยะยาวมากกว่าผลตอบแทนทางการเงินใดๆ
+                        </div>
+                        <div style="display:flex;gap:16px;margin-top:8px;flex-wrap:wrap;">
+                            <span style="font-size:0.78em;">💪 <strong style="color:#4ade80;">ออกกำลังกายสม่ำเสมอ</strong> ลดความเสี่ยงโรคเรื้อรัง</span>
+                            <span style="font-size:0.78em;">🩺 <strong style="color:#4ade80;">ตรวจสุขภาพประจำปี</strong> พบความผิดปกติตั้งแต่เนิ่นๆ</span>
+                            <span style="font-size:0.78em;">🥗 <strong style="color:#4ade80;">โภชนาการที่ดี</strong> ลดความเสี่ยงโรคร้ายแรง</span>
+                            <span style="font-size:0.78em;">😴 <strong style="color:#4ade80;">พักผ่อนเพียงพอ</strong> ระบบภูมิคุ้มกันแข็งแรง</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                        <!-- CV Box (จาก CI Procare Option 2) — Light theme -->
+            <div id="vb-cv-box" style="display:none;margin-bottom:14px;padding:14px 16px;background:#fffbeb;border:1.5px solid #d4af37;border-radius:var(--r-md);-webkit-print-color-adjust:exact;print-color-adjust:exact;">
+            </div>
+
+            <div class="vb-table-wrap">
+                <table class="vb-table" id="vb-table">
+                    <thead>
+                        <tr id="vb-thead-r1">
+                            <th class="th-base" rowspan="2" style="width:7%;">สิ้นปีที่</th>
+                            <th class="th-base" rowspan="2" style="width:6%;">อายุ</th>
+                            <th class="th-base" rowspan="2" style="width:9%;">เบี้ย (บาท)</th>
+                            <th class="th-plat" colspan="2" style="border-left:2px solid rgba(91,200,245,0.3);">💎 Platinum (9%)</th>
+                            <th class="th-gold" colspan="2" style="border-left:2px solid rgba(212,175,55,0.3);">🥇 Gold (4%)</th>
+                            <th class="th-silver" colspan="2" style="border-left:2px solid rgba(192,192,192,0.3);">🥈 Silver (1%)</th>
+                            <th class="th-random" colspan="3" style="border-left:2px solid rgba(167,139,250,0.3);">🎲 สุ่มระดับ</th>
+                            <th class="th-base vb-sav-col" colspan="2" id="vb-sav-th"
+                                style="border-left:2px solid rgba(96,165,250,0.4);color:#60a5fa;display:none;">
+                                💰 ออมเบี้ยทบต้น <span id="vb-sav-rate-lbl" style="font-size:0.85em;opacity:0.8;"></span>
+                            </th>
+                        </tr>
+                        <tr id="vb-thead-r2">
+                            <th class="th-plat" style="border-left:2px solid rgba(91,200,245,0.3);font-size:0.72em;">Bonus สะสม</th>
+                            <th class="th-plat" style="font-size:0.72em;">จ่ายออก</th>
+                            <th class="th-gold" style="border-left:2px solid rgba(212,175,55,0.3);font-size:0.72em;">Bonus สะสม</th>
+                            <th class="th-gold" style="font-size:0.72em;">จ่ายออก</th>
+                            <th class="th-silver" style="border-left:2px solid rgba(192,192,192,0.3);font-size:0.72em;">Bonus สะสม</th>
+                            <th class="th-silver" style="font-size:0.72em;">จ่ายออก</th>
+                            <th class="th-random" style="border-left:2px solid rgba(167,139,250,0.3);font-size:0.72em;">ระดับ</th>
+                            <th class="th-random" style="font-size:0.72em;">Bonus สะสม</th>
+                            <th class="th-random" style="font-size:0.72em;">จ่ายออก</th>
+                            <th class="vb-sav-col" style="border-left:2px solid rgba(96,165,250,0.3);font-size:0.72em;color:#60a5fa;display:none;">เงินสะสม (ฝากเบี้ยทบต้น)</th>
+                            <th class="vb-sav-col" style="font-size:0.72em;color:#60a5fa;display:none;">กำไร/ขาดทุน vs เบี้ยสะสม</th>
+                        </tr>
+                    </thead>
+                    <tbody id="vb-tbody">
+                        <tr><td colspan="11" style="text-align:center;padding:32px;color:var(--t-muted);">กรุณากรอกข้อมูล Option 2</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="vb-note">
+                * Vitality Bonus คำนวณจากเบี้ยประกันหลักที่จ่ายในปีนั้น ตามระดับ Vitality ที่ทำได้ในปีกรมธรรม์นั้น<br>
+                * Bonus สะสมทุกปีและจ่ายออกทุก 3 ปี (ปีที่ 3, 6, 9, ...) โดยนับจากเบี้ย 3 ปีที่สะสมรวมกัน<br>
+                * หลังปีที่ 20 หยุดจ่ายเบี้ย Vitality Bonus จะหยุดสะสมด้วย<br>
+                * ผลตอบแทนจริงขึ้นอยู่กับระดับ Vitality ที่ทำได้แต่ละปี ซึ่งอาจแตกต่างกันในแต่ละปีกรมธรรม์
+            </div>
+
+        </div>
+    </div><!-- end tab-vitality -->
 
     </div><!-- end main-tab-wrapper -->
 
@@ -2317,6 +2647,136 @@ const APP_DATA = {
     RATE_MULTIPAY_CI: {
         male:   {"0-5":6.31,"6-10":4.61,"11-15":4.55,"16-20":4.52,"21-25":5.05,"26-30":5.56,"31-35":6.61,"36-40":8.75,"41-45":16.87,"46-50":27.70,"51-55":49.73,"56-60":83.62,"61-65":130.07,"66-70":163.89,"71-75":235.83,"76-80":326.64,"81-85":381.57,"86-90":621.28,"91-95":909.63,"96-99":1043.30},
         female: {"0-5":5.13,"6-10":3.83,"11-15":3.76,"16-20":3.49,"21-25":4.18,"26-30":4.73,"31-35":6.23,"36-40":7.35,"41-45":10.04,"46-50":16.31,"51-55":29.16,"56-60":45.37,"61-65":69.55,"66-70":102.32,"71-75":157.17,"76-80":232.32,"81-85":480.75,"86-90":571.36,"91-95":855.28,"96-99":1065.97}
+    },
+
+    // AIA CI ProCare — มูลค่าเวนคืน (CV) ต่อทุนประกัน 1,000 บาท
+    // Format: { male: { age: [yr1,yr2,...,yr35] }, female: {...} }
+    // อ่านจากตารางในคู่มือ AIA CI ProCare (Manual_AIACIProCare_20250926.pdf)
+    RATE_CV_CIPROCARE: {
+        male: {
+            1:  [0,20,44,69,95,123,153,182,211,242,274,307,340,376,411,449,488,528,570,614,632,652,671,692,714,735,758,781,805,830,855,882,909,937,966],
+            2:  [0,20,45,72,98,127,158,187,219,250,282,317,351,387,424,463,502,544,587,632,652,671,692,713,735,757,780,804,830,855,882,909,937,965,996],
+            3:  [0,21,48,74,102,132,164,194,226,258,291,326,362,399,437,476,518,560,605,652,671,692,713,735,757,780,804,830,855,882,909,937,965,996,1027],
+            4:  [0,23,49,77,106,137,169,200,233,266,300,336,372,410,450,491,534,577,623,671,692,713,734,757,780,804,830,855,882,909,937,966,996,1027,1057],
+            5:  [0,24,50,80,109,141,174,207,240,274,309,345,383,422,463,505,549,595,643,691,713,734,757,781,804,829,855,882,909,937,966,996,1027,1057,1091],
+            6:  [0,24,53,82,112,145,179,212,247,281,318,356,395,434,477,521,566,614,662,713,734,757,781,805,829,855,882,909,937,966,996,1026,1057,1091,1123],
+            7:  [0,25,54,85,116,149,185,219,253,289,327,366,407,449,492,538,584,632,682,734,757,781,805,829,855,882,909,937,966,996,1026,1058,1091,1123,1155],
+            8:  [0,25,56,87,119,153,190,224,261,298,337,377,418,462,507,553,602,652,704,757,781,805,829,855,881,908,937,966,996,1026,1058,1090,1123,1155,1188],
+            9:  [0,26,57,89,123,157,195,231,269,307,346,388,431,477,523,571,621,672,725,780,805,829,855,881,908,937,966,996,1026,1058,1090,1123,1155,1188,1220],
+            10: [0,27,59,92,126,162,200,238,276,316,358,401,445,491,539,589,640,693,748,805,829,855,881,908,937,966,996,1026,1058,1090,1123,1155,1188,1220,1252],
+            11: [0,27,60,94,129,167,207,245,284,326,369,413,459,507,556,607,660,714,770,829,854,881,908,936,966,995,1026,1058,1090,1123,1155,1188,1220,1253,1285],
+            12: [0,29,62,97,133,172,213,252,294,336,380,426,474,523,573,626,680,737,794,854,881,909,936,966,995,1026,1058,1090,1123,1155,1188,1220,1253,1285,1317],
+            13: [0,30,64,100,138,177,220,260,303,348,393,440,489,541,593,647,703,761,822,883,911,940,968,998,1029,1061,1093,1125,1158,1191,1223,1256,1288,1321,1353],
+            14: [0,31,66,103,142,184,229,271,316,361,409,458,509,562,616,672,731,792,854,919,947,976,1007,1038,1069,1101,1134,1168,1200,1233,1265,1298,1331,1364,1397],
+            15: [0,18,42,66,91,118,146,175,204,234,265,296,330,364,399,436,474,514,554,597,614,633,652,671,692,713,735,758,781,805,830,856,881,909,937],
+            16: [32,71,112,154,200,248,294,342,392,443,497,551,608,667,727,790,856,923,992,1023,1055,1086,1120,1154,1187,1219,1253,1286,1319,1353,1387,1420,1454,1487],
+            17: [34,74,117,161,208,258,306,356,408,461,516,574,633,693,757,822,889,960,1031,1063,1095,1130,1163,1197,1230,1263,1296,1331,1364,1398,1432,1466,1500,1532],
+            18: [35,77,122,168,217,268,319,370,424,480,537,597,658,722,787,855,925,998,1073,1105,1139,1173,1207,1241,1274,1308,1342,1376,1411,1445,1479,1513,1546,1577],
+            19: [37,81,127,175,226,280,332,386,442,500,559,622,685,751,820,890,963,1037,1116,1144,1183,1218,1252,1286,1319,1356,1388,1423,1457,1492,1526,1560,1591,1622],
+            20: [39,84,132,182,235,291,346,402,460,520,582,646,713,782,853,925,1002,1079,1160,1194,1229,1263,1297,1332,1366,1401,1436,1472,1506,1540,1574,1607,1638,1665],
+            21: [40,88,138,189,245,303,359,419,479,541,606,672,742,812,887,964,1042,1123,1205,1240,1275,1309,1345,1379,1415,1450,1485,1520,1556,1589,1622,1655,1687,1718],
+            22: [42,91,143,198,254,315,375,436,499,564,631,701,773,847,924,1002,1084,1168,1252,1288,1322,1358,1393,1429,1464,1500,1535,1571,1605,1638,1671,1698,1728,1748],
+            23: [43,95,149,205,265,329,391,454,520,587,657,730,806,884,964,1044,1128,1214,1300,1336,1371,1407,1443,1478,1515,1551,1587,1621,1655,1687,1720,1742,1766,1787],
+            24: [45,98,155,214,277,343,407,473,542,612,684,760,837,918,1001,1086,1172,1260,1350,1385,1421,1458,1494,1530,1567,1603,1637,1672,1704,1734,1761,1785,1806,1825],
+            25: [46,102,160,222,288,357,423,493,563,637,713,791,873,956,1041,1129,1218,1308,1400,1436,1473,1510,1547,1583,1620,1656,1688,1720,1750,1778,1803,1825,1846,1862],
+            26: [48,107,168,231,300,373,440,509,581,656,734,815,897,983,1071,1163,1256,1351,1448,1484,1524,1561,1599,1638,1674,1708,1741,1772,1801,1826,1848,1868,1884,1898],
+            27: [49,110,174,241,312,388,460,535,612,691,774,859,947,1037,1130,1225,1322,1420,1519,1557,1595,1634,1673,1711,1748,1782,1816,1846,1872,1895,1916,1934,1947,1952],
+            28: [51,115,182,251,326,406,480,558,638,720,806,895,987,1075,1168,1263,1360,1459,1560,1599,1638,1679,1712,1748,1782,1813,1842,1867,1888,1907,1923,1935,1944,1948],
+            29: [54,120,190,262,339,422,500,581,665,750,840,930,1022,1116,1212,1310,1411,1513,1619,1657,1695,1733,1769,1804,1835,1865,1891,1913,1933,1950,1963,1972,1979,1980],
+            30: [55,125,198,273,353,440,521,606,693,783,874,967,1062,1159,1258,1359,1463,1569,1678,1717,1754,1791,1826,1859,1888,1915,1939,1961,1980,1996,2010,2021,2030,2036],
+            31: [57,130,206,285,368,459,544,633,722,814,908,1004,1103,1202,1305,1410,1517,1617,1738,1777,1814,1849,1882,1914,1941,1965,1987,2006,2023,2038,2049,2058,2066,2070],
+            32: [60,135,215,296,385,479,567,658,751,846,943,1044,1142,1248,1354,1462,1573,1686,1800,1837,1874,1909,1942,1972,1998,2021,2040,2057,2071,2082,2091,2097,2103,2104],
+            33: [62,140,224,309,401,499,591,685,875,879,979,1082,1187,1294,1405,1516,1631,1746,1862,1899,1934,1969,2001,2029,2054,2074,2092,2106,2117,2127,2133,2137,2139,2137],
+            34: [65,146,234,322,418,518,614,712,813,917,1023,1131,1239,1349,1461,1577,1694,1813,1927,1960,1994,2029,2059,2085,2108,2126,2141,2154,2164,2172,2175,2175,2172,2167],
+            35: [67,152,243,337,437,543,643,745,851,960,1071,1186,1300,1414,1532,1652,1774,1896,2018,2050,2082,2113,2140,2163,2182,2198,2211,2221,2226,2228,2228,2224,2218,2209],
+            36: [70,159,253,349,452,560,662,766,875,981,1092,1206,1322,1440,1560,1681,1804,1927,2050,2080,2107,2132,2154,2174,2191,2205,2217,2227,2234,2238,2240,2237,2233,2233],
+            37: [72,162,262,362,467,580,683,792,903,1015,1129,1246,1364,1490,1610,1734,1861,1988,2118,2145,2172,2196,2217,2235,2248,2259,2267,2273,2275,2276,2273,2266,2257,2245],
+            38: [75,171,272,374,483,600,708,819,934,1050,1169,1289,1412,1536,1662,1787,1912,2039,2164,2190,2214,2235,2252,2267,2277,2280,2291,2299,2305,2308,2307,2303,2298,2292],
+            39: [77,180,288,399,515,637,747,860,978,1086,1209,1332,1458,1584,1714,1842,1965,2091,2226,2246,2263,2282,2303,2316,2327,2338,2345,2345,2345,2338,2332,2322,2314,2308],
+            40: [79,182,288,398,516,642,758,877,1000,1123,1249,1376,1504,1632,1762,1891,2020,2150,2281,2303,2322,2339,2355,2365,2374,2380,2386,2385,2384,2382,2374,2367,2359,2359],
+            41: [80,188,298,412,534,660,779,901,1028,1153,1282,1412,1541,1672,1805,1939,2073,2203,2336,2360,2382,2400,2415,2427,2431,2437,2440,2438,2434,2428,2419,2413,2410,2408],
+            42: [82,191,304,420,543,673,795,921,1050,1181,1316,1449,1583,1718,1857,1996,2137,2282,2433,2455,2478,2499,2512,2521,2527,2530,2527,2523,2516,2511,2504,2500,2497,2468],
+            43: [87,201,320,442,573,713,843,972,1104,1238,1372,1506,1639,1773,1908,2043,2179,2312,2456,2472,2485,2496,2505,2511,2514,2515,2512,2508,2504,2497,2489,2478,2468,2468],
+            44: [91,208,332,458,594,739,871,1005,1141,1276,1411,1547,1683,1818,1955,2093,2232,2372,2514,2529,2540,2549,2552,2554,2552,2546,2538,2531,2519,2508,2494,2480,2459,2468],
+            45: [95,218,346,477,617,767,903,1040,1177,1315,1451,1589,1726,1864,2004,2143,2285,2428,2574,2587,2596,2603,2606,2606,2601,2593,2582,2569,2553,2537,2519,2502,2564,2555],
+            46: [102,231,365,502,648,805,943,1084,1223,1362,1504,1645,1787,1929,2072,2214,2358,2503,2651,2667,2679,2688,2688,2687,2679,2669,2654,2638,2619,2601,2580,2560,2564,2564],
+            47: [110,245,385,527,679,841,986,1131,1273,1416,1561,1706,1851,1998,2144,2292,2443,2595,2751,2761,2767,2773,2771,2764,2752,2735,2716,2695,2672,2647,2621,2594,2564,2564],
+            48: [113,253,398,547,705,876,1028,1181,1336,1492,1649,1808,1969,2127,2289,2451,2616,2783,2951,2960,2968,2968,2960,2948,2931,2910,2887,2861,2832,2801,2771,2741,2564,2564],
+            49: [124,273,426,581,747,919,1071,1223,1379,1536,1694,1855,2019,2181,2347,2516,2688,2860,3034,3048,3057,3053,3041,3024,3002,2977,2948,2917,2882,2848,2812,2776,2564,2564],
+            50: [130,288,448,608,778,959,1116,1273,1431,1588,1747,1905,2066,2227,2390,2553,2719,2890,3065,3071,3076,3079,3080,3078,3059,3030,2996,2961,2920,2887,2853,2823,2564,2564],
+            51: [139,305,479,654,838,1009,1009,1337,1504,1666,1834,2003,2174,2346,2520,2699,2876,3061,3219,3222,3228,3230,3230,3220,3200,3169,3132,3095,3063,3023,2987,2952,2564,2564],
+            52: [147,323,499,675,863,1062,1234,1406,1577,1749,1923,2096,2271,2447,2625,2804,2988,3176,3372,3382,3387,3389,3392,3398,3407,3423,3458,3504,3566,3650,3768,3969,2564,2564],
+            53: [153,336,519,702,897,1105,1284,1459,1634,1812,1994,2180,2368,2562,2726,2920,3109,3293,3498,3504,3512,3518,3518,3518,3538,3538,3596,3656,3724,3836,3952,4009,2564,2564],
+            54: [159,351,543,735,939,1157,1341,1526,1711,1897,2083,2269,2456,2646,2810,3031,3231,3438,3654,3661,3666,3674,3683,3698,3721,3765,3823,3902,4009,4160,4164,4173,2564,2564],
+            55: [163,367,571,768,988,1198,1388,1581,1778,1978,2175,2370,2563,2755,2947,3152,3366,3586,3811,3824,3832,3848,3873,3902,3918,3997,4074,4160,4178,4398,2564,2564,2564,2564],
+            56: [175,389,600,813,1038,1279,1468,1658,1851,2050,2256,2462,2672,2889,3100,3330,3566,3805,4053,4077,4095,4121,4155,4196,4252,4329,4425,4540,4686,2564,2564,2564,2564,2564],
+            57: [183,410,634,855,1092,1346,1557,1757,1979,2190,2402,2613,2827,3044,3263,3488,3720,3963,4222,4240,4265,4302,4362,4443,4553,4704,4920,5178,2564,2564,2564,2564,2564,2564],
+            58: [193,434,671,904,1155,1422,1644,1865,2098,2327,2559,2791,3030,3271,3488,3720,3963,4222,4460,4480,4500,4540,4610,4720,4870,5100,5370,2564,2564,2564,2564,2564,2564,2564],
+            59: [206,462,714,960,1225,1509,1741,1974,2207,2438,2672,2906,3142,3382,3626,3876,4140,4422,4710,4730,4750,4790,4850,4950,5130,5371,2564,2564,2564,2564,2564,2564,2564,2564],
+            60: [219,494,761,1024,1306,1607,1854,2099,2344,2590,2837,3085,3334,3588,3848,4118,4405,4715,5062,5143,5252,5402,5609,5905,5920,5936,5949,5963,5973,5983,5988,5991,5988,5987]
+        },
+        female: {
+            1:  [0,17,36,58,79,102,127,151,176,201,228,255,283,313,342,373,405,437,471,507,522,536,551,566,584,600,618,635,654,673,691,711,731,751,773],
+            2:  [0,18,38,60,83,106,132,157,182,208,235,263,293,322,352,384,416,450,485,521,536,551,566,584,600,618,635,654,673,691,711,731,751,773,793],
+            3:  [0,18,40,62,85,110,136,161,188,214,241,270,301,331,362,394,427,462,499,536,551,566,584,600,618,635,654,673,691,711,731,751,773,793,815],
+            4:  [0,19,41,64,88,113,140,167,195,222,250,280,311,343,375,408,442,478,515,554,567,584,600,617,635,653,672,691,711,731,751,773,793,815,838],
+            5:  [0,19,43,66,91,117,145,173,202,231,260,291,323,356,389,423,459,496,534,573,588,604,620,638,656,674,692,711,731,751,773,793,815,838,861],
+            6:  [0,20,44,68,94,120,149,178,208,238,268,300,334,368,402,437,474,512,551,591,606,622,638,656,674,692,711,731,751,771,793,815,838,861,886],
+            7:  [0,20,44,68,96,122,152,181,211,243,274,307,342,377,413,450,488,528,569,611,627,643,660,678,696,714,733,752,772,793,815,838,861,886,911],
+            8:  [0,21,46,71,98,126,157,187,219,252,285,319,355,392,430,469,509,551,595,640,657,673,691,709,727,745,765,784,804,826,849,872,896,921,936],
+            9:  [0,22,48,76,104,133,165,196,229,263,298,333,371,410,450,491,533,577,622,670,686,703,721,739,759,777,797,818,840,862,886,909,936,962,987],
+            10: [0,23,48,76,104,134,166,199,232,268,303,340,378,418,459,502,545,590,636,683,700,717,734,753,772,792,812,834,856,879,903,929,955,982,1013],
+            11: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            12: [0,24,51,81,112,144,178,213,248,285,322,362,403,445,488,534,581,630,680,731,749,767,785,805,824,845,866,889,912,936,961,987,1013,1039,1065],
+            13: [0,24,52,82,113,145,180,215,251,288,326,366,407,450,494,540,587,637,688,740,758,776,796,816,836,857,879,902,926,950,976,1002,1027,1053,1078],
+            14: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            15: [0,16,35,54,76,98,123,147,172,197,224,251,280,310,341,374,408,443,480,518,535,552,569,587,605,624,644,664,684,705,727,749,771,793,816],
+            16: [16,37,58,81,104,130,155,182,209,238,267,297,329,363,397,433,470,508,549,567,584,602,620,640,659,680,700,721,743,765,789,812,836,860],
+            17: [17,38,60,82,106,132,157,184,211,239,269,299,331,364,398,434,470,508,549,567,585,604,623,643,663,684,705,726,749,772,796,820,845,869],
+            18: [17,38,60,83,107,133,158,185,213,241,271,301,334,367,401,437,473,512,552,570,589,608,628,648,668,690,711,733,756,779,804,829,854,878],
+            19: [18,40,62,85,109,136,161,188,216,245,275,305,338,372,407,443,480,519,558,576,595,614,634,654,675,697,718,741,764,788,812,837,862,887],
+            20: [18,40,62,86,110,137,163,190,218,247,277,308,341,375,410,447,484,523,563,581,600,619,640,660,681,703,724,747,770,794,819,844,869,893],
+            21: [19,41,64,88,113,141,168,197,226,256,288,320,354,389,425,462,501,541,582,601,620,640,661,682,703,725,748,771,795,819,845,870,895,920],
+            22: [19,41,65,90,115,143,170,199,228,259,290,323,357,393,429,467,506,546,588,607,626,647,668,689,711,734,757,780,805,830,855,880,906,931],
+            23: [20,43,68,93,119,148,176,206,237,268,300,334,369,406,443,482,522,563,605,624,644,665,687,709,731,754,778,802,826,851,877,903,929,955],
+            24: [20,44,69,95,122,152,181,212,244,276,309,344,381,419,458,498,539,582,626,646,666,688,710,733,756,780,804,829,854,879,905,932,959,985],
+            25: [21,46,72,99,127,158,188,220,253,286,320,356,394,433,473,515,558,602,648,669,690,712,735,758,782,806,831,856,882,908,935,962,989,1015],
+            26: [22,47,74,101,130,162,192,224,258,292,327,364,402,442,483,526,570,615,661,682,704,727,750,774,799,823,848,874,900,927,954,981,1008,1035],
+            27: [22,48,75,103,132,164,195,228,262,297,332,370,409,450,492,536,581,626,673,694,717,740,764,788,813,838,864,891,918,945,973,1001,1029,1056],
+            28: [23,49,76,104,134,167,199,232,266,302,338,376,416,458,501,545,590,637,686,708,731,754,779,804,829,855,882,909,936,964,992,1021,1049,1078],
+            29: [23,50,78,107,138,171,203,237,272,308,345,384,424,466,510,555,601,649,698,721,744,768,793,818,844,871,898,927,956,985,1014,1043,1073,1103],
+            30: [24,51,80,111,143,178,212,247,283,321,359,399,440,484,529,576,624,673,724,747,770,794,820,846,873,901,929,958,987,1017,1047,1078,1109,1141],
+            31: [24,52,82,113,146,181,215,251,288,326,366,407,449,493,539,587,636,686,737,761,784,808,835,861,889,917,946,976,1007,1037,1068,1099,1131,1163],
+            32: [25,53,83,115,148,184,219,255,293,333,373,414,457,502,549,598,648,699,751,775,799,824,850,877,906,934,964,995,1027,1058,1089,1121,1153,1186],
+            33: [25,55,87,120,155,193,230,268,309,350,393,436,481,528,577,628,680,733,788,812,838,863,891,919,948,978,1009,1040,1073,1105,1137,1169,1202,1236],
+            34: [26,55,88,122,157,195,233,272,313,356,399,444,491,540,590,642,696,751,808,832,858,885,913,942,972,1002,1034,1067,1100,1134,1167,1200,1234,1268],
+            35: [27,57,90,124,159,198,237,277,318,362,407,453,501,551,603,657,712,769,828,852,878,906,934,964,994,1025,1057,1090,1124,1158,1192,1226,1261,1297],
+            36: [27,57,90,124,159,199,238,278,320,364,409,455,503,553,606,661,717,775,835,860,886,914,942,973,1003,1035,1068,1102,1137,1172,1207,1242,1278,1316],
+            37: [28,60,95,131,168,209,250,291,335,380,426,474,524,576,629,685,742,801,861,887,914,942,971,1001,1033,1065,1098,1133,1168,1203,1239,1275,1311,1349],
+            38: [29,63,99,137,176,219,261,305,351,398,446,496,548,601,657,715,774,835,899,924,951,980,1010,1040,1072,1105,1140,1175,1211,1247,1283,1320,1358,1397],
+            39: [29,65,103,142,183,228,272,318,365,414,465,517,571,627,685,745,807,871,937,963,990,1019,1050,1081,1114,1148,1183,1219,1255,1293,1330,1368,1408,1449],
+            40: [30,66,105,145,187,232,276,323,371,421,472,525,580,637,696,757,820,885,952,978,1006,1035,1066,1098,1131,1165,1200,1237,1275,1313,1351,1390,1430,1471],
+            41: [31,69,109,151,195,242,289,337,387,439,492,547,604,663,724,787,852,919,988,1014,1042,1072,1103,1136,1170,1205,1241,1278,1317,1357,1397,1436,1478,1519],
+            42: [32,72,114,157,203,252,301,351,403,456,512,569,628,688,751,816,883,952,1022,1048,1076,1106,1138,1172,1206,1242,1279,1318,1357,1398,1439,1480,1522,1563],
+            43: [33,74,117,161,208,259,308,360,413,468,524,583,644,706,770,837,906,977,1049,1076,1105,1136,1168,1202,1238,1274,1312,1352,1393,1434,1476,1519,1562,1606],
+            44: [34,77,122,168,217,269,321,374,430,487,546,607,670,734,800,869,940,1012,1087,1114,1143,1175,1208,1243,1279,1317,1356,1396,1438,1480,1523,1567,1611,1656],
+            45: [35,78,123,169,219,272,324,378,434,492,552,614,678,743,811,880,951,1024,1099,1127,1157,1189,1223,1259,1296,1334,1374,1416,1459,1503,1547,1591,1636,1682],
+            46: [36,80,125,173,224,278,331,386,443,502,563,626,691,758,827,897,970,1045,1120,1149,1179,1212,1247,1284,1322,1362,1403,1445,1489,1534,1580,1626,1672,1718],
+            47: [37,82,130,179,232,288,343,400,458,519,581,646,713,781,852,924,999,1075,1152,1181,1213,1247,1282,1319,1358,1399,1440,1484,1528,1575,1622,1670,1718,1766],
+            48: [38,84,133,183,237,295,351,409,469,531,595,662,730,800,872,946,1022,1099,1179,1209,1241,1276,1312,1350,1390,1432,1475,1520,1566,1613,1661,1710,1760,1810],
+            49: [39,87,138,190,247,307,365,426,488,552,618,687,758,830,905,982,1060,1140,1222,1253,1287,1323,1360,1400,1441,1484,1529,1576,1624,1673,1723,1773,1824,1875],
+            50: [40,88,140,193,251,312,372,434,497,563,630,700,772,846,922,1001,1081,1163,1247,1279,1314,1351,1390,1431,1473,1518,1564,1613,1663,1715,1767,1820,1874,1929],
+            51: [41,92,146,202,262,325,387,451,517,585,655,727,801,878,957,1038,1121,1207,1294,1327,1363,1401,1441,1483,1526,1573,1620,1670,1722,1775,1830,1885,1942,2000],
+            52: [43,95,150,207,269,334,398,464,531,601,672,746,822,900,981,1064,1150,1237,1325,1360,1397,1437,1477,1520,1564,1612,1661,1713,1765,1820,1877,1934,1993,2054],
+            53: [44,99,157,217,281,349,416,484,554,626,700,776,855,935,1018,1103,1190,1280,1372,1408,1446,1487,1529,1573,1619,1667,1717,1769,1824,1880,1938,1998,2059,2122],
+            54: [46,103,163,226,293,364,433,504,577,651,728,807,888,971,1056,1143,1233,1324,1417,1455,1495,1537,1580,1626,1673,1722,1774,1828,1884,1942,2001,2063,2125,2190],
+            55: [47,108,170,236,305,378,449,522,598,676,756,838,922,1008,1096,1186,1279,1373,1469,1509,1551,1595,1640,1687,1737,1788,1841,1896,1954,2014,2076,2140,2205,2272],
+            56: [50,114,179,249,322,399,474,551,630,711,795,881,969,1059,1151,1245,1342,1440,1540,1582,1626,1671,1718,1768,1819,1872,1927,1984,2043,2104,2167,2232,2300,2369],
+            57: [52,121,190,264,341,422,501,581,664,749,837,927,1019,1112,1208,1307,1408,1511,1616,1659,1703,1750,1800,1851,1905,1961,2019,2079,2141,2205,2272,2340,2410,2482],
+            58: [54,129,203,282,364,450,534,619,707,798,892,988,1086,1186,1289,1394,1502,1611,1723,1768,1815,1864,1916,1970,2027,2087,2148,2212,2278,2347,2418,2491,2566,2566],
+            59: [57,137,215,299,386,477,565,655,748,843,942,1043,1146,1252,1360,1470,1583,1698,1816,1863,1913,1964,2018,2075,2135,2197,2263,2330,2400,2473,2548,2566,2566,2566],
+            60: [61,143,224,310,400,494,585,678,775,874,976,1079,1184,1291,1402,1516,1634,1754,1877,1926,1978,2031,2088,2147,2210,2276,2345,2418,2493,2566,2566,2566,2566,2566]
+        }
     },
 
     AGE_BANDS: [
@@ -3342,6 +3802,19 @@ const app = {
         document.getElementById('multipayci-benefit-body').innerHTML = html;
     },
 
+    // ── คำนวณมูลค่าเวนคืน CI ProCare ──────────────────────────
+    // entryAge = อายุแรกเข้า, policyYear = ปีกรมธรรม์ (1-35)
+    // sumInsured = ทุนประกัน, gender = 'male'|'female'
+    getCIProCareCV(entryAge, policyYear, sumInsured, gender) {
+        const table = APP_DATA.RATE_CV_CIPROCARE[gender];
+        if (!table) return 0;
+        const row = table[entryAge];
+        if (!row) return 0;
+        const rateIdx = policyYear - 1; // yr1 = index 0
+        if (rateIdx < 0 || rateIdx >= row.length) return 0;
+        return Math.round((sumInsured / 1000) * row[rateIdx]);
+    },
+
     renderCVTable(activeOptions) {
         // เช็คว่ามี Option ไหนเลือก CI ProCare
         let hasCIProCare = false;
@@ -3356,118 +3829,14 @@ const app = {
         });
 
         const section = document.getElementById('cv-table-section');
-        if (!hasCIProCare) { section.style.display = 'none'; return; }
-        section.style.display = '';
+        if (!hasCIProCare) { if(section) section.style.display = 'none'; return; }
+        if(section) section.style.display = '';
 
-        const gender = document.getElementById('inp-gender').value;
-        const fmt = (n) => this.formatMoney(n);
-        let containerHtml = '';
-        // ใช้ CSS variable แทนสีฮาร์ดโค้ด
-        const optColors = { 1: 'var(--c-primary)', 2: 'var(--c-mtl)', 3: 'var(--c-mtl)' };
-        const optNames = { 1: 'Option 1', 2: 'Option 2', 3: 'Option 3' };
-
-        [1,2,3].forEach(id => {
-            if (!cipcActive[id]) return;
-
-            const age = parseInt(document.getElementById(`age-${id}`).value) || 0;
-            const mainSum = parseInt(document.getElementById(`main-sum-${id}`).value) || 0;
-            const mainType = document.getElementById(`main-type-${id}`).value;
-            const annualPrem = this.calculateMainPremiumForPlan(mainSum, age, gender, mainType);
-            const totalPrem20 = annualPrem * 20;
-
-            // กำหนดจุดปีที่ต้องแสดง
-            const yearPoints = [10, 15, 20, 25, 30, 40];
-
-            containerHtml += `
-            <div class="cv-option-header" style="border-color: ${optColors[id]};">
-                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
-                    <div>
-                        <span style="font-weight: 600; font-size: 1.05em; color: ${optColors[id]};">${optNames[id]} — AIA CI ProCare</span>
-                        <span style="font-size: 0.85em; color: var(--t-tertiary); margin-left: 12px;">อายุแรกเข้า ${age} ปี · ทุน ${fmt(mainSum)} บาท</span>
-                    </div>
-                    <div style="text-align: right;">
-                        <div style="font-size: 0.72em; color: var(--t-tertiary); letter-spacing: 0.08em; text-transform: uppercase;">เบี้ยรายปี</div>
-                        <div style="font-weight: 600; color: var(--c-primary); font-size: 1.05em;">${fmt(annualPrem)} <span style="font-size: 0.78em; color: var(--t-tertiary); font-weight: 400;">บ./ปี</span></div>
-                    </div>
-                </div>
-            </div>
-            <table class="cv-table">
-                <thead>
-                    <tr>
-                        <th style="width: 22%;">สิ้นปีกรมธรรม์ที่</th>
-                        <th style="width: 24%;">เบี้ยฯ สะสม (ทุนหลัก)</th>
-                        <th style="width: 28%;">มูลค่าเวนคืน (CV)<br><span style="font-size: 0.85em; font-weight: 400; opacity: 0.85;">(กรอกตัวเลขเพื่อคำนวณ)</span></th>
-                        <th style="width: 26%;">กำไร / ขาดทุนสุทธิ</th>
-                    </tr>
-                </thead>
-                <tbody>`;
-
-            yearPoints.forEach(yr => {
-                const targetAge = age + yr;
-                if (targetAge > 99) return;
-
-                const yearsPayable = Math.min(yr, 20);
-                const accumPrem = annualPrem * yearsPayable;
-                const cvInputId = `cv-input-${id}-${yr}`;
-                const plId = `cv-pl-${id}-${yr}`;
-                const accumId = `cv-accum-${id}-${yr}`;
-                const savedCV = this.state.cvValues[`${id}-${yr}`] || '0';
-                const savedCVNum = parseFloat(String(savedCV).replace(/,/g, '')) || 0;
-                const initPL = savedCVNum - accumPrem;
-                const initPLClass = initPL >= 0 ? 'cv-profit' : 'cv-loss';
-                const initPLText = initPL >= 0 ? `+${fmt(initPL)} ▲` : `${fmt(initPL)} ▼`;
-
-                containerHtml += `
-                    <tr>
-                        <td>ปีที่ ${yr} <span style="color: var(--t-tertiary); font-weight: 400;">(อายุ ${targetAge})</span></td>
-                        <td id="${accumId}">${fmt(accumPrem)}</td>
-                        <td>
-                            <input type="text" id="${cvInputId}" class="cv-input" value="${savedCV}"
-                                   inputmode="numeric"
-                                   onfocus="this.select()"
-                                   oninput="app.updateCVRow(${id}, ${yr})">
-                        </td>
-                        <td id="${plId}" class="${initPLClass}">${initPLText}</td>
-                    </tr>`;
-            });
-
-            containerHtml += `
-                </tbody>
-            </table>`;
-        });
 
         document.getElementById('cv-tables-container').innerHTML = containerHtml;
         if (window.lucide) window.lucide.createIcons();
     },
 
-    updateCVRow(id, yr) {
-        const age = parseInt(document.getElementById(`age-${id}`).value) || 0;
-        const mainSum = parseInt(document.getElementById(`main-sum-${id}`).value) || 0;
-        const gender = document.getElementById('inp-gender').value;
-        const mainType = document.getElementById(`main-type-${id}`).value;
-        const annualPrem = this.calculateMainPremiumForPlan(mainSum, age, gender, mainType);
-        const yearsPayable = Math.min(yr, 20);
-        const accumPrem = annualPrem * yearsPayable;
-
-        const cvInput = document.getElementById(`cv-input-${id}-${yr}`);
-        // แปลงค่าจาก input (ลบ comma ออก)
-        const rawVal = cvInput.value.replace(/,/g, '').replace(/[^0-9.-]/g, '');
-        const cvVal = parseFloat(rawVal) || 0;
-        
-        // บันทึกค่าไว้ใน state เพื่อกันหาย
-        this.state.cvValues[`${id}-${yr}`] = cvInput.value;
-
-        const pl = cvVal - accumPrem;
-        const plEl = document.getElementById(`cv-pl-${id}-${yr}`);
-
-        if (pl >= 0) {
-            plEl.className = 'cv-profit';
-            plEl.innerHTML = `+${this.formatMoney(pl)} ▲`;
-        } else {
-            plEl.className = 'cv-loss';
-            plEl.innerHTML = `${this.formatMoney(pl)} ▼`;
-        }
-    }
 };
 
 // Theme toggle (Dark / Light) — preference persists via localStorage
@@ -3536,13 +3905,15 @@ function switchMainTab(tabId) {
     const btnMap = {
         'tab-compare':      'tab-btn-compare',
         'tab-cipc':         'tab-btn-cipc',
-        'tab-infographic':  'tab-btn-infographic'
+        'tab-infographic':  'tab-btn-infographic',
+        'tab-vitality':     'tab-btn-vitality'
     };
     const btn = document.getElementById(btnMap[tabId]);
     if (btn) btn.classList.add('active');
 
     if (tabId === 'tab-cipc') updateCIPCSlide1();
     if (tabId === 'tab-infographic') refreshInfographic();
+    if (tabId === 'tab-vitality') vbRender();
 }
 
 // ==========================================
@@ -3761,6 +4132,306 @@ function _applyIGScale(idx) {
 function igZoom(delta)  { _applyIGScale(_igScaleIdx + delta); }
 function igZoomReset()  { _applyIGScale(4); }
 
+// ==========================================
+// ==========================================
+// VITALITY BONUS CALCULATION
+// ==========================================
+const VB_RATES = { bronze: 0, silver: 0.01, gold: 0.04, platinum: 0.09 };
+const VB_TIERS = ['bronze', 'silver', 'gold', 'platinum'];
+const VB_LABELS = { bronze: '🥉 Bronze', silver: '🥈 Silver', gold: '🥇 Gold', platinum: '💎 Plat' };
+const VB_COLORS = { bronze: '#cd7f32', silver: '#c0c0c0', gold: '#d4af37', platinum: '#5bc8f5' };
+let _vbRandomTiers = [];
+
+// ── Vitality Font Size Control ───────────────────────────────────
+const VB_FONT_LEVELS = [75, 80, 85, 90, 95, 100, 108, 116, 125, 135];
+let _vbFontIdx = 5; // default 100%
+
+function vbFontSize(delta) {
+    if (delta === 0) { _vbFontIdx = 5; }
+    else { _vbFontIdx = Math.max(0, Math.min(VB_FONT_LEVELS.length - 1, _vbFontIdx + delta)); }
+    const pct = VB_FONT_LEVELS[_vbFontIdx];
+    const container = document.querySelector('#tab-vitality .vb-container');
+    if (container) container.style.fontSize = pct + '%';
+    const lbl = document.getElementById('vb-font-lbl');
+    if (lbl) lbl.textContent = pct + '%';
+}
+
+function vbReshuffle() {
+    _vbRandomTiers = [];
+    for (let i = 0; i < 20; i++) _vbRandomTiers.push(VB_TIERS[Math.floor(Math.random() * 4)]);
+    vbRender();
+}
+
+function vbPrint() {
+    const tab    = document.getElementById('tab-vitality');
+    const others = document.querySelectorAll('.main-tab-panel:not(#tab-vitality)');
+    const nav    = document.querySelector('.main-tab-nav');
+    others.forEach(function(el) { el.style.setProperty('display','none','important'); });
+    tab.style.setProperty('display','block','important');
+    if (nav) nav.style.display = 'none';
+    window.print();
+    setTimeout(function() {
+        others.forEach(function(el) { el.style.display = ''; });
+        tab.style.display = '';
+        if (nav) nav.style.display = '';
+        document.querySelectorAll('.main-tab-panel.active')
+            .forEach(function(el) { el.style.setProperty('display','block','important'); });
+    }, 600);
+}
+
+function vbRender() {
+    var gender  = document.getElementById('inp-gender').value;
+    var age2    = parseInt(document.getElementById('age-2').value) || 0;
+    var sum2    = parseInt(document.getElementById('main-sum-2').value) || 0;
+    var mtype2  = (document.getElementById('main-type-2') || {}).value || 'CIProCare';
+    var prem2   = Math.round(app.calculateMainPremiumForPlan(sum2, age2, gender, mtype2));
+    var gTxt    = gender === 'male' ? 'ชาย' : 'หญิง';
+    var useCampaign = document.getElementById('vb-chk-campaign') ? document.getElementById('vb-chk-campaign').checked : false;
+    var showSav     = document.getElementById('vb-chk-savings')  ? document.getElementById('vb-chk-savings').checked  : false;
+    var savRate     = parseFloat((document.getElementById('vb-savings-rate') || {}).value || 2.5) / 100;
+
+    // toggle savings rate input
+    var rateWrap = document.getElementById('vb-savings-rate-wrap');
+    if (rateWrap) rateWrap.style.display = showSav ? 'flex' : 'none';
+    // toggle savings columns
+    document.querySelectorAll('.vb-sav-col').forEach(function(el){ el.style.display = showSav ? '' : 'none'; });
+    // update savings rate label
+    var rateLbl = document.getElementById('vb-sav-rate-lbl');
+    if (rateLbl) rateLbl.textContent = (savRate * 100).toFixed(1) + '%/ปี';
+
+    // header info
+    document.getElementById('vb-age').textContent     = age2  > 0 ? age2 + ' ปี (' + gTxt + ')' : '–';
+    document.getElementById('vb-sum').textContent     = sum2  > 0 ? sum2.toLocaleString()  + ' บาท' : '–';
+    document.getElementById('vb-prem').textContent    = prem2 > 0 ? prem2.toLocaleString() + ' บาท' : '–';
+    document.getElementById('vb-total20').textContent = prem2 > 0 ? (prem2 * 20).toLocaleString() + ' บาท' : '–';
+
+    // campaign banner
+    var cb = document.getElementById('vb-campaign-banner');
+    if (cb) {
+        cb.classList.toggle('show', useCampaign);
+        if (useCampaign && prem2 > 0) {
+            document.getElementById('vb-camp-before').textContent = (prem2 * 20).toLocaleString();
+            document.getElementById('vb-camp-after').textContent  = (prem2 * 19).toLocaleString();
+            document.getElementById('vb-camp-save').textContent   = 'ประหยัด ' + prem2.toLocaleString() + ' บาท';
+        }
+    }
+
+    var noDataCols = showSav ? 13 : 11;
+    if (age2 <= 0 || sum2 <= 0 || prem2 <= 0) {
+        document.getElementById('vb-tbody').innerHTML =
+            '<tr><td colspan="' + noDataCols + '" style="text-align:center;padding:32px;color:var(--t-muted);">กรุณากรอกอายุและทุนประกันใน Option 2</td></tr>';
+        return;
+    }
+
+    // seed random tiers
+    if (_vbRandomTiers.length === 0) {
+        for (var ii = 0; ii < 20; ii++) _vbRandomTiers.push(VB_TIERS[Math.floor(Math.random() * 4)]);
+    }
+
+    // ── คำนวณ Bonus per year ──────────────────────────────────────
+    // campaign: ปีที่ 20 ไม่ต้องจ่ายเบี้ย แต่ยังได้ Bonus เท่ากับปกติ
+    // (เสมือนได้รับเงินคืน จึงยังนับเบี้ยปีที่ 20 ในการคำนวณ Bonus)
+    var rows = [];
+    var accPlat = 0, accGold = 0, accSilver = 0, accRand = 0;
+    var totalPlat = 0, totalGold = 0, totalSilver = 0, totalRand = 0;
+
+    for (var yr = 1; yr <= 20; yr++) {
+        var tier    = _vbRandomTiers[yr - 1] || 'bronze';
+        // Bonus คำนวณจากเบี้ยเต็ม prem2 ทุกปี (รวมปีที่ 20 กรณี campaign)
+        accPlat   += Math.round(prem2 * VB_RATES.platinum);
+        accGold   += Math.round(prem2 * VB_RATES.gold);
+        accSilver += Math.round(prem2 * VB_RATES.silver);
+        accRand   += Math.round(prem2 * VB_RATES[tier]);
+
+        var payPlat = 0, payGold = 0, paySilver = 0, payRand = 0;
+        var isPayout = (yr % 3 === 0);
+        if (isPayout) {
+            payPlat   = accPlat;   totalPlat   += accPlat;   accPlat   = 0;
+            payGold   = accGold;   totalGold   += accGold;   accGold   = 0;
+            paySilver = accSilver; totalSilver += accSilver; accSilver = 0;
+            payRand   = accRand;   totalRand   += accRand;   accRand   = 0;
+        }
+        // premThis คือเบี้ยที่ "จ่ายจริง" (ปีที่ 20 campaign = 0 แต่ Bonus ยังนับ)
+        var premPaid = (useCampaign && yr === 20) ? 0 : prem2;
+        rows.push({ yr: yr, age: age2 + yr, prem: premPaid, isPayout: isPayout, tier: tier,
+            campFree:  useCampaign && yr === 20,
+            accPlat:   accPlat,   payPlat:   payPlat,
+            accGold:   accGold,   payGold:   payGold,
+            accSilver: accSilver, paySilver: paySilver,
+            accRandDisplay: isPayout ? 0 : accRand, payRand: payRand });
+    }
+    // ส่วนค้างหลังปีที่ 20
+    if (accPlat > 0 || accGold > 0 || accSilver > 0 || accRand > 0) {
+        if (accPlat   > 0) totalPlat   += accPlat;
+        if (accGold   > 0) totalGold   += accGold;
+        if (accSilver > 0) totalSilver += accSilver;
+        if (accRand   > 0) totalRand   += accRand;
+        rows.push({ yr: 21, age: age2 + 21, prem: 0, isPayout: true, isLastPayout: true, tier: '',
+            accPlat: 0, payPlat: accPlat, accGold: 0, payGold: accGold,
+            accSilver: 0, paySilver: accSilver, accRandDisplay: 0, payRand: accRand });
+    }
+
+    // summary cards
+    document.getElementById('vb-total-plat').textContent   = totalPlat   > 0 ? totalPlat.toLocaleString()   + ' บาท' : '–';
+    document.getElementById('vb-total-gold').textContent   = totalGold   > 0 ? totalGold.toLocaleString()   + ' บาท' : '–';
+    document.getElementById('vb-total-silver').textContent = totalSilver > 0 ? totalSilver.toLocaleString() + ' บาท' : '–';
+    document.getElementById('vb-total-rand').textContent   = totalRand   > 0 ? totalRand.toLocaleString()   + ' บาท' : '–';
+
+    // ── CV ณ ปีคุ้มทุน จาก Tab CI Procare (Option 2) ─────────────
+    // ดึงตาม mode: auto = จาก display cells, manual = จาก inputs
+    var isAutoMode = (_cipcMode !== 'manual');
+    var cvBkAmt2, cvBkYr2, cvMxAmt2, cvMxYr2;
+    if (isAutoMode) {
+        cvBkAmt2 = (document.getElementById('cipc-bk-amt2-disp') || {}).textContent || '';
+        cvBkYr2  = (document.getElementById('cipc-bk-yr2-disp')  || {}).textContent || '';
+        cvMxAmt2 = (document.getElementById('cipc-mx-amt2-disp') || {}).textContent || '';
+        cvMxYr2  = (document.getElementById('cipc-mx-yr2-cell')  || {}).textContent || '';
+    } else {
+        cvBkAmt2 = (document.getElementById('cipc-bk-amt2') || {}).value || '';
+        cvBkYr2  = (document.getElementById('cipc-bk-yr2')  || {}).value || '';
+        cvMxAmt2 = (document.getElementById('cipc-mx-amt2') || {}).value || '';
+        cvMxYr2  = (document.getElementById('cipc-mx-yr2')  || {}).value || '';
+    }
+    var cvBkBox = document.getElementById('vb-cv-box');
+    if (cvBkBox) {
+        if (cvBkAmt2 && cvBkAmt2 !== '–') {
+            var cvBkNum = parseInt(cvBkAmt2.replace(/,/g,'')) || 0;
+            var cvPlusBonusTxt = cvBkNum > 0 && totalPlat > 0
+                ? ' + Platinum Bonus <strong style="color:#1d4ed8;">' + totalPlat.toLocaleString() + ' บาท</strong>'
+                  + ' = รวม <strong style="color:#15803d;">' + (cvBkNum + totalPlat).toLocaleString() + ' บาท</strong>'
+                : '';
+            cvBkBox.innerHTML =
+                '<div style="font-size:0.82em;font-weight:800;color:#92400e;margin-bottom:8px;display:flex;align-items:center;gap:6px;">'
+                + '<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'
+                + 'มูลค่าเงินสด ณ จุดคุ้มทุน (Option 2'
+                + (isAutoMode ? ' · อัตโนมัติ' : ' · ใส่เอง') + ')'
+                + '</div>'
+                + '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:8px;">'
+                + '<div style="padding:8px 12px;background:#fffbeb;border:1.5px solid #d97706;border-radius:8px;">'
+                + '<div style="font-size:0.70em;color:#92400e;text-transform:uppercase;letter-spacing:0.06em;font-weight:700;">CV ณ จุดคุ้มทุน · ' + (cvBkYr2 || '–') + '</div>'
+                + '<div style="font-size:1.15em;font-weight:800;color:#92400e;margin-top:3px;">' + cvBkAmt2 + ' บาท</div>'
+                + '</div>'
+                + '<div style="padding:8px 12px;background:#f0fdf4;border:1.5px solid #16a34a;border-radius:8px;">'
+                + '<div style="font-size:0.70em;color:#15803d;text-transform:uppercase;letter-spacing:0.06em;font-weight:700;">CV สูงสุด · ' + (cvMxYr2 || '–') + '</div>'
+                + '<div style="font-size:1.15em;font-weight:800;color:#15803d;margin-top:3px;">' + (cvMxAmt2 || '–') + ' บาท</div>'
+                + '</div></div>'
+                + '<div style="font-size:0.79em;color:#374151;line-height:1.65;padding:8px 10px;background:#fff;border-radius:6px;border:1px solid #e5e7eb;">'
+                + '💡 หากถอนเงิน ณ จุดคุ้มทุน: <strong style="color:#92400e;">CV ' + cvBkAmt2 + ' บาท</strong>'
+                + ' = <em style="color:#374151;">เงินต้นของการออม</em>' + cvPlusBonusTxt + '<br>'
+                + '<span style="color:#6b7280;">Vitality Bonus ที่ถอนได้ทุก 3 ปี = ผลตอบแทนการออม (บวกเพิ่มจากเงินต้น)</span>'
+                + '</div>';
+            cvBkBox.style.display = '';
+        } else {
+            cvBkBox.style.display = 'none';
+        }
+    }
+
+    // ── Compound Savings (เบี้ยที่จ่าย → ออมทบต้น) ────────────────
+    // เปลี่ยนเป็น: สมมติว่านำเบี้ยที่จ่ายแต่ละปีฝากออมทบต้น เพื่อเปรียบเทียบ
+    // ว่าถ้าไม่ทำประกัน แล้วเอาเบี้ยไปออมแทน จะได้เงินเท่าไร
+    var totalPremPaid = prem2 * (useCampaign ? 19 : 20);
+    // อัปเดต header label
+    var rateLbl2 = document.getElementById('vb-sav-rate-lbl');
+    if (rateLbl2) rateLbl2.textContent = (savRate * 100).toFixed(1) + '%/ปี';
+    var savColHdr = document.getElementById('vb-sav-th');
+    if (savColHdr) savColHdr.querySelector('span').textContent = (savRate * 100).toFixed(1) + '%/ปี';
+
+    // สะสมทบต้น: ฝากเบี้ยปีละ prem2 (หรือ 0 ถ้า campaign ปีที่ 20) ทุกปี
+    // สิ้นปีที่ yr: savAccum = Σ prem_k × (1+r)^(yr-k)  สำหรับ k=1..yr
+    var savHistory = [];
+    var savAccum2 = 0;
+    for (var si2 = 0; si2 < rows.length; si2++) {
+        var sr2 = rows[si2];
+        // ทบดอกเงินที่มีอยู่ก่อน
+        if (savAccum2 > 0) savAccum2 = Math.round(savAccum2 * (1 + savRate));
+        // ฝากเบี้ยปีนี้ (ปีที่ 21 = 0)
+        if (!sr2.isLastPayout) savAccum2 += (sr2.prem || 0);
+        savHistory.push(savAccum2);
+    }
+    var finalSav = savHistory.length > 0 ? savHistory[savHistory.length - 1] : 0;
+
+    // ── Build table rows ─────────────────────────────────────────
+    function mkAcc(v, cls) {
+        return '<span class="' + cls + '">' + (v > 0 ? v.toLocaleString() : '0') + '</span>';
+    }
+    function mkPay(v, cls, bc) {
+        return v > 0
+            ? '<span class="' + cls + '">' + v.toLocaleString() + '<span class="payout-badge ' + bc + '">จ่าย</span></span>'
+            : '<span style="color:var(--t-muted);">–</span>';
+    }
+
+    var html = '';
+    rows.forEach(function(r, idx) {
+        var rowCls = r.isPayout ? 'payout-row' : '';
+        var premCell;
+        if (r.isLastPayout) {
+            premCell = '<td class="td-prem" style="color:var(--t-muted);font-size:0.78em;">–</td>';
+        } else if (r.campFree) {
+            premCell = '<td class="td-prem"><span style="color:#22c55e;font-weight:700;">🎁 ฟรี!</span>'
+                     + '<span style="font-size:0.73em;color:var(--t-muted);"> (แคมเปญ)</span></td>';
+        } else {
+            premCell = '<td class="td-prem">' + r.prem.toLocaleString() + '</td>';
+        }
+        var tc = VB_COLORS[r.tier] || 'var(--t-muted)';
+        var tl = VB_LABELS[r.tier] || '';
+        var randTierCell = r.isLastPayout
+            ? '<td style="color:var(--t-muted);font-size:0.75em;">–</td>'
+            : '<td><span style="font-size:0.82em;font-weight:700;color:' + tc + ';">' + tl + '</span></td>';
+        var platA = r.isPayout ? '<span style="color:var(--t-muted);font-size:0.75em;">–</span>' : mkAcc(r.accPlat,   'td-plat-bonus');
+        var goldA = r.isPayout ? '<span style="color:var(--t-muted);font-size:0.75em;">–</span>' : mkAcc(r.accGold,   'td-gold-bonus');
+        var silvA = r.isPayout ? '<span style="color:var(--t-muted);font-size:0.75em;">–</span>' : mkAcc(r.accSilver, 'td-silver-bonus');
+        var randA = r.isPayout ? '<span style="color:var(--t-muted);font-size:0.75em;">–</span>' : mkAcc(r.accRandDisplay, 'td-rand-bonus');
+        var yrLabel = r.isLastPayout
+            ? 'ปีที่ ' + r.yr + ' <span style="font-size:0.72em;color:var(--t-muted);">(ส่วนค้าง)</span>'
+            : 'ปีที่ ' + r.yr;
+
+        // ── savings cells (เบี้ยสะสมทบต้น) ──
+        var savCells = '';
+        if (showSav) {
+            var savVal = savHistory[idx] || 0;
+            var savDisp = savVal > 0
+                ? '<span style="color:#60a5fa;font-weight:700;">' + savVal.toLocaleString() + '</span>'
+                : '<span style="color:var(--t-muted);">–</span>';
+            // vs เบี้ยรวม แสดงทุกปี (เทียบ savVal กับ totalPremPaid เฉพาะปีท้าย)
+            var vsDisp = '';
+            if (!r.isLastPayout && savVal > 0) {
+                var premSoFar = prem2 * Math.min(r.yr, useCampaign ? 19 : 20);
+                var diff = savVal - premSoFar;
+                var dColor = diff >= 0 ? '#4ade80' : '#fb923c';
+                var dSign  = diff >= 0 ? '+' : '';
+                vsDisp = '<span style="color:' + dColor + ';font-weight:600;font-size:0.82em;">'
+                       + dSign + diff.toLocaleString() + '</span>';
+            } else if (r.isLastPayout && finalSav > 0) {
+                var diffF = finalSav - totalPremPaid;
+                var dcF   = diffF >= 0 ? '#4ade80' : '#fb923c';
+                var dsF   = diffF >= 0 ? '+' : '';
+                vsDisp = '<span style="color:' + dcF + ';font-weight:700;">'
+                       + dsF + diffF.toLocaleString() + '</span>';
+            }
+            savCells = '<td class="vb-sav-col" style="border-left:2px solid rgba(96,165,250,0.2);">' + savDisp + '</td>'
+                     + '<td class="vb-sav-col" style="font-size:0.82em;">' + (vsDisp || '<span style="color:var(--t-muted);">–</span>') + '</td>';
+        }
+
+        html += '<tr class="' + rowCls + '">'
+            + '<td class="td-yr">' + yrLabel + '</td>'
+            + '<td class="td-age">อายุ ' + r.age + '</td>'
+            + premCell
+            + '<td style="border-left:2px solid rgba(91,200,245,0.15);">' + platA + '</td>'
+            + '<td>' + mkPay(r.payPlat,   'td-plat-bonus',   'plat')   + '</td>'
+            + '<td style="border-left:2px solid rgba(212,175,55,0.15);">' + goldA + '</td>'
+            + '<td>' + mkPay(r.payGold,   'td-gold-bonus',   'gold')   + '</td>'
+            + '<td style="border-left:2px solid rgba(192,192,192,0.12);">' + silvA + '</td>'
+            + '<td>' + mkPay(r.paySilver, 'td-silver-bonus', 'silver') + '</td>'
+            + randTierCell
+            + '<td style="border-left:2px solid rgba(167,139,250,0.15);">' + randA + '</td>'
+            + '<td>' + mkPay(r.payRand,   'td-rand-bonus',   'rand')   + '</td>'
+            + savCells
+            + '</tr>';
+    });
+    document.getElementById('vb-tbody').innerHTML = html;
+}
+
+
 async function exportIGBoard(id, filename, btn) {
     const el = document.getElementById(id);
     if (!el) return;
@@ -3886,34 +4557,127 @@ function updateCIVitalitySlides() {
 // ==========================================
 // SLIDE 1 AUTO-FILL FROM OPTIONS
 // ==========================================
+// recalcCIPC: ล้าง manual flag แล้วคำนวณใหม่
+// ==========================================
+// SLIDE 1 MODE TOGGLE
+// ==========================================
+var _cipcMode = 'auto'; // 'auto' | 'manual'
+
+function setCIPCMode(mode) {
+    _cipcMode = mode;
+    const isAuto = mode === 'auto';
+    document.getElementById('cipc-table-auto').style.display   = isAuto ? '' : 'none';
+    document.getElementById('cipc-table-manual').style.display = isAuto ? 'none' : '';
+    // toggle button styles
+    var btnA = document.getElementById('cipc-mode-auto-btn');
+    var btnM = document.getElementById('cipc-mode-manual-btn');
+    if (btnA) { btnA.style.background = isAuto ? 'var(--c-primary)' : 'transparent'; btnA.style.color = isAuto ? '#fff' : 'var(--t-secondary)'; }
+    if (btnM) { btnM.style.background = isAuto ? 'transparent' : 'var(--c-primary)'; btnM.style.color = isAuto ? 'var(--t-secondary)' : '#fff'; }
+    // subtitle
+    var sub = document.getElementById('cipc-mode-subtitle');
+    if (sub) sub.textContent = isAuto
+        ? 'ข้อมูลอ้างอิงจาก Option 1 และ Option 2 · คำนวณอัตโนมัติจาก Rate Table'
+        : 'ข้อมูลอ้างอิงจาก Option 1 และ Option 2 · ✏️ Mode ใส่เองทั้งหมด';
+    // sync manual prems from auto cells
+    if (!isAuto) {
+        ['1','2'].forEach(function(id) {
+            var p = document.getElementById('cipc-prem'+id);
+            var pm = document.getElementById('cipc-prem'+id+'m');
+            if (p && pm) pm.textContent = p.textContent;
+            var t20 = document.getElementById('cipc-total20y'+id);
+            var t20m = document.getElementById('cipc-total20y'+id+'m');
+            if (t20 && t20m) t20m.textContent = t20.textContent;
+            var t19 = document.getElementById('cipc-total19y'+id);
+            var t19m = document.getElementById('cipc-total19y'+id+'m');
+            if (t19 && t19m) t19m.textContent = t19.textContent;
+        });
+    }
+}
+
+function recalcCIPC() {
+    ['cipc-bk-yr1','cipc-bk-amt1','cipc-mx-yr1','cipc-mx-amt1',
+     'cipc-bk-yr2','cipc-bk-amt2','cipc-mx-yr2','cipc-mx-amt2'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) { el.dataset.manual = ''; el.value = ''; }
+    });
+    ['cipc-mx-yr1-cell','cipc-mx-yr2-cell'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = '';
+    });
+    updateCIPCSlide1();
+    showToast('✅ คำนวณมูลค่าเวนคืนใหม่แล้ว');
+}
+
 function updateCIPCSlide1() {
     try {
         const gender = document.getElementById('inp-gender').value;
-        // Option 1
-        const mtype1 = (document.getElementById('main-type-1') || {}).value || '20PLN';
-        const age1   = parseInt(document.getElementById('age-1').value) || 0;
-        const sum1   = parseInt(document.getElementById('main-sum-1').value) || 0;
-        const prem1  = app.calculateMainPremiumForPlan(sum1, age1, gender, mtype1);
-        document.getElementById('cipc-prem1').textContent       = prem1.toLocaleString();
-        document.getElementById('cipc-total20y1').textContent   = (prem1 * 20).toLocaleString();
-        document.getElementById('cipc-total19y1').textContent   = (prem1 * 19).toLocaleString();
-        document.getElementById('cipc-sum1-lbl').textContent    = sum1.toLocaleString();
-        document.getElementById('cipc-age1-lbl').textContent    = age1;
-        // Option 2
-        const mtype2 = (document.getElementById('main-type-2') || {}).value || '20PLN';
-        const age2   = parseInt(document.getElementById('age-2').value) || 0;
-        const sum2   = parseInt(document.getElementById('main-sum-2').value) || 0;
-        const prem2  = app.calculateMainPremiumForPlan(sum2, age2, gender, mtype2);
-        document.getElementById('cipc-prem2').textContent       = prem2.toLocaleString();
-        document.getElementById('cipc-total20y2').textContent   = (prem2 * 20).toLocaleString();
-        document.getElementById('cipc-total19y2').textContent   = (prem2 * 19).toLocaleString();
-        document.getElementById('cipc-sum2-lbl').textContent    = sum2.toLocaleString();
-        document.getElementById('cipc-age2-lbl').textContent    = age2;
 
-        // อัปเดต slide 7,8 visibility ตามอายุ
+        function fillCIPCOption(optId, color) {
+            const mtype = (document.getElementById(`main-type-${optId}`) || {}).value || 'CIProCare';
+            const age   = parseInt(document.getElementById(`age-${optId}`).value) || 0;
+            const sum   = parseInt(document.getElementById(`main-sum-${optId}`).value) || 0;
+            const prem  = Math.round(app.calculateMainPremiumForPlan(sum, age, gender, mtype));
+            const total19 = prem * 19;
+            const total20 = prem * 20;
+
+            // fill เบี้ยทั้ง auto และ manual cells
+            const setEl = (id, val) => { const e = document.getElementById(id); if(e) e.textContent = val; };
+            setEl(`cipc-prem${optId}`,      prem.toLocaleString());
+            setEl(`cipc-total20y${optId}`,  total20.toLocaleString());
+            setEl(`cipc-total19y${optId}`,  total19.toLocaleString());
+            setEl(`cipc-prem${optId}m`,     prem.toLocaleString());
+            setEl(`cipc-total20y${optId}m`, total20.toLocaleString());
+            setEl(`cipc-total19y${optId}m`, total19.toLocaleString());
+            setEl(`cipc-sum${optId}-lbl`,   sum.toLocaleString());
+            setEl(`cipc-age${optId}-lbl`,   age);
+
+            if (age > 0 && sum > 0 && mtype === 'CIProCare') {
+                const cvRow = APP_DATA.RATE_CV_CIPROCARE[gender]?.[age] || [];
+                const maxYr = Math.min(35, cvRow.length);
+                let bkYr = 0, bkAmt = 0;
+                for (let yr = 1; yr <= maxYr; yr++) {
+                    const cv = app.getCIProCareCV(age, yr, sum, gender);
+                    if (!bkYr && cv >= total19) { bkYr = yr; bkAmt = cv; break; }
+                }
+                const cv35  = app.getCIProCareCV(age, maxYr, sum, gender);
+                const age35 = age + maxYr;
+                const bkYrTxt  = bkYr  ? `ปีที่ ${bkYr} (อายุ ${age + bkYr} ปี)` : '–';
+                const bkAmtTxt = bkAmt ? bkAmt.toLocaleString() : '–';
+                const mx35Txt  = (age35 <= 99) ? `อายุ ${age35} ปี` : '–';
+                const mxAmtTxt = (cv35 > 0 && age35 <= 99) ? cv35.toLocaleString() : '–';
+
+                // Auto mode: แสดงใน display cells
+                setEl(`cipc-bk-yr${optId}-disp`,  bkYrTxt);
+                setEl(`cipc-bk-amt${optId}-disp`,  bkAmtTxt);
+                setEl(`cipc-mx-yr${optId}-cell`,    mx35Txt);
+                setEl(`cipc-mx-amt${optId}-disp`,   mxAmtTxt);
+
+                // Manual mode: fill inputs ถ้ายังไม่ได้กรอกเอง
+                const bkYrEl  = document.getElementById(`cipc-bk-yr${optId}`);
+                const bkAmtEl = document.getElementById(`cipc-bk-amt${optId}`);
+                const mxYrEl  = document.getElementById(`cipc-mx-yr${optId}`);
+                const mxAmtEl = document.getElementById(`cipc-mx-amt${optId}`);
+                if (bkYrEl  && !bkYrEl.dataset.manual)  bkYrEl.value  = bkYrTxt;
+                if (bkAmtEl && !bkAmtEl.dataset.manual)  bkAmtEl.value = bkAmtTxt;
+                if (mxYrEl  && !mxYrEl.dataset.manual)   mxYrEl.value  = mx35Txt;
+                if (mxAmtEl && !mxAmtEl.dataset.manual)  mxAmtEl.value = mxAmtTxt;
+            }
+        }
+
+        fillCIPCOption(1, 'var(--c-primary)');
+        fillCIPCOption(2, 'var(--c-mtl)');
         updateCIVitalitySlides();
     } catch(e) { console.warn('updateCIPCSlide1:', e); }
 }
+
+// mark input ว่ากรอกเองเพื่อป้องกัน autofill ทับ
+document.addEventListener('DOMContentLoaded', () => {
+    ['cipc-bk-yr1','cipc-bk-amt1','cipc-mx-yr1','cipc-mx-amt1',
+     'cipc-bk-yr2','cipc-bk-amt2','cipc-mx-yr2','cipc-mx-amt2'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('input', () => { el.dataset.manual = '1'; });
+    });
+});
 
 // ==========================================
 // PRINT ALL CI SLIDES
@@ -4025,7 +4789,7 @@ const EXPORT_FIELDS = [
     { id: 'hb-3',        type: 'value' },
     { id: 'mpci-sum-3',  type: 'value' },
     { id: 'cp-3',        type: 'checked' },
-    // CI Procare slide 1 — manual inputs
+    // CI Procare slide 1 — manual inputs + mode
     { id: 'cipc-bk-yr1',  type: 'value' },
     { id: 'cipc-bk-amt1', type: 'value' },
     { id: 'cipc-mx-yr1',  type: 'value' },
@@ -4045,7 +4809,7 @@ function showToast(msg, duration = 2800) {
 }
 
 function exportData() {
-    const data = { _version: 1, _exported: new Date().toISOString() };
+    const data = { _version: 1, _exported: new Date().toISOString(), _cipcMode: _cipcMode };
     EXPORT_FIELDS.forEach(({ id, type }) => {
         const el = document.getElementById(id);
         if (!el) return;
@@ -4081,12 +4845,12 @@ function importData(event) {
                 if (!(id in data)) return;
                 const el = document.getElementById(id);
                 if (!el) return;
-                if (type === 'checked') {
-                    el.checked = data[id];
-                } else {
-                    el.value = data[id];
-                }
+                if (type === 'checked') { el.checked = data[id]; }
+                else { el.value = data[id]; }
             });
+
+            // restore CIPC mode
+            if (data._cipcMode) setCIPCMode(data._cipcMode);
 
             // Trigger re-render ตาม field ที่สำคัญ (main type, health type)
             [1, 2, 3].forEach(id => {

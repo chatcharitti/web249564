@@ -3975,7 +3975,7 @@ const app = {
         // เช็คว่ามี Option ไหนเลือก CI ProCare
         let hasCIProCare = false;
         const cipcActive = {};
-        
+
         [1,2,3].forEach(id => {
             if (!activeOptions[id-1]) { cipcActive[id] = false; return; }
             const mainType = document.getElementById(`main-type-${id}`) ? document.getElementById(`main-type-${id}`).value : '20PLN';
@@ -3988,6 +3988,83 @@ const app = {
         if (!hasCIProCare) { if(section) section.style.display = 'none'; return; }
         if(section) section.style.display = '';
 
+        const gender = document.getElementById('inp-gender').value;
+        const optColors = { 1: 'var(--c-primary)', 2: 'var(--c-mtl)', 3: 'var(--c-mtl)' };
+        const optNames  = { 1: 'Option 1', 2: 'Option 2', 3: 'Option 3' };
+
+        let containerHtml = '';
+
+        [1,2,3].forEach(id => {
+            if (!cipcActive[id]) return;
+
+            const age     = parseInt(document.getElementById(`age-${id}`).value) || 0;
+            const mainSum = parseInt(document.getElementById(`main-sum-${id}`).value) || 0;
+            if (age <= 0 || mainSum <= 0) return;
+
+            const mainType   = document.getElementById(`main-type-${id}`).value;
+            const annualPrem = Math.round(this.calculateMainPremiumForPlan(mainSum, age, gender, mainType));
+            const total19y   = annualPrem * 19;
+
+            const cvRow = APP_DATA.RATE_CV_CIPROCARE[gender]?.[age] || [];
+            const maxYr = Math.min(35, cvRow.length);
+
+            // หา breakeven year (CV >= เบี้ยรวม 19 ปี) + max CV
+            let breakevenYr = 0, breakevenCV = 0;
+            let maxCV = 0, maxCVYr = 0;
+            for (let yr = 1; yr <= maxYr; yr++) {
+                const cv = this.getCIProCareCV(age, yr, mainSum, gender);
+                if (!breakevenYr && cv >= total19y) { breakevenYr = yr; breakevenCV = cv; }
+                if (cv > maxCV) { maxCV = cv; maxCVYr = yr; }
+            }
+
+            containerHtml += `
+            <div style="margin-bottom: 28px;">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
+                    <span style="font-weight:700;font-size:1.05em;color:${optColors[id]};">${optNames[id]}</span>
+                    <span style="font-size:0.82em;color:var(--t-tertiary);">อายุ ${age} ปี · ทุน ${this.formatMoney(mainSum)} บาท · เบี้ย ${this.formatMoney(annualPrem)} บาท/ปี</span>
+                </div>
+                <div style="overflow-x:auto;">
+                <table class="cv-table">
+                    <thead>
+                        <tr>
+                            <th>ปีกรมธรรม์</th>
+                            <th>อายุ</th>
+                            <th>เบี้ยสะสม</th>
+                            <th>มูลค่าเวนคืน (CV)</th>
+                            <th>สถานะ</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+
+            for (let yr = 1; yr <= maxYr; yr++) {
+                const cv = this.getCIProCareCV(age, yr, mainSum, gender);
+                const yearsPaid = Math.min(yr, 20);
+                const accumPrem = annualPrem * yearsPaid;
+                const isBreakeven = (yr === breakevenYr);
+                const isMaxCV = (yr === maxCVYr);
+                const rowStyle = isBreakeven ? 'background: rgba(34,197,94,0.10); font-weight:700;'
+                               : isMaxCV ? 'background: rgba(212,175,55,0.10); font-weight:700;' : '';
+                let statusBadge = '';
+                if (isBreakeven) statusBadge = '<span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:4px;font-size:0.78em;font-weight:700;">จุดคุ้มทุน</span>';
+                else if (isMaxCV) statusBadge = '<span style="background:var(--c-primary);color:#fff;padding:2px 8px;border-radius:4px;font-size:0.78em;font-weight:700;">มูลค่าสูงสุด</span>';
+                else if (yr > 20) statusBadge = '<span style="color:var(--t-tertiary);font-size:0.78em;">หยุดจ่ายเบี้ยแล้ว</span>';
+
+                containerHtml += `
+                    <tr style="${rowStyle}">
+                        <td>${yr}</td>
+                        <td>${age + yr}</td>
+                        <td>${this.formatMoney(accumPrem)}</td>
+                        <td style="color:${optColors[id]};">${cv > 0 ? this.formatMoney(cv) : '-'}</td>
+                        <td>${statusBadge}</td>
+                    </tr>`;
+            }
+
+            containerHtml += `
+                    </tbody>
+                </table>
+                </div>
+            </div>`;
+        });
 
         document.getElementById('cv-tables-container').innerHTML = containerHtml;
         if (window.lucide) window.lucide.createIcons();
@@ -4453,7 +4530,9 @@ function vtBuildBoard(optId, tiersArr, gender, gTxt, useCampaign) {
     else if (_vtSelectedTier === 'bronze'){ payKey = null; accKey = null; totalVal = 0; } // bronze = 0% เสมอ
     else { payKey = 'payRand'; accKey = 'accRandDisplay'; totalVal = calc.totalRand; }
 
-    // ── CV data จาก Tab CI ProCare (mode-aware) ──
+    // ── CV data จาก Tab CI ProCare (ดึงค่าเสมอ ไม่ว่า Auto หรือ Manual mode) ──
+    // Manual mode มีไว้ให้ผู้ใช้แก้ไขค่าเองเมื่อตาราง CV อัตโนมัติไม่ครอบคลุม
+    // หรือไม่ตรงกับข้อมูลจริง จึงต้องนำค่าที่กรอกมาแสดงผลเช่นเดียวกับ Auto mode
     var isAutoMode = (_cipcMode !== 'manual');
     var cvBkYrRaw, cvBkAmtRaw, cvMxYrRaw, cvMxAmtRaw;
     if (isAutoMode) {
@@ -4467,15 +4546,29 @@ function vtBuildBoard(optId, tiersArr, gender, gTxt, useCampaign) {
         cvMxYrRaw  = (document.getElementById('cipc-mx-yr' + optId)  || {}).value || '';
         cvMxAmtRaw = (document.getElementById('cipc-mx-amt' + optId) || {}).value || '';
     }
-    // parse ปีที่จาก string เช่น "ปีที่ 19 (อายุ 40 ปี)" → 19
-    function parseYrNum(txt) {
-        var m = txt.match(/ปีที่\s*(\d+)/);
-        return m ? parseInt(m[1]) : null;
+
+    // ── Parse ปีกรมธรรม์จากข้อความที่อาจมีหลายรูปแบบ ──
+    // รองรับ: "ปีที่ 19 (อายุ 40 ปี)", "อายุ 55 ปี", "19", "ปีที่ 19", เป็นต้น
+    function parsePolicyYear(txt, entryAge) {
+        if (!txt) return null;
+        // 1) หา "ปีที่ N" ก่อน (ตรงที่สุด)
+        var m1 = txt.match(/ปีที่\s*(\d+)/);
+        if (m1) return parseInt(m1[1]);
+        // 2) หา "อายุ N" แล้วคำนวณเป็นปีกรมธรรม์
+        var m2 = txt.match(/อายุ\s*(\d+)/);
+        if (m2) {
+            var ageVal = parseInt(m2[1]);
+            var yrVal  = ageVal - entryAge;
+            return (yrVal > 0 && yrVal <= 99) ? yrVal : null;
+        }
+        // 3) ถ้าเป็นตัวเลขล้วนๆ (ผู้ใช้กรอกแค่ปี เช่น "19")
+        var m3 = txt.match(/^\s*(\d+)\s*$/);
+        if (m3) return parseInt(m3[1]);
+        return null;
     }
-    var bkYrNum = parseYrNum(cvBkYrRaw || '');
-    var mxYrNum = null;
-    var mxAgeMatch = (cvMxYrRaw || '').match(/อายุ\s*(\d+)/);
-    if (mxAgeMatch) mxYrNum = parseInt(mxAgeMatch[1]) - age;
+
+    var bkYrNum = parsePolicyYear(cvBkYrRaw, age);
+    var mxYrNum = parsePolicyYear(cvMxYrRaw, age);
 
     // ── Build HTML ──
     var html = '';
@@ -4571,19 +4664,49 @@ function vtBuildBoard(optId, tiersArr, gender, gTxt, useCampaign) {
     });
     html += '</div></div>';
 
-    // CV marker row (breakeven + max CV)
+    // CV marker row (breakeven + max CV) — แสดงทั้ง Auto และ Manual mode
     html += '<div class="vt-cv-marker-row">';
     rows.forEach(function(r) {
         var tags = '';
         if (bkYrNum && r.yr === bkYrNum) {
             tags += '<span class="vt-cv-tag breakeven">🟢 จุดคุ้มทุน<br>CV ' + (cvBkAmtRaw || '–') + ' บ.</span>';
         }
-        if (mxYrNum && r.yr === mxYrNum) {
+        // มูลค่าสูงสุดถ้าตรงกับปีใน timeline (1-20) ให้แปะตรงปีนั้น
+        if (mxYrNum && mxYrNum <= 20 && mxYrNum >= 1 && r.yr === mxYrNum) {
             tags += (tags ? '<br>' : '') + '<span class="vt-cv-tag maxcv">🟡 มูลค่าสูงสุด<br>CV ' + (cvMxAmtRaw || '–') + ' บ.</span>';
         }
         html += '<div class="vt-cv-marker-cell">' + tags + '</div>';
     });
     html += '</div>';
+
+    // ถ้าจุดคุ้มทุนอยู่นอกช่วง 20 ปี ให้แสดงเป็นกล่องแยกใต้ timeline
+    if (bkYrNum && bkYrNum > 20 && cvBkAmtRaw) {
+        html += '<div style="margin-top:8px;padding:9px 14px;background:#dcfce7;border:1.5px solid #16a34a;border-radius:8px;display:flex;align-items:center;gap:10px;">'
+              + '<span style="font-size:1.1em;">🟢</span>'
+              + '<span style="font-size:0.84em;color:#15803d;font-weight:600;">'
+              + 'จุดคุ้มทุน: <strong>CV ' + cvBkAmtRaw + ' บาท</strong> ที่ปีกรมธรรม์ ' + bkYrNum + ' (' + cvBkYrRaw + ') — อยู่นอกช่วง Timeline 20 ปีที่แสดง'
+              + '</span></div>';
+    }
+
+    // ถ้ามูลค่าสูงสุดอยู่นอกช่วง 20 ปี (เช่น ปีที่ 35) ให้แสดงเป็นกล่องแยกใต้ timeline
+    if (mxYrNum && mxYrNum > 20 && cvMxAmtRaw) {
+        html += '<div style="margin-top:8px;padding:9px 14px;background:#fef3c7;border:1.5px solid #d4af37;border-radius:8px;display:flex;align-items:center;gap:10px;">'
+              + '<span style="font-size:1.1em;">🟡</span>'
+              + '<span style="font-size:0.84em;color:#92400e;font-weight:600;">'
+              + 'มูลค่าสูงสุด: <strong>CV ' + cvMxAmtRaw + ' บาท</strong> ที่ปีกรมธรรม์ ' + mxYrNum + ' (' + cvMxYrRaw + ') — อยู่นอกช่วง Timeline 20 ปีที่แสดง'
+              + '</span></div>';
+    }
+
+    // กรณี Manual mode — แจ้งที่มาของข้อมูล (เพื่อความโปร่งใส ไม่ใช่ปิดกั้นการแสดงผล)
+//<!!--    if (!isAutoMode && (cvBkAmtRaw || cvMxAmtRaw)) {
+//        html += '<div style="margin-top:8px;padding:8px 14px;background:#eff6ff;border:1px dashed #93c5fd;border-radius:8px;">'
+//              + '<span style="font-size:0.78em;color:#1e40af;">✏️ ข้อมูลจุดคุ้มทุน/มูลค่าสูงสุดมาจากการกรอกเองใน Slide 1 (โหมด "ใส่เองทั้งหมด")</span>'
+//              + '</div>';
+//    } else if (!isAutoMode && !cvBkAmtRaw && !cvMxAmtRaw) {
+//        html += '<div style="margin-top:8px;padding:8px 14px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;">'
+//              + '<span style="font-size:0.78em;color:#64748b;">ℹ️ ยังไม่มีข้อมูลจุดคุ้มทุน/มูลค่าสูงสุด — กรุณากรอกที่ Slide 1 (Tab CI ProCare) โหมด "ใส่เองทั้งหมด"</span>'
+//              + '</div>';
+//  }
 
     html += '</div>'; // end vt-track-wrap
 
@@ -5262,6 +5385,17 @@ function importData(event) {
                 if (!el) return;
                 if (type === 'checked') { el.checked = data[id]; }
                 else { el.value = data[id]; }
+            });
+
+            // กู้คืน manual flag สำหรับช่อง CI ProCare ที่ผู้ใช้กรอกเอง
+            // (ป้องกันไม่ให้ auto-calculate เขียนทับค่าที่ import มาทันทีที่มีการคำนวณใหม่)
+            const cipcManualFields = ['cipc-bk-yr1','cipc-bk-amt1','cipc-mx-yr1','cipc-mx-amt1',
+                                       'cipc-bk-yr2','cipc-bk-amt2','cipc-mx-yr2','cipc-mx-amt2'];
+            cipcManualFields.forEach(id => {
+                const el = document.getElementById(id);
+                if (el && id in data && data[id] !== '') {
+                    el.dataset.manual = '1';
+                }
             });
 
             // restore CIPC mode

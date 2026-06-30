@@ -1056,6 +1056,101 @@
         .vb-ctrl-label input[type=checkbox] { width:15px; height:15px; cursor:pointer; accent-color:#1a2f4f; }
         .vb-print-btn { padding:6px 14px; background:#f0fdf4; color:#15803d; border:1.5px solid #16a34a; border-radius:var(--r-md); cursor:pointer; font-family:inherit; font-size:12px; font-weight:700; transition:all 0.15s; display:inline-flex; align-items:center; gap:6px; }
         .vb-print-btn:hover { background:#dcfce7; }
+
+        /* ============================================
+           VITALITY TIMELINE TAB
+           ============================================ */
+        .vt-container { max-width: 1300px; margin: 0 auto; padding: 0 0 40px; }
+        .vt-ctrl-bar { display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-bottom:16px; padding:10px 14px; background:#f8fafc; border-radius:var(--r-md); border:1px solid #e2e8f0; }
+        .vt-tier-select { display:flex; gap:6px; flex-wrap:wrap; }
+        .vt-tier-btn {
+            display:flex; align-items:center; gap:6px; padding:6px 13px; border-radius:20px;
+            font-size:0.82em; font-weight:700; cursor:pointer; border:1.5px solid; transition:all 0.15s;
+            background:#fff; font-family:inherit;
+        }
+        .vt-tier-btn.bronze  { color:#92400e; border-color:#d97706; }
+        .vt-tier-btn.silver  { color:#475569; border-color:#94a3b8; }
+        .vt-tier-btn.gold    { color:#92400e; border-color:#d4af37; }
+        .vt-tier-btn.plat    { color:#1e40af; border-color:#3b82f6; }
+        .vt-tier-btn.rand    { color:#5b21b6; border-color:#7c3aed; }
+        .vt-tier-btn.active.bronze  { background:#fef3e8; box-shadow:0 0 0 2px rgba(217,119,6,0.25); }
+        .vt-tier-btn.active.silver  { background:#f1f5f9; box-shadow:0 0 0 2px rgba(148,163,184,0.3); }
+        .vt-tier-btn.active.gold    { background:#fffbeb; box-shadow:0 0 0 2px rgba(212,175,55,0.3); }
+        .vt-tier-btn.active.plat    { background:#eff6ff; box-shadow:0 0 0 2px rgba(59,130,246,0.3); }
+        .vt-tier-btn.active.rand    { background:#f5f3ff; box-shadow:0 0 0 2px rgba(124,58,237,0.3); }
+        .vt-font-ctrl { display:flex; align-items:center; gap:5px; margin-left:auto; }
+        .vt-font-btn { width:26px;height:26px;border-radius:var(--r-sm);border:1px solid var(--b-soft);background:#fff;color:#1a2f4f;cursor:pointer;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;font-family:inherit; }
+        .vt-font-btn:hover { background:#eff6ff; }
+        .vt-font-lbl { min-width:34px;text-align:center;font-size:11px;font-weight:700;color:#475569; }
+        .vt-print-btn { padding:6px 14px; background:#f0fdf4; color:#15803d; border:1.5px solid #16a34a; border-radius:var(--r-md); cursor:pointer; font-family:inherit; font-size:12px; font-weight:700; display:inline-flex; align-items:center; gap:6px; }
+        .vt-print-btn:hover { background:#dcfce7; }
+        .vt-reshuffle-btn { padding:6px 14px; background:#f5f3ff; color:#5b21b6; border:1.5px solid #7c3aed; border-radius:var(--r-md); cursor:pointer; font-family:inherit; font-size:12px; font-weight:700; display:inline-flex; align-items:center; gap:6px; }
+        .vt-reshuffle-btn:hover { background:#ede9fe; }
+
+        /* Timeline Card (per Option) */
+        .vt-board { background:#fff; border:1.5px solid #e5d9a3; border-radius:var(--r-lg); padding:22px 26px 18px; margin-bottom:24px; box-shadow:0 2px 10px rgba(0,0,0,0.04); }
+        .vt-board-header { display:flex; align-items:flex-start; gap:12px; margin-bottom:16px; }
+        .vt-board-icon { flex-shrink:0; width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3em; }
+        .vt-board-title { font-size:1.15em; font-weight:800; color:#dc2626; }
+        .vt-board-sub { font-size:0.84em; color:#374151; line-height:1.6; margin-top:2px; }
+        .vt-board-meta { font-size:0.80em; color:#6b7280; margin-top:6px; }
+        .vt-board-meta strong { color:#1a2f4f; }
+
+        /* Vitality status legend */
+        .vt-status-legend { background:#fffbeb; border:1.5px solid #d4af37; border-radius:12px; padding:10px 18px; display:flex; align-items:center; gap:20px; flex-wrap:wrap; margin-bottom:16px; }
+        .vt-status-legend-title { font-weight:800; color:#92400e; font-size:0.92em; }
+        .vt-legend-item { display:flex; align-items:center; gap:6px; }
+        .vt-badge { width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:0.78em;font-weight:800;color:#fff;flex-shrink:0; }
+        .vt-badge.bronze { background:#b45309; }
+        .vt-badge.silver { background:#94a3b8; }
+        .vt-badge.gold   { background:#d4af37; }
+        .vt-badge.plat   { background:#64748b; }
+        .vt-legend-pct { font-size:0.86em; font-weight:700; color:#374151; }
+
+        /* Timeline track */
+        .vt-track-wrap { position:relative; padding:0 10px; margin-bottom:6px; }
+        .vt-money-row { display:flex; align-items:flex-end; justify-content:space-between; height:38px; margin-bottom:2px; }
+        .vt-money-row .vt-coin { font-size:1.3em; opacity:0.85; }
+        .vt-axis-line { position:relative; height:3px; background:#dc2626; border-radius:2px; margin:4px 0 6px; }
+        .vt-axis-tick { position:absolute; top:-4px; width:2px; height:11px; background:#dc2626; }
+        .vt-yr-row { display:flex; justify-content:space-between; margin-bottom:10px; }
+        .vt-yr-label { font-size:0.80em; font-weight:700; color:#dc2626; text-align:center; flex:1; }
+
+        /* status row (badges per year) */
+        .vt-status-row { display:flex; gap:3px; margin-bottom:3px; }
+        .vt-status-cell { flex:1; display:flex; flex-direction:column; align-items:center; gap:2px; min-width:0; }
+        .vt-pct-label { font-size:0.74em; font-weight:700; color:#374151; }
+
+        /* payout arrow + calc row */
+        .vt-payout-row { display:flex; gap:3px; margin:8px 0; }
+        .vt-payout-cell { flex:1; text-align:center; min-width:0; }
+        .vt-payout-arrow { color:#dc2626; font-size:1.1em; }
+        .vt-payout-pct { font-size:0.95em; font-weight:800; color:#dc2626; }
+        .vt-payout-formula { font-size:0.68em; color:#9ca3af; }
+
+        /* bonus bar */
+        .vt-bonus-bar { display:flex; gap:3px; margin-top:6px; }
+        .vt-bonus-cell { flex:1; background:#9d174d; color:#fff; text-align:center; padding:7px 2px; font-size:0.82em; font-weight:800; border-radius:4px; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+        .vt-bonus-cell.empty { background:transparent; color:transparent; }
+        .vt-bonus-label { font-size:0.80em; font-weight:700; color:#9d174d; white-space:nowrap; padding-right:10px; display:flex;align-items:center; }
+
+        /* CV markers */
+        .vt-cv-marker-row { display:flex; gap:3px; margin-top:10px; }
+        .vt-cv-marker-cell { flex:1; text-align:center; min-width:0; }
+        .vt-cv-tag { display:inline-block; font-size:0.68em; font-weight:800; padding:3px 7px; border-radius:5px; line-height:1.5; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+        .vt-cv-tag.breakeven { background:#dcfce7; color:#15803d; border:1px solid #16a34a; }
+        .vt-cv-tag.maxcv     { background:#fef3c7; color:#92400e; border:1px solid #d4af37; }
+
+        /* summary footer */
+        .vt-footer { background:#f0fdf4; border:1.5px solid #16a34a; border-radius:10px; padding:12px 18px; margin-top:14px; }
+        .vt-footer-text { font-size:0.86em; color:#166534; line-height:1.7; }
+        .vt-footer-text strong { color:#15803d; font-size:1.05em; }
+
+        @media print {
+            .vt-ctrl-bar { display:none !important; }
+            .vt-board { break-inside: avoid; box-shadow:none !important; border:1.5px solid #d4af37 !important; }
+            .vt-status-legend, .vt-bonus-cell, .vt-cv-tag, .vt-footer { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+        }
         @media print {
             .vb-ctrl-bar { display:none !important; }
             .vb-header-card { background:#fff8e1 !important; border:2px solid #d4af37 !important; }
@@ -1188,6 +1283,10 @@
         <button class="main-tab-btn" onclick="switchMainTab('tab-vitality')" id="tab-btn-vitality">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
             Vitality Bonus
+        </button>
+        <button class="main-tab-btn" onclick="switchMainTab('tab-vtimeline')" id="tab-btn-vtimeline">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Vitality Timeline
         </button>
     </div>
     <div class="main-tab-wrapper">
@@ -1878,8 +1977,6 @@
                   </div>
                 </div>
 
-                </div>
-
                 <!-- SLIDES 2–15: image slides -->
                 <div class="ci-slide" id="ci-s2"><div class="ci-img-slide"><img src="CI_PC_p2.png" alt="CI ProCare P2" onerror="this.parentElement.innerHTML='<div style=\'padding:60px;text-align:center;color:#888;font-size:1.1em;\'>ไม่พบไฟล์ CI_PC_P2.png</div>'"></div></div>
                 <div class="ci-slide" id="ci-s3"><div class="ci-img-slide"><img src="CI_PC_p3.png" alt="CI ProCare P3" onerror="this.parentElement.innerHTML='<div style=\'padding:60px;text-align:center;color:#888;font-size:1.1em;\'>ไม่พบไฟล์ CI_PC_P3.png</div>'"></div></div>
@@ -2230,6 +2327,65 @@
 
         </div>
     </div><!-- end tab-vitality -->
+
+    <!-- ═══ TAB: Vitality Timeline ═══ -->
+    <div class="main-tab-panel" id="tab-vtimeline" style="display:none !important;">
+        <div class="vt-container">
+
+            <!-- Control Bar -->
+            <div class="vt-ctrl-bar no-print">
+                <span style="font-size:0.82em;font-weight:700;color:#374151;">เลือกระดับ Vitality:</span>
+                <div class="vt-tier-select" id="vt-tier-select">
+                    <button class="vt-tier-btn bronze" data-tier="bronze" onclick="vtSetTier('bronze')">🥉 Bronze 0%</button>
+                    <button class="vt-tier-btn silver" data-tier="silver" onclick="vtSetTier('silver')">🥈 Silver 1%</button>
+                    <button class="vt-tier-btn gold"   data-tier="gold"   onclick="vtSetTier('gold')">🥇 Gold 4%</button>
+                    <button class="vt-tier-btn plat active" data-tier="platinum" onclick="vtSetTier('platinum')">💎 Platinum 9%</button>
+                    <button class="vt-tier-btn rand"   data-tier="random" onclick="vtSetTier('random')">🎲 สุ่มระดับ</button>
+                </div>
+                <button class="vt-reshuffle-btn" id="vt-reshuffle-btn" style="display:none;" onclick="vtReshuffle()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
+                    สุ่มใหม่
+                </button>
+                <div class="vt-font-ctrl">
+                    <span style="font-size:0.78em;color:#6b7280;">ขนาด A</span>
+                    <button class="vt-font-btn" onclick="vtFontSize(-1)">A−</button>
+                    <span class="vt-font-lbl" id="vt-font-lbl">100%</span>
+                    <button class="vt-font-btn" onclick="vtFontSize(1)">A+</button>
+                </div>
+                <button class="vt-print-btn" onclick="vtPrint()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                    พิมพ์ A4
+                </button>
+            </div>
+
+            <!-- Board 1: Option 1 -->
+            <div class="vt-board" id="vt-board-1">
+                <div class="vt-board-header">
+                    <div class="vt-board-icon" style="background:rgba(212,175,55,0.15);">💰</div>
+                    <div>
+                        <div class="vt-board-title">ผลประโยชน์โบนัสสุขภาพ — Option 1</div>
+                        <div class="vt-board-sub">บริษัทจะจ่ายโบนัสสุขภาพทุก 3 ปีกรมธรรม์ จนถึงปีสุดท้ายที่ชำระเบี้ย (ปีที่ 20)</div>
+                        <div class="vt-board-meta" id="vt-meta-1">กรุณากรอกข้อมูล Option 1</div>
+                    </div>
+                </div>
+                <div id="vt-body-1"></div>
+            </div>
+
+            <!-- Board 2: Option 2 -->
+            <div class="vt-board" id="vt-board-2">
+                <div class="vt-board-header">
+                    <div class="vt-board-icon" style="background:rgba(236,72,153,0.12);">💰</div>
+                    <div>
+                        <div class="vt-board-title">ผลประโยชน์โบนัสสุขภาพ — Option 2</div>
+                        <div class="vt-board-sub">บริษัทจะจ่ายโบนัสสุขภาพทุก 3 ปีกรมธรรม์ จนถึงปีสุดท้ายที่ชำระเบี้ย (ปีที่ 20)</div>
+                        <div class="vt-board-meta" id="vt-meta-2">กรุณากรอกข้อมูล Option 2</div>
+                    </div>
+                </div>
+                <div id="vt-body-2"></div>
+            </div>
+
+        </div>
+    </div><!-- end tab-vtimeline -->
 
     </div><!-- end main-tab-wrapper -->
 
@@ -3906,7 +4062,8 @@ function switchMainTab(tabId) {
         'tab-compare':      'tab-btn-compare',
         'tab-cipc':         'tab-btn-cipc',
         'tab-infographic':  'tab-btn-infographic',
-        'tab-vitality':     'tab-btn-vitality'
+        'tab-vitality':     'tab-btn-vitality',
+        'tab-vtimeline':    'tab-btn-vtimeline'
     };
     const btn = document.getElementById(btnMap[tabId]);
     if (btn) btn.classList.add('active');
@@ -3914,6 +4071,7 @@ function switchMainTab(tabId) {
     if (tabId === 'tab-cipc') updateCIPCSlide1();
     if (tabId === 'tab-infographic') refreshInfographic();
     if (tabId === 'tab-vitality') vbRender();
+    if (tabId === 'tab-vtimeline') vtRender();
 }
 
 // ==========================================
@@ -4156,6 +4314,298 @@ function vbFontSize(delta) {
     if (lbl) lbl.textContent = pct + '%';
 }
 
+// ── Shared Vitality Bonus Calculation Engine ──────────────────────
+// ใช้ร่วมกันทั้ง Tab Vitality (ตาราง) และ Tab Timeline
+// Logic: จ่าย Bonus ทุก 3 ปี (3,6,9,12,15,18) ตามปกติ
+// ปีที่ 20 (ปีสุดท้ายที่จ่ายเบี้ย) ให้จ่ายก้อนสะสมที่เหลือทันที (รวมเศษปี 19-20)
+// ไม่มีปีที่ 21 ค้างอีกต่อไป — จบที่ปีที่ 20 พอดี ตามตัวอย่างเอกสาร AIA
+function vbCalcBonusRows(prem2, age2, tiersArr, useCampaign) {
+    var rows = [];
+    var accPlat = 0, accGold = 0, accSilver = 0, accRand = 0;
+    var totalPlat = 0, totalGold = 0, totalSilver = 0, totalRand = 0;
+
+    for (var yr = 1; yr <= 20; yr++) {
+        var tier = tiersArr[yr - 1] || 'bronze';
+        accPlat   += Math.round(prem2 * VB_RATES.platinum);
+        accGold   += Math.round(prem2 * VB_RATES.gold);
+        accSilver += Math.round(prem2 * VB_RATES.silver);
+        accRand   += Math.round(prem2 * VB_RATES[tier]);
+
+        var payPlat = 0, payGold = 0, paySilver = 0, payRand = 0;
+        // จ่ายทุก 3 ปี หรือบังคับจ่ายที่ปีที่ 20 (ปีสุดท้าย) เสมอ
+        var isPayout = (yr % 3 === 0) || (yr === 20);
+        if (isPayout) {
+            payPlat   = accPlat;   totalPlat   += accPlat;   accPlat   = 0;
+            payGold   = accGold;   totalGold   += accGold;   accGold   = 0;
+            paySilver = accSilver; totalSilver += accSilver; accSilver = 0;
+            payRand   = accRand;   totalRand   += accRand;   accRand   = 0;
+        }
+        var premPaid = (useCampaign && yr === 20) ? 0 : prem2;
+        rows.push({ yr: yr, age: age2 + yr, prem: premPaid, isPayout: isPayout, tier: tier,
+            campFree:  useCampaign && yr === 20,
+            accPlat:   accPlat,   payPlat:   payPlat,
+            accGold:   accGold,   payGold:   payGold,
+            accSilver: accSilver, paySilver: paySilver,
+            accRandDisplay: isPayout ? 0 : accRand, payRand: payRand });
+    }
+    return { rows: rows, totalPlat: totalPlat, totalGold: totalGold, totalSilver: totalSilver, totalRand: totalRand };
+}
+
+// ==========================================
+// VITALITY TIMELINE TAB
+// ==========================================
+const VT_FONT_LEVELS = [75, 80, 85, 90, 95, 100, 108, 116, 125, 135];
+let _vtFontIdx = 5;
+let _vtSelectedTier = 'platinum'; // 'bronze'|'silver'|'gold'|'platinum'|'random'
+let _vtRandomTiers = []; // shared random tiers for both boards (same level both lines)
+
+function vtFontSize(delta) {
+    _vtFontIdx = Math.max(0, Math.min(VT_FONT_LEVELS.length - 1, _vtFontIdx + delta));
+    var pct = VT_FONT_LEVELS[_vtFontIdx];
+    var container = document.querySelector('#tab-vtimeline .vt-container');
+    if (container) container.style.fontSize = pct + '%';
+    var lbl = document.getElementById('vt-font-lbl');
+    if (lbl) lbl.textContent = pct + '%';
+}
+
+function vtSetTier(tier) {
+    _vtSelectedTier = tier;
+    document.querySelectorAll('.vt-tier-btn').forEach(function(b) {
+        b.classList.toggle('active', b.dataset.tier === tier);
+    });
+    var reBtn = document.getElementById('vt-reshuffle-btn');
+    if (reBtn) reBtn.style.display = (tier === 'random') ? 'inline-flex' : 'none';
+    if (tier === 'random' && _vtRandomTiers.length === 0) vtReshuffle(true);
+    vtRender();
+}
+
+function vtReshuffle(skipRender) {
+    _vtRandomTiers = [];
+    for (var i = 0; i < 20; i++) _vtRandomTiers.push(VB_TIERS[Math.floor(Math.random() * 4)]);
+    if (!skipRender) vtRender();
+}
+
+function vtPrint() {
+    var tab    = document.getElementById('tab-vtimeline');
+    var others = document.querySelectorAll('.main-tab-panel:not(#tab-vtimeline)');
+    var nav    = document.querySelector('.main-tab-nav');
+    others.forEach(function(el) { el.style.setProperty('display', 'none', 'important'); });
+    tab.style.setProperty('display', 'block', 'important');
+    if (nav) nav.style.display = 'none';
+    window.print();
+    setTimeout(function() {
+        others.forEach(function(el) { el.style.display = ''; });
+        tab.style.display = '';
+        if (nav) nav.style.display = '';
+        document.querySelectorAll('.main-tab-panel.active')
+            .forEach(function(el) { el.style.setProperty('display', 'block', 'important'); });
+    }, 600);
+}
+
+function vtRender() {
+    var gender = document.getElementById('inp-gender').value;
+    var gTxt   = gender === 'male' ? 'ชาย' : 'หญิง';
+    var useCampaign = document.getElementById('vb-chk-campaign') ? document.getElementById('vb-chk-campaign').checked : false;
+
+    // ใช้ tier เดียวกันทั้ง 2 เส้น ตามที่กำหนด
+    var tiersArr;
+    if (_vtSelectedTier === 'random') {
+        if (_vtRandomTiers.length === 0) vtReshuffle(true);
+        tiersArr = _vtRandomTiers;
+    } else {
+        tiersArr = [];
+        for (var i = 0; i < 20; i++) tiersArr.push(_vtSelectedTier);
+    }
+
+    vtBuildBoard(1, tiersArr, gender, gTxt, useCampaign);
+    vtBuildBoard(2, tiersArr, gender, gTxt, useCampaign);
+}
+
+function vtBuildBoard(optId, tiersArr, gender, gTxt, useCampaign) {
+    var age   = parseInt(document.getElementById('age-' + optId).value) || 0;
+    var sum   = parseInt(document.getElementById('main-sum-' + optId).value) || 0;
+    var mtype = (document.getElementById('main-type-' + optId) || {}).value || 'CIProCare';
+    var prem  = Math.round(app.calculateMainPremiumForPlan(sum, age, gender, mtype));
+
+    var metaEl = document.getElementById('vt-meta-' + optId);
+    var bodyEl = document.getElementById('vt-body-' + optId);
+    if (!bodyEl) return;
+
+    if (age <= 0 || sum <= 0 || prem <= 0) {
+        if (metaEl) metaEl.textContent = 'กรุณากรอกอายุและทุนประกันใน Option ' + optId;
+        bodyEl.innerHTML = '<div style="text-align:center;padding:30px;color:#9ca3af;font-size:0.9em;">รอข้อมูล Option ' + optId + '</div>';
+        return;
+    }
+
+    if (metaEl) {
+        metaEl.innerHTML = 'อายุ <strong>' + age + ' ปี</strong> (' + gTxt + ') · ทุน <strong>' + sum.toLocaleString() + ' บาท</strong> · เบี้ยรายปี <strong>' + prem.toLocaleString() + ' บาท</strong>';
+    }
+
+    // คำนวณ Bonus rows (shared engine)
+    var calc = vbCalcBonusRows(prem, age, tiersArr, useCampaign);
+    var rows = calc.rows;
+    var tierTotalKey = { bronze: 'totalSilver', silver: 'totalSilver', gold: 'totalGold', platinum: 'totalPlat', random: 'totalRand' };
+    // เลือก field ที่ตรงกับ tier ปัจจุบัน
+    var payKey, accKey, totalVal;
+    if (_vtSelectedTier === 'platinum') { payKey = 'payPlat';   accKey = 'accPlat';   totalVal = calc.totalPlat; }
+    else if (_vtSelectedTier === 'gold')  { payKey = 'payGold';   accKey = 'accGold';   totalVal = calc.totalGold; }
+    else if (_vtSelectedTier === 'silver'){ payKey = 'paySilver'; accKey = 'accSilver'; totalVal = calc.totalSilver; }
+    else if (_vtSelectedTier === 'bronze'){ payKey = null; accKey = null; totalVal = 0; } // bronze = 0% เสมอ
+    else { payKey = 'payRand'; accKey = 'accRandDisplay'; totalVal = calc.totalRand; }
+
+    // ── CV data จาก Tab CI ProCare (mode-aware) ──
+    var isAutoMode = (_cipcMode !== 'manual');
+    var cvBkYrRaw, cvBkAmtRaw, cvMxYrRaw, cvMxAmtRaw;
+    if (isAutoMode) {
+        cvBkYrRaw  = (document.getElementById('cipc-bk-yr' + optId + '-disp')  || {}).textContent || '';
+        cvBkAmtRaw = (document.getElementById('cipc-bk-amt' + optId + '-disp') || {}).textContent || '';
+        cvMxYrRaw  = (document.getElementById('cipc-mx-yr' + optId + '-cell') || {}).textContent || '';
+        cvMxAmtRaw = (document.getElementById('cipc-mx-amt' + optId + '-disp') || {}).textContent || '';
+    } else {
+        cvBkYrRaw  = (document.getElementById('cipc-bk-yr' + optId)  || {}).value || '';
+        cvBkAmtRaw = (document.getElementById('cipc-bk-amt' + optId) || {}).value || '';
+        cvMxYrRaw  = (document.getElementById('cipc-mx-yr' + optId)  || {}).value || '';
+        cvMxAmtRaw = (document.getElementById('cipc-mx-amt' + optId) || {}).value || '';
+    }
+    // parse ปีที่จาก string เช่น "ปีที่ 19 (อายุ 40 ปี)" → 19
+    function parseYrNum(txt) {
+        var m = txt.match(/ปีที่\s*(\d+)/);
+        return m ? parseInt(m[1]) : null;
+    }
+    var bkYrNum = parseYrNum(cvBkYrRaw || '');
+    var mxYrNum = null;
+    var mxAgeMatch = (cvMxYrRaw || '').match(/อายุ\s*(\d+)/);
+    if (mxAgeMatch) mxYrNum = parseInt(mxAgeMatch[1]) - age;
+
+    // ── Build HTML ──
+    var html = '';
+
+    // Status Legend
+    html += '<div class="vt-status-legend">'
+        + '<span class="vt-status-legend-title">สถานะ AIA Vitality</span>'
+        + '<div class="vt-legend-item"><span class="vt-badge bronze">B</span><span class="vt-legend-pct">0%</span></div>'
+        + '<div class="vt-legend-item"><span class="vt-badge silver">S</span><span class="vt-legend-pct">1%</span></div>'
+        + '<div class="vt-legend-item"><span class="vt-badge gold">G</span><span class="vt-legend-pct">4%</span></div>'
+        + '<div class="vt-legend-item"><span class="vt-badge plat">P</span><span class="vt-legend-pct">9%</span></div>'
+        + '<span style="margin-left:auto;font-size:0.8em;color:#92400e;font-weight:700;">'
+        + (_vtSelectedTier === 'random' ? '🎲 แสดงผล: สุ่มระดับ' : '📌 แสดงผล: ' + VB_LABELS[_vtSelectedTier === 'platinum' ? 'platinum' : _vtSelectedTier])
+        + '</span></div>';
+
+    var TIER_CODE = { bronze: 'B', silver: 'S', gold: 'G', platinum: 'P' };
+    var TIER_PCT  = { bronze: 0, silver: 1, gold: 4, platinum: 9 };
+
+    // Money icon row
+    html += '<div class="vt-track-wrap">';
+    html += '<div class="vt-money-row">';
+    for (var y = 1; y <= 20; y++) html += '<span class="vt-coin">💵</span>';
+    html += '</div>';
+
+    // axis line with ticks at every 3 years + 20
+    html += '<div class="vt-axis-line">';
+    var tickYears = [3,6,9,12,15,18,20];
+    tickYears.forEach(function(ty) {
+        var leftPct = ((ty - 0.5) / 20) * 100;
+        html += '<div class="vt-axis-tick" style="left:' + leftPct + '%;"></div>';
+    });
+    html += '</div>';
+
+    // year labels (only at payout years)
+    html += '<div class="vt-yr-row">';
+    for (var y2 = 1; y2 <= 20; y2++) {
+        var isTick = (y2 % 3 === 0) || (y2 === 20);
+        html += '<div class="vt-yr-label">' + (isTick ? 'ปีที่ ' + y2 : '') + '</div>';
+    }
+    html += '</div>';
+
+    // status badges row
+    html += '<div class="vt-status-row">';
+    rows.forEach(function(r, idx) {
+        var tier = r.tier;
+        var code = TIER_CODE[tier] || 'B';
+        var pct  = TIER_PCT[tier] !== undefined ? TIER_PCT[tier] : 0;
+        html += '<div class="vt-status-cell">'
+              + '<span class="vt-badge ' + (tier === 'platinum' ? 'plat' : tier) + '">' + code + '</span>'
+              + '<span class="vt-pct-label">' + pct + '%</span>'
+              + '</div>';
+    });
+    html += '</div>';
+
+    // payout calc row (arrow + % sum + formula) — only at payout years
+    html += '<div class="vt-payout-row">';
+    var lastPayoutIdx = -1;
+    rows.forEach(function(r, idx) {
+        if (!r.isPayout) { html += '<div class="vt-payout-cell"></div>'; return; }
+        // หาช่วงปีที่รวม (จาก payout ก่อนหน้า+1 ถึงปีนี้)
+        var fromYr = lastPayoutIdx === -1 ? 1 : rows[lastPayoutIdx].yr + 1;
+        var toYr   = r.yr;
+        var sumPct = 0;
+        var formulaParts = [];
+        for (var k = fromYr; k <= toYr; k++) {
+            var t = rows[k-1].tier;
+            var p = TIER_PCT[t] !== undefined ? TIER_PCT[t] : 0;
+            sumPct += p;
+            formulaParts.push(p + '%');
+        }
+        html += '<div class="vt-payout-cell">'
+              + '<div class="vt-payout-arrow">⬇️</div>'
+              + '<div class="vt-payout-pct">' + sumPct + '%</div>'
+              + '<div class="vt-payout-formula">(' + formulaParts.join('+') + ')</div>'
+              + '</div>';
+        lastPayoutIdx = idx;
+    });
+    html += '</div>';
+
+    // bonus amount bar
+    html += '<div style="display:flex;align-items:center;">';
+    html += '<div class="vt-bonus-label">ได้รับโบนัสสุขภาพ (บาท)</div>';
+    html += '<div class="vt-bonus-bar" style="flex:1;">';
+    rows.forEach(function(r) {
+        if (!r.isPayout) { html += '<div class="vt-bonus-cell empty">–</div>'; return; }
+        var payVal = 0;
+        if (_vtSelectedTier === 'platinum') payVal = r.payPlat;
+        else if (_vtSelectedTier === 'gold') payVal = r.payGold;
+        else if (_vtSelectedTier === 'silver') payVal = r.paySilver;
+        else if (_vtSelectedTier === 'bronze') payVal = 0;
+        else payVal = r.payRand;
+        html += '<div class="vt-bonus-cell">' + payVal.toLocaleString() + '</div>';
+    });
+    html += '</div></div>';
+
+    // CV marker row (breakeven + max CV)
+    html += '<div class="vt-cv-marker-row">';
+    rows.forEach(function(r) {
+        var tags = '';
+        if (bkYrNum && r.yr === bkYrNum) {
+            tags += '<span class="vt-cv-tag breakeven">🟢 จุดคุ้มทุน<br>CV ' + (cvBkAmtRaw || '–') + ' บ.</span>';
+        }
+        if (mxYrNum && r.yr === mxYrNum) {
+            tags += (tags ? '<br>' : '') + '<span class="vt-cv-tag maxcv">🟡 มูลค่าสูงสุด<br>CV ' + (cvMxAmtRaw || '–') + ' บ.</span>';
+        }
+        html += '<div class="vt-cv-marker-cell">' + tags + '</div>';
+    });
+    html += '</div>';
+
+    html += '</div>'; // end vt-track-wrap
+
+    // Footer summary
+    var totalDisplay = 0;
+    if (_vtSelectedTier === 'platinum') totalDisplay = calc.totalPlat;
+    else if (_vtSelectedTier === 'gold') totalDisplay = calc.totalGold;
+    else if (_vtSelectedTier === 'silver') totalDisplay = calc.totalSilver;
+    else if (_vtSelectedTier === 'bronze') totalDisplay = 0;
+    else totalDisplay = calc.totalRand;
+    var totalPremPaid = prem * (useCampaign ? 19 : 20);
+    var pctOfPrem = totalPremPaid > 0 ? Math.round((totalDisplay / totalPremPaid) * 100) : 0;
+
+    html += '<div class="vt-footer"><div class="vt-footer-text">'
+        + 'ตามตัวอย่าง: ชำระเบี้ยฯ ครบ 20 ปี ' + (useCampaign ? '(ปีที่ 20 ฟรีตามแคมเปญ) ' : '') + 'จะได้รับโบนัสสุขภาพรวม '
+        + '<strong>' + totalDisplay.toLocaleString() + ' บาท</strong>'
+        + (pctOfPrem > 0 ? ' หรือคิดเป็น <strong>' + pctOfPrem + '%</strong> ของเบี้ยประกันภัยมาตรฐานที่จ่ายจริง' : '')
+        + '</div></div>';
+
+    bodyEl.innerHTML = html;
+}
+
 function vbReshuffle() {
     _vbRandomTiers = [];
     for (let i = 0; i < 20; i++) _vbRandomTiers.push(VB_TIERS[Math.floor(Math.random() * 4)]);
@@ -4228,48 +4678,13 @@ function vbRender() {
         for (var ii = 0; ii < 20; ii++) _vbRandomTiers.push(VB_TIERS[Math.floor(Math.random() * 4)]);
     }
 
-    // ── คำนวณ Bonus per year ──────────────────────────────────────
-    // campaign: ปีที่ 20 ไม่ต้องจ่ายเบี้ย แต่ยังได้ Bonus เท่ากับปกติ
-    // (เสมือนได้รับเงินคืน จึงยังนับเบี้ยปีที่ 20 ในการคำนวณ Bonus)
-    var rows = [];
-    var accPlat = 0, accGold = 0, accSilver = 0, accRand = 0;
-    var totalPlat = 0, totalGold = 0, totalSilver = 0, totalRand = 0;
-
-    for (var yr = 1; yr <= 20; yr++) {
-        var tier    = _vbRandomTiers[yr - 1] || 'bronze';
-        // Bonus คำนวณจากเบี้ยเต็ม prem2 ทุกปี (รวมปีที่ 20 กรณี campaign)
-        accPlat   += Math.round(prem2 * VB_RATES.platinum);
-        accGold   += Math.round(prem2 * VB_RATES.gold);
-        accSilver += Math.round(prem2 * VB_RATES.silver);
-        accRand   += Math.round(prem2 * VB_RATES[tier]);
-
-        var payPlat = 0, payGold = 0, paySilver = 0, payRand = 0;
-        var isPayout = (yr % 3 === 0);
-        if (isPayout) {
-            payPlat   = accPlat;   totalPlat   += accPlat;   accPlat   = 0;
-            payGold   = accGold;   totalGold   += accGold;   accGold   = 0;
-            paySilver = accSilver; totalSilver += accSilver; accSilver = 0;
-            payRand   = accRand;   totalRand   += accRand;   accRand   = 0;
-        }
-        // premThis คือเบี้ยที่ "จ่ายจริง" (ปีที่ 20 campaign = 0 แต่ Bonus ยังนับ)
-        var premPaid = (useCampaign && yr === 20) ? 0 : prem2;
-        rows.push({ yr: yr, age: age2 + yr, prem: premPaid, isPayout: isPayout, tier: tier,
-            campFree:  useCampaign && yr === 20,
-            accPlat:   accPlat,   payPlat:   payPlat,
-            accGold:   accGold,   payGold:   payGold,
-            accSilver: accSilver, paySilver: paySilver,
-            accRandDisplay: isPayout ? 0 : accRand, payRand: payRand });
-    }
-    // ส่วนค้างหลังปีที่ 20
-    if (accPlat > 0 || accGold > 0 || accSilver > 0 || accRand > 0) {
-        if (accPlat   > 0) totalPlat   += accPlat;
-        if (accGold   > 0) totalGold   += accGold;
-        if (accSilver > 0) totalSilver += accSilver;
-        if (accRand   > 0) totalRand   += accRand;
-        rows.push({ yr: 21, age: age2 + 21, prem: 0, isPayout: true, isLastPayout: true, tier: '',
-            accPlat: 0, payPlat: accPlat, accGold: 0, payGold: accGold,
-            accSilver: 0, paySilver: accSilver, accRandDisplay: 0, payRand: accRand });
-    }
+    // ── คำนวณ Bonus per year (ใช้ shared engine) ───────────────────
+    var calcResult = vbCalcBonusRows(prem2, age2, _vbRandomTiers, useCampaign);
+    var rows       = calcResult.rows;
+    var totalPlat  = calcResult.totalPlat;
+    var totalGold  = calcResult.totalGold;
+    var totalSilver = calcResult.totalSilver;
+    var totalRand  = calcResult.totalRand;
 
     // summary cards
     document.getElementById('vb-total-plat').textContent   = totalPlat   > 0 ? totalPlat.toLocaleString()   + ' บาท' : '–';

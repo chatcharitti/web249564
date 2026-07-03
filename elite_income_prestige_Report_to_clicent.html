@@ -355,6 +355,91 @@ body{
 
 }
 
+/* === MIDNIGHT PRIVATE BANKING — ALTERNATING DARK SECTIONS === */
+.section.dark{
+  background:linear-gradient(170deg,#0A1220 0%,#0E1728 55%,#0A1526 100%);
+  border-radius:16px;
+  padding:44px 40px;
+  margin-bottom:8px;
+  border:1px solid rgba(201,168,76,.22);
+  position:relative;
+}
+.section.dark::before{
+  content:'';position:absolute;top:0;left:24px;right:24px;height:2px;
+  background:linear-gradient(90deg,transparent,#C9A84C,#E8D9A0,#C9A84C,transparent);
+}
+.section.dark .section-title{color:#F5EFDF;}
+.section.dark .section-title::before{background:linear-gradient(180deg,#E8D9A0,#8B7332);}
+.section.dark > p{color:#9FA8BC !important;}
+.section.dark .insight-box{
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(201,168,76,.18);
+  box-shadow:none;
+}
+.section.dark .insight-box p{color:#C7CEDD !important;}
+.section.dark .box-title{color:#E8D9A0;}
+.section.dark .insight-box.danger .box-title{color:#F0A5B8;}
+.section.dark .insight-box.success .box-title{color:#7FE0B0;}
+.section.dark .point span{color:#C7CEDD;}
+.section.dark .point b{color:#F5EFDF;}
+.section.dark .premium-table{background:transparent;box-shadow:none;border:1px solid rgba(201,168,76,.25);}
+.section.dark .premium-table th{background:rgba(201,168,76,.14);color:#E8D9A0;letter-spacing:.5px;}
+.section.dark .premium-table td{border-bottom:1px solid rgba(255,255,255,.07);color:#C7CEDD;background:transparent;}
+.section.dark .premium-table td:first-child{color:#F5EFDF;}
+.section.dark .premium-table td b{color:#F5EFDF;}
+.section.dark .kpi-card{background:rgba(255,255,255,.04);box-shadow:none;border:1px solid rgba(201,168,76,.2);border-bottom:3px solid var(--gold);}
+.section.dark .kpi-num{color:#E8D9A0;font-family:'Cormorant Garamond',serif;}
+.section.dark .kpi-label{color:#9FA8BC;}
+.section.dark .calc-panel{background:rgba(255,255,255,.04);box-shadow:none;border:1px solid rgba(201,168,76,.2);}
+.section.dark .calc-label{color:#9FA8BC;}
+.section.dark .calc-input{background:#0E1728;border:1px solid rgba(201,168,76,.35);color:#F5EFDF;}
+.section.dark .btn-calc{background:linear-gradient(135deg,#8B7332,#C9A84C);color:#0A1220;}
+.section.dark .btn-calc:hover{background:linear-gradient(135deg,#C9A84C,#E8D9A0);}
+.section.dark .flow-step{background:rgba(255,255,255,.04);border:1px solid rgba(201,168,76,.25);color:#F5EFDF;}
+.section.dark .flow-step span{color:#9FA8BC;}
+.section.dark .sleeve-card{background:rgba(255,255,255,.04);box-shadow:none;border:1px solid rgba(201,168,76,.2);border-top:3px solid var(--gold);}
+.section.dark .sleeve-card p, .section.dark .sleeve-card div{color:#C7CEDD;}
+
+/* dark-section overrides beating inline styles */
+.section.dark .box-title{color:#E8D9A0 !important;}
+.section.dark .insight-box.success .box-title{color:#7FE0B0 !important;}
+.section.dark .insight-box.danger .box-title{color:#F0A5B8 !important;}
+.section.dark p{color:#C7CEDD !important;}
+.section.dark .point span{color:#C7CEDD !important;}
+.section.dark .point b{color:#F5EFDF !important;}
+.section.dark .insight-box{border-left-color:var(--gold) !important;}
+.section.dark .insight-box.success{border-left-color:#2FBF7F !important;}
+.section.dark .insight-box.danger{border-left-color:#E24B4A !important;}
+.section.dark .point::before{background:#C9A84C;}
+.section.dark .insight-box.success .point::before{background:#2FBF7F;}
+
+/* === GOLDEN BUTTON === */
+.btn-gold{
+  display:inline-block;text-decoration:none;
+  background:linear-gradient(135deg,#8B7332 0%,#C9A84C 30%,#F0E3B2 50%,#C9A84C 70%,#8B7332 100%);
+  color:#0A1220 !important;font-weight:700;font-size:1.05rem;letter-spacing:1px;
+  padding:15px 40px;border-radius:8px;border:1px solid #E8D9A0;
+  box-shadow:0 6px 22px rgba(201,168,76,.35);
+  transition:transform .25s, box-shadow .25s;
+}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(201,168,76,.5);}
+.btn-gold-wrap{text-align:center;margin:32px 0;}
+.btn-gold-caption{font-size:.85rem;color:var(--text-muted);margin-top:10px;}
+
+@media print{
+  .section.dark{background:#FFFFFF !important;border:1pt solid var(--gold) !important;}
+  .section.dark .section-title{color:var(--navy) !important;}
+  .section.dark .insight-box{background:var(--white) !important;border:1pt solid var(--cream-dark) !important;}
+  .section.dark .box-title{color:var(--navy) !important;}
+  .section.dark .point span, .section.dark .insight-box p, .section.dark > p{color:var(--text-secondary) !important;}
+  .section.dark .premium-table th{background:var(--navy) !important;color:var(--gold-light) !important;}
+  .section.dark .premium-table td{color:var(--text-primary) !important;}
+  .section.dark .kpi-num{color:var(--navy) !important;}
+  .section.dark p, .section.dark .point span{color:var(--text-secondary) !important;}
+  .section.dark .point b{color:var(--text-primary) !important;}
+  .btn-gold{box-shadow:none !important;}
+}
+
 /* === HERO HEADER === */
 .hero{
   background:linear-gradient(160deg,var(--navy) 0%,var(--navy-mid) 40%,var(--navy-light) 100%);
@@ -394,8 +479,10 @@ body{
 
 /* === SECTION TITLES === */
 .section-title{
-  font-size:var(--fs-h2);
-  font-weight:800;
+  font-family:'Cormorant Garamond','Noto Sans Thai',serif;
+  font-size:calc(var(--fs-h2) * 1.08);
+  letter-spacing:.5px;
+  font-weight:700;
   color:var(--navy);
   margin-bottom:28px;
   padding-left:24px;
@@ -789,6 +876,9 @@ body{
     <h1><em>Strategic Wealth Management</em></h1>
     <div class="hero-sub">วางแผนส่งต่อความมั่งคั่ง พร้อมสร้างกระแสเงินสดอัจฉริยะ — พิสูจน์แล้วจากผลจ่าย Auto Redemption จริง</div>
     <div class="hero-badge">Unit-Linked &nbsp;·&nbsp; ชำระเบี้ย 5 ปี &nbsp;·&nbsp; คุ้มครองตลอดชีพ</div>
+    <div style="margin-top:26px;">
+      <a class="btn-gold" href="sumary_prestige_club.pdf" target="new">👑 &nbsp;เปิดสรุปสิทธิพิเศษ Prestige Club</a>
+    </div>
   </div>
 </div>
 
@@ -962,7 +1052,7 @@ body{
   <!-- ============================================ -->
   <!-- SECTION 1 : MACROECONOMICS (Merged & Professionalized) -->
   <!-- ============================================ -->
-  <div class="section">
+  <div class="section dark">
     <h2 class="section-title">วิเคราะห์สภาวะเศรษฐกิจมหภาค (Macroeconomic Context)</h2>
     <p style="margin-bottom:24px;color:var(--text-secondary)">สภาพเศรษฐกิจครึ่งแรกปี 2569 สะท้อนความจำเป็นในการจัดสรรสินทรัพย์อย่างมีวินัย ท่ามกลางแรงกดดันทั้งในและต่างประเทศ</p>
 
@@ -1033,7 +1123,7 @@ body{
   <!-- ============================================ -->
   <!-- SECTION 2 : PRODUCT & CONCEPTS -->
   <!-- ============================================ -->
-  <div class="section">
+  <div class="section dark">
     <h2 class="section-title">โครงสร้างผลิตภัณฑ์และการจัดการความมั่งคั่ง</h2>
 
     <div class="kpi-grid">
@@ -1116,7 +1206,7 @@ body{
   <!-- ============================================ -->
   <!-- SECTION 2C : VS CONDO RENTAL (NEW) -->
   <!-- ============================================ -->
-  <div class="section">
+  <div class="section dark">
     <h2 class="section-title">เปรียบเทียบเชิงแนวคิด: Elite Income Prestige vs คอนโดปล่อยเช่า</h2>
     <p style="margin-bottom:20px;color:var(--text-secondary)">
       นักลงทุนจำนวนมากเลือกซื้อคอนโดเพื่อปล่อยเช่าเป็นแหล่งรายได้ประจำ โดย Gross Rental Yield คอนโดกรุงเทพฯ เฉลี่ยอยู่ที่ 5–7% ต่อปี — แต่ตัวเลขจริงหลังหักค่าใช้จ่ายต่ำกว่ามาก: แนวปฏิบัติมาตรฐานคำนวณค่าเช่าเพียง <b>10 จาก 12 เดือน</b> (เผื่อห้องว่างรอผู้เช่า) หักค่าส่วนกลางรายเดือน ค่าซ่อมบำรุง <b>5–10% ของค่าเช่า</b> และค่านายหน้า ~1 เดือนต่อการหาผู้เช่าแต่ละรอบ
@@ -1319,7 +1409,7 @@ body{
   <!-- ============================================ -->
   <!-- SECTION 4 : CASHFLOW PROJECTION (Added Back for HNW) -->
   <!-- ============================================ -->
-  <div class="section">
+  <div class="section dark">
     <h2 class="section-title">แบบจำลองผลลัพธ์เชิงกลยุทธ์ (Cashflow Projection)</h2>
     <p style="margin-bottom:24px;color:var(--text-secondary)" class="print-hidden">ประเมินทิศทางกระแสเงินสดรับและมูลค่าสินทรัพย์เพื่อการส่งต่อ เพื่อให้เห็นภาพของเหตุการณ์ที่มีโอกาสเกิดขึ้น&nbsp;</p>
 
@@ -1387,6 +1477,11 @@ body{
   <!-- ============================================ -->
   <!-- ADVISOR CONTACT BLOCK (New for HNW) -->
   <!-- ============================================ -->
+  <div class="btn-gold-wrap">
+    <a class="btn-gold" href="sumary_prestige_club.pdf" target="new">👑 &nbsp;เปิดสรุปสิทธิพิเศษ Prestige Club</a>
+    <div class="btn-gold-caption">เอกสารสรุปสิทธิประโยชน์สำหรับสมาชิก Prestige Club — สำหรับลูกค้าคนสำคัญ</div>
+  </div>
+
   <div class="advisor-card print-hidden">
     <div class="advisor-avatar">NT40</div>
     <div>
@@ -1489,9 +1584,9 @@ body{
               rows.push(`<tr>
                   <td style="text-align:center">ปีที่ ${yr} / อายุ ${age}</td>
                   <td>${fmt(totalPrem)}</td>
-                  <td style="color:var(--gold-dark);font-weight:700">+${fmt(autoRed)}</td>
+                  <td style="color:#E8D9A0;font-weight:700">+${fmt(autoRed)}</td>
                   <td style="font-weight:600">${fmt(nav)}</td>
-                  <td style="color:var(--navy);font-weight:700">${fmt(db)}</td>
+                  <td style="color:#F5EFDF;font-weight:700">${fmt(db)}</td>
               </tr>`);
           }
       }

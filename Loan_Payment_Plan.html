@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ตารางผ่อนชำระแบบลดต้นลดดอก — จ่าย 2% ของยอดคงเหลือ + ชำระเพิ่มรายงวด</title>
+<title>ตารางผ่อนชำระแบบลดต้นลดดอก — ชำระเพิ่ม / ถอนออกระหว่างทาง</title>
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -16,20 +16,19 @@
   --accent-soft:#e6f3ed;
   --extra:#1d5a8a;
   --extra-soft:#e8f1f8;
+  --wd:#8a2f5a;
+  --wd-soft:#f9ecf3;
   --warn:#a4541a;
   --warn-soft:#fdf1e6;
   --fs:15px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{
-  font-family:'Sarabun',sans-serif;
-  font-size:var(--fs);
-  background:var(--paper);
-  color:var(--ink);
-  line-height:1.65;
+  font-family:'Sarabun',sans-serif;font-size:var(--fs);
+  background:var(--paper);color:var(--ink);line-height:1.65;
   padding:28px 16px 60px;
 }
-.wrap{max-width:980px;margin:0 auto}
+.wrap{max-width:1060px;margin:0 auto}
 
 header{border-bottom:3px solid var(--accent);padding-bottom:18px;margin-bottom:22px}
 .eyebrow{font-size:.8em;letter-spacing:.12em;color:var(--accent);font-weight:600;text-transform:uppercase}
@@ -48,83 +47,78 @@ button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
 button.primary:hover{background:#0c5a43;color:#fff}
 button.ghost-extra{border-color:var(--extra);color:var(--extra)}
 button.ghost-extra:hover{background:var(--extra-soft)}
+button.ghost-wd{border-color:var(--wd);color:var(--wd)}
+button.ghost-wd:hover{background:var(--wd-soft)}
 
-.panel{
-  background:var(--card);border:1px solid var(--line);border-radius:12px;
-  padding:18px 20px;margin-bottom:22px;
-}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:22px}
 .panel h2{font-size:1.05em;font-weight:700;margin-bottom:12px;color:var(--accent)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
 .field label{display:block;font-size:.82em;font-weight:600;color:var(--ink-soft);margin-bottom:4px}
 .field input{
   width:100%;font-family:inherit;font-size:1em;font-weight:600;
-  padding:8px 10px;border:1px solid var(--line);border-radius:8px;color:var(--ink);
-  background:#fff;
+  padding:8px 10px;border:1px solid var(--line);border-radius:8px;color:var(--ink);background:#fff;
 }
 .field input:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
 .hint{font-size:.78em;color:var(--ink-soft);margin-top:10px}
+.hint b.ex{color:var(--extra)} .hint b.wd{color:var(--wd)}
 
-.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:14px}
-.stat{
-  background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);
-  border-radius:10px;padding:12px 16px;
-}
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:14px}
+.stat{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:12px 16px}
 .stat .label{font-size:.78em;color:var(--ink-soft);font-weight:600}
-.stat .value{font-size:1.3em;font-weight:700;color:var(--accent)}
+.stat .value{font-size:1.28em;font-weight:700;color:var(--accent)}
 .stat .sub{font-size:.78em;color:var(--ink-soft)}
-.stat.neutral{border-left-color:var(--ink-soft)}
-.stat.neutral .value{color:var(--ink)}
-.stat.extra{border-left-color:var(--extra)}
-.stat.extra .value{color:var(--extra)}
+.stat.neutral{border-left-color:var(--ink-soft)} .stat.neutral .value{color:var(--ink)}
+.stat.extra{border-left-color:var(--extra)} .stat.extra .value{color:var(--extra)}
+.stat.wd{border-left-color:var(--wd)} .stat.wd .value{color:var(--wd)}
 
-.compare{
-  background:var(--extra-soft);border:1px solid #cfe1ef;border-radius:10px;
-  padding:12px 16px;font-size:.9em;color:var(--extra);margin-bottom:22px;display:none;font-weight:600;
-}
+.compare{background:var(--extra-soft);border:1px solid #cfe1ef;border-radius:10px;padding:12px 16px;font-size:.9em;color:var(--extra);margin-bottom:12px;display:none;font-weight:600}
 .compare.show{display:block}
-
-.alert{
-  background:var(--warn-soft);border:1px solid #efd9c2;border-radius:10px;
-  padding:12px 16px;font-size:.9em;color:var(--warn);margin-bottom:22px;display:none;
-}
+.wdinfo{background:var(--wd-soft);border:1px solid #ecd2e0;border-radius:10px;padding:12px 16px;font-size:.9em;color:var(--wd);margin-bottom:22px;display:none;font-weight:600}
+.wdinfo.show{display:block}
+.alert{background:var(--warn-soft);border:1px solid #efd9c2;border-radius:10px;padding:12px 16px;font-size:.9em;color:var(--warn);margin-bottom:22px;display:none}
 .alert.show{display:block}
 
 .table-card{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:.9em;min-width:760px}
-thead th{
-  background:var(--accent);color:#fff;font-weight:600;
-  padding:9px 8px;text-align:right;white-space:nowrap;
-}
+table{width:100%;border-collapse:collapse;font-size:.88em;min-width:900px}
+thead th{background:var(--accent);color:#fff;font-weight:600;padding:9px 7px;text-align:right;white-space:nowrap}
 thead th:first-child{text-align:center}
 thead th.col-extra{background:var(--extra)}
-tbody td{padding:5px 8px;text-align:right;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+thead th.col-wd{background:var(--wd)}
+tbody td{padding:5px 7px;text-align:right;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
 tbody td:first-child{text-align:center;color:var(--ink-soft)}
 tbody td.cell-extra{background:#f6fafd}
 tbody td.cell-extra input{
-  width:92px;font-family:inherit;font-size:.95em;font-weight:600;text-align:right;
+  width:86px;font-family:inherit;font-size:.95em;font-weight:600;text-align:right;
   padding:3px 6px;border:1px solid #c9dcea;border-radius:6px;color:var(--extra);background:#fff;
 }
-tbody td.cell-extra input:focus{outline:2px solid var(--extra-soft);border-color:var(--extra)}
+tbody td.cell-wd{background:#fcf5f9;white-space:nowrap}
+tbody td.cell-wd input[type=number]{
+  width:86px;font-family:inherit;font-size:.95em;font-weight:600;text-align:right;
+  padding:3px 6px;border:1px solid #e0c3d3;border-radius:6px;color:var(--wd);background:#fff;
+}
+tbody td.cell-wd input[type=number]:disabled{background:#f4eef2;color:#b9a3af;border-color:#eadfe5}
+tbody td.cell-wd input[type=checkbox]{width:16px;height:16px;accent-color:var(--wd);vertical-align:middle;margin-right:5px;cursor:pointer}
 tbody tr.has-extra td{background:var(--extra-soft)}
 tbody tr.has-extra td.cell-extra{background:#dcebf6}
+tbody tr.has-wd td{background:var(--wd-soft)}
+tbody tr.has-wd td.cell-wd{background:#f3dfeb}
 tbody tr.year td{background:var(--accent-soft);font-weight:600}
 tbody tr.final td{background:#dcefe6;font-weight:700;color:var(--accent)}
-tfoot td{padding:10px 8px;font-weight:700;text-align:right;background:#f2f6f3;border-top:2px solid var(--accent)}
+tfoot td{padding:10px 7px;font-weight:700;text-align:right;background:#f2f6f3;border-top:2px solid var(--accent)}
 tfoot td:first-child{text-align:left}
 
 footer{margin-top:26px;font-size:.78em;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:12px}
 
 @media print{
   @page{size:A4 landscape;margin:12mm 10mm}
-  body{padding:0;background:#fff;font-size:11px}
+  body{padding:0;background:#fff;font-size:10.5px}
   .toolbar,.panel .hint{display:none}
   .panel,.stat,.table-card{border-color:#ccc;break-inside:avoid}
-  .summary,.compare{break-inside:avoid}
-  .table-card{overflow:visible}
-  table{min-width:0}
-  thead{display:table-header-group}
-  tbody tr{break-inside:avoid}
-  tbody td.cell-extra input{border:none;background:transparent;padding:0;width:auto}
+  .summary,.compare,.wdinfo{break-inside:avoid}
+  .table-card{overflow:visible} table{min-width:0}
+  thead{display:table-header-group} tbody tr{break-inside:avoid}
+  tbody td.cell-extra input,tbody td.cell-wd input[type=number]{border:none;background:transparent;padding:0;width:auto}
+  tbody td.cell-wd input[type=checkbox]{display:none}
   button{display:none}
 }
 </style>
@@ -133,15 +127,16 @@ footer{margin-top:26px;font-size:.78em;color:var(--ink-soft);border-top:1px soli
 <div class="wrap">
 
 <header>
-  <div class="eyebrow">Payment Schedule · Reducing Balance · What-if Extra Payment</div>
+  <div class="eyebrow">Payment Schedule · Reducing Balance · Extra Payment & Mid-term Withdrawal</div>
   <h1>ตารางผ่อนชำระแบบลดต้นลดดอก</h1>
-  <div class="subtitle">ชำระงวดละ 2% ของยอดคงเหลือ · ดอกเบี้ย 15% ต่อปี · จำลองการชำระเพิ่มเป็นรายงวดได้</div>
+  <div class="subtitle">ชำระงวดละ 2% ของยอดคงเหลือ · ดอกเบี้ย 15% ต่อปี · จำลองชำระเพิ่ม และถอนออกระหว่างทางได้รายงวด</div>
 </header>
 
 <div class="toolbar">
   <button onclick="adjustFont(-1)">A−</button>
   <button onclick="adjustFont(1)">A+</button>
-  <button class="ghost-extra" onclick="clearExtras()">↺ ล้างยอดชำระเพิ่มทั้งหมด</button>
+  <button class="ghost-extra" onclick="clearExtras()">↺ ล้างชำระเพิ่ม</button>
+  <button class="ghost-wd" onclick="clearWithdraws()">↺ ล้างการถอนทั้งหมด</button>
   <span class="spacer"></span>
   <button class="primary" onclick="window.print()">🖨 พิมพ์ / บันทึก PDF</button>
 </div>
@@ -166,14 +161,16 @@ footer{margin-top:26px;font-size:.78em;color:var(--ink-soft);border-top:1px soli
       <input type="number" id="inMinPay" value="200" min="0" step="50" onchange="calc()">
     </div>
   </div>
-  <div class="hint">วิธีใช้ช่อง "ชำระเพิ่ม" ในตาราง: กรอกจำนวนเงินที่ต้องการโปะเพิ่มในงวดนั้น ๆ ระบบจะคำนวณงวดถัดไปทั้งหมดใหม่ทันที — งวดที่ไม่ได้กรอกจะชำระตามค่างวดปกติ (2% ของยอดคงเหลือ หรือยอดขั้นต่ำ แล้วแต่ค่าใดสูงกว่า)</div>
+  <div class="hint">
+    <b class="ex">ชำระเพิ่ม ✎</b> : กรอกยอดโปะเพิ่มในงวดนั้น ระบบคำนวณงวดถัดไปใหม่ทันที — งวดที่ไม่กรอกชำระตามค่างวดปกติ (2% ของยอดคงเหลือ หรือขั้นต่ำ แล้วแต่ค่าใดสูงกว่า)<br>
+    <b class="wd">ถอนออกระหว่างทาง ✓</b> : ติ๊ก ✓ เพื่อเลือกถอนในงวดนั้น — ค่าเริ่มต้น = ยอดตัดเงินต้นของงวด (ยอดชำระ − ดอกเบี้ย) ทำให้ยอดคงเหลือกลับเท่าเดิม เหมาะสำหรับดู "ดอกเบี้ยล้วน" ของช่วงเวลาที่ต้องการ · แก้ตัวเลขได้หากต้องการถอนมากกว่าค่าเริ่มต้น (ยอดคงเหลือจะเพิ่มขึ้น) · ไม่ติ๊ก = ผ่อนปกติ
+  </div>
 </div>
 
 <div class="alert" id="alertBox"></div>
-
 <div class="summary" id="summaryBox"></div>
-
 <div class="compare" id="compareBox"></div>
+<div class="wdinfo" id="wdInfoBox"></div>
 
 <div class="table-card">
   <table>
@@ -184,8 +181,9 @@ footer{margin-top:26px;font-size:.78em;color:var(--ink-soft);border-top:1px soli
         <th>ดอกเบี้ย</th>
         <th>ค่างวดปกติ</th>
         <th class="col-extra">ชำระเพิ่ม ✎</th>
-        <th>ชำระรวมงวดนี้</th>
+        <th>ชำระรวม</th>
         <th>ตัดเงินต้น</th>
+        <th class="col-wd">ถอนออกระหว่างทาง</th>
         <th>ยอดคงเหลือ</th>
       </tr>
     </thead>
@@ -195,15 +193,17 @@ footer{margin-top:26px;font-size:.78em;color:var(--ink-soft);border-top:1px soli
 </div>
 
 <footer>
-  วิธีคำนวณ: ดอกเบี้ยรายงวด = ยอดคงเหลือ × (อัตราดอกเบี้ยต่อปี ÷ 12) · ค่างวดปกติ = ค่าที่มากกว่าระหว่าง (ยอดคงเหลือ × อัตราชำระ) กับยอดขั้นต่ำ · ชำระรวม = ค่างวดปกติ + ชำระเพิ่ม · ตัดเงินต้น = ชำระรวม − ดอกเบี้ย · งวดสุดท้ายชำระเท่ายอดคงเหลือบวกดอกเบี้ย<br>
-  ตารางนี้เป็นการประมาณการเพื่อการวางแผนเท่านั้น เงื่อนไขจริงขึ้นอยู่กับสัญญาของผู้ให้สินเชื่อแต่ละราย
+  วิธีคำนวณ: ดอกเบี้ยรายงวด = ยอดยกมา × (อัตราดอกเบี้ยต่อปี ÷ 12) · ค่างวดปกติ = ค่าที่มากกว่าระหว่าง (ยอดยกมา × อัตราชำระ) กับยอดขั้นต่ำ · ตัดเงินต้น = ชำระรวม − ดอกเบี้ย · ยอดคงเหลือ = ยอดยกมา − ตัดเงินต้น + ถอนออก · งวดปิดบัญชีชำระเท่ายอดคงเหลือบวกดอกเบี้ย (หากไม่มีการถอนในงวดนั้น)<br>
+  การถอนออกระหว่างทางจำลองลักษณะวงเงินสินเชื่อหมุนเวียน (Revolving) — เงื่อนไขจริง วงเงินสูงสุด และค่าธรรมเนียมขึ้นอยู่กับสัญญาของผู้ให้สินเชื่อแต่ละราย · ตารางนี้เป็นการประมาณการเพื่อการวางแผนเท่านั้น
 </footer>
 
 </div>
 
 <script>
 let fs = 15;
-let extras = {};   // {เลขงวด: ยอดชำระเพิ่ม}
+let extras = {};        // {งวด: ยอดชำระเพิ่ม}
+let wdOn = {};          // {งวด: true} ติ๊กถอนในงวดนั้น
+let wdCustom = {};      // {งวด: ยอดถอนที่ผู้ใช้กำหนดเอง (ถ้าไม่กำหนด ใช้ค่า default = ตัดเงินต้นของงวด)}
 
 function adjustFont(d){
   fs = Math.min(20, Math.max(11, fs + d));
@@ -220,9 +220,9 @@ function readParams(){
   };
 }
 
-// จำลองตาราง: useExtras = true จะนำยอดชำระเพิ่มรายงวดมารวม
-function simulate(p, useExtras){
-  let bal = p.P0, m = 0, totInt = 0, totPay = 0, totExtra = 0;
+// useWhatIf = true → รวมชำระเพิ่ม + การถอน / false → เส้นฐานผ่อนปกติ
+function simulate(p, useWhatIf){
+  let bal = p.P0, m = 0, totInt = 0, totPay = 0, totExtra = 0, totWd = 0, totBase = 0;
   const MAX = 600, rows = [];
   let stuck = false;
   while (bal > 0.005 && m < MAX){
@@ -230,31 +230,41 @@ function simulate(p, useExtras){
     const open = bal;
     const interest = open * p.mRate;
     let basePay = Math.max(open * p.payPct, p.minPay);
-    let extra = useExtras ? (extras[m] || 0) : 0;
+    let extra = useWhatIf ? (extras[m] || 0) : 0;
     let pay = basePay + extra;
-    if (pay >= open + interest){            // งวดปิดบัญชี
+    const willWd = useWhatIf && wdOn[m];
+    if (!willWd && pay >= open + interest){        // งวดปิดบัญชี (เฉพาะกรณีไม่มีการถอนในงวดนี้)
       pay = open + interest;
       if (extra > 0) extra = Math.max(0, pay - basePay);
       basePay = pay - extra;
     }
     const principal = pay - interest;
-    if (principal <= 0.005){ stuck = true; m--; break; }
-    bal = open - principal;
-    totInt += interest; totPay += pay; totExtra += extra;
-    rows.push({m, open, interest, basePay, extra, pay, principal, bal: Math.max(bal,0)});
+    if (principal <= 0.005 && !willWd){ stuck = true; m--; break; }
+    // ถอนออกระหว่างทาง: default = ตัดเงินต้นของงวดนี้
+    let wd = 0;
+    if (willWd){
+      wd = (wdCustom[m] !== undefined) ? wdCustom[m] : Math.max(principal, 0);
+      if (wd < 0) wd = 0;
+    }
+    bal = open - principal + wd;
+    totInt += interest; totPay += pay; totExtra += extra; totWd += wd; totBase += basePay;
+    rows.push({m, open, interest, basePay, extra, pay, principal, wd, willWd,
+               wdDefault: Math.max(principal,0), bal: Math.max(bal,0)});
+    if (bal <= 0.005) break;
   }
-  return {rows, months: m, totInt, totPay, totExtra, bal, stuck};
+  return {rows, months: m, totInt, totPay, totExtra, totWd, totBase, bal, stuck};
 }
 
 function calc(){
   const p = readParams();
-  const base = simulate(p, false);   // เส้นฐาน: ไม่มีการชำระเพิ่ม
-  const r = simulate(p, true);       // ตามแผนจริง (รวมชำระเพิ่ม)
+  const base = simulate(p, false);
+  const r = simulate(p, true);
 
   const tbody = document.getElementById('tbody');
   const tfoot = document.getElementById('tfoot');
   const alertBox = document.getElementById('alertBox');
   const compareBox = document.getElementById('compareBox');
+  const wdInfoBox = document.getElementById('wdInfoBox');
   const summaryBox = document.getElementById('summaryBox');
 
   let html = '';
@@ -262,7 +272,9 @@ function calc(){
     const isFinal = row.bal <= 0.005;
     let cls = isFinal ? 'final' : (row.m % 12 === 0 ? 'year' : '');
     if (row.extra > 0) cls += ' has-extra';
+    if (row.willWd) cls += ' has-wd';
     const extraVal = extras[row.m] ? extras[row.m] : '';
+    const wdVal = row.willWd ? (wdCustom[row.m] !== undefined ? wdCustom[row.m] : row.wdDefault.toFixed(2)) : '';
     html += `<tr class="${cls.trim()}">
       <td>${row.m}</td>
       <td>${fmt(row.open)}</td>
@@ -271,6 +283,10 @@ function calc(){
       <td class="cell-extra"><input type="number" min="0" step="100" inputmode="numeric" placeholder="0" value="${extraVal}" data-m="${row.m}" onchange="setExtra(this)"></td>
       <td>${fmt(row.pay)}</td>
       <td>${fmt(row.principal)}</td>
+      <td class="cell-wd">
+        <input type="checkbox" ${row.willWd ? 'checked' : ''} data-m="${row.m}" onchange="toggleWd(this)" title="ติ๊กเพื่อถอนในงวดนี้">
+        <input type="number" min="0" step="100" inputmode="numeric" placeholder="—" value="${wdVal}" data-m="${row.m}" onchange="setWd(this)" ${row.willWd ? '' : 'disabled'} title="ยอดถอน (ค่าเริ่มต้น = ตัดเงินต้นของงวด)">
+      </td>
       <td>${fmt(row.bal)}</td>
     </tr>`;
   }
@@ -282,28 +298,38 @@ function calc(){
     alertBox.textContent = '⚠ ด้วยเงื่อนไขนี้ ยอดชำระต่อเดือนไม่เพียงพอครอบคลุมดอกเบี้ย หนี้จะไม่มีวันปิดได้ — กรุณาเพิ่มอัตราชำระ ยอดขั้นต่ำ หรือยอดชำระเพิ่ม';
   } else if (r.months >= 600 && r.bal > 0.005){
     alertBox.className = 'alert show';
-    alertBox.textContent = `⚠ คำนวณถึง 600 งวดแล้วยังเหลือยอด ${fmt(r.bal)} บาท — กรุณาเพิ่มอัตราชำระ ยอดขั้นต่ำ หรือยอดชำระเพิ่ม`;
+    alertBox.textContent = `⚠ คำนวณถึง 600 งวดแล้วยังเหลือยอด ${fmt(r.bal)} บาท — หากมีการถอนต่อเนื่องทุกงวด ยอดหนี้จะไม่ลดลง (เห็นเฉพาะภาระดอกเบี้ย) กรุณายกเลิกการถอนบางงวด หรือเพิ่มยอดชำระ`;
   }
 
   const years = Math.floor(r.months/12), months = r.months%12;
   const closed = !r.stuck && r.bal <= 0.005;
   summaryBox.innerHTML = `
     <div class="stat neutral"><div class="label">เงินต้น</div><div class="value">${fmt(p.P0)}</div><div class="sub">บาท</div></div>
-    <div class="stat"><div class="label">${closed ? 'ระยะเวลาปิดหนี้' : 'จำนวนงวดที่แสดง'}</div><div class="value">${r.months} งวด</div><div class="sub">≈ ${years} ปี ${months} เดือน</div></div>
+    <div class="stat"><div class="label">${closed ? 'ระยะเวลาปิดหนี้' : 'จำนวนงวดที่แสดง'}</div><div class="value">${r.months} งวด</div><div class="sub">≈ ${years} ปี ${months} เดือน${closed ? '' : ' · ยังไม่ปิด'}</div></div>
     <div class="stat"><div class="label">ดอกเบี้ยรวม</div><div class="value">${fmt(r.totInt)}</div><div class="sub">คิดเป็น ${p.P0>0?(r.totInt/p.P0*100).toFixed(1):0}% ของเงินต้น</div></div>
     <div class="stat extra"><div class="label">ชำระเพิ่มรวม</div><div class="value">${fmt(r.totExtra)}</div><div class="sub">บาท</div></div>
+    <div class="stat wd"><div class="label">ถอนออกรวม</div><div class="value">${fmt(r.totWd)}</div><div class="sub">${Object.keys(wdOn).length} งวดที่ถอน</div></div>
     <div class="stat"><div class="label">ยอดชำระรวม</div><div class="value">${fmt(r.totPay)}</div><div class="sub">บาท</div></div>`;
 
-  // เปรียบเทียบกับเส้นฐาน (ไม่ชำระเพิ่ม)
   compareBox.className = 'compare';
-  if (r.totExtra > 0 && closed && !base.stuck){
+  if (r.totExtra > 0 && r.totWd <= 0 && closed && !base.stuck){
     const saveInt = base.totInt - r.totInt;
     const saveMonths = base.months - r.months;
     compareBox.className = 'compare show';
     compareBox.innerHTML = `📊 เปรียบเทียบกับการจ่ายตามปกติ (ไม่ชำระเพิ่ม): ปิดหนี้เร็วขึ้น <u>${saveMonths} งวด</u> (จาก ${base.months} → ${r.months} งวด) และประหยัดดอกเบี้ย <u>${fmt(saveInt)} บาท</u> (จาก ${fmt(base.totInt)} → ${fmt(r.totInt)} บาท)`;
   }
 
-  tfoot.innerHTML = `<tr><td colspan="2">รวมทั้งสิ้น</td><td>${fmt(r.totInt)}</td><td>${fmt(r.totPay - r.totExtra - 0)}</td><td>${fmt(r.totExtra)}</td><td>${fmt(r.totPay)}</td><td>${fmt(r.totPay - r.totInt)}</td><td>—</td></tr>`;
+  // สรุปช่วงที่ถอน: ดอกเบี้ยรวมเฉพาะงวดที่ติ๊กถอน เพื่อดูต้นทุนดอกเบี้ยของช่วงเวลานั้น
+  wdInfoBox.className = 'wdinfo';
+  const wdMonths = r.rows.filter(x => x.willWd);
+  if (wdMonths.length){
+    const wdInt = wdMonths.reduce((s,x) => s + x.interest, 0);
+    const first = wdMonths[0].m, last = wdMonths[wdMonths.length-1].m;
+    wdInfoBox.className = 'wdinfo show';
+    wdInfoBox.innerHTML = `💡 ช่วงที่เลือกถอน (งวดที่ ${first}–${last} รวม ${wdMonths.length} งวด): ดอกเบี้ยเฉพาะช่วงนี้ = <u>${fmt(wdInt)} บาท</u> · ถอนออกรวม ${fmt(r.totWd)} บาท — หากถอนเท่ายอดตัดเงินต้นทุกงวด ยอดคงเหลือจะคงที่ และตัวเลขดอกเบี้ยข้างต้นคือ "ต้นทุนการถือวงเงิน" ของช่วงเวลานี้โดยตรง`;
+  }
+
+  tfoot.innerHTML = `<tr><td colspan="2">รวมทั้งสิ้น</td><td>${fmt(r.totInt)}</td><td>${fmt(r.totBase)}</td><td>${fmt(r.totExtra)}</td><td>${fmt(r.totPay)}</td><td>${fmt(r.totPay - r.totInt)}</td><td>${fmt(r.totWd)}</td><td>—</td></tr>`;
 }
 
 function setExtra(el){
@@ -312,11 +338,22 @@ function setExtra(el){
   if (!v || v <= 0) delete extras[m]; else extras[m] = v;
   calc();
 }
-
-function clearExtras(){
-  extras = {};
+function toggleWd(el){
+  const m = parseInt(el.dataset.m, 10);
+  if (el.checked) wdOn[m] = true;
+  else { delete wdOn[m]; delete wdCustom[m]; }
   calc();
 }
+function setWd(el){
+  const m = parseInt(el.dataset.m, 10);
+  if (!wdOn[m]) return;
+  const v = parseFloat(el.value);
+  if (isNaN(v) || v < 0) delete wdCustom[m];   // กลับไปใช้ค่า default
+  else wdCustom[m] = v;
+  calc();
+}
+function clearExtras(){ extras = {}; calc(); }
+function clearWithdraws(){ wdOn = {}; wdCustom = {}; calc(); }
 
 calc();
 </script>

@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>สรุปผลประโยชน์ Endowment 445 (Par)</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1B2A4A;
+  --navy-light: #2C3E6B;
+  --gold: #C9A84C;
+  --gold-light: #E8D48B;
+  --gold-dark: #A8882E;
+  --red: #C0392B;
+  --red-light: #E74C3C;
+  --green: #27AE60;
+  --bg: #F8F7F4;
+  --text: #2C3E50;
+  --border: #D5D8DC;
+  --white: #FFFFFF;
+  --gray: #95A5A6;
+  --gray-light: #ECF0F1;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Sarabun',sans-serif; background:var(--bg); color:var(--text); font-size:14px; }
+
+/* ===== FORM SECTION ===== */
+.form-section {
+  max-width:900px; margin:20px auto; padding:24px;
+  background:var(--white); border-radius:12px;
+  box-shadow:0 2px 12px rgba(0,0,0,0.08);
+}
+.form-title {
+  font-size:20px; font-weight:700; color:var(--navy);
+  border-bottom:3px solid var(--gold); padding-bottom:8px; margin-bottom:16px;
+}
+.form-grid {
+  display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:12px;
+  margin-bottom:16px;
+}
+.form-group { display:flex; flex-direction:column; }
+.form-group.wide { grid-column: span 2; }
+.form-group.full { grid-column: span 4; }
+.form-group label { font-size:12px; font-weight:600; color:var(--navy); margin-bottom:4px; }
+.form-group input, .form-group select, .form-group textarea {
+  padding:8px 10px; border:1px solid var(--border); border-radius:6px;
+  font-family:'Sarabun',sans-serif; font-size:14px;
+  transition:border-color 0.2s;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  outline:none; border-color:var(--gold);
+}
+.form-group textarea { resize:vertical; min-height:60px; }
+.btn-generate {
+  background:var(--navy); color:var(--gold); border:none; padding:10px 32px;
+  border-radius:8px; font-family:'Sarabun',sans-serif; font-size:15px;
+  font-weight:700; cursor:pointer; transition:all 0.2s;
+}
+.btn-generate:hover { background:var(--navy-light); }
+.btn-print {
+  background:var(--gold-dark); color:var(--white); border:none; padding:10px 32px;
+  border-radius:8px; font-family:'Sarabun',sans-serif; font-size:15px;
+  font-weight:700; cursor:pointer; margin-left:12px; transition:all 0.2s;
+}
+.btn-print:hover { background:var(--gold); }
+.btn-row { display:flex; align-items:center; gap:8px; }
+
+/* Font size controls */
+.font-controls {
+  display:inline-flex; align-items:center; gap:2px;
+  margin-left:16px; border:1px solid var(--border); border-radius:6px;
+  overflow:hidden;
+}
+.font-controls span {
+  font-size:11px; color:var(--gray); padding:0 8px;
+}
+.font-btn {
+  background:var(--gray-light); border:none; padding:6px 12px;
+  font-family:'Sarabun',sans-serif; font-size:14px; font-weight:700;
+  color:var(--navy); cursor:pointer; transition:all 0.15s;
+}
+.font-btn:hover { background:var(--gold-light); }
+.font-btn:active { background:var(--gold); }
+.font-btn-reset {
+  background:var(--gray-light); border:none; padding:6px 10px;
+  font-family:'Sarabun',sans-serif; font-size:11px; font-weight:600;
+  color:var(--navy); cursor:pointer; transition:all 0.15s;
+}
+.font-btn-reset:hover { background:var(--gold-light); }
+
+/* ===== REPORT SECTION ===== */
+.report-section {
+  display:none;
+  max-width:1100px; margin:20px auto; background:var(--white);
+  border-radius:12px; overflow:hidden;
+  box-shadow:0 2px 16px rgba(0,0,0,0.1);
+}
+
+/* Header */
+.report-header {
+  background:linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+  color:var(--white); padding:16px 24px;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.report-header-left h1 { font-size:18px; font-weight:700; color:var(--gold); }
+.report-header-left p { font-size:12px; color:var(--gold-light); margin-top:2px; }
+.client-info-grid {
+  display:grid; grid-template-columns:auto auto auto; gap:4px 20px;
+  font-size:12px; text-align:right;
+}
+.client-info-grid .label { color:var(--gold-light); }
+.client-info-grid .value { font-weight:700; color:var(--white); }
+
+/* Body */
+.report-body { padding:16px 24px 12px; }
+
+/* Sub header */
+.product-desc {
+  font-size:11px; color:var(--gray); margin-bottom:12px;
+  padding-bottom:8px; border-bottom:1px solid var(--gray-light);
+}
+.product-desc span { color:var(--navy); font-weight:600; }
+
+/* ===== GRAPH ===== */
+.graph-container { margin-bottom:12px; }
+.graph-title {
+  font-size:13px; font-weight:700; color:var(--navy);
+  margin-bottom:8px;
+}
+
+/* Coverage area */
+.coverage-area {
+  position:relative; height:80px; margin-bottom:2px;
+  background:var(--gray-light); border-radius:4px 4px 0 0; overflow:hidden;
+}
+.coverage-triangle {
+  position:absolute; bottom:0; left:0;
+  width:50%; height:100%;
+  background:linear-gradient(to right, rgba(27,42,74,0.08), rgba(27,42,74,0.2));
+  clip-path:polygon(0 100%, 50% 0, 50% 100%);
+}
+.coverage-flat {
+  position:absolute; bottom:0; right:0;
+  width:50%; height:100%;
+  background:rgba(27,42,74,0.15);
+}
+.coverage-label-start {
+  position:absolute; left:4px; bottom:4px;
+  font-size:9px; color:var(--navy); font-weight:600;
+}
+.coverage-label-peak {
+  position:absolute; left:48%; top:4px;
+  font-size:10px; color:var(--navy); font-weight:700;
+}
+.coverage-label-200 {
+  position:absolute; right:4px; top:4px;
+  font-size:10px; color:var(--navy); font-weight:700;
+}
+.coverage-increase-label {
+  position:absolute; left:15%; top:20%;
+  font-size:9px; color:var(--navy-light); text-align:center;
+  line-height:1.3;
+}
+
+/* Timeline row */
+.timeline-row {
+  display:flex; height:22px; background:var(--navy);
+  border-radius:0;
+}
+.timeline-cell {
+  flex:1; display:flex; align-items:center; justify-content:center;
+  font-size:7px; color:var(--gold-light); font-weight:600;
+  border-right:1px solid rgba(255,255,255,0.1);
+}
+.timeline-cell:last-child { border-right:none; }
+
+/* Premium row */
+.premium-row {
+  display:flex; height:16px; margin-top:2px;
+}
+.premium-cell {
+  flex:1; display:flex; align-items:center; justify-content:center;
+}
+.premium-marker {
+  width:0; height:0;
+  border-left:4px solid transparent; border-right:4px solid transparent;
+  border-bottom:6px solid var(--navy);
+}
+
+/* Cash return row */
+.cashback-row {
+  display:flex; height:28px; margin-top:2px; position:relative;
+}
+.cashback-cell {
+  flex:1; display:flex; align-items:center; justify-content:center;
+}
+.cashback-block {
+  background:var(--red); color:var(--white); font-size:7px; font-weight:700;
+  padding:1px 2px; border-radius:2px; text-align:center; line-height:1.2;
+  width:90%;
+}
+.cashback-block.maturity {
+  background:var(--red-light); font-size:6px;
+}
+.cashback-block.phase2 {
+  background:var(--red); font-size:6.5px;
+}
+.cashback-total {
+  position:absolute; right:-40px; top:50%; transform:translateY(-50%);
+  background:var(--gold); color:var(--navy); font-size:11px; font-weight:700;
+  padding:2px 6px; border-radius:4px;
+}
+
+/* Dividend row */
+.dividend-row {
+  display:flex; height:16px; margin-top:2px;
+}
+.dividend-cell {
+  flex:1; display:flex; align-items:center; justify-content:center;
+}
+.dividend-marker {
+  width:8px; height:8px; border-radius:50%;
+  background:var(--gray); border:1px solid var(--navy);
+}
+
+/* Year labels - rotated 90° */
+.year-label-row {
+  display:flex; height:48px; margin-top:2px;
+}
+.year-label-cell {
+  flex:1; display:flex; flex-direction:column; align-items:center;
+  justify-content:flex-start; padding-top:2px;
+  overflow:visible;
+}
+.year-label-cell .be-year {
+  writing-mode:vertical-rl;
+  text-orientation:mixed;
+  transform:rotate(180deg);
+  font-weight:700; color:var(--navy); font-size:8px;
+  letter-spacing:-0.3px;
+  white-space:nowrap;
+  line-height:1;
+}
+.year-label-cell .age {
+  writing-mode:vertical-rl;
+  text-orientation:mixed;
+  transform:rotate(180deg);
+  color:var(--gray); font-size:6.5px;
+  white-space:nowrap;
+  line-height:1;
+  margin-top:1px;
+}
+
+/* Row labels */
+.row-labels {
+  display:flex; flex-direction:column; width:80px; flex-shrink:0;
+  font-size:9px; color:var(--navy); font-weight:600;
+}
+.row-label { display:flex; align-items:center; }
+
+.graph-flex { display:flex; gap:0; }
+.graph-data { flex:1; min-width:0; overflow:hidden; position:relative; }
+
+/* Legend */
+.legend-row {
+  display:flex; gap:16px; margin-top:4px; font-size:10px; color:var(--text);
+  padding:4px 0;
+}
+.legend-item { display:flex; align-items:center; gap:4px; }
+.legend-color {
+  width:12px; height:8px; border-radius:2px;
+}
+
+/* ===== PHASE 2 ANNOTATION ===== */
+.phase2-annotation {
+  background:var(--gray-light); border:1px solid var(--border);
+  border-radius:6px; padding:8px 12px; margin-top:8px;
+  font-size:11px; color:var(--text); line-height:1.6;
+}
+.phase2-annotation .highlight {
+  color:var(--red); font-weight:700;
+}
+
+/* ===== SUMMARY ===== */
+.summary-section {
+  margin-top:12px; padding-top:12px;
+  border-top:2px solid var(--gold);
+}
+.summary-title {
+  font-size:13px; font-weight:700; color:var(--navy); margin-bottom:8px;
+}
+.summary-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:8px;
+}
+.summary-card {
+  background:var(--gray-light); border-radius:8px; padding:10px 14px;
+  border-left:4px solid var(--navy);
+}
+.summary-card.total {
+  grid-column:span 2;
+  border-left-color:var(--gold);
+  background:linear-gradient(135deg, rgba(27,42,74,0.05), rgba(201,168,76,0.1));
+}
+.summary-card .sc-label {
+  font-size:11px; color:var(--gray); margin-bottom:2px;
+}
+.summary-card .sc-detail {
+  font-size:11px; color:var(--text);
+}
+.summary-card .sc-amount {
+  font-size:16px; font-weight:700; color:var(--navy);
+}
+.summary-card.total .sc-amount {
+  font-size:20px; color:var(--gold-dark);
+}
+
+/* Notes */
+.notes-section {
+  margin-top:10px; padding:8px 12px;
+  background:var(--gray-light); border-radius:6px;
+  font-size:11px; color:var(--text); line-height:1.5;
+  white-space:pre-wrap;
+  min-height:20px;
+}
+.notes-label {
+  font-size:11px; font-weight:700; color:var(--navy); margin-bottom:4px;
+}
+
+/* Footer */
+.report-footer {
+  margin-top:10px; padding:8px 24px 12px;
+  font-size:8px; color:var(--gray); line-height:1.5;
+  border-top:1px solid var(--gray-light);
+}
+
+/* ===== PRINT ===== */
+@media print {
+  @page { size:A4 landscape; margin:8mm; }
+  body { background:white; font-size:10px; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .form-section { display:none !important; }
+  .report-section {
+    display:block !important; max-width:none; margin:0;
+    box-shadow:none; border-radius:0;
+    page-break-inside:avoid;
+  }
+  .report-header { padding:10px 16px; }
+  .report-header-left h1 { font-size:15px; }
+  .report-body { padding:10px 16px 8px; }
+  .summary-card .sc-amount { font-size:13px; }
+  .summary-card.total .sc-amount { font-size:16px; }
+  .timeline-cell { font-size:6px; }
+  .cashback-block { font-size:6px; }
+  .year-label-cell { font-size:5.5px; }
+  .year-label-cell .be-year { font-size:6px; }
+  .year-label-cell .be-year { font-size:7px; }
+  .year-label-cell .age { font-size:5.5px; }
+  .report-footer { padding:4px 16px 6px; }
+  .btn-print, .btn-generate, .font-controls { display:none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== FORM ===== -->
+<div class="form-section" id="formSection">
+  <div class="form-title">สร้างรายงาน สรุปผลประโยชน์ Endowment 445 (Par)</div>
+  <div class="form-grid">
+    <div class="form-group">
+      <label>ชื่อลูกค้า</label>
+      <input type="text" id="clientName" placeholder="ชื่อ-นามสกุล">
+    </div>
+    <div class="form-group">
+      <label>เพศ</label>
+      <select id="clientGender">
+        <option value="ชาย">ชาย</option>
+        <option value="หญิง">หญิง</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>อายุที่เริ่มทำประกัน (ปี)</label>
+      <input type="number" id="startAge" value="30" min="0" max="70">
+    </div>
+    <div class="form-group">
+      <label>ปี พ.ศ. ที่เริ่มทำ</label>
+      <input type="number" id="startYear" value="2568" min="2500" max="2600">
+    </div>
+    <div class="form-group">
+      <label>ทุนประกัน (บาท)</label>
+      <input type="text" id="sumAssured" value="1,000,000" placeholder="เช่น 1,000,000">
+    </div>
+    <div class="form-group">
+      <label>อัตราเงินปันผล (% ของทุน)</label>
+      <input type="number" id="dividendRate" value="2" min="0" max="100" step="0.1">
+    </div>
+    <div class="form-group wide">
+      <label></label>
+    </div>
+    <div class="form-group full">
+      <label>หมายเหตุ (จะแสดงในรายงานเมื่อพิมพ์)</label>
+      <textarea id="userNotes" rows="3" placeholder="กรอกหมายเหตุเพิ่มเติม..."></textarea>
+    </div>
+  </div>
+  <div class="btn-row">
+    <button class="btn-generate" onclick="generateReport()">สร้างรายงาน</button>
+    <button class="btn-print" onclick="window.print()" style="display:none" id="btnPrint">พิมพ์ / บันทึก PDF</button>
+    <div class="font-controls" id="fontControls" style="display:none;">
+      <button class="font-btn" onclick="adjustHighlightFont(-1)" title="ลดขนาดอักษร">A−</button>
+      <button class="font-btn-reset" onclick="adjustHighlightFont(0)" title="รีเซ็ต">Reset</button>
+      <button class="font-btn" onclick="adjustHighlightFont(1)" title="เพิ่มขนาดอักษร">A+</button>
+      <span id="fontSizeLabel">100%</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== REPORT ===== -->
+<div class="report-section" id="reportSection">
+  <!-- Header -->
+  <div class="report-header">
+    <div class="report-header-left">
+      <h1>ภาพแสดงผลประโยชน์และความคุ้มครอง</h1>
+      <p>Endowment 445 (Par) — สะสมทรัพย์ 42 ปี ชำระเบี้ย 21 ปี (มีเงินปันผล)</p>
+    </div>
+    <div class="client-info-grid" id="clientInfoGrid">
+    </div>
+  </div>
+
+  <div class="report-body">
+    <!-- Product desc -->
+    <div class="product-desc">
+      <span>ความคุ้มครองชีวิต:</span> เพิ่มขึ้นปีละ 5% ตั้งแต่ปีกรมธรรม์ที่ 2-21 (สูงสุด 200% ของทุนประกัน) &nbsp;|&nbsp;
+      <span>ระยะเวลาคุ้มครอง:</span> 42 ปี &nbsp;|&nbsp;
+      <span>ชำระเบี้ย:</span> 21 ปี &nbsp;|&nbsp;
+      <span>เงินปันผล:</span> ตามที่บริษัทประกาศ
+    </div>
+
+    <!-- Graph -->
+    <div class="graph-container">
+      <div class="graph-title">ผลประโยชน์และความคุ้มครองตลอดสัญญา</div>
+
+      <!-- Coverage area -->
+      <div class="coverage-area" id="coverageArea">
+        <div class="coverage-increase-label">
+          ความคุ้มครองชีวิต<br>เพิ่มขึ้นปีละ 5%<br>(ปีที่ 2-21)
+        </div>
+        <div class="coverage-label-200" style="left:48%; right:auto;">200%</div>
+        <div class="coverage-label-start">100%</div>
+      </div>
+
+      <!-- Timeline -->
+      <div id="timelineRow" class="timeline-row"></div>
+
+      <!-- Premium markers -->
+      <div id="premiumRow" class="premium-row"></div>
+
+      <!-- Cash return -->
+      <div style="position:relative;">
+        <div id="cashbackRow" class="cashback-row"></div>
+      </div>
+
+      <!-- Dividend -->
+      <div id="dividendRow" class="dividend-row"></div>
+
+      <!-- Year/Age labels -->
+      <div id="yearLabelRow" class="year-label-row"></div>
+
+      <!-- Legend -->
+      <div class="legend-row">
+        <div class="legend-item">
+          <div class="legend-color" style="background:var(--navy);"></div>
+          <span>ระยะเวลาคุ้มครอง / ชำระเบี้ย</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background:var(--red);"></div>
+          <span>เงินคืน**</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background:var(--gray); border-radius:50%; width:8px; height:8px;"></div>
+          <span>เงินปันผล*</span>
+        </div>
+        <div class="legend-item" style="margin-left:auto;">
+          <span style="font-weight:700; color:var(--gold-dark);">รวมเงินคืน = <span id="legendTotal">445%</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 2 Annotation -->
+    <div class="phase2-annotation" id="phase2Annotation"></div>
+
+    <!-- Summary -->
+    <div class="summary-section">
+      <div class="summary-title">สรุปผลประโยชน์เงินคืนตลอดสัญญา</div>
+      <div class="summary-grid" id="summaryGrid"></div>
+    </div>
+
+    <!-- Notes -->
+    <div id="notesContainer" style="display:none;">
+      <div class="notes-label">หมายเหตุ</div>
+      <div class="notes-section" id="notesDisplay"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="report-footer">
+    * เงินปันผล เป็นผลตอบแทนของความเป็นเจ้าของกรมธรรม์ ภายใต้เงื่อนไขว่าในขณะที่กรมธรรม์ประกันภัยนี้มีผลบังคับและผู้เอาประกันภัยมีชีวิตอยู่ ณ สิ้นปีกรมธรรม์ ซึ่งการจ่ายเงินปันผล อัตราเงินปันผล และ/หรือ จำนวนเงินปันผล ดังกล่าว เป็นแบบไม่รับรองการจ่าย และอาจไม่มีการจ่ายในบางปี<br>
+    ** ในกรณีคงเงินคืนสะสมไว้กับบริษัท ผู้เอาประกันจะได้รับอัตราดอกเบี้ย (ถ้ามี) ตามที่บริษัทประกาศกำหนด<br>
+    เอกสารฉบับนี้จัดทำเพื่อประกอบการนำเสนอเท่านั้น มิใช่ส่วนหนึ่งของสัญญาประกันภัย ข้อกำหนดและเงื่อนไขของความคุ้มครองจะระบุไว้ในกรมธรรม์ประกันภัยที่ออกให้กับผู้ถือกรมธรรม์
+  </div>
+</div>
+
+<script>
+function parseCurrency(str) {
+  return parseFloat(String(str).replace(/,/g, '')) || 0;
+}
+function fmtNum(n) {
+  return n.toLocaleString('th-TH', {minimumFractionDigits:0, maximumFractionDigits:0});
+}
+function fmtNum2(n) {
+  return n.toLocaleString('th-TH', {minimumFractionDigits:2, maximumFractionDigits:2});
+}
+
+// E445 data
+const CASHBACK_YEARS_PHASE1 = [3,6,9,12,15,18,21]; // 5% each
+const PHASE1_RATE = 5;
+const PHASE2_START = 22;
+const PHASE2_END = 41;
+const PHASE2_RATE = 10;
+const MATURITY_YEAR = 42;
+const MATURITY_RATE = 210;
+const PREMIUM_YEARS = 21;
+const COVERAGE_YEARS = 42;
+const TOTAL_PERCENT = 445;
+
+function generateReport() {
+  const name = document.getElementById('clientName').value || '—';
+  const gender = document.getElementById('clientGender').value;
+  const startAge = parseInt(document.getElementById('startAge').value) || 30;
+  const startYear = parseInt(document.getElementById('startYear').value) || 2568;
+  const sa = parseCurrency(document.getElementById('sumAssured').value);
+  const divRate = parseFloat(document.getElementById('dividendRate').value) || 0;
+  const notes = document.getElementById('userNotes').value;
+
+  // Client info
+  document.getElementById('clientInfoGrid').innerHTML = `
+    <div class="label">ชื่อลูกค้า</div><div class="value">${name}</div><div></div>
+    <div class="label">เพศ / อายุเริ่ม</div><div class="value">${gender} / ${startAge} ปี</div><div></div>
+    <div class="label">ทุนประกัน</div><div class="value">${fmtNum(sa)} บาท</div><div></div>
+    <div class="label">ปี พ.ศ. เริ่ม</div><div class="value">${startYear}</div><div></div>
+  `;
+
+  // Coverage area visual
+  const covArea = document.getElementById('coverageArea');
+  const pctPhase1 = (PREMIUM_YEARS / COVERAGE_YEARS) * 100;
+  covArea.innerHTML = `
+    <div style="position:absolute;bottom:0;left:0;width:${pctPhase1}%;height:100%;
+      background:linear-gradient(to top right, rgba(27,42,74,0.18), rgba(27,42,74,0.06));
+      clip-path:polygon(0 100%, 100% 0, 100% 100%);"></div>
+    <div style="position:absolute;bottom:0;left:${pctPhase1}%;right:0;height:100%;
+      background:rgba(27,42,74,0.12);"></div>
+    <div class="coverage-increase-label" style="left:8%;top:15%;">
+      ความคุ้มครองชีวิต<br>เพิ่มขึ้นปีละ 5%<br>ปีที่ 2-21
+    </div>
+    <div style="position:absolute;left:${pctPhase1 - 2}%;top:4px;font-size:10px;color:var(--navy);font-weight:700;">200%</div>
+    <div style="position:absolute;right:8px;top:4px;font-size:10px;color:var(--navy);font-weight:700;">200%</div>
+    <div style="position:absolute;left:4px;bottom:4px;font-size:9px;color:var(--navy);font-weight:600;">100%</div>
+  `;
+
+  // Timeline row
+  let timelineHtml = '';
+  for (let y = 1; y <= COVERAGE_YEARS; y++) {
+    timelineHtml += `<div class="timeline-cell">${y}</div>`;
+  }
+  document.getElementById('timelineRow').innerHTML = timelineHtml;
+
+  // Premium row
+  let premiumHtml = '';
+  for (let y = 1; y <= COVERAGE_YEARS; y++) {
+    premiumHtml += `<div class="premium-cell">`;
+    if (y <= PREMIUM_YEARS) {
+      premiumHtml += `<div class="premium-marker"></div>`;
+    }
+    premiumHtml += `</div>`;
+  }
+  document.getElementById('premiumRow').innerHTML = premiumHtml;
+
+  // Cashback row
+  let cbHtml = '';
+  for (let y = 1; y <= COVERAGE_YEARS; y++) {
+    cbHtml += `<div class="cashback-cell">`;
+    if (CASHBACK_YEARS_PHASE1.includes(y)) {
+      cbHtml += `<div class="cashback-block">5%</div>`;
+    } else if (y >= PHASE2_START && y <= PHASE2_END) {
+      cbHtml += `<div class="cashback-block phase2">10%</div>`;
+    } else if (y === MATURITY_YEAR) {
+      cbHtml += `<div class="cashback-block maturity">210%</div>`;
+    }
+    cbHtml += `</div>`;
+  }
+  document.getElementById('cashbackRow').innerHTML = cbHtml;
+
+  // Dividend row
+  let divHtml = '';
+  for (let y = 1; y <= COVERAGE_YEARS; y++) {
+    divHtml += `<div class="dividend-cell">`;
+    if (y === 21) {
+      divHtml += `<div class="dividend-marker" title="เงินปันผล ณ สิ้นปีที่ 21"></div>`;
+    }
+    divHtml += `</div>`;
+  }
+  document.getElementById('dividendRow').innerHTML = divHtml;
+
+  // Year/Age labels
+  let ylHtml = '';
+  for (let y = 1; y <= COVERAGE_YEARS; y++) {
+    const beYear = startYear + y; // ณ สิ้นปีกรมธรรม์
+    const age = startAge + y;
+    ylHtml += `<div class="year-label-cell">
+      <span class="be-year">${beYear}</span>
+      <span class="age">${age} ปี</span>
+    </div>`;
+  }
+  document.getElementById('yearLabelRow').innerHTML = ylHtml;
+
+  // Phase 2 annotation
+  const annualAmount = sa * PHASE2_RATE / 100;
+  const phase2Count = PHASE2_END - PHASE2_START + 1; // 20 years
+  const phase2Total = annualAmount * phase2Count;
+  const maturityAmount = sa * MATURITY_RATE / 100;
+
+  document.getElementById('phase2Annotation').innerHTML = `
+    <strong style="color:var(--navy);">ช่วงที่ 2 — ได้เงินคืนทุกปี</strong> ตั้งแต่สิ้นปีกรมธรรม์ที่ 22 ถึงสิ้นปีที่ 41 ปีละ
+    <span class="highlight">${PHASE2_RATE}% = ${fmtNum(annualAmount)} บาท</span>
+    (${phase2Count} ครั้ง) รวมเป็นเงิน <span class="highlight">${fmtNum(phase2Total)} บาท</span>
+    &nbsp;|&nbsp; สิ้นปีที่ 42 ครบกำหนดสัญญา รับ <span class="highlight">${MATURITY_RATE}% = ${fmtNum(maturityAmount)} บาท</span>
+  `;
+
+  // Summary
+  const p1Each = sa * PHASE1_RATE / 100;
+  const p1Total = p1Each * CASHBACK_YEARS_PHASE1.length;
+  const divAmount = sa * divRate / 100;
+  const grandTotal = p1Total + phase2Total + maturityAmount + divAmount;
+
+  document.getElementById('summaryGrid').innerHTML = `
+    <div class="summary-card">
+      <div class="sc-label">① คืนทุก 3 ปี (สิ้นปีที่ 3, 6, 9, 12, 15, 18, 21)</div>
+      <div class="sc-detail">${CASHBACK_YEARS_PHASE1.length} ครั้ง × ${PHASE1_RATE}% × ${fmtNum(sa)}</div>
+      <div class="sc-amount">${fmtNum(p1Total)} บาท</div>
+    </div>
+    <div class="summary-card">
+      <div class="sc-label">② คืนทุกปี (สิ้นปีที่ 22-41)</div>
+      <div class="sc-detail">${phase2Count} ครั้ง × ${PHASE2_RATE}% × ${fmtNum(sa)}</div>
+      <div class="sc-amount">${fmtNum(phase2Total)} บาท</div>
+    </div>
+    <div class="summary-card">
+      <div class="sc-label">③ เงินปันผลประมาณการ ณ สิ้นปีที่ 21</div>
+      <div class="sc-detail">อัตรา ${divRate}% × ${fmtNum(sa)}</div>
+      <div class="sc-amount">${fmtNum(divAmount)} บาท</div>
+    </div>
+    <div class="summary-card">
+      <div class="sc-label">④ เงินครบกำหนดสัญญา ณ สิ้นปีที่ 42</div>
+      <div class="sc-detail">${MATURITY_RATE}% × ${fmtNum(sa)}</div>
+      <div class="sc-amount">${fmtNum(maturityAmount)} บาท</div>
+    </div>
+    <div class="summary-card total">
+      <div class="sc-label">รวมผลประโยชน์ทั้งหมดตลอดสัญญา (①+②+③+④)</div>
+      <div class="sc-detail">เงินคืน ${TOTAL_PERCENT}% + เงินปันผลประมาณการ</div>
+      <div class="sc-amount">${fmtNum(grandTotal)} บาท</div>
+    </div>
+  `;
+
+  document.getElementById('legendTotal').textContent = TOTAL_PERCENT + '%';
+
+  // Notes
+  if (notes.trim()) {
+    document.getElementById('notesContainer').style.display = 'block';
+    document.getElementById('notesDisplay').textContent = notes;
+  } else {
+    document.getElementById('notesContainer').style.display = 'none';
+  }
+
+  // Show report
+  document.getElementById('reportSection').style.display = 'block';
+  document.getElementById('btnPrint').style.display = 'inline-block';
+  document.getElementById('fontControls').style.display = 'inline-flex';
+
+  // Scroll to report
+  document.getElementById('reportSection').scrollIntoView({behavior:'smooth'});
+}
+
+// Font size adjustment for highlight boxes
+let hlFontScale = 100;
+function adjustHighlightFont(dir) {
+  if (dir === 0) {
+    hlFontScale = 100;
+  } else {
+    hlFontScale = Math.max(70, Math.min(150, hlFontScale + dir * 10));
+  }
+  const factor = hlFontScale / 100;
+  // Apply to highlight elements
+  const targets = document.querySelectorAll(
+    '.phase2-annotation, .summary-card .sc-label, .summary-card .sc-detail, .summary-card .sc-amount, .notes-section, .legend-row'
+  );
+  targets.forEach(el => {
+    const base = parseFloat(getComputedStyle(el).getPropertyValue('--base-size') || getComputedStyle(el).fontSize);
+    el.style.fontSize = (base * factor) + 'px';
+  });
+  // Simpler approach: scale the containers
+  document.querySelectorAll('.phase2-annotation, .summary-card, .legend-row, .notes-section').forEach(el => {
+    el.style.fontSize = (factor * 100) + '%';
+  });
+  document.getElementById('fontSizeLabel').textContent = hlFontScale + '%';
+}
+
+// Auto-format sum assured input
+document.getElementById('sumAssured').addEventListener('blur', function() {
+  const v = parseCurrency(this.value);
+  if (v > 0) this.value = fmtNum(v);
+});
+</script>
+</body>
+</html>

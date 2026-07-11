@@ -52,6 +52,12 @@ body { font-family:'Sarabun',sans-serif; background:var(--bg); color:var(--text)
   outline:none; border-color:var(--gold);
 }
 .form-group textarea { resize:vertical; min-height:60px; }
+.form-group input[type="checkbox"] {
+  width:16px; height:16px; accent-color:var(--navy); cursor:pointer;
+}
+.form-group input:disabled {
+  background:var(--gray-light); color:var(--gray); cursor:not-allowed;
+}
 .btn-generate {
   background:var(--navy); color:var(--gold); border:none; padding:10px 32px;
   border-radius:8px; font-family:'Sarabun',sans-serif; font-size:15px;
@@ -418,8 +424,11 @@ body { font-family:'Sarabun',sans-serif; background:var(--bg); color:var(--text)
       <label>อัตราเงินปันผล (% ของทุน)</label>
       <input type="number" id="dividendRate" value="2" min="0" max="100" step="0.1">
     </div>
-    <div class="form-group wide">
-      <label></label>
+    <div class="form-group wide" style="flex-direction:row; align-items:flex-end; gap:12px;">
+      <label style="display:flex; align-items:center; gap:6px; cursor:pointer; margin-bottom:8px;">
+        <input type="checkbox" id="showDividend" checked onchange="toggleDividendInput()">
+        <span>แสดงเงินปันผลประมาณการ ณ สิ้นปีที่ 21</span>
+      </label>
     </div>
     <div class="form-group full">
       <label>หมายเหตุ (จะแสดงในรายงานเมื่อพิมพ์)</label>
@@ -628,11 +637,16 @@ function generateReport() {
   document.getElementById('cashbackRow').innerHTML = cbHtml;
 
   // Dividend row
+  const showDiv = document.getElementById('showDividend').checked;
   let divHtml = '';
   for (let y = 1; y <= COVERAGE_YEARS; y++) {
     divHtml += `<div class="dividend-cell">`;
     if (y === 21) {
-      divHtml += `<div class="dividend-marker" title="เงินปันผล ณ สิ้นปีที่ 21"></div>`;
+      if (showDiv) {
+        divHtml += `<div class="dividend-marker" title="เงินปันผลประมาณการ ณ สิ้นปีที่ 21"></div>`;
+      } else {
+        divHtml += `<div class="dividend-marker" style="background:var(--gray-light);border-style:dashed;" title="ปันผลจะทราบ ณ สิ้นปีกรมธรรม์ที่ 21"></div>`;
+      }
     }
     divHtml += `</div>`;
   }
@@ -692,8 +706,27 @@ function generateReport() {
   // Summary
   const p1Each = sa * PHASE1_RATE / 100;
   const p1Total = p1Each * CASHBACK_YEARS_PHASE1.length;
-  const divAmount = sa * divRate / 100;
+  const divAmount = showDiv ? (sa * divRate / 100) : 0;
   const grandTotal = p1Total + phase2Total + maturityAmount + divAmount;
+
+  // Dividend card content
+  let divCardHtml = '';
+  if (showDiv) {
+    divCardHtml = `
+      <div class="sc-label">③ เงินปันผลประมาณการ ณ สิ้นปีที่ 21</div>
+      <div class="sc-detail">อัตรา ${divRate}% × ${fmtNum(sa)}</div>
+      <div class="sc-amount">${fmtNum(divAmount)} บาท</div>`;
+  } else {
+    divCardHtml = `
+      <div class="sc-label">③ เงินปันผล ณ สิ้นปีที่ 21</div>
+      <div class="sc-detail" style="color:var(--gold-dark); font-style:italic;">ปันผลจะทราบ ณ สิ้นปีกรมธรรม์ที่ 21</div>
+      <div class="sc-amount" style="color:var(--gray);">—</div>`;
+  }
+
+  // Grand total label
+  const totalLabel = showDiv
+    ? `เงินคืน ${TOTAL_PERCENT}% + เงินปันผลประมาณการ`
+    : `เงินคืน ${TOTAL_PERCENT}% (ไม่รวมเงินปันผล)`;
 
   document.getElementById('summaryGrid').innerHTML = `
     <div class="summary-card">
@@ -707,9 +740,7 @@ function generateReport() {
       <div class="sc-amount">${fmtNum(phase2Total)} บาท</div>
     </div>
     <div class="summary-card">
-      <div class="sc-label">③ เงินปันผลประมาณการ ณ สิ้นปีที่ 21</div>
-      <div class="sc-detail">อัตรา ${divRate}% × ${fmtNum(sa)}</div>
-      <div class="sc-amount">${fmtNum(divAmount)} บาท</div>
+      ${divCardHtml}
     </div>
     <div class="summary-card">
       <div class="sc-label">④ เงินครบกำหนดสัญญา ณ สิ้นปีที่ 42</div>
@@ -717,8 +748,8 @@ function generateReport() {
       <div class="sc-amount">${fmtNum(maturityAmount)} บาท</div>
     </div>
     <div class="summary-card total">
-      <div class="sc-label">รวมผลประโยชน์ทั้งหมดตลอดสัญญา (①+②+③+④)</div>
-      <div class="sc-detail">เงินคืน ${TOTAL_PERCENT}% + เงินปันผลประมาณการ</div>
+      <div class="sc-label">รวมผลประโยชน์ทั้งหมดตลอดสัญญา (①+②+${showDiv ? '③+' : ''}④)</div>
+      <div class="sc-detail">${totalLabel}</div>
       <div class="sc-amount">${fmtNum(grandTotal)} บาท</div>
     </div>
   `;
@@ -764,6 +795,15 @@ function adjustHighlightFont(dir) {
     el.style.fontSize = (factor * 100) + '%';
   });
   document.getElementById('fontSizeLabel').textContent = hlFontScale + '%';
+}
+
+// Toggle dividend input field
+function toggleDividendInput() {
+  const checked = document.getElementById('showDividend').checked;
+  const input = document.getElementById('dividendRate');
+  input.disabled = !checked;
+  if (!checked) input.style.opacity = '0.4';
+  else input.style.opacity = '1';
 }
 
 // Auto-format sum assured input

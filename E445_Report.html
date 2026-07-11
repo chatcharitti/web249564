@@ -224,32 +224,55 @@ body { font-family:'Sarabun',sans-serif; background:var(--bg); color:var(--text)
   background:var(--gray); border:1px solid var(--navy);
 }
 
-/* Year labels - rotated 90° */
-.year-label-row {
-  display:flex; height:48px; margin-top:2px;
+/* ===== Year labels: Hybrid A+C ===== */
+/* Top row: important years only, large bold */
+.year-label-major {
+  display:flex; height:52px; margin-top:3px;
+  border-bottom:1px solid var(--border);
 }
-.year-label-cell {
-  flex:1; display:flex; flex-direction:column; align-items:center;
-  justify-content:flex-start; padding-top:2px;
-  overflow:visible;
+.year-major-cell {
+  flex:1; display:flex; align-items:flex-start; justify-content:center;
+  position:relative;
 }
-.year-label-cell .be-year {
+.year-major-cell .major-label {
+  position:absolute; top:0;
+  display:flex; flex-direction:row; align-items:flex-start; gap:1px;
+}
+.year-major-cell .major-be {
   writing-mode:vertical-rl;
-  text-orientation:mixed;
   transform:rotate(180deg);
-  font-weight:700; color:var(--navy); font-size:8px;
-  letter-spacing:-0.3px;
-  white-space:nowrap;
+  font-weight:700; color:var(--navy); font-size:14px;
+  white-space:nowrap; line-height:1;
+}
+.year-major-cell .major-age {
+  writing-mode:vertical-rl;
+  transform:rotate(180deg);
+  font-weight:600; color:var(--gold-dark); font-size:10px;
+  white-space:nowrap; line-height:1;
+}
+.year-major-cell .major-tick {
+  position:absolute; top:-4px; left:50%;
+  width:1px; height:4px; background:var(--navy);
+}
+
+/* Bottom rows: all years staggered odd/even, small */
+.year-label-stagger {
+  position:relative; height:30px; margin-top:1px;
+}
+.year-stagger-row {
+  display:flex; position:absolute; left:0; right:0;
+}
+.year-stagger-row.odd { top:0; }
+.year-stagger-row.even { top:14px; }
+.year-stagger-cell {
+  flex:1; display:flex; align-items:center; justify-content:center;
+}
+.year-stagger-cell span {
+  font-size:7px; color:var(--gray); font-weight:400;
   line-height:1;
 }
-.year-label-cell .age {
-  writing-mode:vertical-rl;
-  text-orientation:mixed;
-  transform:rotate(180deg);
-  color:var(--gray); font-size:6.5px;
-  white-space:nowrap;
-  line-height:1;
-  margin-top:1px;
+.year-stagger-cell span.has-event {
+  color:var(--text); font-weight:600;
 }
 
 /* Row labels */
@@ -353,8 +376,10 @@ body { font-family:'Sarabun',sans-serif; background:var(--bg); color:var(--text)
   .cashback-block { font-size:6px; }
   .year-label-cell { font-size:5.5px; }
   .year-label-cell .be-year { font-size:6px; }
-  .year-label-cell .be-year { font-size:7px; }
-  .year-label-cell .age { font-size:5.5px; }
+  .year-major-cell .major-be { font-size:11px; }
+  .year-major-cell .major-age { font-size:8px; }
+  .year-label-major { height:44px; }
+  .year-stagger-cell span { font-size:6px; }
   .report-footer { padding:4px 16px 6px; }
   .btn-print, .btn-generate, .font-controls { display:none; }
 }
@@ -461,8 +486,12 @@ body { font-family:'Sarabun',sans-serif; background:var(--bg); color:var(--text)
       <!-- Dividend -->
       <div id="dividendRow" class="dividend-row"></div>
 
-      <!-- Year/Age labels -->
-      <div id="yearLabelRow" class="year-label-row"></div>
+      <!-- Year/Age labels: Top = important years large, Bottom = all years staggered -->
+      <div id="yearLabelMajor" class="year-label-major"></div>
+      <div class="year-label-stagger">
+        <div id="yearStaggerOdd" class="year-stagger-row odd"></div>
+        <div id="yearStaggerEven" class="year-stagger-row even"></div>
+      </div>
 
       <!-- Legend -->
       <div class="legend-row">
@@ -609,17 +638,43 @@ function generateReport() {
   }
   document.getElementById('dividendRow').innerHTML = divHtml;
 
-  // Year/Age labels
-  let ylHtml = '';
+  // Year/Age labels — Hybrid A+C
+  const KEY_YEARS = [1, 3, 6, 9, 12, 15, 18, 21, 22, 41, 42];
+  const EVENT_YEARS = new Set([...CASHBACK_YEARS_PHASE1, ...Array.from({length:PHASE2_END-PHASE2_START+1},(_,i)=>PHASE2_START+i), MATURITY_YEAR]);
+
+  // Top row: important years only (large)
+  let majorHtml = '';
   for (let y = 1; y <= COVERAGE_YEARS; y++) {
-    const beYear = startYear + y; // ณ สิ้นปีกรมธรรม์
+    const beYear = startYear + y;
     const age = startAge + y;
-    ylHtml += `<div class="year-label-cell">
-      <span class="be-year">${beYear}</span>
-      <span class="age">${age} ปี</span>
-    </div>`;
+    majorHtml += `<div class="year-major-cell">`;
+    if (KEY_YEARS.includes(y)) {
+      majorHtml += `<div class="major-tick"></div>`;
+      majorHtml += `<div class="major-label">
+        <span class="major-be">${beYear}</span>
+        <span class="major-age">${age}ปี</span>
+      </div>`;
+    }
+    majorHtml += `</div>`;
   }
-  document.getElementById('yearLabelRow').innerHTML = ylHtml;
+  document.getElementById('yearLabelMajor').innerHTML = majorHtml;
+
+  // Bottom rows: all years staggered (small)
+  let oddHtml = '', evenHtml = '';
+  for (let y = 1; y <= COVERAGE_YEARS; y++) {
+    const beYear = startYear + y;
+    const isEvent = EVENT_YEARS.has(y);
+    const cls = isEvent ? 'has-event' : '';
+    if (y % 2 === 1) {
+      oddHtml += `<div class="year-stagger-cell"><span class="${cls}">${beYear}</span></div>`;
+      evenHtml += `<div class="year-stagger-cell"></div>`;
+    } else {
+      oddHtml += `<div class="year-stagger-cell"></div>`;
+      evenHtml += `<div class="year-stagger-cell"><span class="${cls}">${beYear}</span></div>`;
+    }
+  }
+  document.getElementById('yearStaggerOdd').innerHTML = oddHtml;
+  document.getElementById('yearStaggerEven').innerHTML = evenHtml;
 
   // Phase 2 annotation
   const annualAmount = sa * PHASE2_RATE / 100;

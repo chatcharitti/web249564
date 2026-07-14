@@ -128,6 +128,13 @@ td.c-dash{color:var(--gray-400);text-align:center;}
 .badge-be-cv{background:var(--green);color:var(--white);}
 .badge-be-tax{background:var(--purple);color:var(--white);}
 .legend{display:flex;gap:12px;flex-wrap:wrap;margin:8px 16px 0;}
+/* ── TAX RATE SELECTOR ── */
+.tax-rate-sel{display:flex;align-items:center;gap:5px;background:var(--white);border:1.5px solid var(--gray-200);border-radius:7px;padding:4px 10px;flex-wrap:wrap;}
+.tax-rate-sel-lbl{font-size:10px;color:var(--gray-400);font-weight:700;margin-right:2px;white-space:nowrap;}
+.tax-chip{display:inline-flex;align-items:center;gap:3px;cursor:pointer;font-size:11px;font-weight:700;font-family:var(--font-hd);padding:2px 8px;border-radius:12px;border:1.5px solid var(--gray-200);background:var(--gray-50);color:var(--gray-400);transition:all .15s;user-select:none;}
+.tax-chip input{display:none;}
+.tax-chip.checked{background:var(--navy);border-color:var(--navy);color:var(--white);}
+.tax-chip:hover{border-color:var(--navy);}
 /* ── TOGGLE TAX COLUMNS ── */
 .tax-hidden .tax-col{display:none;}
 .btn-toggle-tax{font-size:11px;font-weight:700;padding:5px 12px;border-radius:6px;border:1.5px solid var(--gray-200);background:var(--white);color:var(--gray-700);cursor:pointer;font-family:var(--font-hd);transition:all .18s;white-space:nowrap;}
@@ -178,7 +185,7 @@ tr.hybrid-phase td{background:#1a1a2e!important;color:rgba(255,255,255,.9)!impor
 tr.hybrid-be-cv{background:linear-gradient(90deg,#DCFCE7,#F0FDF4)!important;border-left:3px solid var(--green);}
 @media print{
   body{background:white;}
-  .action-bar,.legend,.no-print,.tab-bar{display:none!important;}
+  .action-bar,.legend,.no-print,.tab-bar,.tax-rate-sel{display:none!important;}
   .tab-panel{display:block!important;}
   .hero,.table-header,.hybrid-tbl-hdr,.hybrid-card-hdr{print-color-adjust:exact;-webkit-print-color-adjust:exact;}
   .table-section,.hybrid-tbl-wrap{box-shadow:none;border:1px solid #ccc;margin:4px 0;}
@@ -233,6 +240,14 @@ tr.hybrid-be-cv{background:linear-gradient(90deg,#DCFCE7,#F0FDF4)!important;bord
   <button class="btn btn-navy" onclick="window.print()">🖨️ พิมพ์</button>
   <button class="btn btn-outline" onclick="resetP65()">↺ รีเซ็ต</button>
   <button class="btn-toggle-tax" id="p65-tax-btn" onclick="toggleTax('p65')">🧾 ซ่อนคอลัมน์ภาษี</button>
+  <div class="tax-rate-sel" id="p65-rate-sel">
+    <span class="tax-rate-sel-lbl">อัตราภาษี:</span>
+    <label class="tax-chip checked"><input type="checkbox" value="0.10" checked onchange="rateChanged(this,'p65')">10%</label>
+    <label class="tax-chip checked"><input type="checkbox" value="0.15" checked onchange="rateChanged(this,'p65')">15%</label>
+    <label class="tax-chip checked"><input type="checkbox" value="0.20" checked onchange="rateChanged(this,'p65')">20%</label>
+    <label class="tax-chip checked"><input type="checkbox" value="0.25" checked onchange="rateChanged(this,'p65')">25%</label>
+    <label class="tax-chip checked"><input type="checkbox" value="0.30" checked onchange="rateChanged(this,'p65')">30%</label>
+  </div>
   <div class="font-ctrl">
     <span class="font-ctrl-lbl">ตัวอักษร</span>
     <button class="btn-fs" onclick="adjFS(-1)">−</button>
@@ -293,6 +308,14 @@ tr.hybrid-be-cv{background:linear-gradient(90deg,#DCFCE7,#F0FDF4)!important;bord
   <button class="btn btn-navy" onclick="window.print()">🖨️ พิมพ์</button>
   <button class="btn btn-outline" onclick="resetFIX()">↺ รีเซ็ต</button>
   <button class="btn-toggle-tax" id="fix-tax-btn" onclick="toggleTax('fix')">🧾 ซ่อนคอลัมน์ภาษี</button>
+  <div class="tax-rate-sel" id="fix-rate-sel">
+    <span class="tax-rate-sel-lbl">อัตราภาษี:</span>
+    <label class="tax-chip checked"><input type="checkbox" value="0.10" checked onchange="rateChanged(this,'fix')">10%</label>
+    <label class="tax-chip checked"><input type="checkbox" value="0.15" checked onchange="rateChanged(this,'fix')">15%</label>
+    <label class="tax-chip checked"><input type="checkbox" value="0.20" checked onchange="rateChanged(this,'fix')">20%</label>
+    <label class="tax-chip checked"><input type="checkbox" value="0.25" checked onchange="rateChanged(this,'fix')">25%</label>
+    <label class="tax-chip checked"><input type="checkbox" value="0.30" checked onchange="rateChanged(this,'fix')">30%</label>
+  </div>
   <div class="font-ctrl">
     <span class="font-ctrl-lbl">ตัวอักษร</span>
     <button class="btn-fs" onclick="adjFS(-1)">−</button>
@@ -428,6 +451,29 @@ function switchTab(t){
   document.getElementById('tab-'+t).classList.add('active');
   const btn=document.querySelector(`.tab-btn[onclick="switchTab('${t}')"]`);
   btn.classList.add('active',t);
+}
+
+// ── อ่านอัตราภาษีที่เลือกจาก selector ──
+function getSelectedRates(tab){
+  const sel=document.getElementById(tab+'-rate-sel');
+  if(!sel)return {rates:[.10,.15,.20,.25,.30],labels:['10%','15%','20%','25%','30%']};
+  const rates=[],labels=[];
+  sel.querySelectorAll('input[type=checkbox]:checked').forEach(cb=>{
+    rates.push(parseFloat(cb.value));
+    labels.push((parseFloat(cb.value)*100).toFixed(0)+'%');
+  });
+  // ถ้าไม่เลือกเลย ใช้ทั้งหมด
+  if(rates.length===0)return {rates:[.10,.15,.20,.25,.30],labels:['10%','15%','20%','25%','30%']};
+  return {rates,labels};
+}
+// เมื่อเปลี่ยนอัตราภาษี → update chip style + คำนวณใหม่อัตโนมัติ (ถ้าตารางแสดงอยู่)
+function rateChanged(input,tab){
+  input.parentElement.classList.toggle('checked',input.checked);
+  const scroll=document.getElementById(tab+'-scroll');
+  if(scroll&&scroll.style.display!=='none'){
+    if(tab==='p65')calcP65();
+    else if(tab==='fix')calcFIX();
+  }
 }
 
 // ── Toggle ซ่อน/แสดงคอลัมน์ภาษี ──
@@ -662,27 +708,30 @@ function calcHybrid(){
     const fixPrem_yr=fixPaying?fixPrem:0;
     fixCumPrem+=fixPrem_yr;
     const fixRecvYr=yr-fixPayYrs;
-    const fixIsRecv=fixRecvYr>=1;
+    // บำนาญ FIX: รับเฉพาะ 26 ครั้ง (อายุ 60–85) เท่านั้น — เกินอายุ 85 ไม่มีบำนาญ
+    const fixIsRecv=fixRecvYr>=1 && fixRecvYr<=26;
+    const fixEnded =fixRecvYr>26;   // สัญญา FIX สิ้นสุดแล้ว (อายุ > 85)
     const fixAnn=fixIsRecv?annuity:0;
     fixCumAnn+=fixAnn;
-    const fixCvPerK=fixGetCV(g,age,yr);
-    const fixCv=(base/1000)*fixCvPerK;
-    const fixLife=fixIsRecv?fixCv:Math.max(fixCumPrem*1.05,fixCv);
-    const fixWd=fixIsRecv?0:(fixCv>0?fixCv:0);
+    const fixCvPerK=fixEnded?0:fixGetCV(g,age,yr);
+    const fixCv=fixEnded?0:(base/1000)*fixCvPerK;
+    const fixLife=fixEnded?0:(fixIsRecv?fixCv:Math.max(fixCumPrem*1.05,fixCv));
+    const fixWd=(fixIsRecv||fixEnded)?0:(fixCv>0?fixCv:0);
     const fixTxYr=fixPaying?fixTaxBase:0;
     fixCumTax[0]+=fixTxYr*taxRate;
-    const fixWdTax=fixIsRecv?(fixCumAnn+fixCumTax[0]):(fixWd+fixCumTax[0]);
+    // ระยะรับบำนาญ/สิ้นสุดสัญญา: มูลค่า FIX = บำนาญสะสม + ภาษีสะสม (คงที่หลังจบสัญญา)
+    const fixWdTax=(fixIsRecv||fixEnded)?(fixCumAnn+fixCumTax[0]):(fixWd+fixCumTax[0]);
 
     // รวม
     const totalPrem=p65Prem_yr+fixPrem_yr;
     const totalCumPrem=p65CumPrem+fixCumPrem;
-    const totalWd=p65Wd+(fixIsRecv?fixCumAnn:fixWd); // P65 CV + FIX (บำนาญสะสมหรือ CV)
-    const totalWdTax=p65WdTax+(fixIsRecv?(fixCumAnn+fixCumTax[0]):fixWdTax);
+    const totalWd=p65Wd+((fixIsRecv||fixEnded)?fixCumAnn:fixWd); // P65 CV + FIX
+    const totalWdTax=p65WdTax+((fixIsRecv||fixEnded)?(fixCumAnn+fixCumTax[0]):fixWdTax);
     const totalLife=p65Life+fixLife;
 
     rows.push({yr,aeEnd,
       p65Paying,p65Prem_yr,p65CumPrem,p65RetAmt,p65CumRet,p65Cv,p65Life,p65Wd,p65WdTax,p65RetPct_,
-      fixPaying,fixPrem_yr,fixCumPrem,fixIsRecv,fixAnn,fixCumAnn,fixCv,fixLife,fixWd,fixWdTax,
+      fixPaying,fixPrem_yr,fixCumPrem,fixIsRecv,fixEnded,fixAnn,fixCumAnn,fixCv,fixLife,fixWd,fixWdTax,
       totalPrem,totalCumPrem,totalWd,totalWdTax,totalLife
     });
   }
@@ -728,15 +777,17 @@ function calcHybrid(){
 
   // ── Render tbody ──
   let html='',lph='';
-  const phPay60=`📌 ระยะชำระเบี้ยทั้ง 2 แบบ — FIX ชำระถึงอายุ 59 | P65 ชำระถึงอายุ 64`;
-  const phFIXend=`📌 P65 ชำระเบี้ยต่อเนื่อง | 💰 FIX เริ่มรับบำนาญ ${fmt(annuity)} บ./ปี`;
-  const phP65ret=`💰 P65 เริ่มรับเงินคืน | 💰 FIX รับบำนาญต่อเนื่อง`;
+  const phPay60 =`📌 ระยะชำระเบี้ยทั้ง 2 แบบ — FIX ชำระถึงอายุ 59 | P65 ชำระถึงอายุ 64`;
+  const phFIXrecv=`📌 P65 ชำระเบี้ยต่อเนื่อง | 💰 FIX เริ่มรับบำนาญ ${fmt(annuity)} บ./ปี`;
+  const phBoth  =`💰 P65 รับเงินคืนรายงวด | 💰 FIX รับบำนาญต่อเนื่อง (ถึงอายุ 85)`;
+  const phP65only=`💰 P65 รับเงินคืนรายงวดต่อเนื่อง | FIX สิ้นสุดสัญญาแล้ว (อายุเกิน 85 ปี)`;
 
   rows.forEach(r=>{
     let ph='';
     if(r.aeEnd<=60)ph=phPay60;
-    else if(r.aeEnd<=65)ph=phFIXend;
-    else ph=phP65ret;
+    else if(r.aeEnd<=65)ph=phFIXrecv;
+    else if(!r.fixEnded)ph=phBoth;
+    else ph=phP65only;
     if(ph!==lph){html+=`<tr class="hybrid-phase"><td colspan="16">${ph}</td></tr>`;lph=ph;}
 
     const isBE=r.yr===beHyb,isBET=r.yr===beTaxHyb;
@@ -750,8 +801,8 @@ function calcHybrid(){
       ?`<span style="color:var(--red)">${fmt(sa)}</span>`
       :r.p65RetAmt>0?fmt(r.p65RetAmt):(r.p65Cv>0?`<span style="font-size:10px;color:var(--purple)">${fmt(r.p65Cv)}</span>`:'—');
     // FIX บำนาญ / CV display
-    const fixAnnDisp=r.fixIsRecv?fmt(r.fixAnn):(r.fixCv>0?`<span style="font-size:10px;color:var(--purple)">${fmt(r.fixCv)}</span>`:'—');
-    const fixWdDisp=r.fixIsRecv?fmt(r.fixCumAnn):(r.fixWd>0?fmt(r.fixWd):'—');
+    const fixAnnDisp=r.fixEnded?'<span style="opacity:.35;font-size:10px">สิ้นสุดสัญญา</span>':(r.fixIsRecv?fmt(r.fixAnn):(r.fixCv>0?`<span style="font-size:10px;color:var(--purple)">${fmt(r.fixCv)}</span>`:'—'));
+    const fixWdDisp=(r.fixIsRecv||r.fixEnded)?fmt(r.fixCumAnn):(r.fixWd>0?fmt(r.fixWd):'—');
 
     html+=`<tr class="${rc}">
       <td class="c-idx">${r.yr}</td>
@@ -845,7 +896,8 @@ function calcP65(){
   const gTH=g==='male'?'ชาย':'หญิง';
   const annPrem=(sa/1000)*(P65_PREM[age]||0);
   const payYrs=65-age, totalYrs=99-age;
-  const TAX=[.10,.15,.20,.25,.30], TL=['10%','15%','20%','25%','30%'];
+  // อัตราภาษีจาก selector (แสดงเฉพาะที่เลือก — print จะตรงกับที่เลือก)
+  const {rates:TAX,labels:TL}=getSelectedRates('p65');
   const taxBase=Math.min(annPrem,100000);
   const cumTax=TAX.map(()=>0);
   const rows=[]; let cumPrem=0,cumRet=0;
@@ -886,7 +938,7 @@ function calcP65(){
       <th rowspan="2" style="min-width:80px">มูลค่าเวนคืน (CV)</th>
       <th rowspan="2" style="min-width:80px">ความคุ้มครองชีวิต</th>
       <th rowspan="2" style="min-width:86px">เงินถอน (CV+คืนสะสม)</th>
-      <th colspan="5" class="th-purple tax-col">เงินถอนรวมภาษีสะสม = CV+คืนสะสม+ภาษีสะสม</th>
+      <th colspan="${TAX.length}" class="th-purple tax-col">เงินถอนรวมภาษีสะสม = CV+คืนสะสม+ภาษีสะสม</th>
     </tr>
     <tr>${TL.map(l=>`<th class="th-purple tax-col" style="min-width:76px">รวมภาษี ${l}</th>`).join('')}</tr>`;
 
@@ -903,7 +955,7 @@ function calcP65(){
     else if(r.ae<=95)ph='💰 อายุครบ 91–95 ปี | เงินคืนรายงวด 24%';
     else if(r.ae<=98)ph='💰 อายุครบ 96–98 ปี | เงินคืนรายงวด 26%';
     else ph='⭐ ครบกำหนดสัญญา อายุ 99 ปี | รับเงินครบกำหนด 100%';
-    if(ph!==lph){html+=`<tr class="phase-lbl"><td colspan="15">${ph}</td></tr>`;lph=ph;}
+    if(ph!==lph){html+=`<tr class="phase-lbl"><td colspan="${10+TAX.length}">${ph}</td></tr>`;lph=ph;}
 
     const isMat=r.ae>=99,isBCV=r.yr===beCV,isBTax=beTax.includes(r.yr);
     let rc=isMat?'highlight-mat':'';
@@ -1138,7 +1190,8 @@ function calcFIX(){
   const payYrs  =60-age;                      // ชำระเบี้ยถึงอายุ 60
   const recvYrs =26;                          // รับบำนาญ 26 ครั้ง (อายุ 60-85)
   const totalYrs=payYrs+recvYrs;
-  const TAX=[.10,.15,.20,.25,.30], TL=['10%','15%','20%','25%','30%'];
+  // อัตราภาษีจาก selector (แสดงเฉพาะที่เลือก — print จะตรงกับที่เลือก)
+  const {rates:TAX,labels:TL}=getSelectedRates('fix');
   // สิทธิลดหย่อนภาษี Annuity FIX: 15% ของรายได้รวม แต่ไม่เกิน 200,000 บาท/ปี
   const taxBase=Math.min(income*0.15, 200000);
   const cumTax=TAX.map(()=>0);
@@ -1204,7 +1257,7 @@ function calcFIX(){
       <th rowspan="2" style="min-width:82px">CV / PV บำนาญคงเหลือ<br><small style="opacity:.7;font-weight:400">(ถอนได้ช่วงชำระเบี้ย)</small></th>
       <th rowspan="2" style="min-width:82px">ความคุ้มครองชีวิต<br><small style="opacity:.7;font-weight:400">ระยะรับบำนาญ=PV</small></th>
       <th rowspan="2" style="min-width:88px">เงินถอน<br><small style="opacity:.7;font-weight:400">(ได้เฉพาะช่วงชำระเบี้ย)</small></th>
-      <th colspan="5" class="th-blue tax-col">เงินถอนรวมภาษีสะสม | ช่วงรับบำนาญ = บำนาญสะสม+ภาษีสะสม</th>
+      <th colspan="${TAX.length}" class="th-blue tax-col">เงินถอนรวมภาษีสะสม | ช่วงรับบำนาญ = บำนาญสะสม+ภาษีสะสม</th>
     </tr>
     <tr>${TL.map(l=>`<th class="th-blue tax-col" style="min-width:76px">รวมภาษี ${l}</th>`).join('')}</tr>`;
 
@@ -1214,7 +1267,7 @@ function calcFIX(){
   let html='',lph='';
   rows.forEach(r=>{
     const ph=r.paying?phPay:phRecv;
-    if(ph!==lph){html+=`<tr class="phase-lbl"><td colspan="14">${ph}</td></tr>`;lph=ph;}
+    if(ph!==lph){html+=`<tr class="phase-lbl"><td colspan="${9+TAX.length}">${ph}</td></tr>`;lph=ph;}
 
     const isBCV=r.yr===beCV,isBTax=beTax.includes(r.yr);
     let rc=isBCV?'breakeven-cv':isBTax?'breakeven-tax':'';

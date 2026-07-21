@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ตารางผ่อนชำระแบบลดต้นลดดอก — ชำระเพิ่ม / ถอนออกระหว่างทาง</title>
+<title>ตารางผ่อนชำระ — ลดต้นลดดอก / อัตราคงที่ · เลือกจำนวนงวดได้</title>
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -54,13 +54,41 @@ button.ghost-wd:hover{background:var(--wd-soft)}
 .panel h2{font-size:1.05em;font-weight:700;margin-bottom:12px;color:var(--accent)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
 .field label{display:block;font-size:.82em;font-weight:600;color:var(--ink-soft);margin-bottom:4px}
-.field input{
+.field input[type=number]{
   width:100%;font-family:inherit;font-size:1em;font-weight:600;
   padding:8px 10px;border:1px solid var(--line);border-radius:8px;color:var(--ink);background:#fff;
 }
-.field input:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.field input[type=number]:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.field input[type=number]:disabled{background:#f2f4f0;color:#a9b3ad}
 .hint{font-size:.78em;color:var(--ink-soft);margin-top:10px}
 .hint b.ex{color:var(--extra)} .hint b.wd{color:var(--wd)}
+
+/* กลุ่มตัวเลือกโหมด */
+.mode-group{margin-bottom:14px}
+.mode-title{font-size:.85em;font-weight:700;color:var(--ink-soft);margin-bottom:6px}
+.mode-opts{display:flex;flex-wrap:wrap;gap:8px}
+.mode-opt{
+  display:flex;align-items:center;gap:7px;
+  border:1.5px solid var(--line);border-radius:10px;padding:8px 14px;cursor:pointer;
+  background:#fff;font-size:.9em;font-weight:600;user-select:none;
+}
+.mode-opt input{accent-color:var(--accent);width:16px;height:16px;cursor:pointer}
+.mode-opt.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+
+/* แผงเทียบอัตราดอกเบี้ย */
+.rate-compare{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-bottom:22px;
+}
+.rate-card{
+  border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff;
+}
+.rate-card.active{border-color:var(--accent);background:linear-gradient(180deg,#fff,var(--accent-soft));box-shadow:0 0 0 1px var(--accent)}
+.rate-card .rc-tag{font-size:.75em;font-weight:700;letter-spacing:.05em;color:var(--ink-soft);text-transform:uppercase}
+.rate-card.active .rc-tag{color:var(--accent)}
+.rate-card .rc-main{font-size:1.5em;font-weight:700;color:var(--accent)}
+.rate-card .rc-main small{font-size:.55em;color:var(--ink-soft);font-weight:600}
+.rate-card .rc-sub{font-size:.8em;color:var(--ink-soft)}
+.rate-card .rc-badge{display:inline-block;font-size:.7em;font-weight:700;background:var(--accent);color:#fff;border-radius:6px;padding:1px 8px;margin-left:6px;vertical-align:middle}
 
 .summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:14px}
 .stat{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:12px 16px}
@@ -113,8 +141,8 @@ footer{margin-top:26px;font-size:.78em;color:var(--ink-soft);border-top:1px soli
   @page{size:A4 landscape;margin:12mm 10mm}
   body{padding:0;background:#fff;font-size:10.5px}
   .toolbar,.panel .hint{display:none}
-  .panel,.stat,.table-card{border-color:#ccc;break-inside:avoid}
-  .summary,.compare,.wdinfo{break-inside:avoid}
+  .panel,.stat,.table-card,.rate-card{border-color:#ccc;break-inside:avoid}
+  .summary,.compare,.wdinfo,.rate-compare{break-inside:avoid}
   .table-card{overflow:visible} table{min-width:0}
   thead{display:table-header-group} tbody tr{break-inside:avoid}
   tbody td.cell-extra input,tbody td.cell-wd input[type=number]{border:none;background:transparent;padding:0;width:auto}
@@ -127,9 +155,9 @@ footer{margin-top:26px;font-size:.78em;color:var(--ink-soft);border-top:1px soli
 <div class="wrap">
 
 <header>
-  <div class="eyebrow">Payment Schedule · Reducing Balance · Extra Payment & Mid-term Withdrawal</div>
-  <h1>ตารางผ่อนชำระแบบลดต้นลดดอก</h1>
-  <div class="subtitle">ชำระงวดละ 2% ของยอดคงเหลือ · ดอกเบี้ย 15% ต่อปี · จำลองชำระเพิ่ม และถอนออกระหว่างทางได้รายงวด</div>
+  <div class="eyebrow">Payment Schedule · Reducing Balance / Flat Rate · Fixed Term Option</div>
+  <h1>ตารางผ่อนชำระเงินกู้</h1>
+  <div class="subtitle">เลือกได้: ดอกเบี้ยลดต้นลดดอก หรืออัตราคงที่ · ชำระตาม % ยอดคงเหลือ หรือกำหนดจำนวนงวด · จำลองชำระเพิ่มและถอนออกระหว่างทาง</div>
 </header>
 
 <div class="toolbar">
@@ -143,18 +171,43 @@ footer{margin-top:26px;font-size:.78em;color:var(--ink-soft);border-top:1px soli
 
 <div class="panel">
   <h2>เงื่อนไขการคำนวณ (ปรับค่าได้)</h2>
+
+  <div class="mode-group">
+    <div class="mode-title">① ประเภทดอกเบี้ย</div>
+    <div class="mode-opts">
+      <label class="mode-opt" id="optEff"><input type="radio" name="intMode" value="eff" checked onchange="onModeChange()"> ลดต้นลดดอก (% ต่อปี)</label>
+      <label class="mode-opt" id="optFlat"><input type="radio" name="intMode" value="flat" onchange="onModeChange()"> อัตราคงที่ / Flat (% ต่อเดือน)</label>
+    </div>
+  </div>
+
+  <div class="mode-group">
+    <div class="mode-title">② รูปแบบการชำระ</div>
+    <div class="mode-opts">
+      <label class="mode-opt" id="optPct"><input type="radio" name="payMode" value="pct" checked onchange="onModeChange()"> % ของยอดคงเหลือ + ขั้นต่ำ</label>
+      <label class="mode-opt" id="optTerm"><input type="radio" name="payMode" value="term" onchange="onModeChange()"> กำหนดจำนวนงวด (ค่างวดคงที่)</label>
+    </div>
+  </div>
+
   <div class="grid">
     <div class="field">
       <label>เงินต้น (บาท)</label>
       <input type="number" id="inPrincipal" value="25200" min="1" step="100" onchange="calc()">
     </div>
     <div class="field">
-      <label>อัตราชำระต่อเดือน (% ของยอดคงเหลือ)</label>
-      <input type="number" id="inPayPct" value="2" min="0.1" step="0.1" onchange="calc()">
+      <label>ดอกเบี้ยลดต้นลดดอก (% ต่อปี)</label>
+      <input type="number" id="inRateEff" value="15" min="0" step="0.25" onchange="calc()">
     </div>
     <div class="field">
-      <label>ดอกเบี้ย (% ต่อปี)</label>
-      <input type="number" id="inRate" value="15" min="0" step="0.25" onchange="calc()">
+      <label>ดอกเบี้ยคงที่ (% ต่อเดือน)</label>
+      <input type="number" id="inRateFlat" value="1.25" min="0" step="0.05" onchange="calc()">
+    </div>
+    <div class="field">
+      <label>จำนวนงวด (เดือน)</label>
+      <input type="number" id="inTerm" value="36" min="1" max="600" step="1" onchange="calc()">
+    </div>
+    <div class="field">
+      <label>อัตราชำระต่อเดือน (% ของยอดคงเหลือ)</label>
+      <input type="number" id="inPayPct" value="2" min="0.1" step="0.1" onchange="calc()">
     </div>
     <div class="field">
       <label>ยอดชำระขั้นต่ำ (บาท/งวด)</label>
@@ -162,10 +215,13 @@ footer{margin-top:26px;font-size:.78em;color:var(--ink-soft);border-top:1px soli
     </div>
   </div>
   <div class="hint">
-    <b class="ex">ชำระเพิ่ม ✎</b> : กรอกยอดโปะเพิ่มในงวดนั้น ระบบคำนวณงวดถัดไปใหม่ทันที — งวดที่ไม่กรอกชำระตามค่างวดปกติ (2% ของยอดคงเหลือ หรือขั้นต่ำ แล้วแต่ค่าใดสูงกว่า)<br>
-    <b class="wd">ถอนออกระหว่างทาง ✓</b> : ติ๊ก ✓ เพื่อเลือกถอนในงวดนั้น — ค่าเริ่มต้น = ยอดตัดเงินต้นของงวด (ยอดชำระ − ดอกเบี้ย) ทำให้ยอดคงเหลือกลับเท่าเดิม เหมาะสำหรับดู "ดอกเบี้ยล้วน" ของช่วงเวลาที่ต้องการ · แก้ตัวเลขได้หากต้องการถอนมากกว่าค่าเริ่มต้น (ยอดคงเหลือจะเพิ่มขึ้น) · ไม่ติ๊ก = ผ่อนปกติ
+    <b class="ex">ชำระเพิ่ม ✎</b> : กรอกยอดโปะเพิ่มในงวดนั้น ระบบคำนวณงวดถัดไปใหม่ทันที<br>
+    <b class="wd">ถอนออกระหว่างทาง ✓</b> : ติ๊กเพื่อถอนในงวดนั้น — ค่าเริ่มต้น = ยอดตัดเงินต้นของงวด (ยอดคงเหลือกลับเท่าเดิม เห็นดอกเบี้ยล้วนของช่วงที่เลือก) แก้ตัวเลขได้หากต้องการถอนมากกว่า<br>
+    หมายเหตุ: ช่องที่ไม่เกี่ยวกับโหมดที่เลือกจะถูกปิดอัตโนมัติ · โหมดอัตราคงที่ (Flat) คิดดอกเบี้ยจากเงินต้นตั้งต้นเท่ากันทุกงวดตามแนวปฏิบัติสินเชื่อเช่าซื้อ/ผ่อนสินค้า
   </div>
 </div>
+
+<div class="rate-compare" id="rateCompare"></div>
 
 <div class="alert" id="alertBox"></div>
 <div class="summary" id="summaryBox"></div>
@@ -193,17 +249,17 @@ footer{margin-top:26px;font-size:.78em;color:var(--ink-soft);border-top:1px soli
 </div>
 
 <footer>
-  วิธีคำนวณ: ดอกเบี้ยรายงวด = ยอดยกมา × (อัตราดอกเบี้ยต่อปี ÷ 12) · ค่างวดปกติ = ค่าที่มากกว่าระหว่าง (ยอดยกมา × อัตราชำระ) กับยอดขั้นต่ำ · ตัดเงินต้น = ชำระรวม − ดอกเบี้ย · ยอดคงเหลือ = ยอดยกมา − ตัดเงินต้น + ถอนออก · งวดปิดบัญชีชำระเท่ายอดคงเหลือบวกดอกเบี้ย (หากไม่มีการถอนในงวดนั้น)<br>
-  การถอนออกระหว่างทางจำลองลักษณะวงเงินสินเชื่อหมุนเวียน (Revolving) — เงื่อนไขจริง วงเงินสูงสุด และค่าธรรมเนียมขึ้นอยู่กับสัญญาของผู้ให้สินเชื่อแต่ละราย · ตารางนี้เป็นการประมาณการเพื่อการวางแผนเท่านั้น
+  วิธีคำนวณ — ลดต้นลดดอก: ดอกเบี้ยรายงวด = ยอดยกมา × (อัตราต่อปี ÷ 12) · อัตราคงที่ (Flat): ดอกเบี้ยรายงวด = เงินต้นตั้งต้น × อัตราต่อเดือน (เท่ากันทุกงวด) · โหมดกำหนดจำนวนงวด: ค่างวดลดต้นลดดอกคำนวณด้วยสูตร Annuity, ค่างวด Flat = (เงินต้น + ดอกเบี้ยรวม) ÷ จำนวนงวด · การเทียบอัตราทั้งสองแบบใช้การคำนวณอัตราผลตอบแทนภายใน (IRR) จากกระแสเงินสดจริง<br>
+  การถอนออกระหว่างทางจำลองลักษณะวงเงินหมุนเวียน · ในโหมด Flat การชำระเพิ่ม/ถอนเป็นการประมาณการ เงื่อนไขจริงขึ้นอยู่กับสัญญาของผู้ให้สินเชื่อ · ตารางนี้เป็นการประมาณการเพื่อการวางแผนเท่านั้น
 </footer>
 
 </div>
 
 <script>
 let fs = 15;
-let extras = {};        // {งวด: ยอดชำระเพิ่ม}
-let wdOn = {};          // {งวด: true} ติ๊กถอนในงวดนั้น
-let wdCustom = {};      // {งวด: ยอดถอนที่ผู้ใช้กำหนดเอง (ถ้าไม่กำหนด ใช้ค่า default = ตัดเงินต้นของงวด)}
+let extras = {};
+let wdOn = {};
+let wdCustom = {};
 
 function adjustFont(d){
   fs = Math.min(20, Math.max(11, fs + d));
@@ -214,33 +270,75 @@ const fmt = n => n.toLocaleString('th-TH',{minimumFractionDigits:2,maximumFracti
 function readParams(){
   return {
     P0: parseFloat(document.getElementById('inPrincipal').value) || 0,
+    intMode: document.querySelector('input[name=intMode]:checked').value,
+    effAnnual: (parseFloat(document.getElementById('inRateEff').value) || 0) / 100,
+    flatMonthly: (parseFloat(document.getElementById('inRateFlat').value) || 0) / 100,
+    payMode: document.querySelector('input[name=payMode]:checked').value,
+    termN: Math.max(1, Math.round(parseFloat(document.getElementById('inTerm').value) || 1)),
     payPct: (parseFloat(document.getElementById('inPayPct').value) || 0) / 100,
-    mRate: (parseFloat(document.getElementById('inRate').value) || 0) / 100 / 12,
     minPay: parseFloat(document.getElementById('inMinPay').value) || 0
   };
 }
 
-// useWhatIf = true → รวมชำระเพิ่ม + การถอน / false → เส้นฐานผ่อนปกติ
+function onModeChange(){
+  const p = readParams();
+  document.getElementById('inRateEff').disabled  = (p.intMode !== 'eff');
+  document.getElementById('inRateFlat').disabled = (p.intMode !== 'flat');
+  document.getElementById('inTerm').disabled     = (p.payMode !== 'term');
+  document.getElementById('inPayPct').disabled   = (p.payMode !== 'pct');
+  document.getElementById('inMinPay').disabled   = (p.payMode !== 'pct');
+  document.getElementById('optEff').className  = 'mode-opt' + (p.intMode==='eff' ? ' on' : '');
+  document.getElementById('optFlat').className = 'mode-opt' + (p.intMode==='flat'? ' on' : '');
+  document.getElementById('optPct').className  = 'mode-opt' + (p.payMode==='pct' ? ' on' : '');
+  document.getElementById('optTerm').className = 'mode-opt' + (p.payMode==='term'? ' on' : '');
+  calc();
+}
+
+// ค่างวดคงที่แบบลดต้นลดดอก (Annuity)
+function annuityPMT(P, rMonthly, N){
+  if (rMonthly <= 0) return P / N;
+  return P * rMonthly / (1 - Math.pow(1 + rMonthly, -N));
+}
+// หา r ต่อเดือน (ลดต้นลดดอก) ที่ทำให้ค่างวด PMT × N ผ่อน P หมดพอดี — ด้วย bisection
+function solveMonthlyRate(P, PMT, N){
+  if (PMT * N <= P + 0.01) return 0;
+  let lo = 1e-9, hi = 1.0;
+  for (let i = 0; i < 200; i++){
+    const mid = (lo + hi) / 2;
+    const pv = PMT * (1 - Math.pow(1 + mid, -N)) / mid;
+    if (pv > P) lo = mid; else hi = mid;
+  }
+  return (lo + hi) / 2;
+}
+
 function simulate(p, useWhatIf){
   let bal = p.P0, m = 0, totInt = 0, totPay = 0, totExtra = 0, totWd = 0, totBase = 0;
   const MAX = 600, rows = [];
   let stuck = false;
+
+  // ค่างวดคงที่สำหรับโหมดกำหนดจำนวนงวด (คำนวณครั้งเดียวจากเงื่อนไขตั้งต้น)
+  let fixedPMT = 0;
+  if (p.payMode === 'term'){
+    fixedPMT = (p.intMode === 'flat')
+      ? (p.P0 * (1 + p.flatMonthly * p.termN)) / p.termN
+      : annuityPMT(p.P0, p.effAnnual / 12, p.termN);
+  }
+
   while (bal > 0.005 && m < MAX){
     m++;
     const open = bal;
-    const interest = open * p.mRate;
-    let basePay = Math.max(open * p.payPct, p.minPay);
+    const interest = (p.intMode === 'flat') ? p.P0 * p.flatMonthly : open * (p.effAnnual / 12);
+    let basePay = (p.payMode === 'term') ? fixedPMT : Math.max(open * p.payPct, p.minPay);
     let extra = useWhatIf ? (extras[m] || 0) : 0;
     let pay = basePay + extra;
     const willWd = useWhatIf && wdOn[m];
-    if (!willWd && pay >= open + interest){        // งวดปิดบัญชี (เฉพาะกรณีไม่มีการถอนในงวดนี้)
+    if (!willWd && pay >= open + interest){
       pay = open + interest;
       if (extra > 0) extra = Math.max(0, pay - basePay);
       basePay = pay - extra;
     }
     const principal = pay - interest;
     if (principal <= 0.005 && !willWd){ stuck = true; m--; break; }
-    // ถอนออกระหว่างทาง: default = ตัดเงินต้นของงวดนี้
     let wd = 0;
     if (willWd){
       wd = (wdCustom[m] !== undefined) ? wdCustom[m] : Math.max(principal, 0);
@@ -252,13 +350,49 @@ function simulate(p, useWhatIf){
                wdDefault: Math.max(principal,0), bal: Math.max(bal,0)});
     if (bal <= 0.005) break;
   }
-  return {rows, months: m, totInt, totPay, totExtra, totWd, totBase, bal, stuck};
+  return {rows, months: m, totInt, totPay, totExtra, totWd, totBase, bal, stuck, fixedPMT};
+}
+
+// แผงเทียบอัตราดอกเบี้ยทั้งสองแบบ
+function renderRateCompare(p, base){
+  const box = document.getElementById('rateCompare');
+  // จำนวนงวดอ้างอิงสำหรับการเทียบ: โหมดกำหนดงวดใช้ N ที่เลือก, โหมด % ใช้จำนวนงวดจริงจากการจำลอง
+  const N = (p.payMode === 'term') ? p.termN : Math.max(base.months, 1);
+  let effA, flatM, activeIsEff = (p.intMode === 'eff');
+  if (activeIsEff){
+    effA = p.effAnnual;
+    const PMT = annuityPMT(p.P0, effA/12, N);
+    flatM = (PMT * N - p.P0) / p.P0 / N;              // flat เทียบเท่า
+  } else {
+    flatM = p.flatMonthly;
+    const PMT = (p.P0 * (1 + flatM * N)) / N;
+    effA = solveMonthlyRate(p.P0, PMT, N) * 12;       // effective เทียบเท่าจาก IRR
+  }
+  const ratio = flatM > 0 ? (effA / (flatM * 12)) : 0;
+  box.innerHTML = `
+    <div class="rate-card ${activeIsEff ? 'active' : ''}">
+      <div class="rc-tag">ลดต้นลดดอก (Effective)${activeIsEff ? '<span class="rc-badge">ใช้คำนวณ</span>' : ''}</div>
+      <div class="rc-main">${(effA*100).toFixed(2)}<small> % ต่อปี</small></div>
+      <div class="rc-sub">≈ ${(effA/12*100).toFixed(3)} % ต่อเดือน · คิดจากยอดคงเหลือจริง${activeIsEff ? '' : ' · <b>อัตราเทียบเท่าที่แท้จริงของ Flat ที่เลือก</b>'}</div>
+    </div>
+    <div class="rate-card ${activeIsEff ? '' : 'active'}">
+      <div class="rc-tag">อัตราคงที่ (Flat)${activeIsEff ? '' : '<span class="rc-badge">ใช้คำนวณ</span>'}</div>
+      <div class="rc-main">${(flatM*100).toFixed(3)}<small> % ต่อเดือน</small></div>
+      <div class="rc-sub">= ${(flatM*12*100).toFixed(2)} % ต่อปี · คิดจากเงินต้นตั้งต้นทุกงวด${activeIsEff ? ' · <b>Flat เทียบเท่าของอัตราที่เลือก</b>' : ''}</div>
+    </div>
+    <div class="rate-card">
+      <div class="rc-tag">ข้อเท็จจริงที่ควรรู้</div>
+      <div class="rc-main">×${ratio ? ratio.toFixed(2) : '—'}</div>
+      <div class="rc-sub">ดอกเบี้ย Flat เมื่อแปลงเป็นลดต้นลดดอกจะสูงกว่าตัวเลขที่เห็นประมาณเท่านี้ (เทียบที่ ${N} งวด) — ใช้เปรียบเทียบข้อเสนอสินเชื่อต่างประเภทอย่างเป็นธรรม</div>
+    </div>`;
 }
 
 function calc(){
   const p = readParams();
   const base = simulate(p, false);
   const r = simulate(p, true);
+
+  renderRateCompare(p, base);
 
   const tbody = document.getElementById('tbody');
   const tfoot = document.getElementById('tfoot');
@@ -295,16 +429,19 @@ function calc(){
   alertBox.className = 'alert'; alertBox.textContent = '';
   if (r.stuck){
     alertBox.className = 'alert show';
-    alertBox.textContent = '⚠ ด้วยเงื่อนไขนี้ ยอดชำระต่อเดือนไม่เพียงพอครอบคลุมดอกเบี้ย หนี้จะไม่มีวันปิดได้ — กรุณาเพิ่มอัตราชำระ ยอดขั้นต่ำ หรือยอดชำระเพิ่ม';
+    alertBox.textContent = '⚠ ด้วยเงื่อนไขนี้ ยอดชำระต่อเดือนไม่เพียงพอครอบคลุมดอกเบี้ย หนี้จะไม่มีวันปิดได้ — กรุณาปรับเงื่อนไขการชำระ';
   } else if (r.months >= 600 && r.bal > 0.005){
     alertBox.className = 'alert show';
-    alertBox.textContent = `⚠ คำนวณถึง 600 งวดแล้วยังเหลือยอด ${fmt(r.bal)} บาท — หากมีการถอนต่อเนื่องทุกงวด ยอดหนี้จะไม่ลดลง (เห็นเฉพาะภาระดอกเบี้ย) กรุณายกเลิกการถอนบางงวด หรือเพิ่มยอดชำระ`;
+    alertBox.textContent = `⚠ คำนวณถึง 600 งวดแล้วยังเหลือยอด ${fmt(r.bal)} บาท — หากมีการถอนต่อเนื่องทุกงวด ยอดหนี้จะไม่ลดลง กรุณายกเลิกการถอนบางงวดหรือเพิ่มยอดชำระ`;
   }
 
   const years = Math.floor(r.months/12), months = r.months%12;
   const closed = !r.stuck && r.bal <= 0.005;
+  const modeLabel = (p.payMode==='term')
+    ? `ค่างวดคงที่ ${fmt(r.fixedPMT)} บ.`
+    : `${(p.payPct*100).toFixed(1)}% ของยอดคงเหลือ`;
   summaryBox.innerHTML = `
-    <div class="stat neutral"><div class="label">เงินต้น</div><div class="value">${fmt(p.P0)}</div><div class="sub">บาท</div></div>
+    <div class="stat neutral"><div class="label">เงินต้น</div><div class="value">${fmt(p.P0)}</div><div class="sub">${modeLabel}</div></div>
     <div class="stat"><div class="label">${closed ? 'ระยะเวลาปิดหนี้' : 'จำนวนงวดที่แสดง'}</div><div class="value">${r.months} งวด</div><div class="sub">≈ ${years} ปี ${months} เดือน${closed ? '' : ' · ยังไม่ปิด'}</div></div>
     <div class="stat"><div class="label">ดอกเบี้ยรวม</div><div class="value">${fmt(r.totInt)}</div><div class="sub">คิดเป็น ${p.P0>0?(r.totInt/p.P0*100).toFixed(1):0}% ของเงินต้น</div></div>
     <div class="stat extra"><div class="label">ชำระเพิ่มรวม</div><div class="value">${fmt(r.totExtra)}</div><div class="sub">บาท</div></div>
@@ -316,17 +453,16 @@ function calc(){
     const saveInt = base.totInt - r.totInt;
     const saveMonths = base.months - r.months;
     compareBox.className = 'compare show';
-    compareBox.innerHTML = `📊 เปรียบเทียบกับการจ่ายตามปกติ (ไม่ชำระเพิ่ม): ปิดหนี้เร็วขึ้น <u>${saveMonths} งวด</u> (จาก ${base.months} → ${r.months} งวด) และประหยัดดอกเบี้ย <u>${fmt(saveInt)} บาท</u> (จาก ${fmt(base.totInt)} → ${fmt(r.totInt)} บาท)`;
+    compareBox.innerHTML = `📊 เปรียบเทียบกับการจ่ายตามปกติ (ไม่ชำระเพิ่ม): ปิดหนี้เร็วขึ้น <u>${saveMonths} งวด</u> (จาก ${base.months} → ${r.months} งวด) และประหยัดดอกเบี้ย <u>${fmt(saveInt)} บาท</u>${p.intMode==='flat' ? ' · หมายเหตุ: สินเชื่อ Flat จริงบางสัญญาไม่ลดดอกเบี้ยเมื่อโปะ ควรตรวจสอบเงื่อนไข' : ''}`;
   }
 
-  // สรุปช่วงที่ถอน: ดอกเบี้ยรวมเฉพาะงวดที่ติ๊กถอน เพื่อดูต้นทุนดอกเบี้ยของช่วงเวลานั้น
   wdInfoBox.className = 'wdinfo';
   const wdMonths = r.rows.filter(x => x.willWd);
   if (wdMonths.length){
     const wdInt = wdMonths.reduce((s,x) => s + x.interest, 0);
     const first = wdMonths[0].m, last = wdMonths[wdMonths.length-1].m;
     wdInfoBox.className = 'wdinfo show';
-    wdInfoBox.innerHTML = `💡 ช่วงที่เลือกถอน (งวดที่ ${first}–${last} รวม ${wdMonths.length} งวด): ดอกเบี้ยเฉพาะช่วงนี้ = <u>${fmt(wdInt)} บาท</u> · ถอนออกรวม ${fmt(r.totWd)} บาท — หากถอนเท่ายอดตัดเงินต้นทุกงวด ยอดคงเหลือจะคงที่ และตัวเลขดอกเบี้ยข้างต้นคือ "ต้นทุนการถือวงเงิน" ของช่วงเวลานี้โดยตรง`;
+    wdInfoBox.innerHTML = `💡 ช่วงที่เลือกถอน (งวดที่ ${first}–${last} รวม ${wdMonths.length} งวด): ดอกเบี้ยเฉพาะช่วงนี้ = <u>${fmt(wdInt)} บาท</u> · ถอนออกรวม ${fmt(r.totWd)} บาท — หากถอนเท่ายอดตัดเงินต้นทุกงวด ยอดคงเหลือจะคงที่ และตัวเลขนี้คือ "ต้นทุนการถือวงเงิน" ของช่วงเวลาดังกล่าวโดยตรง`;
   }
 
   tfoot.innerHTML = `<tr><td colspan="2">รวมทั้งสิ้น</td><td>${fmt(r.totInt)}</td><td>${fmt(r.totBase)}</td><td>${fmt(r.totExtra)}</td><td>${fmt(r.totPay)}</td><td>${fmt(r.totPay - r.totInt)}</td><td>${fmt(r.totWd)}</td><td>—</td></tr>`;
@@ -348,14 +484,14 @@ function setWd(el){
   const m = parseInt(el.dataset.m, 10);
   if (!wdOn[m]) return;
   const v = parseFloat(el.value);
-  if (isNaN(v) || v < 0) delete wdCustom[m];   // กลับไปใช้ค่า default
+  if (isNaN(v) || v < 0) delete wdCustom[m];
   else wdCustom[m] = v;
   calc();
 }
 function clearExtras(){ extras = {}; calc(); }
 function clearWithdraws(){ wdOn = {}; wdCustom = {}; calc(); }
 
-calc();
+onModeChange();
 </script>
 </body>
 </html>

@@ -567,6 +567,84 @@ body{font-size:var(--user-fs)}
 .prod .pd-segment .sg-name{font-size:calc(var(--user-fs) * 1.0625);font-weight:700;color:var(--pd-navy);margin-bottom:6px;line-height:1.3}
 .prod .pd-segment .sg-desc{font-size:calc(var(--user-fs) * 0.8125);color:#5F6373;line-height:1.55}
 
+/* AIAIMT credentials */
+.prod .pd-cred-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:26px}
+.prod .pd-cred{background:linear-gradient(180deg,#fff,#FEFCF6);border:1px solid var(--pd-line);border-top:3px solid var(--pd-gold);border-radius:8px;padding:22px 20px;text-align:center;transition:.25s}
+.prod .pd-cred:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(11,31,58,.08)}
+.prod .pd-cred .cr-label{font-size:calc(var(--user-fs) * 0.6875);letter-spacing:1.5px;color:var(--pd-gold);font-weight:600;text-transform:uppercase;margin-bottom:6px}
+.prod .pd-cred .cr-value{font-family:'Cormorant Garamond',serif;font-size:calc(var(--user-fs) * 2.375);font-weight:700;color:var(--pd-navy);line-height:1.05}
+.prod .pd-cred .cr-value small{font-size:calc(var(--user-fs) * 0.75);color:var(--pd-gold);font-family:'IBM Plex Sans Thai',sans-serif;font-weight:500;margin-left:3px}
+.prod .pd-cred .cr-desc{font-size:calc(var(--user-fs) * 0.8125);color:#5F6373;margin-top:8px;line-height:1.5}
+
+/* AIAIMT intro card - dark accent */
+.prod .pd-aiaimt-intro{background:linear-gradient(135deg,var(--pd-navy) 0%,var(--pd-navy-2, #12294A) 100%);color:#fff;border-radius:10px;padding:28px 32px;margin-bottom:24px;border-left:4px solid var(--pd-gold);position:relative;overflow:hidden}
+.prod .pd-aiaimt-intro::after{content:'';position:absolute;right:-40px;top:-40px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(212,168,103,.2),transparent 70%)}
+.prod .pd-aiaimt-intro .ai-tag{font-family:'Cormorant Garamond',serif;font-size:calc(var(--user-fs) * 0.8125);letter-spacing:3px;color:var(--pd-gold-2);text-transform:uppercase;font-weight:600;margin-bottom:8px;display:inline-block;padding-bottom:5px;border-bottom:1px solid var(--pd-gold-2)}
+.prod .pd-aiaimt-intro h4{font-family:'Cormorant Garamond',serif;font-size:calc(var(--user-fs) * 1.75);color:#fff;margin:6px 0 12px;font-weight:600}
+.prod .pd-aiaimt-intro p{color:#D6DBE6;font-size:calc(var(--user-fs) * 0.9375);line-height:1.7;margin-bottom:10px;position:relative;z-index:1}
+
+/* 70/30 Allocation visualization */
+.prod .pd-alloc-block{background:#fff;border:1px solid var(--pd-line);border-radius:8px;padding:28px 32px;margin-bottom:24px}
+.prod .pd-alloc-header{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:14px;margin-bottom:20px}
+.prod .pd-alloc-title{font-family:'Cormorant Garamond',serif;font-size:calc(var(--user-fs) * 1.5);color:var(--pd-navy);font-weight:600}
+.prod .pd-alloc-sub{font-size:calc(var(--user-fs) * 0.8125);color:#6B7280}
+.prod .pd-alloc-bar{display:flex;height:44px;border-radius:6px;overflow:hidden;box-shadow:0 2px 8px rgba(11,31,58,.08);margin-bottom:6px}
+.prod .pd-alloc-seg{display:flex;align-items:center;justify-content:center;font-size:calc(var(--user-fs) * 0.8125);font-weight:700;color:#fff;transition:.2s;position:relative}
+.prod .pd-alloc-seg:hover{filter:brightness(1.08)}
+.prod .pd-alloc-seg.fi-local{background:linear-gradient(135deg,#1E4A82,#2C6BAA)}
+.prod .pd-alloc-seg.fi-global{background:linear-gradient(135deg,#4A7BB0,#6AA0D8)}
+.prod .pd-alloc-seg.eq-local{background:linear-gradient(135deg,#B8894A,#D4A867)}
+.prod .pd-alloc-seg.eq-global{background:linear-gradient(135deg,#8B1E2E,#A83950)}
+.prod .pd-alloc-seg.private{background:linear-gradient(135deg,#6B3FA0,#8956C0)}
+.prod .pd-alloc-labels{display:flex;justify-content:space-between;font-size:calc(var(--user-fs) * 0.75);color:var(--pd-navy);font-weight:600;padding:8px 0 16px}
+.prod .pd-alloc-labels .fi-total{color:#2C6BAA}
+.prod .pd-alloc-labels .ga-total{color:var(--pd-accent)}
+
+.prod .pd-alloc-detail{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:14px}
+.prod .pd-asset{background:#FEFCF6;border:1px solid var(--pd-line);border-radius:8px;padding:16px 18px;position:relative;transition:.2s}
+.prod .pd-asset:hover{border-color:var(--pd-gold);box-shadow:0 6px 16px rgba(11,31,58,.06)}
+.prod .pd-asset::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:8px 0 0 8px}
+.prod .pd-asset.fi-local::before{background:#1E4A82}
+.prod .pd-asset.fi-global::before{background:#4A7BB0}
+.prod .pd-asset.eq-local::before{background:#B8894A}
+.prod .pd-asset.eq-global::before{background:#8B1E2E}
+.prod .pd-asset.private::before{background:#6B3FA0}
+.prod .pd-asset .as-pct{font-family:'Cormorant Garamond',serif;font-size:calc(var(--user-fs) * 2);font-weight:700;line-height:1;margin-bottom:4px}
+.prod .pd-asset.fi-local .as-pct{color:#1E4A82}
+.prod .pd-asset.fi-global .as-pct{color:#4A7BB0}
+.prod .pd-asset.eq-local .as-pct{color:#B8894A}
+.prod .pd-asset.eq-global .as-pct{color:#8B1E2E}
+.prod .pd-asset.private .as-pct{color:#6B3FA0}
+.prod .pd-asset .as-name{font-size:calc(var(--user-fs) * 0.9375);font-weight:700;color:var(--pd-navy);margin-bottom:4px;line-height:1.3}
+.prod .pd-asset .as-name .en{font-size:calc(var(--user-fs) * 0.75);color:#6B7280;font-weight:500;letter-spacing:.5px;display:block;margin-top:2px}
+.prod .pd-asset .as-desc{font-size:calc(var(--user-fs) * 0.78);color:#5F6373;line-height:1.55;margin-top:6px}
+
+/* Historical performance */
+.prod .pd-perf{background:linear-gradient(135deg,#FEFCF6 0%,var(--pd-cream) 100%);border:1px solid var(--pd-line);border-radius:10px;padding:28px 32px;margin-bottom:24px;display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:center}
+.prod .pd-perf-hero{text-align:center;padding:12px 0}
+.prod .pd-perf-hero .p-tag{font-size:calc(var(--user-fs) * 0.75);letter-spacing:2px;color:var(--pd-gold);font-weight:600;text-transform:uppercase;margin-bottom:6px}
+.prod .pd-perf-hero .p-value{font-family:'Cormorant Garamond',serif;font-size:calc(var(--user-fs) * 5);font-weight:700;color:var(--pd-navy);line-height:1;margin:4px 0}
+.prod .pd-perf-hero .p-value small{font-size:calc(var(--user-fs) * 1.25);color:var(--pd-gold);font-family:'IBM Plex Sans Thai',sans-serif;font-weight:500;margin-left:4px}
+.prod .pd-perf-hero .p-sub{font-size:calc(var(--user-fs) * 0.875);color:#3D4452;margin-top:6px}
+.prod .pd-perf-detail h5{font-family:'Cormorant Garamond',serif;font-size:calc(var(--user-fs) * 1.25);color:var(--pd-navy);margin:0 0 12px;font-weight:600}
+.prod .pd-perf-detail p{font-size:calc(var(--user-fs) * 0.875);color:#3D4452;line-height:1.65;margin-bottom:10px}
+.prod .pd-perf-detail .p-note{font-size:calc(var(--user-fs) * 0.75);color:#6B7280;font-style:italic;padding-top:10px;border-top:1px dashed var(--pd-line);margin-top:8px}
+
+/* Reference indices */
+.prod .pd-index-block{background:#fff;border:1px solid var(--pd-line);border-radius:8px;padding:26px 30px;margin-bottom:24px}
+.prod .pd-index-block h4{font-size:calc(var(--user-fs) * 1.0625);color:var(--pd-navy);margin:0 0 6px}
+.prod .pd-index-sub{font-size:calc(var(--user-fs) * 0.8125);color:#6B7280;margin-bottom:20px}
+.prod .pd-index-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.prod .pd-index-col{background:#FEFCF6;border:1px solid var(--pd-line);border-radius:8px;padding:18px 20px;border-top:3px solid var(--pd-gold)}
+.prod .pd-index-col.growth{border-top-color:var(--pd-accent)}
+.prod .pd-index-col-head{display:flex;align-items:baseline;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--pd-line)}
+.prod .pd-index-col-head .col-pct{font-family:'Cormorant Garamond',serif;font-size:calc(var(--user-fs) * 1.75);color:var(--pd-navy);font-weight:700;line-height:1}
+.prod .pd-index-col.growth .col-pct{color:var(--pd-accent)}
+.prod .pd-index-col-head .col-name{font-size:calc(var(--user-fs) * 0.9375);color:var(--pd-navy);font-weight:600}
+.prod .pd-index-list{list-style:none;padding:0;margin:0}
+.prod .pd-index-list li{font-size:calc(var(--user-fs) * 0.8125);color:#3D4452;padding:6px 0 6px 18px;position:relative;line-height:1.5}
+.prod .pd-index-list li::before{content:'▸';position:absolute;left:0;top:6px;color:var(--pd-gold);font-size:calc(var(--user-fs) * 0.75)}
+
 /* PRINT */
 @media print{
   @page{size:A4;margin:15mm 12mm}
@@ -642,6 +720,11 @@ body{font-size:var(--user-fs)}
   .print-hint{display:none}
   .sv .alloc-item{grid-template-columns:130px 1fr 55px 24px;gap:6px}
   .sv .alloc-item .ai-name{font-size:12.5px}
+  .prod .pd-perf{grid-template-columns:1fr;gap:16px}
+  .prod .pd-index-grid{grid-template-columns:1fr}
+  .prod .pd-alloc-seg{font-size:11px}
+  .prod .pd-alloc-seg.eq-local{font-size:0}
+  .prod .pd-alloc-labels{flex-direction:column;gap:4px;text-align:center}
 }
 </style>
 </head>
@@ -1634,8 +1717,139 @@ body{font-size:var(--user-fs)}
     </div>
   </div>
 
-  <!-- Section 4: 3 Investment Scenarios -->
-  <h3 class="pd-section-title"><span class="num">04</span>3 สถานการณ์ตัวอย่างของผลตอบแทน</h3>
+  <!-- Section 4 (NEW): AIAIMT Portfolio Management -->
+  <h3 class="pd-section-title"><span class="num">04</span>AIAIMT · ผู้บริหารพอร์ตการลงทุน 70/30</h3>
+
+  <div class="pd-aiaimt-intro">
+    <div class="ai-tag">AIA Investment Management Thailand</div>
+    <h4>ทีมมืออาชีพที่บริหารเงินให้ Participating Fund</h4>
+    <p>เงินปันผลของ AIA Lifetime Income 9/99 (Par) มาจากผลประกอบการของ Participating Fund ที่บริหารจัดการโดย <b style="color:var(--pd-gold-2)">บลจ. เอไอเอ (ประเทศไทย) จำกัด · AIAIMT</b> — บริษัทหลักทรัพย์จัดการกองทุนในเครือ AIA ที่ใช้ทีมงานเดียวกันกับที่บริหารเงินให้กลุ่มบริษัทเอไอเอทั่วโลก · การออกแบบพอร์ตมุ่งเน้นผลตอบแทน<b style="color:var(--pd-gold-2)">ระยะยาวอย่างยั่งยืน</b>ให้สอดคล้องกับวัตถุประสงค์ของแผนประกันและวัตถุประสงค์ทางธุรกิจของบริษัท</p>
+  </div>
+
+  <!-- AIAIMT Credentials -->
+  <div class="pd-cred-grid">
+    <div class="pd-cred">
+      <div class="cr-label">AUM</div>
+      <div class="cr-value">1<small>ล้านล้านบาท</small></div>
+      <div class="cr-desc">สินทรัพย์ภายใต้การบริหาร (Assets Under Management)</div>
+    </div>
+    <div class="pd-cred">
+      <div class="cr-label">Market Rank</div>
+      <div class="cr-value">#4</div>
+      <div class="cr-desc">บลจ. ขนาดใหญ่อันดับ 4 ของประเทศไทย</div>
+    </div>
+    <div class="pd-cred">
+      <div class="cr-label">Team Experience</div>
+      <div class="cr-value">18<small>ปี+</small></div>
+      <div class="cr-desc">ประสบการณ์เฉลี่ยของทีมผู้จัดการกองทุน</div>
+    </div>
+    <div class="pd-cred">
+      <div class="cr-label">Track Record</div>
+      <div class="cr-value">10<small>ปี</small></div>
+      <div class="cr-desc">ผลตอบแทนย้อนหลังจากดัชนีอ้างอิง 2016 - ก.ย. 2025</div>
+    </div>
+  </div>
+
+  <!-- 70/30 Allocation Detail -->
+  <h4 style="font-size:calc(var(--user-fs) * 1.25);color:var(--pd-navy);margin:26px 0 12px;font-weight:600">🎯 เป้าหมายการจัดสรรสินทรัพย์เชิงกลยุทธ์ 70/30</h4>
+  <p style="font-size:calc(var(--user-fs) * 0.9375);color:#3D4452;line-height:1.7;max-width:820px;margin-bottom:18px">AIAIMT จัดสรรพอร์ตของ Participating Fund เป็น <b>ตราสารหนี้ 70%</b> (Fixed Income) เพื่อสร้างรายได้สม่ำเสมอและลดความผันผวน + <b>สินทรัพย์เชิงรุก 30%</b> (Growth Assets) เพื่อเพิ่มโอกาสรับผลตอบแทนในระยะยาว รายละเอียดการกระจายในแต่ละสินทรัพย์เป็นดังนี้</p>
+
+  <div class="pd-alloc-block">
+    <div class="pd-alloc-header">
+      <div class="pd-alloc-title">โครงสร้างพอร์ตแบบ Strategic Asset Allocation</div>
+      <div class="pd-alloc-sub">แบ่งเป็น 5 หมวดสินทรัพย์ · รวม 100%</div>
+    </div>
+
+    <div class="pd-alloc-bar" title="Fixed Income Local 45% + Global 25% + Equity Local 5% + Global 10% + Private 15%">
+      <div class="pd-alloc-seg fi-local" style="flex:45">45% Local Fixed Income</div>
+      <div class="pd-alloc-seg fi-global" style="flex:25">25% Global Fixed Income</div>
+      <div class="pd-alloc-seg eq-local" style="flex:5">5%</div>
+      <div class="pd-alloc-seg eq-global" style="flex:10">10% Global Equity</div>
+      <div class="pd-alloc-seg private" style="flex:15">15% Private</div>
+    </div>
+    <div class="pd-alloc-labels">
+      <span class="fi-total">◀ ตราสารหนี้ 70% (Fixed Income) ▶</span>
+      <span class="ga-total">◀ สินทรัพย์เชิงรุก 30% (Growth Assets) ▶</span>
+    </div>
+
+    <div class="pd-alloc-detail">
+      <div class="pd-asset fi-local">
+        <div class="as-pct">45%</div>
+        <div class="as-name">ตราสารหนี้ในประเทศ<span class="en">Local Fixed Income</span></div>
+        <div class="as-desc">พันธบัตรรัฐบาลไทย · หุ้นกู้เอกชนคุณภาพสูง · สร้างรายได้สม่ำเสมอในสกุลเงินบาท · ความผันผวนต่ำ</div>
+      </div>
+      <div class="pd-asset fi-global">
+        <div class="as-pct">25%</div>
+        <div class="as-name">ตราสารหนี้ต่างประเทศ<span class="en">Global Fixed Income</span></div>
+        <div class="as-desc">พันธบัตรและหุ้นกู้ต่างประเทศ · กระจายความเสี่ยงทางภูมิศาสตร์ · มีความเสี่ยงจากอัตราแลกเปลี่ยน</div>
+      </div>
+      <div class="pd-asset eq-local">
+        <div class="as-pct">5%</div>
+        <div class="as-name">ตราสารทุนในประเทศ<span class="en">Local Equity</span></div>
+        <div class="as-desc">หุ้นและกองทุนรวมของบริษัทจดทะเบียนในตลาดหลักทรัพย์ไทย · สะท้อนการเติบโตของเศรษฐกิจไทย</div>
+      </div>
+      <div class="pd-asset eq-global">
+        <div class="as-pct">10%</div>
+        <div class="as-name">ตราสารทุนต่างประเทศ<span class="en">Global Equity</span></div>
+        <div class="as-desc">หุ้นในตลาดพัฒนาแล้วและตลาดเกิดใหม่ทั่วโลก · เปิดรับโอกาสการเติบโตของเศรษฐกิจโลก</div>
+      </div>
+      <div class="pd-asset private">
+        <div class="as-pct">15%</div>
+        <div class="as-name">สินทรัพย์นอกตลาด<span class="en">Private Assets</span></div>
+        <div class="as-desc">อสังหาริมทรัพย์ · Private Equity Fund · Private Credit Fund · สภาพคล่องต่ำ ลงทุนระยะยาว · โอกาสให้ผลตอบแทนเพิ่มจากการลงทุนระยะยาว</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Historical Performance -->
+  <div class="pd-perf">
+    <div class="pd-perf-hero">
+      <div class="p-tag">Historical Return · 10 Years</div>
+      <div class="p-value">5.5<small>%</small></div>
+      <div class="p-sub">ผลตอบแทนเฉลี่ยย้อนหลังต่อปี</div>
+    </div>
+    <div class="pd-perf-detail">
+      <h5>ผลตอบแทนย้อนหลังจากดัชนีอ้างอิง</h5>
+      <p><b>ระยะเวลา:</b> ประมาณ 10 ปี (2016 - กันยายน 2025) · <b>โครงสร้างพอร์ต:</b> Strategic Asset Allocation 70/30</p>
+      <p>ตัวเลข <b style="color:var(--pd-navy)">5.5% ต่อปี</b> คำนวณจากดัชนีอ้างอิงที่พอร์ตใช้เป็น Benchmark ในการบริหาร ไม่ใช่ผลตอบแทนที่รับประกัน หรือผลตอบแทนที่ AIAIMT ทำได้จริง เป็นเพียงข้อมูลอ้างอิงเพื่อประเมินศักยภาพของโครงสร้างพอร์ตแบบ 70/30 ในระยะยาว</p>
+      <div class="p-note">⚠ ผลตอบแทนเป็นในรูปสกุลเงินบาท โดยไม่มีการป้องกันความเสี่ยงอัตราแลกเปลี่ยนเต็มจำนวน และผลตอบแทนตราสารหนี้คำนวณจากยิลด์ที่ถือจนครบกำหนด · ผลตอบแทนในอดีตมิได้เป็นเครื่องยืนยันผลตอบแทนในอนาคต</div>
+    </div>
+  </div>
+
+  <!-- Reference Indices -->
+  <div class="pd-index-block">
+    <h4>📊 ดัชนีอ้างอิงที่ใช้เป็น Benchmark</h4>
+    <div class="pd-index-sub">พอร์ต 70/30 ใช้ดัชนีทั้งหมด 8 ตัว (4 fixed income + 4 growth) เพื่อวัดผลการดำเนินงานของแต่ละหมวดสินทรัพย์</div>
+    <div class="pd-index-grid">
+      <div class="pd-index-col">
+        <div class="pd-index-col-head">
+          <div class="col-pct">70%</div>
+          <div class="col-name">ตราสารหนี้ (Fixed Income)</div>
+        </div>
+        <ul class="pd-index-list">
+          <li>Thai BMA MTM Government Bond Group 4 (&gt;10) Total Return Index</li>
+          <li>Bloomberg Long U.S. Corporate Total Return Index Value Unhedged USD</li>
+          <li>JPM US CLOIE A · Large Manager</li>
+          <li>JPM US CLOIE BBB · Large Manager</li>
+        </ul>
+      </div>
+      <div class="pd-index-col growth">
+        <div class="pd-index-col-head">
+          <div class="col-pct">30%</div>
+          <div class="col-name">สินทรัพย์เชิงรุก (Growth Assets)</div>
+        </div>
+        <ul class="pd-index-list">
+          <li>Stock Exchange of Thailand SET50 Total Return Index</li>
+          <li>MSCI World Net Total Return USD Index</li>
+          <li>Cambridge Associates Horizon Summary (Large Report) PC SI 1990</li>
+          <li>Cambridge Associates Horizon Summary (Large Report) PE SI 1990</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 (renumbered): 3 Investment Scenarios -->
+  <h3 class="pd-section-title"><span class="num">05</span>3 สถานการณ์ตัวอย่างของผลตอบแทน</h3>
   <p style="font-size:calc(var(--user-fs) * 1);color:#3D4452;margin-bottom:22px;max-width:820px;line-height:1.7">AIA แสดง 3 สถานการณ์ตัวอย่างในเอกสารเสนอขาย โดยอ้างอิงจากสมมติฐานผลตอบแทนจากการลงทุนของ Participating Fund ในระดับที่แตกต่างกัน สถานการณ์เหล่านี้เป็นเพียง<b>ตัวอย่าง (illustration)</b> ไม่ใช่การรับประกัน</p>
   <div class="pd-scen-grid">
     <div class="pd-scen s1">
@@ -1658,8 +1872,8 @@ body{font-size:var(--user-fs)}
     </div>
   </div>
 
-  <!-- Section 5: Annual Dividend Rate Table -->
-  <h3 class="pd-section-title"><span class="num">05</span>อัตราเงินปันผลตัวอย่างรายปี</h3>
+  <!-- Section 5 (renumbered): Annual Dividend Rate Table -->
+  <h3 class="pd-section-title"><span class="num">06</span>อัตราเงินปันผลตัวอย่างรายปี</h3>
   <p style="font-size:calc(var(--user-fs) * 0.94);color:#3D4452;margin-bottom:16px;line-height:1.6">อัตราปันผลตัวอย่าง แสดงเป็น<b>ร้อยละของทุนประกัน</b>ต่อปี · ยืนยันตรงกับใบเสนอขายทางการของ AIA · เงินปันผลจริงอาจสูงหรือต่ำกว่าค่าเหล่านี้ตามผลประกอบการของกองทุน</p>
   <div class="pd-rate-wrap">
     <table class="pd-rate">
@@ -1683,8 +1897,8 @@ body{font-size:var(--user-fs)}
     </table>
   </div>
 
-  <!-- Section 6: Considerations -->
-  <h3 class="pd-section-title"><span class="num">06</span>ข้อควรระวังและข้อจำกัด</h3>
+  <!-- Section 6 (renumbered): Considerations -->
+  <h3 class="pd-section-title"><span class="num">07</span>ข้อควรระวังและข้อจำกัด</h3>
   <div class="pd-warn">
     <h4>⚠ ประเด็นสำคัญที่ต้องทำความเข้าใจก่อนตัดสินใจ</h4>
     <ul>
@@ -1696,8 +1910,8 @@ body{font-size:var(--user-fs)}
     </ul>
   </div>
 
-  <!-- Section 7: Target Segments -->
-  <h3 class="pd-section-title"><span class="num">07</span>กลุ่มลูกค้าเป้าหมาย</h3>
+  <!-- Section 7 (renumbered): Target Segments -->
+  <h3 class="pd-section-title"><span class="num">08</span>กลุ่มลูกค้าเป้าหมาย</h3>
   <p style="font-size:calc(var(--user-fs) * 0.94);color:#3D4452;margin-bottom:18px;line-height:1.6">ผลิตภัณฑ์นี้เหมาะกับ 4 กลุ่มลูกค้าเป้าหมายในบริบทของ Longevity Economy</p>
   <div class="pd-segments">
     <div class="pd-segment">
@@ -1723,7 +1937,7 @@ body{font-size:var(--user-fs)}
   </div>
 
   <div style="background:#FEFCF6;border:1px solid var(--pd-line);border-radius:8px;padding:20px 24px;margin-top:32px;font-size:calc(var(--user-fs) * 0.8125);color:#6B7280;line-height:1.7">
-    <b style="color:var(--pd-navy)">แหล่งอ้างอิง:</b> เอกสารฉบับนี้เรียบเรียงจาก (1) คู่มือผลิตภัณฑ์ AIA Lifetime Income 9/99 (Par) ฉบับ กรกฎาคม 2569, (2) Training Slide AIA Lifetime Income Feature Part 1 (ก.ค. 2569), (3) Training Slide AIA Lifetime Income Dividend Part 2 (ก.ค. 2569), และ (4) ใบเสนอขายรายบุคคล iPoS+ 51.9.13 ลงวันที่ 24 กรกฎาคม 2569 · ข้อมูลอัตราปันผลตัวอย่างและสมมติฐานผลตอบแทน (3.75% / 5.20% / 6.00%) ได้รับการยืนยันตรงกับตัวเลขจริงในใบเสนอขายทางการของ AIA · <b style="color:var(--pd-accent)">เอกสารนี้จัดทำเพื่อเป็นข้อมูลประกอบการนำเสนอเท่านั้น ไม่ใช่เอกสารเสนอขายอย่างเป็นทางการ</b>
+    <b style="color:var(--pd-navy)">แหล่งอ้างอิง:</b> เอกสารฉบับนี้เรียบเรียงจาก (1) คู่มือผลิตภัณฑ์ AIA Lifetime Income 9/99 (Par) ฉบับ กรกฎาคม 2569, (2) Training Slide AIA Lifetime Income Feature Part 1 (ก.ค. 2569), (3) Training Slide AIA Lifetime Income Dividend Part 2 (ก.ค. 2569), (4) Training Slide AIA Lifetime Income 9/99 (Par) Part 2 — Investment Target 20260710 (ก.ค. 2569) สำหรับข้อมูล AIAIMT และการจัดสรร 70/30, และ (5) ใบเสนอขายรายบุคคล iPoS+ 51.9.13 ลงวันที่ 24 กรกฎาคม 2569 · ข้อมูลอัตราปันผลตัวอย่างและสมมติฐานผลตอบแทน (3.75% / 5.20% / 6.00%) ได้รับการยืนยันตรงกับตัวเลขจริงในใบเสนอขายทางการของ AIA · <b style="color:var(--pd-accent)">เอกสารนี้จัดทำเพื่อเป็นข้อมูลประกอบการนำเสนอเท่านั้น ไม่ใช่เอกสารเสนอขายอย่างเป็นทางการ</b>
   </div>
 
 </div>

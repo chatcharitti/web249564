@@ -264,9 +264,39 @@ body{font-size:var(--user-fs)}
 .sv .panel h2{font-size:16px;font-weight:700;margin-bottom:12px;color:var(--sv-green-deep);border-bottom:none;padding-bottom:0}
 .sv .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:14px}
 .sv .field label{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:4px}
-.sv .field input{width:100%;font-family:inherit;font-size:15px;font-weight:600;padding:8px 10px;border:1px solid var(--line);border-radius:8px;color:var(--ink);background:#fff}
+.sv .field input{width:100%;font-family:inherit;font-size:15px;font-weight:600;padding:8px 10px;border:1px solid var(--line);border-radius:8px;color:var(--ink);background:#fff;transition:.2s}
 .sv .field input:focus{outline:2px solid var(--sv-green-soft);border-color:var(--sv-green)}
+.sv .field.dirty input{border-color:var(--sv-gold-bright);background:#fffdf5;box-shadow:0 0 0 3px rgba(212,160,23,.08)}
 .sv .hint{font-size:12.5px;color:var(--muted);margin-top:10px}
+
+/* Panel header with dirty indicator */
+.sv .input-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px}
+.sv .input-head h2{margin-bottom:0}
+.sv .dirty-badge{display:none;align-items:center;gap:6px;background:#fdf5e0;color:var(--sv-gold);font-size:12px;font-weight:600;padding:4px 12px;border-radius:20px;border:1px solid #ecd28a}
+.sv .dirty-badge.show{display:inline-flex;animation:svDirtyIn .3s ease}
+.sv .dirty-badge::before{content:'●';color:var(--sv-gold-bright);animation:svPulse 1.4s ease-in-out infinite}
+@keyframes svPulse{0%,100%{opacity:1}50%{opacity:.35}}
+@keyframes svDirtyIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+
+/* Calculate button area */
+.sv .calc-area{margin-top:16px;padding-top:16px;border-top:1px dashed var(--line);display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.sv .sv-calc-btn{
+  font-family:inherit;font-size:15px;font-weight:700;letter-spacing:.3px;
+  background:linear-gradient(135deg,var(--sv-green-deep) 0%,var(--sv-green) 100%);color:#fff;
+  border:none;padding:12px 28px;border-radius:10px;cursor:pointer;
+  transition:all .25s ease;box-shadow:0 4px 12px rgba(14,122,78,.22);
+  display:inline-flex;align-items:center;gap:8px;position:relative;overflow:hidden;
+}
+.sv .sv-calc-btn:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(14,122,78,.38)}
+.sv .sv-calc-btn:active{transform:translateY(0)}
+.sv .sv-calc-btn svg{width:16px;height:16px;fill:currentColor}
+.sv .sv-calc-btn.pulse{
+  background:linear-gradient(135deg,var(--sv-gold),var(--sv-gold-bright));
+  animation:svBtnPulse 1.4s ease-in-out infinite;
+}
+@keyframes svBtnPulse{0%,100%{box-shadow:0 4px 12px rgba(212,160,23,.35)}50%{box-shadow:0 4px 26px rgba(212,160,23,.7),0 0 0 6px rgba(212,160,23,.12)}}
+.sv .calc-hint{font-size:12.5px;color:var(--muted);flex:1;min-width:200px}
+.sv .calc-hint kbd{background:#fff;border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:1px 6px;font-size:11px;font-family:inherit;color:var(--sv-green-deep);font-weight:700}
 
 .sv .progress-card{background:linear-gradient(180deg,#fffdf6,var(--sv-gold-soft));border:1px solid #efe2bd;border-radius:12px;padding:18px 22px;margin-bottom:14px}
 .sv .progress-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px}
@@ -1150,13 +1180,23 @@ body{font-size:var(--user-fs)}
   </div>
 
   <div class="panel">
-    <h2>⚙️ เงื่อนไขแผนการออม (ปรับค่าได้ตามต้องการ)</h2>
+    <div class="input-head">
+      <h2>⚙️ เงื่อนไขแผนการออม (ปรับค่าได้ตามต้องการ)</h2>
+      <span class="dirty-badge" id="svDirtyBadge">แก้ไขแล้ว · รอคำนวณ</span>
+    </div>
     <div class="grid">
-      <div class="field"><label>ยอดเงินเป้าหมาย (บาท)</label><input type="number" id="inGoal" value="12000000" min="1" step="10000" onchange="svCalc()"></div>
-      <div class="field"><label>เงินตั้งต้น (บาท)</label><input type="number" id="inStart" value="0" min="0" step="10000" onchange="svCalc()"></div>
-      <div class="field"><label>ผลตอบแทนคาดหวัง (% ต่อปี)</label><input type="number" id="inRate" value="5.4" min="0" step="0.25" onchange="svCalc()"></div>
-      <div class="field"><label>เงินออมรายเดือน (บาท)</label><input type="number" id="inMonthly" value="20000" min="0" step="1000" onchange="svCalc()"></div>
-      <div class="field"><label>อัตราเงินออมขั้นต่ำ (บาท/เดือน)</label><input type="number" id="inMinSave" value="5000" min="0" step="500" onchange="svCalc()"></div>
+      <div class="field" data-fname="inGoal"><label>ยอดเงินเป้าหมาย (บาท)</label><input type="number" id="inGoal" value="12000000" min="1" step="10000" oninput="svMarkDirty(this)" onkeydown="svOnEnter(event)"></div>
+      <div class="field" data-fname="inStart"><label>เงินตั้งต้น (บาท)</label><input type="number" id="inStart" value="0" min="0" step="10000" oninput="svMarkDirty(this)" onkeydown="svOnEnter(event)"></div>
+      <div class="field" data-fname="inRate"><label>ผลตอบแทนคาดหวัง (% ต่อปี)</label><input type="number" id="inRate" value="5.4" min="0" step="0.25" oninput="svMarkDirty(this)" onkeydown="svOnEnter(event)"></div>
+      <div class="field" data-fname="inMonthly"><label>เงินออมรายเดือน (บาท)</label><input type="number" id="inMonthly" value="20000" min="0" step="1000" oninput="svMarkDirty(this)" onkeydown="svOnEnter(event)"></div>
+      <div class="field" data-fname="inMinSave"><label>อัตราเงินออมขั้นต่ำ (บาท/เดือน)</label><input type="number" id="inMinSave" value="5000" min="0" step="500" oninput="svMarkDirty(this)" onkeydown="svOnEnter(event)"></div>
+    </div>
+    <div class="calc-area">
+      <button class="sv-calc-btn" id="svCalcBtn" onclick="svCalcNow()" title="กดเพื่อคำนวณแผนออม">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        คำนวณผลลัพธ์
+      </button>
+      <span class="calc-hint">💡 กรอกเงื่อนไขได้หลายช่องพร้อมกัน แล้วกดปุ่มนี้ (หรือกด <kbd>Enter</kbd> ในช่องกรอก) เพื่อคำนวณ · ปุ่มจะกะพริบสีทองเมื่อมีการแก้ไขค้างอยู่</span>
     </div>
     <div class="hint">💡 ช่อง <b>"ออมเพิ่มพิเศษ ✨"</b> ในตาราง: กรอกยอดโปะเพิ่มในเดือนนั้น (เช่น เดือนที่ได้โบนัส) ระบบคำนวณใหม่ทันที · การ์ดผลตอบแทนด้านล่าง กดปุ่ม "ใช้อัตรานี้" เพื่อลองอัตราแต่ละแบบ หรือใช้ "จัดสรรพอร์ต" เพื่อรวมหลายช่องทางเข้าด้วยกัน</div>
   </div>
@@ -1824,6 +1864,40 @@ function svAdjustFont(d){svFs=Math.min(20,Math.max(11,svFs+d));document.document
 const svFmt = n => n.toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2});
 const svFmt0 = n => n.toLocaleString('th-TH',{maximumFractionDigits:0});
 
+/* Dirty state tracking for input panel - only recalc on button click / Enter */
+let svIsDirty = false;
+function svMarkDirty(el){
+  svIsDirty = true;
+  const btn = document.getElementById('svCalcBtn');
+  const badge = document.getElementById('svDirtyBadge');
+  if (btn) btn.classList.add('pulse');
+  if (badge) badge.classList.add('show');
+  if (el){
+    const field = el.closest('.field');
+    if (field) field.classList.add('dirty');
+  }
+}
+function svClearDirty(){
+  svIsDirty = false;
+  const btn = document.getElementById('svCalcBtn');
+  const badge = document.getElementById('svDirtyBadge');
+  if (btn) btn.classList.remove('pulse');
+  if (badge) badge.classList.remove('show');
+  document.querySelectorAll('.sv .field.dirty').forEach(f => f.classList.remove('dirty'));
+}
+function svCalcNow(){
+  svCalc();
+  svClearDirty();
+  const progressEl = document.querySelector('#tab-2 .progress-card');
+  if (progressEl) progressEl.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+function svOnEnter(e){
+  if (e && e.key === 'Enter'){
+    e.preventDefault();
+    svCalcNow();
+  }
+}
+
 function svReadParams(){
   return {
     goal: parseFloat(document.getElementById('inGoal').value) || 0,
@@ -1939,6 +2013,7 @@ function svRenderVehicles(){
 function svApplyRate(rate){
   document.getElementById('inRate').value = rate;
   svCalc();
+  svClearDirty();
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
@@ -2055,6 +2130,7 @@ function svApplyPortfolio(){
   }, 0) / totalW;
   document.getElementById('inRate').value = weighted.toFixed(2);
   svCalc();
+  svClearDirty();
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
@@ -2123,6 +2199,7 @@ function applyPreset(kind){
   svPortfolio = p.portfolio.map(x => ({id:x.id, weight:x.w}));
   svRenderPortfolio();
   svCalc();
+  svClearDirty();
   document.querySelector('.progress-card').scrollIntoView({behavior:'smooth', block:'start'});
 }
 </script>

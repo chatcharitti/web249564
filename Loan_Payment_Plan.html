@@ -3,89 +3,85 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ตารางผ่อนชำระ — ลดต้นลดดอก / อัตราคงที่ · เลือกจำนวนงวดได้</title>
-<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>เครื่องมือวางแผนสินเชื่อ — ลดต้นลดดอก / อัตราคงที่ · หลายรายการ</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#1b2a24;
-  --ink-soft:#5b6e66;
-  --paper:#fbfcfa;
-  --card:#ffffff;
-  --line:#e3eae5;
-  --accent:#0f6b4f;
-  --accent-soft:#e6f3ed;
-  --extra:#1d5a8a;
-  --extra-soft:#e8f1f8;
-  --wd:#8a2f5a;
-  --wd-soft:#f9ecf3;
-  --warn:#a4541a;
-  --warn-soft:#fdf1e6;
+  --ink:#1b2a24; --ink-soft:#5b6e66; --paper:#fbfcfa; --card:#ffffff; --line:#e3eae5;
+  --accent:#0f6b4f; --accent-soft:#e6f3ed;
+  --extra:#1d5a8a; --extra-soft:#e8f1f8;
+  --wd:#8a2f5a; --wd-soft:#f9ecf3;
+  --multi:#a55a1e; --multi-soft:#fbeee0;
+  --warn:#a4541a; --warn-soft:#fdf1e6;
+  --ok:#0e7a4e;
   --fs:15px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{
-  font-family:'Sarabun',sans-serif;font-size:var(--fs);
-  background:var(--paper);color:var(--ink);line-height:1.65;
-  padding:28px 16px 60px;
-}
-.wrap{max-width:1060px;margin:0 auto}
+body{font-family:'Sarabun',sans-serif;font-size:var(--fs);background:var(--paper);color:var(--ink);line-height:1.65;padding:24px 16px 60px}
+.wrap{max-width:1080px;margin:0 auto}
 
-header{border-bottom:3px solid var(--accent);padding-bottom:18px;margin-bottom:22px}
+header{border-bottom:3px solid var(--accent);padding-bottom:16px;margin-bottom:16px}
 .eyebrow{font-size:.8em;letter-spacing:.12em;color:var(--accent);font-weight:600;text-transform:uppercase}
-h1{font-size:1.7em;font-weight:700;margin:4px 0 2px}
-.subtitle{color:var(--ink-soft);font-size:.95em}
+h1{font-size:1.6em;font-weight:700;margin:4px 0 2px}
+.subtitle{color:var(--ink-soft);font-size:.92em}
+
+/* Tab switcher */
+.tabs{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:16px;border-bottom:2px solid var(--line)}
+.tab{
+  font-family:inherit;font-size:.95em;font-weight:600;
+  border:none;background:transparent;color:var(--ink-soft);
+  padding:10px 20px;cursor:pointer;border-radius:8px 8px 0 0;position:relative;bottom:-2px;
+  border-bottom:2px solid transparent;transition:.15s;
+}
+.tab:hover{color:var(--accent);background:var(--accent-soft)}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent);background:#fff}
+.tab.multi.active{color:var(--multi);border-bottom-color:var(--multi)}
+.tab.multi:hover{color:var(--multi);background:var(--multi-soft)}
+
+.tab-content{display:none;animation:fadeIn .2s ease}
+.tab-content.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
 
 .toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:18px}
 .toolbar .spacer{flex:1}
-button{
-  font-family:inherit;font-size:.9em;font-weight:600;
-  border:1px solid var(--line);background:var(--card);color:var(--ink);
-  padding:7px 14px;border-radius:8px;cursor:pointer;
-}
+button{font-family:inherit;font-size:.9em;font-weight:600;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:7px 14px;border-radius:8px;cursor:pointer;transition:.12s}
 button:hover{border-color:var(--accent);color:var(--accent)}
 button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
 button.primary:hover{background:#0c5a43;color:#fff}
+button.multi-btn{background:var(--multi);border-color:var(--multi);color:#fff}
+button.multi-btn:hover{background:#8a4a17;color:#fff}
 button.ghost-extra{border-color:var(--extra);color:var(--extra)}
 button.ghost-extra:hover{background:var(--extra-soft)}
 button.ghost-wd{border-color:var(--wd);color:var(--wd)}
 button.ghost-wd:hover{background:var(--wd-soft)}
+button.ghost-multi{border-color:var(--multi);color:var(--multi)}
+button.ghost-multi:hover{background:var(--multi-soft)}
 
-.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:22px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px}
 .panel h2{font-size:1.05em;font-weight:700;margin-bottom:12px;color:var(--accent)}
+.panel.multi h2{color:var(--multi)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
 .field label{display:block;font-size:.82em;font-weight:600;color:var(--ink-soft);margin-bottom:4px}
-.field input[type=number]{
-  width:100%;font-family:inherit;font-size:1em;font-weight:600;
-  padding:8px 10px;border:1px solid var(--line);border-radius:8px;color:var(--ink);background:#fff;
-}
-.field input[type=number]:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
-.field input[type=number]:disabled{background:#f2f4f0;color:#a9b3ad}
+.field input{width:100%;font-family:inherit;font-size:1em;font-weight:600;padding:8px 10px;border:1px solid var(--line);border-radius:8px;color:var(--ink);background:#fff}
+.field input:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+.field input:disabled{background:#f2f4f0;color:#a9b3ad}
+.field .helper{font-size:.72em;color:var(--ink-soft);margin-top:2px}
 .hint{font-size:.78em;color:var(--ink-soft);margin-top:10px}
 .hint b.ex{color:var(--extra)} .hint b.wd{color:var(--wd)}
 
-/* กลุ่มตัวเลือกโหมด */
 .mode-group{margin-bottom:14px}
 .mode-title{font-size:.85em;font-weight:700;color:var(--ink-soft);margin-bottom:6px}
 .mode-opts{display:flex;flex-wrap:wrap;gap:8px}
-.mode-opt{
-  display:flex;align-items:center;gap:7px;
-  border:1.5px solid var(--line);border-radius:10px;padding:8px 14px;cursor:pointer;
-  background:#fff;font-size:.9em;font-weight:600;user-select:none;
-}
+.mode-opt{display:flex;align-items:center;gap:7px;border:1.5px solid var(--line);border-radius:10px;padding:8px 14px;cursor:pointer;background:#fff;font-size:.9em;font-weight:600;user-select:none}
 .mode-opt input{accent-color:var(--accent);width:16px;height:16px;cursor:pointer}
 .mode-opt.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
 
-/* แผงเทียบอัตราดอกเบี้ย */
-.rate-compare{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-bottom:22px;
-}
-.rate-card{
-  border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff;
-}
+.rate-compare{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-bottom:18px}
+.rate-card{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff}
 .rate-card.active{border-color:var(--accent);background:linear-gradient(180deg,#fff,var(--accent-soft));box-shadow:0 0 0 1px var(--accent)}
 .rate-card .rc-tag{font-size:.75em;font-weight:700;letter-spacing:.05em;color:var(--ink-soft);text-transform:uppercase}
 .rate-card.active .rc-tag{color:var(--accent)}
-.rate-card .rc-main{font-size:1.5em;font-weight:700;color:var(--accent)}
+.rate-card .rc-main{font-size:1.45em;font-weight:700;color:var(--accent)}
 .rate-card .rc-main small{font-size:.55em;color:var(--ink-soft);font-weight:600}
 .rate-card .rc-sub{font-size:.8em;color:var(--ink-soft)}
 .rate-card .rc-badge{display:inline-block;font-size:.7em;font-weight:700;background:var(--accent);color:#fff;border-radius:6px;padding:1px 8px;margin-left:6px;vertical-align:middle}
@@ -93,18 +89,21 @@ button.ghost-wd:hover{background:var(--wd-soft)}
 .summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:14px}
 .stat{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:12px 16px}
 .stat .label{font-size:.78em;color:var(--ink-soft);font-weight:600}
-.stat .value{font-size:1.28em;font-weight:700;color:var(--accent)}
+.stat .value{font-size:1.24em;font-weight:700;color:var(--accent)}
 .stat .sub{font-size:.78em;color:var(--ink-soft)}
 .stat.neutral{border-left-color:var(--ink-soft)} .stat.neutral .value{color:var(--ink)}
 .stat.extra{border-left-color:var(--extra)} .stat.extra .value{color:var(--extra)}
 .stat.wd{border-left-color:var(--wd)} .stat.wd .value{color:var(--wd)}
+.stat.multi-stat{border-left-color:var(--multi)} .stat.multi-stat .value{color:var(--multi)}
 
 .compare{background:var(--extra-soft);border:1px solid #cfe1ef;border-radius:10px;padding:12px 16px;font-size:.9em;color:var(--extra);margin-bottom:12px;display:none;font-weight:600}
 .compare.show{display:block}
-.wdinfo{background:var(--wd-soft);border:1px solid #ecd2e0;border-radius:10px;padding:12px 16px;font-size:.9em;color:var(--wd);margin-bottom:22px;display:none;font-weight:600}
+.wdinfo{background:var(--wd-soft);border:1px solid #ecd2e0;border-radius:10px;padding:12px 16px;font-size:.9em;color:var(--wd);margin-bottom:18px;display:none;font-weight:600}
 .wdinfo.show{display:block}
-.alert{background:var(--warn-soft);border:1px solid #efd9c2;border-radius:10px;padding:12px 16px;font-size:.9em;color:var(--warn);margin-bottom:22px;display:none}
+.alert{background:var(--warn-soft);border:1px solid #efd9c2;border-radius:10px;padding:12px 16px;font-size:.9em;color:var(--warn);margin-bottom:18px;display:none}
 .alert.show{display:block}
+.saved-toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ok);color:#fff;padding:10px 20px;border-radius:24px;font-weight:600;font-size:.9em;box-shadow:0 6px 20px rgba(0,0,0,.15);z-index:100;opacity:0;pointer-events:none;transition:.3s}
+.saved-toast.show{opacity:1;bottom:30px}
 
 .table-card{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-size:.88em;min-width:900px}
@@ -112,18 +111,13 @@ thead th{background:var(--accent);color:#fff;font-weight:600;padding:9px 7px;tex
 thead th:first-child{text-align:center}
 thead th.col-extra{background:var(--extra)}
 thead th.col-wd{background:var(--wd)}
+thead th.col-multi{background:var(--multi)}
 tbody td{padding:5px 7px;text-align:right;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
 tbody td:first-child{text-align:center;color:var(--ink-soft)}
 tbody td.cell-extra{background:#f6fafd}
-tbody td.cell-extra input{
-  width:86px;font-family:inherit;font-size:.95em;font-weight:600;text-align:right;
-  padding:3px 6px;border:1px solid #c9dcea;border-radius:6px;color:var(--extra);background:#fff;
-}
+tbody td.cell-extra input{width:86px;font-family:inherit;font-size:.95em;font-weight:600;text-align:right;padding:3px 6px;border:1px solid #c9dcea;border-radius:6px;color:var(--extra);background:#fff}
 tbody td.cell-wd{background:#fcf5f9;white-space:nowrap}
-tbody td.cell-wd input[type=number]{
-  width:86px;font-family:inherit;font-size:.95em;font-weight:600;text-align:right;
-  padding:3px 6px;border:1px solid #e0c3d3;border-radius:6px;color:var(--wd);background:#fff;
-}
+tbody td.cell-wd input[type=number]{width:86px;font-family:inherit;font-size:.95em;font-weight:600;text-align:right;padding:3px 6px;border:1px solid #e0c3d3;border-radius:6px;color:var(--wd);background:#fff}
 tbody td.cell-wd input[type=number]:disabled{background:#f4eef2;color:#b9a3af;border-color:#eadfe5}
 tbody td.cell-wd input[type=checkbox]{width:16px;height:16px;accent-color:var(--wd);vertical-align:middle;margin-right:5px;cursor:pointer}
 tbody tr.has-extra td{background:var(--extra-soft)}
@@ -132,22 +126,50 @@ tbody tr.has-wd td{background:var(--wd-soft)}
 tbody tr.has-wd td.cell-wd{background:#f3dfeb}
 tbody tr.year td{background:var(--accent-soft);font-weight:600}
 tbody tr.final td{background:#dcefe6;font-weight:700;color:var(--accent)}
+tbody tr.event td{background:var(--multi-soft);font-weight:600}
 tfoot td{padding:10px 7px;font-weight:700;text-align:right;background:#f2f6f3;border-top:2px solid var(--accent)}
 tfoot td:first-child{text-align:left}
+
+/* Multi-loan tab */
+.loans-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:12px}
+.loans-header h2{margin:0}
+.loans-header .count{background:var(--multi-soft);color:var(--multi);padding:2px 10px;border-radius:12px;font-size:.82em;font-weight:700;margin-left:6px}
+.loans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+.loan-card{border:1px solid var(--line);border-left:5px solid var(--loan-color,#a55a1e);border-radius:12px;padding:14px 16px;background:#fff;transition:.15s;position:relative}
+.loan-card:hover{box-shadow:0 3px 12px rgba(0,0,0,.05)}
+.loan-head{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.loan-head input.loan-name{flex:1;font-family:inherit;font-size:1.05em;font-weight:700;padding:5px 8px;border:1px dashed transparent;border-radius:6px;background:transparent;color:var(--ink)}
+.loan-head input.loan-name:hover{border-color:var(--line)}
+.loan-head input.loan-name:focus{outline:none;border-style:solid;border-color:var(--multi);background:#fff}
+.loan-head .rm-btn{background:transparent;border:none;color:#bb6b7f;font-size:1.1em;padding:4px 8px;cursor:pointer;font-weight:700}
+.loan-head .rm-btn:hover{color:#8a2f5a;background:var(--wd-soft);border-radius:6px}
+.loan-fields{display:grid;grid-template-columns:1fr 1fr;gap:8px 10px}
+.loan-fields .field label{font-size:.75em;margin-bottom:2px}
+.loan-fields .field input{padding:5px 8px;font-size:.9em}
+.loan-fields .field.wide{grid-column:1 / -1}
+.loan-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:12px;padding-top:10px;border-top:1px dashed var(--line)}
+.loan-stats .lst{background:var(--multi-soft);border-radius:8px;padding:6px 8px;text-align:center}
+.loan-stats .lst .l{font-size:.68em;color:var(--ink-soft);font-weight:600}
+.loan-stats .lst .v{font-size:.95em;font-weight:700;color:var(--multi)}
+.loan-warn{background:var(--warn-soft);border:1px solid #efd9c2;color:var(--warn);border-radius:8px;padding:6px 10px;font-size:.78em;margin-top:8px;font-weight:600}
+
+.multi-summary-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px}
 
 footer{margin-top:26px;font-size:.78em;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:12px}
 
 @media print{
   @page{size:A4 landscape;margin:12mm 10mm}
   body{padding:0;background:#fff;font-size:10.5px}
-  .toolbar,.panel .hint{display:none}
-  .panel,.stat,.table-card,.rate-card{border-color:#ccc;break-inside:avoid}
-  .summary,.compare,.wdinfo,.rate-compare{break-inside:avoid}
+  .toolbar,.tabs,.panel .hint{display:none}
+  .tab-content{display:block !important}
+  .tab-content:not(.active){page-break-before:always}
+  .panel,.stat,.table-card,.rate-card,.loan-card{border-color:#ccc;break-inside:avoid}
+  .summary,.compare,.wdinfo,.rate-compare,.multi-summary-bar{break-inside:avoid}
   .table-card{overflow:visible} table{min-width:0}
   thead{display:table-header-group} tbody tr{break-inside:avoid}
   tbody td.cell-extra input,tbody td.cell-wd input[type=number]{border:none;background:transparent;padding:0;width:auto}
   tbody td.cell-wd input[type=checkbox]{display:none}
-  button{display:none}
+  button,.saved-toast{display:none}
 }
 </style>
 </head>
@@ -155,19 +177,28 @@ footer{margin-top:26px;font-size:.78em;color:var(--ink-soft);border-top:1px soli
 <div class="wrap">
 
 <header>
-  <div class="eyebrow">Payment Schedule · Reducing Balance / Flat Rate · Fixed Term Option</div>
-  <h1>ตารางผ่อนชำระเงินกู้</h1>
-  <div class="subtitle">เลือกได้: ดอกเบี้ยลดต้นลดดอก หรืออัตราคงที่ · ชำระตาม % ยอดคงเหลือ หรือกำหนดจำนวนงวด · จำลองชำระเพิ่มและถอนออกระหว่างทาง</div>
+  <div class="eyebrow">Loan Planner · Reducing Balance / Flat · Single & Multi-Loan · Export/Import</div>
+  <h1>เครื่องมือวางแผนสินเชื่อ</h1>
+  <div class="subtitle">แท็บเดี่ยว: ตารางผ่อนละเอียดพร้อมชำระเพิ่ม/ถอนออก · แท็บหลายรายการ: วางแผนภาระรวมและปิดหนี้เร็วขึ้น</div>
 </header>
+
+<div class="tabs">
+  <button class="tab active" data-tab="single" onclick="switchTab('single')">📋 ผ่อนชำระเดี่ยว (ละเอียด)</button>
+  <button class="tab multi" data-tab="multi" onclick="switchTab('multi')">📊 สรุปหลายสินเชื่อ</button>
+</div>
 
 <div class="toolbar">
   <button onclick="adjustFont(-1)">A−</button>
   <button onclick="adjustFont(1)">A+</button>
-  <button class="ghost-extra" onclick="clearExtras()">↺ ล้างชำระเพิ่ม</button>
-  <button class="ghost-wd" onclick="clearWithdraws()">↺ ล้างการถอนทั้งหมด</button>
+  <button onclick="exportData()" title="บันทึกข้อมูลทั้งหมดเป็นไฟล์">💾 Export</button>
+  <button onclick="triggerImport()" title="โหลดข้อมูลจากไฟล์">📂 Import</button>
+  <input type="file" id="importFile" accept=".json,application/json" style="display:none" onchange="onImportFile(this)">
   <span class="spacer"></span>
   <button class="primary" onclick="window.print()">🖨 พิมพ์ / บันทึก PDF</button>
 </div>
+
+<!-- ============ TAB 1: SINGLE LOAN ============ -->
+<div id="tab-single" class="tab-content active">
 
 <div class="panel">
   <h2>เงื่อนไขการคำนวณ (ปรับค่าได้)</h2>
@@ -189,85 +220,109 @@ footer{margin-top:26px;font-size:.78em;color:var(--ink-soft);border-top:1px soli
   </div>
 
   <div class="grid">
-    <div class="field">
-      <label>เงินต้น (บาท)</label>
-      <input type="number" id="inPrincipal" value="25200" min="1" step="100" onchange="calc()">
-    </div>
-    <div class="field">
-      <label>ดอกเบี้ยลดต้นลดดอก (% ต่อปี)</label>
-      <input type="number" id="inRateEff" value="15" min="0" step="0.25" onchange="calc()">
-    </div>
-    <div class="field">
-      <label>ดอกเบี้ยคงที่ (% ต่อเดือน)</label>
-      <input type="number" id="inRateFlat" value="1.25" min="0" step="0.05" onchange="calc()">
-    </div>
-    <div class="field">
-      <label>จำนวนงวด (เดือน)</label>
-      <input type="number" id="inTerm" value="36" min="1" max="600" step="1" onchange="calc()">
-    </div>
-    <div class="field">
-      <label>อัตราชำระต่อเดือน (% ของยอดคงเหลือ)</label>
-      <input type="number" id="inPayPct" value="2" min="0.1" step="0.1" onchange="calc()">
-    </div>
-    <div class="field">
-      <label>ยอดชำระขั้นต่ำ (บาท/งวด)</label>
-      <input type="number" id="inMinPay" value="200" min="0" step="50" onchange="calc()">
-    </div>
+    <div class="field"><label>เงินต้น (บาท)</label><input type="number" id="inPrincipal" value="25200" min="1" step="100" onchange="calcSingle()"></div>
+    <div class="field"><label>ดอกเบี้ยลดต้นลดดอก (% ต่อปี)</label><input type="number" id="inRateEff" value="15" min="0" step="0.25" onchange="calcSingle()"></div>
+    <div class="field"><label>ดอกเบี้ยคงที่ (% ต่อเดือน)</label><input type="number" id="inRateFlat" value="1.25" min="0" step="0.05" onchange="calcSingle()"></div>
+    <div class="field"><label>จำนวนงวด (เดือน)</label><input type="number" id="inTerm" value="36" min="1" max="600" step="1" onchange="calcSingle()"></div>
+    <div class="field"><label>อัตราชำระต่อเดือน (% ของยอดคงเหลือ)</label><input type="number" id="inPayPct" value="2" min="0.1" step="0.1" onchange="calcSingle()"></div>
+    <div class="field"><label>ยอดชำระขั้นต่ำ (บาท/งวด)</label><input type="number" id="inMinPay" value="200" min="0" step="50" onchange="calcSingle()"></div>
   </div>
   <div class="hint">
     <b class="ex">ชำระเพิ่ม ✎</b> : กรอกยอดโปะเพิ่มในงวดนั้น ระบบคำนวณงวดถัดไปใหม่ทันที<br>
-    <b class="wd">ถอนออกระหว่างทาง ✓</b> : ติ๊กเพื่อถอนในงวดนั้น — ค่าเริ่มต้น = ยอดตัดเงินต้นของงวด (ยอดคงเหลือกลับเท่าเดิม เห็นดอกเบี้ยล้วนของช่วงที่เลือก) แก้ตัวเลขได้หากต้องการถอนมากกว่า<br>
-    หมายเหตุ: ช่องที่ไม่เกี่ยวกับโหมดที่เลือกจะถูกปิดอัตโนมัติ · โหมดอัตราคงที่ (Flat) คิดดอกเบี้ยจากเงินต้นตั้งต้นเท่ากันทุกงวดตามแนวปฏิบัติสินเชื่อเช่าซื้อ/ผ่อนสินค้า
+    <b class="wd">ถอนออกระหว่างทาง ✓</b> : ติ๊กเพื่อถอนในงวดนั้น — ค่าเริ่มต้น = ยอดตัดเงินต้น (ยอดคงเหลือกลับเท่าเดิม) แก้ตัวเลขได้หากต้องการถอนมากกว่า
   </div>
 </div>
 
 <div class="rate-compare" id="rateCompare"></div>
-
 <div class="alert" id="alertBox"></div>
 <div class="summary" id="summaryBox"></div>
 <div class="compare" id="compareBox"></div>
 <div class="wdinfo" id="wdInfoBox"></div>
 
+<div class="toolbar" style="margin-bottom:10px">
+  <button class="ghost-extra" onclick="clearExtras()">↺ ล้างชำระเพิ่ม</button>
+  <button class="ghost-wd" onclick="clearWithdraws()">↺ ล้างการถอนทั้งหมด</button>
+</div>
+
 <div class="table-card">
   <table>
-    <thead>
-      <tr>
-        <th>งวดที่</th>
-        <th>ยอดยกมา</th>
-        <th>ดอกเบี้ย</th>
-        <th>ค่างวดปกติ</th>
-        <th class="col-extra">ชำระเพิ่ม ✎</th>
-        <th>ชำระรวม</th>
-        <th>ตัดเงินต้น</th>
-        <th class="col-wd">ถอนออกระหว่างทาง</th>
-        <th>ยอดคงเหลือ</th>
-      </tr>
-    </thead>
+    <thead><tr>
+      <th>งวด</th><th>ยอดยกมา</th><th>ดอกเบี้ย</th><th>ค่างวดปกติ</th>
+      <th class="col-extra">ชำระเพิ่ม ✎</th><th>ชำระรวม</th><th>ตัดเงินต้น</th>
+      <th class="col-wd">ถอนออกระหว่างทาง</th><th>ยอดคงเหลือ</th>
+    </tr></thead>
     <tbody id="tbody"></tbody>
     <tfoot id="tfoot"></tfoot>
   </table>
 </div>
+</div>
+
+<!-- ============ TAB 2: MULTI LOAN ============ -->
+<div id="tab-multi" class="tab-content">
+
+<div class="panel multi">
+  <div class="loans-header">
+    <h2>💼 รายการสินเชื่อของคุณ <span class="count" id="loanCount">0 รายการ</span></h2>
+    <div>
+      <button class="ghost-multi" onclick="loadMultiExample()">📚 โหลดตัวอย่าง</button>
+      <button class="multi-btn" onclick="addLoan()">➕ เพิ่มรายการสินเชื่อ</button>
+    </div>
+  </div>
+  <div class="loans-grid" id="loansGrid"></div>
+  <div class="hint" id="loansHint">คลิก "เพิ่มรายการสินเชื่อ" เพื่อสร้างรายการแรก — แต่ละรายการกำหนดชื่อ ยอด ดอกเบี้ย จำนวนงวด ยอดจ่าย/เดือน และเดือนเริ่มชำระได้อิสระ (ไม่จำเป็นต้องเริ่มพร้อมกัน) · ช่อง "โปะเพิ่ม/เดือน" สำหรับจำลองว่าจ่ายเกินค่างวดเท่าไรเพื่อปิดหนี้เร็วขึ้น</div>
+</div>
+
+<div class="multi-summary-bar" id="multiSummary"></div>
+<div class="alert" id="multiAlert"></div>
+
+<div class="panel multi" id="multiInsight" style="display:none">
+  <h2>💡 มุมมองการวางแผน</h2>
+  <div id="multiInsightBody" style="font-size:.9em"></div>
+</div>
+
+<div class="table-card" id="multiTableCard" style="display:none">
+  <table id="multiTable">
+    <thead id="multiThead"></thead>
+    <tbody id="multiTbody"></tbody>
+    <tfoot id="multiTfoot"></tfoot>
+  </table>
+</div>
+</div>
 
 <footer>
-  วิธีคำนวณ — ลดต้นลดดอก: ดอกเบี้ยรายงวด = ยอดยกมา × (อัตราต่อปี ÷ 12) · อัตราคงที่ (Flat): ดอกเบี้ยรายงวด = เงินต้นตั้งต้น × อัตราต่อเดือน (เท่ากันทุกงวด) · โหมดกำหนดจำนวนงวด: ค่างวดลดต้นลดดอกคำนวณด้วยสูตร Annuity, ค่างวด Flat = (เงินต้น + ดอกเบี้ยรวม) ÷ จำนวนงวด · การเทียบอัตราทั้งสองแบบใช้การคำนวณอัตราผลตอบแทนภายใน (IRR) จากกระแสเงินสดจริง<br>
-  การถอนออกระหว่างทางจำลองลักษณะวงเงินหมุนเวียน · ในโหมด Flat การชำระเพิ่ม/ถอนเป็นการประมาณการ เงื่อนไขจริงขึ้นอยู่กับสัญญาของผู้ให้สินเชื่อ · ตารางนี้เป็นการประมาณการเพื่อการวางแผนเท่านั้น
+  วิธีคำนวณ — ลดต้นลดดอก: ดอกเบี้ยรายงวด = ยอดยกมา × (อัตราต่อปี ÷ 12) · Flat: ดอกเบี้ยรายงวด = เงินต้นตั้งต้น × อัตราต่อเดือน · โหมดกำหนดงวด: ค่างวดลดต้นลดดอกใช้สูตร Annuity · แท็บหลายรายการ: จำลองแต่ละสินเชื่อแยกกันตามวันเริ่มชำระของแต่ละรายการ แล้วรวมภาระเป็นรายเดือน · Export/Import: บันทึกข้อมูลทั้ง 2 แท็บเป็นไฟล์ JSON กลับมาโหลดต่อได้ · เครื่องมือนี้เป็นการประมาณการเพื่อการวางแผนเท่านั้น เงื่อนไขจริงขึ้นอยู่กับสัญญาของผู้ให้สินเชื่อ
 </footer>
 
 </div>
 
+<div class="saved-toast" id="toast"></div>
+
 <script>
+/* ================= COMMON ================= */
 let fs = 15;
-let extras = {};
-let wdOn = {};
-let wdCustom = {};
-
-function adjustFont(d){
-  fs = Math.min(20, Math.max(11, fs + d));
-  document.documentElement.style.setProperty('--fs', fs + 'px');
-}
+function adjustFont(d){fs=Math.min(20,Math.max(11,fs+d));document.documentElement.style.setProperty('--fs',fs+'px')}
 const fmt = n => n.toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2});
+const fmt0 = n => n.toLocaleString('th-TH',{maximumFractionDigits:0});
+const thMonths = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+const thMonthsFull = ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+function fmtThai(d){ return thMonths[d.getMonth()] + ' ' + (d.getFullYear()+543); }
+function addMonths(d, n){ const x = new Date(d); x.setMonth(x.getMonth()+n); return x; }
 
-function readParams(){
+function switchTab(name){
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.toggle('active', c.id === 'tab-' + name));
+  if (name === 'multi') calcMulti();
+}
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2400);
+}
+
+/* ================= TAB 1: SINGLE LOAN ================= */
+let extras = {}, wdOn = {}, wdCustom = {};
+
+function readSingleParams(){
   return {
     P0: parseFloat(document.getElementById('inPrincipal').value) || 0,
     intMode: document.querySelector('input[name=intMode]:checked').value,
@@ -279,9 +334,8 @@ function readParams(){
     minPay: parseFloat(document.getElementById('inMinPay').value) || 0
   };
 }
-
 function onModeChange(){
-  const p = readParams();
+  const p = readSingleParams();
   document.getElementById('inRateEff').disabled  = (p.intMode !== 'eff');
   document.getElementById('inRateFlat').disabled = (p.intMode !== 'flat');
   document.getElementById('inTerm').disabled     = (p.payMode !== 'term');
@@ -291,207 +345,440 @@ function onModeChange(){
   document.getElementById('optFlat').className = 'mode-opt' + (p.intMode==='flat'? ' on' : '');
   document.getElementById('optPct').className  = 'mode-opt' + (p.payMode==='pct' ? ' on' : '');
   document.getElementById('optTerm').className = 'mode-opt' + (p.payMode==='term'? ' on' : '');
-  calc();
+  calcSingle();
 }
-
-// ค่างวดคงที่แบบลดต้นลดดอก (Annuity)
-function annuityPMT(P, rMonthly, N){
-  if (rMonthly <= 0) return P / N;
-  return P * rMonthly / (1 - Math.pow(1 + rMonthly, -N));
-}
-// หา r ต่อเดือน (ลดต้นลดดอก) ที่ทำให้ค่างวด PMT × N ผ่อน P หมดพอดี — ด้วย bisection
+function annuityPMT(P, rM, N){ if (rM <= 0) return P/N; return P*rM/(1-Math.pow(1+rM,-N)); }
 function solveMonthlyRate(P, PMT, N){
-  if (PMT * N <= P + 0.01) return 0;
-  let lo = 1e-9, hi = 1.0;
-  for (let i = 0; i < 200; i++){
-    const mid = (lo + hi) / 2;
-    const pv = PMT * (1 - Math.pow(1 + mid, -N)) / mid;
-    if (pv > P) lo = mid; else hi = mid;
-  }
-  return (lo + hi) / 2;
+  if (PMT*N <= P+0.01) return 0;
+  let lo=1e-9, hi=1.0;
+  for (let i=0;i<200;i++){const mid=(lo+hi)/2; const pv=PMT*(1-Math.pow(1+mid,-N))/mid; if (pv>P) lo=mid; else hi=mid;}
+  return (lo+hi)/2;
 }
-
-function simulate(p, useWhatIf){
-  let bal = p.P0, m = 0, totInt = 0, totPay = 0, totExtra = 0, totWd = 0, totBase = 0;
-  const MAX = 600, rows = [];
-  let stuck = false;
-
-  // ค่างวดคงที่สำหรับโหมดกำหนดจำนวนงวด (คำนวณครั้งเดียวจากเงื่อนไขตั้งต้น)
+function simulateSingle(p, useWhatIf){
+  let bal=p.P0, m=0, totInt=0, totPay=0, totExtra=0, totWd=0, totBase=0;
+  const MAX=600, rows=[]; let stuck=false;
   let fixedPMT = 0;
-  if (p.payMode === 'term'){
-    fixedPMT = (p.intMode === 'flat')
-      ? (p.P0 * (1 + p.flatMonthly * p.termN)) / p.termN
-      : annuityPMT(p.P0, p.effAnnual / 12, p.termN);
+  if (p.payMode==='term'){
+    fixedPMT = (p.intMode==='flat') ? (p.P0*(1+p.flatMonthly*p.termN))/p.termN : annuityPMT(p.P0, p.effAnnual/12, p.termN);
   }
-
-  while (bal > 0.005 && m < MAX){
+  while (bal>0.005 && m<MAX){
     m++;
-    const open = bal;
-    const interest = (p.intMode === 'flat') ? p.P0 * p.flatMonthly : open * (p.effAnnual / 12);
-    let basePay = (p.payMode === 'term') ? fixedPMT : Math.max(open * p.payPct, p.minPay);
-    let extra = useWhatIf ? (extras[m] || 0) : 0;
-    let pay = basePay + extra;
+    const open=bal;
+    const interest = (p.intMode==='flat') ? p.P0*p.flatMonthly : open*(p.effAnnual/12);
+    let basePay = (p.payMode==='term') ? fixedPMT : Math.max(open*p.payPct, p.minPay);
+    let extra = useWhatIf ? (extras[m]||0) : 0;
+    let pay = basePay+extra;
     const willWd = useWhatIf && wdOn[m];
-    if (!willWd && pay >= open + interest){
-      pay = open + interest;
-      if (extra > 0) extra = Math.max(0, pay - basePay);
-      basePay = pay - extra;
-    }
-    const principal = pay - interest;
-    if (principal <= 0.005 && !willWd){ stuck = true; m--; break; }
+    if (!willWd && pay>=open+interest){ pay=open+interest; if (extra>0) extra=Math.max(0,pay-basePay); basePay=pay-extra; }
+    const principal = pay-interest;
+    if (principal<=0.005 && !willWd){ stuck=true; m--; break; }
     let wd = 0;
-    if (willWd){
-      wd = (wdCustom[m] !== undefined) ? wdCustom[m] : Math.max(principal, 0);
-      if (wd < 0) wd = 0;
-    }
-    bal = open - principal + wd;
-    totInt += interest; totPay += pay; totExtra += extra; totWd += wd; totBase += basePay;
-    rows.push({m, open, interest, basePay, extra, pay, principal, wd, willWd,
-               wdDefault: Math.max(principal,0), bal: Math.max(bal,0)});
-    if (bal <= 0.005) break;
+    if (willWd){ wd = (wdCustom[m]!==undefined) ? wdCustom[m] : Math.max(principal,0); if (wd<0) wd=0; }
+    bal = open-principal+wd;
+    totInt+=interest; totPay+=pay; totExtra+=extra; totWd+=wd; totBase+=basePay;
+    rows.push({m,open,interest,basePay,extra,pay,principal,wd,willWd,wdDefault:Math.max(principal,0),bal:Math.max(bal,0)});
+    if (bal<=0.005) break;
   }
-  return {rows, months: m, totInt, totPay, totExtra, totWd, totBase, bal, stuck, fixedPMT};
+  return {rows,months:m,totInt,totPay,totExtra,totWd,totBase,bal,stuck,fixedPMT};
 }
-
-// แผงเทียบอัตราดอกเบี้ยทั้งสองแบบ
 function renderRateCompare(p, base){
-  const box = document.getElementById('rateCompare');
-  // จำนวนงวดอ้างอิงสำหรับการเทียบ: โหมดกำหนดงวดใช้ N ที่เลือก, โหมด % ใช้จำนวนงวดจริงจากการจำลอง
-  const N = (p.payMode === 'term') ? p.termN : Math.max(base.months, 1);
-  let effA, flatM, activeIsEff = (p.intMode === 'eff');
+  const box=document.getElementById('rateCompare');
+  const N = (p.payMode==='term') ? p.termN : Math.max(base.months,1);
+  let effA, flatM, activeIsEff = (p.intMode==='eff');
   if (activeIsEff){
     effA = p.effAnnual;
     const PMT = annuityPMT(p.P0, effA/12, N);
-    flatM = (PMT * N - p.P0) / p.P0 / N;              // flat เทียบเท่า
+    flatM = (PMT*N-p.P0)/p.P0/N;
   } else {
     flatM = p.flatMonthly;
-    const PMT = (p.P0 * (1 + flatM * N)) / N;
-    effA = solveMonthlyRate(p.P0, PMT, N) * 12;       // effective เทียบเท่าจาก IRR
+    const PMT = (p.P0*(1+flatM*N))/N;
+    effA = solveMonthlyRate(p.P0, PMT, N)*12;
   }
-  const ratio = flatM > 0 ? (effA / (flatM * 12)) : 0;
+  const ratio = flatM>0 ? (effA/(flatM*12)) : 0;
   box.innerHTML = `
-    <div class="rate-card ${activeIsEff ? 'active' : ''}">
-      <div class="rc-tag">ลดต้นลดดอก (Effective)${activeIsEff ? '<span class="rc-badge">ใช้คำนวณ</span>' : ''}</div>
+    <div class="rate-card ${activeIsEff?'active':''}">
+      <div class="rc-tag">ลดต้นลดดอก (Effective)${activeIsEff?'<span class="rc-badge">ใช้คำนวณ</span>':''}</div>
       <div class="rc-main">${(effA*100).toFixed(2)}<small> % ต่อปี</small></div>
-      <div class="rc-sub">≈ ${(effA/12*100).toFixed(3)} % ต่อเดือน · คิดจากยอดคงเหลือจริง${activeIsEff ? '' : ' · <b>อัตราเทียบเท่าที่แท้จริงของ Flat ที่เลือก</b>'}</div>
+      <div class="rc-sub">≈ ${(effA/12*100).toFixed(3)} % ต่อเดือน · คิดจากยอดคงเหลือจริง${activeIsEff?'':' · <b>อัตราเทียบเท่าที่แท้จริงของ Flat ที่เลือก</b>'}</div>
     </div>
-    <div class="rate-card ${activeIsEff ? '' : 'active'}">
-      <div class="rc-tag">อัตราคงที่ (Flat)${activeIsEff ? '' : '<span class="rc-badge">ใช้คำนวณ</span>'}</div>
+    <div class="rate-card ${activeIsEff?'':'active'}">
+      <div class="rc-tag">อัตราคงที่ (Flat)${activeIsEff?'':'<span class="rc-badge">ใช้คำนวณ</span>'}</div>
       <div class="rc-main">${(flatM*100).toFixed(3)}<small> % ต่อเดือน</small></div>
-      <div class="rc-sub">= ${(flatM*12*100).toFixed(2)} % ต่อปี · คิดจากเงินต้นตั้งต้นทุกงวด${activeIsEff ? ' · <b>Flat เทียบเท่าของอัตราที่เลือก</b>' : ''}</div>
+      <div class="rc-sub">= ${(flatM*12*100).toFixed(2)} % ต่อปี · คิดจากเงินต้นตั้งต้นทุกงวด${activeIsEff?' · <b>Flat เทียบเท่าของอัตราที่เลือก</b>':''}</div>
     </div>
     <div class="rate-card">
       <div class="rc-tag">ข้อเท็จจริงที่ควรรู้</div>
-      <div class="rc-main">×${ratio ? ratio.toFixed(2) : '—'}</div>
-      <div class="rc-sub">ดอกเบี้ย Flat เมื่อแปลงเป็นลดต้นลดดอกจะสูงกว่าตัวเลขที่เห็นประมาณเท่านี้ (เทียบที่ ${N} งวด) — ใช้เปรียบเทียบข้อเสนอสินเชื่อต่างประเภทอย่างเป็นธรรม</div>
+      <div class="rc-main">×${ratio?ratio.toFixed(2):'—'}</div>
+      <div class="rc-sub">ดอกเบี้ย Flat เมื่อแปลงเป็นลดต้นลดดอกจะสูงกว่าตัวเลขที่เห็นประมาณเท่านี้ (เทียบที่ ${N} งวด)</div>
     </div>`;
 }
-
-function calc(){
-  const p = readParams();
-  const base = simulate(p, false);
-  const r = simulate(p, true);
-
+function calcSingle(){
+  const p = readSingleParams();
+  const base = simulateSingle(p, false);
+  const r = simulateSingle(p, true);
   renderRateCompare(p, base);
-
-  const tbody = document.getElementById('tbody');
-  const tfoot = document.getElementById('tfoot');
-  const alertBox = document.getElementById('alertBox');
-  const compareBox = document.getElementById('compareBox');
-  const wdInfoBox = document.getElementById('wdInfoBox');
-  const summaryBox = document.getElementById('summaryBox');
-
-  let html = '';
+  const tbody=document.getElementById('tbody'), tfoot=document.getElementById('tfoot');
+  const alertBox=document.getElementById('alertBox'), compareBox=document.getElementById('compareBox');
+  const wdInfoBox=document.getElementById('wdInfoBox'), summaryBox=document.getElementById('summaryBox');
+  let html='';
   for (const row of r.rows){
-    const isFinal = row.bal <= 0.005;
-    let cls = isFinal ? 'final' : (row.m % 12 === 0 ? 'year' : '');
-    if (row.extra > 0) cls += ' has-extra';
-    if (row.willWd) cls += ' has-wd';
-    const extraVal = extras[row.m] ? extras[row.m] : '';
-    const wdVal = row.willWd ? (wdCustom[row.m] !== undefined ? wdCustom[row.m] : row.wdDefault.toFixed(2)) : '';
-    html += `<tr class="${cls.trim()}">
-      <td>${row.m}</td>
-      <td>${fmt(row.open)}</td>
-      <td>${fmt(row.interest)}</td>
-      <td>${fmt(row.basePay)}</td>
-      <td class="cell-extra"><input type="number" min="0" step="100" inputmode="numeric" placeholder="0" value="${extraVal}" data-m="${row.m}" onchange="setExtra(this)"></td>
-      <td>${fmt(row.pay)}</td>
-      <td>${fmt(row.principal)}</td>
-      <td class="cell-wd">
-        <input type="checkbox" ${row.willWd ? 'checked' : ''} data-m="${row.m}" onchange="toggleWd(this)" title="ติ๊กเพื่อถอนในงวดนี้">
-        <input type="number" min="0" step="100" inputmode="numeric" placeholder="—" value="${wdVal}" data-m="${row.m}" onchange="setWd(this)" ${row.willWd ? '' : 'disabled'} title="ยอดถอน (ค่าเริ่มต้น = ตัดเงินต้นของงวด)">
-      </td>
-      <td>${fmt(row.bal)}</td>
-    </tr>`;
+    const isFinal = row.bal<=0.005;
+    let cls = isFinal?'final':(row.m%12===0?'year':'');
+    if (row.extra>0) cls+=' has-extra';
+    if (row.willWd) cls+=' has-wd';
+    const extraVal = extras[row.m]?extras[row.m]:'';
+    const wdVal = row.willWd?(wdCustom[row.m]!==undefined?wdCustom[row.m]:row.wdDefault.toFixed(2)):'';
+    html += `<tr class="${cls.trim()}"><td>${row.m}</td><td>${fmt(row.open)}</td><td>${fmt(row.interest)}</td><td>${fmt(row.basePay)}</td><td class="cell-extra"><input type="number" min="0" step="100" inputmode="numeric" placeholder="0" value="${extraVal}" data-m="${row.m}" onchange="setExtra(this)"></td><td>${fmt(row.pay)}</td><td>${fmt(row.principal)}</td><td class="cell-wd"><input type="checkbox" ${row.willWd?'checked':''} data-m="${row.m}" onchange="toggleWd(this)"><input type="number" min="0" step="100" inputmode="numeric" placeholder="—" value="${wdVal}" data-m="${row.m}" onchange="setWd(this)" ${row.willWd?'':'disabled'}></td><td>${fmt(row.bal)}</td></tr>`;
   }
   tbody.innerHTML = html;
-
-  alertBox.className = 'alert'; alertBox.textContent = '';
-  if (r.stuck){
-    alertBox.className = 'alert show';
-    alertBox.textContent = '⚠ ด้วยเงื่อนไขนี้ ยอดชำระต่อเดือนไม่เพียงพอครอบคลุมดอกเบี้ย หนี้จะไม่มีวันปิดได้ — กรุณาปรับเงื่อนไขการชำระ';
-  } else if (r.months >= 600 && r.bal > 0.005){
-    alertBox.className = 'alert show';
-    alertBox.textContent = `⚠ คำนวณถึง 600 งวดแล้วยังเหลือยอด ${fmt(r.bal)} บาท — หากมีการถอนต่อเนื่องทุกงวด ยอดหนี้จะไม่ลดลง กรุณายกเลิกการถอนบางงวดหรือเพิ่มยอดชำระ`;
-  }
-
-  const years = Math.floor(r.months/12), months = r.months%12;
-  const closed = !r.stuck && r.bal <= 0.005;
-  const modeLabel = (p.payMode==='term')
-    ? `ค่างวดคงที่ ${fmt(r.fixedPMT)} บ.`
-    : `${(p.payPct*100).toFixed(1)}% ของยอดคงเหลือ`;
+  alertBox.className='alert'; alertBox.textContent='';
+  if (r.stuck){ alertBox.className='alert show'; alertBox.textContent='⚠ ด้วยเงื่อนไขนี้ ยอดชำระต่อเดือนไม่พอครอบคลุมดอกเบี้ย — กรุณาปรับเงื่อนไขการชำระ'; }
+  else if (r.months>=600 && r.bal>0.005){ alertBox.className='alert show'; alertBox.textContent=`⚠ คำนวณถึง 600 งวดแล้วยังเหลือยอด ${fmt(r.bal)} บาท`; }
+  const years=Math.floor(r.months/12), months=r.months%12;
+  const closed = !r.stuck && r.bal<=0.005;
+  const modeLabel = (p.payMode==='term') ? `ค่างวดคงที่ ${fmt(r.fixedPMT)} บ.` : `${(p.payPct*100).toFixed(1)}% ของยอดคงเหลือ`;
   summaryBox.innerHTML = `
     <div class="stat neutral"><div class="label">เงินต้น</div><div class="value">${fmt(p.P0)}</div><div class="sub">${modeLabel}</div></div>
-    <div class="stat"><div class="label">${closed ? 'ระยะเวลาปิดหนี้' : 'จำนวนงวดที่แสดง'}</div><div class="value">${r.months} งวด</div><div class="sub">≈ ${years} ปี ${months} เดือน${closed ? '' : ' · ยังไม่ปิด'}</div></div>
-    <div class="stat"><div class="label">ดอกเบี้ยรวม</div><div class="value">${fmt(r.totInt)}</div><div class="sub">คิดเป็น ${p.P0>0?(r.totInt/p.P0*100).toFixed(1):0}% ของเงินต้น</div></div>
+    <div class="stat"><div class="label">${closed?'ระยะเวลาปิดหนี้':'จำนวนงวดที่แสดง'}</div><div class="value">${r.months} งวด</div><div class="sub">≈ ${years} ปี ${months} เดือน${closed?'':' · ยังไม่ปิด'}</div></div>
+    <div class="stat"><div class="label">ดอกเบี้ยรวม</div><div class="value">${fmt(r.totInt)}</div><div class="sub">${p.P0>0?(r.totInt/p.P0*100).toFixed(1):0}% ของเงินต้น</div></div>
     <div class="stat extra"><div class="label">ชำระเพิ่มรวม</div><div class="value">${fmt(r.totExtra)}</div><div class="sub">บาท</div></div>
     <div class="stat wd"><div class="label">ถอนออกรวม</div><div class="value">${fmt(r.totWd)}</div><div class="sub">${Object.keys(wdOn).length} งวดที่ถอน</div></div>
     <div class="stat"><div class="label">ยอดชำระรวม</div><div class="value">${fmt(r.totPay)}</div><div class="sub">บาท</div></div>`;
-
-  compareBox.className = 'compare';
-  if (r.totExtra > 0 && r.totWd <= 0 && closed && !base.stuck){
-    const saveInt = base.totInt - r.totInt;
-    const saveMonths = base.months - r.months;
-    compareBox.className = 'compare show';
-    compareBox.innerHTML = `📊 เปรียบเทียบกับการจ่ายตามปกติ (ไม่ชำระเพิ่ม): ปิดหนี้เร็วขึ้น <u>${saveMonths} งวด</u> (จาก ${base.months} → ${r.months} งวด) และประหยัดดอกเบี้ย <u>${fmt(saveInt)} บาท</u>${p.intMode==='flat' ? ' · หมายเหตุ: สินเชื่อ Flat จริงบางสัญญาไม่ลดดอกเบี้ยเมื่อโปะ ควรตรวจสอบเงื่อนไข' : ''}`;
+  compareBox.className='compare';
+  if (r.totExtra>0 && r.totWd<=0 && closed && !base.stuck){
+    const saveInt=base.totInt-r.totInt, saveMonths=base.months-r.months;
+    compareBox.className='compare show';
+    compareBox.innerHTML = `📊 เทียบกับจ่ายปกติ: ปิดหนี้เร็วขึ้น <u>${saveMonths} งวด</u> · ประหยัดดอกเบี้ย <u>${fmt(saveInt)} บาท</u>${p.intMode==='flat'?' · หมายเหตุ: Flat บางสัญญาไม่ลดดอกเมื่อโปะ':''}`;
   }
-
-  wdInfoBox.className = 'wdinfo';
-  const wdMonths = r.rows.filter(x => x.willWd);
+  wdInfoBox.className='wdinfo';
+  const wdMonths = r.rows.filter(x=>x.willWd);
   if (wdMonths.length){
-    const wdInt = wdMonths.reduce((s,x) => s + x.interest, 0);
-    const first = wdMonths[0].m, last = wdMonths[wdMonths.length-1].m;
-    wdInfoBox.className = 'wdinfo show';
-    wdInfoBox.innerHTML = `💡 ช่วงที่เลือกถอน (งวดที่ ${first}–${last} รวม ${wdMonths.length} งวด): ดอกเบี้ยเฉพาะช่วงนี้ = <u>${fmt(wdInt)} บาท</u> · ถอนออกรวม ${fmt(r.totWd)} บาท — หากถอนเท่ายอดตัดเงินต้นทุกงวด ยอดคงเหลือจะคงที่ และตัวเลขนี้คือ "ต้นทุนการถือวงเงิน" ของช่วงเวลาดังกล่าวโดยตรง`;
+    const wdInt = wdMonths.reduce((s,x)=>s+x.interest,0);
+    const first=wdMonths[0].m, last=wdMonths[wdMonths.length-1].m;
+    wdInfoBox.className='wdinfo show';
+    wdInfoBox.innerHTML = `💡 ช่วงถอน (งวด ${first}–${last} รวม ${wdMonths.length} งวด): ดอกเบี้ยเฉพาะช่วงนี้ = <u>${fmt(wdInt)} บาท</u>`;
   }
+  tfoot.innerHTML = `<tr><td colspan="2">รวมทั้งสิ้น</td><td>${fmt(r.totInt)}</td><td>${fmt(r.totBase)}</td><td>${fmt(r.totExtra)}</td><td>${fmt(r.totPay)}</td><td>${fmt(r.totPay-r.totInt)}</td><td>${fmt(r.totWd)}</td><td>—</td></tr>`;
+}
+function setExtra(el){const m=+el.dataset.m, v=parseFloat(el.value); if (!v||v<=0) delete extras[m]; else extras[m]=v; calcSingle();}
+function toggleWd(el){const m=+el.dataset.m; if (el.checked) wdOn[m]=true; else {delete wdOn[m]; delete wdCustom[m];} calcSingle();}
+function setWd(el){const m=+el.dataset.m; if (!wdOn[m]) return; const v=parseFloat(el.value); if (isNaN(v)||v<0) delete wdCustom[m]; else wdCustom[m]=v; calcSingle();}
+function clearExtras(){extras={}; calcSingle();}
+function clearWithdraws(){wdOn={}; wdCustom={}; calcSingle();}
 
-  tfoot.innerHTML = `<tr><td colspan="2">รวมทั้งสิ้น</td><td>${fmt(r.totInt)}</td><td>${fmt(r.totBase)}</td><td>${fmt(r.totExtra)}</td><td>${fmt(r.totPay)}</td><td>${fmt(r.totPay - r.totInt)}</td><td>${fmt(r.totWd)}</td><td>—</td></tr>`;
+/* ================= TAB 2: MULTI LOAN ================= */
+const LOAN_COLORS = ['#a55a1e','#1d5a8a','#0e7a4e','#8a2f5a','#b8860b','#6b3fa0','#0a7f8a'];
+let loans = [];   // {id, name, principal, rate, installments, monthlyPay, startYM, monthlyExtra}
+let loanSeq = 0;
+
+function newLoan(defaults={}){
+  loanSeq++;
+  const today = new Date();
+  const ym = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0');
+  return {
+    id: 'L' + loanSeq,
+    name: defaults.name || 'สินเชื่อรายการที่ ' + loanSeq,
+    principal: defaults.principal ?? 100000,
+    rate: defaults.rate ?? 15,          // % ต่อปี ลดต้นลดดอก
+    installments: defaults.installments ?? 36,
+    monthlyPay: defaults.monthlyPay ?? 0,   // 0 = คำนวณจาก annuity
+    startYM: defaults.startYM || ym,
+    monthlyExtra: defaults.monthlyExtra ?? 0
+  };
+}
+function addLoan(){ loans.push(newLoan()); renderLoans(); calcMulti(); }
+function removeLoan(id){ loans = loans.filter(l => l.id !== id); renderLoans(); calcMulti(); }
+function updateLoanField(id, field, value){
+  const l = loans.find(x => x.id === id); if (!l) return;
+  if (field === 'name' || field === 'startYM') l[field] = value;
+  else l[field] = parseFloat(value) || 0;
+  renderLoans(); calcMulti();
+}
+function loadMultiExample(){
+  loans = [
+    newLoan({name:'บัตรกดเงินสด', principal:50000, rate:24, installments:36, monthlyPay:2000, startYM:'2026-01', monthlyExtra:0}),
+    newLoan({name:'สินเชื่อรถยนต์', principal:400000, rate:5.5, installments:60, monthlyPay:0, startYM:'2026-03', monthlyExtra:0}),
+    newLoan({name:'สินเชื่อบ้าน', principal:1500000, rate:4.5, installments:180, monthlyPay:0, startYM:'2026-06', monthlyExtra:1000})
+  ];
+  renderLoans(); calcMulti();
+  showToast('โหลดตัวอย่าง 3 รายการเรียบร้อย');
 }
 
-function setExtra(el){
-  const m = parseInt(el.dataset.m, 10);
-  const v = parseFloat(el.value);
-  if (!v || v <= 0) delete extras[m]; else extras[m] = v;
-  calc();
+function simulateLoan(loan){
+  const rMonth = (loan.rate/100)/12;
+  let payment = loan.monthlyPay > 0 ? loan.monthlyPay : annuityPMT(loan.principal, rMonth, loan.installments);
+  let bal = loan.principal, m=0, totInt=0, totPaid=0, totExtra=0;
+  const MAX=600, rows=[]; let stuck=false;
+  while (bal>0.005 && m<MAX){
+    m++;
+    const open=bal;
+    const interest = open*rMonth;
+    const extra = loan.monthlyExtra || 0;
+    let pay = payment + extra;
+    if (pay >= open+interest) pay = open+interest;
+    const principal = pay-interest;
+    if (principal<=0.005){ stuck=true; m--; break; }
+    bal = open-principal;
+    totInt+=interest; totPaid+=pay; totExtra+=Math.min(extra, pay-payment>=0?extra:0);
+    rows.push({m, open, interest, payment:pay, principal, balance:Math.max(bal,0)});
+    if (bal<=0.005) break;
+  }
+  return {rows, months:rows.length, totInt, totPaid, totExtra, stuck, actualPayment: payment};
 }
-function toggleWd(el){
-  const m = parseInt(el.dataset.m, 10);
-  if (el.checked) wdOn[m] = true;
-  else { delete wdOn[m]; delete wdCustom[m]; }
-  calc();
-}
-function setWd(el){
-  const m = parseInt(el.dataset.m, 10);
-  if (!wdOn[m]) return;
-  const v = parseFloat(el.value);
-  if (isNaN(v) || v < 0) delete wdCustom[m];
-  else wdCustom[m] = v;
-  calc();
-}
-function clearExtras(){ extras = {}; calc(); }
-function clearWithdraws(){ wdOn = {}; wdCustom = {}; calc(); }
 
+function calcMulti(){
+  const grid = document.getElementById('loansGrid');
+  const hint = document.getElementById('loansHint');
+  const countEl = document.getElementById('loanCount');
+  const tableCard = document.getElementById('multiTableCard');
+  const summary = document.getElementById('multiSummary');
+  const alertBox = document.getElementById('multiAlert');
+  const insight = document.getElementById('multiInsight');
+  const insightBody = document.getElementById('multiInsightBody');
+  const thead = document.getElementById('multiThead');
+  const tbody = document.getElementById('multiTbody');
+  const tfoot = document.getElementById('multiTfoot');
+  countEl.textContent = loans.length + ' รายการ';
+
+  if (loans.length === 0){
+    tableCard.style.display='none'; summary.innerHTML=''; alertBox.className='alert';
+    insight.style.display='none'; hint.style.display='block';
+    return;
+  }
+  hint.style.display='none';
+
+  // จำลองแต่ละสินเชื่อ
+  const sims = loans.map((l,i) => ({loan:l, color:LOAN_COLORS[i%LOAN_COLORS.length], sim: simulateLoan(l)}));
+
+  // อัพเดต stats ในการ์ด
+  sims.forEach(({loan, sim}) => {
+    const el = document.querySelector(`[data-loan-stats="${loan.id}"]`);
+    if (!el) return;
+    const startD = ymToDate(loan.startYM);
+    const closeD = addMonths(startD, sim.months-1);
+    const suggested = annuityPMT(loan.principal, (loan.rate/100)/12, loan.installments);
+    let warn = '';
+    if (sim.stuck) warn = '⚠ ยอดจ่ายไม่พอครอบคลุมดอกเบี้ย — หนี้จะไม่ปิด';
+    else if (sim.months > loan.installments + 1) warn = `⚠ ยอดจ่ายต่ำกว่าค่างวดสูตร (${fmt(suggested)}) → ผ่อนนานกว่ากำหนด ${sim.months-loan.installments} งวด`;
+    el.innerHTML = `
+      <div class="lst"><div class="l">ค่างวดจริง/เดือน</div><div class="v">${fmt(sim.actualPayment)}</div></div>
+      <div class="lst"><div class="l">ปิดใน</div><div class="v">${sim.stuck?'—':sim.months+' งวด'}</div></div>
+      <div class="lst"><div class="l">ดอกเบี้ยรวม</div><div class="v">${fmt(sim.totInt)}</div></div>
+      <div class="lst" style="grid-column:1/-1"><div class="l">เริ่มชำระ → ปิดบัญชี</div><div class="v" style="font-size:.8em">${fmtThai(startD)} → ${sim.stuck?'—':fmtThai(closeD)}</div></div>
+      ${warn ? `<div class="loan-warn" style="grid-column:1/-1">${warn}</div>` : ''}`;
+  });
+
+  // สร้างตารางสรุปรายเดือน — key เป็น YYYY-MM (Gregorian)
+  const monthMap = new Map();  // key -> {date, perLoan:{loanId:{payment, balance}}, events:[]}
+  sims.forEach(({loan, sim}) => {
+    const startD = ymToDate(loan.startYM);
+    if (sim.rows.length === 0) return;
+    sim.rows.forEach((r, i) => {
+      const d = addMonths(startD, i);
+      const key = d.getFullYear() + '-' + String(d.getMonth()).padStart(2,'0');
+      if (!monthMap.has(key)) monthMap.set(key, {date:d, perLoan:{}, events:[]});
+      const entry = monthMap.get(key);
+      entry.perLoan[loan.id] = {payment:r.payment, balance:r.balance, interest:r.interest};
+      if (i === 0) entry.events.push({type:'start', loanId:loan.id});
+      if (i === sim.rows.length-1) entry.events.push({type:'end', loanId:loan.id});
+    });
+  });
+  const sortedKeys = [...monthMap.keys()].sort();
+
+  // Header
+  let thHtml = '<tr><th>เดือน/ปี</th>';
+  sims.forEach(({loan, color}) => {
+    thHtml += `<th style="background:${color}">${loan.name}</th>`;
+  });
+  thHtml += '<th>รวมชำระเดือน</th><th>ยอดหนี้คงเหลือรวม</th><th class="col-multi">เหตุการณ์</th></tr>';
+  thead.innerHTML = thHtml;
+
+  // Body
+  let bodyHtml = '', grandPay=0, grandInt=0, i=0;
+  for (const key of sortedKeys){
+    i++;
+    const e = monthMap.get(key);
+    let rowPay = 0, rowRemaining = 0, cells = '';
+    sims.forEach(({loan}) => {
+      const cell = e.perLoan[loan.id];
+      if (cell){
+        cells += `<td>${fmt(cell.payment)}</td>`;
+        rowPay += cell.payment; rowRemaining += cell.balance;
+      } else {
+        // ยังไม่เริ่ม → นับเงินต้นเต็ม หรือปิดแล้ว → 0
+        const startD = ymToDate(loan.startYM);
+        const cellD = e.date;
+        if (cellD < startD){
+          cells += `<td style="color:#c9d1cc">—</td>`;
+          rowRemaining += loan.principal;
+        } else {
+          cells += `<td style="color:#c9d1cc">✓ ปิดแล้ว</td>`;
+        }
+      }
+    });
+    grandPay += rowPay; grandInt += Object.values(e.perLoan).reduce((s,x)=>s+x.interest,0);
+    let eventsHtml = '';
+    for (const ev of e.events){
+      const ln = loans.find(l=>l.id===ev.loanId);
+      if (!ln) continue;
+      if (ev.type === 'start') eventsHtml += `<div>🆕 <b>${ln.name}</b> เริ่มชำระ</div>`;
+      if (ev.type === 'end')   eventsHtml += `<div>🎉 <b>${ln.name}</b> ปิดบัญชี</div>`;
+    }
+    const cls = e.events.length ? 'event' : (i%12===0 ? 'year' : '');
+    bodyHtml += `<tr class="${cls}"><td style="text-align:left;font-weight:600">${fmtThai(e.date)}</td>${cells}<td><b>${fmt(rowPay)}</b></td><td>${fmt(rowRemaining)}</td><td class="cell-multi" style="text-align:left;font-size:.85em">${eventsHtml||'—'}</td></tr>`;
+  }
+  tbody.innerHTML = bodyHtml;
+
+  // Footer
+  const totalPay = sims.reduce((s,x)=>s+x.sim.totPaid,0);
+  const totalInt = sims.reduce((s,x)=>s+x.sim.totInt,0);
+  const totalPrin = loans.reduce((s,l)=>s+l.principal,0);
+  let tfHtml = `<tr><td>รวมทั้งสิ้น</td>`;
+  sims.forEach(({sim}) => { tfHtml += `<td>${fmt(sim.totPaid)}</td>`; });
+  tfHtml += `<td>${fmt(totalPay)}</td><td>ดอกเบี้ย ${fmt(totalInt)}</td><td class="cell-multi" style="text-align:left">${sortedKeys.length} เดือน</td></tr>`;
+  tfoot.innerHTML = tfHtml;
+  tableCard.style.display = 'block';
+
+  // Summary bar
+  const firstStart = sims.reduce((min,x) => { const d=ymToDate(x.loan.startYM); return !min||d<min?d:min; }, null);
+  const anyStuck = sims.some(x => x.sim.stuck);
+  const lastEnd = anyStuck ? null : sortedKeys.length ? monthMap.get(sortedKeys[sortedKeys.length-1]).date : null;
+  const peakMonthly = Math.max(...[...monthMap.values()].map(e => Object.values(e.perLoan).reduce((s,x)=>s+x.payment,0)));
+
+  summary.innerHTML = `
+    <div class="stat multi-stat"><div class="label">💼 ยอดหนี้รวม (เงินต้น)</div><div class="value">${fmt(totalPrin)}</div><div class="sub">บาท · ${loans.length} รายการ</div></div>
+    <div class="stat multi-stat"><div class="label">📅 ภาระสูงสุด/เดือน</div><div class="value">${fmt(peakMonthly)}</div><div class="sub">บาท (เดือนที่ทุกสินเชื่อเรียกเก็บ)</div></div>
+    <div class="stat"><div class="label">ดอกเบี้ยรวมทั้งหมด</div><div class="value">${fmt(totalInt)}</div><div class="sub">${totalPrin>0?(totalInt/totalPrin*100).toFixed(1):0}% ของเงินต้นรวม</div></div>
+    <div class="stat"><div class="label">ยอดชำระรวมทั้งหมด</div><div class="value">${fmt(totalPay)}</div><div class="sub">บาท</div></div>
+    <div class="stat"><div class="label">เริ่มชำระ → ปิดครบ</div><div class="value" style="font-size:1em">${firstStart?fmtThai(firstStart):'—'}<br>→ ${lastEnd?fmtThai(lastEnd):'—'}</div><div class="sub">${anyStuck?'⚠ มีสินเชื่อที่จ่ายไม่พอ':(lastEnd?sortedKeys.length+' เดือนตลอดแผน':'—')}</div></div>`;
+
+  // Insight
+  const withExtra = loans.some(l => l.monthlyExtra > 0);
+  const totalMonthlyExtra = loans.reduce((s,l)=>s+(l.monthlyExtra||0),0);
+  if (withExtra){
+    // จำลองเทียบไม่มี extra
+    const noExtraSims = loans.map(l => simulateLoan({...l, monthlyExtra:0}));
+    const noExtraInt = noExtraSims.reduce((s,x)=>s+x.totInt,0);
+    const noExtraMonths = Math.max(...noExtraSims.map(x=>x.months));
+    const withMonths = Math.max(...sims.map(x=>x.sim.months));
+    const saveInt = noExtraInt - totalInt;
+    insight.style.display='block';
+    insightBody.innerHTML = `
+      <p>🚀 <b>คุณกำลังโปะเพิ่มรวม ${fmt(totalMonthlyExtra)} บาท/เดือน</b> — ช่วยประหยัดดอกเบี้ยรวมได้ประมาณ <b style="color:${saveInt>0?'var(--ok)':'var(--warn)'}">${fmt(saveInt)} บาท</b> ตลอดแผน และปิดหนี้เร็วขึ้น ~<b>${noExtraMonths-withMonths} เดือน</b> เมื่อเทียบกับการจ่ายค่างวดปกติ</p>
+      <p>💡 <b>กลยุทธ์แนะนำ:</b> โฟกัสโปะสินเชื่อที่ <b>ดอกเบี้ยสูงสุด</b>ก่อน (Debt Avalanche) จะประหยัดดอกเบี้ยรวมได้มากกว่า — จากรายการปัจจุบัน สินเชื่อดอกเบี้ยสูงสุดคือ "<b>${[...loans].sort((a,b)=>b.rate-a.rate)[0].name}</b>" ที่ ${[...loans].sort((a,b)=>b.rate-a.rate)[0].rate}% ต่อปี</p>`;
+  } else if (loans.length >= 2){
+    insight.style.display='block';
+    const highest = [...loans].sort((a,b)=>b.rate-a.rate)[0];
+    insightBody.innerHTML = `
+      <p>💡 <b>ยังไม่ได้ตั้งยอดโปะเพิ่ม</b> — ลองใส่ "โปะเพิ่ม/เดือน" ในการ์ดสินเชื่อที่ดอกเบี้ยสูงสุดก่อน คือ "<b>${highest.name}</b>" (${highest.rate}%/ปี) เพื่อดูว่าถ้าโปะเพิ่มเพียงเดือนละไม่กี่พัน จะประหยัดดอกเบี้ยและปิดหนี้เร็วขึ้นแค่ไหน</p>
+      <p>📌 <b>กลยุทธ์ Debt Avalanche</b> — ทุ่มโปะรายการดอกสูงก่อน = ประหยัดสุด · <b>Debt Snowball</b> — ทุ่มโปะรายการยอดน้อยที่สุดก่อน = ได้กำลังใจจากการปิดบัญชีเร็ว</p>`;
+  } else insight.style.display='none';
+
+  // Alert
+  if (anyStuck){
+    alertBox.className = 'alert show';
+    alertBox.textContent = '⚠ มีสินเชื่อบางรายการที่ยอดจ่ายรายเดือนไม่ครอบคลุมดอกเบี้ย จะไม่มีวันปิดหนี้ได้ — ตรวจสอบการ์ดที่มีแถบเตือน';
+  } else { alertBox.className='alert'; alertBox.textContent=''; }
+}
+
+function ymToDate(ym){
+  const [y,m] = ym.split('-').map(Number);
+  return new Date(y, m-1, 1);
+}
+function renderLoans(){
+  const grid = document.getElementById('loansGrid');
+  document.getElementById('loanCount').textContent = loans.length + ' รายการ';
+  grid.innerHTML = loans.map((l,i) => {
+    const color = LOAN_COLORS[i%LOAN_COLORS.length];
+    return `
+    <div class="loan-card" style="--loan-color:${color}">
+      <div class="loan-head">
+        <input type="text" class="loan-name" value="${escapeHtml(l.name)}" onchange="updateLoanField('${l.id}','name',this.value)" placeholder="ชื่อสินเชื่อ">
+        <button class="rm-btn" onclick="removeLoan('${l.id}')" title="ลบรายการนี้">✕</button>
+      </div>
+      <div class="loan-fields">
+        <div class="field"><label>ยอดสินเชื่อ (บาท)</label><input type="number" min="1" step="1000" value="${l.principal}" onchange="updateLoanField('${l.id}','principal',this.value)"></div>
+        <div class="field"><label>ดอกเบี้ย (% ต่อปี · ลดต้นลดดอก)</label><input type="number" min="0" step="0.1" value="${l.rate}" onchange="updateLoanField('${l.id}','rate',this.value)"></div>
+        <div class="field"><label>จำนวนงวด (เดือน)</label><input type="number" min="1" step="1" value="${l.installments}" onchange="updateLoanField('${l.id}','installments',this.value)"></div>
+        <div class="field"><label>ยอดจ่าย/เดือน (0 = คำนวณจากงวด)</label><input type="number" min="0" step="100" value="${l.monthlyPay}" onchange="updateLoanField('${l.id}','monthlyPay',this.value)"></div>
+        <div class="field"><label>📅 เริ่มชำระ (เดือน/ปี)</label><input type="month" value="${l.startYM}" onchange="updateLoanField('${l.id}','startYM',this.value)"></div>
+        <div class="field"><label>💰 โปะเพิ่ม/เดือน (บาท)</label><input type="number" min="0" step="100" value="${l.monthlyExtra}" onchange="updateLoanField('${l.id}','monthlyExtra',this.value)"></div>
+      </div>
+      <div class="loan-stats" data-loan-stats="${l.id}"></div>
+    </div>`;
+  }).join('');
+}
+function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+/* ================= EXPORT / IMPORT ================= */
+function collectState(){
+  return {
+    version: 2,
+    exported_at: new Date().toISOString(),
+    single: {
+      principal: +document.getElementById('inPrincipal').value,
+      intMode: document.querySelector('input[name=intMode]:checked').value,
+      rateEff: +document.getElementById('inRateEff').value,
+      rateFlat: +document.getElementById('inRateFlat').value,
+      payMode: document.querySelector('input[name=payMode]:checked').value,
+      term: +document.getElementById('inTerm').value,
+      payPct: +document.getElementById('inPayPct').value,
+      minPay: +document.getElementById('inMinPay').value,
+      extras: {...extras}, wdOn: {...wdOn}, wdCustom: {...wdCustom}
+    },
+    multi: { loans: loans.map(l => ({...l})), loanSeq }
+  };
+}
+function exportData(){
+  const state = collectState();
+  const blob = new Blob([JSON.stringify(state, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'loan-plan-' + new Date().toISOString().slice(0,10) + '.json';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('บันทึกไฟล์ข้อมูลเรียบร้อย');
+}
+function triggerImport(){ document.getElementById('importFile').click(); }
+async function onImportFile(input){
+  const file = input.files[0];
+  if (!file) return;
+  try{
+    const text = await file.text();
+    const state = JSON.parse(text);
+    applyState(state);
+    showToast('โหลดข้อมูลเรียบร้อย');
+  } catch(err){
+    alert('ไฟล์ไม่ถูกต้องหรืออ่านไม่ได้: ' + err.message);
+  }
+  input.value = '';
+}
+function applyState(state){
+  if (state.single){
+    const s = state.single;
+    if (s.principal!=null) document.getElementById('inPrincipal').value = s.principal;
+    if (s.rateEff!=null)   document.getElementById('inRateEff').value   = s.rateEff;
+    if (s.rateFlat!=null)  document.getElementById('inRateFlat').value  = s.rateFlat;
+    if (s.term!=null)      document.getElementById('inTerm').value      = s.term;
+    if (s.payPct!=null)    document.getElementById('inPayPct').value    = s.payPct;
+    if (s.minPay!=null)    document.getElementById('inMinPay').value    = s.minPay;
+    if (s.intMode) document.querySelector(`input[name=intMode][value=${s.intMode}]`).checked = true;
+    if (s.payMode) document.querySelector(`input[name=payMode][value=${s.payMode}]`).checked = true;
+    extras = s.extras || {}; wdOn = s.wdOn || {}; wdCustom = s.wdCustom || {};
+  }
+  if (state.multi){
+    loans = (state.multi.loans || []).map(l => ({...l}));
+    loanSeq = state.multi.loanSeq || loans.length;
+  }
+  onModeChange();
+  renderLoans();
+  calcMulti();
+}
+
+/* ================= INIT ================= */
 onModeChange();
+renderLoans();
 </script>
 </body>
 </html>

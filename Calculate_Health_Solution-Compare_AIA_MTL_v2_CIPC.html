@@ -1850,14 +1850,31 @@
                       </div>
                     </div>
 
-                    <!-- TABLE: Auto Mode (Read-only display) -->
+                    <!-- Campaign Control Bar -->
+                    <div class="no-print" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:12px;padding:9px 14px;background:var(--bg-surface);border-radius:var(--r-md);border:1px solid var(--b-soft);">
+                      <label style="display:flex;align-items:center;gap:7px;font-size:0.82em;color:var(--t-secondary);cursor:pointer;user-select:none;font-weight:600;">
+                        <input type="checkbox" id="cipc-campaign-enabled" checked onchange="updateCIPCCampaign()"
+                          style="width:15px;height:15px;cursor:pointer;accent-color:var(--c-primary);">
+                        🎁 แสดงส่วนลดแคมเปญ (ไม่ต้องจ่ายเบี้ยปีที่ 20)
+                      </label>
+                      <div id="cipc-campaign-date-wrap" style="display:flex;align-items:center;gap:7px;">
+                        <span style="font-size:0.80em;color:var(--t-tertiary);">สิ้นสุดแคมเปญ</span>
+                        <input type="date" id="cipc-campaign-date" value="2026-06-30" onchange="updateCIPCCampaign()"
+                          style="padding:4px 8px;font-size:0.82em;font-weight:600;background:var(--bg-input);
+                                 border:1px solid var(--b-gold);border-radius:var(--r-sm);
+                                 color:var(--c-primary);font-family:inherit;outline:none;">
+                      </div>
+                      <span style="font-size:0.75em;color:var(--t-muted);margin-left:auto;">
+                        * เมื่อปิด: แสดงเบี้ยรวม 20 ปีเต็ม ไม่มีส่วนลด
+                      </span>
+                    </div>
                     <div id="cipc-table-auto">
                       <table class="cipc-main-table">
                         <thead>
                           <tr>
                             <th style="width:13%">เบี้ยต่อปี</th>
                             <th style="width:14%">รวมเบี้ย<br>20 ปี</th>
-                            <th class="hl-col" style="width:15%">ซื้อก่อน 30 มิ.ย.<br><span style="font-size:0.85em;">เหลือเบี้ยรวม 19 ปี</span></th>
+                            <th class="hl-col" style="width:15%" id="cipc-th-campaign-auto"><span id="cipc-th-campaign-label-auto">ซื้อก่อน 30 มิ.ย.</span><br><span style="font-size:0.85em;" id="cipc-th-campaign-sub-auto">เหลือเบี้ยรวม 19 ปี</span></th>
                             <th style="width:12%">ปีที่เริ่ม<br>คุ้มทุน</th>
                             <th style="width:16%">มูลค่า<br>ณ ปีคุ้มทุน</th>
                             <th style="width:12%">อายุ<br>ณ ปีที่ 35</th>
@@ -1895,7 +1912,7 @@
                           <tr>
                             <th style="width:13%">เบี้ยต่อปี</th>
                             <th style="width:14%">รวมเบี้ย<br>20 ปี</th>
-                            <th class="hl-col" style="width:15%">ซื้อก่อน 30 มิ.ย.<br><span style="font-size:0.85em;">เหลือเบี้ยรวม 19 ปี</span></th>
+                            <th class="hl-col" style="width:15%" id="cipc-th-campaign-manual"><span id="cipc-th-campaign-label-manual">ซื้อก่อน 30 มิ.ย.</span><br><span style="font-size:0.85em;" id="cipc-th-campaign-sub-manual">เหลือเบี้ยรวม 19 ปี</span></th>
                             <th style="width:12%">อายุที่เริ่ม<br>คุ้มทุน</th>
                             <th style="width:16%">มูลค่า<br>ณ ปีคุ้มทุน</th>
                             <th style="width:12%">อายุที่ถอนได้<br>มากที่สุด</th>
@@ -4698,15 +4715,15 @@ function vtBuildBoard(optId, tiersArr, gender, gTxt, useCampaign) {
     }
 
     // กรณี Manual mode — แจ้งที่มาของข้อมูล (เพื่อความโปร่งใส ไม่ใช่ปิดกั้นการแสดงผล)
-//<!!--    if (!isAutoMode && (cvBkAmtRaw || cvMxAmtRaw)) {
-//        html += '<div style="margin-top:8px;padding:8px 14px;background:#eff6ff;border:1px dashed #93c5fd;border-radius:8px;">'
-//              + '<span style="font-size:0.78em;color:#1e40af;">✏️ ข้อมูลจุดคุ้มทุน/มูลค่าสูงสุดมาจากการกรอกเองใน Slide 1 (โหมด "ใส่เองทั้งหมด")</span>'
-//              + '</div>';
-//    } else if (!isAutoMode && !cvBkAmtRaw && !cvMxAmtRaw) {
-//        html += '<div style="margin-top:8px;padding:8px 14px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;">'
-//              + '<span style="font-size:0.78em;color:#64748b;">ℹ️ ยังไม่มีข้อมูลจุดคุ้มทุน/มูลค่าสูงสุด — กรุณากรอกที่ Slide 1 (Tab CI ProCare) โหมด "ใส่เองทั้งหมด"</span>'
-//              + '</div>';
-//  }
+    if (!isAutoMode && (cvBkAmtRaw || cvMxAmtRaw)) {
+        html += '<div style="margin-top:8px;padding:8px 14px;background:#eff6ff;border:1px dashed #93c5fd;border-radius:8px;">'
+              + '<span style="font-size:0.78em;color:#1e40af;">✏️ ข้อมูลจุดคุ้มทุน/มูลค่าสูงสุดมาจากการกรอกเองใน Slide 1 (โหมด "ใส่เองทั้งหมด")</span>'
+              + '</div>';
+    } else if (!isAutoMode && !cvBkAmtRaw && !cvMxAmtRaw) {
+        html += '<div style="margin-top:8px;padding:8px 14px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:8px;">'
+              + '<span style="font-size:0.78em;color:#64748b;">ℹ️ ยังไม่มีข้อมูลจุดคุ้มทุน/มูลค่าสูงสุด — กรุณากรอกที่ Slide 1 (Tab CI ProCare) โหมด "ใส่เองทั้งหมด"</span>'
+              + '</div>';
+    }
 
     html += '</div>'; // end vt-track-wrap
 
@@ -5146,26 +5163,70 @@ function recalcCIPC() {
     showToast('✅ คำนวณมูลค่าเวนคืนใหม่แล้ว');
 }
 
+// ── Campaign (ส่วนลดเบี้ยปีที่ 20) Control ────────────────────────
+function updateCIPCCampaign() {
+    const campEl   = document.getElementById('cipc-campaign-enabled');
+    const dateEl   = document.getElementById('cipc-campaign-date');
+    const dateWrap = document.getElementById('cipc-campaign-date-wrap');
+    const active   = campEl ? campEl.checked : true;
+
+    // ซ่อน/แสดงช่องวันที่ตามสถานะ checkbox
+    if (dateWrap) dateWrap.style.display = active ? 'flex' : 'none';
+
+    // แปลงวันที่เป็นข้อความไทย เช่น "30 มิ.ย. 69"
+    let dateTxt = '30 มิ.ย.';
+    if (active && dateEl && dateEl.value) {
+        const THAI_MONTHS = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.',
+                             'ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+        const d = new Date(dateEl.value);
+        if (!isNaN(d.getTime())) {
+            const beYear = (d.getFullYear() + 543) % 100; // พ.ศ. 2 หลัก
+            dateTxt = `${d.getDate()} ${THAI_MONTHS[d.getMonth()]} ${String(beYear).padStart(2,'0')}`;
+        }
+    }
+
+    // อัปเดตหัวตารางทั้ง Auto และ Manual mode
+    ['auto','manual'].forEach(m => {
+        const lblEl = document.getElementById(`cipc-th-campaign-label-${m}`);
+        const subEl = document.getElementById(`cipc-th-campaign-sub-${m}`);
+        if (lblEl) lblEl.textContent = active ? `ซื้อก่อน ${dateTxt}` : 'เบี้ยรวมทั้งหมด';
+        if (subEl) subEl.textContent = active ? 'เหลือเบี้ยรวม 19 ปี' : 'เบี้ยรวม 20 ปี (ไม่มีส่วนลด)';
+    });
+
+    // คำนวณใหม่ให้ตัวเลขในตารางอัปเดตตาม
+    updateCIPCSlide1();
+    // sync Vitality tabs ที่อ้างอิงค่าจาก slide 1 ด้วย
+    if (typeof vbRender === 'function' && document.getElementById('tab-vitality')) vbRender();
+    if (typeof vtRender === 'function' && document.getElementById('tab-vtimeline')) vtRender();
+}
+
 function updateCIPCSlide1() {
     try {
         const gender = document.getElementById('inp-gender').value;
+        // อ่านสถานะแคมเปญ
+        const campEl     = document.getElementById('cipc-campaign-enabled');
+        const campActive = campEl ? campEl.checked : true;
+        const payYears   = campActive ? 19 : 20;
 
         function fillCIPCOption(optId, color) {
             const mtype = (document.getElementById(`main-type-${optId}`) || {}).value || 'CIProCare';
             const age   = parseInt(document.getElementById(`age-${optId}`).value) || 0;
             const sum   = parseInt(document.getElementById(`main-sum-${optId}`).value) || 0;
             const prem  = Math.round(app.calculateMainPremiumForPlan(sum, age, gender, mtype));
-            const total19 = prem * 19;
-            const total20 = prem * 20;
+            const total20  = prem * 20;
+            // เบี้ยรวมตามแคมเปญ (19 ปีถ้าเปิดแคมเปญ, 20 ปีถ้าปิด)
+            const totalCamp = prem * payYears;
+            // ใช้ totalCamp เป็นเกณฑ์คำนวณจุดคุ้มทุน
+            const total19  = totalCamp;
 
             // fill เบี้ยทั้ง auto และ manual cells
             const setEl = (id, val) => { const e = document.getElementById(id); if(e) e.textContent = val; };
             setEl(`cipc-prem${optId}`,      prem.toLocaleString());
             setEl(`cipc-total20y${optId}`,  total20.toLocaleString());
-            setEl(`cipc-total19y${optId}`,  total19.toLocaleString());
+            setEl(`cipc-total19y${optId}`,  totalCamp.toLocaleString());
             setEl(`cipc-prem${optId}m`,     prem.toLocaleString());
             setEl(`cipc-total20y${optId}m`, total20.toLocaleString());
-            setEl(`cipc-total19y${optId}m`, total19.toLocaleString());
+            setEl(`cipc-total19y${optId}m`, totalCamp.toLocaleString());
             setEl(`cipc-sum${optId}-lbl`,   sum.toLocaleString());
             setEl(`cipc-age${optId}-lbl`,   age);
 
@@ -5336,6 +5397,9 @@ const EXPORT_FIELDS = [
     { id: 'cipc-bk-amt2', type: 'value' },
     { id: 'cipc-mx-yr2',  type: 'value' },
     { id: 'cipc-mx-amt2', type: 'value' },
+    // Campaign settings (ส่วนลดเบี้ยปีที่ 20)
+    { id: 'cipc-campaign-enabled', type: 'checked' },
+    { id: 'cipc-campaign-date',    type: 'value' },
 ];
 
 function showToast(msg, duration = 2800) {
@@ -5400,6 +5464,8 @@ function importData(event) {
 
             // restore CIPC mode
             if (data._cipcMode) setCIPCMode(data._cipcMode);
+            // อัปเดตหัวตารางแคมเปญตามค่าที่ import มา
+            if (typeof updateCIPCCampaign === 'function') updateCIPCCampaign();
 
             // Trigger re-render ตาม field ที่สำคัญ (main type, health type)
             [1, 2, 3].forEach(id => {

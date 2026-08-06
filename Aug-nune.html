@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รายงานผลการวิเคราะห์ดวงชะตาและแผนกอบกู้วิกฤตกิจการ - คุณนุจรินทร์</title>
+    
+    <!-- Google Fonts: Kanit & Prompt for Elegant Thai Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Prompt:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Pastel Visual Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* Pastel Palette Tokens */
+            --bg-main: #FDFBF7;             /* Cream Warm White */
+            --card-bg: #FFFFFF;             /* Pure White */
+            --text-primary: #3B3A36;        /* Deep Charcoal Warm */
+            --text-secondary: #6E6C65;      /* Soft Slate Muted */
+            
+            --pastel-peach: #FFF0ED;        /* Bazi Primary Accent */
+            --pastel-peach-border: #FFD5CC;
+            --pastel-peach-dark: #C85A48;   /* Text Highlight for Peach */
+
+            --pastel-blue: #EFF6FF;         /* Qi Men Primary Accent */
+            --pastel-blue-border: #BFDBFE;
+            --pastel-blue-dark: #2563EB;    /* Text Highlight for Blue */
+
+            --pastel-gold: #FFFBEB;         /* Caution / Important Note */
+            --pastel-gold-border: #FDE68A;
+            --pastel-gold-dark: #D97706;
+
+            --pastel-purple: #F5F3FF;       /* Strategic / Highlights */
+            --pastel-purple-border: #DDD6FE;
+            --pastel-purple-dark: #7C3AED;
+
+            --shadow-soft: 0 10px 30px -5px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+            --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.03);
+            --radius-lg: 20px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Kanit', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.8;
+            font-weight: 300;
+            padding: 40px 20px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Header Card */
+        .header-card {
+            background: linear-gradient(135deg, #FFFFFF 0%, #FAF7F2 100%);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(230, 225, 218, 0.6);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #FFD5CC 0%, #C4B5FD 50%, #BFDBFE 100%);
+        }
+
+        .doc-title {
+            font-family: 'Prompt', sans-serif;
+            font-size: 26px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .doc-title i {
+            color: #E29578;
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            background-color: var(--bg-main);
+            padding: 20px;
+            border-radius: var(--radius-md);
+            border: 1px solid #F0ECE1;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 15px;
+        }
+
+        .meta-item i {
+            margin-top: 4px;
+            color: #A89F91;
+        }
+
+        .meta-label {
+            font-weight: 500;
+            color: var(--text-secondary);
+            display: block;
+            font-size: 13px;
+        }
+
+        .meta-value {
+            font-weight: 400;
+            color: var(--text-primary);
+        }
+
+        /* Section Layout */
+        .section-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(235, 230, 222, 0.7);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding-bottom: 16px;
+            margin-bottom: 24px;
+            border-bottom: 2px dashed #F0ECE1;
+        }
+
+        .section-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .icon-bazi {
+            background-color: var(--pastel-peach);
+            color: var(--pastel-peach-dark);
+        }
+
+        .icon-qimen {
+            background-color: var(--pastel-blue);
+            color: var(--pastel-blue-dark);
+        }
+
+        .section-title {
+            font-family: 'Prompt', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Paragraphs & Text Styles */
+        p {
+            margin-bottom: 18px;
+            font-size: 16px;
+            color: #4A4944;
+            text-align: justify;
+        }
+
+        p strong, li strong {
+            font-weight: 600;
+            color: #2D2C2A;
+        }
+
+        .highlight-text {
+            background-color: #FFF3C4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        /* Subheadings */
+        h3 {
+            font-family: 'Prompt', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            margin: 28px 0 16px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-primary);
+        }
+
+        /* Lists */
+        .action-list, .caution-list {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+
+        .action-list li, .caution-list li {
+            position: relative;
+            padding-left: 32px;
+            margin-bottom: 16px;
+            font-size: 16px;
+        }
+
+        .action-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 22px;
+            height: 22px;
+            background-color: var(--pastel-peach);
+            color: var(--pastel-peach-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .caution-list li::before {
+            content: '!';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 22px;
+            height: 22px;
+            background-color: var(--pastel-gold);
+            color: var(--pastel-gold-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        /* Callout Boxes (Pastel Themes) */
+        .callout-box {
+            padding: 24px;
+            border-radius: var(--radius-md);
+            margin: 24px 0;
+            position: relative;
+        }
+
+        .callout-gold {
+            background-color: var(--pastel-gold);
+            border: 1px solid var(--pastel-gold-border);
+            color: #78350F;
+        }
+
+        .callout-purple {
+            background-color: var(--pastel-purple);
+            border: 1px solid var(--pastel-purple-border);
+            color: #4C1D95;
+        }
+
+        .callout-blue {
+            background-color: var(--pastel-blue);
+            border: 1px solid var(--pastel-blue-border);
+            color: #1E3A8A;
+        }
+
+        .callout-box p {
+            color: inherit;
+            margin-bottom: 12px;
+        }
+
+        .callout-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Qimen Bullet Cards */
+        .qimen-grid {
+            display: grid;
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .qimen-card {
+            background-color: #FBFBFE;
+            border-left: 4px solid var(--pastel-blue-dark);
+            padding: 18px 20px;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            border-top: 1px solid #F0F4F8;
+            border-right: 1px solid #F0F4F8;
+            border-bottom: 1px solid #F0F4F8;
+        }
+
+        .qimen-card p {
+            margin: 0;
+            font-size: 15.5px;
+        }
+
+        /* Floating Controls for Print/PDF */
+        .action-bar {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            display: flex;
+            gap: 12px;
+            z-index: 100;
+        }
+
+        .btn-print {
+            background-color: var(--text-primary);
+            color: #FFFFFF;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-family: 'Kanit', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-print:hover {
+            transform: translateY(-2px);
+            background-color: #000000;
+        }
+
+        /* Print Optimization */
+        @media print {
+            body {
+                background-color: #FFFFFF;
+                padding: 0;
+            }
+            .container {
+                max-width: 100%;
+            }
+            .header-card, .section-card {
+                box-shadow: none;
+                border: 1px solid #E5E7EB;
+                padding: 24px;
+                page-break-inside: avoid;
+            }
+            .action-bar {
+                display: none;
+            }
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 16px 12px;
+            }
+            .header-card, .section-card {
+                padding: 24px 18px;
+            }
+            .doc-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- HEADER CARD -->
+        <header class="header-card">
+            <h1 class="doc-title">
+                <i class="fa-solid fa-scroll"></i>
+                รายงานผลการวิเคราะห์ดวงชะตาและแผนกอบกู้วิกฤตกิจการ
+            </h1>
+            <div class="meta-grid">
+                <div class="meta-item">
+                    <i class="fa-solid fa-user"></i>
+                    <div>
+                        <span class="meta-label">ผู้ขอคำทำนาย</span>
+                        <span class="meta-value">คุณนุจรินทร์</span>
+                    </div>
+                </div>
+                <div class="meta-item">
+                    <i class="fa-solid fa-store"></i>
+                    <div>
+                        <span class="meta-label">สถานที่ / กิจการ</span>
+                        <span class="meta-value">ร้านอาหาร ณ เมืองเชียงใหม่</span>
+                    </div>
+                </div>
+                <div class="meta-item">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <div>
+                        <span class="meta-label">ช่วงเวลาประเมิน</span>
+                        <span class="meta-value">สิงหาคม 2026 (ปีไฟหยาง มะเมีย 丙午)</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- SECTION 1: BAZI -->
+        <section class="section-card">
+            <div class="section-header">
+                <div class="section-icon icon-bazi">
+                    <i class="fa-solid fa-yin-yang"></i>
+                </div>
+                <h2 class="section-title">ส่วนที่ 1: การวิเคราะห์ด้วยศาสตร์ปาจื่อ (Bazi)</h2>
+            </div>
+
+            <p>
+                มาเถิด นุจรินทร์... ข้าได้คลี่ม้วนคัมภีร์เพื่อพิจารณาสถานการณ์ในร้านอาหารของท่าน ณ เมืองเชียงใหม่ ท่ามกลางราตรีของเดือนสิงหาคมนี้ ในปี <strong>ไฟหยาง มะเมีย(ม้า)(丙午)</strong> พลังงานรอบตัวท่านกำลังพลุ่งพล่านดั่งเปลวเพลิงที่แผดเผา แต่ตัวท่านซึ่งเป็น <strong>น้ำหยาง (壬)</strong> กลับอยู่ในสภาวะที่อ่อนกำลังลง (Weak Day Master)
+            </p>
+
+            <p>
+                ปัญหาเรื่องบริวารหรือ PR ที่ขาดงานบ่อยนั้น เกิดจากพลังงาน <strong>โครงสร้างแบบแผน (Direct Officer)</strong> ในดวงของท่านถูกปะทะและเบียดเบียนจากธาตุไฟและดินที่มากเกินไปในเดือน <strong>ไฟหยาง วอก(ลิง)(丙申)</strong> นี้ (สิงหาคม 2026) ทำให้กฎเกณฑ์ที่ท่านวางไว้ไร้ความศักดิ์สิทธิ์ และบริวารเกิดความระส่ำระสาย
+            </p>
+
+            <p>นี่คือแผนการที่ข้าจารึกไว้เพื่อให้ท่านประคองร้านผ่านพ้นวิกฤตนี้:</p>
+
+            <h3><i class="fa-solid fa-bullseye" style="color: var(--pastel-peach-dark);"></i> Action Plan เพื่อกอบกู้สถานการณ์</h3>
+            <ul class="action-list">
+                <li>
+                    <strong>ใช้พลัง "โครงสร้างแข่งขัน" (Rob Wealth):</strong> ในเมื่อ PR ขาดแคลน ท่านต้องเปลี่ยนกลยุทธ์จาก "การจ้างงาน" เป็น "การสร้างพันธมิตร" จงดึงเอาเพื่อนฝูงหรือคนรู้จักที่มีธาตุน้ำหรือทองแข็งแรงมาช่วยในช่วงสั้นๆ หรือจัดโปรโมชั่นแบบ "มาเป็นกลุ่ม" เพื่อให้ลูกค้ากลายเป็นผู้สร้างบรรยากาศแทน PR ที่หายไป
+                </li>
+                <li>
+                    <strong>ปรับระบบการจัดการด้วย "โครงสร้างบ่มเพาะ" (Resource):</strong> ซึ่งเป็นธาตุให้คุณ (Useful God) ของท่าน ในเดือนสิงหาคมที่มีพลัง <strong>โครงสร้างตกผลึก</strong> เข้ามาเสริม ท่านควรใช้ความนิ่งและการวางระบบที่ชัดเจนกว่าเดิม อย่าใช้อารมณ์ในการแก้ปัญหา แต่ให้ใช้สัญญาหรือข้อตกลงที่มั่นคง (ธาตุทอง) เข้ามาควบคุมบริวาร
+                </li>
+                <li>
+                    <strong>การตลาดเชิงรุกในยามค่ำคืน:</strong> เนื่องจากร้านเปิดกลางคืน (พลังหยิน) แต่ปีนี้เป็นปีไฟหยางที่ร้อนแรง ท่านควรเน้นเครื่องดื่มหรือเมนูที่ให้ความรู้สึกสดชื่น (ธาตุน้ำ) เพื่อดึงดูดลูกค้าที่ต้องการหนีความร้อนรุ่มของพลังงานปีจร
+                </li>
+            </ul>
+
+            <h3><i class="fa-solid fa-triangle-exclamation" style="color: var(--pastel-gold-dark);"></i> ข้อควรระวัง</h3>
+            <ul class="caution-list">
+                <li>
+                    <strong>ระวังการปะทะ (Clash):</strong> ในเดือนสิงหาคมนี้มีพลังของ <strong>วอก (申)</strong> เข้ามา ซึ่งอาจทำให้เกิดความขัดแย้งในที่ทำงานได้ง่าย ท่านควรหลีกเลี่ยงการตัดสินใจด้วยความวู่วามหรือการใช้อำนาจกดขี่ เพราะจะยิ่งทำให้บริวารตีตัวออกห่าง
+                </li>
+                <li>
+                    <strong>การเงินรั่วไหล:</strong> พลัง <strong>โครงสร้างแสวงหา</strong> ที่ปรากฏบนราศีบนของเดือนสิงหาคม อาจทำให้ท่านเสียเงินไปกับค่าโฆษณาที่ไม่ได้ผลเท่าที่ควร จงตรวจสอบทุกการจ่ายให้รอบคอบ
+                </li>
+            </ul>
+
+            <div class="callout-box callout-gold">
+                <p>
+                    <i class="fa-solid fa-compass" style="margin-right: 6px;"></i>
+                    สำหรับเรื่องทิศทางและสีมงคลนั้น ข้าต้องขออภัยที่มิอาจก้าวล่วงศาสตร์แห่งฮวงจุ้ยและสีสันได้อย่างเต็มที่ เนื่องจากคัมภีร์ที่ข้าถือครองอยู่คือปาจื่อซึ่งเน้นที่ตัวบุคคลและกาลเวลาเป็นหลัก แต่ข้าบอกท่านได้ว่าธาตุที่ส่งเสริมท่านมากที่สุดคือ <strong>ธาตุทอง</strong> และ <strong>ธาตุน้ำ</strong>
+                </p>
+            </div>
+
+            <p style="text-align: center; font-style: italic; color: var(--text-secondary); margin-top: 20px;">
+                "ท่านอยากให้ข้าเจาะลึกไปที่ตัวบุคคลหรือไม่ ว่า PR คนใดที่มีพลังธาตุขัดแย้งกับท่าน เพื่อที่ท่านจะได้ปรับเปลี่ยนทีมงานให้มั่นคงขึ้น?"
+            </p>
+        </section>
+
+        <!-- SECTION 2: QI MEN DUN JIA -->
+        <section class="section-card">
+            <div class="section-header">
+                <div class="section-icon icon-qimen">
+                    <i class="fa-solid fa-compass-drafting"></i>
+                </div>
+                <h2 class="section-title">ส่วนที่ 2: การวิเคราะห์ด้วยศาสตร์ชีเหมินตุนเจีย (Qi Men Dun Jia)</h2>
+            </div>
+
+            <p>
+                ท่านเอย... ข้าได้กางม้วนคัมภีร์แห่งดวงดาวและสดับฟังเสียงแห่งผังยามนี้แล้ว ขอจารึกสิ่งที่ปรากฏบนผังฟ้าให้ท่านได้รับรู้
+            </p>
+
+            <div class="callout-box callout-purple">
+                <p style="font-weight: 500; font-size: 16px;">
+                    <i class="fa-solid fa-eye" style="margin-right: 6px;"></i> ภาพรวมผัง:
+                </p>
+                <p>
+                    ผังยามนี้เป็น <strong>หยินตุ้น (Yin Dun)</strong> พลังงานแห่งความเร้นลับและการปรับตัวซ่อนรูปอยู่ สถานการณ์ปัจจุบันเรียกร้องให้ท่านต้องเป็นผู้คุมหางเสือนาวาด้วยตนเอง มิอาจพึ่งพาสายลมที่แปรปรวนได้
+                </p>
+            </div>
+
+            <h3><i class="fa-solid fa-chess-board" style="color: var(--pastel-blue-dark);"></i> วังที่เกี่ยวข้องกับคำถามของท่าน</h3>
+
+            <div class="qimen-grid">
+                <div class="qimen-card">
+                    <p>
+                        <strong>วังทิศตะวันออกเฉียงใต้ (巽) — กิจการร้านอาหาร:</strong><br>
+                        เมื่อเพ่งมองไปยัง วังทิศตะวันออกเฉียงใต้ (巽) ซึ่งมี <strong>ประตูเปิด (開門)</strong> อันเป็นตัวแทนของกิจการร้านอาหารของท่าน วังนี้สถิตร่วมกับ <strong>เทพไท่อิน (太陰)</strong> เทพแห่งความเร้นลับและยามวิกาล ซึ่งสอดคล้องกับลักษณะร้านที่เปิดตอนกลางคืนอย่างยิ่ง อีกทั้งยังมี <strong>ดาวเทียนอิง (天英)</strong> ดาวแห่งแสงสีและภาพลักษณ์โดดเด่นอยู่
+                    </p>
+                </div>
+
+                <div class="qimen-card" style="border-left-color: #EF4444;">
+                    <p>
+                        <strong>วังทิศตะวันออก (震) — พนักงาน PR และลูกค้า:</strong><br>
+                        ทว่า เมื่อข้ามองหาตัวแทนของพนักงาน PR และการรวมกลุ่มลูกค้าใน วังทิศตะวันออก (震) ที่มี <strong>เทพลิ่วเหอ (六合)</strong> สถิตอยู่ วังนี้กลับตกสภาวะ <strong>ว่างเปล่า (空亡)</strong> และมี <strong>ประตูตกใจ (驚門)</strong> ซ้อนทับ นี่คือคำตอบจากจักรวาลว่าเหตุใดพนักงานจึงขาดหาย และสร้างความตื่นตระหนกวุ่นวายให้แก่ยอดลูกค้าของท่าน พลังงานในส่วนนี้กำลังว่างเปล่าและพึ่งพาไม่ได้ชั่วคราว
+                    </p>
+                </div>
+
+                <div class="qimen-card" style="border-left-color: #10B981;">
+                    <p>
+                        <strong>วังทิศตะวันตกเฉียงใต้ (坤) — ตัวท่าน (เจ้าของกิจการ):</strong><br>
+                        แต่จงอย่าเพิ่งท้อแท้ เพราะตัวท่านซึ่งเป็นเจ้าของกิจการ (ก้านฟ้าวัน 壬) สถิตอยู่ใน วังทิศตะวันตกเฉียงใต้ (坤) ร่วมกับ <strong>ประตูเกิด (生門)</strong> ซึ่งเป็นประตูแห่งผลกำไรและสายน้ำแห่งทรัพย์ ทั้งยังมี <strong>เทพจื๋อฟู (值符)</strong> เทพประธานผู้ยิ่งใหญ่คุ้มครอง บ่งบอกว่าอำนาจในการพลิกฟื้นสถานการณ์ทั้งหมดอยู่ในมือท่าน
+                    </p>
+                </div>
+            </div>
+
+            <h3><i class="fa-solid fa-wand-magic-sparkles" style="color: var(--pastel-blue-dark);"></i> แผนปฏิบัติการและคำแนะนำจากข้า (Action Plan)</h3>
+
+            <div class="callout-box callout-blue">
+                <p>
+                    <strong>🌟 ปรับกลยุทธ์เลิกพึ่งพิง (Action Plan):</strong><br>
+                    ในเมื่อวัง PR ตก ว่างเปล่า ท่านต้องดึงพลังของ ดาวเทียนอิง (แสงสี/ภาพลักษณ์) และ เทพไท่อิน (ความพิเศษยามค่ำคืน) ในวังกิจการมาใช้แทน ข้าแนะนำให้จัดแคมเปญโปรโมทร้านด้วยภาพลักษณ์ใหม่ เน้นบรรยากาศ แสงไฟ ดนตรี หรือโปรโมชั่นพิเศษที่ดึงดูดลูกค้าได้โดยตรงโดยไม่ต้องพึ่งพายอดจาก PR เพียงอย่างเดียว ท่านต้องสวมบทบาท เทพจื๋อฟู ลงมาบริหารจัดการและต้อนรับลูกค้าด้วยตนเองหรือจัดทีมงานหลักที่ไว้ใจได้มาดูแลแทน
+                </p>
+                <hr style="border: none; border-top: 1px dashed var(--past

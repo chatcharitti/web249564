@@ -1146,6 +1146,134 @@
         .vt-footer-text { font-size:0.86em; color:#166534; line-height:1.7; }
         .vt-footer-text strong { color:#15803d; font-size:1.05em; }
 
+
+        /* ============================================
+           CARE FOR CANCER TAB
+           ============================================ */
+        .cc-container { max-width: 1320px; margin: 0 auto; padding: 0 0 40px; }
+        .cc-ctrl-bar { display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-bottom:16px; padding:10px 14px; background:#f8fafc; border-radius:var(--r-md); border:1px solid #e2e8f0; }
+        .cc-font-btn { width:26px;height:26px;border-radius:var(--r-sm);border:1px solid var(--b-soft);background:#fff;color:#1a2f4f;cursor:pointer;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;font-family:inherit; }
+        .cc-font-btn:hover { background:#fee2e2; }
+        .cc-print-btn { padding:6px 14px; background:#fef2f2; color:#b91c1c; border:1.5px solid #dc2626; border-radius:var(--r-md); cursor:pointer; font-family:inherit; font-size:12px; font-weight:700; display:inline-flex; align-items:center; gap:6px; }
+        .cc-print-btn:hover { background:#fee2e2; }
+
+        /* Header card */
+        .cc-header-card {
+            background: linear-gradient(135deg,#fff5f5 0%,#fef2f2 100%);
+            border: 2px solid #dc2626; border-radius: var(--r-xl);
+            padding: 20px 26px 16px; margin-bottom: 20px;
+            -webkit-print-color-adjust: exact; print-color-adjust: exact;
+        }
+        .cc-header-title { font-size:1.3em; font-weight:800; color:#b91c1c; margin-bottom:3px; }
+        .cc-header-sub { font-size:0.83em; color:#7f1d1d; margin-bottom:14px; }
+        .cc-info-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:10px; }
+        .cc-info-box { background:#fff; border:1.5px solid #fca5a5; border-radius:var(--r-md); padding:10px 14px; }
+        .cc-info-label { font-size:0.71em; color:#991b1b; letter-spacing:0.07em; text-transform:uppercase; font-weight:700; }
+        .cc-info-value { font-size:1.08em; font-weight:800; color:#1a2f4f; margin-top:3px; }
+        .cc-info-value.red { color:#dc2626; }
+
+        /* Section */
+        .cc-section { background:#fff; border:1.5px solid #e5e7eb; border-radius:var(--r-lg); padding:20px 24px 18px; margin-bottom:22px; }
+        .cc-section-title { font-size:1.08em; font-weight:800; color:#b91c1c; margin-bottom:4px; display:flex; align-items:center; gap:8px; }
+        .cc-section-sub { font-size:0.80em; color:#6b7280; margin-bottom:16px; line-height:1.6; }
+
+        /* Treatment flow (photo1 style) */
+        .cc-flow-note { background:#fefce8; border:1px solid #fde047; border-radius:8px; padding:9px 14px; font-size:0.79em; color:#713f12; line-height:1.65; margin-bottom:16px; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+        .cc-flow-wrap { position:relative; padding:10px 0 0; }
+        .cc-flow-track { display:flex; align-items:stretch; gap:0; }
+        .cc-flow-start {
+            flex-shrink:0; width:88px; background:#4b5563; color:#fff; border-radius:8px;
+            padding:12px 8px; display:flex; align-items:center; justify-content:center; text-align:center;
+            font-size:0.74em; font-weight:700; line-height:1.5; align-self:center;
+            -webkit-print-color-adjust:exact; print-color-adjust:exact;
+        }
+        .cc-flow-phases { flex:1; display:flex; gap:8px; }
+        .cc-phase { flex:1; border-radius:10px; padding:12px 10px; }
+        .cc-phase.diagnosis { background:#fffbeb; border:1.5px solid #fbbf24; }
+        .cc-phase.followup  { background:#f1f5f9; border:1.5px solid #94a3b8; }
+        .cc-phase-title { font-size:0.80em; font-weight:800; text-align:center; margin-bottom:10px; }
+        .cc-phase.diagnosis .cc-phase-title { color:#92400e; }
+        .cc-phase.followup  .cc-phase-title { color:#334155; }
+        .cc-steps { display:flex; gap:6px; justify-content:space-around; }
+        .cc-step { flex:1; text-align:center; min-width:0; }
+        .cc-step-icon {
+            width:46px; height:46px; border-radius:50%; margin:0 auto 5px;
+            display:flex; align-items:center; justify-content:center; font-size:1.35em;
+            border:2.5px solid; background:#fff;
+            -webkit-print-color-adjust:exact; print-color-adjust:exact;
+        }
+        .cc-step-icon.blue { border-color:#2563eb; }
+        .cc-step-icon.orange { border-color:#ea580c; }
+        .cc-step-icon.red { border-color:#b91c1c; }
+        .cc-step-label { font-size:0.71em; font-weight:700; color:#374151; line-height:1.45; }
+        .cc-axis {
+            height:4px; background:linear-gradient(90deg,#2563eb 0%,#ea580c 55%,#b91c1c 100%);
+            border-radius:2px; margin:12px 0 10px; position:relative;
+            -webkit-print-color-adjust:exact; print-color-adjust:exact;
+        }
+        .cc-flow-end {
+            flex-shrink:0; width:92px; background:#f97316; color:#fff; border-radius:8px;
+            padding:12px 8px; display:flex; align-items:center; justify-content:center; text-align:center;
+            font-size:0.74em; font-weight:700; line-height:1.5; align-self:center;
+            -webkit-print-color-adjust:exact; print-color-adjust:exact;
+        }
+        .cc-detail-list { font-size:0.76em; color:#4b5563; line-height:1.8; margin-top:8px; padding-left:4px; }
+        .cc-detail-list b { color:#1f2937; }
+
+        /* Benefit timeline (photo2 style) */
+        .cc-story-row { display:grid; grid-template-columns:1fr; gap:12px; }
+        .cc-event {
+            display:grid; grid-template-columns:120px 1fr 200px; gap:14px; align-items:center;
+            padding:12px 14px; border-radius:10px; border:1.5px solid #e5e7eb; background:#fff;
+        }
+        .cc-event.payout { border-color:#f97316; background:#fff7ed; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+        .cc-event-date { font-size:0.78em; font-weight:800; color:#fff; background:#1e3a5f; border-radius:20px; padding:5px 10px; text-align:center; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+        .cc-event.payout .cc-event-date { background:#c2410c; }
+        .cc-event-desc { font-size:0.83em; color:#374151; line-height:1.6; }
+        .cc-event-desc b { color:#1a2f4f; }
+        .cc-event-amt { text-align:right; }
+        .cc-event-amt .amt-val { font-size:1.15em; font-weight:800; color:#c2410c; }
+        .cc-event-amt .amt-calc { font-size:0.71em; color:#9a3412; margin-top:2px; }
+        .cc-event-amt .amt-none { font-size:0.78em; color:#9ca3af; }
+
+        /* Total box */
+        .cc-total-box {
+            margin-top:16px; padding:16px 22px; border-radius:12px;
+            background:#ede9fe; border:2px solid #7c3aed;
+            display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+            -webkit-print-color-adjust:exact; print-color-adjust:exact;
+        }
+        .cc-total-label { font-size:0.88em; font-weight:700; color:#5b21b6; }
+        .cc-total-val { font-size:1.7em; font-weight:800; color:#5b21b6; }
+        .cc-total-sub { font-size:0.76em; color:#6d28d9; }
+
+        /* 7 treatments + 3 tech (photo3) */
+        .cc-tt-grid { display:grid; grid-template-columns:1.2fr 1fr; gap:18px; }
+        .cc-tt-list { display:flex; flex-direction:column; gap:9px; }
+        .cc-tt-item { display:flex; gap:10px; align-items:flex-start; padding:9px 12px; background:#fafafa; border-radius:8px; border-left:3px solid #dc2626; }
+        .cc-tt-icon { font-size:1.2em; flex-shrink:0; }
+        .cc-tt-name { font-size:0.84em; font-weight:800; color:#b91c1c; }
+        .cc-tt-desc { font-size:0.75em; color:#4b5563; line-height:1.55; margin-top:2px; }
+        .cc-tech-item { padding:12px 14px; border-radius:10px; margin-bottom:10px; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+        .cc-tech-item.mri { background:#fef2f2; border:1.5px solid #dc2626; }
+        .cc-tech-item.ct  { background:#fff7ed; border:1.5px solid #ea580c; }
+        .cc-tech-item.pet { background:#fefce8; border:1.5px solid #ca8a04; }
+        .cc-tech-name { font-size:0.86em; font-weight:800; margin-bottom:4px; }
+        .cc-tech-item.mri .cc-tech-name { color:#b91c1c; }
+        .cc-tech-item.ct  .cc-tech-name { color:#c2410c; }
+        .cc-tech-item.pet .cc-tech-name { color:#a16207; }
+        .cc-tech-desc { font-size:0.75em; color:#44403c; line-height:1.6; }
+
+        .cc-footnote { font-size:0.72em; color:#9ca3af; line-height:1.7; margin-top:14px; }
+
+        @media print {
+            .cc-ctrl-bar { display:none !important; }
+            .cc-section, .cc-header-card { break-inside: avoid; }
+            .cc-header-card, .cc-phase, .cc-flow-start, .cc-flow-end, .cc-axis,
+            .cc-event.payout, .cc-total-box, .cc-tech-item, .cc-flow-note, .cc-step-icon,
+            .cc-event-date { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+        }
+
         @media print {
             .vt-ctrl-bar { display:none !important; }
             .vt-board { break-inside: avoid; box-shadow:none !important; border:1.5px solid #d4af37 !important; }
@@ -1287,6 +1415,10 @@
         <button class="main-tab-btn" onclick="switchMainTab('tab-vtimeline')" id="tab-btn-vtimeline">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             Vitality Timeline
+        </button>
+        <button class="main-tab-btn" onclick="switchMainTab('tab-cancer')" id="tab-btn-cancer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>
+            Care for Cancer
         </button>
     </div>
     <div class="main-tab-wrapper">
@@ -2403,6 +2535,198 @@
 
         </div>
     </div><!-- end tab-vtimeline -->
+
+    <!-- ═══ TAB: Care for Cancer ═══ -->
+    <div class="main-tab-panel" id="tab-cancer" style="display:none !important;">
+        <div class="cc-container">
+
+            <!-- Control Bar -->
+            <div class="cc-ctrl-bar no-print">
+                <span style="font-size:0.82em;font-weight:700;color:#374151;">🎗️ AIA Care for Cancer · ข้อมูลจาก Option 1</span>
+                <div style="display:flex;align-items:center;gap:5px;margin-left:auto;">
+                    <span style="font-size:0.78em;color:#6b7280;">ขนาด A</span>
+                    <button class="cc-font-btn" onclick="ccFontSize(-1)">A−</button>
+                    <span style="min-width:34px;text-align:center;font-size:11px;font-weight:700;color:#475569;" id="cc-font-lbl">100%</span>
+                    <button class="cc-font-btn" onclick="ccFontSize(1)">A+</button>
+                </div>
+                <button class="cc-print-btn" onclick="ccPrint()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                    พิมพ์ A4
+                </button>
+            </div>
+
+            <!-- Header: ข้อมูลลูกค้าจาก Option 1 -->
+            <div class="cc-header-card">
+                <div class="cc-header-title">🎗️ AIA Care for Cancer — สัญญาเพิ่มเติมโรคมะเร็ง</div>
+                <div class="cc-header-sub">ช่วยปกป้องคุณจากการสูญเสียรายได้ หากเจ็บป่วยจากโรคมะเร็ง · ครอบคลุมการรักษาแบบ IPD และ OPD</div>
+                <div class="cc-info-grid" id="cc-info-grid">
+                    <div class="cc-info-box">
+                        <div class="cc-info-label">ผู้เอาประกัน (Option 1)</div>
+                        <div class="cc-info-value" id="cc-age">–</div>
+                    </div>
+                    <div class="cc-info-box">
+                        <div class="cc-info-label">ทุนประกัน CFC</div>
+                        <div class="cc-info-value red" id="cc-sum">–</div>
+                    </div>
+                    <div class="cc-info-box">
+                        <div class="cc-info-label">เบี้ยประกัน CFC / ปี</div>
+                        <div class="cc-info-value red" id="cc-prem">–</div>
+                    </div>
+                    <div class="cc-info-box">
+                        <div class="cc-info-label">ชดเชยรายวัน IPD</div>
+                        <div class="cc-info-value red" id="cc-ipd-rate">–</div>
+                    </div>
+                    <div class="cc-info-box">
+                        <div class="cc-info-label">ชดเชยต่อครั้ง OPD</div>
+                        <div class="cc-info-value red" id="cc-opd-rate">–</div>
+                    </div>
+                </div>
+                <!-- หมายเหตุแพคเกจซื้อคู่ประกันชีวิต -->
+                <div id="cc-package-note" style="margin-top:12px;padding:11px 15px;background:#fff;border:1.5px dashed #dc2626;border-radius:8px;font-size:0.82em;color:#7f1d1d;line-height:1.7;display:none;">
+                </div>
+            </div>
+
+            <!-- Section 1: ขั้นตอนการดูแลรักษาผู้ป่วยโรคมะเร็ง -->
+            <div class="cc-section">
+                <div class="cc-section-title">📋 ขั้นตอนการดูแลรักษาผู้ป่วยโรคมะเร็ง</div>
+                <div class="cc-section-sub">ตัวอย่างเส้นทางการรักษาตั้งแต่พบอาการจนถึงโรคสงบ</div>
+                <div class="cc-flow-note">
+                    ทั้งนี้ ขั้นตอนการรักษาของผู้ป่วยขึ้นอยู่กับระยะความรุนแรงของโรค ระยะเวลาในการรักษา
+                    วิธีการรักษาตามการวินิจฉัยของแพทย์ และรวมถึงการวางแผนการรักษาของแพทย์แต่ละท่าน
+                </div>
+
+                <div class="cc-flow-wrap">
+                    <div class="cc-flow-track">
+                        <div class="cc-flow-start">มีอาการ<br>หรือเจอก้อนเนื้อ<br>ที่ผิดปกติ</div>
+                        <div style="flex:1;padding:0 10px;">
+                            <div class="cc-flow-phases">
+                                <div class="cc-phase diagnosis" style="flex:1.6;">
+                                    <div class="cc-phase-title">ระยะวินิจฉัยและรักษา</div>
+                                    <div class="cc-steps">
+                                        <div class="cc-step"><div class="cc-step-icon blue">🩺</div><div class="cc-step-label">พบแพทย์</div></div>
+                                        <div class="cc-step"><div class="cc-step-icon blue">🔬</div><div class="cc-step-label">วินิจฉัยว่าเป็น<br>"โรคมะเร็ง"</div></div>
+                                        <div class="cc-step"><div class="cc-step-icon orange">💉</div><div class="cc-step-label">เคมีบำบัด</div></div>
+                                        <div class="cc-step"><div class="cc-step-icon orange">☢️</div><div class="cc-step-label">ฉายแสง</div></div>
+                                    </div>
+                                </div>
+                                <div class="cc-phase followup" style="flex:1;">
+                                    <div class="cc-phase-title">ระยะติดตามผล</div>
+                                    <div class="cc-steps">
+                                        <div class="cc-step"><div class="cc-step-icon red">📅</div><div class="cc-step-label">ติดตามผล<br>เป็นระยะ</div></div>
+                                        <div class="cc-step"><div class="cc-step-icon red">😊</div><div class="cc-step-label">โรคสงบ<br>(Remission)</div></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cc-axis"></div>
+                            <div class="cc-flow-phases">
+                                <div style="flex:1.6;">
+                                    <div class="cc-steps">
+                                        <div class="cc-step"><div class="cc-step-icon blue">🧪</div><div class="cc-step-label">ตรวจค่ามะเร็ง<br>X-ray / MRI / CT / PET<br>ตรวจชิ้นเนื้อ</div></div>
+                                        <div class="cc-step"><div class="cc-step-icon orange">🏥</div><div class="cc-step-label">ผ่าตัด</div></div>
+                                        <div class="cc-step"><div class="cc-step-icon orange">🖥️</div><div class="cc-step-label">CT/MRI Scan อีกครั้ง<br>เพื่อวางแผนการรักษา</div></div>
+                                    </div>
+                                </div>
+                                <div style="flex:1;">
+                                    <div class="cc-steps">
+                                        <div class="cc-step"><div class="cc-step-icon red">📋</div><div class="cc-step-label">ประเมิน<br>ผลการรักษา</div></div>
+                                        <div class="cc-step"><div class="cc-step-icon red">🔄</div><div class="cc-step-label">กลับมาเป็นซ้ำ<br>(Relapsed Cancer)</div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cc-flow-end">ดูแลรักษา<br>ร่างกาย<br>ให้แข็งแรง<br>อย่างต่อเนื่อง</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: ตัวอย่างการจ่ายค่าชดเชย -->
+            <div class="cc-section">
+                <div class="cc-section-title">💰 ตัวอย่างการจ่ายค่าชดเชย — AIA Care for Cancer</div>
+                <div class="cc-section-sub" id="cc-story-sub">คำนวณจากทุนประกัน CFC ของ Option 1 · สมมติกรณีมะเร็งเต้านมระยะที่ 2</div>
+                <div class="cc-story-row" id="cc-story-rows">
+                    <div style="text-align:center;padding:30px;color:#9ca3af;font-size:0.9em;">กรุณากรอกทุน CFC ใน Option 1</div>
+                </div>
+                <div id="cc-total-wrap"></div>
+                <div class="cc-footnote">
+                    * ตัวอย่างข้างต้นเป็นเพียงกรณีสมมติเพื่อประกอบการอธิบาย ผลประโยชน์จริงขึ้นอยู่กับแผนการรักษาของแพทย์และเงื่อนไขในกรมธรรม์<br>
+                    * ผลประโยชน์ค่าชดเชยรายวันรวมสูงสุด 1,000 วัน ตลอดอายุสัญญา
+                </div>
+            </div>
+
+            <!-- Section 3: 7 แนวทางรักษา + 3 เทคโนโลยีตรวจ -->
+            <div class="cc-section">
+                <div class="cc-section-title">🔬 ความก้าวหน้าทางการแพทย์เปิดโอกาสให้รักษาโรคมะเร็งได้หลากหลายแนวทางมากขึ้น</div>
+                <div class="cc-section-sub">7 แนวทางหลักเพื่อการรักษาโรคมะเร็งในปัจจุบัน กับ 3 เทคโนโลยีทางการแพทย์ในการตรวจโรคมะเร็ง</div>
+                <div class="cc-tt-grid">
+                    <div>
+                        <div style="font-size:0.88em;font-weight:800;color:#b91c1c;margin-bottom:10px;">7 แนวทางหลักเพื่อการรักษา</div>
+                        <div class="cc-tt-list">
+                            <div class="cc-tt-item"><span class="cc-tt-icon">🏥</span><div><div class="cc-tt-name">การผ่าตัด (Surgery)</div><div class="cc-tt-desc">วิธีที่นิยมมากที่สุด ใช้กำจัดก้อนมะเร็งออกทั้งหมดหรือบางส่วน</div></div></div>
+                            <div class="cc-tt-item"><span class="cc-tt-icon">💉</span><div><div class="cc-tt-name">ยาเคมีบำบัด (Chemotherapy)</div><div class="cc-tt-desc">ใช้ยาเคมีทำลายเซลล์มะเร็ง มักใช้ร่วมกับการผ่าตัดหรือรังสีรักษา</div></div></div>
+                            <div class="cc-tt-item"><span class="cc-tt-icon">☢️</span><div><div class="cc-tt-name">รังสีรักษา (Radiation Therapy)</div><div class="cc-tt-desc">ใช้รังสีเอกซเรย์ แกมมา โปรตอน อิเล็กตรอน ทำลายเซลล์มะเร็ง</div></div></div>
+                            <div class="cc-tt-item"><span class="cc-tt-icon">🎯</span><div><div class="cc-tt-name">การรักษาด้วยยามุ่งเป้า (Targeted Therapy)</div><div class="cc-tt-desc">ยาทำลายเซลล์มะเร็งเฉพาะเจาะจง ใช้กับมะเร็งเต้านม ปอด ลำไส้ใหญ่ ตับ</div></div></div>
+                            <div class="cc-tt-item"><span class="cc-tt-icon">🧬</span><div><div class="cc-tt-name">ฮอร์โมนบำบัด (Hormone Therapy)</div><div class="cc-tt-desc">ยับยั้งการเจริญเติบโตของเซลล์มะเร็งบางชนิด เช่น มะเร็งต่อมลูกหมาก</div></div></div>
+                            <div class="cc-tt-item"><span class="cc-tt-icon">🛡️</span><div><div class="cc-tt-name">ภูมิคุ้มกันบำบัด (Immunotherapy)</div><div class="cc-tt-desc">กระตุ้นภูมิคุ้มกันทำลายเซลล์มะเร็ง เช่น มะเร็งผิวหนัง ต่อมน้ำเหลือง ปอด</div></div></div>
+                            <div class="cc-tt-item"><span class="cc-tt-icon">🧩</span><div><div class="cc-tt-name">การรักษาแบบผสมผสาน (Combination Therapy)</div><div class="cc-tt-desc">ใช้หลายวิธีร่วมกัน เช่น มะเร็งเต้านม ลำไส้ใหญ่ และปอด</div></div></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="font-size:0.88em;font-weight:800;color:#b91c1c;margin-bottom:10px;">3 เทคโนโลยีในการตรวจโรคมะเร็ง</div>
+                        <div class="cc-tech-item mri">
+                            <div class="cc-tech-name">เครื่องสร้างภาพด้วยสนามแม่เหล็กไฟฟ้า (MRI Scan)</div>
+                            <div class="cc-tech-desc">ใช้สนามแม่เหล็กและคลื่นวิทยุความเข้มสูงสร้างภาพเสมือนจริงของอวัยวะ ให้รายละเอียดคมชัด <b>ตรวจหาความผิดปกติได้ตั้งแต่ระยะเริ่มแรก</b></div>
+                        </div>
+                        <div class="cc-tech-item ct">
+                            <div class="cc-tech-name">เอกซเรย์คอมพิวเตอร์ (CT Scan)</div>
+                            <div class="cc-tech-desc">ตรวจวินิจฉัยหรือติดตามโรคเป็นระยะ ละเอียดกว่าเอกซเรย์ธรรมดา สร้างภาพ 3 มิติ <b>บอกขนาด ตำแหน่ง และการกระจายของมะเร็งได้</b></div>
+                        </div>
+                        <div class="cc-tech-item pet">
+                            <div class="cc-tech-name">เพทสแกน (PET Scan)</div>
+                            <div class="cc-tech-desc">ตรวจอวัยวะและเนื้อเยื่อในระดับโมเลกุลด้วยสารเภสัชรังสี <b>ตรวจหาการแพร่กระจายของมะเร็ง</b> สำหรับใช้วางแผนการรักษา</div>
+                        </div>
+                        <div style="font-size:0.70em;color:#9ca3af;line-height:1.65;margin-top:10px;">
+                            หมายเหตุ: ข้อมูลจากคณะแพทยศาสตร์โรงพยาบาลรามาธิบดี มหาวิทยาลัยมหิดล และคณะแพทยศาสตร์ ภาควิชารังสีวิทยา จุฬาลงกรณ์มหาวิทยาลัย ·
+                            การตรวจโรคมะเร็งด้วย 3 วิธีนี้ ขึ้นอยู่กับแพทย์ผู้เชี่ยวชาญโดยเป็นไปตามมาตรฐานทางการแพทย์และความจำเป็นทางการแพทย์
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: เบี้ยคาดการณ์ปรับตามอายุ -->
+            <div class="cc-section">
+                <div class="cc-section-title">📊 เบี้ยประกันคาดการณ์ปรับตามอายุ</div>
+                <div class="cc-section-sub" id="cc-proj-sub">รวมเบี้ยประกันหลักและสัญญาเพิ่มเติมทั้งหมดของ Option 1 ตามช่วงอายุ</div>
+                <div style="overflow-x:auto;">
+                    <table class="vb-table" id="cc-proj-table" style="font-size:0.85em;">
+                        <thead>
+                            <tr>
+                                <th class="th-base" style="width:12%;">ช่วงอายุ</th>
+                                <th class="th-base" style="width:9%;">ปีที่</th>
+                                <th class="th-base" style="width:16%;">ประกันหลัก<br><span style="font-size:0.85em;font-weight:600;" id="cc-proj-th-main">20PayLife</span></th>
+                                <th class="th-base" style="width:16%;color:#fca5a5;">Care for Cancer<br><span style="font-size:0.85em;font-weight:600;">(CFC)</span></th>
+                                <th class="th-base" style="width:16%;">สัญญาอื่น<br><span style="font-size:0.85em;font-weight:600;" id="cc-proj-th-other">(สุขภาพ/HB/MPCI)</span></th>
+                                <th class="th-base" style="width:17%;color:#fcd34d;">รวมเบี้ยต่อปี</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cc-proj-body">
+                            <tr><td colspan="6" style="text-align:center;padding:28px;color:#9ca3af;">กรุณากรอกข้อมูลใน Option 1</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="cc-footnote" id="cc-proj-note">
+                    * เบี้ยประกันหลัก 20PayLife คงที่ตลอด 20 ปีที่ชำระ · สัญญาเพิ่มเติมปรับขึ้นตามช่วงอายุ<br>
+                    * ตัวเลขเป็นการคาดการณ์จากอัตราเบี้ยปัจจุบัน บริษัทฯ ขอสงวนสิทธิ์ในการปรับอัตราเบี้ยประกันภัยของสัญญาเพิ่มเติมตามเงื่อนไขกรมธรรม์
+                </div>
+            </div>
+
+            <div class="cc-footnote">
+                • ผู้ขอเอาประกันภัยควรศึกษาและทำความเข้าใจในเอกสารเสนอขายก่อนตัดสินใจทำประกันภัย เมื่อได้รับกรมธรรม์แล้ว โปรดศึกษารายละเอียด ข้อกำหนดและเงื่อนไขในกรมธรรม์<br>
+                • ผู้ขอเอาประกันภัยมีหน้าที่แถลงข้อความจริงในการขอเอาประกันภัย การปกปิดข้อความจริงหรือแถลงข้อความเป็นเท็จใดๆ อาจเป็นเหตุให้บริษัทผู้รับประกันภัยบอกล้างสัญญาประกันภัยและปฏิเสธไม่จ่ายค่าสินไหมทดแทนตามสัญญาประกันภัย<br>
+                • ข้อกำหนดและเงื่อนไขของความคุ้มครองจะระบุไว้ในกรมธรรม์ประกันภัยที่ออกให้กับผู้ถือกรมธรรม์
+            </div>
+
+        </div>
+    </div><!-- end tab-cancer -->
 
     </div><!-- end main-tab-wrapper -->
 
@@ -4157,7 +4481,8 @@ function switchMainTab(tabId) {
         'tab-cipc':         'tab-btn-cipc',
         'tab-infographic':  'tab-btn-infographic',
         'tab-vitality':     'tab-btn-vitality',
-        'tab-vtimeline':    'tab-btn-vtimeline'
+        'tab-vtimeline':    'tab-btn-vtimeline',
+        'tab-cancer':       'tab-btn-cancer'
     };
     const btn = document.getElementById(btnMap[tabId]);
     if (btn) btn.classList.add('active');
@@ -4166,6 +4491,7 @@ function switchMainTab(tabId) {
     if (tabId === 'tab-infographic') refreshInfographic();
     if (tabId === 'tab-vitality') vbRender();
     if (tabId === 'tab-vtimeline') vtRender();
+    if (tabId === 'tab-cancer') ccRender();
 }
 
 // ==========================================
@@ -4443,6 +4769,265 @@ function vbCalcBonusRows(prem2, age2, tiersArr, useCampaign) {
             accRandDisplay: isPayout ? 0 : accRand, payRand: payRand });
     }
     return { rows: rows, totalPlat: totalPlat, totalGold: totalGold, totalSilver: totalSilver, totalRand: totalRand };
+}
+
+// ==========================================
+// CARE FOR CANCER TAB
+// ==========================================
+const CC_FONT_LEVELS = [75, 80, 85, 90, 95, 100, 108, 116, 125, 135];
+let _ccFontIdx = 5;
+
+function ccFontSize(delta) {
+    _ccFontIdx = Math.max(0, Math.min(CC_FONT_LEVELS.length - 1, _ccFontIdx + delta));
+    var pct = CC_FONT_LEVELS[_ccFontIdx];
+    var c = document.querySelector('#tab-cancer .cc-container');
+    if (c) c.style.fontSize = pct + '%';
+    var lbl = document.getElementById('cc-font-lbl');
+    if (lbl) lbl.textContent = pct + '%';
+}
+
+function ccPrint() {
+    var tab    = document.getElementById('tab-cancer');
+    var others = document.querySelectorAll('.main-tab-panel:not(#tab-cancer)');
+    var nav    = document.querySelector('.main-tab-nav');
+    others.forEach(function(el) { el.style.setProperty('display','none','important'); });
+    tab.style.setProperty('display','block','important');
+    if (nav) nav.style.display = 'none';
+    window.print();
+    setTimeout(function() {
+        others.forEach(function(el) { el.style.display = ''; });
+        tab.style.display = '';
+        if (nav) nav.style.display = '';
+        document.querySelectorAll('.main-tab-panel.active')
+            .forEach(function(el) { el.style.setProperty('display','block','important'); });
+    }, 600);
+}
+
+function ccRender() {
+    var gender  = document.getElementById('inp-gender').value;
+    var gTxt    = gender === 'male' ? 'ชาย' : 'หญิง';
+    var age     = parseInt(document.getElementById('age-1').value) || 0;
+    var cfcSum  = parseInt(document.getElementById('cfc-1').value) || 0;
+    var premCFC = (cfcSum > 0) ? Math.round((cfcSum / 100000) * app.getRiderRate('CFC', age, gender)) : 0;
+
+    // อัตราชดเชย: IPD = ทุน/100,000 × 2,000 ต่อวัน · OPD = ทุน/100,000 × 500 ต่อครั้ง
+    var unit    = cfcSum / 100000;
+    var ipdRate = Math.round(unit * 2000);
+    var opdRate = Math.round(unit * 500);
+
+    var setEl = function(id, val) { var e = document.getElementById(id); if (e) e.textContent = val; };
+    setEl('cc-age',      age > 0 ? 'อายุ ' + age + ' ปี (' + gTxt + ')' : '–');
+    setEl('cc-sum',      cfcSum  > 0 ? cfcSum.toLocaleString()  + ' บาท' : '–');
+    setEl('cc-prem',     premCFC > 0 ? premCFC.toLocaleString() + ' บาท' : '–');
+    setEl('cc-ipd-rate', ipdRate > 0 ? ipdRate.toLocaleString() + ' บ./วัน'  : '–');
+    setEl('cc-opd-rate', opdRate > 0 ? opdRate.toLocaleString() + ' บ./ครั้ง' : '–');
+
+    var rowsEl  = document.getElementById('cc-story-rows');
+    var totalEl = document.getElementById('cc-total-wrap');
+    var subEl   = document.getElementById('cc-story-sub');
+    if (!rowsEl) return;
+
+    if (cfcSum <= 0) {
+        rowsEl.innerHTML = '<div style="text-align:center;padding:30px;color:#9ca3af;font-size:0.9em;">กรุณาเลือกทุนประกัน CFC (AIA Care for Cancer) ใน Option 1 ที่แถบเปรียบเทียบ</div>';
+        if (totalEl) totalEl.innerHTML = '';
+        // ยังคงแสดงหมายเหตุแพคเกจและตารางเบี้ยคาดการณ์
+        ccRenderPackageNote(age, gender, 0);
+        ccRenderProjection(age, gender, 0);
+        return;
+    }
+
+    if (subEl) {
+        subEl.textContent = 'คำนวณจากทุนประกัน CFC ' + cfcSum.toLocaleString() + ' บาท ของ Option 1 · '
+            + 'ชดเชย IPD ' + ipdRate.toLocaleString() + ' บ./วัน · OPD ' + opdRate.toLocaleString() + ' บ./ครั้ง '
+            + '· ตัวอย่างสมมติกรณีมะเร็งเต้านมระยะที่ 2';
+    }
+
+    // ── ตัวอย่าง Sales Story (อ้างอิงรูปแบบเอกสาร AIA) ──
+    var ipd5   = ipdRate * 5;    // นอน รพ. 5 วัน (ผ่าตัด)
+    var opdChemo = opdRate * 6;  // เคมีบำบัด 6 ครั้ง
+    var opdRadio = opdRate * 20; // ฉายแสง 20 ครั้ง
+    var opdCT    = opdRate * 1;  // CT Scan 1 ครั้ง
+    var grandTotal = ipd5 + opdChemo + opdRadio + opdCT;
+    var daysUsed   = 5 + 6 + 20 + 1;
+
+    var events = [
+        { date: 'เริ่มคุ้มครอง', desc: 'ทำสัญญาเพิ่มเติม <b>AIA Care for Cancer</b> ทุนประกัน <b>' + cfcSum.toLocaleString() + ' บาท</b> ขณะอายุ ' + age + ' ปี', amt: null },
+        { date: 'พบก้อนผิดปกติ', desc: 'คลำพบก้อนที่บริเวณรักแร้ จึงไปพบแพทย์ ทำการตรวจและเจาะชิ้นเนื้อไปตรวจ', amt: null },
+        { date: 'วินิจฉัยโรค', desc: 'ได้รับการวินิจฉัยจากแพทย์ว่าเป็น <b>"โรคมะเร็งเต้านมระยะที่ 2"</b> แต่ยังไม่มีการแพร่กระจายไปที่ต่อมน้ำเหลือง', amt: null },
+        { date: 'ผ่าตัด (IPD)', desc: 'ผ่าตัดแบบสงวนเต้านมหรือผ่าตัดเต้านมออกบางส่วน <b>นอนโรงพยาบาล 5 วัน</b>',
+          amt: ipd5, calc: ipdRate.toLocaleString() + ' บ./วัน × 5 วัน', payout: true },
+        { date: 'เคมีบำบัด (OPD)', desc: 'เริ่มให้ยาเคมีบำบัด (Chemotherapy) ทำลายเซลล์มะเร็ง <b>จำนวน 6 ครั้ง</b> แต่ละครั้งห่างกัน 3 สัปดาห์',
+          amt: opdChemo, calc: opdRate.toLocaleString() + ' บ./ครั้ง × 6 ครั้ง', payout: true },
+        { date: 'CT Scan (OPD)', desc: 'CT Scan ครั้งที่ 1 เพื่อวางแผนการรักษา (ภายใน 60 วันก่อนเริ่มรังสีรักษา)',
+          amt: opdCT, calc: opdRate.toLocaleString() + ' บ./ครั้ง × 1 ครั้ง', payout: true },
+        { date: 'ฉายแสง (OPD)', desc: 'เริ่มการฉายแสง (Radiation Therapy) <b>ทั้งหมด 20 ครั้ง</b> แบ่งเป็นสัปดาห์ละ 5 วัน วันละ 2–3 ชม.',
+          amt: opdRadio, calc: opdRate.toLocaleString() + ' บ./ครั้ง × 20 ครั้ง', payout: true },
+        { date: 'ติดตามผล', desc: 'ประเมินผลการรักษาและติดตามผลเป็นระยะ', amt: null },
+        { date: 'โรคสงบ', desc: '<b style="color:#15803d;">โรคสงบ (Remission)</b> — ผ่านไป 5 ปี ยังคงมีความคุ้มครองต่อเนื่อง', amt: null }
+    ];
+
+    var html = '';
+    events.forEach(function(ev) {
+        var amtCell;
+        if (ev.amt) {
+            amtCell = '<div class="amt-val">' + ev.amt.toLocaleString() + ' บาท</div>'
+                    + '<div class="amt-calc">(' + ev.calc + ')</div>';
+        } else {
+            amtCell = '<div class="amt-none">—</div>';
+        }
+        html += '<div class="cc-event' + (ev.payout ? ' payout' : '') + '">'
+              + '<div class="cc-event-date">' + ev.date + '</div>'
+              + '<div class="cc-event-desc">' + ev.desc + '</div>'
+              + '<div class="cc-event-amt">' + amtCell + '</div>'
+              + '</div>';
+    });
+    rowsEl.innerHTML = html;
+
+    if (totalEl) {
+        totalEl.innerHTML =
+            '<div class="cc-total-box">'
+          + '<span style="font-size:1.6em;">💰</span>'
+          + '<div style="flex:1;">'
+          + '<div class="cc-total-label">รวมผลประโยชน์ค่าชดเชยรายวันที่ได้รับ</div>'
+          + '<div class="cc-total-val">' + grandTotal.toLocaleString() + ' บาท</div>'
+          + '<div class="cc-total-sub">ใช้ผลประโยชน์ค่าชดเชยรายวันไป ' + daysUsed + ' วัน · เหลือ ' + (1000 - daysUsed).toLocaleString() + ' วัน (จากสูงสุด 1,000 วัน)</div>'
+          + '</div>'
+          + '<div style="text-align:right;">'
+          + '<div style="font-size:0.75em;color:#6d28d9;">เทียบเบี้ยที่จ่ายปีละ</div>'
+          + '<div style="font-size:1.05em;font-weight:800;color:#5b21b6;">' + premCFC.toLocaleString() + ' บาท</div>'
+          + (premCFC > 0 ? '<div style="font-size:0.72em;color:#7c3aed;margin-top:2px;">คิดเป็น ' + Math.round(grandTotal / premCFC) + ' เท่าของเบี้ยรายปี</div>' : '')
+          + '</div>'
+          + '</div>';
+    }
+
+    ccRenderPackageNote(age, gender, premCFC);
+    ccRenderProjection(age, gender, cfcSum);
+}
+
+// ── หมายเหตุ: แพคเกจซื้อคู่ประกันชีวิต 20PayLife ──────────────────
+function ccRenderPackageNote(age, gender, premCFC) {
+    var noteEl = document.getElementById('cc-package-note');
+    if (!noteEl) return;
+
+    var mainSum  = parseInt(document.getElementById('main-sum-1').value) || 0;
+    var mainType = (document.getElementById('main-type-1') || {}).value || '20PLN';
+    if (mainSum <= 0 || age <= 0) { noteEl.style.display = 'none'; return; }
+
+    // เบี้ยประกันหลักตามแบบที่เลือก
+    var premMain  = Math.round(app.calculateMainPremiumForPlan(mainSum, age, gender, mainType));
+    var mainLabel = (mainType === 'CIProCare') ? 'AIA CI ProCare (20/99)' : 'ประกันชีวิต 20PayLife คุ้มครองตลอดชีพ';
+
+    // สัญญาเพิ่มเติมอื่นๆ (สุขภาพ / HB / MPCI)
+    var other = ccCalcOtherRiders(age, gender);
+    var grand = premMain + premCFC + other.total;
+
+    noteEl.style.display = '';
+    noteEl.innerHTML =
+        '<div style="font-weight:800;color:#b91c1c;margin-bottom:5px;">📌 หมายเหตุ — แพคเกจนี้ซื้อคู่กับประกันชีวิตหลัก</div>'
+      + 'แพคเกจนี้ซื้อคู่กับ <b>' + mainLabel + '</b> ทุนประกัน <b style="color:#dc2626;">' + mainSum.toLocaleString() + ' บาท</b> '
+      + 'เป็นเบี้ย <b style="color:#dc2626;">' + premMain.toLocaleString() + ' บาท/ปี</b>'
+      + (other.total > 0 ? ' · สัญญาเพิ่มเติมอื่น <b>' + other.total.toLocaleString() + ' บาท/ปี</b> (' + other.labels.join(' + ') + ')' : '')
+      + '<br>รวมเป็นเบี้ยเริ่มต้น ณ อายุ ' + age + ' ปี ทั้งสิ้น '
+      + '<b style="color:#15803d;font-size:1.15em;">' + grand.toLocaleString() + ' บาท/ปี</b>';
+}
+
+// ── คำนวณเบี้ยสัญญาเพิ่มเติมอื่น (นอกจาก CFC) ณ อายุที่กำหนด ──────
+function ccCalcOtherRiders(evalAge, gender) {
+    var total = 0, labels = [];
+    var st = app.state[1];
+
+    // สัญญาสุขภาพ
+    if (st && st.type !== 'NONE' && APP_DATA.plans[st.type]) {
+        var opts = APP_DATA.plans[st.type].options;
+        var opt  = opts ? opts[st.idx] : null;
+        if (opt) {
+            var band = app.getBandIndex(evalAge, st.type);
+            var arr  = APP_DATA.rateTable[st.type] && APP_DATA.rateTable[st.type][gender]
+                     ? APP_DATA.rateTable[st.type][gender][opt.k] : null;
+            var pHl  = arr ? (arr[band] || 0) : 0;
+            if (pHl > 0) { total += pHl; labels.push('สุขภาพ'); }
+        }
+    }
+    // HB
+    var hbSum = parseInt(document.getElementById('hb-1').value) || 0;
+    if (hbSum > 0) {
+        var rateHb = app.getRiderRate('HB', evalAge, gender);
+        var pHB = (rateHb > 0) ? (hbSum / 100) * rateHb : 0;
+        if (pHB > 0) { total += Math.round(pHB); labels.push('HB'); }
+    }
+    // MPCI
+    var mpciSum = parseInt(document.getElementById('mpci-sum-1').value) || 0;
+    if (mpciSum > 0 && evalAge <= 99) {
+        var pM = Math.round(app.calcMultiPayCI(mpciSum, evalAge, gender));
+        if (pM > 0) { total += pM; labels.push('MPCI'); }
+    }
+    return { total: Math.round(total), labels: labels };
+}
+
+// ── ตารางเบี้ยคาดการณ์ปรับตามอายุ ────────────────────────────────
+function ccRenderProjection(age, gender, cfcSum) {
+    var bodyEl = document.getElementById('cc-proj-body');
+    if (!bodyEl) return;
+
+    var mainSum  = parseInt(document.getElementById('main-sum-1').value) || 0;
+    var mainType = (document.getElementById('main-type-1') || {}).value || '20PLN';
+    if (age <= 0 || mainSum <= 0) {
+        bodyEl.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:28px;color:#9ca3af;">กรุณากรอกอายุและทุนประกันใน Option 1</td></tr>';
+        return;
+    }
+
+    // อัปเดตหัวคอลัมน์ตามแบบที่เลือก
+    var thMain = document.getElementById('cc-proj-th-main');
+    if (thMain) thMain.textContent = (mainType === 'CIProCare') ? 'CI ProCare' : '20PayLife';
+    var otherLbls = ccCalcOtherRiders(age, gender).labels;
+    var thOther = document.getElementById('cc-proj-th-other');
+    if (thOther) thOther.textContent = otherLbls.length ? '(' + otherLbls.join('/') + ')' : '(ไม่มี)';
+
+    var premMain = Math.round(app.calculateMainPremiumForPlan(mainSum, age, gender, mainType));
+    var subEl = document.getElementById('cc-proj-sub');
+    if (subEl) {
+        subEl.textContent = 'Option 1 · อายุแรกเข้า ' + age + ' ปี (' + (gender === 'male' ? 'ชาย' : 'หญิง') + ') · '
+            + 'ทุนหลัก ' + mainSum.toLocaleString() + ' บาท'
+            + (cfcSum > 0 ? ' · ทุน CFC ' + cfcSum.toLocaleString() + ' บาท' : '');
+    }
+
+    var html = '';
+    var grandSum = 0;
+    APP_DATA.AGE_BANDS.forEach(function(band) {
+        var parts = band.split('-');
+        var bandStart = parseInt(parts[0]), bandEnd = parseInt(parts[1]);
+        // ข้ามช่วงที่จบก่อนอายุแรกเข้า
+        if (bandEnd < age) return;
+        var evalAge = Math.max(age, bandStart);
+        var policyYr = evalAge - age + 1;
+
+        // เบี้ยหลัก: จ่าย 20 ปี (ปีที่ 1-20)
+        var pMain = (policyYr <= 20) ? premMain : 0;
+        // CFC
+        var pCFC = 0;
+        if (cfcSum > 0) {
+            var rCfc = app.getRiderRate('CFC', evalAge, gender);
+            pCFC = (rCfc > 0) ? Math.round((cfcSum / 100000) * rCfc) : 0;
+        }
+        // สัญญาอื่น
+        var oth = ccCalcOtherRiders(evalAge, gender);
+        var pOther = oth.total;
+        var rowTotal = pMain + pCFC + pOther;
+        if (rowTotal <= 0) return;
+
+        var stopMain = (policyYr > 20);
+        html += '<tr' + (stopMain ? ' style="background:#f8fafc;"' : '') + '>'
+             + '<td class="td-yr">' + evalAge + '–' + bandEnd + ' ปี</td>'
+             + '<td class="td-age">ปีที่ ' + policyYr + '</td>'
+             + '<td class="td-prem">' + (pMain > 0 ? pMain.toLocaleString()
+                 : '<span style="color:#16a34a;font-size:0.82em;font-weight:700;">ครบชำระแล้ว</span>') + '</td>'
+             + '<td style="color:#dc2626;font-weight:600;">' + (pCFC > 0 ? pCFC.toLocaleString() : '—') + '</td>'
+             + '<td style="color:#475569;">' + (pOther > 0 ? pOther.toLocaleString() : '—') + '</td>'
+             + '<td style="color:#92400e;font-weight:800;font-size:1.05em;">' + rowTotal.toLocaleString() + '</td>'
+             + '</tr>';
+    });
+
+    bodyEl.innerHTML = html || '<tr><td colspan="6" style="text-align:center;padding:28px;color:#9ca3af;">ไม่มีข้อมูลเบี้ย</td></tr>';
 }
 
 // ==========================================

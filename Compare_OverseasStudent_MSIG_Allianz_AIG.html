@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เปรียบเทียบประกันเดินทางศึกษาต่อต่างประเทศ | MSIG vs Allianz vs AIG</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0b1c33; --navy2:#122642; --gold:#c9a24b; --gold-l:#e6c877;
+  --bg:#f4f5f7; --surface:#ffffff; --surface2:#eef1f5; --text:#1b2432; --text-soft:#5b6577;
+  --border:#dde2ea; --green:#e6f4ea; --green-b:#2e7d46; --yellow:#fff6e0; --yellow-b:#a5760a;
+  --red:#fdecec; --red-b:#b3261e; --neutral:#eef0f3; --neutral-b:#8a93a3;
+  --msig:#e63946; --allianz:#00509e; --aig:#c8102e;
+  --shadow:0 2px 10px rgba(11,28,51,.06); --radius:12px;
+}
+[data-theme="dark"]{
+  --bg:#0a1526; --surface:#0f2038; --surface2:#132845; --text:#eaeef5; --text-soft:#a7b3c8;
+  --border:#243858; --green:#123626; --green-b:#5fd889; --yellow:#3a2f10; --yellow-b:#f0c14b;
+  --red:#3a1616; --red-b:#ff8a80; --neutral:#182740; --neutral-b:#7c8aa3;
+  --shadow:0 2px 14px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0; font-family:'Sarabun',sans-serif; background:var(--bg); color:var(--text);
+  transition:background .25s,color .25s; font-size:var(--fs,16px); line-height:1.6;
+  padding-bottom:60px;
+}
+.wrap{max-width:1280px;margin:0 auto;padding:0 20px;}
+header.top{
+  position:sticky; top:0; z-index:50; background:linear-gradient(135deg,var(--navy),var(--navy2));
+  color:#fff; box-shadow:var(--shadow); padding:14px 0;
+}
+[data-theme="dark"] header.top{background:linear-gradient(135deg,#050d1a,#0a1930);}
+header.top .row{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;}
+header.top h1{font-size:1.15rem; margin:0; font-weight:700; color:#fff;}
+header.top .sub{font-size:.8rem; color:var(--gold-l); margin-top:2px;}
+.controls{display:flex; gap:8px; align-items:center; flex-wrap:wrap;}
+.btn{
+  border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.08); color:#fff;
+  padding:7px 12px; border-radius:8px; cursor:pointer; font-family:inherit; font-size:.82rem;
+  display:inline-flex; align-items:center; gap:6px; transition:.15s;
+}
+.btn:hover{background:rgba(255,255,255,.18);}
+.btn.gold{background:var(--gold); color:var(--navy); border-color:var(--gold); font-weight:600;}
+.btn.gold:hover{background:var(--gold-l);}
+.tabbar{display:flex; gap:8px; margin:18px 0; flex-wrap:wrap;}
+.tabbtn{
+  flex:1; min-width:220px; text-align:center; padding:12px 14px; border-radius:10px;
+  border:1.5px solid var(--border); background:var(--surface); color:var(--text); cursor:pointer;
+  font-family:inherit; font-weight:600; font-size:.95rem; box-shadow:var(--shadow); transition:.15s;
+}
+.tabbtn small{display:block; font-weight:400; color:var(--text-soft); margin-top:3px; font-size:.78rem;}
+.tabbtn.active{border-color:var(--gold); background:linear-gradient(135deg,var(--navy),var(--navy2)); color:#fff;}
+.tabbtn.active small{color:var(--gold-l);}
+.tabpanel{display:none;}
+.tabpanel.active{display:block; animation:fadein .25s;}
+@keyframes fadein{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+.card{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px; margin-bottom:20px;}
+.card h2{margin-top:0; font-size:1.1rem; color:var(--text); border-bottom:2px solid var(--gold); padding-bottom:8px; display:flex; align-items:center; gap:8px;}
+.card h2 .n{background:var(--gold); color:var(--navy); width:26px; height:26px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:.8rem; font-weight:700;}
+
+.sum-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-bottom:6px;}
+.sum-card{border-radius:10px; padding:16px; color:#fff; position:relative; overflow:hidden;}
+.sum-card .co{font-size:.78rem; opacity:.85; text-transform:uppercase; letter-spacing:.05em;}
+.sum-card .plan{font-size:1.02rem; font-weight:700; margin:2px 0 10px;}
+.sum-card .amt{font-size:1.5rem; font-weight:800;}
+.sum-card .lbl{font-size:.72rem; opacity:.85;}
+.sum-card.msig{background:linear-gradient(135deg,#e63946,#a4222c);}
+.sum-card.allianz{background:linear-gradient(135deg,#0066cc,#00396e);}
+.sum-card.aig{background:linear-gradient(135deg,#c8102e,#7d0a1c);}
+
+table{width:100%; border-collapse:collapse; font-size:.85rem;}
+th,td{border:1px solid var(--border); padding:9px 10px; text-align:center; vertical-align:middle;}
+th{background:var(--surface2); font-weight:700; font-size:.82rem;}
+td.cat{text-align:left; font-weight:600; background:var(--surface2); min-width:230px;}
+td.sub{text-align:left; font-weight:400; color:var(--text-soft); font-size:.78rem; padding-left:18px;}
+.tbl-wrap{overflow-x:auto; -webkit-overflow-scrolling:touch;}
+.covered{background:var(--green); color:var(--green-b); font-weight:600;}
+.capped{background:var(--yellow); color:var(--yellow-b); font-weight:600;}
+.none{background:var(--red); color:var(--red-b); font-weight:500;}
+.neutral{background:var(--neutral); color:var(--neutral-b);}
+.note{font-size:.7rem; display:block; color:inherit; opacity:.85; margin-top:2px; font-weight:400;}
+.legend{display:flex; gap:16px; flex-wrap:wrap; font-size:.78rem; margin:10px 0 4px; color:var(--text-soft);}
+.legend span{display:inline-flex; align-items:center; gap:6px;}
+.legend i{width:12px; height:12px; border-radius:3px; display:inline-block;}
+
+.hl-row{background:var(--surface2);}
+.company-head{color:#fff !important;}
+.company-head.msig{background:var(--msig);}
+.company-head.allianz{background:var(--allianz);}
+.company-head.aig{background:var(--aig);}
+
+ul.exl{margin:6px 0; padding-inline-start:20px;}
+ul.exl li{margin-bottom:4px; font-size:.86rem; line-height:1.55;}
+
+.grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px;}
+.mini{background:var(--surface2); border-radius:10px; padding:14px; border-left:4px solid var(--gold);}
+.mini h3{margin:0 0 8px; font-size:.92rem;}
+
+footer{max-width:1280px; margin:30px auto 0; padding:16px 20px; color:var(--text-soft); font-size:.78rem; border-top:1px solid var(--border);}
+
+@media print{
+  header.top{position:static; background:var(--navy) !important; -webkit-print-color-adjust:exact; print-color-adjust:exact;}
+  .controls, .tabbar{display:none !important;}
+  .tabpanel{display:block !important; page-break-before:always;}
+  .tabpanel:first-of-type{page-break-before:auto;}
+  body{padding-bottom:0; font-size:12px;}
+  .card{box-shadow:none; break-inside:avoid;}
+  @page{size:A4 landscape; margin:12mm;}
+  table{font-size:10.5px;}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap row">
+    <div>
+      <h1>ตารางเปรียบเทียบประกันเดินทางศึกษาต่อต่างประเทศ</h1>
+      <div class="sub">MSIG Overseas Student Plus &nbsp;•&nbsp; Allianz Overseas Student Care &nbsp;•&nbsp; AIG PA Guard – Overseas Student</div>
+    </div>
+    <div class="controls">
+      <button class="btn" onclick="adjFont(-1)">A−</button>
+      <button class="btn" onclick="adjFont(1)">A+</button>
+      <button class="btn" onclick="toggleTheme()">🌓 โหมดมืด/สว่าง</button>
+      <button class="btn gold" onclick="window.print()">🖨 พิมพ์ / PDF</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap" style="margin-top:18px;">
+
+  <div class="card" id="summary-card">
+    <h2><span class="n">i</span>สรุปภาพรวมสำหรับที่ปรึกษา</h2>
+    <p style="margin-top:0;">รายงานนี้จัดกลุ่มแผนความคุ้มครองของทั้ง 3 บริษัทออกเป็น <b>3 ระดับ (Tier)</b> โดยจับคู่แผนที่มี<b>ทุนประกันค่ารักษาพยาบาลใกล้เคียงกัน</b> เพื่อให้เปรียบเทียบได้อย่างเป็นธรรม เนื่องจากชื่อแผนและโครงสร้างทุนประกันของแต่ละบริษัทไม่ตรงกัน</p>
+    <div class="grid3" id="exec-highlights"></div>
+  </div>
+
+  <div class="tabbar" id="tabbar"></div>
+  <div id="tabpanels"></div>
+
+  <div class="card">
+    <h2><span class="n">§</span>เงื่อนไขการรับประกันภัยและคุณสมบัติผู้ขอเอาประกันภัย</h2>
+    <div class="tbl-wrap">
+      <table id="cond-table"></table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="n">✕</span>ประเทศที่ยกเว้นความคุ้มครอง</h2>
+    <div class="grid3" id="excl-countries"></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="n">!</span>ข้อยกเว้นสำคัญโดยสรุป (ไม่ครอบคลุมทั้งหมด — โปรดดูรายละเอียดเต็มในกรมธรรม์)</h2>
+    <div class="grid3" id="excl-general"></div>
+  </div>
+
+</div>
+
+<footer class="wrap">
+  <p><b>ข้อจำกัดความรับผิดชอบ:</b> จัดทำจากเอกสารสรุปผลิตภัณฑ์/โบรชัวร์การตลาดของแต่ละบริษัท (มิใช่กรมธรรม์ประกันภัย) ณ วันที่จัดทำรายงาน ตัวเลขและเงื่อนไขอาจมีการเปลี่ยนแปลง โปรดตรวจสอบกับกรมธรรม์ฉบับจริงและอัตราเบี้ยล่าสุดก่อนนำเสนอลูกค้าหรือดำเนินการซื้อขายทุกครั้ง สำหรับ AIG เอกสารต้นทางระบุอัตราเบี้ยประกันภัยเฉพาะระยะเวลาไม่เกิน 6 เดือน และไม่เกิน 12 เดือนเท่านั้น จึงไม่มีข้อมูลอัตราเบี้ยสำหรับช่วงเวลาอื่นในตารางเปรียบเทียบ</p>
+  <p>จัดทำเมื่อ 9 กันยายน 2569 (2026) — เอกสารอ้างอิง: MSIG Overseas Student Plus, Allianz Overseas Student Care (V.2026-07-29), AIG PA Guard – Overseas Student</p>
+</footer>
+
+<script>
+// ============================================================
+// ข้อมูลเปรียบเทียบ MSIG / Allianz / AIG - Overseas Student Insurance
+// สกัดจากเอกสารต้นฉบับที่ผู้ใช้อัปโหลด (ก.ย. 2569)
+// ============================================================
+
+const TIERS = [
+  {
+    id: "A",
+    label: "ระดับสูงสุด",
+    sub: "ทุนรักษาพยาบาลสูงสุด ~5–6 ล้านบาท",
+    companies: {
+      msig:    { name: "MSIG", plan: "Student 1", sum: "6,000,000" },
+      allianz: { name: "Allianz", plan: "Advance Plan", sum: "5,500,000" },
+      aig:     { name: "AIG", plan: "Platinum Plan", sum: "5,000,000" }
+    },
+    benefits: [
+      { cat:"1. ค่ารักษาพยาบาล (ทุนหลัก)",
+        msig:{v:"6,000,000",t:"covered", note:"OPD ทางไกลสูงสุด 5,000/ครั้ง • ค่าส่งเอกสารเคลม 1,500/ครั้ง"},
+        allianz:{v:"5,500,000",t:"covered", note:"รักษาต่อเนื่องในไทย (ภายใน 12 ชม.) 550,000 • กลับไทยชั่วคราว ≤90 วัน 200,000"},
+        aig:{v:"5,000,000",t:"covered", note:"ครอบคลุมอุบัติเหตุและเจ็บป่วย ไม่แยกวงเงินย่อย"} },
+      { cat:"2. เคลื่อนย้ายฉุกเฉิน / กลับประเทศ / ส่งศพ",
+        msig:{v:"6,000,000",t:"covered"}, allianz:{v:"5,500,000",t:"covered"}, aig:{v:"5,000,000",t:"covered", note:"เอกสารระบุ: ไม่ตรวจสอบประวัติการรักษา (แม้สภาพเป็นมาก่อน) หากต้องเคลื่อนย้าย"} },
+      { cat:"3. เสียชีวิต/สูญเสียอวัยวะ/ทุพพลภาพจากอุบัติเหตุ",
+        msig:{v:"3,000,000",t:"covered", note:"รวมกรณีถูกฆาตกรรม/ทำร้ายร่างกาย"}, allianz:{v:"3,000,000",t:"covered"}, aig:{v:"3,000,000",t:"covered", note:"มีผลประโยชน์ Felonious Assault แยกต่างหาก (ดูข้อ 18)"} },
+      { cat:"4. ชดเชยการสูญเสียค่าเล่าเรียน",
+        msig:{v:"350,000",t:"covered"}, allianz:{v:"300,000",t:"covered"}, aig:{v:"300,000",t:"covered"} },
+      { cat:"5. ชดเชยการเดินทางเยี่ยมผู้ป่วย",
+        msig:{v:"350,000",t:"covered", note:"+ ค่าวีซ่าเร่งด่วน สูงสุด 17,000/คน"}, allianz:{v:"350,000",t:"covered"}, aig:{v:"300,000",t:"covered"} },
+      { cat:"6. เสียชีวิต/ทุพพลภาพของบิดามารดาจากอุบัติเหตุ",
+        msig:{v:"100,000",t:"covered"}, allianz:{v:"—",t:"none"}, aig:{v:"—",t:"none"} },
+      { cat:"7. คุ้มครองกีฬาอันตราย (บอลลูน บันจี้จัมพ์ ดำน้ำถังอากาศ สกู๊ตเตอร์ไฟฟ้า)",
+        msig:{v:"คุ้มครอง",t:"covered", note:"เสียชีวิต/ทุพพลภาพ 300,000 • ค่ารักษา 300,000"},
+        allianz:{v:"ไม่คุ้มครอง",t:"none", note:"อยู่ในข้อยกเว้นกิจกรรมเสี่ยงสูง"},
+        aig:{v:"ไม่คุ้มครอง",t:"none", note:"อยู่ในข้อยกเว้นกิจกรรมเสี่ยงสูง"} },
+      { cat:"8. ความล่าช้าของเที่ยวบิน",
+        msig:{v:"2,500/6ชม. สูงสุด 12,500",t:"covered"}, allianz:{v:"ไม่มีผลประโยชน์นี้",t:"none"}, aig:{v:"ไม่มีผลประโยชน์นี้",t:"none"} },
+      { cat:"9. ความล่าช้าของกระเป๋าเดินทาง",
+        msig:{v:"2,500/6ชม. สูงสุด 12,500",t:"covered"}, allianz:{v:"ไม่มีผลประโยชน์นี้",t:"none"}, aig:{v:"ไม่มีผลประโยชน์นี้",t:"none"} },
+      { cat:"10. พลาดการต่อเที่ยวบิน",
+        msig:{v:"2,500/6ชม. สูงสุด 12,500",t:"covered"}, allianz:{v:"ไม่มีผลประโยชน์นี้",t:"none"}, aig:{v:"ไม่มีผลประโยชน์นี้",t:"none"} },
+      { cat:"11. กระเป๋าเดินทาง/ทรัพย์สินส่วนตัวสูญหาย-เสียหาย",
+        msig:{v:"สูงสุด 100,000",t:"covered", note:"10,000/ชิ้น/คู่/ชุด • คุ้มครองทั่วไป ไม่จำกัดเฉพาะช่วงใช้บริการขนส่ง"},
+        allianz:{v:"สูงสุด 100,000/เหตุการณ์",t:"covered", note:"5,000/ชิ้น • เฉพาะระหว่างใช้บริการขนส่งสาธารณะ"},
+        aig:{v:"สูงสุด 80,000/เหตุการณ์",t:"covered", note:"8,000/ชิ้น • Excess 500/ครั้ง • เฉพาะระหว่างใช้บริการบริษัทขนส่ง"} },
+      { cat:"12. เอกสารการเดินทางสูญหาย/เสียหาย",
+        msig:{v:"15,000",t:"covered"}, allianz:{v:"ไม่มีผลประโยชน์แยก",t:"none"}, aig:{v:"ไม่มีผลประโยชน์แยก",t:"none"} },
+      { cat:"13. คอมพิวเตอร์โน้ตบุ๊กสูญหาย/เสียหาย",
+        msig:{v:"สูงสุด 15,000",t:"covered", note:"จ่ายตามจริง"}, allianz:{v:"ไม่มีผลประโยชน์นี้",t:"none"}, aig:{v:"ไม่มีผลประโยชน์นี้",t:"none"} },
+      { cat:"14. เงินสดส่วนตัวสูญหาย",
+        msig:{v:"5,000",t:"covered"}, allianz:{v:"ไม่มีผลประโยชน์นี้",t:"none"}, aig:{v:"ไม่มีผลประโยชน์นี้",t:"none"} },
+      { cat:"15. ความรับผิดตามกฎหมายต่อบุคคลภายนอก",
+        msig:{v:"5,000,000",t:"covered"}, allianz:{v:"1,000,000",t:"covered"}, aig:{v:"5,000,000",t:"covered"} },
+      { cat:"16. ถูกลักพาตัวระหว่างเดินทาง",
+        msig:{v:"50,000",t:"covered"}, allianz:{v:"ไม่มีผลประโยชน์นี้",t:"none"}, aig:{v:"ไม่มีผลประโยชน์นี้",t:"none"} },
+      { cat:"17. ค่าเสียหายส่วนแรกสำหรับรถเช่า",
+        msig:{v:"15,000",t:"covered"}, allianz:{v:"ไม่มีผลประโยชน์นี้",t:"none"}, aig:{v:"ไม่มีผลประโยชน์นี้",t:"none"} },
+      { cat:"18. เสียชีวิต/ทุพพลภาพจากถูกทำร้ายร่างกาย (Felonious Assault) — ผลประโยชน์แยก",
+        msig:{v:"รวมอยู่ในข้อ 3",t:"neutral"}, allianz:{v:"ไม่ระบุแยก",t:"neutral"}, aig:{v:"1,500,000",t:"covered"} },
+    ],
+    premium: { // months: [msig, allianz, aig]
+      3:  ["12,200","4,789","—"], 4:  ["14,800","5,809","—"], 5:  ["18,000","7,029","—"],
+      6:  ["19,950","7,499","19,691"], 7:  ["23,350","8,799","—"], 8:  ["26,750","9,999","—"],
+      9:  ["30,150","11,299","—"], 10: ["33,450","12,599","—"], 11: ["36,850","13,799","—"],
+      12: ["39,900","14,999","39,380"], 13: ["41,150","16,199","—"], 14: ["44,350","17,499","—"],
+      15: ["47,600","18,699","—"], 16: ["50,850","19,999","—"], 17: ["53,850","21,199","—"],
+      18: ["56,850","22,499","—"], 19: ["60,150","23,699","—"], 20: ["63,350","24,999","—"],
+      21: ["66,600","26,199","—"], 22: ["69,850","27,499","—"], 23: ["72,850","28,799","—"],
+      24: ["75,800","29,999","—"]
+    }
+  },
+
+  {
+    id: "B",
+    label: "ระดับกลาง",
+    sub: "ทุนรักษาพยาบาล ~2–3 ล้านบาท",
+    companies: {
+      msig:    { name: "MSIG", plan: "Student 2", sum: "3,000,000" },
+      allianz: { name: "Allianz", plan: "Intermediate Plan", sum: "2,500,000" },
+      aig:     { name: "AIG", plan: "Premier Plan", sum: "2,000,000" }
+    },
+    benefits: [
+      { cat:"1. ค่ารักษาพยาบาล (ทุนหลัก)",
+        msig:{v:"3,000,000",t:"covered", note:"OPD ทางไกลสูงสุด 5,000/ครั้ง • ค่าส่งเอกสารเคลม 1,500/ครั้ง"},
+        allianz:{v:"2,500,000",t:"covered", note:"รักษาต่อเนื่องในไทย 250,000 • กลับไทยชั่วคราว ≤90 วัน 200,000"},
+        aig:{v:"2,000,000",t:"covered", note:"ไม่แยกวงเงินย่อย"} },
+      { cat:"2. เคลื่อนย้ายฉุกเฉิน / กลับประเทศ / ส่งศพ",
+        msig:{v:"4,000,000",t:"covered"}, allianz:{v:"4,000,000",t:"covered"}, aig:{v:"4,000,000",t:"covered"} },
+      { cat:"3. เสียชีวิต/สูญเสียอวัยวะ/ทุพพลภาพจากอุบัติเหตุ",
+        msig:{v:"2,000,000",t:"covered", note:"รวมกรณีถูกฆาตกรรม/ทำร้ายร่างกาย"}, allianz:{v:"2,000,000",t:"covered"}, aig:{v:"2,000,000",t:"covered", note:"มีผลประโยชน์ Felonious Assault แยก (ข้อ 18)"} },
+      { cat:"4. ชดเชยการสูญเสียค่าเล่าเรียน",
+        msig:{v:"300,000",t:"covered"}, allianz:{v:"250,000",t:"covered"}, aig:{v:"250,000",t:"covered"} },
+      { cat:"5. ชดเชยการเดินทางเยี่ยมผู้ป่วย",
+        msig:{v:"300,000",t:"covered", note:"+ ค่าวีซ่าเร่งด่วน สูงสุด 15,000/คน"}, allianz:{v:"300,000",t:"covered"}, aig:{v:"250,000",t:"covered"} },
+      { cat:"6. เสียชีวิต/ทุพพลภาพของบิดามารดาจากอุบัติเหตุ",
+        msig:{v:"100,000",t:"covered"}, allianz:{v:"—",t:"none"}, aig:{v:"—",t:"none"} },
+      { cat:"7. คุ้มครองกีฬาอันตราย (บอลลูน บันจี้จัมพ์ ดำน้ำถังอากาศ สกู๊ตเตอร์ไฟฟ้า)",
+        msig:{v:"คุ้มครอง",t:"covered", note:"เสียชีวิต/ทุพพลภาพ 200,000 • ค่ารักษา 200,000"},
+        allianz:{v:"ไม่คุ้มครอง",t:"none"}, aig:{v:"ไม่คุ้มครอง",t:"none"} },
+      { cat:"8. ความล่าช้าของเที่ยวบิน",
+        msig:{v:"2,000/6ชม. สูงสุด 10,000",t:"covered"}, allianz:{v:"ไม่มีผลประโยชน์นี้",t:"none"}, aig:{v:"ไม่มีผลประโยชน์นี้",t:"none"} },
+      { cat:"9. ความล่าช้าของกระเป๋าเดินทาง",
+        msig:{v:"2,000/6ชม. สูงสุด 10,000",t:"covered"}, allianz:{v:"ไม่มีผลประโยชน์นี้",t:"none"}, aig:{v:"ไม่มีผลประโยชน์นี้",t:"none"} },
+      { cat:"10. พลาดการต่อเที่ยวบิน",
+        msig:{v:"2,000/6ชม. สูงสุด 10,000",t:"covered"}, allianz:{v:"ไม่มีผลประโยชน์นี้",t:"none"}, aig:{v:"ไม่มีผลประโยชน์นี้",t:"none"} },
+      { cat:"11. กระเป๋าเดินทาง/ทรัพย์สินส่วนตัวสูญหาย-เสียหาย",
+        msig:{v:"สูงสุด 60,000",t:"covered", note:"8,000/ชิ้น/คู่/ชุด • คุ้มครองทั่วไป"},
+        allianz:{v:"สูงสุด 60,000/เหตุการณ์",t:"covered", note:"5,000/ชิ้น • เฉพาะระหว่างใช้บริการขนส่งสาธารณะ"},
+        aig:{v:"สูงสุด 40,000/เหตุการณ์",t:"covered", note:"4,000/ชิ้น • Excess 500/ครั้ง"} },
+      { cat:"12. เอกสารการเดินทางสูญหาย/เสียหาย",
+        msig:{v:"10,000",t:"covered"}, allianz:{v:"ไม่มีผลประโยชน์แยก",t:"none"}, aig:{v:"ไม่มีผลประโยชน์แยก",t:"none"} },
+      { cat:"13. คอมพิวเตอร์โน้ตบุ๊กสูญหาย/เสียหาย",
+        msig:{v:"ไม่คุ้มครอง",t:"none"}, allianz:{v:"ไม่มีผลประโยชน์นี้",t:"none"}, aig:{v:"ไม่มีผลประโยชน์นี้",t:"none"} },
+      { cat:"14. เงินสดส่วนตัวสูญหาย",
+        msig:{v:"ไม่คุ้มครอง",t:"none"}, allianz:{v:"ไม่มีผลประโยชน์นี้",t:"none"}, aig:{v:"ไม่มีผลประโยชน์นี้",t:"none"} },
+      { cat:"15. ความรับผิดตามกฎหมายต่อบุคคลภายนอก",
+        msig:{v:"4,000,000",t:"covered"}, allianz:{v:"1,000,000",t:"covered"}, aig:{v:"4,000,000",t:"covered"} },
+      { cat:"16. ถูกลักพาตัวระหว่างเดินทาง",
+        msig:{v:"50,000",t:"covered"}, allianz:{v:"ไม่มีผลประโยชน์นี้",t:"none"}, aig:{v:"ไม่มีผลประโยชน์นี้",t:"none"} },
+      { cat:"17. ค่าเสียหายส่วนแรกสำหรับรถเช่า",
+        msig:{v:"10,000",t:"covered"}, allianz:{v:"ไม่มีผลประโยชน์นี้",t:"none"}, aig:{v:"ไม่มีผลประโยชน์นี้",t:"none"} },
+      { cat:"18. เสียชีวิต/ทุพพลภาพจากถูกทำร้ายร่างกาย (Felonious Assault) — ผลประโยชน์แยก",
+        msig:{v:"รวมอยู่ในข้อ 3",t:"neutral"}, allianz:{v:"ไม่ระบุแยก",t:"neutral"}, aig:{v:"1,000,000",t:"covered"} },
+    ],
+    premium: {
+      3:  ["6,000","6,129","—"], 4:  ["7,300","7,439","—"], 5:  ["8,900","9,009","—"],
+      6:  ["9,950","9,999","9,872"], 7:  ["11,550","11,599","—"], 8:  ["13,050","13,099","—"],
+      9:  ["14,650","14,699","—"], 10: ["16,250","16,299","—"], 11: ["18,150","18,199","—"],
+      12: ["19,900","19,999","19,742"], 13: ["20,500","21,699","—"], 14: ["22,150","23,399","—"],
+      15: ["23,750","25,099","—"], 16: ["25,350","26,799","—"], 17: ["26,900","28,399","—"],
+      18: ["28,350","29,999","—"], 19: ["30,000","31,699","—"], 20: ["31,650","33,399","—"],
+      21: ["33,250","35,099","—"], 22: ["34,850","36,799","—"], 23: ["36,400","38,399","—"],
+      24: ["37,800","39,999","—"]
+    }
+  },
+
+  {
+    id: "C",
+    label: "ระดับเริ่มต้น",
+    sub: "ทุนรักษาพยาบาล ~1.5–2 ล้านบาท",
+    companies: {
+      msig:    { name: "MSIG", plan: "Student 3", sum: "1,500,000" },
+      allianz: { name: "Allianz", plan: "Basic Plan", sum: "2,000,000" },
+      aig:     { name: "AIG", plan: "Basic Plan", sum: "1,500,000" }
+    },
+    benefits: [
+      { cat:"1. ค่ารักษาพยาบาล (ทุนหลัก)",
+        msig:{v:"1,500,000",t:"covered", note:"OPD ทางไกลสูงสุด 5,000/ครั้ง • ค่าส่งเอกสารเคลม 1,500/ครั้ง"},
+        allianz:{v:"2,000,000",t:"covered", note:"รักษาต่อเนื่องในไทย 200,000 • กลับไทยชั่วคราว ≤90 วัน 200,000"},
+        aig:{v:"1,500,000",t:"covered", note:"ไม่แยกวงเงินย่อย"} },
+      { cat:"2. เคลื่อนย้ายฉุกเฉิน / กลับประเทศ / ส่งศพ",
+        msig:{v:"3,000,000",t:"covered"}, allianz:{v:"3,000,000",t:"covered"}, aig:{v:"3,000,000",t:"covered"} },
+      { cat:"3. เสียชีวิต/สูญเสียอวัยวะ/ทุพพลภาพจากอุบัติเหตุ",
+        msig:{v:"1,500,000",t:"covered", note:"รวมกรณีถูกฆาตกรรม/ทำร้ายร่างกาย"}, allianz:{v:"1,500,000",t:"covered"}, aig:{v:"1,500,000",t:"covered", note:"มีผลประโยชน์ Felonious Assault แยก (ข้อ 18)"} },
+      { cat:"4. ชดเชยการสูญเสียค่าเล่าเรียน",
+        msig:{v:"200,000",t:"covered"}, allianz:{v:"200,000",t:"covered"}, aig:{v:"150,000",t:"covered"} },
+      { cat:"5. ชดเชยการเดินทางเยี่ยมผู้ป่วย",
+        msig:{v:"200,000",t:"covered", note:"+ ค่าวีซ่าเร่งด่วน สูงสุด 10,000/คน"}, allianz:{v:"200,000",t:"covered"}, aig:{v:"150,000",t:"covered"} },
+      { cat:"6. เสียชีวิต/ทุพพลภาพของบิดามารดาจากอุบัติเหตุ",
+        msig:{v:"100,000",t:"covered"}, allianz:{v:"—",t:"none"}, aig:{v:"—",t:"none"} },
+      { cat:"7. คุ้มครองกีฬาอันตราย (บอลลูน บันจี้จัมพ์ ดำน้ำถังอากาศ สกู๊ตเตอร์ไฟฟ้า)",
+        msig:{v:"คุ้มครอง",t:"covered", note:"เสียชีวิต/ทุพพลภาพ 150,000 • ค่ารักษา 150,000"},
+        allianz:{v:"ไม่คุ้มครอง",t:"none"}, aig:{v:"ไม่คุ้มครอง",t:"none"} },
+      { cat:"8. ความล่าช้าของเที่ยวบิน",
+        msig:{v:"ไม่คุ้มครอง",t:"none"}, allianz:{v:"ไม่มีผลประโยชน์นี้",t:"none"}, aig:{v:"ไม่มีผลประโยชน์นี้",t:"none"} },
+      { cat:"9. ความล่าช้าของกระเป๋าเดินทาง",
+        msig:{v:"ไม่คุ้มครอง",t:"none"}, allianz:{v:"ไม่มีผลประโยชน์นี้",t:"none"}, aig:{v:"ไม่มีผลประโยชน์นี้",t:"none"} },
+      { cat:"10. พลาดการต่อเที่ยวบิน",
+        msig:{v:"ไม่คุ้มครอง",t:"none"}, allianz:{v:"ไม่มีผลประโยชน์นี้",t:"none"}, aig:{v:"ไม่มีผลประโยชน์นี้",t:"none"} },
+      { cat:"11. กระเป๋าเดินทาง/ทรัพย์สินส่วนตัวสูญหาย-เสียหาย",
+        msig:{v:"สูงสุด 40,000",t:"covered", note:"5,000/ชิ้น/คู่/ชุด • คุ้มครองทั่วไป"},
+        allianz:{v:"สูงสุด 40,000/เหตุการณ์",t:"covered", note:"5,000/ชิ้น • เฉพาะระหว่างใช้บริการขนส่งสาธารณะ"},
+        aig:{v:"สูงสุด 20,000/เหตุการณ์",t:"covered", note:"2,000/ชิ้น • Excess 500/ครั้ง"} },
+      { cat:"12. เอกสารการเดินทางสูญหาย/เสียหาย",
+        msig:{v:"5,000",t:"covered"}, allianz:{v:"ไม่มีผลประโยชน์แยก",t:"none"}, aig:{v:"ไม่มีผลประโยชน์แยก",t:"none"} },
+      { cat:"13. คอมพิวเตอร์โน้ตบุ๊กสูญหาย/เสียหาย",
+        msig:{v:"ไม่คุ้มครอง",t:"none"}, allianz:{v:"ไม่มีผลประโยชน์นี้",t:"none"}, aig:{v:"ไม่มีผลประโยชน์นี้",t:"none"} },
+      { cat:"14. เงินสดส่วนตัวสูญหาย",
+        msig:{v:"ไม่คุ้มครอง",t:"none"}, allianz:{v:"ไม่มีผลประโยชน์นี้",t:"none"}, aig:{v:"ไม่มีผลประโยชน์นี้",t:"none"} },
+      { cat:"15. ความรับผิดตามกฎหมายต่อบุคคลภายนอก",
+        msig:{v:"1,000,000",t:"covered"}, allianz:{v:"1,000,000",t:"covered"}, aig:{v:"2,000,000",t:"covered"} },
+      { cat:"16. ถูกลักพาตัวระหว่างเดินทาง",
+        msig:{v:"50,000",t:"covered"}, allianz:{v:"ไม่มีผลประโยชน์นี้",t:"none"}, aig:{v:"ไม่มีผลประโยชน์นี้",t:"none"} },
+      { cat:"17. ค่าเสียหายส่วนแรกสำหรับรถเช่า",
+        msig:{v:"ไม่คุ้มครอง",t:"none"}, allianz:{v:"ไม่มีผลประโยชน์นี้",t:"none"}, aig:{v:"ไม่มีผลประโยชน์นี้",t:"none"} },
+      { cat:"18. เสียชีวิต/ทุพพลภาพจากถูกทำร้ายร่างกาย (Felonious Assault) — ผลประโยชน์แยก",
+        msig:{v:"รวมอยู่ในข้อ 3",t:"neutral"}, allianz:{v:"ไม่ระบุแยก",t:"neutral"}, aig:{v:"750,000",t:"covered"} },
+    ],
+    premium: {
+      3:  ["4,700","12,319","—"], 4:  ["5,700","14,969","—"], 5:  ["6,900","18,219","—"],
+      6:  ["7,450","19,999","7,155"], 7:  ["8,750","23,399","—"], 8:  ["9,950","26,799","—"],
+      9:  ["11,250","30,199","—"], 10: ["12,550","33,499","—"], 11: ["13,750","36,899","—"],
+      12: ["14,900","39,999","14,310"], 13: ["15,300","43,399","—"], 14: ["16,550","46,799","—"],
+      15: ["17,650","50,199","—"], 16: ["18,900","53,599","—"], 17: ["20,050","56,799","—"],
+      18: ["21,250","59,999","—"], 19: ["22,400","63,399","—"], 20: ["23,650","66,799","—"],
+      21: ["24,800","70,199","—"], 22: ["26,050","73,599","—"], 23: ["27,150","76,799","—"],
+      24: ["28,300","79,999","—"]
+    }
+  }
+];
+
+const CONDITIONS = [
+  { label:"อายุที่รับประกัน", msig:"11–50 ปีบริบูรณ์", allianz:"14–49 ปีบริบูรณ์", aig:"15–45 ปีบริบูรณ์" },
+  { label:"ต้องเริ่มต้น-สิ้นสุดการเดินทางที่ประเทศไทย", msig:"ใช่", allianz:"ใช่", aig:"ไม่ระบุชัดเจนในเอกสาร" },
+  { label:"ต้องมีภูมิลำเนา/ถิ่นฐานอยู่ในประเทศไทย", msig:"ใช่", allianz:"ใช่", aig:"ไม่ระบุชัดเจนในเอกสาร" },
+  { label:"ซื้อประกันภัยล่วงหน้าได้สูงสุด", msig:"ไม่ระบุในเอกสาร", allianz:"6 เดือนก่อนเดินทาง (ซื้อล่วงหน้าอย่างน้อย 2 ชม. ก่อนเดินทาง)", aig:"ไม่ระบุในเอกสาร" },
+  { label:"ระยะเวลาคุ้มครองสูงสุด", msig:"24 เดือน (ตามตารางเบี้ยประกันภัย)", allianz:"24 เดือน (ตามตารางเบี้ยประกันภัย)", aig:"2 ปี (24 เดือน) แต่มีตารางเบี้ยเฉพาะ 6 และ 12 เดือนในเอกสาร" },
+  { label:"ต้องลงทะเบียนเรียนในสถาบันที่ได้รับการยอมรับในต่างประเทศ", msig:"ใช่ (รวมสายอาชีพ)", allianz:"ไม่ได้ระบุชัดเจนในเอกสารนี้", aig:"ใช่ (เป็นแผนเฉพาะนักเรียน/นักศึกษา)" },
+  { label:"สภาพที่เป็นมาก่อนการเอาประกันภัย (Pre-existing Conditions)", msig:"ยกเว้น", allianz:"ยกเว้น", aig:"ยกเว้นตามข้อยกเว้นทั่วไป แต่มีเงื่อนไขพิเศษ: ไม่ตรวจสอบประวัติการรักษาหากต้องเคลื่อนย้ายฉุกเฉิน/กลับประเทศ" },
+  { label:"กีฬา/กิจกรรมเสี่ยงสูง", msig:"ยกเว้นกีฬาอาชีพ/แข่งขันทั่วไป แต่คุ้มครองกีฬาอันตรายที่ระบุไว้เป็นผลประโยชน์แยก (ข้อ 7)", allianz:"ยกเว้นกีฬาทุกประเภท (อาชีพและสมัครเล่น) และกิจกรรมผาดโผน/เอ็กซ์ตรีม", aig:"ยกเว้นกีฬาทุกประเภทและงานที่มีความเสี่ยงสูง" },
+  { label:"จำนวนกรมธรรม์ที่ถือได้ในเวลาเดียวกัน", msig:"1 ฉบับ", allianz:"ไม่ระบุในเอกสารนี้", aig:"1 ฉบับ" },
+];
+
+const EXCLUDED_COUNTRIES = {
+  msig: { count:19, list:"อัฟกานิสถาน, อาเซอร์ไบจาน, คิวบา, อิรัก, อิสราเอล, คีร์กีซสถาน, เลบานอน, ลิเบีย, นิการากัว, เกาหลีเหนือ, ปากีสถาน, ปาเลสไตน์, ซีเรีย, ทาจิกิสถาน, เติร์กเมนิสถาน, อุซเบกิสถาน, อิหร่าน, เนปาล (ยกเว้นเฉพาะการไต่หน้าผาหรือการปีนเขา), รัสเซีย, ยูเครน" },
+  allianz: { count:24, list:"อัฟกานิสถาน, แอลจีเรีย, เบลารุส, บุรุนดี, คองโก, คิวบา, เอริเทรีย, กินี, เกาหลีเหนือ, อิรัก, อิหร่าน, อิสราเอล, คอซอวอ, ไลบีเรีย, ลิเบีย, มอริเตเนีย, เนปาล, ไนเจอร์, ไนจีเรีย, เซอร์เบีย, โซมาเลีย, ซูดาน, ซีเรีย, ยูเครน, เยเมน" },
+  aig: { count:5, list:"คิวบา, อิหร่าน, ซีเรีย, สาธารณรัฐประชาธิปไตยประชาชนเกาหลี (เกาหลีเหนือ), ภูมิภาคไครเมีย — จุดขายหลักของ AIG คือรายชื่อประเทศยกเว้นสั้นที่สุดในบรรดา 3 บริษัท" }
+};
+
+const EXCLUSIONS_GENERAL = {
+  msig: ["สงคราม การก่อการร้าย การปฏิวัติ จลาจล", "สารกัมมันตรังสี เคมี ชีวภาพ", "สภาพที่เป็นมาก่อนการเอาประกันภัย และโรคเรื้อรังที่ยังไม่รักษาให้หายก่อนทำสัญญา", "เดินทางขัดคำสั่งแพทย์ หรือเพื่อไปรับการรักษาพยาบาลในต่างประเทศ", "ปฏิบัติหน้าที่ทหาร ตำรวจ หน่วยกู้ภัย ในภาวะสงคราม", "งานช่างเทคนิค/ก่อสร้าง/แรงงาน (ยกเว้นงานบริหาร งานขาย)", "ขับขี่/โดยสารรถจักรยานยนต์", "ทะเลาะวิวาท หรือมีส่วนยั่วยุ", "นักบิน/ลูกเรืออากาศยาน หรือโดยสารอากาศยานที่ไม่ได้จดทะเบียนเพื่อการพาณิชย์", "โรคเอดส์ กามโรค หรือโรคติดต่อทางเพศสัมพันธ์"],
+  allianz: ["ฆ่าตัวตาย พยายามฆ่าตัวตาย หรือทำร้ายร่างกายตนเอง", "สภาพที่เป็นมาก่อนการเอาประกันภัย", "เข้าร่วม ฝึกซ้อม หรือแข่งขันกีฬาทุกประเภท ทั้งอาชีพและสมัครเล่น", "งานเสี่ยงสูง งานใช้แรงงาน เครื่องจักรกล แท่นขุดเจาะน้ำมัน เหมืองใต้ดิน ประมง", "กิจกรรมผาดโผน/กีฬาเอ็กซ์ตรีม เช่น Free solo climbing, Base jumping, Heli-skiing, Cliff jumping"],
+  aig: ["ฆ่าตัวตาย พยายามฆ่าตัวตาย หรือทำร้ายร่างกายตนเอง", "สงคราม การจลาจล การนัดหยุดงาน การก่อความวุ่นวาย การปฏิวัติ", "งานช่างเทคนิค/ก่อสร้าง (ยกเว้นงานบริหาร งานควบคุมดูแล งานขาย)", "ขับขี่หรือโดยสารรถจักรยานยนต์"]
+};
+
+const EXEC_HIGHLIGHTS = [
+  { co:"msig", title:"MSIG", text:"ผลประโยชน์เสริมครอบคลุมกว้างที่สุด — มีทั้งความล่าช้าเที่ยวบิน/กระเป๋า, พลาดต่อเที่ยวบิน, เอกสารเดินทาง, โน้ตบุ๊ก, เงินสด, ลักพาตัว และรถเช่า ซึ่งอีก 2 บริษัทไม่มี" },
+  { co:"allianz", title:"Allianz", text:"เด่นเรื่องการรักษาต่อเนื่องหลังกลับไทย (คุ้มครองรักษาในไทยภายใน 12 ชม. และกรณีกลับไทยชั่วคราวสูงสุด 90 วัน สำหรับกรมธรรม์ >1 ปี)" },
+  { co:"aig", title:"AIG", text:"ประเทศยกเว้นน้อยที่สุดเพียง 5 ประเทศ และมีผลประโยชน์ Felonious Assault แยกต่างหาก พร้อมเงื่อนไขไม่ตรวจสอบประวัติการรักษาก่อนเคลื่อนย้ายฉุกเฉิน" },
+];
+
+</script>
+<script>
+// ============================================================
+// Render engine — builds all tables/tabs from data.js
+// ============================================================
+
+function money(v){ return v; }
+
+function cellClass(t){
+  if(t==="covered") return "covered";
+  if(t==="capped") return "capped";
+  if(t==="none") return "none";
+  return "neutral";
+}
+
+function buildExecHighlights(){
+  const wrap = document.getElementById("exec-highlights");
+  wrap.innerHTML = EXEC_HIGHLIGHTS.map(h => `
+    <div class="mini" style="border-left-color:var(--${h.co==='msig'?'msig':h.co==='allianz'?'allianz':'aig'})">
+      <h3>${h.title}</h3>
+      <div style="font-size:.85rem; color:var(--text-soft);">${h.text}</div>
+    </div>
+  `).join("");
+}
+
+function buildTabs(){
+  const bar = document.getElementById("tabbar");
+  const panelsWrap = document.getElementById("tabpanels");
+  bar.innerHTML = "";
+  panelsWrap.innerHTML = "";
+
+  TIERS.forEach((tier, idx) => {
+    const btn = document.createElement("button");
+    btn.className = "tabbtn" + (idx===0 ? " active" : "");
+    btn.id = "tabbtn-"+tier.id;
+    btn.innerHTML = `Tier ${tier.id} — ${tier.label}<small>${tier.sub}</small>`;
+    btn.onclick = () => showTab(tier.id);
+    bar.appendChild(btn);
+
+    const panel = document.createElement("div");
+    panel.className = "tabpanel" + (idx===0 ? " active" : "");
+    panel.id = "panel-"+tier.id;
+    panel.innerHTML = renderTierPanel(tier);
+    panelsWrap.appendChild(panel);
+  });
+}
+
+function showTab(id){
+  document.querySelectorAll(".tabbtn").forEach(b => b.classList.toggle("active", b.id === "tabbtn-"+id));
+  document.querySelectorAll(".tabpanel").forEach(p => p.classList.toggle("active", p.id === "panel-"+id));
+}
+
+function renderTierPanel(tier){
+  const c = tier.companies;
+  const sumCards = `
+    <div class="sum-grid">
+      <div class="sum-card msig"><div class="co">${c.msig.name}</div><div class="plan">${c.msig.plan}</div><div class="lbl">ทุนค่ารักษาพยาบาล</div><div class="amt">${c.msig.sum}</div></div>
+      <div class="sum-card allianz"><div class="co">${c.allianz.name}</div><div class="plan">${c.allianz.plan}</div><div class="lbl">ทุนค่ารักษาพยาบาล</div><div class="amt">${c.allianz.sum}</div></div>
+      <div class="sum-card aig"><div class="co">${c.aig.name}</div><div class="plan">${c.aig.plan}</div><div class="lbl">ทุนค่ารักษาพยาบาล</div><div class="amt">${c.aig.sum}</div></div>
+    </div>`;
+
+  const legend = `
+    <div class="legend">
+      <span><i style="background:var(--green)"></i> มีความคุ้มครอง</span>
+      <span><i style="background:var(--red)"></i> ไม่คุ้มครอง / ไม่มีผลประโยชน์นี้</span>
+      <span><i style="background:var(--neutral)"></i> รวมอยู่ในผลประโยชน์อื่น / ไม่ระบุแยก</span>
+    </div>`;
+
+  let benefitRows = "";
+  tier.benefits.forEach(b => {
+    benefitRows += `<tr>
+      <td class="cat">${b.cat}</td>
+      <td class="${cellClass(b.msig.t)}">${b.msig.v}${b.msig.note?`<span class="note">${b.msig.note}</span>`:""}</td>
+      <td class="${cellClass(b.allianz.t)}">${b.allianz.v}${b.allianz.note?`<span class="note">${b.allianz.note}</span>`:""}</td>
+      <td class="${cellClass(b.aig.t)}">${b.aig.v}${b.aig.note?`<span class="note">${b.aig.note}</span>`:""}</td>
+    </tr>`;
+  });
+
+  const benefitTable = `
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr>
+          <th style="text-align:left;">หมวดผลประโยชน์</th>
+          <th class="company-head msig">${c.msig.name}<br>${c.msig.plan}</th>
+          <th class="company-head allianz">${c.allianz.name}<br>${c.allianz.plan}</th>
+          <th class="company-head aig">${c.aig.name}<br>${c.aig.plan}</th>
+        </tr></thead>
+        <tbody>${benefitRows}</tbody>
+      </table>
+    </div>`;
+
+  let premRows = "";
+  Object.keys(tier.premium).sort((a,b)=>a-b).forEach(m => {
+    const [msig, allianz, aig] = tier.premium[m];
+    premRows += `<tr>
+      <td class="cat" style="min-width:auto;">ไม่เกิน ${m} เดือน</td>
+      <td>${msig}</td><td>${allianz}</td><td>${aig==="—"?'<span style="color:var(--text-soft)">ไม่มีข้อมูล</span>':aig}</td>
+    </tr>`;
+  });
+
+  const premTable = `
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr>
+          <th style="text-align:left;">ระยะเวลาเอาประกันภัย</th>
+          <th class="company-head msig">${c.msig.name}</th>
+          <th class="company-head allianz">${c.allianz.name}</th>
+          <th class="company-head aig">${c.aig.name}</th>
+        </tr></thead>
+        <tbody>${premRows}</tbody>
+      </table>
+    </div>`;
+
+  return `
+    <div class="card">
+      <h2><span class="n">${tier.id}</span>Tier ${tier.id} — ${tier.label}: ทุนประกันภัยและแผนที่จับคู่</h2>
+      ${sumCards}
+    </div>
+    <div class="card">
+      <h2><span class="n">✓</span>ตารางเปรียบเทียบความคุ้มครองโดยละเอียด</h2>
+      ${legend}
+      ${benefitTable}
+    </div>
+    <div class="card">
+      <h2><span class="n">฿</span>ตารางเบี้ยประกันภัย (บาท) ตามระยะเวลาเอาประกันภัย</h2>
+      <p style="font-size:.8rem; color:var(--text-soft); margin-top:-4px;">หมายเหตุ: อัตราเบี้ยของ AIG ในเอกสารต้นทางระบุเฉพาะระยะเวลาไม่เกิน 6 เดือน และไม่เกิน 12 เดือนเท่านั้น</p>
+      ${premTable}
+    </div>`;
+}
+
+function buildConditions(){
+  const t = document.getElementById("cond-table");
+  let rows = CONDITIONS.map(c => `<tr>
+    <td class="cat">${c.label}</td>
+    <td style="text-align:left;">${c.msig}</td>
+    <td style="text-align:left;">${c.allianz}</td>
+    <td style="text-align:left;">${c.aig}</td>
+  </tr>`).join("");
+  t.innerHTML = `
+    <thead><tr>
+      <th style="text-align:left;">หัวข้อ</th>
+      <th class="company-head msig">MSIG</th>
+      <th class="company-head allianz">Allianz</th>
+      <th class="company-head aig">AIG</th>
+    </tr></thead>
+    <tbody>${rows}</tbody>`;
+}
+
+function buildExcludedCountries(){
+  const wrap = document.getElementById("excl-countries");
+  const map = [["msig","MSIG"],["allianz","Allianz"],["aig","AIG"]];
+  wrap.innerHTML = map.map(([k,label]) => `
+    <div class="mini" style="border-left-color:var(--${k})">
+      <h3>${label} <span style="font-weight:400; color:var(--text-soft); font-size:.8rem;">(${EXCLUDED_COUNTRIES[k].count} ประเทศ/พื้นที่)</span></h3>
+      <div style="font-size:.82rem; line-height:1.6;">${EXCLUDED_COUNTRIES[k].list}</div>
+    </div>`).join("");
+}
+
+function buildExclusionsGeneral(){
+  const wrap = document.getElementById("excl-general");
+  const map = [["msig","MSIG"],["allianz","Allianz"],["aig","AIG"]];
+  wrap.innerHTML = map.map(([k,label]) => `
+    <div class="mini" style="border-left-color:var(--${k})">
+      <h3>${label}</h3>
+      <ul class="exl">${EXCLUSIONS_GENERAL[k].map(x=>`<li>${x}</li>`).join("")}</ul>
+    </div>`).join("");
+}
+
+// ---- Controls ----
+function adjFont(delta){
+  const cur = parseInt(getComputedStyle(document.body).getPropertyValue("font-size")) || 16;
+  const next = Math.min(20, Math.max(13, cur + delta));
+  document.body.style.setProperty("--fs", next+"px");
+  localStorage.setItem("ost_fs", next);
+}
+function toggleTheme(){
+  const cur = document.documentElement.getAttribute("data-theme");
+  const next = cur === "dark" ? "light" : "dark";
+  if(next === "dark") document.body.setAttribute("data-theme","dark");
+  else document.body.removeAttribute("data-theme");
+  localStorage.setItem("ost_theme", next);
+}
+
+(function init(){
+  const savedFs = localStorage.getItem("ost_fs");
+  if(savedFs) document.body.style.setProperty("--fs", savedFs+"px");
+  const savedTheme = localStorage.getItem("ost_theme");
+  if(savedTheme === "dark") document.body.setAttribute("data-theme","dark");
+
+  buildExecHighlights();
+  buildTabs();
+  buildConditions();
+  buildExcludedCountries();
+  buildExclusionsGeneral();
+})();
+
+</script>
+</body>
+</html>

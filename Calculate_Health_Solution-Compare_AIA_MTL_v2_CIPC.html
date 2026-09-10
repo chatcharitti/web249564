@@ -1416,6 +1416,10 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             Vitality Timeline
         </button>
+        <button class="main-tab-btn" onclick="switchMainTab('tab-cihero')" id="tab-btn-cihero">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            CI Hero
+        </button>
         <button class="main-tab-btn" onclick="switchMainTab('tab-cancer')" id="tab-btn-cancer">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>
             Care for Cancer
@@ -1544,6 +1548,21 @@
                                 <span id="mpci-prem-1" style="font-size:0.78em;color:var(--c-primary);font-weight:700;text-align:right;padding-right:2px;">฿ 0</span>
                             </div>
                         </div>
+                        <div class="rider-row">
+                            <span>CI Hero<span class="rider-tag" style="background:rgba(37,99,235,0.12);color:#2563eb;">AIA</span></span>
+                            <div style="display:flex;flex-direction:column;gap:3px;width:130px;">
+                                <select id="cihero-1" onchange="app.calculate()" class="premium-select compact" style="width:100%;">
+                                    <option value="">ไม่เลือก</option>
+                                    <option value="2M">2 ล้าน</option>
+                                    <option value="6M">6 ล้าน</option>
+                                    <option value="12M">12 ล้าน</option>
+                                </select>
+                                <select id="cihero-co-1" onchange="app.calculate()" class="premium-select compact" style="width:100%;font-size:0.78em;">
+                                    <option value="begin">Begin (มี Copay 10%)</option>
+                                    <option value="balanced">Balanced (ไม่มี Copay)</option>
+                                </select>
+                            </div>
+                        </div>
                         <div id="cp-container-1" class="hidden">
                             <label class="cp-checkbox-label">
                                 <input type="checkbox" id="cp-1" onchange="app.calculate()"> + Care Plus 5M <span style="color: var(--t-tertiary); font-weight: 400; font-size: 10px;">(มะเร็ง/ไต)</span>
@@ -1607,6 +1626,21 @@
                                 <span id="mpci-prem-2" style="font-size:0.78em;color:var(--c-primary);font-weight:700;text-align:right;padding-right:2px;">฿ 0</span>
                             </div>
                         </div>
+                        <div class="rider-row">
+                            <span>CI Hero<span class="rider-tag" style="background:rgba(37,99,235,0.12);color:#2563eb;">AIA</span></span>
+                            <div style="display:flex;flex-direction:column;gap:3px;width:130px;">
+                                <select id="cihero-2" onchange="app.calculate()" class="premium-select compact" style="width:100%;">
+                                    <option value="">ไม่เลือก</option>
+                                    <option value="2M">2 ล้าน</option>
+                                    <option value="6M">6 ล้าน</option>
+                                    <option value="12M">12 ล้าน</option>
+                                </select>
+                                <select id="cihero-co-2" onchange="app.calculate()" class="premium-select compact" style="width:100%;font-size:0.78em;">
+                                    <option value="begin">Begin (มี Copay 10%)</option>
+                                    <option value="balanced">Balanced (ไม่มี Copay)</option>
+                                </select>
+                            </div>
+                        </div>
                         <div id="cp-container-2" class="hidden">
                             <label class="cp-checkbox-label">
                                 <input type="checkbox" id="cp-2" onchange="app.calculate()"> + Care Plus 5M <span style="color: var(--t-tertiary); font-weight: 400; font-size: 10px;">(มะเร็ง/ไต)</span>
@@ -1668,6 +1702,21 @@
                             <div style="display:flex;flex-direction:column;gap:3px;width:130px;">
                                 <input type="number" id="mpci-sum-3" value="0" min="0" step="100000" class="premium-input" style="font-size:0.82em;padding:5px 8px;" oninput="app.calculate()" placeholder="ทุน (บาท)">
                                 <span id="mpci-prem-3" style="font-size:0.78em;color:var(--c-primary);font-weight:700;text-align:right;padding-right:2px;">฿ 0</span>
+                            </div>
+                        </div>
+                        <div class="rider-row">
+                            <span>CI Hero<span class="rider-tag" style="background:rgba(37,99,235,0.12);color:#2563eb;">AIA</span></span>
+                            <div style="display:flex;flex-direction:column;gap:3px;width:130px;">
+                                <select id="cihero-3" onchange="app.calculate()" class="premium-select compact" style="width:100%;">
+                                    <option value="">ไม่เลือก</option>
+                                    <option value="2M">2 ล้าน</option>
+                                    <option value="6M">6 ล้าน</option>
+                                    <option value="12M">12 ล้าน</option>
+                                </select>
+                                <select id="cihero-co-3" onchange="app.calculate()" class="premium-select compact" style="width:100%;font-size:0.78em;">
+                                    <option value="begin">Begin (มี Copay 10%)</option>
+                                    <option value="balanced">Balanced (ไม่มี Copay)</option>
+                                </select>
                             </div>
                         </div>
                         <div id="cp-container-3" class="hidden">
@@ -1757,6 +1806,12 @@
                         <td class="data-cell col-opt-1"><div id="name-mpci-1" style="font-size: 0.72em; color: #dc2626; margin-bottom: 4px;"></div><span id="sum-mpci-1" style="color: #dc2626; font-weight:600;">–</span></td>
                         <td class="data-cell col-opt-2"><div id="name-mpci-2" style="font-size: 0.72em; color: #dc2626; margin-bottom: 4px;"></div><span id="sum-mpci-2" style="color: #dc2626; font-weight:600;">–</span></td>
                         <td class="data-cell col-opt-3"><div id="name-mpci-3" style="font-size: 0.72em; color: #dc2626; margin-bottom: 4px;"></div><span id="sum-mpci-3" style="color: #dc2626; font-weight:600;">–</span></td>
+                    </tr>
+                    <tr id="row-cihero">
+                        <td class="row-header">สุขภาพ + โรคร้ายแรง (AIA Health CI Hero) <span class="badge" style="margin-left:6px;background:rgba(37,99,235,0.12);color:#2563eb;border:1px solid rgba(37,99,235,0.25);">เหมาจ่าย</span></td>
+                        <td class="data-cell col-opt-1"><div id="name-cihero-1" style="font-size: 0.72em; color: #2563eb; margin-bottom: 4px;"></div><span id="sum-cihero-1" style="color: #2563eb; font-weight:600;">–</span></td>
+                        <td class="data-cell col-opt-2"><div id="name-cihero-2" style="font-size: 0.72em; color: #2563eb; margin-bottom: 4px;"></div><span id="sum-cihero-2" style="color: #2563eb; font-weight:600;">–</span></td>
+                        <td class="data-cell col-opt-3"><div id="name-cihero-3" style="font-size: 0.72em; color: #2563eb; margin-bottom: 4px;"></div><span id="sum-cihero-3" style="color: #2563eb; font-weight:600;">–</span></td>
                     </tr>
                     <tr>
                         <td class="row-header">ชดเชยรายได้ (AIA HB Extra)</td>
@@ -2728,6 +2783,151 @@
         </div>
     </div><!-- end tab-cancer -->
 
+    <!-- ═══ TAB: CI Hero ═══ -->
+    <div class="main-tab-panel" id="tab-cihero" style="display:none !important;">
+        <div class="cc-container">
+
+            <div class="cc-ctrl-bar no-print">
+                <span style="font-size:0.82em;font-weight:700;color:#374151;">🦸 AIA Health CI Hero · ข้อมูลจาก Option 1</span>
+                <div style="display:flex;align-items:center;gap:5px;margin-left:auto;">
+                    <span style="font-size:0.78em;color:#6b7280;">ขนาด A</span>
+                    <button class="cc-font-btn" onclick="chFontSize(-1)">A−</button>
+                    <span style="min-width:34px;text-align:center;font-size:11px;font-weight:700;color:#475569;" id="ch-font-lbl">100%</span>
+                    <button class="cc-font-btn" onclick="chFontSize(1)">A+</button>
+                </div>
+                <button class="cc-print-btn" onclick="chPrint()" style="background:#eff6ff;color:#1d4ed8;border-color:#2563eb;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                    พิมพ์ A4
+                </button>
+            </div>
+
+            <!-- Header -->
+            <div class="cc-header-card" style="background:linear-gradient(135deg,#eff6ff 0%,#f0f9ff 100%);border-color:#2563eb;">
+                <div class="cc-header-title" style="color:#1d4ed8;">🦸 AIA Health CI Hero — สุขภาพเหมาจ่าย + โรคร้ายแรง</div>
+                <div class="cc-header-sub" style="color:#1e3a8a;">สุขภาพเหมาจ่าย + คุ้มครองโรคร้ายแรง · เลือกได้ 2 แบบ: BEGIN (มีค่าใช้จ่ายร่วม 10%) หรือ BALANCED (ไม่มีค่าใช้จ่ายร่วม)</div>
+                <div class="cc-info-grid" id="ch-info-grid">
+                    <div class="cc-info-box" style="border-color:#93c5fd;">
+                        <div class="cc-info-label" style="color:#1e40af;">ผู้เอาประกัน (Option 1)</div>
+                        <div class="cc-info-value" id="ch-age">–</div>
+                    </div>
+                    <div class="cc-info-box" style="border-color:#93c5fd;">
+                        <div class="cc-info-label" style="color:#1e40af;">แผนความคุ้มครอง</div>
+                        <div class="cc-info-value" style="color:#1d4ed8;" id="ch-plan">–</div>
+                    </div>
+                    <div class="cc-info-box" style="border-color:#93c5fd;">
+                        <div class="cc-info-label" style="color:#1e40af;">เบี้ย CI Hero / ปี</div>
+                        <div class="cc-info-value" style="color:#1d4ed8;" id="ch-prem">–</div>
+                    </div>
+                    <div class="cc-info-box" style="border-color:#93c5fd;">
+                        <div class="cc-info-label" style="color:#1e40af;">ค่าห้อง/วัน (IPD)</div>
+                        <div class="cc-info-value" style="color:#1d4ed8;" id="ch-room">–</div>
+                    </div>
+                    <div class="cc-info-box" style="border-color:#93c5fd;">
+                        <div class="cc-info-label" style="color:#1e40af;">ค่าแพทย์ตรวจ/วัน</div>
+                        <div class="cc-info-value" style="color:#1d4ed8;" id="ch-doctor">–</div>
+                    </div>
+                </div>
+                <div id="ch-package-note" style="margin-top:12px;padding:11px 15px;background:#fff;border:1.5px dashed #2563eb;border-radius:8px;font-size:0.82em;color:#1e3a8a;line-height:1.7;display:none;"></div>
+            </div>
+
+            <!-- ผลประโยชน์ IPD -->
+            <div class="cc-section">
+                <div class="cc-section-title" style="color:#1d4ed8;">📋 ตารางผลประโยชน์ความคุ้มครอง (หมวดที่ 1–13)</div>
+                <div class="cc-section-sub">ความคุ้มครองสูงสุดต่อรอบปีกรมธรรม์ — เปรียบเทียบ 3 แผน (แผนที่เลือกจะถูกเน้นสีฟ้า)</div>
+                <div style="overflow-x:auto;">
+                    <table class="vb-table" style="font-size:0.84em;">
+                        <thead>
+                            <tr>
+                                <th class="th-base" style="width:7%;">หมวด</th>
+                                <th class="th-base" style="width:47%;text-align:left;">รายการความคุ้มครอง</th>
+                                <th class="th-base ch-col-2M"  id="ch-th-2M"  style="width:15%;">2 ล้าน</th>
+                                <th class="th-base ch-col-6M"  id="ch-th-6M"  style="width:15%;">6 ล้าน</th>
+                                <th class="th-base ch-col-12M" id="ch-th-12M" style="width:16%;">12 ล้าน</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ch-ipd-body"></tbody>
+                    </table>
+                </div>
+                <div class="cc-footnote" style="text-align:right;font-weight:600;color:#475569;">รวมผลประโยชน์ในหมวดที่ 1 – 13 ต้องไม่เกินผลประโยชน์สูงสุดต่อรอบปีกรมธรรม์</div>
+            </div>
+
+            <!-- ค่าใช้จ่ายร่วม (Copayment) -->
+            <div class="cc-section">
+                <div class="cc-section-title" style="color:#1d4ed8;">💳 เงื่อนไขค่าใช้จ่ายร่วม (Copayment)</div>
+                <div class="cc-section-sub">AIA Health CI Hero เลือกได้ 2 แบบ — ต่างกันที่การร่วมจ่ายค่ารักษา ทั้งกรณีรักษาในสิทธิ (AIA Smart Network) และนอกสิทธิ</div>
+                <div id="ch-copay-box"></div>
+            </div>
+
+            <!-- เงื่อนไขสำคัญ -->
+            <div class="cc-section">
+                <div class="cc-section-title" style="color:#1d4ed8;">⏱️ เงื่อนไขระยะเวลาที่ต้องทราบ</div>
+                <div class="cc-section-sub">เงื่อนไขเฉพาะของ AIA Health CI Hero สำหรับความคุ้มครองโรคร้ายแรง</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+                    <div style="padding:14px 16px;background:#fef2f2;border:1.5px solid #dc2626;border-radius:10px;">
+                        <div style="font-size:0.92em;font-weight:800;color:#b91c1c;margin-bottom:6px;">🕐 Waiting Period — 60 วัน</div>
+                        <div style="font-size:0.80em;color:#374151;line-height:1.7;">
+                            ระยะเวลาที่ไม่คุ้มครองนับจากวันเริ่มมีผลคุ้มครอง หากได้รับการวินิจฉัยว่าเป็นโรคร้ายแรงภายในช่วงนี้ จะไม่ได้รับความคุ้มครอง
+                        </div>
+                    </div>
+                    <div style="padding:14px 16px;background:#eef2ff;border:1.5px solid #4f46e5;border-radius:10px;">
+                        <div style="font-size:0.92em;font-weight:800;color:#4338ca;margin-bottom:6px;">📅 Condition Persistence Period — 45 วัน</div>
+                        <div style="font-size:0.80em;color:#374151;line-height:1.7;">
+                            ระยะเวลาการคงอยู่ต่อเนื่องของโรคนับตั้งแต่วันที่ได้รับการวินิจฉัยโรคร้ายแรงและยืนยันจากแพทย์ผู้เชี่ยวชาญ
+                            โดยอาการต้องปรากฏและคงอยู่ต่อเนื่องจนครบระยะเวลาที่กำหนด
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top:14px;padding:12px 16px;background:#fffbeb;border:1.5px dashed #d97706;border-radius:10px;">
+                    <div style="font-size:0.86em;font-weight:800;color:#92400e;margin-bottom:5px;">💡 Tips &amp; Tricks</div>
+                    <div style="font-size:0.79em;color:#78350f;line-height:1.75;">
+                        หากได้รับการวินิจฉัยจากแพทย์ว่าเป็นโรคร้ายแรงครั้งแรก และเป็นโรคร้ายแรงที่ไม่มี Condition Persistence Period
+                        <b>สามารถเบิกค่ารักษาในโรงพยาบาลได้ทันที</b><br>
+                        เช่น กรณีเจ็บป่วยด้วยโรคหลอดเลือดสมองแตกหรืออุดตันถึงระดับปานกลาง (3.1E) · โรคหลอดเลือดสมองที่ต้องผ่าตัดคอออกจากโรคติด (3.2E) ·
+                        โรคหลอดเลือดสมองโป่งพองที่รักษาโดยใช้ขดลวดผ่านสายสวนทางหลอดเลือด (3.3E)
+                    </div>
+                </div>
+                <div style="margin-top:12px;padding:12px 16px;background:#f0fdf4;border:1.5px solid #16a34a;border-radius:10px;">
+                    <div style="font-size:0.84em;color:#166534;line-height:1.75;">
+                        <b>เมื่อครบระยะเวลาการคงอยู่ต่อเนื่อง</b> บริษัทจะจ่ายผลประโยชน์ 13 หมวด
+                        <b>ให้ตั้งแต่วันที่ได้รับวินิจฉัยครั้งแรก</b> โดยจ่ายทั้งค่ารักษาพยาบาลจากโรคร้ายแรงและค่ารักษาพยาบาลจากการเจ็บป่วยอื่นๆ
+                        — จ่ายผลประโยชน์ 13 หมวด <b>ได้เหมือนประกันสุขภาพทั่วไป</b>
+                    </div>
+                </div>
+            </div>
+
+            <!-- เบี้ยคาดการณ์ -->
+            <div class="cc-section">
+                <div class="cc-section-title" style="color:#1d4ed8;">📊 เบี้ยประกันคาดการณ์ปรับตามอายุ</div>
+                <div class="cc-section-sub" id="ch-proj-sub">รวมเบี้ยประกันหลักและสัญญาเพิ่มเติมทั้งหมดของ Option 1 ตามช่วงอายุ</div>
+                <div style="overflow-x:auto;">
+                    <table class="vb-table" style="font-size:0.85em;">
+                        <thead>
+                            <tr>
+                                <th class="th-base" style="width:12%;">ช่วงอายุ</th>
+                                <th class="th-base" style="width:9%;">ปีที่</th>
+                                <th class="th-base" style="width:16%;">ประกันหลัก<br><span style="font-size:0.85em;font-weight:600;" id="ch-proj-th-main">20PayLife</span></th>
+                                <th class="th-base" style="width:16%;color:#93c5fd;">CI Hero<br><span style="font-size:0.85em;font-weight:600;" id="ch-proj-th-plan">–</span></th>
+                                <th class="th-base" style="width:16%;">สัญญาอื่น<br><span style="font-size:0.85em;font-weight:600;" id="ch-proj-th-other">–</span></th>
+                                <th class="th-base" style="width:17%;color:#fcd34d;">รวมเบี้ยต่อปี</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ch-proj-body"><tr><td colspan="6" style="text-align:center;padding:28px;color:#9ca3af;">กรุณาเลือกแผน CI Hero ใน Option 1</td></tr></tbody>
+                    </table>
+                </div>
+                <div class="cc-footnote">
+                    * ช่วงอายุ 81–98 ปี คือ เบี้ยประกันภัยแบบคุ้มครองค่ารักษาพยาบาลทุกกรณีเจ็บป่วย<br>
+                    * สัญญาเพิ่มเติมนี้เป็นสัญญาที่มีระยะเวลาเอาประกันภัย 1 ปี ซึ่งอาจต่ออายุได้ · บริษัทฯ สงวนสิทธิ์ในการปรับเบี้ยประกันภัยในรอบปีกรมธรรม์ตามอายุ ชั้นอาชีพ หรือค่าใช้จ่ายในการรักษาพยาบาลที่สูงขึ้น
+                </div>
+            </div>
+
+            <div class="cc-footnote">
+                • ผู้ขอเอาประกันภัยควรศึกษาและทำความเข้าใจในเอกสารเสนอขายก่อนตัดสินใจทำประกันภัย เมื่อได้รับกรมธรรม์แล้ว โปรดศึกษารายละเอียด ข้อกำหนดและเงื่อนไขในกรมธรรม์<br>
+                • ข้อกำหนดและเงื่อนไขของความคุ้มครองจะระบุไว้ในกรมธรรม์ประกันภัยที่ออกให้กับผู้ถือกรมธรรม์
+            </div>
+
+        </div>
+    </div><!-- end tab-cihero -->
+
     </div><!-- end main-tab-wrapper -->
 
 <!-- Toast Notification -->
@@ -3130,6 +3330,41 @@ const APP_DATA = {
         CP: { male: {}, female: {} }   // Built dynamically (Care Plus Exact Age)
     },
 
+    // AIA Health CI Hero — เบี้ยประกันภัยมาตรฐานรายปี (แบบ BEGIN)
+    // มีค่าใช้จ่ายร่วม 10% สูงสุดไม่เกิน 10,000 บาท (รักษาใน AIA Smart Network)
+    // 3 แผน: 2 ล้าน / 6 ล้าน / 12 ล้าน · 20 ช่วงอายุ
+    // AIA Health CI Hero — เบี้ยประกันภัยมาตรฐานรายปี
+    // BEGIN    = มีค่าใช้จ่ายร่วม 10% ของค่าใช้จ่ายที่ได้รับความคุ้มครอง สูงสุดไม่เกิน 10,000 บาท/รอบปีกรมธรรม์
+    // BALANCED = ไม่มีค่าใช้จ่ายร่วม (เบี้ยสูงกว่า)
+    // เงื่อนไขข้างต้นใช้กรณีเข้ารักษาตัวในโรงพยาบาลในโครงการ AIA Smart Network
+    RATE_CIHERO: {
+        bands: ["15วัน-5","6-10","11-15","16-20","21-25","26-30","31-35","36-40","41-45","46-50",
+                "51-55","56-60","61-65","66-70","71-75","76-80","81-85","86-90","91-95","96-98"],
+        begin: {
+            male: {
+                "2M":  [14700,5700,4800,3300,4200,5700,6900,9300,12300,17100,21300,29100,40800,58200,84300,120600,179400,206400,237300,273000],
+                "6M":  [18000,6600,6300,4200,5100,7200,8700,12600,14400,21600,28200,37200,49800,76200,114900,160800,250800,288600,332100,381600],
+                "12M": [20700,7800,6900,5100,6000,8400,9900,14400,17400,26400,32700,45600,55800,85200,128400,180000,312000,358800,412500,474600]
+            },
+            female: {
+                "2M":  [12300,5100,3600,3600,4500,6600,7800,10800,13200,18600,22500,30600,41100,60000,86700,124500,184800,212700,244800,281400],
+                "6M":  [14400,6000,4800,4800,5700,8100,9300,13800,17100,23100,29400,37800,51600,78900,118800,166200,259200,297900,342600,393600],
+                "12M": [16200,6300,5700,5400,6900,10200,12000,16500,21000,28800,33000,46800,58500,89700,131400,187800,329100,378300,434700,499800]
+            }
+        },
+        balanced: {
+            male: {
+                "2M":  [17400,6600,5700,3900,4800,6600,8100,11100,14400,20100,25200,34200,48000,68400,99300,141900,211200,242700,279300,321000],
+                "6M":  [21000,7800,7500,5100,6000,8400,10200,14700,17100,25500,33000,43500,58500,89700,135300,189300,295200,339600,390600,448800],
+                "12M": [24300,9000,8100,6000,7200,9900,11700,17100,20400,30900,38400,53700,65700,100200,151200,212100,367200,422100,485400,558300]
+            },
+            female: {
+                "2M":  [14400,6000,4200,4200,5400,7800,9000,12600,15600,21900,26400,36000,48300,70500,102000,146400,217500,250200,288000,330900],
+                "6M":  [17100,6900,5700,5700,6600,9600,11100,16200,20100,27000,34500,44400,60600,92700,139800,195600,304800,350400,402900,463200],
+                "12M": [19200,7500,6600,6300,8100,12000,14100,19500,24600,33900,38700,54900,69000,105300,154500,220800,387000,444900,511500,588000]
+            }
+        }
+    },
     RATE_CFC: {
         male: { "0-15":119.51, "16-20":135.16, "21-25":155.84, "26-30":189.26, "31-35":253.51, "36-40":386.81, "41-45":512.13, "46-50":800.92, "51-55":1282.87, "56-60":1869.36, "61-65":2876.04, "66-70":4676.21, "71-75":6152.96, "76-79":7639.52 },
         female: { "0-15":119.51, "16-20":139.33, "21-25":182.50, "26-30":253.40, "31-35":375.68, "36-40":462.17, "41-45":669.69, "46-50":921.10, "51-55":1247.10, "56-60":1774.95, "61-65":2115.73, "66-70":3143.33, "71-75":3834.44, "76-79":4591.68 }
@@ -3603,6 +3838,35 @@ const app = {
         if (age <= 90) return 15; if (age <= 95) return 16; return 17;
     },
 
+    // ── AIA Health CI Hero ─────────────────────────────────────────
+    // คืน index ของช่วงอายุในตาราง CI Hero (20 bands)
+    getCIHeroBandIdx(age) {
+        if (age <= 5) return 0;
+        if (age <= 10) return 1;
+        if (age <= 98) {
+            var i = Math.floor((age - 11) / 5) + 2;
+            return Math.min(i, 19);
+        }
+        return 19;
+    },
+    // เบี้ย CI Hero ต่อปี ตามแผน (2M/6M/12M), อายุ, เพศ
+    calcCIHero(plan, age, gender, coType) {
+        if (!plan) return 0;
+        var ct = coType || 'begin';
+        var grp = APP_DATA.RATE_CIHERO[ct];
+        if (!grp) return 0;
+        var t = grp[gender];
+        if (!t || !t[plan]) return 0;
+        if (age > 98) return 0;
+        return t[plan][this.getCIHeroBandIdx(age)] || 0;
+    },
+    // อ่านค่า plan + coType ของ option ที่กำหนด
+    getCIHeroSel(id) {
+        var plan = (document.getElementById('cihero-' + id) || {}).value || '';
+        var ct   = (document.getElementById('cihero-co-' + id) || {}).value || 'begin';
+        return { plan: plan, coType: ct };
+    },
+
     getRiderRate(type, age, gender) {
         let table;
         if (type === 'CFC') table = APP_DATA.RATE_CFC[gender];
@@ -3721,13 +3985,16 @@ const app = {
             const pCFC  = (sumCFC / 100000) * this.getRiderRate('CFC', age, gender);
             const pHB   = (sumHB / 100) * this.getRiderRate('HB', age, gender);
             const pMPCI = this.calcMultiPayCI(sumMPCI, age, gender);
+            const heroSel = this.getCIHeroSel(id);
+            const heroPlan = heroSel.plan;
+            const pHero = this.calcCIHero(heroPlan, age, gender, heroSel.coType);
             
             let pCP = 0;
             if (cpChecked && this.isMTL(st.type)) {
                 pCP = APP_DATA.rateTable.CP[gender]["5M"][Math.min(99, age)] || 0;
             }
 
-            const pTotal = pMain + pHl + pCFC + pHB + pCP + pMPCI;
+            const pTotal = pMain + pHl + pCFC + pHB + pCP + pMPCI + pHero;
 
             // Summary Table Update
             const mainTypeName = this.isMTL(st.type) ? "MTL" : (mainType === 'CIProCare' ? 'CI ProCare' : '20PLN');
@@ -3747,6 +4014,10 @@ const app = {
             }
             document.getElementById(`sum-cp-${id}`).textContent = pCP > 0 ? this.formatMoney(pCP) : "-";
 
+            const heroLbl = { '2M':'แผน 2 ล้าน', '6M':'แผน 6 ล้าน', '12M':'แผน 12 ล้าน' };
+            const coLbl = heroSel.coType === 'balanced' ? ' · Balanced' : ' · Begin';
+            document.getElementById(`name-cihero-${id}`).textContent = heroPlan ? (heroLbl[heroPlan] + coLbl) : "";
+            document.getElementById(`sum-cihero-${id}`).textContent  = pHero > 0 ? this.formatMoney(pHero) : "–";
             document.getElementById(`name-cfc-${id}`).textContent = sumCFC > 0 ? `ทุน ${this.formatMoney(sumCFC)}` : "-";
             document.getElementById(`sum-cfc-${id}`).textContent = sumCFC > 0 ? this.formatMoney(pCFC) : "-";
             
@@ -4004,6 +4275,8 @@ const app = {
                 if(hb>0) desc += ` + HB`;
                 const mpciSumHdr = parseInt(document.getElementById(`mpci-sum-${id}`).value) || 0;
                 if(mpciSumHdr>0) desc += ` + MPCI`;
+                const heroSelH = this.getCIHeroSel(id);
+                if(heroSelH.plan) desc += ` + CI Hero ${heroSelH.plan.replace('M',' ล้าน')} (${heroSelH.coType==='balanced'?'Balanced':'Begin'})`;
                 document.getElementById(`proj-head-${id}`).textContent = `(${desc})`;
             }
         });
@@ -4076,13 +4349,15 @@ const app = {
                 const pHB = (hbSum > 0 && rateHb > 0) ? (hbSum / 100) * rateHb : 0;
                 // MPCI: yearly renewable — คำนวณตาม evalAge ของแต่ละ band
                 const pMPCI = mpciSum > 0 ? this.calcMultiPayCI(mpciSum, evalAge, gender) : 0;
+                const heroSelP = this.getCIHeroSel(id);
+                const pHeroP = this.calcCIHero(heroSelP.plan, evalAge, gender, heroSelP.coType);
 
                 let termDesc = [];
                 if(cfcSum > 0 && rateCfc === 0) termDesc.push("CFC สิ้นสุด");
                 if(hbSum > 0 && rateHb === 0) termDesc.push("HB สิ้นสุด");
                 if(mpciSum > 0 && evalAge > 99) termDesc.push("MPCI สิ้นสุด");
                 
-                const pTotal = pMain + pHl + pCFC + pHB + pCP + pMPCI;
+                const pTotal = pMain + pHl + pCFC + pHB + pCP + pMPCI + pHeroP;
                 let termHtml = mainDesc;
                 if(termDesc.length > 0) {
                     termHtml += `<br><span style="font-size: 11px; color: var(--t-tertiary);">(${termDesc.join(', ')})</span>`;
@@ -4482,7 +4757,8 @@ function switchMainTab(tabId) {
         'tab-infographic':  'tab-btn-infographic',
         'tab-vitality':     'tab-btn-vitality',
         'tab-vtimeline':    'tab-btn-vtimeline',
-        'tab-cancer':       'tab-btn-cancer'
+        'tab-cancer':       'tab-btn-cancer',
+        'tab-cihero':       'tab-btn-cihero'
     };
     const btn = document.getElementById(btnMap[tabId]);
     if (btn) btn.classList.add('active');
@@ -4492,6 +4768,7 @@ function switchMainTab(tabId) {
     if (tabId === 'tab-vitality') vbRender();
     if (tabId === 'tab-vtimeline') vtRender();
     if (tabId === 'tab-cancer') ccRender();
+    if (tabId === 'tab-cihero') chRender();
 }
 
 // ==========================================
@@ -4769,6 +5046,255 @@ function vbCalcBonusRows(prem2, age2, tiersArr, useCampaign) {
             accRandDisplay: isPayout ? 0 : accRand, payRand: payRand });
     }
     return { rows: rows, totalPlat: totalPlat, totalGold: totalGold, totalSilver: totalSilver, totalRand: totalRand };
+}
+
+// ==========================================
+// CI HERO TAB
+// ==========================================
+const CH_FONT_LEVELS = [75,80,85,90,95,100,108,116,125,135];
+let _chFontIdx = 5;
+const CH_PLAN_LBL = { '2M':'2 ล้านบาท', '6M':'6 ล้านบาท', '12M':'12 ล้านบาท' };
+// ผลประโยชน์ IPD ตามแผน (จากเอกสาร AIA Health CI Hero)
+const CH_IPD_ROWS = [
+  { sec:'ipd', label:'1️⃣ ผลประโยชน์กรณีผู้ป่วยใน (IPD)' },
+  { no:'1', name:'ค่าห้อง และค่าอาหาร ค่าบริการในโรงพยาบาล (ผู้ป่วยใน) ต่อการเข้าพักรักษาเป็นผู้ป่วยในครั้งใดครั้งหนึ่ง<br><span style="font-size:0.85em;color:#6b7280;">ห้องผู้ป่วยวิกฤติ (ICU) จะจ่ายค่าห้อง ค่าอาหาร รวมถึงค่าบริการในโรงพยาบาล ให้ตามจำนวนที่จ่ายจริง · สูงสุดไม่เกิน 365 วัน</span>',
+    v:{'2M':'3,000','6M':'6,000','12M':'9,000'}, unit:'บาท/วัน' },
+  { no:'', name:'<span style="color:#dc2626;font-weight:700;">ค่าห้องฯ ICU</span>', v:{'2M':'จ่ายตามจริง'}, span:true },
+  { no:'2', name:'ค่าบริการทางการแพทย์เพื่อการตรวจวินิจฉัยหรือบำบัดรักษา ค่าบริการโลหิตและส่วนประกอบของโลหิต ค่าบริการทางการพยาบาล ค่ายา ค่าสารอาหารทางหลอดเลือด และค่าเวชภัณฑ์ ต่อรอบปีกรมธรรม์<br><span style="font-size:0.85em;color:#6b7280;">2.1 ค่าบริการทางการแพทย์เพื่อการตรวจวินิจฉัย · 2.2 ค่าบริการทางการแพทย์เพื่อการบำบัดรักษา ค่าบริการโลหิตฯ และค่าบริการทางการพยาบาล · 2.3 ค่ายา ค่าสารอาหารทางหลอดเลือด และค่าเวชภัณฑ์</span>',
+    v:{'2M':'เหมาจ่ายตามจริง'}, span:true, head:true },
+  { no:'2.4', name:'ค่ายา และค่าเวชภัณฑ์สิ้นเปลือง (เวชภัณฑ์ 1) สำหรับกลับบ้าน <i style="color:#dc2626;">(จำกัดปริมาณไม่เกิน 14 วัน)</i>',
+    v:{'2M':'20,000 ต่อครั้ง','6M':'20,000 ต่อครั้ง','12M':'จ่ายตามจริง'} },
+  { no:'3', name:'ค่าผู้ประกอบวิชาชีพเวชกรรม (แพทย์) ตรวจรักษา ต่อการเข้าพักรักษาเป็นผู้ป่วยในครั้งใดครั้งหนึ่ง สูงสุดไม่เกิน 365 วัน',
+    v:{'2M':'3,000','6M':'4,000','12M':'6,000'}, unit:'บาท/วัน' },
+  { no:'4', name:'ค่ารักษาพยาบาลโดยการผ่าตัด (ศัลยกรรม) และหัตถการ ต่อรอบปีกรมธรรม์<br><span style="font-size:0.85em;color:#6b7280;">4.1 ค่าห้องผ่าตัดและค่าห้องทำหัตถการ · 4.2 ค่ายา ค่าสารอาหารทางหลอดเลือด ค่าเวชภัณฑ์ และค่าอุปกรณ์การผ่าตัดและหัตถการ · 4.3 ค่าแพทย์ทำศัลยกรรมและหัตถการ (Doctor fee) · 4.4 ค่าแพทย์วิสัญญี (Doctor fee) · 4.5 ค่ารักษาพยาบาลโดยการผ่าตัดเปลี่ยนอวัยวะ</span>',
+    v:{'2M':'เหมาจ่ายตามจริง'}, span:true },
+  { no:'5', name:'การผ่าตัดใหญ่ที่ไม่ต้องเข้าพักรักษาตัวเป็นผู้ป่วยใน (Day Surgery)',
+    v:{'2M':'เหมาจ่ายตามจริง'}, span:true },
+
+  { sec:'opd', label:'2️⃣ ผลประโยชน์กรณีไม่ต้องเข้าพักรักษาตัวเป็นผู้ป่วยใน (OPD)' },
+  { no:'6', name:'ค่าบริการทางการแพทย์เพื่อตรวจวินิจฉัยที่เกี่ยวข้องโดยตรงก่อนและหลังการเข้าพักรักษาตัวเป็นผู้ป่วยใน หรือค่ารักษาพยาบาลผู้ป่วยนอกต่อเนื่องที่เกี่ยวข้องโดยตรงหลังการเข้าพักรักษาตัวเป็นผู้ป่วยใน ต่อรอบปีกรมธรรม์',
+    v:{'2M':''}, span:true, head:true, blank:true },
+  { no:'6.1', name:'ค่าบริการทางการแพทย์เพื่อการตรวจวินิจฉัยที่เกี่ยวข้องโดยตรงและเกิดขึ้นภายใน 30 วันก่อนและหลังการเข้าพักรักษาตัวเป็นผู้ป่วยใน',
+    v:{'2M':'เหมาจ่ายตามจริง'}, span:true },
+  { no:'6.2', name:'ค่ารักษาพยาบาลผู้ป่วยนอกหลังการเข้าพักรักษาตัวเป็นผู้ป่วยในต่อครั้ง สำหรับการรักษาพยาบาลต่อเนื่อง ภายใน 30 วันหลังจากออกจากการเข้าพักรักษาเป็นผู้ป่วยในครั้งนั้น <span style="font-size:0.85em;color:#6b7280;">(ไม่รวมค่าบริการทางการแพทย์เพื่อตรวจวินิจฉัย ตามหมวดย่อย 6.1)</span>',
+    v:{'2M':'เหมาจ่ายตามจริง<div style="font-size:0.80em;font-weight:600;color:#9a3412;margin-top:3px;">จำกัด 2 ครั้ง ต่อการเข้าพักรักษาเป็นผู้ป่วยในครั้งใดครั้งหนึ่ง</div>'}, span:true },
+  { no:'7', name:'ค่ารักษาพยาบาลการบาดเจ็บ กรณีผู้ป่วยนอก ภายใน 24 ชั่วโมง ของการเกิดอุบัติเหตุต่อครั้ง',
+    v:{'2M':'เหมาจ่ายตามจริง'}, span:true },
+  { no:'8', name:'ค่าเวชศาสตร์ฟื้นฟู หลังการเข้าพักรักษาตัวเป็นผู้ป่วยใน แต่ละครั้งต่อรอบปีกรมธรรม์ <span style="color:#dc2626;font-weight:700;">(ไม่เกิน 5 ครั้งต่อรอบปีกรมธรรม์)</span>',
+    v:{'2M':'เหมาจ่ายตามจริง'}, span:true },
+  { no:'9', name:'ค่าบริการทางการแพทย์เพื่อการบำบัดรักษาโรคไตวายเรื้อรัง โดยการล้างไตผ่านทางเส้นเลือด ต่อรอบปีกรมธรรม์',
+    v:{'2M':'เหมาจ่ายตามจริง'}, span:true },
+  { no:'10', name:'ค่าบริการทางการแพทย์เพื่อการบำบัดรักษาโรคเนื้องอกหรือมะเร็ง โดยรังสีรักษา รังสีร่วมรักษา เวชศาสตร์นิวเคลียร์รักษา ต่อรอบปีกรมธรรม์',
+    v:{'2M':'เหมาจ่ายตามจริง'}, span:true },
+  { no:'11', name:'ค่าบริการทางการแพทย์เพื่อการบำบัดรักษาโรคมะเร็ง โดยเคมีบำบัด ต่อรอบปีกรมธรรม์',
+    v:{'2M':'เหมาจ่ายตามจริง'}, span:true },
+  { no:'12', name:'ค่าบริการรถพยาบาลฉุกเฉิน', v:{'2M':'เหมาจ่ายตามจริง'}, span:true },
+  { no:'13', name:'ค่ารักษาพยาบาล โดยการผ่าตัดเล็ก (Minor Surgery)', v:{'2M':'เหมาจ่ายตามจริง'}, span:true }
+];
+
+
+function chFontSize(d){ _chFontIdx=Math.max(0,Math.min(CH_FONT_LEVELS.length-1,_chFontIdx+d));
+  var p=CH_FONT_LEVELS[_chFontIdx]; var c=document.querySelector('#tab-cihero .cc-container');
+  if(c)c.style.fontSize=p+'%'; var l=document.getElementById('ch-font-lbl'); if(l)l.textContent=p+'%'; }
+
+function chPrint(){ var t=document.getElementById('tab-cihero');
+  var o=document.querySelectorAll('.main-tab-panel:not(#tab-cihero)'), n=document.querySelector('.main-tab-nav');
+  o.forEach(function(e){e.style.setProperty('display','none','important');});
+  t.style.setProperty('display','block','important'); if(n)n.style.display='none';
+  window.print();
+  setTimeout(function(){ o.forEach(function(e){e.style.display='';}); t.style.display=''; if(n)n.style.display='';
+    document.querySelectorAll('.main-tab-panel.active').forEach(function(e){e.style.setProperty('display','block','important');}); },600); }
+
+function chRender(){
+  var gender=document.getElementById('inp-gender').value;
+  var gTxt=gender==='male'?'ชาย':'หญิง';
+  var age=parseInt(document.getElementById('age-1').value)||0;
+  var sel=app.getCIHeroSel(1);
+  var plan=sel.plan, coType=sel.coType;
+  var prem=plan?app.calcCIHero(plan,age,gender,coType):0;
+
+  var set=function(id,v){var e=document.getElementById(id); if(e)e.textContent=v;};
+  set('ch-age', age>0?('อายุ '+age+' ปี ('+gTxt+')'):'–');
+  set('ch-plan', plan?(CH_PLAN_LBL[plan]+' · '+(coType==='balanced'?'Balanced':'Begin')):'ยังไม่ได้เลือก');
+  set('ch-prem', prem>0?prem.toLocaleString()+' บาท':'–');
+  var roomMap={'2M':'3,000','6M':'6,000','12M':'9,000'}, docMap={'2M':'3,000','6M':'4,000','12M':'6,000'};
+  set('ch-room', plan?roomMap[plan]+' บาท':'–');
+  set('ch-doctor', plan?docMap[plan]+' บาท':'–');
+
+  // highlight หัวคอลัมน์ของแผนที่เลือก
+  ['2M','6M','12M'].forEach(function(k){
+    var th=document.getElementById('ch-th-'+k); if(!th)return;
+    var on=(plan===k);
+    th.style.background   = on ? '#2563eb' : '';
+    th.style.color        = on ? '#fff'    : '';
+    th.style.fontSize     = on ? '0.92em'  : '';
+    th.style.borderBottom = on ? '3px solid #fcd34d' : '';
+    th.innerHTML = CH_PLAN_LBL[k].replace('บาท','')
+      + (on ? '<div style="font-size:0.72em;font-weight:800;margin-top:2px;color:#fcd34d;">★ แผนที่เลือก</div>' : '');
+  });
+
+  // IPD table
+  var body=document.getElementById('ch-ipd-body');
+  if(body){
+    var h='';
+    CH_IPD_ROWS.forEach(function(r){
+      var hl=function(k){ return plan===k?'background:#dbeafe;font-weight:800;color:#1d4ed8;':''; };
+      if(r.sec){
+        h+='<tr style="background:#1e3a5f;"><td colspan="5" style="text-align:left;font-weight:800;color:#fff;font-size:0.95em;padding:9px 12px;">'+r.label+'</td></tr>';
+        return;
+      }
+      h+='<tr'+(r.head?' style="background:#f8fafc;"':'')+'>'
+        +'<td style="font-weight:700;color:#475569;">'+r.no+'</td>'
+        +'<td style="text-align:left;font-size:0.94em;line-height:1.6;">'+r.name+'</td>';
+      if(r.blank){
+        h+='<td colspan="3"></td>';
+      } else if(r.span){
+        h+='<td colspan="3" style="color:#dc2626;font-weight:700;">'+r.v['2M']+'</td>';
+      } else {
+        ['2M','6M','12M'].forEach(function(k){
+          h+='<td style="'+hl(k)+'">'+r.v[k]+(r.unit&&/^[\d,]+$/.test(r.v[k])?'<div style="font-size:0.78em;opacity:0.7;">'+r.unit+'</div>':'')+'</td>';
+        });
+      }
+      h+='</tr>';
+    });
+    body.innerHTML=h;
+  }
+
+  chCopayBox(coType);
+  chPackageNote(age,gender,prem,plan);
+  chProjection(age,gender,plan,coType);
+}
+
+function chPackageNote(age,gender,prem,plan){
+  var el=document.getElementById('ch-package-note'); if(!el)return;
+  var mainSum=parseInt(document.getElementById('main-sum-1').value)||0;
+  var mainType=(document.getElementById('main-type-1')||{}).value||'20PLN';
+  if(mainSum<=0||age<=0||!plan){ el.style.display='none'; return; }
+  var pMain=Math.round(app.calculateMainPremiumForPlan(mainSum,age,gender,mainType));
+  var lbl=(mainType==='CIProCare')?'AIA CI ProCare (20/99)':'ประกันชีวิต 20PayLife คุ้มครองตลอดชีพ';
+  var oth=chOtherRiders(age,gender);
+  var grand=pMain+prem+oth.total;
+  el.style.display='';
+  el.innerHTML='<div style="font-weight:800;color:#1d4ed8;margin-bottom:5px;">📌 หมายเหตุ — แพคเกจนี้ซื้อคู่กับประกันชีวิตหลัก</div>'
+    +'แพคเกจนี้ซื้อคู่กับ <b>'+lbl+'</b> ทุนประกัน <b style="color:#2563eb;">'+mainSum.toLocaleString()+' บาท</b> '
+    +'เป็นเบี้ย <b style="color:#2563eb;">'+pMain.toLocaleString()+' บาท/ปี</b>'
+    +(oth.total>0?' · สัญญาเพิ่มเติมอื่น <b>'+oth.total.toLocaleString()+' บาท/ปี</b> ('+oth.labels.join(' + ')+')':'')
+    +'<br>รวมเป็นเบี้ยเริ่มต้น ณ อายุ '+age+' ปี ทั้งสิ้น <b style="color:#15803d;font-size:1.15em;">'+grand.toLocaleString()+' บาท/ปี</b>';
+}
+
+// สัญญาอื่นๆ นอกจาก CI Hero (สุขภาพ/CFC/HB/MPCI)
+function chOtherRiders(evalAge,gender){
+  var total=0,labels=[];
+  var st=app.state[1];
+  if(st&&st.type!=='NONE'&&APP_DATA.plans[st.type]){
+    var opts=APP_DATA.plans[st.type].options, opt=opts?opts[st.idx]:null;
+    if(opt){ var band=app.getBandIndex(evalAge,st.type);
+      var arr=(APP_DATA.rateTable[st.type]&&APP_DATA.rateTable[st.type][gender])?APP_DATA.rateTable[st.type][gender][opt.k]:null;
+      var p=arr?(arr[band]||0):0; if(p>0){total+=p;labels.push('สุขภาพ');} }
+  }
+  var cfc=parseInt(document.getElementById('cfc-1').value)||0;
+  if(cfc>0){ var rc=app.getRiderRate('CFC',evalAge,gender);
+    var pc=rc>0?Math.round((cfc/100000)*rc):0; if(pc>0){total+=pc;labels.push('CFC');} }
+  var hb=parseInt(document.getElementById('hb-1').value)||0;
+  if(hb>0){ var rh=app.getRiderRate('HB',evalAge,gender);
+    var ph=rh>0?Math.round((hb/100)*rh):0; if(ph>0){total+=ph;labels.push('HB');} }
+  var mp=parseInt(document.getElementById('mpci-sum-1').value)||0;
+  if(mp>0&&evalAge<=99){ var pm=Math.round(app.calcMultiPayCI(mp,evalAge,gender)); if(pm>0){total+=pm;labels.push('MPCI');} }
+  return {total:Math.round(total),labels:labels};
+}
+
+// กรอบอธิบาย Copayment (ตามเอกสาร AIA Health CI Hero หน้า 16)
+function chCopayBox(coType){
+  var el=document.getElementById('ch-copay-box'); if(!el)return;
+  var isBal = coType==='balanced';
+  // [ในสิทธิ %, ในสิทธิ cap, นอกสิทธิ %, นอกสิทธิ cap]
+  var D={ begin:{inPct:'10%',inCap:'10,000',outPct:'30%',outCap:'90,000'},
+          balanced:{inPct:'ไม่มี',inCap:'—',outPct:'20%',outCap:'60,000'} };
+  function card(key){
+    var d=D[key], on=(key==='balanced')===isBal;
+    var nm=key==='begin'?'แบบ Begin (บิกิน)':'แบบ Balanced (บาลานซ์)';
+    var ac=key==='begin'?'#d97706':'#16a34a', bg=key==='begin'?'#fffbeb':'#f0fdf4';
+    var noCo=(key==='balanced');
+    return '<div style="border:2px solid '+(on?ac:'#cbd5e1')+';background:'+(on?bg:'#f8fafc')+';border-radius:12px;overflow:hidden;opacity:'+(on?'1':'0.55')+';">'
+      +'<div style="padding:10px 14px;background:'+(on?ac:'#94a3b8')+';color:#fff;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">'
+      +'<span style="font-size:0.94em;font-weight:800;">'+nm+'</span>'
+      +(on?'<span style="font-size:0.68em;font-weight:800;background:rgba(255,255,255,0.25);padding:2px 8px;border-radius:10px;">แผนที่เลือก</span>':'')
+      +'<span style="font-size:0.70em;margin-left:auto;opacity:0.9;">อายุรับประกันภัย 15 วัน – 65 ปี</span></div>'
+      +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#e2e8f0;">'
+      // ในสิทธิ
+      +'<div style="background:#fff;padding:11px 13px;">'
+      +'<div style="font-size:0.72em;font-weight:800;color:#be123c;margin-bottom:5px;">🏥 โรงพยาบาลในสิทธิ<br><span style="font-weight:600;color:#9f1239;">(AIA Smart Network)</span></div>'
+      +(noCo
+        ? '<div style="font-size:1.02em;font-weight:800;color:#15803d;"><u>ไม่มี</u> ค่าใช้จ่ายร่วม</div>'
+        : '<div style="font-size:1.02em;font-weight:800;color:#be123c;">ค่าใช้จ่ายร่วม '+d.inPct+'</div>'
+          +'<div style="font-size:0.70em;color:#6b7280;margin-top:2px;">ของค่าใช้จ่ายที่ได้รับความคุ้มครอง</div>'
+          +'<div style="margin-top:6px;padding:4px 9px;background:#fef3c7;border-radius:5px;font-size:0.76em;font-weight:700;color:#92400e;display:inline-block;">สูงสุดไม่เกิน '+d.inCap+' บาท</div>')
+      +'</div>'
+      // นอกสิทธิ
+      +'<div style="background:#fafafa;padding:11px 13px;">'
+      +'<div style="font-size:0.72em;font-weight:800;color:#475569;margin-bottom:5px;">🏨 โรงพยาบาลนอกสิทธิ<br><span style="font-weight:600;color:#64748b;">(Out Network Hospital)</span></div>'
+      +'<div style="font-size:1.02em;font-weight:800;color:#475569;">ค่าใช้จ่ายร่วม '+d.outPct+'</div>'
+      +'<div style="font-size:0.70em;color:#6b7280;margin-top:2px;">ของค่าใช้จ่ายที่ได้รับความคุ้มครอง</div>'
+      +'<div style="margin-top:6px;padding:4px 9px;background:#fef3c7;border-radius:5px;font-size:0.76em;font-weight:700;color:#92400e;display:inline-block;">สูงสุดไม่เกิน '+d.outCap+' บาท</div>'
+      +'</div></div></div>';
+  }
+  el.innerHTML =
+     '<div style="padding:12px 16px;background:#fff1f2;border:1.5px solid #be123c;border-radius:10px;margin-bottom:14px;">'
+    +'<div style="font-size:0.88em;font-weight:800;color:#9f1239;margin-bottom:6px;">📌 ค่าใช้จ่ายร่วม (Copayment) — ทุกกรณีตั้งแต่ปีกรมธรรม์แรก</div>'
+    +'<div style="font-size:0.79em;color:#44403c;line-height:1.8;">'
+    +'• ความรับผิดระหว่างบริษัทประกันภัยและผู้เอาประกันภัยที่ต้องร่วมรับผิดชอบค่าใช้จ่ายในการรักษาพยาบาล อันจะพึงจ่ายตามจำนวนเงินผลประโยชน์ ภายหลังหักจำนวนความรับผิดส่วนแรก (ถ้ามี)<br>'
+    +'• ค่าใช้จ่ายร่วมคิด<b>เฉพาะหมวดที่ 1–13 เท่านั้น</b> (ผลประโยชน์อื่นๆ ที่อยู่ในบันทึกสลักหลังไม่นำมาคำนวณค่าใช้จ่ายร่วม)<br>'
+    +'• ผู้เอาประกันภัยจะร่วมรับผิดชอบ<b>ไม่เกินจำนวนค่าใช้จ่ายร่วมสูงสุด</b>ตามที่ระบุไว้ในตารางผลประโยชน์ของสัญญาเพิ่มเติมนี้ (ถ้ามี) <span style="background:#fef08a;padding:1px 7px;border-radius:4px;font-weight:700;color:#854d0e;">COPAY CAP MAX</span>'
+    +'</div></div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">'+card('begin')+card('balanced')+'</div>'
+    +'<div style="margin-top:12px;padding:11px 15px;background:#eff6ff;border:1.5px dashed #2563eb;border-radius:8px;font-size:0.78em;color:#1e3a8a;line-height:1.8;">'
+    +'<b>หมายเหตุ:</b> บริษัทจะพิจารณาค่าใช้จ่ายร่วม ดังนี้<br>'
+    +'• ผลประโยชน์<b>หมวดที่ 1–6, 8 และ 12</b> — ค่าใช้จ่ายที่ได้รับความคุ้มครองพิจารณา<b>ต่อการเข้าพักรักษาตัวเป็นผู้ป่วยในครั้งใดครั้งหนึ่ง</b><br>'
+    +'• ผลประโยชน์<b>หมวดที่ 7, 9–11 และ 13</b> — ค่าใช้จ่ายที่ได้รับความคุ้มครองพิจารณา<b>ต่อการรักษาพยาบาลกรณีผู้ป่วยนอกแต่ละครั้ง</b><br>'
+    +'<b>📍 เงื่อนไขข้างต้นใช้สำหรับกรณีเข้ารักษาตัวในโรงพยาบาลในโครงการ AIA Smart Network</b> · ช่วงอายุ 81–98 ปี คือ เบี้ยประกันภัยแบบคุ้มครองค่ารักษาพยาบาลทุกกรณีเจ็บป่วย · '
+    +'สัญญาเพิ่มเติมนี้มีระยะเวลาเอาประกันภัย 1 ปี ซึ่งอาจต่ออายุได้ บริษัทฯ สงวนสิทธิ์ในการปรับเบี้ยประกันภัยในรอบปีกรมธรรม์ตามอายุ ชั้นอาชีพ หรือค่าใช้จ่ายในการรักษาพยาบาลที่สูงขึ้น'
+    +'</div>';
+}
+
+function chProjection(age,gender,plan,coType){
+  var body=document.getElementById('ch-proj-body'); if(!body)return;
+  var mainSum=parseInt(document.getElementById('main-sum-1').value)||0;
+  var mainType=(document.getElementById('main-type-1')||{}).value||'20PLN';
+  if(age<=0||!plan){ body.innerHTML='<tr><td colspan="6" style="text-align:center;padding:28px;color:#9ca3af;">กรุณาเลือกแผน CI Hero ใน Option 1</td></tr>'; return; }
+
+  var tm=document.getElementById('ch-proj-th-main'); if(tm)tm.textContent=(mainType==='CIProCare')?'CI ProCare':'20PayLife';
+  var tp=document.getElementById('ch-proj-th-plan'); if(tp)tp.textContent=CH_PLAN_LBL[plan]+' · '+((coType||'begin')==='balanced'?'Balanced':'Begin');
+  var lbls=chOtherRiders(age,gender).labels;
+  var to=document.getElementById('ch-proj-th-other'); if(to)to.textContent=lbls.length?'('+lbls.join('/')+')':'(ไม่มี)';
+
+  var pMainBase=mainSum>0?Math.round(app.calculateMainPremiumForPlan(mainSum,age,gender,mainType)):0;
+  var sub=document.getElementById('ch-proj-sub');
+  if(sub)sub.textContent='Option 1 · อายุแรกเข้า '+age+' ปี ('+(gender==='male'?'ชาย':'หญิง')+') · แผน CI Hero '+CH_PLAN_LBL[plan]
+    +' · '+((coType||'begin')==='balanced'?'Balanced (ไม่มี Copay)':'Begin (Copay 10%)')
+    +(mainSum>0?' · ทุนหลัก '+mainSum.toLocaleString()+' บาท':'');
+
+  // ใช้ช่วงอายุของตาราง CI Hero (20 bands)
+  var bands=APP_DATA.RATE_CIHERO.bands, h='';
+  bands.forEach(function(b,idx){
+    var parts=b.replace('15วัน-','0-').split('-');
+    var bs=parseInt(parts[0]), be=parseInt(parts[1]);
+    if(be<age)return;
+    var evalAge=Math.max(age,bs);
+    var yr=evalAge-age+1;
+    var pMain=(yr<=20)?pMainBase:0;
+    var pHero=APP_DATA.RATE_CIHERO[coType||'begin'][gender][plan][idx]||0;
+    var oth=chOtherRiders(evalAge,gender);
+    var tot=pMain+pHero+oth.total;
+    if(tot<=0)return;
+    h+='<tr'+(yr>20?' style="background:#f8fafc;"':'')+'>'
+      +'<td class="td-yr">'+evalAge+'–'+be+' ปี</td>'
+      +'<td class="td-age">ปีที่ '+yr+'</td>'
+      +'<td class="td-prem">'+(pMain>0?pMain.toLocaleString():'<span style="color:#16a34a;font-size:0.82em;font-weight:700;">ครบชำระแล้ว</span>')+'</td>'
+      +'<td style="color:#1d4ed8;font-weight:700;">'+(pHero>0?pHero.toLocaleString():'—')+'</td>'
+      +'<td style="color:#475569;">'+(oth.total>0?oth.total.toLocaleString():'—')+'</td>'
+      +'<td style="color:#92400e;font-weight:800;font-size:1.05em;">'+tot.toLocaleString()+'</td></tr>';
+  });
+  body.innerHTML=h||'<tr><td colspan="6" style="text-align:center;padding:28px;color:#9ca3af;">ไม่มีข้อมูล</td></tr>';
 }
 
 // ==========================================
@@ -5952,6 +6478,8 @@ const EXPORT_FIELDS = [
     { id: 'cfc-1',       type: 'value' },
     { id: 'hb-1',        type: 'value' },
     { id: 'mpci-sum-1',  type: 'value' },
+    { id: 'cihero-1',    type: 'value' },
+    { id: 'cihero-co-1', type: 'value' },
     { id: 'cp-1',        type: 'checked' },
     // Option 2
     { id: 'main-type-2', type: 'value' },
@@ -5962,6 +6490,8 @@ const EXPORT_FIELDS = [
     { id: 'cfc-2',       type: 'value' },
     { id: 'hb-2',        type: 'value' },
     { id: 'mpci-sum-2',  type: 'value' },
+    { id: 'cihero-2',    type: 'value' },
+    { id: 'cihero-co-2', type: 'value' },
     { id: 'cp-2',        type: 'checked' },
     // Option 3
     { id: 'main-type-3', type: 'value' },
@@ -5972,6 +6502,8 @@ const EXPORT_FIELDS = [
     { id: 'cfc-3',       type: 'value' },
     { id: 'hb-3',        type: 'value' },
     { id: 'mpci-sum-3',  type: 'value' },
+    { id: 'cihero-3',    type: 'value' },
+    { id: 'cihero-co-3', type: 'value' },
     { id: 'cp-3',        type: 'checked' },
     // CI Procare slide 1 — manual inputs + mode
     { id: 'cipc-bk-yr1',  type: 'value' },

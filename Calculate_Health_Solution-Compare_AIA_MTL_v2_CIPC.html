@@ -1205,6 +1205,75 @@
         .sum1-gap-img { width:225px; height:auto; }
         .sum1-gap-cap { text-align:center; font-size:0.80em; font-weight:800; color:#1e293b !important; letter-spacing:0.04em; margin-top:2px; }
 
+
+        /* ============================================
+           INFOGRAPHIC TAB (พิมพ์ให้ลูกค้า)
+           ============================================ */
+        .ig-container { max-width: 1400px; margin: 0 auto; padding: 0 0 40px; }
+        .ig-board {
+            width: 840px; margin: 0 auto; border-radius: 18px; overflow: hidden;
+            font-family: 'Sarabun', sans-serif; position: relative;
+            -webkit-print-color-adjust: exact; print-color-adjust: exact;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+        }
+        .ig-board, .ig-board * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+        /* ── Care for Cancer theme ── */
+        .ig-cfc { background: linear-gradient(170deg,#fdf2f4 0%,#fdf6f7 40%,#fbeef1 100%); padding: 30px 34px 24px; }
+        .ig-cfc-title { text-align:center; font-size:29px; font-weight:800; color:#1f2937; line-height:1.34; }
+        .ig-cfc-title .hl { color:#be123c; }
+        .ig-ribbon {
+            background: linear-gradient(180deg,#d81b4a 0%,#be123c 100%); color:#fff;
+            padding: 17px 30px; margin: 20px -10px 0; text-align:center;
+            font-size: 18px; font-weight:700; line-height:1.55; border-radius: 6px;
+            box-shadow: 0 3px 10px rgba(190,18,60,0.28); position:relative;
+        }
+        .ig-card { background:#fff; border-radius:14px; padding:16px 20px; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+        .ig-plan-card { margin-top:20px; text-align:center; }
+        .ig-plan-t { font-size:22px; font-weight:800; color:#1f2937; }
+        .ig-plan-s { font-size:15px; color:#4b5563; margin-top:3px; }
+        .ig-prem-line { font-size:17px; color:#374151; line-height:1.85; margin-top:8px; }
+        .ig-prem-line .big { font-size:23px; font-weight:800; color:#be123c; }
+        .ig-grid2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px; }
+        .ig-feat-t { font-size:18px; font-weight:800; color:#1f2937; margin-bottom:5px; }
+        .ig-feat-b { font-size:14.5px; color:#4b5563; line-height:1.68; }
+        .ig-feat-b .big { font-size:21px; font-weight:800; color:#be123c; }
+        .ig-case { background:#fdeef1; border-radius:14px; padding:16px 20px; margin-top:16px; }
+        .ig-case-t { font-size:18px; font-weight:800; color:#1f2937; text-align:center; margin-bottom:12px; }
+        .ig-steps { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }
+        .ig-step { text-align:center; }
+        .ig-step-ic { font-size:34px; line-height:1; }
+        .ig-step-l { font-size:12px; color:#4b5563; margin-top:5px; line-height:1.5; }
+        .ig-step-v { font-size:13px; font-weight:800; color:#be123c; margin-top:3px; }
+        .ig-total { background:#fce7ec; border-radius:11px; padding:12px; text-align:center; margin-top:13px; }
+        .ig-total-t { font-size:20px; font-weight:800; color:#1f2937; }
+        .ig-total-t .v { color:#be123c; }
+        .ig-total-s { font-size:13px; color:#6b7280; margin-top:3px; }
+        .ig-quote { text-align:center; font-size:15px; font-weight:700; color:#374151; margin-top:18px; font-style:italic; }
+        /* ── CI Hero theme ── */
+        .ig-hero { background: linear-gradient(170deg,#fdf8ed 0%,#fefaf2 50%,#fdf5e8 100%); padding: 30px 34px 24px; }
+        .ig-hero-title { text-align:center; font-size:29px; font-weight:800; line-height:1.34; color:#e11d48; text-shadow:1px 1px 0 rgba(255,255,255,0.8); }
+        .ig-hero-sub { text-align:center; font-size:15.5px; color:#44403c; line-height:1.65; margin-top:9px; }
+        .ig-hero-band { background: linear-gradient(180deg,#e8637f 0%,#d94a68 100%); color:#fff; padding:14px 24px; border-radius:10px; text-align:center; margin-top:18px; }
+        .ig-hero-band-t { font-size:20px; font-weight:800; }
+        .ig-hero-band-s { font-size:14.5px; opacity:0.95; margin-top:2px; }
+        .ig-hero-card { background:#fff; border-radius:14px; padding:14px 18px; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+        .ig-hero-lbl { background:#cfe3f5; color:#1e3a5f; font-size:15px; font-weight:800; padding:6px 14px; border-radius:8px; display:inline-block; margin-bottom:9px; }
+        .ig-hero-lbl.pink { background:#f9d4dc; color:#9f1239; }
+        .ig-hero-v { font-size:15px; color:#44403c; line-height:1.68; }
+        .ig-hero-v .big { font-size:24px; font-weight:800; color:#be123c; }
+        .ig-hero-quote { border:2.5px solid #e8637f; border-radius:12px; padding:14px 20px; text-align:center; font-size:15.5px; font-weight:700; color:#44403c; line-height:1.7; margin-top:18px; }
+        /* toolbar */
+        .ig-tb { display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-bottom:16px; padding:10px 14px; background:#f8fafc; border-radius:var(--r-md); border:1px solid #e2e8f0; }
+        .ig-editable { outline:none; border-bottom:1px dashed transparent; }
+        body.ig-edit .ig-editable { border-bottom-color:#94a3b8; background:rgba(59,130,246,0.05); }
+        body.ig-edit .ig-editable:focus { background:rgba(59,130,246,0.12); border-bottom-color:#2563eb; }
+        @media print {
+            .ig-tb { display:none !important; }
+            .ig-board { box-shadow:none !important; break-inside:avoid; }
+            body.ig-print-cfc #ig-board-hero, body.ig-print-hero #ig-board-cfc { display:none !important; }
+            body.ig-edit .ig-editable { border-bottom-color:transparent !important; background:transparent !important; }
+        }
+
         /* ============================================
            CARE FOR CANCER TAB
            ============================================ */
@@ -1473,6 +1542,10 @@
         <button class="main-tab-btn" onclick="switchMainTab('tab-vtimeline')" id="tab-btn-vtimeline">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             Vitality Timeline
+        </button>
+        <button class="main-tab-btn" onclick="switchMainTab('tab-ig')" id="tab-btn-ig">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Infographic
         </button>
         <button class="main-tab-btn" onclick="switchMainTab('tab-allci')" id="tab-btn-allci">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
@@ -3088,6 +3161,147 @@
 
         </div>
     </div><!-- end tab-allci -->
+
+    <!-- ═══ TAB: Infographic ═══ -->
+    <div class="main-tab-panel" id="tab-ig" style="display:none !important;">
+        <div class="ig-container">
+
+            <div class="ig-tb no-print">
+                <span style="font-size:0.82em;font-weight:700;color:#374151;">🖼️ Infographic สำหรับส่งลูกค้า · ข้อมูลจาก Option 1</span>
+                <label style="display:flex;align-items:center;gap:6px;font-size:0.80em;color:#374151;cursor:pointer;user-select:none;font-weight:600;">
+                    <input type="checkbox" id="ig-edit-mode" onchange="igToggleEdit()" style="width:15px;height:15px;cursor:pointer;accent-color:#2563eb;">
+                    ✏️ แก้ไขข้อความ
+                </label>
+                <button onclick="igRender()" style="padding:6px 14px;background:var(--c-primary-faint);color:var(--c-primary);border:1px solid var(--b-gold);border-radius:var(--r-md);cursor:pointer;font-family:inherit;font-size:12px;font-weight:700;">🔄 ดึงข้อมูลใหม่</button>
+                <div style="display:flex;gap:8px;margin-left:auto;flex-shrink:0;">
+                    <button class="cc-print-btn" onclick="igPrint('cfc')" style="background:#fef2f2;color:#b91c1c;border-color:#dc2626;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                        พิมพ์ Care for Cancer
+                    </button>
+                    <button class="cc-print-btn" onclick="igPrint('hero')" style="background:#eff6ff;color:#1d4ed8;border-color:#2563eb;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                        พิมพ์ CI Hero
+                    </button>
+                </div>
+            </div>
+
+            <!-- ═══ Board 1: Care for Cancer ═══ -->
+            <div class="ig-board ig-cfc" id="ig-board-cfc">
+                <div class="ig-cfc-title">
+                    <span class="ig-editable" contenteditable="false" id="ig-c-t1">หมดห่วงเรื่องค่าใช้จ่ายและรายได้ที่สะดุด<br>เมื่อต้องเผชิญโรคมะเร็ง</span><br>
+                    ด้วย <span class="hl">‘AIA Care for Cancer’</span>
+                </div>
+
+                <div class="ig-ribbon">
+                    <span class="ig-editable" contenteditable="false" id="ig-c-rib">เงินชดเชยรายวันจัดเต็ม รับเงินก้อนดูแลตัวเอง<br>ทั้งนอนโรงพยาบาลและการรักษาต่อเนื่อง<br>จ่ายเพิ่มให้อีกต่อจากประกันสุขภาพเดิมที่มี!</span>
+                </div>
+
+                <div class="ig-card ig-plan-card">
+                    <div class="ig-plan-t">💡 ตัวอย่างแผนความคุ้มครองสุดคุ้ม</div>
+                    <div class="ig-plan-s">(<span id="ig-c-gender">เพศหญิง</span> อายุ <span id="ig-c-age">49</span> ปี • ทุนประกัน <span id="ig-c-sum">1,000,000</span> บาท)</div>
+                    <div class="ig-prem-line">
+                        💰 <b>เบี้ยเริ่มต้นเบาๆ:</b><br>
+                        • เฉลี่ยเพียงเดือนละ <span class="big" id="ig-c-pm">1,023</span> บาท<br>
+                        • หรือเริ่มต้นปีละ <span class="big" id="ig-c-py">12,270</span> บาท<br>
+                        <span style="font-size:14px;color:#6b7280;">รวมสัญญาหลัก <span id="ig-c-main">20PayLife ทุน 100,000</span> บาทแล้ว</span>
+                    </div>
+                </div>
+
+                <div class="ig-grid2">
+                    <div class="ig-card">
+                        <div class="ig-feat-t">🏥 ค่าชดเชยรายวันผู้ป่วยใน (IPD):</div>
+                        <div class="ig-feat-b">รับสูงถึง <span class="big" id="ig-c-ipd">20,000</span> บาท/วัน<br>ทุกวันที่นอนโรงพยาบาลจากการรักษาโรคมะเร็ง</div>
+                    </div>
+                    <div class="ig-card">
+                        <div class="ig-feat-t">🩺 ค่าชดเชยผู้ป่วยนอก (OPD):</div>
+                        <div class="ig-feat-b">รับ <span class="big" id="ig-c-opd">5,000</span> บาท/ครั้ง<br>สำหรับการรักษาแบบผู้ป่วยนอก ทั้งเคมีบำบัด, รังสีรักษา (ฉายแสง) และตรวจ CT / MRI / PET Scan</div>
+                    </div>
+                    <div class="ig-card">
+                        <div class="ig-feat-t">⏳ คุ้มครองยาวนาน:</div>
+                        <div class="ig-feat-b">ชดเชยรวมสูงสุดถึง <b style="color:#be123c;font-size:19px;">1,000 วัน</b> ตลอดอายุสัญญา</div>
+                    </div>
+                    <div class="ig-card">
+                        <div class="ig-feat-t">➕ รับเงินเพิ่มเต็มๆ:</div>
+                        <div class="ig-feat-b">จ่าย On-top เพิ่มเติมจากค่ารักษาพยาบาลที่เบิกจากสัญญาประกันสุขภาพเดิม</div>
+                    </div>
+                </div>
+
+                <div class="ig-case">
+                    <div class="ig-case-t">📊 ตัวอย่างกรณีสมมติ (การรักษามะเร็งเต้านมระยะที่ 2):</div>
+                    <div class="ig-steps">
+                        <div class="ig-step"><div class="ig-step-ic">🛏️</div><div class="ig-step-l">ผ่าตัด นอน รพ. 5 วัน (IPD)</div><div class="ig-step-v">➜ รับชดเชย <span id="ig-c-s1">100,000</span> บาท</div></div>
+                        <div class="ig-step"><div class="ig-step-ic">💉</div><div class="ig-step-l">เคมีบำบัด 6 ครั้ง (OPD)</div><div class="ig-step-v">➜ รับชดเชย <span id="ig-c-s2">30,000</span> บาท</div></div>
+                        <div class="ig-step"><div class="ig-step-ic">☢️</div><div class="ig-step-l">ฉายแสง 20 ครั้ง (OPD)</div><div class="ig-step-v">➜ รับชดเชย <span id="ig-c-s3">100,000</span> บาท</div></div>
+                        <div class="ig-step"><div class="ig-step-ic">🖥️</div><div class="ig-step-l">CT Scan วางแผนรักษา 1 ครั้ง</div><div class="ig-step-v">➜ รับชดเชย <span id="ig-c-s4">5,000</span> บาท</div></div>
+                    </div>
+                    <div class="ig-total">
+                        <div class="ig-total-t">⭐ รวมรับเงินชดเชยทั้งสิ้น <span class="v" id="ig-c-tot">235,000</span> บาท</div>
+                        <div class="ig-total-s">(ใช้สิทธิ์ไปเพียง 32 วัน ยังเหลือสิทธิ์เงินชดเชยอีกถึง 968 วัน)</div>
+                    </div>
+                </div>
+
+                <div class="ig-quote">
+                    <span class="ig-editable" contenteditable="false" id="ig-c-q">“เตรียมพร้อมตั้งแต่วันนี้ เพื่อให้ทุกขั้นตอนการรักษามีเงินสำรองดูแลค่าใช้จ่ายและครอบครัวอย่างอุ่นใจ”</span>
+                </div>
+            </div>
+
+            <!-- ═══ Board 2: CI Hero ═══ -->
+            <div class="ig-board ig-hero" id="ig-board-hero" style="margin-top:26px;">
+                <div class="ig-hero-title">
+                    <span class="ig-editable" contenteditable="false" id="ig-h-t1">หมดกังวลค่ารักษาโรคร้ายแรง...<br>ด้วย AIA Health CI Hero 🛡️</span>
+                </div>
+                <div class="ig-hero-sub">
+                    <span class="ig-editable" contenteditable="false" id="ig-h-sub">ตัวช่วยเติมเต็มความคุ้มครองสุขภาพ คุ้มครองตรงจุด ไม่ซ้ำซ้อน<br>พร้อมวงเงินเหมาจ่ายค่ารักษาจัดเต็ม ในเบี้ยประกันที่เข้าถึงง่าย สบายกระเป๋า!</span>
+                </div>
+
+                <div class="ig-hero-band">
+                    <div class="ig-hero-band-t">ตัวอย่างแผนความคุ้มครอง</div>
+                    <div class="ig-hero-band-s">(<span id="ig-h-gender">เพศหญิง</span> อายุ <span id="ig-h-age">49</span> ปี • แผน <span id="ig-h-plan">2 ล้านบาท</span> แบบ <span id="ig-h-type">Begin</span>)</div>
+                </div>
+
+                <div class="ig-grid2" style="margin-top:18px;">
+                    <div class="ig-hero-card">
+                        <div class="ig-hero-lbl">💰 เบี้ยเริ่มต้นสบายๆ:</div>
+                        <div class="ig-hero-v">
+                            เฉลี่ยเพียงเดือนละ <span class="big" id="ig-h-pm">1,805</span> บาท<br>
+                            หรือเริ่มต้นปีละ <span class="big" id="ig-h-py">21,659</span> บาท<br>
+                            <span style="font-size:13.5px;color:#6b7280;">(รวมสัญญาหลัก <span id="ig-h-main">20PayLife ทุน 100,000</span> บาทแล้ว)</span>
+                        </div>
+                    </div>
+                    <div class="ig-hero-card">
+                        <div class="ig-hero-lbl">🏥 วงเงินเหมาจ่ายค่ารักษาสูงสุด:</div>
+                        <div class="ig-hero-v" style="text-align:center;">
+                            <span class="big" style="font-size:29px;" id="ig-h-cap">2,000,000</span> บาท<br>ต่อรอบปีกรมธรรม์
+                        </div>
+                    </div>
+                    <div class="ig-hero-card">
+                        <div class="ig-hero-lbl">🛏️ ค่าห้อง ค่าอาหาร (IPD):</div>
+                        <div class="ig-hero-v">
+                            <span class="big" id="ig-h-room">3,000</span> บาท/วัน<br>
+                            ห้อง ICU เหมาจ่ายตามจริง<br><span style="font-size:13.5px;color:#6b7280;">(สูงสุด 365 วัน)</span>
+                        </div>
+                    </div>
+                    <div class="ig-hero-card">
+                        <div class="ig-hero-lbl">🩺 การรักษาต่อเนื่องเหมาจ่ายตามจริง:</div>
+                        <div class="ig-hero-v">ผ่าตัด, หัตถการ/ส่องกล้อง, เคมีบำบัด, รังสีรักษา, ล้างไต และ Day Surgery</div>
+                    </div>
+                </div>
+
+                <div class="ig-hero-card" style="margin-top:14px;">
+                    <div class="ig-hero-lbl pink">🤝 ค่าใช้จ่ายร่วม (Copayment):</div>
+                    <div class="ig-hero-v" style="text-align:center;" id="ig-h-copay">
+                        ร่วมจ่ายเพียง <span class="big">10%</span> เมื่อรักษาใน รพ. เครือ AIA Smart Network<br>
+                        <span style="font-size:14px;">(สูงสุดไม่เกิน 10,000 บาท/ปี)</span>
+                    </div>
+                </div>
+
+                <div class="ig-hero-quote">
+                    <span class="ig-editable" contenteditable="false" id="ig-h-q">“อย่าปล่อยให้โรคร้ายแรงกระทบเงินเก็บทั้งชีวิต<br>ให้ CI Hero เป็นเกราะป้องกันสุขภาพและการเงินของคุณ”</span>
+                </div>
+            </div>
+
+        </div>
+    </div><!-- end tab-ig -->
 
     </div><!-- end main-tab-wrapper -->
 
@@ -4920,7 +5134,8 @@ function switchMainTab(tabId) {
         'tab-vtimeline':    'tab-btn-vtimeline',
         'tab-cancer':       'tab-btn-cancer',
         'tab-cihero':       'tab-btn-cihero',
-        'tab-allci':        'tab-btn-allci'
+        'tab-allci':        'tab-btn-allci',
+        'tab-ig':           'tab-btn-ig'
     };
     const btn = document.getElementById(btnMap[tabId]);
     if (btn) btn.classList.add('active');
@@ -4932,6 +5147,7 @@ function switchMainTab(tabId) {
     if (tabId === 'tab-cancer') ccRender();
     if (tabId === 'tab-cihero') chRender();
     if (tabId === 'tab-allci') acRender();
+    if (tabId === 'tab-ig') igRender();
 }
 
 // ==========================================
@@ -5256,18 +5472,20 @@ function _printOnlyTab(tabId, summaryOnly){
 
 // ── สรุปเบี้ยแยกรายการ (ใช้ร่วมทั้ง 2 tab) ────────────────────────
 // extraLabel/extraVal = รายการเด่นของ tab นั้น (CI Hero หรือ CFC)
-function _sum1PremRows(age, gender, extraLabel, extraVal, excludeKey){
+// onlyKeys: array ของสัญญาที่ต้องการแสดง เช่น ['MAIN','HERO'] · null = แสดงทั้งหมด
+function _sum1PremRows(age, gender, extraLabel, extraVal, excludeKey, onlyKeys){
+  var _inc=function(k){ return !onlyKeys || onlyKeys.indexOf(k)>=0; };
   var rows=[], total=0;
   var mainSum=parseInt(document.getElementById('main-sum-1').value)||0;
   var mainType=(document.getElementById('main-type-1')||{}).value||'20PLN';
-  if(mainSum>0){
+  if(mainSum>0&&_inc('MAIN')){
     var pm=Math.round(app.calculateMainPremiumForPlan(mainSum,age,gender,mainType));
     if(pm>0){ rows.push([(mainType==='CIProCare'?'AIA CI ProCare (20/99)':'ประกันชีวิต 20PayLife')+' · ทุน '+mainSum.toLocaleString(), pm]); total+=pm; }
   }
   if(extraVal>0){ rows.push([extraLabel, extraVal]); total+=extraVal; }
   // สัญญาสุขภาพ
   var st=app.state[1];
-  if(st&&st.type!=='NONE'&&APP_DATA.plans[st.type]){
+  if(st&&st.type!=='NONE'&&APP_DATA.plans[st.type]&&_inc('HEALTH')){
     var opts=APP_DATA.plans[st.type].options, opt=opts?opts[st.idx]:null;
     if(opt){ var bi=app.getBandIndex(age,st.type);
       var arr=(APP_DATA.rateTable[st.type]&&APP_DATA.rateTable[st.type][gender])?APP_DATA.rateTable[st.type][gender][opt.k]:null;
@@ -5275,24 +5493,24 @@ function _sum1PremRows(age, gender, extraLabel, extraVal, excludeKey){
       if(p>0){ rows.push([APP_DATA.plans[st.type].name+' ('+opt.name+')', Math.round(p)]); total+=p; } }
   }
   // CFC
-  if(excludeKey!=='CFC'){
+  if(excludeKey!=='CFC'&&_inc('CFC')){
     var cfc=parseInt(document.getElementById('cfc-1').value)||0;
     if(cfc>0){ var rc=app.getRiderRate('CFC',age,gender); var pc=rc>0?Math.round((cfc/100000)*rc):0;
       if(pc>0){ rows.push(['AIA Care for Cancer · ทุน '+cfc.toLocaleString(), pc]); total+=pc; } }
   }
   // CI Hero
-  if(excludeKey!=='HERO'){
+  if(excludeKey!=='HERO'&&_inc('HERO')){
     var hs=app.getCIHeroSel(1);
     if(hs.plan){ var ph=app.calcCIHero(hs.plan,age,gender,hs.coType);
       if(ph>0){ rows.push(['AIA Health CI Hero · '+CH_PLAN_LBL[hs.plan]+' ('+(hs.coType==='balanced'?'Balanced':'Begin')+')', ph]); total+=ph; } }
   }
   // HB
   var hb=parseInt(document.getElementById('hb-1').value)||0;
-  if(hb>0){ var rh=app.getRiderRate('HB',age,gender); var phb=rh>0?Math.round((hb/100)*rh):0;
+  if(hb>0&&_inc('HB')){ var rh=app.getRiderRate('HB',age,gender); var phb=rh>0?Math.round((hb/100)*rh):0;
     if(phb>0){ rows.push(['AIA HB Extra · ชดเชย '+hb.toLocaleString()+' บ./วัน', phb]); total+=phb; } }
   // MPCI
   var mp=parseInt(document.getElementById('mpci-sum-1').value)||0;
-  if(mp>0&&age<=99){ var pm2=Math.round(app.calcMultiPayCI(mp,age,gender));
+  if(mp>0&&age<=99&&_inc('MPCI')){ var pm2=Math.round(app.calcMultiPayCI(mp,age,gender));
     if(pm2>0){ rows.push(['Multi-Pay CI · ทุน '+mp.toLocaleString(), pm2]); total+=pm2; } }
   return { rows:rows, total:Math.round(total) };
 }
@@ -5300,8 +5518,12 @@ function _sum1PremRows(age, gender, extraLabel, extraVal, excludeKey){
 function _sum1PremHTML(pr){
   var h='<div class="sum1-prem-grid">';
   pr.rows.forEach(function(r){ h+='<div class="lbl">'+r[0]+'</div><div class="val">'+r[1].toLocaleString()+'</div>'; });
-  h+='<div class="lbl sum1-prem-total" style="font-weight:800;">รวมเบี้ยประกันภัยทั้งหมด</div>'
-    +'<div class="val sum1-prem-total">'+pr.total.toLocaleString()+' บ./ปี</div></div>';
+  var perMonth = Math.round(pr.total/12);
+  h+='<div class="lbl sum1-prem-total" style="font-weight:800;">รวมเบี้ยประกันภัยทั้งหมด '
+    +'<span style="font-weight:600;font-size:0.86em;color:#64748b;">(เฉลี่ยแล้วเบี้ย<u>เริ่มต้น</u>ปีละ '
+    +pr.total.toLocaleString()+' บาท หรือเดือนละ '+perMonth.toLocaleString()+' บาท)</span></div>'
+    +'<div class="val sum1-prem-total">'+pr.total.toLocaleString()+' บ./ปี</div></div>'
+    +'<div style="font-size:0.72em;color:#9ca3af;margin-top:4px;line-height:1.5;">* เป็นเบี้ย<b>เริ่มต้น</b> ณ อายุปัจจุบัน — เบี้ยสัญญาเพิ่มเติมจะปรับเพิ่มขึ้นตามช่วงอายุ</div>';
   return h;
 }
 
@@ -5316,7 +5538,7 @@ function chBuildSum1(){
   var sel=app.getCIHeroSel(1), plan=sel.plan, coType=sel.coType;
   if(!plan||age<=0){ el.innerHTML='<div style="padding:30px;text-align:center;color:#9ca3af;">กรุณาเลือกแผน CI Hero ใน Option 1</div>'; return; }
   var prem=app.calcCIHero(plan,age,gender,coType);
-  var pr=_sum1PremRows(age,gender,null,0,null);
+  var pr=_sum1PremRows(age,gender,null,0,null,['MAIN','HERO']);
   var room={'2M':'3,000','6M':'6,000','12M':'9,000'}[plan];
   var doc={'2M':'3,000','6M':'4,000','12M':'6,000'}[plan];
   var med={'2M':'20,000 ต่อครั้ง','6M':'20,000 ต่อครั้ง','12M':'จ่ายตามจริง'}[plan];
@@ -5388,7 +5610,7 @@ function ccBuildSum1(){
   var cfc=parseInt(document.getElementById('cfc-1').value)||0;
   if(cfc<=0||age<=0){ el.innerHTML='<div style="padding:30px;text-align:center;color:#9ca3af;">กรุณาเลือกทุน CFC ใน Option 1</div>'; return; }
   var unit=cfc/100000, ipd=Math.round(unit*2000), opd=Math.round(unit*500);
-  var pr=_sum1PremRows(age,gender,null,0,null);
+  var pr=_sum1PremRows(age,gender,null,0,null,['MAIN','CFC']);
   var ipd5=ipd*5, chemo=opd*6, radio=opd*20, ct=opd*1;
   var gt=ipd5+chemo+radio+ct;
 
@@ -5425,6 +5647,68 @@ function ccBuildSum1(){
     +'<div class="sum1-foot">* ตัวอย่างข้างต้นเป็นกรณีสมมติเพื่อประกอบการอธิบาย ผลประโยชน์จริงขึ้นอยู่กับแผนการรักษาของแพทย์และเงื่อนไขในกรมธรรม์<br>'
     +'* เอกสารนี้เป็นเพียงการสรุปเบื้องต้นเพื่อประกอบการนำเสนอ มิใช่ส่วนหนึ่งของสัญญาประกันภัย · ผู้ขอเอาประกันภัยควรศึกษาและทำความเข้าใจในเอกสารเสนอขายก่อนตัดสินใจทำประกันภัย</div>'
     +'</div>';
+}
+
+// ==========================================
+// INFOGRAPHIC TAB
+// ==========================================
+function igToggleEdit(){
+  var on=document.getElementById('ig-edit-mode').checked;
+  document.body.classList.toggle('ig-edit', on);
+  document.querySelectorAll('#tab-ig .ig-editable').forEach(function(e){ e.contentEditable = on?'true':'false'; });
+}
+
+function igPrint(which){
+  var cls = which==='cfc' ? 'ig-print-cfc' : 'ig-print-hero';
+  document.body.classList.add(cls);
+  _printOnlyTab('tab-ig', false);
+  setTimeout(function(){ document.body.classList.remove(cls); }, 800);
+}
+
+function igRender(){
+  var gender=document.getElementById('inp-gender').value;
+  var gTxt=gender==='male'?'เพศชาย':'เพศหญิง';
+  var age=parseInt(document.getElementById('age-1').value)||0;
+  var mainSum=parseInt(document.getElementById('main-sum-1').value)||0;
+  var mainType=(document.getElementById('main-type-1')||{}).value||'20PLN';
+  var pMain=(mainSum>0&&age>0)?Math.round(app.calculateMainPremiumForPlan(mainSum,age,gender,mainType)):0;
+  var mainLbl=(mainType==='CIProCare'?'CI ProCare':'20PayLife')+' ทุน '+mainSum.toLocaleString();
+  var S=function(id,v){var e=document.getElementById(id); if(e)e.textContent=v;};
+
+  // ── Care for Cancer ──
+  var cfc=parseInt(document.getElementById('cfc-1').value)||0;
+  if(cfc>0&&age>0){
+    var rc=app.getRiderRate('CFC',age,gender);
+    var pc=rc>0?Math.round((cfc/100000)*rc):0;
+    var tot=pMain+pc;
+    var unit=cfc/100000, ipd=Math.round(unit*2000), opd=Math.round(unit*500);
+    var s1=ipd*5, s2=opd*6, s3=opd*20, s4=opd*1;
+    S('ig-c-gender',gTxt); S('ig-c-age',age); S('ig-c-sum',cfc.toLocaleString());
+    S('ig-c-pm',Math.round(tot/12).toLocaleString()); S('ig-c-py',tot.toLocaleString());
+    S('ig-c-main',mainLbl);
+    S('ig-c-ipd',ipd.toLocaleString()); S('ig-c-opd',opd.toLocaleString());
+    S('ig-c-s1',s1.toLocaleString()); S('ig-c-s2',s2.toLocaleString());
+    S('ig-c-s3',s3.toLocaleString()); S('ig-c-s4',s4.toLocaleString());
+    S('ig-c-tot',(s1+s2+s3+s4).toLocaleString());
+  }
+
+  // ── CI Hero ──
+  var hs=app.getCIHeroSel(1);
+  if(hs.plan&&age>0){
+    var ph=app.calcCIHero(hs.plan,age,gender,hs.coType);
+    var totH=pMain+ph;
+    var isBal=hs.coType==='balanced';
+    var room={'2M':'3,000','6M':'6,000','12M':'9,000'}[hs.plan];
+    var cap={'2M':'2,000,000','6M':'6,000,000','12M':'12,000,000'}[hs.plan];
+    S('ig-h-gender',gTxt); S('ig-h-age',age);
+    S('ig-h-plan',CH_PLAN_LBL[hs.plan]); S('ig-h-type',isBal?'Balanced':'Begin');
+    S('ig-h-pm',Math.round(totH/12).toLocaleString()); S('ig-h-py',totH.toLocaleString());
+    S('ig-h-main',mainLbl); S('ig-h-cap',cap); S('ig-h-room',room);
+    var cp=document.getElementById('ig-h-copay');
+    if(cp) cp.innerHTML = isBal
+      ? '<span class="big" style="color:#15803d;">ไม่มี</span> ค่าใช้จ่ายร่วม เมื่อรักษาใน รพ. เครือ AIA Smart Network<br><span style="font-size:14px;">(นอกเครือ ร่วมจ่าย 20% สูงสุดไม่เกิน 60,000 บาท/ปี)</span>'
+      : 'ร่วมจ่ายเพียง <span class="big">10%</span> เมื่อรักษาใน รพ. เครือ AIA Smart Network<br><span style="font-size:14px;">(สูงสุดไม่เกิน 10,000 บาท/ปี · นอกเครือ 30% สูงสุด 90,000 บาท/ปี)</span>';
+  }
 }
 
 // ==========================================
@@ -5553,9 +5837,13 @@ function acRender(){
       plans.forEach(function(p){ rows+='<div class="lbl" style="color:'+p.color+';font-weight:600;">'+p.icon+' '+p.name+' · '+p.detail+'</div><div class="val" style="color:'+p.color+';">'+p.prem.toLocaleString()+'</div>'; });
       if(oth.total>0) rows+='<div class="lbl">สัญญาเพิ่มเติมอื่น ('+oth.labels.join(' + ')+')</div><div class="val">'+oth.total.toLocaleString()+'</div>';
       var pctCI=grand>0?Math.round(ciTotal/grand*100):0;
+      var perMo=Math.round(grand/12);
       pc.innerHTML='<div class="sum1-prem-grid" style="font-size:0.92em;">'+rows
-        +'<div class="lbl sum1-prem-total" style="font-weight:800;">รวมเบี้ยประกันภัยทั้งหมด</div>'
+        +'<div class="lbl sum1-prem-total" style="font-weight:800;">รวมเบี้ยประกันภัยทั้งหมด '
+        +'<span style="font-weight:600;font-size:0.88em;color:#64748b;">(เฉลี่ยแล้วเบี้ย<u>เริ่มต้น</u>ปีละ '
+        +grand.toLocaleString()+' บาท หรือเดือนละ '+perMo.toLocaleString()+' บาท)</span></div>'
         +'<div class="val sum1-prem-total">'+grand.toLocaleString()+' บ./ปี</div></div>'
+        +'<div style="font-size:0.74em;color:#9ca3af;margin-top:5px;line-height:1.55;">* เป็นเบี้ย<b>เริ่มต้น</b> ณ อายุปัจจุบัน — เบี้ยสัญญาเพิ่มเติมจะปรับเพิ่มขึ้นตามช่วงอายุ (ดูตารางเบี้ยคาดการณ์ด้านล่าง)</div>'
         +(ciTotal>0?('<div style="margin-top:12px;padding:10px 14px;background:#fef2f2;border:1.5px solid #dc2626;border-radius:8px;font-size:0.84em;color:#7f1d1d;">'
           +'❤️ ในจำนวนนี้เป็น<b>เบี้ยสัญญาโรคร้ายแรง '+ciTotal.toLocaleString()+' บาท/ปี</b> คิดเป็น <b>'+pctCI+'%</b> ของเบี้ยทั้งหมด</div>'):'');
     }
@@ -5809,7 +6097,8 @@ function chPackageNote(age,gender,prem,plan){
     +'แพคเกจนี้ซื้อคู่กับ <b>'+lbl+'</b> ทุนประกัน <b style="color:#2563eb;">'+mainSum.toLocaleString()+' บาท</b> '
     +'เป็นเบี้ย <b style="color:#2563eb;">'+pMain.toLocaleString()+' บาท/ปี</b>'
     +(oth.total>0?' · สัญญาเพิ่มเติมอื่น <b>'+oth.total.toLocaleString()+' บาท/ปี</b> ('+oth.labels.join(' + ')+')':'')
-    +'<br>รวมเป็นเบี้ยเริ่มต้น ณ อายุ '+age+' ปี ทั้งสิ้น <b style="color:#15803d;font-size:1.15em;">'+grand.toLocaleString()+' บาท/ปี</b>';
+    +'<br>รวมเป็นเบี้ย<u>เริ่มต้น</u> ณ อายุ '+age+' ปี ทั้งสิ้น <b style="color:#15803d;font-size:1.15em;">'+grand.toLocaleString()+' บาท/ปี</b>'
+    +' <span style="font-size:0.88em;color:#64748b;">(เฉลี่ยเดือนละ '+Math.round(grand/12).toLocaleString()+' บาท)</span>';
 }
 
 // สัญญาอื่นๆ นอกจาก CI Hero (สุขภาพ/CFC/HB/MPCI)
@@ -6084,8 +6373,9 @@ function ccRenderPackageNote(age, gender, premCFC) {
       + 'แพคเกจนี้ซื้อคู่กับ <b>' + mainLabel + '</b> ทุนประกัน <b style="color:#dc2626;">' + mainSum.toLocaleString() + ' บาท</b> '
       + 'เป็นเบี้ย <b style="color:#dc2626;">' + premMain.toLocaleString() + ' บาท/ปี</b>'
       + (other.total > 0 ? ' · สัญญาเพิ่มเติมอื่น <b>' + other.total.toLocaleString() + ' บาท/ปี</b> (' + other.labels.join(' + ') + ')' : '')
-      + '<br>รวมเป็นเบี้ยเริ่มต้น ณ อายุ ' + age + ' ปี ทั้งสิ้น '
-      + '<b style="color:#15803d;font-size:1.15em;">' + grand.toLocaleString() + ' บาท/ปี</b>';
+      + '<br>รวมเป็นเบี้ย<u>เริ่มต้น</u> ณ อายุ ' + age + ' ปี ทั้งสิ้น '
+      + '<b style="color:#15803d;font-size:1.15em;">' + grand.toLocaleString() + ' บาท/ปี</b>'
+      + ' <span style="font-size:0.88em;color:#64748b;">(เฉลี่ยเดือนละ ' + Math.round(grand/12).toLocaleString() + ' บาท)</span>';
 }
 
 // ── คำนวณเบี้ยสัญญาเพิ่มเติมอื่น (นอกจาก CFC) ณ อายุที่กำหนด ──────

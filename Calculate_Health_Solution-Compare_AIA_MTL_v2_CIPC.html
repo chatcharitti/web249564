@@ -1474,6 +1474,10 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             Vitality Timeline
         </button>
+        <button class="main-tab-btn" onclick="switchMainTab('tab-allci')" id="tab-btn-allci">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            All CI
+        </button>
         <button class="main-tab-btn" onclick="switchMainTab('tab-cihero')" id="tab-btn-cihero">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
             CI Hero
@@ -3002,6 +3006,88 @@
 
         </div>
     </div><!-- end tab-cihero -->
+
+    <!-- ═══ TAB: All CI ═══ -->
+    <div class="main-tab-panel" id="tab-allci" style="display:none !important;">
+        <div class="cc-container">
+
+            <div class="cc-ctrl-bar no-print">
+                <span style="font-size:0.82em;font-weight:700;color:#374151;">❤️ สัญญาโรคร้ายแรงทั้งหมด · ข้อมูลจาก Option 1</span>
+                <label style="display:flex;align-items:center;gap:6px;font-size:0.80em;color:#374151;cursor:pointer;user-select:none;font-weight:600;">
+                    <input type="checkbox" id="ac-sum-images" checked onchange="acBuildSum1()" style="width:15px;height:15px;cursor:pointer;accent-color:#be123c;">
+                    🖼️ แสดงรูปประกอบในหน้าสรุป
+                </label>
+                <div style="display:flex;align-items:center;gap:5px;margin-left:auto;">
+                    <span style="font-size:0.78em;color:#6b7280;">ขนาด A</span>
+                    <button class="cc-font-btn" onclick="acFontSize(-1)">A−</button>
+                    <span style="min-width:34px;text-align:center;font-size:11px;font-weight:700;color:#475569;" id="ac-font-lbl">100%</span>
+                    <button class="cc-font-btn" onclick="acFontSize(1)">A+</button>
+                </div>
+                <button class="cc-print-btn" onclick="acPrintSummary()" style="background:#f0fdf4;color:#15803d;border-color:#16a34a;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                    พิมพ์สรุป 1 หน้า
+                </button>
+                <button class="cc-print-btn" onclick="acPrint()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                    พิมพ์ A4
+                </button>
+            </div>
+
+            <div class="sum1-box" id="ac-sum1"></div>
+
+            <!-- Header -->
+            <div class="cc-header-card">
+                <div class="cc-header-title">❤️ ความคุ้มครองโรคร้ายแรง — สรุปรวมทุกสัญญา</div>
+                <div class="cc-header-sub">แสดงเฉพาะสัญญาโรคร้ายแรงที่เลือกไว้ใน Option 1 · AIA Health CI Hero · AIA Care for Cancer · Multi-Pay CI</div>
+                <div class="cc-info-grid" id="ac-info-grid"></div>
+            </div>
+
+            <!-- Card: เบี้ยทั้งหมด -->
+            <div class="cc-section">
+                <div class="cc-section-title">💰 เบี้ยประกันภัยทั้งหมด (Option 1)</div>
+                <div class="cc-section-sub">รวมเบี้ยทุกสัญญา พร้อมแยกให้เห็นสัดส่วนของสัญญาโรคร้ายแรง</div>
+                <div id="ac-prem-card"></div>
+            </div>
+
+            <!-- Card: ความคุ้มครองแต่ละสัญญา -->
+            <div class="cc-section">
+                <div class="cc-section-title">🛡️ ความคุ้มครองของแต่ละสัญญา</div>
+                <div class="cc-section-sub">สรุปย่อความคุ้มครองหลักของสัญญาโรคร้ายแรงที่เลือก</div>
+                <div id="ac-cov-cards"></div>
+            </div>
+
+            <!-- Card: เบี้ยในอนาคต -->
+            <div class="cc-section">
+                <div class="cc-section-title">📊 เบี้ยประกันคาดการณ์ปรับตามอายุ</div>
+                <div class="cc-section-sub" id="ac-proj-sub">รวมเบี้ยประกันหลักและสัญญาเพิ่มเติมทั้งหมดของ Option 1 ตามช่วงอายุ</div>
+                <div style="overflow-x:auto;">
+                    <table class="vb-table" style="font-size:0.85em;">
+                        <thead>
+                            <tr>
+                                <th class="th-base" style="width:12%;">ช่วงอายุ</th>
+                                <th class="th-base" style="width:9%;">ปีที่</th>
+                                <th class="th-base" style="width:16%;">ประกันหลัก<br><span style="font-size:0.85em;font-weight:600;" id="ac-proj-th-main">20PayLife</span></th>
+                                <th class="th-base" style="width:17%;color:#fca5a5;">สัญญาโรคร้ายแรง<br><span style="font-size:0.85em;font-weight:600;" id="ac-proj-th-ci">–</span></th>
+                                <th class="th-base" style="width:16%;">สัญญาอื่น<br><span style="font-size:0.85em;font-weight:600;" id="ac-proj-th-other">–</span></th>
+                                <th class="th-base" style="width:17%;color:#fcd34d;">รวมเบี้ยต่อปี</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ac-proj-body"></tbody>
+                    </table>
+                </div>
+                <div class="cc-footnote">
+                    * เบี้ยประกันหลักคงที่ตลอด 20 ปีที่ชำระ · สัญญาเพิ่มเติมปรับขึ้นตามช่วงอายุ<br>
+                    * ตัวเลขเป็นการคาดการณ์จากอัตราเบี้ยปัจจุบัน บริษัทฯ สงวนสิทธิ์ในการปรับอัตราเบี้ยประกันภัยของสัญญาเพิ่มเติมตามเงื่อนไขกรมธรรม์
+                </div>
+            </div>
+
+            <div class="cc-footnote">
+                • ผู้ขอเอาประกันภัยควรศึกษาและทำความเข้าใจในเอกสารเสนอขายก่อนตัดสินใจทำประกันภัย เมื่อได้รับกรมธรรม์แล้ว โปรดศึกษารายละเอียด ข้อกำหนดและเงื่อนไขในกรมธรรม์<br>
+                • ข้อกำหนดและเงื่อนไขของความคุ้มครองจะระบุไว้ในกรมธรรม์ประกันภัยที่ออกให้กับผู้ถือกรมธรรม์
+            </div>
+
+        </div>
+    </div><!-- end tab-allci -->
 
     </div><!-- end main-tab-wrapper -->
 
@@ -4833,7 +4919,8 @@ function switchMainTab(tabId) {
         'tab-vitality':     'tab-btn-vitality',
         'tab-vtimeline':    'tab-btn-vtimeline',
         'tab-cancer':       'tab-btn-cancer',
-        'tab-cihero':       'tab-btn-cihero'
+        'tab-cihero':       'tab-btn-cihero',
+        'tab-allci':        'tab-btn-allci'
     };
     const btn = document.getElementById(btnMap[tabId]);
     if (btn) btn.classList.add('active');
@@ -4844,6 +4931,7 @@ function switchMainTab(tabId) {
     if (tabId === 'tab-vtimeline') vtRender();
     if (tabId === 'tab-cancer') ccRender();
     if (tabId === 'tab-cihero') chRender();
+    if (tabId === 'tab-allci') acRender();
 }
 
 // ==========================================
@@ -5336,6 +5424,256 @@ function ccBuildSum1(){
 
     +'<div class="sum1-foot">* ตัวอย่างข้างต้นเป็นกรณีสมมติเพื่อประกอบการอธิบาย ผลประโยชน์จริงขึ้นอยู่กับแผนการรักษาของแพทย์และเงื่อนไขในกรมธรรม์<br>'
     +'* เอกสารนี้เป็นเพียงการสรุปเบื้องต้นเพื่อประกอบการนำเสนอ มิใช่ส่วนหนึ่งของสัญญาประกันภัย · ผู้ขอเอาประกันภัยควรศึกษาและทำความเข้าใจในเอกสารเสนอขายก่อนตัดสินใจทำประกันภัย</div>'
+    +'</div>';
+}
+
+// ==========================================
+// ALL CI TAB — สัญญาโรคร้ายแรงทั้งหมด
+// ==========================================
+const AC_FONT_LEVELS = [75,80,85,90,95,100,108,116,125,135];
+let _acFontIdx = 5;
+
+function acFontSize(d){ _acFontIdx=Math.max(0,Math.min(AC_FONT_LEVELS.length-1,_acFontIdx+d));
+  var p=AC_FONT_LEVELS[_acFontIdx]; var c=document.querySelector('#tab-allci .cc-container');
+  if(c)c.style.fontSize=p+'%'; var l=document.getElementById('ac-font-lbl'); if(l)l.textContent=p+'%'; }
+
+function acPrint(){ _printOnlyTab('tab-allci', false); }
+function acPrintSummary(){ acBuildSum1(); _printOnlyTab('tab-allci', true); }
+
+// ── รวบรวมสัญญาโรคร้ายแรงที่เลือกไว้ใน Option 1 ──────────────────
+function acGetCIPlans(age, gender){
+  var out=[];
+  // 1) AIA Health CI Hero
+  var hs=app.getCIHeroSel(1);
+  if(hs.plan){
+    var ph=app.calcCIHero(hs.plan,age,gender,hs.coType);
+    var room={'2M':'3,000','6M':'6,000','12M':'9,000'}[hs.plan];
+    var doc={'2M':'3,000','6M':'4,000','12M':'6,000'}[hs.plan];
+    out.push({
+      key:'HERO', name:'AIA Health CI Hero', color:'#2563eb', bg:'#eff6ff', icon:'🦸',
+      detail:CH_PLAN_LBL[hs.plan]+' · แบบ '+(hs.coType==='balanced'?'Balanced':'Begin'),
+      prem:ph,
+      cov:['<b>สุขภาพเหมาจ่าย + โรคร้ายแรง</b> วงเงินสูงสุด '+CH_PLAN_LBL[hs.plan]+'/ปี',
+           'ค่าห้อง '+room+' บ./วัน · <b>ICU จ่ายตามจริง</b> (สูงสุด 365 วัน)',
+           'ค่าแพทย์ตรวจรักษา '+doc+' บ./วัน',
+           'ค่าผ่าตัด · เคมีบำบัด · รังสีรักษา · ล้างไต — <b>เหมาจ่ายตามจริง</b>',
+           'ค่าใช้จ่ายร่วม: ในสิทธิ '+(hs.coType==='balanced'?'<b>ไม่มี</b>':'10% (สูงสุด 10,000)')+' · นอกสิทธิ '+(hs.coType==='balanced'?'20% (สูงสุด 60,000)':'30% (สูงสุด 90,000)')]
+    });
+  }
+  // 2) AIA Care for Cancer
+  var cfc=parseInt(document.getElementById('cfc-1').value)||0;
+  if(cfc>0){
+    var rc=app.getRiderRate('CFC',age,gender);
+    var pc=rc>0?Math.round((cfc/100000)*rc):0;
+    var unit=cfc/100000, ipd=Math.round(unit*2000), opd=Math.round(unit*500);
+    out.push({
+      key:'CFC', name:'AIA Care for Cancer', color:'#dc2626', bg:'#fef2f2', icon:'🎗️',
+      detail:'ทุนประกัน '+cfc.toLocaleString()+' บาท',
+      prem:pc,
+      cov:['<b>ค่าชดเชยรายวันเฉพาะโรคมะเร็ง</b> — จ่ายเพิ่มจากค่ารักษาที่เบิกได้',
+           'ผู้ป่วยใน (IPD) <b>'+ipd.toLocaleString()+' บ./วัน</b>',
+           'ผู้ป่วยนอก (OPD) <b>'+opd.toLocaleString()+' บ./ครั้ง</b> — เคมีบำบัด · ฉายแสง · CT/MRI/PET',
+           'รวมสูงสุด <b>1,000 วัน</b> ตลอดอายุสัญญา']
+    });
+  }
+  // 3) Multi-Pay CI
+  var mp=parseInt(document.getElementById('mpci-sum-1').value)||0;
+  if(mp>0){
+    var pm=Math.round(app.calcMultiPayCI(mp,age,gender));
+    out.push({
+      key:'MPCI', name:'Multi-Pay CI', color:'#7c3aed', bg:'#f5f3ff', icon:'🔄',
+      detail:'ทุนประกัน '+mp.toLocaleString()+' บาท',
+      prem:pm,
+      cov:['<b>จ่ายเงินก้อนเมื่อตรวจพบโรคร้ายแรง</b> — เบิกได้หลายครั้ง',
+           'คุ้มครองโรคร้ายแรงหลายกลุ่ม · เป็นซ้ำเบิกได้อีก',
+           'เบี้ยแบบ <b>ปรับตามอายุทุกปี</b> (1-year renewable)',
+           'คุ้มครองถึงอายุ 99 ปี']
+    });
+  }
+  return out;
+}
+
+// ── เบี้ยสัญญาอื่นที่ไม่ใช่โรคร้ายแรง ─────────────────────────────
+function acOtherRiders(evalAge,gender){
+  var total=0,labels=[];
+  var st=app.state[1];
+  if(st&&st.type!=='NONE'&&APP_DATA.plans[st.type]){
+    var opts=APP_DATA.plans[st.type].options, opt=opts?opts[st.idx]:null;
+    if(opt){ var bi=app.getBandIndex(evalAge,st.type);
+      var arr=(APP_DATA.rateTable[st.type]&&APP_DATA.rateTable[st.type][gender])?APP_DATA.rateTable[st.type][gender][opt.k]:null;
+      var p=arr?(arr[bi]||0):0; if(p>0){total+=p;labels.push('สุขภาพ');} }
+  }
+  var hb=parseInt(document.getElementById('hb-1').value)||0;
+  if(hb>0){ var rh=app.getRiderRate('HB',evalAge,gender);
+    var ph=rh>0?Math.round((hb/100)*rh):0; if(ph>0){total+=ph;labels.push('HB');} }
+  return {total:Math.round(total),labels:labels};
+}
+
+// ── เบี้ยรวมสัญญาโรคร้ายแรง ณ อายุที่กำหนด ───────────────────────
+function acCIPremAt(evalAge,gender){
+  var t=0;
+  var hs=app.getCIHeroSel(1);
+  if(hs.plan) t+=app.calcCIHero(hs.plan,evalAge,gender,hs.coType);
+  var cfc=parseInt(document.getElementById('cfc-1').value)||0;
+  if(cfc>0){ var rc=app.getRiderRate('CFC',evalAge,gender); if(rc>0) t+=Math.round((cfc/100000)*rc); }
+  var mp=parseInt(document.getElementById('mpci-sum-1').value)||0;
+  if(mp>0&&evalAge<=99) t+=Math.round(app.calcMultiPayCI(mp,evalAge,gender));
+  return Math.round(t);
+}
+
+function acRender(){
+  var gender=document.getElementById('inp-gender').value, gTxt=gender==='male'?'ชาย':'หญิง';
+  var age=parseInt(document.getElementById('age-1').value)||0;
+  var mainSum=parseInt(document.getElementById('main-sum-1').value)||0;
+  var mainType=(document.getElementById('main-type-1')||{}).value||'20PLN';
+  var pMain=(mainSum>0&&age>0)?Math.round(app.calculateMainPremiumForPlan(mainSum,age,gender,mainType)):0;
+
+  var plans=acGetCIPlans(age,gender);
+  var ciTotal=plans.reduce(function(s,p){return s+p.prem;},0);
+  var oth=acOtherRiders(age,gender);
+  var grand=pMain+ciTotal+oth.total;
+
+  // ── Header info ──
+  var ig=document.getElementById('ac-info-grid');
+  if(ig){
+    ig.innerHTML=
+       '<div class="cc-info-box"><div class="cc-info-label">ผู้เอาประกัน (Option 1)</div><div class="cc-info-value">'+(age>0?('อายุ '+age+' ปี ('+gTxt+')'):'–')+'</div></div>'
+      +'<div class="cc-info-box"><div class="cc-info-label">สัญญาโรคร้ายแรงที่เลือก</div><div class="cc-info-value red">'+(plans.length?plans.length+' สัญญา':'ยังไม่เลือก')+'</div></div>'
+      +'<div class="cc-info-box"><div class="cc-info-label">เบี้ยสัญญาโรคร้ายแรง/ปี</div><div class="cc-info-value red">'+(ciTotal>0?ciTotal.toLocaleString()+' บาท':'–')+'</div></div>'
+      +'<div class="cc-info-box"><div class="cc-info-label">เบี้ยรวมทั้งหมด/ปี</div><div class="cc-info-value" style="color:#15803d;">'+(grand>0?grand.toLocaleString()+' บาท':'–')+'</div></div>';
+  }
+
+  // ── Card เบี้ยทั้งหมด ──
+  var pc=document.getElementById('ac-prem-card');
+  if(pc){
+    if(grand<=0){ pc.innerHTML='<div style="text-align:center;padding:24px;color:#9ca3af;">กรุณากรอกข้อมูลใน Option 1</div>'; }
+    else{
+      var rows='';
+      if(pMain>0) rows+='<div class="lbl">'+(mainType==='CIProCare'?'AIA CI ProCare (20/99)':'ประกันชีวิต 20PayLife')+' · ทุน '+mainSum.toLocaleString()+'</div><div class="val">'+pMain.toLocaleString()+'</div>';
+      plans.forEach(function(p){ rows+='<div class="lbl" style="color:'+p.color+';font-weight:600;">'+p.icon+' '+p.name+' · '+p.detail+'</div><div class="val" style="color:'+p.color+';">'+p.prem.toLocaleString()+'</div>'; });
+      if(oth.total>0) rows+='<div class="lbl">สัญญาเพิ่มเติมอื่น ('+oth.labels.join(' + ')+')</div><div class="val">'+oth.total.toLocaleString()+'</div>';
+      var pctCI=grand>0?Math.round(ciTotal/grand*100):0;
+      pc.innerHTML='<div class="sum1-prem-grid" style="font-size:0.92em;">'+rows
+        +'<div class="lbl sum1-prem-total" style="font-weight:800;">รวมเบี้ยประกันภัยทั้งหมด</div>'
+        +'<div class="val sum1-prem-total">'+grand.toLocaleString()+' บ./ปี</div></div>'
+        +(ciTotal>0?('<div style="margin-top:12px;padding:10px 14px;background:#fef2f2;border:1.5px solid #dc2626;border-radius:8px;font-size:0.84em;color:#7f1d1d;">'
+          +'❤️ ในจำนวนนี้เป็น<b>เบี้ยสัญญาโรคร้ายแรง '+ciTotal.toLocaleString()+' บาท/ปี</b> คิดเป็น <b>'+pctCI+'%</b> ของเบี้ยทั้งหมด</div>'):'');
+    }
+  }
+
+  // ── Card ความคุ้มครองแต่ละสัญญา ──
+  var cc=document.getElementById('ac-cov-cards');
+  if(cc){
+    if(!plans.length){ cc.innerHTML='<div style="text-align:center;padding:24px;color:#9ca3af;">ยังไม่ได้เลือกสัญญาโรคร้ายแรงใน Option 1<br><span style="font-size:0.85em;">(CI Hero · Care for Cancer · Multi-Pay CI)</span></div>'; }
+    else{
+      var h='<div style="display:grid;grid-template-columns:repeat('+Math.min(plans.length,3)+',1fr);gap:12px;">';
+      plans.forEach(function(p){
+        h+='<div style="border:1.5px solid '+p.color+';background:'+p.bg+';border-radius:10px;overflow:hidden;">'
+          +'<div style="padding:9px 13px;background:'+p.color+';color:#fff;">'
+          +'<div style="font-size:0.92em;font-weight:800;">'+p.icon+' '+p.name+'</div>'
+          +'<div style="font-size:0.76em;opacity:0.92;">'+p.detail+' · เบี้ย '+p.prem.toLocaleString()+' บ./ปี</div></div>'
+          +'<div style="padding:10px 13px;font-size:0.79em;color:#374151;line-height:1.8;">'
+          +p.cov.map(function(x){return '• '+x;}).join('<br>')
+          +'</div></div>';
+      });
+      cc.innerHTML=h+'</div>';
+    }
+  }
+
+  acProjection(age,gender,plans);
+  acBuildSum1();
+}
+
+// ── ตารางเบี้ยในอนาคต ────────────────────────────────────────────
+function acProjection(age,gender,plans){
+  var body=document.getElementById('ac-proj-body'); if(!body)return;
+  var mainSum=parseInt(document.getElementById('main-sum-1').value)||0;
+  var mainType=(document.getElementById('main-type-1')||{}).value||'20PLN';
+  if(age<=0||(mainSum<=0&&!plans.length)){ body.innerHTML='<tr><td colspan="6" style="text-align:center;padding:28px;color:#9ca3af;">กรุณากรอกข้อมูลใน Option 1</td></tr>'; return; }
+
+  var tm=document.getElementById('ac-proj-th-main'); if(tm)tm.textContent=(mainType==='CIProCare')?'CI ProCare':'20PayLife';
+  var tc=document.getElementById('ac-proj-th-ci');
+  if(tc)tc.textContent=plans.length?('('+plans.map(function(p){return p.key==='HERO'?'CI Hero':(p.key==='CFC'?'CFC':'MPCI');}).join('/')+')'):'(ไม่มี)';
+  var lbls=acOtherRiders(age,gender).labels;
+  var to=document.getElementById('ac-proj-th-other'); if(to)to.textContent=lbls.length?'('+lbls.join('/')+')':'(ไม่มี)';
+
+  var pMainBase=mainSum>0?Math.round(app.calculateMainPremiumForPlan(mainSum,age,gender,mainType)):0;
+  var sub=document.getElementById('ac-proj-sub');
+  if(sub)sub.textContent='Option 1 · อายุแรกเข้า '+age+' ปี ('+(gender==='male'?'ชาย':'หญิง')+')'
+    +(plans.length?(' · สัญญาโรคร้ายแรง '+plans.length+' สัญญา'):'');
+
+  var h='';
+  APP_DATA.AGE_BANDS.forEach(function(band){
+    var parts=band.split('-');
+    var bs=parseInt(parts[0]), be=parseInt(parts[1]);
+    if(be<age)return;
+    var evalAge=Math.max(age,bs);
+    var yr=evalAge-age+1;
+    var pMain=(yr<=20)?pMainBase:0;
+    var pCI=acCIPremAt(evalAge,gender);
+    var oth=acOtherRiders(evalAge,gender);
+    var tot=pMain+pCI+oth.total;
+    if(tot<=0)return;
+    h+='<tr'+(yr>20?' style="background:#f8fafc;"':'')+'>'
+      +'<td class="td-yr">'+evalAge+'–'+be+' ปี</td>'
+      +'<td class="td-age">ปีที่ '+yr+'</td>'
+      +'<td class="td-prem">'+(pMain>0?pMain.toLocaleString():'<span style="color:#16a34a;font-size:0.82em;font-weight:700;">ครบชำระแล้ว</span>')+'</td>'
+      +'<td style="color:#dc2626;font-weight:700;">'+(pCI>0?pCI.toLocaleString():'—')+'</td>'
+      +'<td style="color:#475569;">'+(oth.total>0?oth.total.toLocaleString():'—')+'</td>'
+      +'<td style="color:#92400e;font-weight:800;font-size:1.05em;">'+tot.toLocaleString()+'</td></tr>';
+  });
+  body.innerHTML=h||'<tr><td colspan="6" style="text-align:center;padding:28px;color:#9ca3af;">ไม่มีข้อมูล</td></tr>';
+}
+
+// ── สรุป 1 หน้า ──────────────────────────────────────────────────
+function acBuildSum1(){
+  var el=document.getElementById('ac-sum1'); if(!el)return;
+  var gender=document.getElementById('inp-gender').value, gTxt=gender==='male'?'ชาย':'หญิง';
+  var age=parseInt(document.getElementById('age-1').value)||0;
+  var name=document.getElementById('inp-name').value||'คุณลูกค้า';
+  var imgOn=(document.getElementById('ac-sum-images')||{checked:true}).checked;
+  var plans=acGetCIPlans(age,gender);
+  if(!plans.length||age<=0){ el.innerHTML='<div style="padding:30px;text-align:center;color:#9ca3af;">กรุณาเลือกสัญญาโรคร้ายแรงใน Option 1</div>'; return; }
+
+  var pr=_sum1PremRows(age,gender,null,0,null);
+  var ciTotal=plans.reduce(function(s,p){return s+p.prem;},0);
+
+  var covHTML='<div style="display:grid;grid-template-columns:repeat('+Math.min(plans.length,3)+',1fr);gap:9px;">';
+  plans.forEach(function(p){
+    covHTML+='<div style="border:1.5px solid '+p.color+';background:'+p.bg+';border-radius:8px;overflow:hidden;">'
+      +'<div style="padding:6px 10px;background:'+p.color+';color:#fff;font-size:0.80em;font-weight:800;">'+p.icon+' '+p.name+'</div>'
+      +'<div style="padding:7px 10px;font-size:0.72em;color:#374151;line-height:1.7;">'
+      +'<div style="font-weight:700;color:'+p.color+';margin-bottom:3px;">'+p.detail+' · '+p.prem.toLocaleString()+' บ./ปี</div>'
+      +p.cov.map(function(x){return '• '+x;}).join('<br>')
+      +'</div></div>';
+  });
+  covHTML+='</div>';
+
+  el.innerHTML='<div class="sum1-wrap" style="border-color:#be123c;">'
+    +'<div class="sum1-head" style="background:#be123c;">'
+    +(imgOn?'<img class="sum1-shield" src="'+SUM1_IMG.shield+'" alt="">':'')
+    +'<div class="sum1-title">❤️ ความคุ้มครองโรคร้ายแรง — สรุปข้อเสนอ</div>'
+    +'<div class="sum1-client">'+name+' · อายุ '+age+' ปี ('+gTxt+') · '+plans.length+' สัญญาโรคร้ายแรง</div></div>'
+
+    +'<div class="sum1-sec"><div class="'+(imgOn?'sum1-prem-row':'')+'">'
+    +'<div><div class="sum1-sec-t" style="color:#be123c;">💰 เบี้ยประกันภัย (แยกรายการ)</div>'+_sum1PremHTML(pr)
+    +'<div style="margin-top:7px;padding:7px 11px;background:#fef2f2;border-radius:6px;font-size:0.80em;color:#7f1d1d;">'
+    +'❤️ เป็นเบี้ยสัญญาโรคร้ายแรง <b>'+ciTotal.toLocaleString()+' บ./ปี</b> ('+Math.round(ciTotal/pr.total*100)+'% ของเบี้ยทั้งหมด)</div></div>'
+    +(imgOn?('<div class="sum1-icons">'
+      +'<img src="'+SUM1_IMG.heart+'" alt="">'
+      +'<img src="'+SUM1_IMG.brain+'" alt="">'
+      +'<img src="'+SUM1_IMG.health+'" alt="">'
+      +'</div>'):'')
+    +'</div></div>'
+
+    +'<div class="sum1-sec"><div class="sum1-sec-t" style="color:#be123c;">🛡️ ความคุ้มครองของแต่ละสัญญา</div>'
+    +covHTML
+    +(imgOn?('<div style="text-align:center;margin-top:9px;"><img src="'+SUM1_IMG.gap+'" style="width:190px;height:auto;">'
+      +'<div class="sum1-gap-cap">FILL THE GAP. PROTECT WHAT MATTERS.</div></div>'):'')
+    +'</div>'
+
+    +'<div class="sum1-foot">* เอกสารนี้เป็นเพียงการสรุปเบื้องต้นเพื่อประกอบการนำเสนอ มิใช่ส่วนหนึ่งของสัญญาประกันภัย · ข้อกำหนดและเงื่อนไขของความคุ้มครองจะระบุไว้ในกรมธรรม์ประกันภัยที่ออกให้ผู้ถือกรมธรรม์<br>'
+    +'* เบี้ยประกันภัยของสัญญาเพิ่มเติมอาจปรับเปลี่ยนตามอายุ ชั้นอาชีพ หรือค่าใช้จ่ายในการรักษาพยาบาลที่สูงขึ้น · ผู้ขอเอาประกันภัยควรศึกษาและทำความเข้าใจในเอกสารเสนอขายก่อนตัดสินใจทำประกันภัย</div>'
     +'</div>';
 }
 
@@ -6774,6 +7112,7 @@ const EXPORT_FIELDS = [
     { id: 'cihero-1',    type: 'value' },
     { id: 'cihero-co-1', type: 'value' },
     { id: 'ch-sum-images', type: 'checked' },
+    { id: 'ac-sum-images', type: 'checked' },
     { id: 'cp-1',        type: 'checked' },
     // Option 2
     { id: 'main-type-2', type: 'value' },

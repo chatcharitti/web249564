@@ -1554,7 +1554,7 @@
         </button>
         <button class="main-tab-btn" onclick="switchMainTab('tab-ig')" id="tab-btn-ig">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            Infographic
+            Infographic CI Hero &amp; CFC
         </button>
         <button class="main-tab-btn" onclick="switchMainTab('tab-allci')" id="tab-btn-allci">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
@@ -4571,76 +4571,147 @@ const app = {
             'AIA HH เท่านั้น: หัวใจ, หลอดเลือดสมอง, บายพาส, มะเร็งลุกลาม, ปลูกถ่ายอวัยวะ, ผ่าตัดเส้นเลือดแดงใหญ่');
         row('เงินช่วยเหลือกรณีเสียชีวิต', 'd');
 
-        // ── CFC ──────────────────────────────────────────────────────────────
-        html += `<tr class="sub-header-row"><td colspan="4">สัญญาเพิ่มเติมโรคร้ายแรง — AIA Care for Cancer (CFC)</td></tr>`;
-        html += `<tr><td class="row-header">เงินก้อนเมื่อตรวจพบมะเร็ง (ทุกระยะ)</td>`;
-        [1,2,3].forEach(id => {
-            if (!activeOptions[id-1]) { html += `<td class="data-cell col-opt-${id} hide-col"></td>`; return; }
-            const sum = parseInt(document.getElementById(`cfc-${id}`).value) || 0;
-            html += `<td class="data-cell col-opt-${id}" style="color:var(--c-mtl);font-weight:600;">${sum>0 ? this.formatMoney(sum)+' บ.' : '—'}</td>`;
-        });
-        html += `</tr>`;
-        html += `<tr><td class="row-header">ชดเชยรายวันกรณีแอดมิทด้วยโรคมะเร็ง<div style="font-size:0.72em;color:var(--t-tertiary);margin-top:3px;">ทุน CFC ÷ 100,000 × 2,000 บ./วัน</div></td>`;
-        [1,2,3].forEach(id => {
-            if (!activeOptions[id-1]) { html += `<td class="data-cell col-opt-${id} hide-col"></td>`; return; }
-            const sum = parseInt(document.getElementById(`cfc-${id}`).value) || 0;
-            html += `<td class="data-cell col-opt-${id}" style="color:var(--t-primary);">${sum>0 ? this.formatMoney((sum/100000)*2000)+' บ./วัน' : '—'}</td>`;
-        });
-        html += `</tr>`;
-        html += `<tr><td class="row-header">ชดเชยกรณีรับเคมีบำบัด / รังสีรักษา (OPD)<div style="font-size:0.72em;color:var(--t-tertiary);margin-top:3px;">ทุน CFC ÷ 100,000 × 500 บ./ครั้ง</div></td>`;
-        [1,2,3].forEach(id => {
-            if (!activeOptions[id-1]) { html += `<td class="data-cell col-opt-${id} hide-col"></td>`; return; }
-            const sum = parseInt(document.getElementById(`cfc-${id}`).value) || 0;
-            html += `<td class="data-cell col-opt-${id}" style="color:var(--t-primary);">${sum>0 ? this.formatMoney((sum/100000)*500)+' บ./ครั้ง' : '—'}</td>`;
-        });
-        html += `</tr>`;
+        // ── CI Hero ──────────────────────────────────────────────────────────
+        const HERO_DATA = {
+            '2M':  { cap:'2,000,000', room:'3,000', doc:'3,000', med:'20,000 ต่อครั้ง' },
+            '6M':  { cap:'6,000,000', room:'6,000', doc:'4,000', med:'20,000 ต่อครั้ง' },
+            '12M': { cap:'12,000,000',room:'9,000', doc:'6,000', med:'จ่ายตามจริง' }
+        };
+        const heroSel = {};
+        let anyHero = false;
+        [1,2,3].forEach(id => { const s=this.getCIHeroSel(id); heroSel[id]=s; if(s.plan) anyHero=true; });
 
-        // ── HB Extra ─────────────────────────────────────────────────────────
-        html += `<tr class="sub-header-row"><td colspan="4">สัญญาเพิ่มเติมชดเชยรายได้ — AIA HB Extra</td></tr>`;
-        html += `<tr><td class="row-header">ชดเชยรายวันทั่วไป (IPD)</td>`;
-        [1,2,3].forEach(id => {
-            if (!activeOptions[id-1]) { html += `<td class="data-cell col-opt-${id} hide-col"></td>`; return; }
-            const sum = parseInt(document.getElementById(`hb-${id}`).value) || 0;
-            html += `<td class="data-cell col-opt-${id}" style="color:var(--c-primary);font-weight:600;">${sum>0 ? this.formatMoney(sum)+' บ./วัน' : '—'}</td>`;
-        });
-        html += `</tr>`;
-        html += `<tr><td class="row-header">ชดเชยห้อง ICU (3 เท่าของรายวันทั่วไป)</td>`;
-        [1,2,3].forEach(id => {
-            if (!activeOptions[id-1]) { html += `<td class="data-cell col-opt-${id} hide-col"></td>`; return; }
-            const sum = parseInt(document.getElementById(`hb-${id}`).value) || 0;
-            html += `<td class="data-cell col-opt-${id}" style="color:var(--t-primary);">${sum>0 ? this.formatMoney(sum*3)+' บ./วัน' : '—'}</td>`;
-        });
-        html += `</tr>`;
-        html += `<tr><td class="row-header">โรคร้ายแรงเฉียบพลัน 13 โรค (25 เท่า)</td>`;
-        [1,2,3].forEach(id => {
-            if (!activeOptions[id-1]) { html += `<td class="data-cell col-opt-${id} hide-col"></td>`; return; }
-            const sum = parseInt(document.getElementById(`hb-${id}`).value) || 0;
-            html += `<td class="data-cell col-opt-${id}" style="color:var(--t-primary);">${sum>0 ? this.formatMoney(sum*25)+' บ.' : '—'}</td>`;
-        });
-        html += `</tr>`;
+        if (anyHero) {
+            html += `<tr class="sub-header-row" style="background:rgba(37,99,235,0.10);"><td colspan="4" style="color:#2563eb;">สุขภาพเหมาจ่าย + โรคร้ายแรง — AIA Health CI Hero</td></tr>`;
 
-        // ── Care Plus ─────────────────────────────────────────────────────────
-        html += `<tr class="sub-header-row"><td colspan="4">สัญญาเพิ่มเติม MTL Care Plus 5M — คุ้มครองมะเร็งและไตวายเรื้อรัง (หมวด 9, 10, 11)</td></tr>`;
-        const cpRows = [
-            { label: "วงเงินความคุ้มครองโรคมะเร็ง และไตวายเรื้อรัง (ต่อโรค / ต่อปี)", valFn: (cp) => cp ? "5,000,000 บาท" : "—" },
-            { label: "ค่ายา/เวชภัณฑ์กลับบ้าน (สูงสุด 30 วัน)", valFn: (cp) => cp ? "100,000 บาท/ครั้ง" : "—" },
-            { label: "การรักษาแบบมุ่งเป้า (Targeted Therapy) / ภูมิคุ้มกันบำบัด", valFn: (cp) => cp ? "จ่ายตามจริง (ในวงเงิน)" : "—" },
-            { label: "การล้างไตทุกรูปแบบ / การปลูกถ่ายไต", valFn: (cp) => cp ? "จ่ายตามจริง (ในวงเงิน)" : "—" },
-        ];
-        cpRows.forEach(r => {
-            html += `<tr><td class="row-header">${r.label}</td>`;
+            const heroRow = (label, note, fn, styleFn) => {
+                html += `<tr><td class="row-header">${label}${note?`<div style="font-size:0.72em;color:var(--t-tertiary);margin-top:3px;line-height:1.4;">${note}</div>`:''}</td>`;
+                [1,2,3].forEach(id => {
+                    if (!activeOptions[id-1]) { html += `<td class="data-cell col-opt-${id} hide-col"></td>`; return; }
+                    const s = heroSel[id];
+                    const v = s.plan ? fn(s, HERO_DATA[s.plan]) : '—';
+                    const st = s.plan ? (styleFn ? styleFn(s) : 'color:#2563eb;font-weight:600;') : 'color:var(--t-muted);';
+                    html += `<td class="data-cell col-opt-${id}" style="${st}">${v}</td>`;
+                });
+                html += `</tr>`;
+            };
+
+            heroRow('แผนความคุ้มครอง / รูปแบบ', 'เลือกได้ 2 แบบ — Begin (มีค่าใช้จ่ายร่วม) หรือ Balanced (ไม่มี)',
+                (s,d) => `${d.cap} บ.<div style="font-size:0.78em;font-weight:500;margin-top:2px;">แบบ ${s.coType==='balanced'?'Balanced':'Begin'}</div>`);
+            heroRow('วงเงินเหมาจ่ายสูงสุด (ต่อรอบปีกรมธรรม์)', 'ครอบคลุมหมวดที่ 1–13 รวมกัน',
+                (s,d) => `${d.cap} บ.`);
+            heroRow('ค่าห้อง ค่าอาหาร ค่าบริการ (ต่อวัน)', 'ห้อง ICU จ่ายตามจริง · สูงสุดไม่เกิน 365 วัน',
+                (s,d) => `${d.room} บ./วัน`);
+            heroRow('ค่าแพทย์ตรวจรักษา (ต่อวัน)', 'สูงสุดไม่เกิน 365 วัน',
+                (s,d) => `${d.doc} บ./วัน`);
+            heroRow('ค่ารักษา ค่ายา เวชภัณฑ์ ค่าตรวจวินิจฉัย', 'หมวด 2 — รวมค่าโลหิต ค่าสารอาหารทางหลอดเลือด',
+                () => 'เหมาจ่ายตามจริง', () => 'color:var(--c-success);font-weight:600;');
+            heroRow('ค่าผ่าตัด ศัลยกรรม หัตถการ ค่าแพทย์ผ่าตัด/วิสัญญี', 'หมวด 4 — รวมค่าผ่าตัดเปลี่ยนอวัยวะ',
+                () => 'เหมาจ่ายตามจริง', () => 'color:var(--c-success);font-weight:600;');
+            heroRow('Day Surgery + ผ่าตัดเล็ก (Minor Surgery)', 'หมวด 5 และ 13',
+                () => 'เหมาจ่ายตามจริง', () => 'color:var(--c-success);font-weight:600;');
+            heroRow('เคมีบำบัด · รังสีรักษา · ล้างไต · เวชศาสตร์ฟื้นฟู', 'หมวด 8–11 (เวชศาสตร์ฟื้นฟูไม่เกิน 5 ครั้ง/ปี)',
+                () => 'เหมาจ่ายตามจริง', () => 'color:var(--c-success);font-weight:600;');
+            heroRow('OPD ก่อน/หลัง Admit 30 วัน · อุบัติเหตุ 24 ชม. · รถพยาบาล', 'หมวด 6, 7, 12',
+                () => 'เหมาจ่ายตามจริง', () => 'color:var(--c-success);font-weight:600;');
+            heroRow('ค่ายาและเวชภัณฑ์กลับบ้าน', 'จำกัดปริมาณไม่เกิน 14 วัน',
+                (s,d) => d.med);
+            heroRow('ค่าใช้จ่ายร่วม — โรงพยาบาลในสิทธิ (AIA Smart Network)', 'คิดเฉพาะหมวดที่ 1–13',
+                (s) => s.coType==='balanced' ? 'ไม่มีค่าใช้จ่ายร่วม' : 'ร่วมจ่าย 10%<div style="font-size:0.78em;font-weight:500;">สูงสุด 10,000 บ./ปี</div>',
+                (s) => s.coType==='balanced' ? 'color:var(--c-success);font-weight:600;' : 'color:var(--c-warning);font-weight:600;');
+            heroRow('ค่าใช้จ่ายร่วม — โรงพยาบาลนอกสิทธิ', 'กรณีรักษานอกโครงการ AIA Smart Network',
+                (s) => s.coType==='balanced' ? 'ร่วมจ่าย 20%<div style="font-size:0.78em;font-weight:500;">สูงสุด 60,000 บ./ปี</div>' : 'ร่วมจ่าย 30%<div style="font-size:0.78em;font-weight:500;">สูงสุด 90,000 บ./ปี</div>',
+                () => 'color:var(--c-warning);font-weight:600;');
+            heroRow('เงื่อนไขระยะเวลา', 'Waiting Period และ Condition Persistence Period',
+                () => 'รอ 60 วัน<div style="font-size:0.78em;font-weight:500;">คงอยู่ต่อเนื่อง 45 วัน</div>',
+                () => 'color:var(--t-primary);font-weight:600;');
+        }
+
+                const anyCFC = [1,2,3].some(id => activeOptions[id-1] && (parseInt(document.getElementById(`cfc-${id}`).value)||0) > 0);
+        if (anyCFC) {
+    // ── CFC ──────────────────────────────────────────────────────────────
+            html += `<tr class="sub-header-row"><td colspan="4">สัญญาเพิ่มเติมโรคร้ายแรง — AIA Care for Cancer (CFC)</td></tr>`;
+            html += `<tr><td class="row-header">เงินก้อนเมื่อตรวจพบมะเร็ง (ทุกระยะ)</td>`;
             [1,2,3].forEach(id => {
                 if (!activeOptions[id-1]) { html += `<td class="data-cell col-opt-${id} hide-col"></td>`; return; }
-                const st = this.state[id];
-                const cpChecked = document.getElementById(`cp-${id}`).checked;
-                const val = this.isMTL(st.type) ? r.valFn(cpChecked) : '—';
-                const isPink = val !== '—';
-                html += `<td class="data-cell col-opt-${id}" style="${isPink ? 'color:var(--c-mtl);font-weight:600;' : 'color:var(--t-muted);'}">${val}</td>`;
+                const sum = parseInt(document.getElementById(`cfc-${id}`).value) || 0;
+                html += `<td class="data-cell col-opt-${id}" style="color:var(--c-mtl);font-weight:600;">${sum>0 ? this.formatMoney(sum)+' บ.' : '—'}</td>`;
             });
             html += `</tr>`;
-        });
+            html += `<tr><td class="row-header">ชดเชยรายวันกรณีแอดมิทด้วยโรคมะเร็ง<div style="font-size:0.72em;color:var(--t-tertiary);margin-top:3px;">ทุน CFC ÷ 100,000 × 2,000 บ./วัน</div></td>`;
+            [1,2,3].forEach(id => {
+                if (!activeOptions[id-1]) { html += `<td class="data-cell col-opt-${id} hide-col"></td>`; return; }
+                const sum = parseInt(document.getElementById(`cfc-${id}`).value) || 0;
+                html += `<td class="data-cell col-opt-${id}" style="color:var(--t-primary);">${sum>0 ? this.formatMoney((sum/100000)*2000)+' บ./วัน' : '—'}</td>`;
+            });
+            html += `</tr>`;
+            html += `<tr><td class="row-header">ชดเชยกรณีรับเคมีบำบัด / รังสีรักษา (OPD)<div style="font-size:0.72em;color:var(--t-tertiary);margin-top:3px;">ทุน CFC ÷ 100,000 × 500 บ./ครั้ง</div></td>`;
+            [1,2,3].forEach(id => {
+                if (!activeOptions[id-1]) { html += `<td class="data-cell col-opt-${id} hide-col"></td>`; return; }
+                const sum = parseInt(document.getElementById(`cfc-${id}`).value) || 0;
+                html += `<td class="data-cell col-opt-${id}" style="color:var(--t-primary);">${sum>0 ? this.formatMoney((sum/100000)*500)+' บ./ครั้ง' : '—'}</td>`;
+            });
+            html += `</tr>`;
 
-        document.getElementById('benefit-body').innerHTML = html;
+        
+        }
+
+        const anyHB = [1,2,3].some(id => activeOptions[id-1] && (parseInt(document.getElementById(`hb-${id}`).value)||0) > 0);
+        if (anyHB) {
+    // ── HB Extra ─────────────────────────────────────────────────────────
+            html += `<tr class="sub-header-row"><td colspan="4">สัญญาเพิ่มเติมชดเชยรายได้ — AIA HB Extra</td></tr>`;
+            html += `<tr><td class="row-header">ชดเชยรายวันทั่วไป (IPD)</td>`;
+            [1,2,3].forEach(id => {
+                if (!activeOptions[id-1]) { html += `<td class="data-cell col-opt-${id} hide-col"></td>`; return; }
+                const sum = parseInt(document.getElementById(`hb-${id}`).value) || 0;
+                html += `<td class="data-cell col-opt-${id}" style="color:var(--c-primary);font-weight:600;">${sum>0 ? this.formatMoney(sum)+' บ./วัน' : '—'}</td>`;
+            });
+            html += `</tr>`;
+            html += `<tr><td class="row-header">ชดเชยห้อง ICU (3 เท่าของรายวันทั่วไป)</td>`;
+            [1,2,3].forEach(id => {
+                if (!activeOptions[id-1]) { html += `<td class="data-cell col-opt-${id} hide-col"></td>`; return; }
+                const sum = parseInt(document.getElementById(`hb-${id}`).value) || 0;
+                html += `<td class="data-cell col-opt-${id}" style="color:var(--t-primary);">${sum>0 ? this.formatMoney(sum*3)+' บ./วัน' : '—'}</td>`;
+            });
+            html += `</tr>`;
+            html += `<tr><td class="row-header">โรคร้ายแรงเฉียบพลัน 13 โรค (25 เท่า)</td>`;
+            [1,2,3].forEach(id => {
+                if (!activeOptions[id-1]) { html += `<td class="data-cell col-opt-${id} hide-col"></td>`; return; }
+                const sum = parseInt(document.getElementById(`hb-${id}`).value) || 0;
+                html += `<td class="data-cell col-opt-${id}" style="color:var(--t-primary);">${sum>0 ? this.formatMoney(sum*25)+' บ.' : '—'}</td>`;
+            });
+            html += `</tr>`;
+
+        
+        }
+
+        const anyCP = [1,2,3].some(id => activeOptions[id-1] && document.getElementById(`cp-${id}`).checked && this.isMTL(this.state[id].type));
+        if (anyCP) {
+    // ── Care Plus ─────────────────────────────────────────────────────────
+            html += `<tr class="sub-header-row"><td colspan="4">สัญญาเพิ่มเติม MTL Care Plus 5M — คุ้มครองมะเร็งและไตวายเรื้อรัง (หมวด 9, 10, 11)</td></tr>`;
+            const cpRows = [
+                { label: "วงเงินความคุ้มครองโรคมะเร็ง และไตวายเรื้อรัง (ต่อโรค / ต่อปี)", valFn: (cp) => cp ? "5,000,000 บาท" : "—" },
+                { label: "ค่ายา/เวชภัณฑ์กลับบ้าน (สูงสุด 30 วัน)", valFn: (cp) => cp ? "100,000 บาท/ครั้ง" : "—" },
+                { label: "การรักษาแบบมุ่งเป้า (Targeted Therapy) / ภูมิคุ้มกันบำบัด", valFn: (cp) => cp ? "จ่ายตามจริง (ในวงเงิน)" : "—" },
+                { label: "การล้างไตทุกรูปแบบ / การปลูกถ่ายไต", valFn: (cp) => cp ? "จ่ายตามจริง (ในวงเงิน)" : "—" },
+            ];
+            cpRows.forEach(r => {
+                html += `<tr><td class="row-header">${r.label}</td>`;
+                [1,2,3].forEach(id => {
+                    if (!activeOptions[id-1]) { html += `<td class="data-cell col-opt-${id} hide-col"></td>`; return; }
+                    const st = this.state[id];
+                    const cpChecked = document.getElementById(`cp-${id}`).checked;
+                    const val = this.isMTL(st.type) ? r.valFn(cpChecked) : '—';
+                    const isPink = val !== '—';
+                    html += `<td class="data-cell col-opt-${id}" style="${isPink ? 'color:var(--c-mtl);font-weight:600;' : 'color:var(--t-muted);'}">${val}</td>`;
+                });
+                html += `</tr>`;
+            });
+
+        
+        }
+
+document.getElementById('benefit-body').innerHTML = html;
         if (window.lucide) window.lucide.createIcons();
     },
 

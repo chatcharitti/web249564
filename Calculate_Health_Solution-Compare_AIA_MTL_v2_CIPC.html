@@ -1250,7 +1250,7 @@
         .ig-total-t { font-size:20px; font-weight:800; color:#1f2937; }
         .ig-total-t .v { color:#be123c; }
         .ig-total-s { font-size:13px; color:#6b7280; margin-top:3px; }
-        .ig-quote { text-align:center; font-size:15px; font-weight:700; color:#374151; margin-top:18px; font-style:italic; }
+        .ig-quote { text-align:center; font-size:18.75px; font-weight:700; color:#374151; margin-top:18px; font-style:italic; line-height:1.6; }
         /* ── CI Hero theme ── */
         .ig-hero { background: linear-gradient(170deg,#fdf8ed 0%,#fefaf2 50%,#fdf5e8 100%); padding: 30px 34px 24px; }
         .ig-hero-title { text-align:center; font-size:29px; font-weight:800; line-height:1.34; color:#e11d48; text-shadow:1px 1px 0 rgba(255,255,255,0.8); }
@@ -1263,14 +1263,69 @@
         .ig-hero-lbl.pink { background:#f9d4dc; color:#9f1239; }
         .ig-hero-v { font-size:15px; color:#44403c; line-height:1.68; }
         .ig-hero-v .big { font-size:24px; font-weight:800; color:#be123c; }
-        .ig-hero-quote { border:2.5px solid #e8637f; border-radius:12px; padding:14px 20px; text-align:center; font-size:15.5px; font-weight:700; color:#44403c; line-height:1.7; margin-top:18px; }
+        .ig-hero-quote { border:2.5px solid #e8637f; border-radius:12px; padding:15px 20px; text-align:center; font-size:19.4px; font-weight:700; color:#44403c; line-height:1.65; margin-top:18px; }
         /* ปรับขนาดเฉพาะจุด — บรรทัดเบี้ยเฉลี่ย +25% · หมายเหตุสัญญาหลัก -40% */
         .ig-pm-line        { font-size: 21.25px; }
         .ig-pm-line .big   { font-size: 28.75px; }
         .ig-pm-line.hero       { font-size: 18.75px; }
         .ig-pm-line.hero .big  { font-size: 30px; }
-        .ig-main-note      { font-size: 8.4px; color:#6b7280; }
-        .ig-main-note.hero { font-size: 8.1px; }
+        .ig-main-note      { font-size: 10.9px; color:#6b7280; }
+        .ig-main-note.hero { font-size: 10.5px; }
+        /* ── CI Hero Claim Flow Infographic (compact timeline) ── */
+        .chc-wrap { border:1.5px solid #e5e7eb; border-radius:12px; overflow:hidden; background:#fff; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+        .chc-wrap * { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+        .chc-head { background:linear-gradient(135deg,#be123c,#9f1239); color:#fff; padding:7px 16px; text-align:center; }
+        .chc-head-t { font-size:0.92em; font-weight:800; line-height:1.35; }
+        .chc-head-s { font-size:0.72em; opacity:0.88; font-style:italic; line-height:1.3; }
+        .chc-body { padding:10px 14px; }
+        /* แถว 1 — การ์ดสิทธิประโยชน์ 3 ใบ */
+        .chc-facts { display:grid; grid-template-columns:1fr 1fr 1.2fr; gap:7px; margin-bottom:10px; }
+        .chc-fact { border:1.5px solid #e5d9c3; background:#fdfbf7; border-radius:8px; padding:6px 9px; text-align:center; display:flex; align-items:center; justify-content:center; gap:7px; }
+        .chc-fact.gold { border:2px solid #d4af37; background:linear-gradient(180deg,#fffdf5,#fffaeb); }
+        .chc-fact-ic { font-size:1.25em; line-height:1; flex-shrink:0; }
+        .chc-fact-t  { font-size:0.78em; color:#57534e; line-height:1.45; text-align:left; }
+        .chc-fact-t b { color:#be123c; font-size:1.18em; }
+        .chc-fact.gold .chc-fact-t b { color:#a16207; }
+        /* แถว 2 — ไทม์ไลน์ 4 จุด */
+        .chc-tl { margin-bottom:10px; }
+        .chc-tl-row { display:grid; grid-template-columns:repeat(4,1fr); }
+        .chc-tl-ic { text-align:center; font-size:1.2em; line-height:1.1; }
+        .chc-tl-lbl { text-align:center; font-size:0.76em; font-weight:800; color:#be123c; line-height:1.3; min-height:2.2em; }
+        .chc-tl-line { position:relative; height:4px; background:linear-gradient(90deg,#be123c,#d4a1ac,#9ca3af,#d4af37); border-radius:2px; margin:5px 0 7px; }
+        .chc-tl-dot { position:absolute; top:-4px; width:12px; height:12px; border-radius:50%; background:#fff; border:3px solid #be123c; transform:translateX(-50%); }
+        .chc-tl-dot.gold { border-color:#d4af37; }
+        .chc-tl-desc { text-align:center; font-size:0.72em; color:#57534e; line-height:1.45; padding:0 3px; }
+        .chc-tl-desc b { color:#7f1d1d; }
+        /* แถว 3 — ตัวอย่างโรค */
+        .chc-ex-t { font-size:0.76em; font-weight:800; color:#7f1d1d; margin-bottom:5px; text-align:center; }
+        .chc-ex { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+        .chc-ex-item { border:1.5px solid #f0b4c2; background:#fff5f7; border-radius:8px; padding:5px 4px; text-align:center; display:flex; align-items:center; justify-content:center; gap:6px; flex-wrap:wrap; }
+        .chc-ex-ic { font-size:1.1em; line-height:1; }
+        .chc-ex-l  { font-size:0.76em; font-weight:700; color:#7f1d1d; }
+        .chc-ex-b  { display:inline-block; background:#dcfce7; color:#15803d; border:1px solid #16a34a; border-radius:5px; font-size:0.68em; font-weight:800; padding:0 7px; }
+        .chc-cont-bar { background:#f0fdf4; border:1.5px solid #16a34a; border-radius:8px; padding:6px 12px; text-align:center; margin:8px 0 7px; }
+        .chc-cont-bar b { color:#15803d; font-size:0.84em; }
+        .chc-cont-bar span { display:block; font-size:0.73em; color:#166534; margin-top:1px; line-height:1.35; }
+        .chc-foot { font-size:0.66em; color:#9ca3af; line-height:1.4; margin-top:6px; text-align:center; }
+
+        /* ── Infographic: กรอบทองส่วนเบี้ย · อักษรคำอธิบาย +30% · จัดกึ่งกลาง ── */
+        .ig-prem-gold {
+            border: 3px solid #d4af37 !important;
+            box-shadow: 0 0 0 1px rgba(212,175,55,0.25), 0 3px 12px rgba(212,175,55,0.22) !important;
+            background: linear-gradient(180deg,#fffdf5 0%,#fffaeb 100%) !important;
+        }
+        /* จัดกึ่งกลางทุกกรอบ */
+        #tab-ig .ig-card, #tab-ig .ig-hero-card { text-align: center; }
+        #tab-ig .ig-hero-lbl { display:inline-block; }
+        /* คำอธิบายในกรอบ +30% */
+        #tab-ig .ig-feat-b  { font-size: 18.85px; }   /* 14.5 × 1.3 */
+        #tab-ig .ig-hero-v  { font-size: 19.5px;  }   /* 15   × 1.3 */
+        #tab-ig .ig-feat-t  { font-size: 20.7px;  }   /* 18   × 1.15 (หัวข้อขยายเล็กน้อยให้สมดุล) */
+        #tab-ig .ig-hero-lbl{ font-size: 17.25px; }   /* 15   × 1.15 */
+        #tab-ig .ig-step-l  { font-size: 15.6px;  }   /* 12   × 1.3 */
+        #tab-ig .ig-step-v  { font-size: 16.9px;  }   /* 13   × 1.3 */
+        #tab-ig .ig-prem-line { font-size: 22.1px; }  /* 17   × 1.3 */
+
         /* toolbar */
         .ig-tb { display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-bottom:16px; padding:10px 14px; background:#f8fafc; border-radius:var(--r-md); border:1px solid #e2e8f0; }
         .ig-editable { outline:none; border-bottom:1px dashed transparent; }
@@ -2847,7 +2902,7 @@
             <!-- Section 2: ตัวอย่างการจ่ายค่าชดเชย -->
             <div class="cc-section">
                 <div class="cc-section-title">💰 ตัวอย่างการจ่ายค่าชดเชย — AIA Care for Cancer</div>
-                <div class="cc-section-sub" id="cc-story-sub">คำนวณจากทุนประกัน CFC ของ Option 1 · สมมติกรณีมะเร็งเต้านมระยะที่ 2</div>
+                <div class="cc-section-sub" id="cc-story-sub">คำนวณจากทุนประกัน CFC ของ Option 1 · สมมติกรณีมะเร็งตับระยะที่ 1</div>
                 <div class="cc-story-row" id="cc-story-rows">
                     <div style="text-align:center;padding:30px;color:#9ca3af;font-size:0.9em;">กรุณากรอกทุน CFC ใน Option 1</div>
                 </div>
@@ -3017,6 +3072,60 @@
                 <div class="cc-section-title" style="color:#1d4ed8;">💳 เงื่อนไขค่าใช้จ่ายร่วม (Copayment)</div>
                 <div class="cc-section-sub">AIA Health CI Hero เลือกได้ 2 แบบ — ต่างกันที่การร่วมจ่ายค่ารักษา ทั้งกรณีรักษาในสิทธิ (AIA Smart Network) และนอกสิทธิ</div>
                 <div id="ch-copay-box"></div>
+            </div>
+
+            <!-- Claim Flow Infographic -->
+            <div class="cc-section">
+                <div class="cc-section-title" style="color:#be123c;">🎯 ตัวอย่างการเคลม — คุ้มครองต่อเนื่องเสมือนประกันสุขภาพ</div>
+                <div class="cc-section-sub">เมื่อได้รับวินิจฉัยโรคร้ายแรงที่คุ้มครองแล้ว จะเบิกค่ารักษาโรคอื่นๆ ได้ต่อเนื่อง</div>
+                <div class="chc-wrap">
+  <div class="chc-head">
+    <div class="chc-head-t">🛡️ คุ้มครองทันที! สำหรับโรคร้ายแรงที่ <u>ไม่มี</u> ระยะเวลาการคงอยู่ต่อเนื่อง</div>
+    <div class="chc-head-s">(Condition Persistence Period)</div>
+  </div>
+  <div class="chc-body">
+
+    <div class="chc-facts">
+      <div class="chc-fact"><div class="chc-fact-ic">🛡️</div><div class="chc-fact-t">คุ้มครองโรคร้ายแรง<br><b>62 โรค</b></div></div>
+      <div class="chc-fact"><div class="chc-fact-ic">❤️‍🩹</div><div class="chc-fact-t">คุ้มครองทุกระยะ<br><b>Early 18</b> + <b>Severe 44</b></div></div>
+      <div class="chc-fact gold"><div class="chc-fact-ic">🏅</div><div class="chc-fact-t"><b>43 โรค</b> <span style="font-size:0.88em;">(Early 18 + Severe 25)</span><br><u>ไม่มี</u>ระยะคงอยู่ต่อเนื่อง — <b style="font-size:1em;">เบิกได้ทันทีเมื่อวินิจฉัย</b></div></div>
+    </div>
+
+    <div class="chc-tl">
+      <div class="chc-tl-row">
+        <div><div class="chc-tl-ic">📅</div><div class="chc-tl-lbl">เริ่มมีผลบังคับ<br>CI HERO</div></div>
+        <div><div class="chc-tl-ic">⏳</div><div class="chc-tl-lbl">พ้น Waiting Period<br>60 วัน</div></div>
+        <div><div class="chc-tl-ic">🧠</div><div class="chc-tl-lbl">วินิจฉัยโรคร้ายแรง<br>ครั้งแรก</div></div>
+        <div><div class="chc-tl-ic">🧾</div><div class="chc-tl-lbl">เบิกค่ารักษา<br>ได้ทันที</div></div>
+      </div>
+      <div class="chc-tl-line">
+        <div class="chc-tl-dot" style="left:12.5%;"></div>
+        <div class="chc-tl-dot" style="left:37.5%;"></div>
+        <div class="chc-tl-dot" style="left:62.5%;"></div>
+        <div class="chc-tl-dot gold" style="left:87.5%;"></div>
+      </div>
+      <div class="chc-tl-row">
+        <div class="chc-tl-desc">สัญญาเริ่ม<br>มีผลคุ้มครอง</div>
+        <div class="chc-tl-desc">เมื่อพ้น<br>ระยะเวลารอคอย</div>
+        <div class="chc-tl-desc"><b>3.2E โรคหลอดเลือดสมอง</b></div>
+        <div class="chc-tl-desc">📄 Bill 1 · 2 · 3 ✅<br>บริษัทจ่ายผลประโยชน์</div>
+      </div>
+    </div>
+
+    <div class="chc-cont-bar">
+      <b>🛡️ คุ้มครองต่อเนื่องทุกโรค — เสมือนประกันสุขภาพทั่วไป</b>
+      <span>หลังวินิจฉัยว่าเป็นโรคร้ายแรงที่ได้รับความคุ้มครองแล้ว · ตัวอย่างเช่น</span>
+    </div>
+
+    <div class="chc-ex">
+      <div class="chc-ex-item"><div class="chc-ex-ic">🦠</div><div class="chc-ex-l">ลำไส้อักเสบ</div><div class="chc-ex-b">เบิกได้*</div></div>
+      <div class="chc-ex-item"><div class="chc-ex-ic">🫁</div><div class="chc-ex-l">ปอดอักเสบ</div><div class="chc-ex-b">เบิกได้*</div></div>
+      <div class="chc-ex-item"><div class="chc-ex-ic">🛏️</div><div class="chc-ex-l">ผ่าตัดไส้ติ่ง</div><div class="chc-ex-b">เบิกได้*</div></div>
+    </div>
+
+    <div class="chc-foot">*บริษัทจะจ่ายผลประโยชน์ค่ารักษาพยาบาล ตามข้อกำหนดและเงื่อนไขของสัญญาเพิ่มเติม และตามแผนความคุ้มครองที่ลูกค้าเลือก</div>
+  </div>
+</div>
             </div>
 
             <!-- เงื่อนไขสำคัญ -->
@@ -3221,7 +3330,7 @@
                     <span class="ig-editable" contenteditable="false" id="ig-c-rib">เงินชดเชยรายวันจัดเต็ม รับเงินก้อนดูแลตัวเอง<br>ทั้งนอนโรงพยาบาลและการรักษาต่อเนื่อง<br>จ่ายเพิ่มให้อีกต่อจากประกันสุขภาพเดิมที่มี!</span>
                 </div>
 
-                <div class="ig-card ig-plan-card">
+                <div class="ig-card ig-plan-card ig-prem-gold">
                     <div class="ig-plan-t">💡 ตัวอย่างแผนความคุ้มครองสุดคุ้ม</div>
                     <div class="ig-plan-s">(<span id="ig-c-gender">เพศหญิง</span> อายุ <span id="ig-c-age">49</span> ปี • ทุนประกัน <span id="ig-c-sum">1,000,000</span> บาท)</div>
                     <div class="ig-prem-line">
@@ -3252,16 +3361,16 @@
                 </div>
 
                 <div class="ig-case">
-                    <div class="ig-case-t">📊 ตัวอย่างกรณีสมมติ (การรักษามะเร็งเต้านมระยะที่ 2):</div>
+                    <div class="ig-case-t">📊 ตัวอย่างกรณีสมมติ (การรักษามะเร็งตับระยะที่ 1):</div>
                     <div class="ig-steps">
-                        <div class="ig-step"><div class="ig-step-ic">🛏️</div><div class="ig-step-l">ผ่าตัด นอน รพ. 5 วัน (IPD)</div><div class="ig-step-v">➜ รับชดเชย <span id="ig-c-s1">100,000</span> บาท</div></div>
-                        <div class="ig-step"><div class="ig-step-ic">💉</div><div class="ig-step-l">เคมีบำบัด 6 ครั้ง (OPD)</div><div class="ig-step-v">➜ รับชดเชย <span id="ig-c-s2">30,000</span> บาท</div></div>
-                        <div class="ig-step"><div class="ig-step-ic">☢️</div><div class="ig-step-l">ฉายแสง 20 ครั้ง (OPD)</div><div class="ig-step-v">➜ รับชดเชย <span id="ig-c-s3">100,000</span> บาท</div></div>
-                        <div class="ig-step"><div class="ig-step-ic">🖥️</div><div class="ig-step-l">CT Scan วางแผนรักษา 1 ครั้ง</div><div class="ig-step-v">➜ รับชดเชย <span id="ig-c-s4">5,000</span> บาท</div></div>
+                        <div class="ig-step"><div class="ig-step-ic">🖥️</div><div class="ig-step-l">MRI Scan ประเมินการแพร่กระจาย 1 ครั้ง (OPD)</div><div class="ig-step-v">➜ รับชดเชย <span id="ig-c-s1">15,000</span> บาท</div></div>
+                        <div class="ig-step"><div class="ig-step-ic">🛏️</div><div class="ig-step-l">ผ่าตัด นอน รพ. 10 วัน (IPD)</div><div class="ig-step-v">➜ รับชดเชย <span id="ig-c-s2">600,000</span> บาท</div></div>
+                        <div class="ig-step"><div class="ig-step-ic">☢️</div><div class="ig-step-l">ฉายแสง 30 ครั้ง (OPD)</div><div class="ig-step-v">➜ รับชดเชย <span id="ig-c-s3">450,000</span> บาท</div></div>
+                        <div class="ig-step"><div class="ig-step-ic">🔬</div><div class="ig-step-l">MRI Scan หลังการรักษา 1 ครั้ง (OPD)</div><div class="ig-step-v">➜ รับชดเชย <span id="ig-c-s4">15,000</span> บาท</div></div>
                     </div>
                     <div class="ig-total">
-                        <div class="ig-total-t">⭐ รวมรับเงินชดเชยทั้งสิ้น <span class="v" id="ig-c-tot">235,000</span> บาท</div>
-                        <div class="ig-total-s">(ใช้สิทธิ์ไปเพียง 32 วัน ยังเหลือสิทธิ์เงินชดเชยอีกถึง 968 วัน)</div>
+                        <div class="ig-total-t">⭐ รวมรับเงินชดเชยทั้งสิ้น <span class="v" id="ig-c-tot">1,080,000</span> บาท</div>
+                        <div class="ig-total-s">(ใช้สิทธิ์ไปเพียง 42 วัน ยังเหลือสิทธิ์เงินชดเชยอีกถึง 958 วัน)</div>
                     </div>
                 </div>
 
@@ -3285,7 +3394,7 @@
                 </div>
 
                 <div class="ig-grid2" style="margin-top:18px;">
-                    <div class="ig-hero-card">
+                    <div class="ig-hero-card ig-prem-gold">
                         <div class="ig-hero-lbl">💰 เบี้ยเริ่มต้นสบายๆ:</div>
                         <div class="ig-hero-v">
                             <span class="ig-pm-line hero">เฉลี่ยเพียงเดือนละ <span class="big" id="ig-h-pm">1,805</span> บาท</span><br>
@@ -3319,6 +3428,55 @@
                         <span style="font-size:14px;">(สูงสุดไม่เกิน 10,000 บาท/ปี)</span>
                     </div>
                 </div>
+
+                <div style="margin-top:14px;"><div class="chc-wrap">
+  <div class="chc-head">
+    <div class="chc-head-t">🛡️ คุ้มครองทันที! สำหรับโรคร้ายแรงที่ <u>ไม่มี</u> ระยะเวลาการคงอยู่ต่อเนื่อง</div>
+    <div class="chc-head-s">(Condition Persistence Period)</div>
+  </div>
+  <div class="chc-body">
+
+    <div class="chc-facts">
+      <div class="chc-fact"><div class="chc-fact-ic">🛡️</div><div class="chc-fact-t">คุ้มครองโรคร้ายแรง<br><b>62 โรค</b></div></div>
+      <div class="chc-fact"><div class="chc-fact-ic">❤️‍🩹</div><div class="chc-fact-t">คุ้มครองทุกระยะ<br><b>Early 18</b> + <b>Severe 44</b></div></div>
+      <div class="chc-fact gold"><div class="chc-fact-ic">🏅</div><div class="chc-fact-t"><b>43 โรค</b> <span style="font-size:0.88em;">(Early 18 + Severe 25)</span><br><u>ไม่มี</u>ระยะคงอยู่ต่อเนื่อง — <b style="font-size:1em;">เบิกได้ทันทีเมื่อวินิจฉัย</b></div></div>
+    </div>
+
+    <div class="chc-tl">
+      <div class="chc-tl-row">
+        <div><div class="chc-tl-ic">📅</div><div class="chc-tl-lbl">เริ่มมีผลบังคับ<br>CI HERO</div></div>
+        <div><div class="chc-tl-ic">⏳</div><div class="chc-tl-lbl">พ้น Waiting Period<br>60 วัน</div></div>
+        <div><div class="chc-tl-ic">🧠</div><div class="chc-tl-lbl">วินิจฉัยโรคร้ายแรง<br>ครั้งแรก</div></div>
+        <div><div class="chc-tl-ic">🧾</div><div class="chc-tl-lbl">เบิกค่ารักษา<br>ได้ทันที</div></div>
+      </div>
+      <div class="chc-tl-line">
+        <div class="chc-tl-dot" style="left:12.5%;"></div>
+        <div class="chc-tl-dot" style="left:37.5%;"></div>
+        <div class="chc-tl-dot" style="left:62.5%;"></div>
+        <div class="chc-tl-dot gold" style="left:87.5%;"></div>
+      </div>
+      <div class="chc-tl-row">
+        <div class="chc-tl-desc">สัญญาเริ่ม<br>มีผลคุ้มครอง</div>
+        <div class="chc-tl-desc">เมื่อพ้น<br>ระยะเวลารอคอย</div>
+        <div class="chc-tl-desc"><b>3.2E โรคหลอดเลือดสมอง</b></div>
+        <div class="chc-tl-desc">📄 Bill 1 · 2 · 3 ✅<br>บริษัทจ่ายผลประโยชน์</div>
+      </div>
+    </div>
+
+    <div class="chc-cont-bar">
+      <b>🛡️ คุ้มครองต่อเนื่องทุกโรค — เสมือนประกันสุขภาพทั่วไป</b>
+      <span>หลังวินิจฉัยว่าเป็นโรคร้ายแรงที่ได้รับความคุ้มครองแล้ว · ตัวอย่างเช่น</span>
+    </div>
+
+    <div class="chc-ex">
+      <div class="chc-ex-item"><div class="chc-ex-ic">🦠</div><div class="chc-ex-l">ลำไส้อักเสบ</div><div class="chc-ex-b">เบิกได้*</div></div>
+      <div class="chc-ex-item"><div class="chc-ex-ic">🫁</div><div class="chc-ex-l">ปอดอักเสบ</div><div class="chc-ex-b">เบิกได้*</div></div>
+      <div class="chc-ex-item"><div class="chc-ex-ic">🛏️</div><div class="chc-ex-l">ผ่าตัดไส้ติ่ง</div><div class="chc-ex-b">เบิกได้*</div></div>
+    </div>
+
+    <div class="chc-foot">*บริษัทจะจ่ายผลประโยชน์ค่ารักษาพยาบาล ตามข้อกำหนดและเงื่อนไขของสัญญาเพิ่มเติม และตามแผนความคุ้มครองที่ลูกค้าเลือก</div>
+  </div>
+</div></div>
 
                 <div class="ig-hero-quote">
                     <span class="ig-editable" contenteditable="false" id="ig-h-q">“อย่าปล่อยให้โรคร้ายแรงกระทบเงินเก็บทั้งชีวิต<br>ให้ CI Hero เป็นเกราะป้องกันสุขภาพและการเงินของคุณ”</span>
@@ -5707,8 +5865,8 @@ function ccBuildSum1(){
   if(cfc<=0||age<=0){ el.innerHTML='<div style="padding:30px;text-align:center;color:#9ca3af;">กรุณาเลือกทุน CFC ใน Option 1</div>'; return; }
   var unit=cfc/100000, ipd=Math.round(unit*2000), opd=Math.round(unit*500);
   var pr=_sum1PremRows(age,gender,null,0,null,['MAIN','CFC']);
-  var ipd5=ipd*5, chemo=opd*6, radio=opd*20, ct=opd*1;
-  var gt=ipd5+chemo+radio+ct;
+  var mri1=opd*1, ipd10=ipd*10, radio=opd*30, mri2=opd*1;
+  var gt=mri1+ipd10+radio+mri2;
 
   el.innerHTML='<div class="sum1-wrap" style="border-color:#b91c1c;">'
     +'<div class="sum1-head" style="background:#b91c1c;"><div class="sum1-title">🎗️ AIA Care for Cancer — สรุปข้อเสนอความคุ้มครอง</div>'
@@ -5730,13 +5888,13 @@ function ccBuildSum1(){
     +'• <b>รวมสูงสุด 1,000 วัน</b> ตลอดอายุสัญญา · จ่ายเพิ่มจากค่ารักษาพยาบาลที่เบิกจากสัญญาสุขภาพอื่น'
     +'</div></div>'
 
-    +'<div class="sum1-sec"><div class="sum1-sec-t" style="color:#b91c1c;">📋 ตัวอย่างการจ่ายค่าชดเชย (มะเร็งเต้านมระยะที่ 2)</div>'
+    +'<div class="sum1-sec"><div class="sum1-sec-t" style="color:#b91c1c;">📋 ตัวอย่างการจ่ายค่าชดเชย (มะเร็งตับระยะที่ 1)</div>'
     +'<div class="sum1-prem-grid">'
-    +'<div class="lbl">ผ่าตัด · นอน รพ. 5 วัน (IPD)</div><div class="val">'+ipd5.toLocaleString()+'</div>'
-    +'<div class="lbl">เคมีบำบัด 6 ครั้ง (OPD)</div><div class="val">'+chemo.toLocaleString()+'</div>'
-    +'<div class="lbl">ฉายแสง 20 ครั้ง (OPD)</div><div class="val">'+radio.toLocaleString()+'</div>'
-    +'<div class="lbl">CT Scan วางแผนรักษา 1 ครั้ง (OPD)</div><div class="val">'+ct.toLocaleString()+'</div>'
-    +'<div class="lbl sum1-prem-total" style="font-weight:800;">รวมค่าชดเชยที่ได้รับ (ใช้ไป 32 วัน · เหลือ 968 วัน)</div>'
+    +'<div class="lbl">MRI Scan ประเมินการแพร่กระจาย 1 ครั้ง (OPD)</div><div class="val">'+mri1.toLocaleString()+'</div>'
+    +'<div class="lbl">ผ่าตัด · นอน รพ. 10 วัน (IPD)</div><div class="val">'+ipd10.toLocaleString()+'</div>'
+    +'<div class="lbl">ฉายแสง 30 ครั้ง (OPD)</div><div class="val">'+radio.toLocaleString()+'</div>'
+    +'<div class="lbl">MRI Scan หลังการรักษา 1 ครั้ง (OPD)</div><div class="val">'+mri2.toLocaleString()+'</div>'
+    +'<div class="lbl sum1-prem-total" style="font-weight:800;">รวมค่าชดเชยที่ได้รับ (ใช้ไป 42 วัน · เหลือ 958 วัน)</div>'
     +'<div class="val sum1-prem-total" style="color:#b91c1c;">'+gt.toLocaleString()+' บาท</div>'
     +'</div></div>'
 
@@ -5764,13 +5922,19 @@ function igApplyFont(){
   var pct = IG_FONT_LEVELS[_igFontIdx], f = pct/100;
   document.querySelectorAll('#tab-ig .ig-board').forEach(function(board){
     board.style.width='840px';
-    board.querySelectorAll('*').forEach(function(el){
-      // จำขนาดฐานครั้งแรก (ก่อนเคยถูกปรับ)
+    var els = board.querySelectorAll('*');
+    // ── รอบที่ 1: ล้าง inline แล้วเก็บขนาดฐานให้ครบทุก element ก่อน ──
+    // (ต้องแยกรอบ มิฉะนั้น element ที่ใช้หน่วย em จะคำนวณจาก parent
+    //  ที่ถูกขยายไปแล้ว ทำให้ขนาดทวีคูณ — ยิ่งซ้อนลึกยิ่งบานปลาย)
+    els.forEach(function(el){ if(!el.dataset.baseFs) el.style.fontSize=''; });
+    els.forEach(function(el){
       if(!el.dataset.baseFs){
-        el.style.fontSize='';
         var fs=parseFloat(window.getComputedStyle(el).fontSize);
         if(fs) el.dataset.baseFs=fs;
       }
+    });
+    // ── รอบที่ 2: นำขนาดฐานไปคูณตามสัดส่วน ──
+    els.forEach(function(el){
       if(el.dataset.baseFs) el.style.fontSize=(parseFloat(el.dataset.baseFs)*f).toFixed(2)+'px';
     });
   });
@@ -5818,7 +5982,7 @@ function igRender(){
     var pc=rc>0?Math.round((cfc/100000)*rc):0;
     var tot=pMain+pc;
     var unit=cfc/100000, ipd=Math.round(unit*2000), opd=Math.round(unit*500);
-    var s1=ipd*5, s2=opd*6, s3=opd*20, s4=opd*1;
+    var s1=opd*1, s2=ipd*10, s3=opd*30, s4=opd*1;
     S('ig-c-gender',gTxt); S('ig-c-age',age); S('ig-c-sum',cfc.toLocaleString());
     S('ig-c-pm',Math.round(tot/12).toLocaleString()); S('ig-c-py',tot.toLocaleString());
     S('ig-c-main',mainLbl);
@@ -6421,32 +6585,33 @@ function ccRender() {
     if (subEl) {
         subEl.textContent = 'คำนวณจากทุนประกัน CFC ' + cfcSum.toLocaleString() + ' บาท ของ Option 1 · '
             + 'ชดเชย IPD ' + ipdRate.toLocaleString() + ' บ./วัน · OPD ' + opdRate.toLocaleString() + ' บ./ครั้ง '
-            + '· ตัวอย่างสมมติกรณีมะเร็งเต้านมระยะที่ 2';
+            + '· ตัวอย่างสมมติกรณีมะเร็งตับระยะที่ 1';
     }
 
     // ── ตัวอย่าง Sales Story (อ้างอิงรูปแบบเอกสาร AIA) ──
-    var ipd5   = ipdRate * 5;    // นอน รพ. 5 วัน (ผ่าตัด)
-    var opdChemo = opdRate * 6;  // เคมีบำบัด 6 ครั้ง
-    var opdRadio = opdRate * 20; // ฉายแสง 20 ครั้ง
-    var opdCT    = opdRate * 1;  // CT Scan 1 ครั้ง
-    var grandTotal = ipd5 + opdChemo + opdRadio + opdCT;
-    var daysUsed   = 5 + 6 + 20 + 1;
+    var opdMRI1  = opdRate * 1;   // MRI ประเมินการแพร่กระจาย 1 ครั้ง
+    var ipd10    = ipdRate * 10;  // ผ่าตัด + นอน รพ. 10 วัน
+    var opdRadio = opdRate * 30;  // ฉายแสง 30 ครั้ง
+    var opdMRI2  = opdRate * 1;   // MRI หลังการรักษา 1 ครั้ง
+    var grandTotal = opdMRI1 + ipd10 + opdRadio + opdMRI2;
+    var daysUsed   = 1 + 10 + 30 + 1;
 
     var events = [
         { date: 'เริ่มคุ้มครอง', desc: 'ทำสัญญาเพิ่มเติม <b>AIA Care for Cancer</b> ทุนประกัน <b>' + cfcSum.toLocaleString() + ' บาท</b> ขณะอายุ ' + age + ' ปี', amt: null },
-        { date: 'พบก้อนผิดปกติ', desc: 'คลำพบก้อนที่บริเวณรักแร้ จึงไปพบแพทย์ ทำการตรวจและเจาะชิ้นเนื้อไปตรวจ', amt: null },
-        { date: 'วินิจฉัยโรค', desc: 'ได้รับการวินิจฉัยจากแพทย์ว่าเป็น <b>"โรคมะเร็งเต้านมระยะที่ 2"</b> แต่ยังไม่มีการแพร่กระจายไปที่ต่อมน้ำเหลือง', amt: null },
-        { date: 'ผ่าตัด (IPD)', desc: 'ผ่าตัดแบบสงวนเต้านมหรือผ่าตัดเต้านมออกบางส่วน <b>นอนโรงพยาบาล 5 วัน</b>',
-          amt: ipd5, calc: ipdRate.toLocaleString() + ' บ./วัน × 5 วัน', payout: true },
-        { date: 'เคมีบำบัด (OPD)', desc: 'เริ่มให้ยาเคมีบำบัด (Chemotherapy) ทำลายเซลล์มะเร็ง <b>จำนวน 6 ครั้ง</b> แต่ละครั้งห่างกัน 3 สัปดาห์',
-          amt: opdChemo, calc: opdRate.toLocaleString() + ' บ./ครั้ง × 6 ครั้ง', payout: true },
-        { date: 'CT Scan (OPD)', desc: 'CT Scan ครั้งที่ 1 เพื่อวางแผนการรักษา (ภายใน 60 วันก่อนเริ่มรังสีรักษา)',
-          amt: opdCT, calc: opdRate.toLocaleString() + ' บ./ครั้ง × 1 ครั้ง', payout: true },
-        { date: 'ฉายแสง (OPD)', desc: 'เริ่มการฉายแสง (Radiation Therapy) <b>ทั้งหมด 20 ครั้ง</b> แบ่งเป็นสัปดาห์ละ 5 วัน วันละ 2–3 ชม.',
-          amt: opdRadio, calc: opdRate.toLocaleString() + ' บ./ครั้ง × 20 ครั้ง', payout: true },
-        { date: 'ติดตามผล', desc: 'ประเมินผลการรักษาและติดตามผลเป็นระยะ', amt: null },
+        { date: 'พบอาการผิดปกติ', desc: 'มีอาการปวดจุกแน่นท้อง คลำได้ก้อนบริเวณชายโครงด้านขวา จึงไปพบแพทย์ ทำการตรวจและเจาะชิ้นเนื้อไปตรวจ', amt: null },
+        { date: 'วินิจฉัยโรค', desc: 'ได้รับการวินิจฉัยจากแพทย์ว่าเป็น <b>"โรคมะเร็งตับ"</b> (ผ่านไปประมาณ 2 สัปดาห์หลังพบแพทย์)', amt: null },
+        { date: 'MRI Scan (OPD)', desc: 'ตรวจโรคมะเร็งอีกครั้งด้วย <b>MRI Scan</b> เพื่อประเมินการแพร่กระจาย พบว่าเป็น <b>"โรคมะเร็งตับระยะที่ 1"</b>',
+          amt: opdMRI1, calc: opdRate.toLocaleString() + ' บ./ครั้ง × 1 ครั้ง', payout: true },
+        { date: 'ผ่าตัด (IPD)', desc: 'รักษาโดยการ<b>ผ่าตัดเพื่อเอาก้อนมะเร็งออกให้มากที่สุด</b> และนอนรักษาตัวเป็นผู้ป่วยใน (IPD) <b>เป็นเวลา 10 วัน</b>',
+          amt: ipd10, calc: ipdRate.toLocaleString() + ' บ./วัน × 10 วัน', payout: true },
+        { date: 'ฉายแสง (OPD)', desc: 'เริ่มการฉายแสง (Radiation Therapy) ต้องทำทั้งหมด <b>30 ครั้ง</b> 6 สัปดาห์ แบ่งเป็นสัปดาห์ละ 5 วัน วันละ 2–3 ชม.',
+          amt: opdRadio, calc: opdRate.toLocaleString() + ' บ./ครั้ง × 30 ครั้ง', payout: true },
+        { date: 'MRI Scan (OPD)', desc: 'ตรวจด้วย <b>MRI Scan</b> อีกครั้งหลังการรักษาโรคมะเร็ง (ภายใน 60 วันหลังทำการรักษาด้วยรังสีรักษาครั้งสุดท้าย)',
+          amt: opdMRI2, calc: opdRate.toLocaleString() + ' บ./ครั้ง × 1 ครั้ง', payout: true },
+        { date: 'ติดตามผล', desc: 'ประเมินผลการรักษาและติดตามผลการรักษาเป็นระยะ', amt: null },
         { date: 'โรคสงบ', desc: '<b style="color:#15803d;">โรคสงบ (Remission)</b> — ผ่านไป 5 ปี ยังคงมีความคุ้มครองต่อเนื่อง', amt: null }
     ];
+
 
     var html = '';
     events.forEach(function(ev) {

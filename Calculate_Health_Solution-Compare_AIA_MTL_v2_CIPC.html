@@ -7570,15 +7570,63 @@ async function exportIGBoard(id, filename, btn) {
     const scopeEls = document.querySelectorAll('.ig-artboard-scope');
     const prevTransforms = [...scopeEls].map(e => e.style.transform);
     scopeEls.forEach(e => e.style.transform = 'scale(1)');
+    // iOS/iPadOS: a[download] มักไม่ทำงานเพราะ user-gesture หมดอายุระหว่าง await
+    // และ data: URI ยาวเกินลิมิต จึงเปิดแท็บใหม่ให้กดค้างบันทึกรูปแทน
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent)
+               || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    // เปิดแท็บล่วงหน้าขณะยังอยู่ใน user gesture (กัน popup blocker)
+    const preTab = isIOS ? window.open('', '_blank') : null;
+    if (preTab) {
+        preTab.document.write('<!DOCTYPE html><html><head><meta charset="utf-8">'
+          + '<meta name="viewport" content="width=device-width,initial-scale=1">'
+          + '<title>' + filename + '</title></head>'
+          + '<body style="margin:0;background:#f5f5f5;font-family:-apple-system,sans-serif;text-align:center;">'
+          + '<div style="padding:40px 20px;color:#666;">⏳ กำลังสร้างภาพ...</div></body></html>');
+        preTab.document.close();
+    }
     try {
         await document.fonts.ready;
-        const canvas = await html2canvas(el, { scale: 2, useCORS: true, backgroundColor: null });
-        const a = document.createElement('a');
-        a.download = filename + '.png';
-        a.href = canvas.toDataURL('image/png');
-        a.click();
-        showToast('✅ ดาวน์โหลด PNG สำเร็จ');
+        const canvas = await html2canvas(el, { scale: 2, useCORS: true, backgroundColor: '#ffffff' });
+
+        if (preTab && !preTab.closed) {
+            // ── iOS: แสดงรูปในแท็บใหม่ ให้กดค้างแล้ว Save to Photos ──
+            const dataUrl = canvas.toDataURL('image/png');
+            preTab.document.open();
+            preTab.document.write('<!DOCTYPE html><html><head><meta charset="utf-8">'
+              + '<meta name="viewport" content="width=device-width,initial-scale=1">'
+              + '<title>' + filename + '</title></head>'
+              + '<body style="margin:0;background:#f5f5f5;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">'
+              + '<div style="position:sticky;top:0;background:#1e3a5f;color:#fff;padding:12px 16px;text-align:center;font-size:14px;line-height:1.6;z-index:9;">'
+              + '📲 <b>กดค้างที่รูป</b> แล้วเลือก <b>“บันทึกลงรูปภาพ”</b> (Save to Photos)<br>'
+              + '<span style="font-size:12px;opacity:0.85;">หรือเลือก “เพิ่มไปยังไฟล์” เพื่อบันทึกลง Files</span></div>'
+              + '<div style="padding:12px;"><img src="' + dataUrl + '" alt="' + filename + '" '
+              + 'style="width:100%;height:auto;display:block;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,0.15);"></div>'
+              + '</body></html>');
+            preTab.document.close();
+            showToast('📲 เปิดแท็บใหม่แล้ว — กดค้างที่รูปเพื่อบันทึก', 5000);
+        } else {
+            // ── Desktop/Android: ดาวน์โหลดตรงผ่าน Blob (เสถียรกว่า data URI) ──
+            await new Promise((resolve) => {
+                canvas.toBlob(function(blob) {
+                    if (!blob) { resolve(); return; }
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = filename + '.png';
+                    a.style.display = 'none';
+                    document.body.appendChild(a);
+                    a.click();
+                    setTimeout(function() {
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(url);
+                        resolve();
+                    }, 1500);
+                }, 'image/png');
+            });
+            showToast('✅ ดาวน์โหลด PNG สำเร็จ');
+        }
     } catch(e) {
+        if (preTab && !preTab.closed) preTab.close();
         showToast('❌ สร้างภาพไม่สำเร็จ: ' + e.message, 4000);
     } finally {
         // restore scale เดิม

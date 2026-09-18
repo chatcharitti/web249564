@@ -1206,6 +1206,37 @@
         .sum1-claim-ex { display:flex; gap:5px; justify-content:center; margin-top:6px; flex-wrap:wrap; }
         .sum1-claim-ex span { border:1px solid #f0b4c2; background:#fff5f7; border-radius:12px; padding:2px 9px; font-size:0.68em; font-weight:700; color:#7f1d1d; }
 
+        /* ── All CI — หน้าสรุป 1 หน้า ธีม minimal 2 คอลัมน์ ── */
+        .acs-hd { background:linear-gradient(135deg,#fdf2f4,#fef6f2); border-bottom:2px solid #f3d5c0; padding:11px 18px; display:flex; align-items:center; gap:11px; }
+        .acs-hd-ic { font-size:1.6em; line-height:1; flex-shrink:0; }
+        .acs-hd-t { font-size:0.90em; font-weight:800; color:#7f1d1d; line-height:1.4; }
+        .acs-hd-s { font-size:0.76em; color:#78716c; margin-top:1px; }
+        .acs-prem { border:1.5px solid #e7d9c3; background:#fffdf8; border-radius:10px; padding:9px 14px; }
+        .acs-prem-t { font-size:0.80em; font-weight:800; color:#92400e; text-align:center; margin-bottom:5px; }
+        .acs-hint { text-align:center; font-size:0.78em; color:#78716c; margin:10px 0 7px; line-height:1.5; }
+        .acs-hint b { color:#44403c; }
+        .acs-cols { display:grid; gap:9px; }
+        .acs-col { border:1.5px solid; border-radius:11px; overflow:hidden; background:#fff; }
+        .acs-col-hd { padding:7px 11px; text-align:center; }
+        .acs-col-hd .nm { font-size:0.84em; font-weight:800; color:#fff !important; }
+        .acs-col-hd .fc { font-size:0.70em; color:#fff !important; opacity:0.93; margin-top:1px; }
+        .acs-col-bd { padding:8px 10px; }
+        .acs-big { text-align:center; padding:6px 8px; border-radius:8px; margin-bottom:6px; }
+        .acs-big .v { font-size:1.45em; font-weight:800; line-height:1.1; }
+        .acs-big .l { font-size:0.68em; color:#57534e; margin-top:1px; }
+        .acs-li { font-size:0.70em; color:#44403c; line-height:1.65; }
+        .acs-li .ic { margin-right:3px; }
+        .acs-strip { font-size:0.68em; color:#57534e; background:#fafaf9; border:1px dashed #d6d3d1; border-radius:6px; padding:4px 8px; margin-top:5px; text-align:center; line-height:1.45; }
+        .acs-steps { display:grid; grid-template-columns:repeat(4,1fr); gap:3px; margin-top:6px; }
+        .acs-step { text-align:center; font-size:0.62em; color:#57534e; line-height:1.35; }
+        .acs-step .si { font-size:1.25em; line-height:1.1; }
+        .acs-step .sv { font-weight:800; color:#be123c; }
+        .acs-tot { text-align:center; border-radius:8px; padding:5px 8px; margin-top:6px; font-size:0.76em; font-weight:800; }
+        .acs-chips { display:flex; gap:4px; justify-content:center; flex-wrap:wrap; margin-top:5px; }
+        .acs-chips span { border:1px solid #e5e7eb; background:#fafafa; border-radius:10px; padding:1px 7px; font-size:0.64em; color:#57534e; }
+        .acs-close { text-align:center; font-size:0.78em; color:#57534e; background:#fafaf9; border-radius:9px; padding:8px 14px; margin-top:9px; line-height:1.6; }
+        .acs-close b { color:#7f1d1d; }
+
         /* สรุป 1 หน้า — บังคับ Light theme เสมอ (สำหรับพิมพ์ลงกระดาษ) */
         .sum1-box, .sum1-box * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         .sum1-wrap { background:#fff !important; color:#1f2937 !important; }
@@ -5737,7 +5768,7 @@ function _printOnlyTab(tabId, summaryOnly){
       sumBox.style.setProperty('display','block','important');
       // ── Auto-fit: ขยายให้ใหญ่ที่สุดเท่าที่ยังพอดี A4 หน้าเดียว ──
       // A4 สูง 297mm − ขอบบน/ล่าง ≈ 1,050px ที่ 96dpi
-      var MAXH = 980, best = 100;
+      var MAXH = 1010, best = 100;
       for (var pc = 150; pc >= 90; pc -= 2) {
         sumBox.style.fontSize = pc + '%';
         if (sumBox.offsetHeight <= MAXH) { best = pc; break; }
@@ -6281,43 +6312,98 @@ function acBuildSum1(){
 
   var pr=_sum1PremRows(age,gender,null,0,null);
   var ciTotal=plans.reduce(function(s,p){return s+p.prem;},0);
+  var mainType=(document.getElementById('main-type-1')||{}).value||'20PLN';
+  var mainNm=(mainType==='CIProCare')?'CI ProCare':'20PayLife';
 
-  var covHTML='<div style="display:grid;grid-template-columns:repeat('+Math.min(plans.length,3)+',1fr);gap:9px;">';
-  plans.forEach(function(p){
-    covHTML+='<div style="border:1.5px solid '+p.color+';background:'+p.bg+';border-radius:8px;overflow:hidden;">'
-      +'<div style="padding:6px 10px;background:'+p.color+';color:#fff;font-size:0.80em;font-weight:800;">'+p.icon+' '+p.name+'</div>'
-      +'<div style="padding:7px 10px;font-size:0.72em;color:#374151;line-height:1.7;">'
-      +'<div style="font-weight:700;color:'+p.color+';margin-bottom:3px;">'+p.detail+' · '+p.prem.toLocaleString()+' บ./ปี</div>'
-      +p.cov.map(function(x){return '• '+x;}).join('<br>')
-      +'</div></div>';
-  });
-  covHTML+='</div>';
+  // ── ชื่อสัญญาในหัวเรื่อง ──
+  var ciNames=plans.map(function(p){
+    return p.key==='HERO'?'CI Hero':(p.key==='CFC'?'Care for Cancer':'Multi-Pay CI'); });
+  var names=[mainNm].concat(ciNames);
 
-  el.innerHTML='<div class="sum1-wrap" style="border-color:#be123c;">'
-    +'<div class="sum1-head" style="background:#be123c;">'
-    +(imgOn?'<img class="sum1-shield" src="'+SUM1_IMG.shield+'" alt="">':'')
-    +'<div class="sum1-title">❤️ ความคุ้มครองโรคร้ายแรง — สรุปข้อเสนอ</div>'
-    +'<div class="sum1-client">'+name+' · อายุ '+age+' ปี ('+gTxt+') · '+plans.length+' สัญญาโรคร้ายแรง</div></div>'
+  // ── สร้างคอลัมน์ต่อ 1 สัญญา ──
+  function colHTML(p){
+    var focus, big, lines='', extra='';
+    if(p.key==='HERO'){
+      var hs=app.getCIHeroSel(1), d=({'2M':{cap:'2,000,000',room:'3,000'},'6M':{cap:'6,000,000',room:'6,000'},'12M':{cap:'12,000,000',room:'9,000'}})[hs.plan];
+      var isBal=hs.coType==='balanced';
+      focus='🏥 เน้น “ค่ารักษาพยาบาล” — จ่ายตามจริงในวงเงิน';
+      big='<div class="acs-big" style="background:#eff6ff;"><div class="v" style="color:#1d4ed8;">'+d.cap+' บ.</div><div class="l">วงเงินเหมาจ่ายต่อรอบปีกรมธรรม์</div></div>';
+      lines='<span class="ic">🛏️</span> ค่าห้อง <b>'+d.room+' บ./วัน</b> · ห้อง ICU จ่ายตามจริง (สูงสุด 365 วัน)<br>'
+           +'<span class="ic">💊</span> ค่ารักษา ค่ายา ค่าตรวจวินิจฉัย — <b>เหมาจ่ายตามจริง</b><br>'
+           +'<span class="ic">🔪</span> ผ่าตัด · หัตถการ/ส่องกล้อง · Day Surgery — <b>เหมาจ่ายตามจริง</b><br>'
+           +'<span class="ic">💉</span> เคมีบำบัด · รังสีรักษา · ล้างไต — <b>เหมาจ่ายตามจริง</b>';
+      extra='<div class="acs-strip">⏱️ Waiting 60 วัน → วินิจฉัยโรคร้ายแรงครั้งแรก → <b>เบิกค่ารักษาได้ทันที</b> แล้วคุ้มครองต่อเนื่องทุกโรคเสมือนประกันสุขภาพ</div>'
+        +'<div class="acs-chips"><span>🦠 ลำไส้อักเสบ ✓</span><span>🫁 ปอดอักเสบ ✓</span><span>🛏️ ผ่าตัดไส้ติ่ง ✓</span></div>'
+        +'<div class="acs-strip">🤝 ค่าใช้จ่ายร่วม: ในเครือ AIA Smart Network '
+        +(isBal?'<b style="color:#15803d;">ไม่มี</b>':'<b>10%</b> (สูงสุด 10,000 บ./ปี)')+' · นอกเครือ <b>'+(isBal?'20% (60,000)':'30% (90,000)')+'</b></div>';
+    } else if(p.key==='CFC'){
+      var cfc=parseInt(document.getElementById('cfc-1').value)||0, u=cfc/100000;
+      var ipd=Math.round(u*2000), opd=Math.round(u*500);
+      var s1=opd*1, s2=ipd*10, s3=opd*30, s4=opd*1, tot=s1+s2+s3+s4;
+      focus='💰 เน้น “ค่าชดเชยรายวัน” — รับเป็นเงินก้อนใช้ได้อิสระ';
+      big='<div class="acs-big" style="background:#fef2f2;display:grid;grid-template-columns:1fr 1fr;gap:6px;">'
+         +'<div><div class="v" style="color:#dc2626;font-size:1.2em;">'+ipd.toLocaleString()+'</div><div class="l">IPD บาท/วัน</div></div>'
+         +'<div><div class="v" style="color:#ea580c;font-size:1.2em;">'+opd.toLocaleString()+'</div><div class="l">OPD บาท/ครั้ง</div></div></div>';
+      lines='<span class="ic">🏨</span> ทุกวันที่<b>นอนโรงพยาบาล</b>จากการรักษามะเร็ง<br>'
+           +'<span class="ic">💉</span> ทุกครั้งที่รักษาแบบผู้ป่วยนอก — เคมีบำบัด · ฉายแสง · CT/MRI/PET<br>'
+           +'<span class="ic">➕</span> จ่าย <b>On-top</b> เพิ่มจากค่ารักษาที่เบิกจากสัญญาสุขภาพเดิม<br>'
+           +'<span class="ic">⏳</span> ชดเชยรวมสูงสุด <b>1,000 วัน</b> ตลอดอายุสัญญา';
+      extra='<div class="acs-strip" style="border-style:solid;">📋 ตัวอย่างกรณีมะเร็งตับระยะที่ 1</div>'
+        +'<div class="acs-steps">'
+        +'<div class="acs-step"><div class="si">🖥️</div>MRI ประเมิน 1 ครั้ง<div class="sv">'+s1.toLocaleString()+'</div></div>'
+        +'<div class="acs-step"><div class="si">🛏️</div>ผ่าตัด นอน 10 วัน<div class="sv">'+s2.toLocaleString()+'</div></div>'
+        +'<div class="acs-step"><div class="si">☢️</div>ฉายแสง 30 ครั้ง<div class="sv">'+s3.toLocaleString()+'</div></div>'
+        +'<div class="acs-step"><div class="si">🔬</div>MRI หลังรักษา 1 ครั้ง<div class="sv">'+s4.toLocaleString()+'</div></div>'
+        +'</div>'
+        +'<div class="acs-tot" style="background:#fef2f2;color:#b91c1c;">⭐ รวมรับเงินชดเชย '+tot.toLocaleString()+' บาท <span style="font-weight:600;font-size:0.9em;">(ใช้ 42 วัน · เหลือ 958 วัน)</span></div>';
+    } else {
+      var mp=parseInt(document.getElementById('mpci-sum-1').value)||0;
+      focus='🎯 เน้น “เงินก้อนเมื่อตรวจพบ” — เบิกได้หลายครั้ง';
+      big='<div class="acs-big" style="background:#f5f3ff;"><div class="v" style="color:#6d28d9;">'+mp.toLocaleString()+' บ.</div><div class="l">ทุนประกันต่อการเจ็บป่วย</div></div>';
+      lines='<span class="ic">💵</span> จ่าย<b>เงินก้อน</b>ทันทีเมื่อตรวจพบโรคร้ายแรง<br>'
+           +'<span class="ic">🔄</span> คุ้มครองหลายกลุ่มโรค · <b>เป็นซ้ำเบิกได้อีก</b><br>'
+           +'<span class="ic">🛡️</span> คุ้มครองยาวถึง<b>อายุ 99 ปี</b><br>'
+           +'<span class="ic">📈</span> เบี้ยปรับตามอายุทุกปี (1-year renewable)';
+    }
+    return '<div class="acs-col" style="border-color:'+p.color+';">'
+      +'<div class="acs-col-hd" style="background:'+p.color+';"><div class="nm">'+p.icon+' '+p.name+'</div><div class="fc">'+focus+'</div></div>'
+      +'<div class="acs-col-bd">'+big
+      +'<div style="font-size:0.70em;font-weight:700;color:'+p.color+';text-align:center;margin-bottom:4px;">'+p.detail+' · เบี้ย '+p.prem.toLocaleString()+' บ./ปี</div>'
+      +'<div class="acs-li">'+lines+'</div>'+extra+'</div></div>';
+  }
 
-    +'<div class="sum1-sec"><div class="'+(imgOn?'sum1-prem-row':'')+'">'
-    +'<div><div class="sum1-sec-t" style="color:#be123c;">💰 เบี้ยประกันภัย (แยกรายการ)</div>'+_sum1PremHTML(pr)
-    +'<div style="margin-top:7px;padding:7px 11px;background:#fef2f2;border-radius:6px;font-size:0.80em;color:#7f1d1d;">'
-    +'❤️ เป็นเบี้ยสัญญาโรคร้ายแรง <b>'+ciTotal.toLocaleString()+' บ./ปี</b> ('+Math.round(ciTotal/pr.total*100)+'% ของเบี้ยทั้งหมด)</div></div>'
-    +(imgOn?('<div class="sum1-icons">'
-      +'<img src="'+SUM1_IMG.heart+'" alt="">'
-      +'<img src="'+SUM1_IMG.brain+'" alt="">'
-      +'<img src="'+SUM1_IMG.health+'" alt="">'
-      +'</div>'):'')
-    +'</div></div>'
+  // เรียง: CI Hero ซ้าย · CFC ขวา · MPCI ท้าย
+  var order={HERO:0,CFC:1,MPCI:2};
+  var sorted=plans.slice().sort(function(a,b){return order[a.key]-order[b.key];});
+  var colsHTML='<div class="acs-cols" style="grid-template-columns:repeat('+sorted.length+',1fr);">'
+    + sorted.map(colHTML).join('') + '</div>';
 
-    +'<div class="sum1-sec"><div class="sum1-sec-t" style="color:#be123c;">🛡️ ความคุ้มครองของแต่ละสัญญา</div>'
-    +covHTML
-    +(imgOn?('<div style="text-align:center;margin-top:9px;"><img src="'+SUM1_IMG.gap+'" style="width:190px;height:auto;">'
-      +'<div class="sum1-gap-cap">FILL THE GAP. PROTECT WHAT MATTERS.</div></div>'):'')
+  var hint = sorted.length>1
+    ? 'เลือก<b>อย่างใดอย่างหนึ่ง</b>ก็ช่วยได้มาก · หรือ<b>ทั้งคู่</b>เพื่อดูแลครบทั้งค่ารักษาและเงินใช้จ่ายระหว่างพักฟื้น 🌿'
+    : 'ความคุ้มครองที่เลือกไว้ · เพิ่มอีกสัญญาได้ภายหลังเพื่อดูแลให้ครบทั้งค่ารักษาและค่าชดเชย 🌿';
+
+  el.innerHTML='<div class="sum1-wrap" style="border-color:#f3d5c0;">'
+    +'<div class="acs-hd">'
+    +'<div class="acs-hd-ic">'+(imgOn?'🧑‍⚕️':'🛡️')+'</div>'
+    +'<div style="flex:1;"><div class="acs-hd-t">ข้อเสนอการวางแผนคุ้มครองโรคร้ายแรง — '+name+' · อายุ '+age+' ปี ('+gTxt+')</div>'
+    +'<div class="acs-hd-s">รวม '+pr.rows.length+' สัญญาในแผน · เน้นโรคร้ายแรง '+ciNames.length+' สัญญา ('+ciNames.join(' + ')+')</div></div>'
+    +(imgOn?'<img src="'+SUM1_IMG.shield+'" style="width:34px;height:auto;">':'')
     +'</div>'
 
-    +'<div class="sum1-foot">* เอกสารนี้เป็นเพียงการสรุปเบื้องต้นเพื่อประกอบการนำเสนอ มิใช่ส่วนหนึ่งของสัญญาประกันภัย · ข้อกำหนดและเงื่อนไขของความคุ้มครองจะระบุไว้ในกรมธรรม์ประกันภัยที่ออกให้ผู้ถือกรมธรรม์<br>'
-    +'* เบี้ยประกันภัยของสัญญาเพิ่มเติมอาจปรับเปลี่ยนตามอายุ ชั้นอาชีพ หรือค่าใช้จ่ายในการรักษาพยาบาลที่สูงขึ้น · ผู้ขอเอาประกันภัยควรศึกษาและทำความเข้าใจในเอกสารเสนอขายก่อนตัดสินใจทำประกันภัย</div>'
+    +'<div class="sum1-sec" style="padding:10px 16px;">'
+    +'<div class="acs-prem"><div class="acs-prem-t">📋 สรุปเบี้ยประกันภัยรวม</div>'+_sum1PremHTML(pr)+'</div>'
+    +'</div>'
+
+    +'<div class="sum1-sec" style="padding:4px 16px 12px;border-bottom:none;">'
+    +'<div class="acs-hint">'+hint+'</div>'
+    + colsHTML
+    +'<div class="acs-close">'
+    +(imgOn?'<img src="'+SUM1_IMG.gap+'" style="width:132px;height:auto;display:block;margin:0 auto 4px;">':'')
+    +'<b>“ไม่ต้องรีบตัดสินใจวันนี้ — ลองดูตัวเลขสบายๆ แล้วค่อยคุยกันว่าแบบไหนเหมาะกับคุณที่สุด”</b></div>'
+    +'</div>'
+
+    +'<div class="sum1-foot">* เอกสารนี้เป็นเพียงการสรุปเบื้องต้นเพื่อประกอบการนำเสนอ มิใช่ส่วนหนึ่งของสัญญาประกันภัย · ตัวอย่างการเคลมเป็นกรณีสมมติ ผลประโยชน์จริงขึ้นอยู่กับแผนการรักษาของแพทย์และเงื่อนไขในกรมธรรม์<br>'
+    +'* เบี้ยประกันภัยของสัญญาเพิ่มเติมอาจปรับเปลี่ยนตามอายุ ชั้นอาชีพ หรือค่าใช้จ่ายในการรักษาพยาบาลที่สูงขึ้น</div>'
     +'</div>';
 }
 

@@ -7,7 +7,7 @@
     <!-- นำเข้า Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- นำเข้า Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.544.0/dist/umd/lucide.min.js"></script>
     <!-- นำเข้าฟอนต์ Sarabun -->
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
@@ -1206,6 +1206,27 @@
         .sum1-claim-ex { display:flex; gap:5px; justify-content:center; margin-top:6px; flex-wrap:wrap; }
         .sum1-claim-ex span { border:1px solid #f0b4c2; background:#fff5f7; border-radius:12px; padding:2px 9px; font-size:0.68em; font-weight:700; color:#7f1d1d; }
 
+        /* ── About tab ── */
+        .ab-wrap { max-width:820px; margin:0 auto; padding:0 0 40px; }
+        .ab-hero { background:linear-gradient(135deg,#fdf8ed,#fefaf2); border:2px solid #d4af37; border-radius:var(--r-xl); padding:22px 26px; text-align:center; margin-bottom:18px; }
+        .ab-hero-t { font-size:1.25em; font-weight:800; color:#92400e; }
+        .ab-hero-s { font-size:0.84em; color:#78716c; margin-top:4px; line-height:1.6; }
+        .ab-ver { display:inline-flex; align-items:center; gap:8px; background:#fff; border:1.5px solid #d4af37; border-radius:20px; padding:6px 16px; margin-top:12px; }
+        .ab-ver-l { font-size:0.74em; color:#78716c; font-weight:600; }
+        .ab-ver-v { font-size:0.92em; font-weight:800; color:#92400e; }
+        .ab-card { background:var(--bg-elevated); border:1px solid var(--b-hairline); border-radius:var(--r-lg); padding:18px 22px; margin-bottom:14px; }
+        .ab-card-t { font-size:0.95em; font-weight:800; color:var(--c-primary); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+        .ab-li { font-size:0.85em; color:var(--t-secondary); line-height:1.9; }
+        .ab-li b { color:var(--t-primary); }
+        .ab-warn { background:rgba(220,38,38,0.06); border:1.5px solid rgba(220,38,38,0.35); border-radius:var(--r-md); padding:14px 18px; }
+        .ab-warn-t { font-size:0.92em; font-weight:800; color:#dc2626; margin-bottom:6px; }
+        .ab-warn-b { font-size:0.84em; color:var(--t-secondary); line-height:1.8; }
+        .ab-log { max-height:none; }
+        .ab-log-row { display:grid; grid-template-columns:135px 1fr; gap:12px; padding:8px 0; border-bottom:1px solid var(--b-hairline); font-size:0.82em; }
+        .ab-log-row:last-child { border-bottom:none; }
+        .ab-log-d { color:var(--c-primary); font-weight:700; font-variant-numeric:tabular-nums; }
+        .ab-log-x { color:var(--t-secondary); line-height:1.65; }
+
         /* ── All CI — หน้าสรุป 1 หน้า ธีม minimal 2 คอลัมน์ ── */
         .acs-hd { background:linear-gradient(135deg,#fdf2f4,#fef6f2); border-bottom:2px solid #f3d5c0; padding:11px 18px; display:flex; align-items:center; gap:11px; }
         .acs-hd-ic { font-size:1.6em; line-height:1; flex-shrink:0; }
@@ -1678,6 +1699,10 @@
         <button class="main-tab-btn" onclick="switchMainTab('tab-cancer')" id="tab-btn-cancer">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>
             Care for Cancer
+        </button>
+        <button class="main-tab-btn" onclick="switchMainTab('tab-about')" id="tab-btn-about" style="margin-left:auto;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            About
         </button>
     </div>
     <div class="main-tab-wrapper">
@@ -3541,6 +3566,68 @@
 
         </div>
     </div><!-- end tab-ig -->
+
+    <!-- ═══ TAB: About ═══ -->
+    <div class="main-tab-panel" id="tab-about" style="display:none !important;">
+        <div class="ab-wrap">
+
+            <div class="ab-hero">
+                <div style="font-size:2em;line-height:1;">🛡️</div>
+                <div class="ab-hero-t">เครื่องมือเปรียบเทียบประกันสุขภาพ AIA / MTL</div>
+                <div class="ab-hero-s">Health Solution Comparison &amp; Presentation Tool</div>
+                <div class="ab-ver">
+                    <span class="ab-ver-l">อัปเดตล่าสุด</span>
+                    <span class="ab-ver-v" id="ab-updated">2026-09-18 12:42 น.</span>
+                </div>
+            </div>
+
+            <div class="ab-card">
+                <div class="ab-card-t">📌 วัตถุประสงค์การใช้งาน</div>
+                <div class="ab-li">
+                    • Web Application นี้ออกแบบขึ้นเพื่อใช้เป็นการ<b>ภายใน</b> สำหรับนำเสนอข้อมูลที่ถูกต้องของผลิตภัณฑ์ <b>AIA</b><br>
+                    • ช่วยให้ตัวแทนและผู้แนะนำสามารถเปรียบเทียบแบบประกัน คำนวณเบี้ย และจัดทำเอกสารนำเสนอได้อย่างรวดเร็วและแม่นยำ<br>
+                    • ข้อมูลอัตราเบี้ยและผลประโยชน์อ้างอิงจากเอกสารประกอบการขายของบริษัท
+                </div>
+            </div>
+
+            <div class="ab-card ab-warn">
+                <div class="ab-warn-t">⚠️ ข้อจำกัดความรับผิดชอบ</div>
+                <div class="ab-warn-b">
+                    • ข้อมูลต่างๆ จาก Web Application นี้ <b>ไม่ใช่เอกสารสัญญาของบริษัทแต่อย่างใด</b><br>
+                    • ใช้เพื่อประกอบการอธิบายและนำเสนอเบื้องต้นเท่านั้น มิใช่ส่วนหนึ่งของสัญญาประกันภัย<br>
+                    • ข้อกำหนดและเงื่อนไขของความคุ้มครองที่มีผลผูกพัน จะระบุไว้ใน<b>กรมธรรม์ประกันภัย</b>ที่บริษัทออกให้ผู้ถือกรมธรรม์เท่านั้น<br>
+                    • กรณีข้อมูลไม่ตรงกัน ให้ยึดถือตามเอกสารทางการของบริษัทเป็นสำคัญ
+                </div>
+            </div>
+
+            <div class="ab-card">
+                <div class="ab-card-t">🤖 การพัฒนา</div>
+                <div class="ab-li">
+                    • พัฒนา Web Application ด้วย <b>Claude.ai</b> (Anthropic)<br>
+                    • รูปแบบ Single-file HTML — เปิดใช้งานได้ทันทีโดยไม่ต้องติดตั้งโปรแกรมเพิ่มเติม<br>
+                    • รองรับการบันทึก/โหลดข้อมูลเป็นไฟล์ JSON และพิมพ์เอกสารนำเสนอเป็น PDF
+                </div>
+            </div>
+
+            <div class="ab-card">
+                <div class="ab-card-t">🗂️ ประวัติการอัปเดต</div>
+                <div class="ab-log" id="ab-log">
+                    <div class="ab-log-row"><div class="ab-log-d">2026-09-18 12:42 น.</div><div class="ab-log-x">เพิ่มแท็บ About · ปรับหน้าสรุป 1 หน้าของ All CI เป็นธีม minimal 2 คอลัมน์ (เน้นค่ารักษา / ค่าชดเชย) พร้อม auto-fit ขนาดอักษรให้พอดี 1 หน้าอัตโนมัติ</div></div>
+                    <div class="ab-log-row"><div class="ab-log-d">2026-09-18</div><div class="ab-log-x">เพิ่มการ์ดตัวอย่างการเคลมและคุ้มครองต่อเนื่องในหน้าสรุป CI Hero · แก้ปัญหาขนาดอักษรทวีคูณตอนขยาย (two-pass scaling) · ขยายคำโปรยปิดท้าย 25%</div></div>
+                    <div class="ab-log-row"><div class="ab-log-d">2026-09-17</div><div class="ab-log-x">เพิ่มแท็บ Infographic CI Hero &amp; CFC (ดาวน์โหลด PNG / พิมพ์แยกใบ / แก้ข้อความได้) · เพิ่มแท็บ All CI รวมสัญญาโรคร้ายแรง</div></div>
+                    <div class="ab-log-row"><div class="ab-log-d">2026-09-16</div><div class="ab-log-x">เพิ่ม AIA Health CI Hero ครบทั้งแบบ Begin และ Balanced · ตารางความคุ้มครอง 13 หมวด · เงื่อนไข Copayment ในสิทธิ/นอกสิทธิ</div></div>
+                    <div class="ab-log-row"><div class="ab-log-d">2026-09-15</div><div class="ab-log-x">เพิ่มแท็บ Care for Cancer · แท็บ Vitality Timeline · ปรับ Logic การจ่าย Vitality Bonus ให้จบที่ปีที่ 20</div></div>
+                    <div class="ab-log-row"><div class="ab-log-d">ก่อนหน้า</div><div class="ab-log-x">ระบบเปรียบเทียบ 3 Options · CI ProCare Slides · ตารางมูลค่าเวนคืน (CV) · เบี้ยคาดการณ์ตามอายุ · Export / Import JSON</div></div>
+                </div>
+            </div>
+
+            <div style="text-align:center;font-size:0.76em;color:var(--t-muted);line-height:1.7;margin-top:16px;">
+                จัดทำเพื่อใช้ภายในสำหรับตัวแทนประกันชีวิต AIA เท่านั้น<br>
+                ห้ามนำไปใช้ประกอบการเสนอขาย แสดง เผยแพร่ หรือแจกจ่ายแก่ลูกค้าหรือผู้เอาประกันภัย
+            </div>
+
+        </div>
+    </div><!-- end tab-about -->
 
     </div><!-- end main-tab-wrapper -->
 
@@ -5445,7 +5532,8 @@ function switchMainTab(tabId) {
         'tab-cancer':       'tab-btn-cancer',
         'tab-cihero':       'tab-btn-cihero',
         'tab-allci':        'tab-btn-allci',
-        'tab-ig':           'tab-btn-ig'
+        'tab-ig':           'tab-btn-ig',
+        'tab-about':        'tab-btn-about'
     };
     const btn = document.getElementById(btnMap[tabId]);
     if (btn) btn.classList.add('active');

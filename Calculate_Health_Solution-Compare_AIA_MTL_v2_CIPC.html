@@ -1153,7 +1153,7 @@
             #tab-cihero .cc-container,
             #tab-cancer .cc-container { font-size: 120% !important; }
             /* โหมดพิมพ์สรุป 1 หน้า: ซ่อนทุกอย่างยกเว้นกล่องสรุป */
-            body.print-summary-only .cc-section,
+            body.print-summary-only .cc-section:not(#ch-dz-section),
             body.print-summary-only .cc-header-card,
             body.print-summary-only .cc-footnote,
             body.print-summary-only .cc-ctrl-bar { display: none !important; }
@@ -1348,6 +1348,36 @@
         .ig-pm-line.hero .big  { font-size: 30px; }
         .ig-main-note      { font-size: 10.9px; color:#6b7280; }
         .ig-main-note.hero { font-size: 10.5px; }
+        /* ── 62 โรคร้ายแรง CI Hero ── */
+        .dz-board { background:#fff; border:2px solid #1e3a5f; border-radius:12px; overflow:hidden; }
+        .dz-board, .dz-board * { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+        .dz-hd { background:linear-gradient(135deg,#1e3a5f,#2c5282); color:#fff; padding:10px 16px; text-align:center; }
+        .dz-hd-t { font-size:1.05em; font-weight:800; }
+        .dz-hd-t .n { color:#fcd34d; font-size:1.2em; }
+        .dz-hd-s { font-size:0.78em; opacity:0.9; margin-top:2px; }
+        .dz-legend { display:flex; gap:14px; justify-content:center; padding:7px; background:#f8fafc; border-bottom:1px solid #e2e8f0; flex-wrap:wrap; }
+        .dz-legend span { font-size:0.76em; font-weight:700; display:inline-flex; align-items:center; gap:5px; }
+        .dz-dot { width:11px; height:11px; border-radius:3px; display:inline-block; }
+        .dz-grid { columns:2; column-gap:7px; padding:8px; }
+        .dz-g { margin-bottom:7px; display:inline-block; width:100%; }
+        .dz-g { border:1.5px solid; border-radius:9px; overflow:hidden; break-inside:avoid-column; }
+        .dz-g-hd { padding:5px 10px; display:flex; align-items:center; gap:6px; }
+        .dz-g-ic { font-size:1.1em; line-height:1; }
+        .dz-g-nm { font-size:0.80em; font-weight:800; color:#fff !important; line-height:1.3; }
+        .dz-g-ct { margin-left:auto; font-size:0.70em; font-weight:800; background:rgba(255,255,255,0.25); color:#fff !important; border-radius:10px; padding:1px 8px; white-space:nowrap; }
+        .dz-g-bd { padding:6px 9px; }
+        .dz-sub { font-size:0.70em; font-weight:800; margin:3px 0 2px; letter-spacing:0.02em; }
+        .dz-sub.e { color:#1d4ed8; }
+        .dz-sub.s { color:#ea580c; }
+        .dz-li { font-size:0.74em; color:#374151; line-height:1.55; display:grid; grid-template-columns:38px 1fr; gap:4px; padding:1px 0; }
+        .dz-li .cd { font-weight:800; }
+        .dz-li.e .cd { color:#1d4ed8; }
+        .dz-li.s .cd { color:#ea580c; }
+        .dz-foot { font-size:0.66em; color:#9ca3af; line-height:1.5; padding:6px 12px 9px; text-align:center; }
+        @media print { body.dz-print-only .cc-section, body.dz-print-only .cc-header-card,
+          body.dz-print-only .cc-footnote, body.dz-print-only .cc-ctrl-bar, body.dz-print-only .sum1-box { display:none !important; }
+          body.dz-print-only #ch-dz-section { display:block !important; } }
+
         /* ── CI Hero Claim Flow Infographic (compact timeline) ── */
         .chc-wrap { border:1.5px solid #e5e7eb; border-radius:12px; overflow:hidden; background:#fff; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
         .chc-wrap * { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
@@ -3246,6 +3276,19 @@
                 </div>
             </div>
 
+            <!-- 62 โรคร้ายแรง -->
+            <div class="cc-section" id="ch-dz-section">
+                <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:4px;">
+                    <div class="cc-section-title" style="color:#1d4ed8;margin-bottom:0;">📋 รายการ 62 โรคร้ายแรงที่คุ้มครอง</div>
+                    <button class="cc-print-btn no-print" onclick="dzPrint()" style="margin-left:auto;background:#eff6ff;color:#1d4ed8;border-color:#2563eb;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                        พิมพ์รายการโรค 1 หน้า
+                    </button>
+                </div>
+                <div class="cc-section-sub">แบ่งเป็น 6 กลุ่มโรค · ระดับต้นถึงปานกลาง (Early) 18 โรค + ระดับรุนแรง (Severe) 44 โรค</div>
+                <div id="ch-dz-board"></div>
+            </div>
+
             <!-- เบี้ยคาดการณ์ -->
             <div class="cc-section">
                 <div class="cc-section-title" style="color:#1d4ed8;">📊 เบี้ยประกันคาดการณ์ปรับตามอายุ</div>
@@ -3577,7 +3620,7 @@
                 <div class="ab-hero-s">Health Solution Comparison &amp; Presentation Tool</div>
                 <div class="ab-ver">
                     <span class="ab-ver-l">อัปเดตล่าสุด</span>
-                    <span class="ab-ver-v" id="ab-updated">2026-09-18 12:42 น.</span>
+                    <span class="ab-ver-v" id="ab-updated">2026-09-18 13:15 น.</span>
                 </div>
             </div>
 
@@ -3612,7 +3655,7 @@
             <div class="ab-card">
                 <div class="ab-card-t">🗂️ ประวัติการอัปเดต</div>
                 <div class="ab-log" id="ab-log">
-                    <div class="ab-log-row"><div class="ab-log-d">2026-09-18 12:42 น.</div><div class="ab-log-x">เพิ่มแท็บ About · ปรับหน้าสรุป 1 หน้าของ All CI เป็นธีม minimal 2 คอลัมน์ (เน้นค่ารักษา / ค่าชดเชย) พร้อม auto-fit ขนาดอักษรให้พอดี 1 หน้าอัตโนมัติ</div></div>
+                    <div class="ab-log-row"><div class="ab-log-d">2026-09-18 13:15 น.</div><div class="ab-log-x">เพิ่มรายการ 62 โรคร้ายแรงที่คุ้มครองในแท็บ CI Hero พร้อมปุ่มพิมพ์ 1 หน้า A4 · แก้การดาวน์โหลด PNG ให้รองรับ iPad/iPhone (เปิดแท็บใหม่ให้กดค้างบันทึกรูป)</div></div><div class="ab-log-row"><div class="ab-log-d">2026-09-18 12:42 น.</div><div class="ab-log-x">เพิ่มแท็บ About · ปรับหน้าสรุป 1 หน้าของ All CI เป็นธีม minimal 2 คอลัมน์ (เน้นค่ารักษา / ค่าชดเชย) พร้อม auto-fit ขนาดอักษรให้พอดี 1 หน้าอัตโนมัติ</div></div>
                     <div class="ab-log-row"><div class="ab-log-d">2026-09-18</div><div class="ab-log-x">เพิ่มการ์ดตัวอย่างการเคลมและคุ้มครองต่อเนื่องในหน้าสรุป CI Hero · แก้ปัญหาขนาดอักษรทวีคูณตอนขยาย (two-pass scaling) · ขยายคำโปรยปิดท้าย 25%</div></div>
                     <div class="ab-log-row"><div class="ab-log-d">2026-09-17</div><div class="ab-log-x">เพิ่มแท็บ Infographic CI Hero &amp; CFC (ดาวน์โหลด PNG / พิมพ์แยกใบ / แก้ข้อความได้) · เพิ่มแท็บ All CI รวมสัญญาโรคร้ายแรง</div></div>
                     <div class="ab-log-row"><div class="ab-log-d">2026-09-16</div><div class="ab-log-x">เพิ่ม AIA Health CI Hero ครบทั้งแบบ Begin และ Balanced · ตารางความคุ้มครอง 13 หมวด · เงื่อนไข Copayment ในสิทธิ/นอกสิทธิ</div></div>
@@ -6495,6 +6538,112 @@ function acBuildSum1(){
     +'</div>';
 }
 
+// ── 62 โรคร้ายแรงภายใต้ AIA Health CI Hero ──
+const CIH_DISEASES = [
+ { g:'กลุ่ม 1', icon:'🎗️', name:'โรคมะเร็งและเนื้องอก', color:'#be123c', bg:'#fff1f2',
+   E:[['1.1E','โรคมะเร็งระยะไม่ลุกลาม'],['1.2E','การผ่าตัดเนื้องอกต่อมใต้สมองออก']],
+   S:[['1.1S','โรคมะเร็งระยะลุกลาม'],['1.2S','เนื้องอกในสมองชนิดที่ไม่ใช่มะเร็ง']] },
+
+ { g:'กลุ่ม 2', icon:'❤️', name:'โรคหัวใจ การหายใจ และระบบการไหลเวียนโลหิต', color:'#dc2626', bg:'#fef2f2',
+   E:[['2.1E','โรคหลอดเลือดหัวใจตีบที่รักษาด้วยการสวนหลอดเลือดหัวใจ'],['2.2E','การผ่าตัดลอกเยื่อหุ้มหัวใจ'],['2.3E','การรักษาโรคลิ้นหัวใจด้วยการสวนหลอดเลือด'],['2.4E','การรักษาโรคหลอดเลือดแดงใหญ่เอออร์ต้าโดยวิธีใส่สายสวนทางหลอดเลือด'],['2.5E','การใส่เครื่องกรองลิ่มเลือดในหลอดเลือดดำใหญ่']],
+   S:[['2.1S','กล้ามเนื้อหัวใจตายเฉียบพลันจากการขาดเลือด'],['2.2S','การผ่าตัดเส้นเลือดเลี้ยงกล้ามเนื้อหัวใจ'],['2.3S','โรคลิ้นหัวใจ'],['2.4S','การผ่าตัดลิ้นหัวใจโดยวิธีการเปิดหัวใจ'],['2.5S','การผ่าตัดหลอดเลือดแดงใหญ่ เอออร์ต้า'],['2.6S','โรคแรงดันในหลอดเลือดแดงปอดสูงแบบปฐมภูมิ'],['2.7S','โรคหลอดลมปอดอุดกั้นเรื้อรังขั้นรุนแรง / โรคปอดระยะสุดท้าย'],['2.8S','โรคโลหิตจางจากไขกระดูกไม่สร้างเม็ดโลหิต']] },
+
+ { g:'กลุ่ม 3', icon:'🧠', name:'โรคหลอดเลือดสมอง ระบบประสาท และกล้ามเนื้อ', color:'#7c3aed', bg:'#f5f3ff',
+   E:[['3.1E','โรคหลอดเลือดสมองที่ต้องได้รับการผ่าตัดลอกหลอดเลือดแดงคาโรติด'],['3.2E','โรคหลอดเลือดสมองที่ต้องได้รับการรักษาโดยวิธีใส่สายสวนเส้นเลือดแดงบริเวณคอ'],['3.3E','โรคหลอดเลือดสมองโป่งพองที่รักษาโดยใช้ขดลวดผ่านสายสวนทางหลอดเลือด'],['3.4E','การผ่าตัดใส่ท่อระบายในโพรงสมอง']],
+   S:[['3.1S','โรคหลอดเลือดสมองแตกหรืออุดตัน'],['3.2S','โรคหลอดเลือดสมองโป่งพองที่ต้องรักษาโดยการผ่าตัด'],['3.3S','ภาวะโคม่า'],['3.4S','โรคสมองเสื่อมชนิดอัลไซเมอร์*'],['3.5S','โรคเยื่อหุ้มสมองและไขสันหลังอักเสบจากเชื้อแบคทีเรีย'],['3.6S','สมองอักเสบจากเชื้อไวรัส'],['3.7S','โรคพาร์กินสัน*'],['3.8S','โรคระบบประสาทมัลติเพิลสะเคลอโรสิส'],['3.9S','โรคของเซลล์ประสาทควบคุมการเคลื่อนไหว'],['3.10S','ภาวะอะแพลลิก'],['3.11S','อัมพาตของกล้ามเนื้อแขนหรือขา'],['3.12S','โรคโปลิโอ'],['3.13S','โรคกล้ามเนื้อเสื่อม']] },
+
+ { g:'กลุ่ม 4', icon:'🫀', name:'โรคอวัยวะและระบบการทำงานที่สำคัญของร่างกาย', color:'#0891b2', bg:'#ecfeff',
+   E:[['4.1E','การผ่าตัดตับออกหนึ่งกลีบ'],['4.2E','การผ่าตัดไตออกหนึ่งข้าง'],['4.3E','การผ่าตัดปอดออกหนึ่งข้าง']],
+   S:[['4.1S','ตับวาย'],['4.2S','ไตวายเรื้อรัง'],['4.3S','โรคลำไส้อักเสบเป็นแผลรุนแรง'],['4.4S','การผ่าตัดเปลี่ยนอวัยวะหรือปลูกถ่ายไขกระดูก'],['4.5S','โรคไวรัสตับอักเสบขั้นรุนแรง'],['4.6S','ภาวะตับอ่อนอักเสบที่กลับเป็นซ้ำและเรื้อรัง'],['4.7S','ไตอักเสบลูปูส จากโรคซิสเต็มมิค ลูปูส อิริเธมาโตซูส'],['4.8S','ภาวะข้ออักเสบรูมาตอยด์ชนิดรุนแรง']] },
+
+ { g:'กลุ่ม 5', icon:'🦠', name:'ภาวะติดเชื้อ การบาดเจ็บร้ายแรง และภาวะทุพพลภาพ', color:'#ea580c', bg:'#fff7ed',
+   E:[['5.1E','แผลไหม้ชนิดรุนแรงน้อย'],['5.2E','การผ่าตัดเลือดคั่งใต้เยื่อหุ้มสมองอันเนื่องมาจากอุบัติเหตุ'],['5.3E','การสูญเสียแขนหรือขาหนึ่งข้าง หรือตาหนึ่งข้าง'],['5.4E','โรคเบาหวานขึ้นจอประสาทตา']],
+   S:[['5.1S','แผลไหม้ฉกรรจ์'],['5.2S','การบาดเจ็บที่ศีรษะอย่างรุนแรง'],['5.3S','การสูญเสียการดำรงชีพอย่างอิสระ*'],['5.4S','การทุพพลภาพถาวรสิ้นเชิง*'],['5.5S','ตาบอด'],['5.6S','การฉีกขาดของรากประสาทต้นแขน'],['5.7S','การสูญเสียความสามารถในการพูด'],['5.8S','โรคเนื้อเยื่อพังผืดอักเสบติดเชื้อและเป็นเนื้อตาย'],['5.9S','โรคเท้าช้าง']] },
+
+ { g:'กลุ่ม 6', icon:'👶', name:'โรคร้ายแรงสำหรับผู้เยาว์ (อายุ 15 วัน – 16 ปี)', color:'#16a34a', bg:'#f0fdf4',
+   E:[],
+   S:[['6.1S','โรคไข้รูมาติกที่ทำให้หัวใจผิดปกติ'],['6.2S','โรคคาวาซากิที่ทำให้เกิดโรคแทรกซ้อนของหัวใจ'],['6.3S','โรคเบาหวานชนิดที่หนึ่ง'],['6.4S','โรคน้ำไขสันหลังคั่งในโพรงสมองซึ่งเกิดภายหลังและต้องใส่ท่อระบาย']] }
+];
+
+function dzRender(){
+  var el=document.getElementById('ch-dz-board'); if(!el)return;
+  var nE=0,nS=0;
+  CIH_DISEASES.forEach(function(g){ nE+=g.E.length; nS+=g.S.length; });
+  var h='<div class="dz-board">'
+    +'<div class="dz-hd"><div class="dz-hd-t"><span class="n">62</span> โรคร้ายแรง ภายใต้ความคุ้มครองของ AIA HEALTH CI HERO</div>'
+    +'<div class="dz-hd-s">🛡️ คุ้มครองครบทุกระยะ — ตั้งแต่ระยะต้นจนถึงระยะรุนแรง</div></div>'
+    +'<div class="dz-legend">'
+    +'<span><i class="dz-dot" style="background:#1d4ed8;"></i>ระดับต้นถึงปานกลาง (E) — '+nE+' โรค</span>'
+    +'<span><i class="dz-dot" style="background:#ea580c;"></i>ระดับรุนแรง (S) — '+nS+' โรค</span>'
+    +'</div><div class="dz-grid">';
+  CIH_DISEASES.forEach(function(g){
+    var tot=g.E.length+g.S.length;
+    h+='<div class="dz-g" style="border-color:'+g.color+';background:'+g.bg+';">'
+      +'<div class="dz-g-hd" style="background:'+g.color+';">'
+      +'<span class="dz-g-ic">'+g.icon+'</span>'
+      +'<span class="dz-g-nm">'+g.g+' · '+g.name+'</span>'
+      +'<span class="dz-g-ct">'+tot+' โรค</span></div>'
+      +'<div class="dz-g-bd">';
+    if(g.E.length){
+      h+='<div class="dz-sub e">▸ ระดับต้นถึงปานกลาง (E)</div>';
+      g.E.forEach(function(d){ h+='<div class="dz-li e"><span class="cd">'+d[0]+'</span><span>'+d[1]+'</span></div>'; });
+    }
+    if(g.S.length){
+      h+='<div class="dz-sub s">▸ ระดับรุนแรง (S)</div>';
+      g.S.forEach(function(d){ h+='<div class="dz-li s"><span class="cd">'+d[0]+'</span><span>'+d[1]+'</span></div>'; });
+    }
+    h+='</div></div>';
+  });
+  h+='</div><div class="dz-foot">* บริษัทจะจ่ายผลประโยชน์ค่ารักษาพยาบาลในวันที่ผู้เอาประกันภัยยังมีชีวิตอยู่ ภายใต้เงื่อนไขว่า วันที่ผู้เอาประกันภัยได้รับการวินิจฉัยโรคร้ายแรงและหรือยืนยันจากแพทย์เป็นครั้งแรกในระหว่างที่ยังมีชีวิตอยู่ '
+    +'· ข้อกำหนดและเงื่อนไขของความคุ้มครองจะระบุไว้ในกรมธรรม์ประกันภัยที่ออกให้กับผู้ถือกรมธรรม์</div></div>';
+  el.innerHTML=h;
+}
+
+// พิมพ์เฉพาะรายการโรค 1 หน้า A4 (auto-fit)
+function dzPrint(){
+  dzRender();
+  var tab=document.getElementById('tab-cihero');
+  var sec=document.getElementById('ch-dz-section');
+  var board=sec.querySelector('.dz-board');
+  var others=document.querySelectorAll('.main-tab-panel:not(#tab-cihero)');
+  var nav=document.querySelector('.main-tab-nav');
+  var hidden=[];
+  others.forEach(function(e){ e.style.setProperty('display','none','important'); });
+  tab.style.setProperty('display','block','important');
+  if(nav) nav.style.display='none';
+  tab.querySelectorAll('.cc-section, .cc-header-card, .cc-footnote, .cc-ctrl-bar, .sum1-box').forEach(function(e){
+    if(e===sec) return;
+    hidden.push([e,e.style.display]); e.style.setProperty('display','none','important');
+  });
+  var prevPad=sec.style.padding, prevBorder=sec.style.border;
+  sec.style.padding='0'; sec.style.border='none'; sec.style.background='transparent';
+  // ซ่อนหัวข้อ/คำอธิบาย/ปุ่ม เหลือเฉพาะบอร์ดรายการโรค
+  var hideIn=[];
+  sec.querySelectorAll(':scope > div:not(#ch-dz-board)').forEach(function(e){
+    hideIn.push([e,e.style.display]); e.style.setProperty('display','none','important');
+  });
+  // ใช้ CSS ตัด padding ของ container (ชุดเดียวกับหน้าสรุป)
+  document.body.classList.add('print-summary-only');
+  // auto-fit ให้พอดี A4 แนวตั้ง 1 หน้า
+  var MAXH=1075, best=100;
+  for(var pc=135; pc>=60; pc-=2){
+    board.style.fontSize=pc+'%';
+    if(board.offsetHeight<=MAXH){ best=pc; break; }
+  }
+  board.style.fontSize=best+'%';
+  window.print();
+  setTimeout(function(){
+    document.body.classList.remove('print-summary-only');
+    board.style.fontSize='';
+    hideIn.forEach(function(p){ p[0].style.display=p[1]||''; });
+    sec.style.padding=prevPad; sec.style.border=prevBorder; sec.style.background='';
+    hidden.forEach(function(p){ p[0].style.display=p[1]||''; });
+    others.forEach(function(e){ e.style.display=''; });
+    tab.style.display=''; if(nav) nav.style.display='';
+    document.querySelectorAll('.main-tab-panel.active').forEach(function(e){ e.style.setProperty('display','block','important'); });
+  },700);
+}
+
 // ==========================================
 // CI HERO TAB
 // ==========================================
@@ -6608,6 +6757,7 @@ function chRender(){
   }
 
   chCopayBox(coType);
+  if(typeof dzRender==='function') dzRender();
   if(typeof chBuildSum1==="function") chBuildSum1();
   chPackageNote(age,gender,prem,plan);
   chProjection(age,gender,plan,coType);

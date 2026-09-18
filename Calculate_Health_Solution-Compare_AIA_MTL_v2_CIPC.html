@@ -1157,7 +1157,12 @@
             body.print-summary-only .cc-header-card,
             body.print-summary-only .cc-footnote,
             body.print-summary-only .cc-ctrl-bar { display: none !important; }
-            body.print-summary-only .sum1-box { display: block !important; font-size: 144% !important; }
+            body.print-summary-only .sum1-box { display: block !important; }
+            body.print-summary-only .cc-container,
+            body.print-summary-only .ig-container { padding:0 !important; margin:0 !important; }
+            body.print-summary-only .main-tab-wrapper { padding:0 !important; margin:0 !important; }
+            body.print-summary-only { padding:0 !important; margin:0 !important; }
+
             body.print-summary-only .sum1-box * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
             .sum1-box { page-break-inside: avoid; }
         }
@@ -1180,6 +1185,26 @@
         .sum1-copay-card { padding:9px 12px; border-radius:8px; border:1.5px solid; }
         .sum1-foot { padding:10px 20px; background:#f8fafc; font-size:0.72em; color:#6b7280; line-height:1.6; }
 
+
+        /* ── Claim flow ฉบับย่อ สำหรับหน้าสรุป 1 หน้า ── */
+        .sum1-claim { border:1.5px solid #f0b4c2; border-radius:9px; overflow:hidden; margin-top:4px; }
+        .sum1-claim-h { background:#be123c; color:#fff !important; padding:5px 11px; font-size:0.80em; font-weight:800; text-align:center; }
+        .sum1-claim-h * { color:#fff !important; }
+        .sum1-claim-b { padding:8px 11px; background:#fff; }
+        .sum1-claim-facts { display:grid; grid-template-columns:1fr 1fr 1.25fr; gap:6px; margin-bottom:7px; }
+        .sum1-claim-f { border:1px solid #e5d9c3; background:#fdfbf7; border-radius:6px; padding:4px 7px; font-size:0.70em; color:#57534e; line-height:1.4; text-align:center; }
+        .sum1-claim-f b { color:#be123c; }
+        .sum1-claim-f.gold { border:1.5px solid #d4af37; background:#fffaeb; }
+        .sum1-claim-f.gold b { color:#a16207; }
+        .sum1-claim-tl { display:grid; grid-template-columns:repeat(4,1fr); gap:4px; margin-bottom:7px; }
+        .sum1-claim-s { text-align:center; font-size:0.68em; line-height:1.4; }
+        .sum1-claim-s .n { display:inline-block; width:15px; height:15px; border-radius:50%; background:#be123c; color:#fff !important; font-weight:800; font-size:0.85em; line-height:15px; margin-bottom:2px; }
+        .sum1-claim-s .n.g { background:#d4af37; }
+        .sum1-claim-s b { color:#7f1d1d; display:block; }
+        .sum1-claim-cont { background:#f0fdf4; border:1px solid #16a34a; border-radius:6px; padding:5px 9px; text-align:center; font-size:0.72em; color:#166534; line-height:1.45; }
+        .sum1-claim-cont b { color:#15803d; }
+        .sum1-claim-ex { display:flex; gap:5px; justify-content:center; margin-top:6px; flex-wrap:wrap; }
+        .sum1-claim-ex span { border:1px solid #f0b4c2; background:#fff5f7; border-radius:12px; padding:2px 9px; font-size:0.68em; font-weight:700; color:#7f1d1d; }
 
         /* สรุป 1 หน้า — บังคับ Light theme เสมอ (สำหรับพิมพ์ลงกระดาษ) */
         .sum1-box, .sum1-box * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -5708,7 +5733,17 @@ function _printOnlyTab(tabId, summaryOnly){
       e.style.setProperty('display','none','important');
     });
     sumBox=tab.querySelector('.sum1-box');
-    if(sumBox){ sumBox.style.setProperty('display','block','important'); sumBox.style.fontSize='144%'; }
+    if(sumBox){
+      sumBox.style.setProperty('display','block','important');
+      // ── Auto-fit: ขยายให้ใหญ่ที่สุดเท่าที่ยังพอดี A4 หน้าเดียว ──
+      // A4 สูง 297mm − ขอบบน/ล่าง ≈ 1,050px ที่ 96dpi
+      var MAXH = 980, best = 100;
+      for (var pc = 150; pc >= 90; pc -= 2) {
+        sumBox.style.fontSize = pc + '%';
+        if (sumBox.offsetHeight <= MAXH) { best = pc; break; }
+      }
+      sumBox.style.fontSize = best + '%';
+    }
   }
 
   window.print();
@@ -5847,6 +5882,26 @@ function chBuildSum1(){
     +'</div>'
     +'<div style="font-size:0.76em;color:#6b7280;margin-top:7px;line-height:1.6;">คิดเฉพาะหมวดที่ 1–13 · Waiting Period 60 วัน · Condition Persistence Period 45 วัน (เฉพาะโรคร้ายแรงที่กำหนด)</div>'
     +'</div>'
+
+    // ── ตัวอย่างการเคลม + คุ้มครองต่อเนื่อง (ฉบับย่อ) ──
+    +'<div class="sum1-sec"><div class="sum1-sec-t">🎯 คุ้มครองทันที! สำหรับโรคร้ายแรงที่<u>ไม่มี</u>ระยะเวลาการคงอยู่ต่อเนื่อง</div>'
+    +'<div class="sum1-claim">'
+    +'<div class="sum1-claim-h">🛡️ ตัวอย่างการเคลม — คุ้มครองต่อเนื่องเสมือนประกันสุขภาพทั่วไป</div>'
+    +'<div class="sum1-claim-b">'
+    +'<div class="sum1-claim-facts">'
+    +'<div class="sum1-claim-f">คุ้มครองโรคร้ายแรง<br><b>62 โรค</b></div>'
+    +'<div class="sum1-claim-f">ทุกระยะ<br><b>Early 18 + Severe 44</b></div>'
+    +'<div class="sum1-claim-f gold"><b>43 โรค</b> ไม่มีระยะคงอยู่ต่อเนื่อง<br><b>เบิกได้ทันทีเมื่อวินิจฉัย</b></div>'
+    +'</div>'
+    +'<div class="sum1-claim-tl">'
+    +'<div class="sum1-claim-s"><span class="n">1</span><b>เริ่มมีผล</b>สัญญาคุ้มครอง</div>'
+    +'<div class="sum1-claim-s"><span class="n">2</span><b>พ้น 60 วัน</b>Waiting Period</div>'
+    +'<div class="sum1-claim-s"><span class="n">3</span><b>วินิจฉัยครั้งแรก</b>3.2E โรคหลอดเลือดสมอง</div>'
+    +'<div class="sum1-claim-s"><span class="n g">4</span><b>เบิกได้ทันที</b>บริษัทจ่ายผลประโยชน์</div>'
+    +'</div>'
+    +'<div class="sum1-claim-cont"><b>🛡️ คุ้มครองต่อเนื่องทุกโรค</b> — หลังวินิจฉัยโรคร้ายแรงที่คุ้มครองแล้ว เบิกค่ารักษาโรคอื่นได้เสมือนประกันสุขภาพทั่วไป</div>'
+    +'<div class="sum1-claim-ex"><span>🦠 ลำไส้อักเสบ ✅</span><span>🫁 ปอดอักเสบ ✅</span><span>🛏️ ผ่าตัดไส้ติ่ง ✅</span></div>'
+    +'</div></div></div>'
 
     +'<div class="sum1-foot">* เอกสารนี้เป็นเพียงการสรุปเบื้องต้นเพื่อประกอบการนำเสนอ มิใช่ส่วนหนึ่งของสัญญาประกันภัย · ข้อกำหนดและเงื่อนไขของความคุ้มครองจะระบุไว้ในกรมธรรม์ประกันภัยที่ออกให้ผู้ถือกรมธรรม์<br>'
     +'* เบี้ยประกันภัยของสัญญาเพิ่มเติมอาจปรับเปลี่ยนตามอายุ ชั้นอาชีพ หรือค่าใช้จ่ายในการรักษาพยาบาลที่สูงขึ้น · ผู้ขอเอาประกันภัยควรศึกษาและทำความเข้าใจในเอกสารเสนอขายก่อนตัดสินใจทำประกันภัย</div>'

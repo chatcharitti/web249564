@@ -627,30 +627,99 @@
         /* ============================================
            MAIN TAB NAVIGATION
            ============================================ */
+        /* ── Sidebar navigation (ซ้าย · พับเก็บได้) ── */
+        :root { --nav-w: 236px; --nav-w-mini: 58px; }
         .main-tab-nav {
-            display: flex; gap: 4px;
-            max-width: 1280px; margin: 0 auto 0;
+            position: fixed; top: 0; left: 0; bottom: 0; width: var(--nav-w);
+            display: flex; flex-direction: column; gap: 3px;
+            padding: 12px 10px 20px; overflow-y: auto; overscroll-behavior: contain;
+            background: var(--bg-surface); border-right: 1px solid var(--b-soft);
+            z-index: 60; position: fixed; transition: width 0.22s ease, transform 0.22s ease;
         }
+        .main-tab-nav::-webkit-scrollbar { width: 5px; }
+        .main-tab-nav::-webkit-scrollbar-thumb { background: var(--b-soft); border-radius: 3px; }
+        .nav-brand {
+            display: flex; padding-right: 44px; align-items: center; gap: 9px; padding: 6px 8px 12px;
+            border-bottom: 1px solid var(--b-hairline); margin-bottom: 8px;
+        }
+        .nav-brand-ic { font-size: 1.3em; line-height: 1; flex-shrink: 0; }
+        .nav-brand-tx { font-size: 12.5px; font-weight: 800; color: var(--c-primary); line-height: 1.35; white-space: nowrap; overflow: hidden; }
         .main-tab-btn {
-            padding: 11px 26px;
-            border-radius: var(--r-md) var(--r-md) 0 0;
-            border: 1px solid var(--b-soft); border-bottom: none;
-            background: var(--bg-surface);
+            padding: 10px 12px; border-radius: var(--r-md);
+            border: 1px solid transparent; background: transparent;
             color: var(--t-secondary);
-            font-family: inherit; font-size: 14px; font-weight: 600;
-            cursor: pointer; transition: all 0.18s;
-            letter-spacing: 0.01em;
-            display: flex; align-items: center; gap: 8px;
+            font-family: inherit; font-size: 13.5px; font-weight: 600;
+            cursor: pointer; transition: all 0.15s; text-align: left;
+            display: flex; align-items: center; gap: 10px; white-space: nowrap;
+            flex-shrink: 0; overflow: hidden;
         }
+        .main-tab-btn svg { flex-shrink: 0; }
         .main-tab-btn:hover { background: var(--bg-surface-2); color: var(--t-primary); }
         .main-tab-btn.active {
-            background: var(--bg-elevated); color: var(--c-primary);
-            border-color: var(--b-gold); border-bottom-color: var(--bg-elevated);
-            box-shadow: 0 -2px 0 0 var(--c-primary); z-index: 1;
+            background: var(--c-primary-faint); color: var(--c-primary);
+            border-color: var(--b-gold); font-weight: 700;
+            box-shadow: inset 3px 0 0 0 var(--c-primary);
+        }
+        /* ปุ่มพับ/กาง */
+        .nav-toggle {
+            position: absolute; top: 12px; right: 10px;
+            width: 32px; height: 32px; border-radius: var(--r-md);
+            border: 1px solid var(--b-soft); background: var(--bg-surface);
+            color: var(--t-primary); cursor: pointer; z-index: 61;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.15s;
+        }
+        body.nav-collapsed .nav-toggle { position: static; margin: 0 auto 8px; }
+        .nav-toggle:hover { background: var(--c-primary-faint); color: var(--c-primary); }
+        /* ปุ่มลอยเปิดเมนู (เฉพาะมือถือ/แท็บเล็ต) */
+        .nav-fab {
+            display: none; position: fixed; top: 10px; left: 10px;
+            width: 40px; height: 40px; border-radius: var(--r-md);
+            border: 1px solid var(--b-soft); background: var(--bg-surface);
+            color: var(--t-primary); cursor: pointer; z-index: 58;
+            align-items: center; justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+        }
+        .nav-backdrop {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.45);
+            z-index: 59; opacity: 0; pointer-events: none; transition: opacity 0.22s;
         }
         .main-tab-wrapper {
-            max-width: 1280px; margin: 0 auto 0;
-            border-top: 1px solid var(--b-soft); padding-top: 24px;
+            max-width: 1280px; margin: 0 auto;
+            padding: 8px 0 0 0; transition: margin-left 0.22s ease;
+        }
+        body { padding-left: var(--nav-w); transition: padding-left 0.22s ease; }
+
+        /* ── โหมดพับ (เดสก์ท็อป: เหลือเฉพาะไอคอน) ── */
+        body.nav-collapsed { padding-left: var(--nav-w-mini); }
+        body.nav-collapsed .main-tab-nav { width: var(--nav-w-mini); padding-left: 7px; padding-right: 7px; }
+        body.nav-collapsed .main-tab-btn { justify-content: center; padding: 10px 0; gap: 0; }
+        body.nav-collapsed .main-tab-btn > *:not(svg) { display: none; }
+        body.nav-collapsed .main-tab-btn { font-size: 0; }
+        body.nav-collapsed .nav-brand-tx { display: none; }
+        body.nav-collapsed .nav-brand { justify-content: center; padding-left: 0; padding-right: 0; }
+        body.nav-collapsed .nav-toggle { left: calc(var(--nav-w-mini) + 10px); }
+
+        /* ── มือถือ/แท็บเล็ต: ซ่อนเป็น overlay ── */
+        @media (max-width: 900px) {
+            body, body.nav-collapsed { padding-left: 0; }
+            .main-tab-nav { transform: translateX(-100%); width: 262px; box-shadow: 4px 0 24px rgba(0,0,0,0.28); }
+            body.nav-open .main-tab-nav { transform: translateX(0); }
+            body.nav-open .nav-backdrop { opacity: 1; pointer-events: auto; }
+            .nav-fab { display: flex; }
+            body.nav-open .nav-fab { display: none; }
+            .nav-toggle, body.nav-collapsed .nav-toggle { position: absolute; top: 12px; right: 10px; margin: 0; }
+            body.nav-collapsed .main-tab-nav { width: 262px; padding-left: 10px; padding-right: 10px; }
+            body.nav-collapsed .main-tab-btn { justify-content: flex-start; padding: 10px 12px; gap: 10px; font-size: 13.5px; }
+            body.nav-collapsed .main-tab-btn > *:not(svg) { display: inline; }
+            body.nav-collapsed .nav-brand-tx { display: block; }
+            body.nav-collapsed .nav-brand { justify-content: flex-start; padding-left: 8px; }
+            .main-tab-wrapper { padding-top: 54px; }
+        }
+        @media print {
+            body, body.nav-collapsed { padding-left: 0 !important; }
+            .main-tab-nav, .nav-toggle, .nav-fab, .nav-backdrop { display: none !important; }
+            .main-tab-wrapper { padding-top: 0 !important; }
         }
         .main-tab-panel { display: none !important; }
         .main-tab-panel.active { display: block !important; }
@@ -1688,12 +1757,30 @@
                 font-size: 13px !important;
             }
         }
-    </style>
+    
+        /* ── Print override (ท้ายสุด เพื่อชนะทุก rule ก่อนหน้า) ── */
+        @media print {
+            html body, html body.nav-collapsed, html body.nav-open {
+                padding-left: 0 !important; margin-left: 0 !important;
+            }
+            html body .main-tab-nav, html body .nav-toggle,
+            html body .nav-fab, html body .nav-backdrop { display: none !important; }
+            html body .main-tab-wrapper { margin-left: auto !important; padding-top: 0 !important; }
+        }
+</style>
 </head>
 <body data-theme="dark" class="p-4 md:p-8">
 
     <!-- Main Tab Navigation -->
-    <div class="main-tab-nav no-print" style="max-width:1280px;margin:0 auto 0;">
+    <div class="nav-backdrop no-print" onclick="navToggle(false)"></div>
+    <button class="nav-fab no-print" onclick="navToggle()" aria-label="เปิดเมนู" title="เปิดเมนู">
+        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <div class="main-tab-nav no-print">
+        <button class="nav-toggle no-print" onclick="navToggle()" aria-label="พับ/กางเมนู" title="พับ/กางเมนู">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="nav-brand"><span class="nav-brand-ic">🛡️</span><span class="nav-brand-tx">AIA / MTL<br>Health Compare</span></div>
         <button class="main-tab-btn active" onclick="switchMainTab('tab-compare')" id="tab-btn-compare">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
             เปรียบเทียบประกันสุขภาพ
@@ -3626,7 +3713,7 @@
                 <div class="ab-hero-s">Health Solution Comparison &amp; Presentation Tool</div>
                 <div class="ab-ver">
                     <span class="ab-ver-l">อัปเดตล่าสุด</span>
-                    <span class="ab-ver-v" id="ab-updated">2026-09-18 13:15 น.</span>
+                    <span class="ab-ver-v" id="ab-updated">2026-09-18 14:05 น.</span>
                 </div>
             </div>
 
@@ -3661,7 +3748,7 @@
             <div class="ab-card">
                 <div class="ab-card-t">🗂️ ประวัติการอัปเดต</div>
                 <div class="ab-log" id="ab-log">
-                    <div class="ab-log-row"><div class="ab-log-d">2026-09-18 13:15 น.</div><div class="ab-log-x">เพิ่มรายการ 62 โรคร้ายแรงที่คุ้มครองในแท็บ CI Hero พร้อมปุ่มพิมพ์ A4 แนวนอน 3 คอลัมน์ 1 หน้า · แก้การดาวน์โหลด PNG ให้รองรับ iPad/iPhone (เปิดแท็บใหม่ให้กดค้างบันทึกรูป)</div></div><div class="ab-log-row"><div class="ab-log-d">2026-09-18 12:42 น.</div><div class="ab-log-x">เพิ่มแท็บ About · ปรับหน้าสรุป 1 หน้าของ All CI เป็นธีม minimal 2 คอลัมน์ (เน้นค่ารักษา / ค่าชดเชย) พร้อม auto-fit ขนาดอักษรให้พอดี 1 หน้าอัตโนมัติ</div></div>
+                    <div class="ab-log-row"><div class="ab-log-d">2026-09-18 14:05 น.</div><div class="ab-log-x">เปลี่ยนเมนูแท็บเป็น Sidebar ด้านซ้าย พับเก็บได้ · รองรับมือถือ/แท็บเล็ตแบบ overlay · เพิ่มปุ่มพิมพ์รายการโรค 2 แบบ (1 หน้า / ตัวใหญ่ 2 หน้า)</div></div><div class="ab-log-row"><div class="ab-log-d">2026-09-18 13:15 น.</div><div class="ab-log-x">เพิ่มรายการ 62 โรคร้ายแรงที่คุ้มครองในแท็บ CI Hero พร้อมปุ่มพิมพ์ A4 แนวนอน 3 คอลัมน์ 1 หน้า · แก้การดาวน์โหลด PNG ให้รองรับ iPad/iPhone (เปิดแท็บใหม่ให้กดค้างบันทึกรูป)</div></div><div class="ab-log-row"><div class="ab-log-d">2026-09-18 12:42 น.</div><div class="ab-log-x">เพิ่มแท็บ About · ปรับหน้าสรุป 1 หน้าของ All CI เป็นธีม minimal 2 คอลัมน์ (เน้นค่ารักษา / ค่าชดเชย) พร้อม auto-fit ขนาดอักษรให้พอดี 1 หน้าอัตโนมัติ</div></div>
                     <div class="ab-log-row"><div class="ab-log-d">2026-09-18</div><div class="ab-log-x">เพิ่มการ์ดตัวอย่างการเคลมและคุ้มครองต่อเนื่องในหน้าสรุป CI Hero · แก้ปัญหาขนาดอักษรทวีคูณตอนขยาย (two-pass scaling) · ขยายคำโปรยปิดท้าย 25%</div></div>
                     <div class="ab-log-row"><div class="ab-log-d">2026-09-17</div><div class="ab-log-x">เพิ่มแท็บ Infographic CI Hero &amp; CFC (ดาวน์โหลด PNG / พิมพ์แยกใบ / แก้ข้อความได้) · เพิ่มแท็บ All CI รวมสัญญาโรคร้ายแรง</div></div>
                     <div class="ab-log-row"><div class="ab-log-d">2026-09-16</div><div class="ab-log-x">เพิ่ม AIA Health CI Hero ครบทั้งแบบ Begin และ Balanced · ตารางความคุ้มครอง 13 หมวด · เงื่อนไข Copayment ในสิทธิ/นอกสิทธิ</div></div>
@@ -5893,6 +5980,8 @@ function _printOnlyTab(tabId, summaryOnly){
   if(nav) nav.style.display='none';
 
   var hidden=[], sumBox=null;
+  var prevBodyPad=document.body.style.paddingLeft;
+  document.body.style.setProperty('padding-left','0','important');
   if(summaryOnly){
     document.body.classList.add('print-summary-only');
     // ซ่อนทุก section ใน tab นี้ ยกเว้นกล่องสรุป (inline style = แน่นอนกว่า CSS class)
@@ -5918,6 +6007,7 @@ function _printOnlyTab(tabId, summaryOnly){
 
   setTimeout(function(){
     document.body.classList.remove('print-summary-only');
+    document.body.style.paddingLeft=prevBodyPad||'';
     hidden.forEach(function(p){ p[0].style.display=p[1]||''; });
     if(sumBox){ sumBox.style.display=''; sumBox.style.fontSize=''; }
     others.forEach(function(e){e.style.display='';});
@@ -6632,6 +6722,9 @@ function dzPrint(mode){
     hideIn.push([e,e.style.display]); e.style.setProperty('display','none','important');
   });
   document.body.classList.add('print-summary-only');
+  // ตัด padding ของ sidebar ก่อนคำนวณ auto-fit (มิฉะนั้นความกว้างจะผิด)
+  var prevBodyPad=document.body.style.paddingLeft;
+  document.body.style.setProperty('padding-left','0','important');
 
   var pageCSS=document.createElement('style');
   pageCSS.id='dz-page-css';
@@ -6672,6 +6765,7 @@ function dzPrint(mode){
   window.print();
   setTimeout(function(){
     document.body.classList.remove('print-summary-only');
+    document.body.style.paddingLeft=prevBodyPad||'';
     var pc2=document.getElementById('dz-page-css'); if(pc2) pc2.remove();
     grid.style.columns=prevCols||'';
     board.style.width=prevW||'';
@@ -6684,6 +6778,72 @@ function dzPrint(mode){
     document.querySelectorAll('.main-tab-panel.active').forEach(function(e){ e.style.setProperty('display','block','important'); });
   },700);
 }
+
+// ==========================================
+// SIDEBAR NAVIGATION
+// ==========================================
+function navIsMobile(){ return window.matchMedia('(max-width: 900px)').matches; }
+
+function navToggle(force){
+  var b=document.body;
+  if(navIsMobile()){
+    var open = (typeof force==='boolean') ? force : !b.classList.contains('nav-open');
+    b.classList.toggle('nav-open', open);
+  } else {
+    var col = (typeof force==='boolean') ? !force : !b.classList.contains('nav-collapsed');
+    b.classList.toggle('nav-collapsed', col);
+    try { localStorage.setItem('hs_nav', col ? 'collapsed' : 'expanded'); } catch(e){}
+  }
+}
+
+// ตอนพิมพ์: ตัด padding ของ sidebar ออกด้วย inline style (ชนะทุก CSS)
+(function navPrintFix(){
+  var saved=null;
+  function before(){
+    saved={p:document.body.style.paddingLeft, m:document.body.style.marginLeft};
+    document.body.style.setProperty('padding-left','0','important');
+    document.body.style.setProperty('margin-left','0','important');
+  }
+  function after(){
+    if(!saved) return;
+    document.body.style.paddingLeft=saved.p||'';
+    document.body.style.marginLeft=saved.m||'';
+    saved=null;
+  }
+  window.addEventListener('beforeprint', before);
+  window.addEventListener('afterprint', after);
+  if(window.matchMedia){
+    var mq=window.matchMedia('print');
+    var h=function(e){ e.matches ? before() : after(); };
+    if(mq.addEventListener) mq.addEventListener('change',h);
+    else if(mq.addListener) mq.addListener(h);
+  }
+})();
+
+(function initNav(){
+  function apply(){
+    try {
+      if(!navIsMobile() && localStorage.getItem('hs_nav')==='collapsed')
+        document.body.classList.add('nav-collapsed');
+    } catch(e){}
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', apply);
+  else apply();
+
+  // มือถือ: ปิดเมนูอัตโนมัติหลังเลือกแท็บ
+  document.addEventListener('click', function(ev){
+    var btn = ev.target.closest && ev.target.closest('.main-tab-btn');
+    if(btn && navIsMobile()) setTimeout(function(){ document.body.classList.remove('nav-open'); }, 120);
+  });
+  // ปิดด้วยปุ่ม Esc
+  document.addEventListener('keydown', function(ev){
+    if(ev.key==='Escape') document.body.classList.remove('nav-open');
+  });
+  // สลับขนาดจอ: ล้างสถานะ overlay
+  window.addEventListener('resize', function(){
+    if(!navIsMobile()) document.body.classList.remove('nav-open');
+  });
+})();
 
 // ==========================================
 // CI HERO TAB

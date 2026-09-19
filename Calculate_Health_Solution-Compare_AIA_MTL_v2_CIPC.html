@@ -3280,10 +3280,16 @@
             <div class="cc-section" id="ch-dz-section">
                 <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:4px;">
                     <div class="cc-section-title" style="color:#1d4ed8;margin-bottom:0;">📋 รายการ 62 โรคร้ายแรงที่คุ้มครอง</div>
-                    <button class="cc-print-btn no-print" onclick="dzPrint()" style="margin-left:auto;background:#eff6ff;color:#1d4ed8;border-color:#2563eb;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-                        พิมพ์รายการโรค 1 หน้า
+                    <div style="margin-left:auto;display:flex;gap:8px;flex-wrap:wrap;">
+                    <button class="cc-print-btn no-print" onclick="dzPrint('compact')" style="background:#eff6ff;color:#1d4ed8;border-color:#2563eb;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="15" y2="11"/></svg>
+                        พิมพ์ 1 หน้า (แนวตั้ง)
                     </button>
+                    <button class="cc-print-btn no-print" onclick="dzPrint('large')" style="background:#f0fdf4;color:#15803d;border-color:#16a34a;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V4h16v3"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+                        พิมพ์ตัวใหญ่ 2 หน้า
+                    </button>
+                    </div>
                 </div>
                 <div class="cc-section-sub">แบ่งเป็น 6 กลุ่มโรค · ระดับต้นถึงปานกลาง (Early) 18 โรค + ระดับรุนแรง (Severe) 44 โรค</div>
                 <div id="ch-dz-board"></div>
@@ -3655,7 +3661,7 @@
             <div class="ab-card">
                 <div class="ab-card-t">🗂️ ประวัติการอัปเดต</div>
                 <div class="ab-log" id="ab-log">
-                    <div class="ab-log-row"><div class="ab-log-d">2026-09-18 13:15 น.</div><div class="ab-log-x">เพิ่มรายการ 62 โรคร้ายแรงที่คุ้มครองในแท็บ CI Hero พร้อมปุ่มพิมพ์ 1 หน้า A4 · แก้การดาวน์โหลด PNG ให้รองรับ iPad/iPhone (เปิดแท็บใหม่ให้กดค้างบันทึกรูป)</div></div><div class="ab-log-row"><div class="ab-log-d">2026-09-18 12:42 น.</div><div class="ab-log-x">เพิ่มแท็บ About · ปรับหน้าสรุป 1 หน้าของ All CI เป็นธีม minimal 2 คอลัมน์ (เน้นค่ารักษา / ค่าชดเชย) พร้อม auto-fit ขนาดอักษรให้พอดี 1 หน้าอัตโนมัติ</div></div>
+                    <div class="ab-log-row"><div class="ab-log-d">2026-09-18 13:15 น.</div><div class="ab-log-x">เพิ่มรายการ 62 โรคร้ายแรงที่คุ้มครองในแท็บ CI Hero พร้อมปุ่มพิมพ์ A4 แนวนอน 3 คอลัมน์ 1 หน้า · แก้การดาวน์โหลด PNG ให้รองรับ iPad/iPhone (เปิดแท็บใหม่ให้กดค้างบันทึกรูป)</div></div><div class="ab-log-row"><div class="ab-log-d">2026-09-18 12:42 น.</div><div class="ab-log-x">เพิ่มแท็บ About · ปรับหน้าสรุป 1 หน้าของ All CI เป็นธีม minimal 2 คอลัมน์ (เน้นค่ารักษา / ค่าชดเชย) พร้อม auto-fit ขนาดอักษรให้พอดี 1 หน้าอัตโนมัติ</div></div>
                     <div class="ab-log-row"><div class="ab-log-d">2026-09-18</div><div class="ab-log-x">เพิ่มการ์ดตัวอย่างการเคลมและคุ้มครองต่อเนื่องในหน้าสรุป CI Hero · แก้ปัญหาขนาดอักษรทวีคูณตอนขยาย (two-pass scaling) · ขยายคำโปรยปิดท้าย 25%</div></div>
                     <div class="ab-log-row"><div class="ab-log-d">2026-09-17</div><div class="ab-log-x">เพิ่มแท็บ Infographic CI Hero &amp; CFC (ดาวน์โหลด PNG / พิมพ์แยกใบ / แก้ข้อความได้) · เพิ่มแท็บ All CI รวมสัญญาโรคร้ายแรง</div></div>
                     <div class="ab-log-row"><div class="ab-log-d">2026-09-16</div><div class="ab-log-x">เพิ่ม AIA Health CI Hero ครบทั้งแบบ Begin และ Balanced · ตารางความคุ้มครอง 13 หมวด · เงื่อนไข Copayment ในสิทธิ/นอกสิทธิ</div></div>
@@ -6599,12 +6605,16 @@ function dzRender(){
   el.innerHTML=h;
 }
 
-// พิมพ์เฉพาะรายการโรค 1 หน้า A4 (auto-fit)
-function dzPrint(){
+// พิมพ์รายการโรค — 2 โหมด
+//   compact : A4 แนวตั้ง 2 คอลัมน์ บีบให้พอดี 1 หน้า
+//   large   : A4 แนวตั้ง 2 คอลัมน์ ตัวอักษรใหญ่ กระจาย 2 หน้า (อ่านบนมือถือ/แท็บเล็ตสบาย)
+function dzPrint(mode){
+  mode = mode || 'compact';
   dzRender();
   var tab=document.getElementById('tab-cihero');
   var sec=document.getElementById('ch-dz-section');
   var board=sec.querySelector('.dz-board');
+  var grid=board.querySelector('.dz-grid');
   var others=document.querySelectorAll('.main-tab-panel:not(#tab-cihero)');
   var nav=document.querySelector('.main-tab-nav');
   var hidden=[];
@@ -6617,23 +6627,54 @@ function dzPrint(){
   });
   var prevPad=sec.style.padding, prevBorder=sec.style.border;
   sec.style.padding='0'; sec.style.border='none'; sec.style.background='transparent';
-  // ซ่อนหัวข้อ/คำอธิบาย/ปุ่ม เหลือเฉพาะบอร์ดรายการโรค
   var hideIn=[];
   sec.querySelectorAll(':scope > div:not(#ch-dz-board)').forEach(function(e){
     hideIn.push([e,e.style.display]); e.style.setProperty('display','none','important');
   });
-  // ใช้ CSS ตัด padding ของ container (ชุดเดียวกับหน้าสรุป)
   document.body.classList.add('print-summary-only');
-  // auto-fit ให้พอดี A4 แนวตั้ง 1 หน้า
-  var MAXH=1075, best=100;
-  for(var pc=135; pc>=60; pc-=2){
-    board.style.fontSize=pc+'%';
-    if(board.offsetHeight<=MAXH){ best=pc; break; }
+
+  var pageCSS=document.createElement('style');
+  pageCSS.id='dz-page-css';
+  var prevW=board.style.width, prevCols=grid.style.columns;
+  var best=100;
+
+  if(mode==='large'){
+    // ── ตัวใหญ่ 2 หน้า — grid 2 คอลัมน์ แบ่งหน้าที่ขอบการ์ด ──
+    pageCSS.textContent='@page { size: A4 portrait; margin: 9mm; }'
+      + '#ch-dz-board .dz-grid { columns:auto !important; display:block; padding:9px; }'
+      + '#ch-dz-board .dz-g { margin-bottom:9px; display:block; width:100%; break-inside:avoid; page-break-inside:avoid; }'
+      // แต่ละกลุ่มแบ่งรายการเป็น 2 คอลัมน์ภายในการ์ด (ประหยัดพื้นที่ อ่านง่าย)
+      + '#ch-dz-board .dz-g-bd { columns:2; column-gap:14px; }'
+      + '#ch-dz-board .dz-sub { column-span:all; }'
+      + '#ch-dz-board .dz-li { line-height:1.6; grid-template-columns:44px 1fr; break-inside:avoid; }'
+      + '#ch-dz-board .dz-board { border-width:0; }';
+    document.head.appendChild(pageCSS);
+    board.style.width='740px';
+    // สูงรวมไม่เกิน 2 หน้า (A4 portrait − margin ≈ 1010px/หน้า)
+    var MAXH2=2020;
+    for(var p2=165; p2>=90; p2-=3){
+      board.style.fontSize=p2+'%';
+      if(board.offsetHeight<=MAXH2){ best=p2; break; }
+    }
+  } else {
+    // ── บีบให้พอดี 1 หน้า — masonry 2 คอลัมน์ ──
+    pageCSS.textContent='@page { size: A4 portrait; margin: 7mm; }';
+    document.head.appendChild(pageCSS);
+    board.style.width='770px';
+    grid.style.columns='2';
+    for(var p1=135; p1>=60; p1-=2){
+      board.style.fontSize=p1+'%';
+      if(board.offsetHeight<=1055){ best=p1; break; }
+    }
   }
   board.style.fontSize=best+'%';
+
   window.print();
   setTimeout(function(){
     document.body.classList.remove('print-summary-only');
+    var pc2=document.getElementById('dz-page-css'); if(pc2) pc2.remove();
+    grid.style.columns=prevCols||'';
+    board.style.width=prevW||'';
     board.style.fontSize='';
     hideIn.forEach(function(p){ p[0].style.display=p[1]||''; });
     sec.style.padding=prevPad; sec.style.border=prevBorder; sec.style.background='';

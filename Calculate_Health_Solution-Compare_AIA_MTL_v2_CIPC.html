@@ -408,7 +408,8 @@
             padding: 48px 56px; border-radius: var(--r-xl);
             box-shadow: var(--shadow-lg);
             border: 1px solid var(--b-hairline);
-            font-size: 16px; line-height: 1.65;
+            /* ไม่ล็อก font-size ที่นี่ — ให้สืบทอดจาก body[data-fs] เพื่อให้ปุ่ม A-/A+ มีผลกับทั้งหน้ารวมตารางเปรียบเทียบ */
+            line-height: 1.65;
         }
 
         .report-header {
@@ -1697,6 +1698,8 @@
                 box-shadow: none !important; padding: 12px 0 !important;
                 max-width: 100% !important; margin: 0 !important;
                 border: none !important; border-radius: 0 !important;
+                /* ตรึงขนาดตัวอักษรตอนพิมพ์ไว้คงที่ (แยกจากปุ่ม A-/A+ บนหน้าจอ) เพื่อให้ตารางพิมพ์ขนาดเดิมเสมอ */
+                font-size: 16px !important;
             }
             .page-break { page-break-before: always; }
 

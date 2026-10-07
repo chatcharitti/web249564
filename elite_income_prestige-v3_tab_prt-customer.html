@@ -145,6 +145,8 @@ tr:hover td{background:#f7fafc}
   <button onclick="showPage('cashflow',this)">📊 ตัวอย่าง Cashflow</button>
   <button onclick="showPage('fees',this)">📋 ค่าธรรมเนียม</button>
   <button onclick="showPage('estate',this)">🏛️ วางแผนมรดก</button>
+  <button onclick="showPage('savings',this)">🏦 ย้ายเงินฝาก</button>
+  <button onclick="showPage('vscondo',this)">🏢 vs คอนโด</button>
   <button onclick="showPage('clientreport',this)" style="color:#c05621">📄 รายงานลูกค้า</button>
 </nav>
 
@@ -323,7 +325,7 @@ tr:hover td{background:#f7fafc}
 <div id="fund" class="page">
   <div class="elite-hero" style="background:linear-gradient(135deg,#1a365d,#2b6cb0)">
     <h2>🌍 กองทุน AIA Global Active Income Fund (AIA-GAIF)</h2>
-    <p>กองทุนเฉพาะสำหรับ Elite Income Prestige — ลงทุนในสินทรัพย์ทั่วโลก<br>
+    <p>กองทุนเฉพาะสำหรับ Elite Income Prestige — โครงสร้าง <b>Fund of Funds</b> ลงทุนในสินทรัพย์ทั่วโลก<br>
     บริหารโดย บลจ. เอไอเอ (ประเทศไทย) ร่วมกับพันธมิตรระดับโลก 3 ราย</p>
   </div>
 
@@ -361,22 +363,38 @@ tr:hover td{background:#f7fafc}
   </div>
 
   <div class="card">
-    <h2>🧩 โครงสร้างการลงทุนของ AIA-GAIF</h2>
+    <h2>🧩 โครงสร้างการลงทุนของ AIA-GAIF — Fund of Funds</h2>
     <div class="alert alert-blue" style="margin-bottom:16px">
-      <strong>📌 กองทุน AIA-GAIF ใช้โครงสร้าง SAA + TAA:</strong><br>
-      <b>SAA (Strategic Asset Allocation)</b> = การจัดสรรสินทรัพย์เชิงกลยุทธ์ระยะยาว<br>
-      <b>TAA (Tactical Asset Allocation)</b> = การปรับพอร์ตเชิงกลยุทธ์ระยะสั้นตามสภาวะตลาด
+      <strong>🔄 พัฒนาการ: จาก Feeder Fund สู่ Fund of Funds (ก.พ. 2569)</strong><br>
+      เดิม AIA-GAIF ลงทุนใน Allianz Income and Growth เพียงกองเดียว (~100%) ปัจจุบันเปลี่ยนเป็น <b>Fund of Funds</b> ที่สามารถกระจายลงทุนได้ถึง 3 กองทุนปลายทาง — เปิดโอกาสให้ผู้จัดการกองทุนบริหารจัดการได้ยืดหยุ่นยิ่งขึ้น
     </div>
+    <!-- Fund of Funds Flow Visual -->
+    <div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:18px;padding:16px;background:linear-gradient(135deg,#ebf8ff,#f0fff4);border-radius:10px">
+      <div style="background:#2b6cb0;color:#fff;padding:12px 16px;border-radius:8px;text-align:center;font-weight:700;min-width:140px">Allianz Income<br>and Growth<br><span style="font-size:1.3em">62.8%</span></div>
+      <div style="font-size:1.5em;font-weight:700;color:#718096">+</div>
+      <div style="background:#d69e2e;color:#fff;padding:12px 16px;border-radius:8px;text-align:center;font-weight:700;min-width:140px">AIA Equity<br>Income<br><span style="font-size:1.3em">37.2%</span></div>
+      <div style="font-size:1.5em;font-weight:700;color:#718096">+</div>
+      <div style="background:#805ad5;color:#fff;padding:12px 16px;border-radius:8px;text-align:center;font-weight:700;min-width:140px">Franklin<br>Income Fund<br><span style="font-size:1.1em">พร้อมลงทุน</span></div>
+    </div>
+    <p style="font-size:.85em;color:#718096;text-align:center;margin-bottom:14px">สัดส่วนการลงทุน ณ 31 มี.ค. 2569 | ที่มา: บลจ. เอไอเอ (ประเทศไทย)</p>
+
     <div style="overflow-x:auto"><table>
-      <tr><th>ส่วนประกอบ</th><th>สัดส่วน</th><th>กลยุทธ์ / กองทุนอ้างอิง</th><th>ผู้บริหาร</th><th>สินทรัพย์หลัก</th></tr>
-      <tr><td style="font-weight:700;text-align:left">SAA หลัก</td><td class="num">90%</td><td><b>Allianz Income and Growth</b></td><td>Allianz GI</td><td>หุ้นสหรัฐ + Convertible Bonds + High Yield Bonds</td></tr>
-      <tr><td style="font-weight:700;text-align:left">SAA เสริม</td><td class="num">10%</td><td><b>AIA Equity Income</b></td><td>Wellington Management</td><td>หุ้นปันผลทั่วโลก (Global Dividend Equities)</td></tr>
-      <tr><td style="font-weight:700;text-align:left">TAA</td><td>ปรับตามสภาวะตลาด</td><td><b>Franklin Income Fund</b></td><td>Franklin Templeton</td><td>Multi-Asset Income (ตราสารหนี้ + หุ้น + สินทรัพย์ทางเลือก)</td></tr>
+      <tr><th>กองทุนปลายทาง</th><th>สัดส่วน</th><th>ผู้บริหาร</th><th>สินทรัพย์หลัก</th></tr>
+      <tr><td style="font-weight:700;text-align:left">Allianz Income and Growth</td><td class="num">62.8%</td><td>Allianz GI (€562B AUM)</td><td>หุ้นสหรัฐ + Convertible Bonds + High Yield Bonds (Tri-Sleeve)</td></tr>
+      <tr><td style="font-weight:700;text-align:left">AIA Equity Income</td><td class="num">37.2%</td><td>Wellington Management ($1.29T AUM)</td><td>หุ้นปันผลทั่วโลก (Global Dividend Equities)</td></tr>
+      <tr><td style="font-weight:700;text-align:left">Franklin Income Fund</td><td class="num">พร้อมลงทุน</td><td>Franklin Templeton ($1.6T AUM)</td><td>Multi-Asset Income (ตราสารหนี้ + หุ้น + สินทรัพย์ทางเลือก)</td></tr>
     </table></div>
+    <div class="alert alert-green" style="margin-top:14px">
+      <strong>✅ ข้อดีของ Fund of Funds:</strong><br>
+      ▸ ไม่จำเป็นต้องลงทุนกองทุนใดกองทุนหนึ่ง ≥ 80% — เพิ่มความยืดหยุ่นสูงสุด<br>
+      ▸ ผู้จัดการกองทุนปรับสัดส่วนได้ตามสภาวะตลาดทันที<br>
+      ▸ พอร์ตการลงทุนมีการกระจายที่ดีขึ้น ลดความเสี่ยงกระจุกตัว<br>
+      ▸ เปิดโอกาสหาทางเลือกใหม่ๆ มาเติมในพอร์ตอย่างต่อเนื่อง
+    </div>
   </div>
 
   <div class="card">
-    <h2>📊 Allianz Income and Growth (90% ของ SAA) — แกนหลัก</h2>
+    <h2>📊 Allianz Income and Growth (62.8% ของพอร์ต) — แกนหลัก</h2>
     <div class="grid2">
       <div>
         <div class="alert alert-purple">
@@ -403,7 +421,7 @@ tr:hover td{background:#f7fafc}
   </div>
 
   <div class="card">
-    <h2>📋 Wellington — AIA Equity Income (10% ของ SAA)</h2>
+    <h2>📋 Wellington — AIA Equity Income (37.2% ของพอร์ต)</h2>
     <div class="alert alert-blue">
       <strong>🎯 กลยุทธ์:</strong> ลงทุนในหุ้นที่มีการจ่ายปันผลสูงทั่วโลก (Global Dividend Equities) โดยเน้นบริษัทที่มีกระแสเงินสดแข็งแรง สามารถจ่ายปันผลได้อย่างต่อเนื่อง ช่วยเสริมกระแสรายได้ให้กองทุน
     </div>
@@ -514,7 +532,7 @@ tr:hover td{background:#f7fafc}
   <div class="card" style="border:3px solid #d69e2e;background:#fffff0">
     <h2 style="color:#92400e;border-bottom-color:#d69e2e">⭐ Allianz Income and Growth: 7 แหล่งรายรับ (Sources of Income)</h2>
     <div class="alert alert-gold" style="margin-bottom:16px;font-size:1em">
-      <strong>💡 หัวใจสำคัญ:</strong> กลยุทธ์ Allianz Income and Growth (ซึ่งเป็น 90% ของ AIA-GAIF) สร้างรายได้จาก <b>7 แหล่ง</b> พร้อมกัน ทำให้กระแสรายได้มีความหลากหลายและมั่นคง ไม่พึ่งพาแหล่งใดแหล่งเดียว
+      <strong>💡 หัวใจสำคัญ:</strong> กลยุทธ์ Allianz Income and Growth (ซึ่งเป็น 62.8% ของ AIA-GAIF) สร้างรายได้จาก <b>7 แหล่ง</b> พร้อมกัน ทำให้กระแสรายได้มีความหลากหลายและมั่นคง ไม่พึ่งพาแหล่งใดแหล่งเดียว
     </div>
     <div class="grid2">
       <div>
@@ -541,7 +559,72 @@ tr:hover td{background:#f7fafc}
     <p style="color:#718096;font-size:.82em;margin-top:10px">Source: Allianz Global Investors; Data as of Jun 2025</p>
   </div>
 
-  <div class="alert alert-gold"><strong>⭐ สรุป AIA-GAIF:</strong> กองทุนนี้ออกแบบมาเพื่อ <b>สร้างรายได้ (Income)</b> เป็นหลัก ไม่ใช่เพื่อเก็งกำไร โดยใช้พันธมิตรระดับโลก 3 รายที่เชี่ยวชาญด้าน Income Strategy โดยเฉพาะ ด้วย <b>7 แหล่งรายรับ</b> จากกลยุทธ์ Tri-Sleeve ทำให้กระแสรายได้มีความหลากหลายและมั่นคง บริหารโดย บลจ.เอไอเอ ซึ่งเป็นส่วนหนึ่งของกลุ่ม AIA — บริษัทประกันที่ใหญ่ที่สุดในเอเชีย</div>
+  <!-- 4 Pillars -->
+  <div class="card">
+    <h2>🏛️ 4 เสาหลักของการลงทุน — สร้างความมั่นคงในโลกการลงทุนที่ผันผวน</h2>
+    <div class="grid2" style="grid-template-columns:repeat(4,1fr)">
+      <div class="benefit-card gold-top" style="text-align:center">
+        <h3 style="font-size:1.1em">Covered Call</h3>
+        <p style="font-size:.88em">หุ้นสหรัฐฯ + ขายสิทธิ์ซื้อหุ้น<br>→ เก็บค่าพรีเมียม</p>
+      </div>
+      <div class="benefit-card purple-top" style="text-align:center">
+        <h3 style="font-size:1.1em">Convertibles</h3>
+        <p style="font-size:.88em">ตราสารหนี้แปลงสภาพ<br>→ สิทธิ์แปลงเป็นหุ้นในอนาคต</p>
+      </div>
+      <div class="benefit-card" style="border-top:3px solid #e53e3e;text-align:center">
+        <h3 style="font-size:1.1em">HY Bond</h3>
+        <p style="font-size:.88em">ตราสารหนี้ผลตอบแทนสูง<br>→ ดอกเบี้ยรับมั่นคง</p>
+      </div>
+      <div class="benefit-card" style="border-top:3px solid #2b6cb0;text-align:center">
+        <h3 style="font-size:1.1em">World Equity</h3>
+        <p style="font-size:.88em">หุ้นโลกปันผล (ex. US)<br>→ กระจายภูมิภาค</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sub-fund Performance Table -->
+  <div class="card">
+    <h2>📈 ผลการดำเนินงานย้อนหลังของกองทุนย่อย (%)</h2>
+    <div style="overflow-x:auto"><table>
+      <tr><th style="text-align:left">ผลการดำเนินงาน</th><th>Allianz Income<br>and Growth¹</th><th>AIA Equity<br>Income²</th><th>Franklin<br>Income³</th></tr>
+      <tr><td style="text-align:left">3 เดือน</td><td>1.11%</td><td>4.28%</td><td style="color:#276749;font-weight:700">5.53%</td></tr>
+      <tr><td style="text-align:left">6 เดือน</td><td>4.54%</td><td style="color:#276749;font-weight:700">9.06%</td><td>8.19%</td></tr>
+      <tr><td style="text-align:left">1 ปี</td><td>11.03%</td><td style="color:#276749;font-weight:700">23.09%</td><td>13.25%</td></tr>
+      <tr><td style="text-align:left">3 ปี (ต่อปี)</td><td>11.70%</td><td style="color:#276749;font-weight:700">19.23%</td><td>9.56%</td></tr>
+      <tr><td style="text-align:left">5 ปี (ต่อปี)</td><td>4.71%</td><td style="color:#276749;font-weight:700">10.45%</td><td>7.16%</td></tr>
+      <tr><td style="text-align:left">ตั้งแต่จัดตั้ง</td><td>7.54%</td><td style="color:#276749;font-weight:700">12.16%</td><td>6.13%</td></tr>
+      <tr style="background:#f7fafc"><td style="text-align:left;color:#718096">วันจัดตั้ง</td><td style="color:#718096">16 ต.ค. 2555</td><td style="color:#718096">8 ก.ย. 2563</td><td style="color:#718096">16 ธ.ค. 2559</td></tr>
+    </table></div>
+    <p style="color:#718096;font-size:.82em;margin-top:8px">¹ Allianz Income and Growth Fund Class AM (USD) | ² AIA Equity Income Fund Class IDQ | ³ Franklin Income Fund Class W (Mdis) USD<br>ที่มา: AIAIMT, Bloomberg ข้อมูล ณ 31 มี.ค. 2569 — ผลการดำเนินงานในอดีตไม่ได้รับประกันผลตอบแทนในอนาคต</p>
+  </div>
+
+  <!-- AIA-GAIF Performance -->
+  <div class="card">
+    <h2>📊 ผลการดำเนินงาน AIA-GAIF (ณ 31 มี.ค. 2569)</h2>
+    <div class="grid2">
+      <div class="alert alert-blue">
+        <strong>📈 ผลตอบแทน:</strong><br>
+        ▸ ตั้งแต่จัดตั้ง: <b>+4.03%</b> (เทียบดัชนีชี้วัด +3.29%)<br>
+        ▸ ผลตอบแทน 1 เดือน: <b>+1.30% (THB)</b> แม้ตลาดโลกผันผวน<br>
+        ▸ NAV: <b>10.4028 บาท/หน่วย</b><br>
+        ▸ ขนาดกองทุน: <b>2,447 ล้านบาท</b>
+      </div>
+      <div class="alert alert-green">
+        <strong>✅ ทำไมผลตอบแทนเป็นบวกแม้ตลาดโลกลง?</strong><br>
+        ▸ กองทุนลงทุนในสกุล USD โดยไม่ป้องกันค่าเงิน (Unhedged)<br>
+        ▸ <b>USD แข็งค่า</b>เทียบ THB → แปลงกลับเป็นบาทได้ผลตอบแทนเป็นบวก<br>
+        ▸ นโยบาย Unhedged <b>ประหยัดต้นทุน 2-4%/ปี</b> และเป็น Inflation Hedge ระยะยาว
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-gold"><strong>⭐ สรุป AIA-GAIF:</strong> กองทุนนี้ออกแบบมาเพื่อ <b>สร้างรายได้ (Income)</b> เป็นหลัก ไม่ใช่เพื่อเก็งกำไร โดยใช้โครงสร้าง <b>Fund of Funds</b> กับพันธมิตรระดับโลก 3 ราย ด้วย <b>7 แหล่งรายรับ</b> จากกลยุทธ์ Tri-Sleeve + หุ้นปันผลโลก ทำให้กระแสรายได้หลากหลายและมั่นคง บริหารโดย บลจ.เอไอเอ ซึ่งเป็นส่วนหนึ่งของกลุ่ม AIA — บริษัทประกันที่ใหญ่ที่สุดในเอเชีย</div>
+
+  <!-- Links to official sources -->
+  <div style="text-align:center;margin-top:16px">
+    <a href="https://www.aiaim.co.th/content/dam/th-aiaim/pdf/redemp_GAIF.pdf" target="_blank" style="display:inline-block;background:#2b6cb0;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:700;margin:4px">📄 ดูข้อมูล Auto Redemption ล่าสุด</a>
+    <a href="https://www.aiaim.co.th/th/fund/fund-detail.html?fid=AIA-GAIF" target="_blank" style="display:inline-block;background:#805ad5;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:700;margin:4px">🔗 ข้อมูลกองทุน AIA-GAIF</a>
+  </div>
 </div>
 
 <!-- ======================================== -->
@@ -608,7 +691,30 @@ tr:hover td{background:#f7fafc}
     <p style="color:#718096;font-size:.82em;margin-top:10px">* ตัวเลขประมาณการจากโบรชัวร์ AIA (ผลตอบแทนเฉลี่ย ~5%/ปี ก่อนหักค่าธรรมเนียม, Auto Red. ~3%/ปี) — ไม่รับประกันผลตอบแทน</p>
   </div>
 
-  <div class="alert alert-gold"><strong>⭐ สรุป:</strong> Auto Redemption คือกลไกสำคัญที่ทำให้ Elite Income Prestige สร้าง <b>"รายได้ประจำ"</b> ได้จริงตั้งแต่ปีแรก โดยไม่ต้องรอเกษียณ ไม่ต้องขายเอง ไม่มีภาษี หัวใจอยู่ที่กองทุนสามารถสร้างผลตอบแทนได้มากกว่าสิ่งที่ Redeem ออกไป</div>
+  <!-- Auto Redemption Actual History -->
+  <div class="card" style="border:2px solid #d69e2e">
+    <h2 style="color:#92400e;border-bottom-color:#d69e2e">📜 ประวัติการจ่าย Auto Redemption จริง — จ่ายแล้ว 6 ครั้ง สม่ำเสมอ</h2>
+    <div style="overflow-x:auto"><table>
+      <tr><th style="text-align:center">ครั้งที่</th><th>วันที่จ่าย</th><th>อัตรา (บาท/หน่วย)</th><th>NAV ณ วันจ่าย</th><th style="color:#92400e">% ต่อ NAV</th></tr>
+      <tr><td style="text-align:center;font-weight:700">1</td><td>16 ก.ย. 2568</td><td style="font-weight:600">0.1018</td><td>10.1275</td><td style="color:#92400e;font-weight:700">1.01%</td></tr>
+      <tr><td style="text-align:center;font-weight:700">2</td><td>26 พ.ย. 2568</td><td style="font-weight:600">0.0518</td><td>10.4361</td><td style="color:#92400e;font-weight:700">0.50%</td></tr>
+      <tr><td style="text-align:center;font-weight:700">3</td><td>16 ธ.ค. 2568</td><td style="font-weight:600">0.0766</td><td>10.2061</td><td style="color:#92400e;font-weight:700">0.75%</td></tr>
+      <tr><td style="text-align:center;font-weight:700">4</td><td>17 ก.พ. 2569</td><td style="font-weight:600">0.0512</td><td>10.2858</td><td style="color:#92400e;font-weight:700">0.50%</td></tr>
+      <tr><td style="text-align:center;font-weight:700">5</td><td>17 มี.ค. 2569</td><td style="font-weight:600">0.0789</td><td>10.5304</td><td style="color:#92400e;font-weight:700">0.75%</td></tr>
+      <tr style="background:linear-gradient(90deg,rgba(214,158,46,.15),rgba(214,158,46,.05))"><td style="text-align:center;font-weight:700">6 ★</td><td><b>16 มิ.ย. 2569</b></td><td style="font-weight:700">0.1433</td><td><b>11.4789</b></td><td style="color:#92400e;font-weight:800">1.25%</td></tr>
+    </table></div>
+    <p style="color:#718096;font-size:.85em;margin-top:8px">รวม Auto Redemption สะสม: <b>0.5036 บาท/หน่วย (~4.76%)</b></p>
+
+    <div class="alert alert-green" style="margin-top:14px">
+      <strong>★ ไฮไลต์ครั้งที่ 6 (16 มิ.ย. 2569) — จ่ายสูงสุดตั้งแต่จัดตั้งกองทุน</strong><br>
+      ▸ อัตราจ่ายสูงสุดเป็นประวัติการณ์ <b>1.25% (0.1433 บาท/หน่วย)</b> — สูงกว่าค่าเฉลี่ย 5 ครั้งก่อนหน้าเกือบเท่าตัว<br>
+      ▸ NAV ณ วันจ่ายทำจุดสูงสุดตั้งแต่จัดตั้งที่ <b>11.4789 บาท/หน่วย</b><br>
+      ▸ พิสูจน์ว่ากองทุนทำได้ทั้ง <b>"จ่ายเงินสม่ำเสมอ" และ "มูลค่าเติบโต"</b> พร้อมกัน
+    </div>
+    <p style="color:#718096;font-size:.82em;margin-top:8px">ที่มา: บลจ. เอไอเอ (ประเทศไทย) จำกัด, ข้อมูล ณ 18 มิ.ย. 2569 | ผลการดำเนินงานในอดีตมิได้ยืนยันผลในอนาคต</p>
+  </div>
+
+  <div class="alert alert-gold"><strong>⭐ สรุป:</strong> Auto Redemption คือกลไกสำคัญที่ทำให้ Elite Income Prestige สร้าง <b>"รายได้ประจำ"</b> ได้จริงตั้งแต่ปีแรก โดยไม่ต้องรอเกษียณ ไม่ต้องขายเอง ไม่มีภาษี หัวใจอยู่ที่กองทุนสามารถสร้างผลตอบแทนได้มากกว่าสิ่งที่ Redeem ออกไป — <b>จ่ายแล้ว 6 ครั้ง สะสม ~4.76%</b></div>
 </div>
 
 <!-- ======================================== -->
@@ -980,6 +1086,29 @@ document.addEventListener('DOMContentLoaded',()=>{setTimeout(calcCashflow,300)})
     <p>Elite Income Prestige ไม่เพียงสร้างรายได้ แต่ยังเป็นเครื่องมือส่งต่อความมั่งคั่งที่ทรงประสิทธิภาพ</p>
   </div>
 
+  <!-- 3 ข้อได้เปรียบเชิงโครงสร้าง (Wealth Transfer Pillars) -->
+  <div class="card">
+    <h2>🎯 3 ข้อได้เปรียบเชิงโครงสร้าง — ประกันชีวิต vs มรดกทั่วไป</h2>
+    <p style="color:#718096;margin-bottom:16px">ข้อผิดพลาดที่พบบ่อยคือการสับสนระหว่าง "ทรัพย์สินที่มีอยู่เดิม" กับ "เงินที่เกิดขึ้นหลังเสียชีวิตตามสัญญา" — ประกันชีวิตอยู่ในหมวดหลัง ซึ่งทำงานนอกระบบมรดกทั้งหมด</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px">
+      <div style="background:linear-gradient(135deg,#f0fff4,#c6f6d5);border-radius:12px;padding:20px;text-align:center;border:2px solid #38a169">
+        <div style="font-size:2em;margin-bottom:8px">🎯</div>
+        <div style="font-weight:800;color:#276749;font-size:1.05em;margin-bottom:8px">ระบุผู้รับได้อย่างแม่นยำ</div>
+        <div style="color:#2d3748;font-size:.88em;line-height:1.5">ระบุชื่อ-นามสกุล และสัดส่วนได้โดยตรงในกรมธรรม์ ผูกพันตามสัญญา ไม่อาจโต้แย้งได้</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#ebf8ff,#bee3f8);border-radius:12px;padding:20px;text-align:center;border:2px solid #3182ce">
+        <div style="font-size:2em;margin-bottom:8px">⚡</div>
+        <div style="font-weight:800;color:#2b6cb0;font-size:1.05em;margin-bottom:8px">ส่งมอบทันที — ไม่รอศาล</div>
+        <div style="color:#2d3748;font-size:.88em;line-height:1.5">มรดกทั่วไปใช้เวลา 6–18 เดือน ผ่านศาล เงินประกันส่งตรงถึงผู้รับเป็นเงินสดสภาพคล่องทันที</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#faf5ff,#e9d8fd);border-radius:12px;padding:20px;text-align:center;border:2px solid #805ad5">
+        <div style="font-size:2em;margin-bottom:8px">🛡️</div>
+        <div style="font-weight:800;color:#6b46c1;font-size:1.05em;margin-bottom:8px">ปลอดจากเจ้าหนี้ &amp; ภาษี</div>
+        <div style="color:#2d3748;font-size:.88em;line-height:1.5">เจ้าหนี้ของผู้ตายไม่มีสิทธิเรียกร้อง ผู้รับไม่ต้องเสียภาษีมรดก เงินทั้งก้อนถึงมืออย่างครบถ้วน</div>
+      </div>
+    </div>
+  </div>
+
   <div class="card">
     <h2>💎 ผลประโยชน์กรณีเสียชีวิต</h2>
     <div class="grid2">
@@ -1046,11 +1175,151 @@ document.addEventListener('DOMContentLoaded',()=>{setTimeout(calcCashflow,300)})
     </table></div>
   </div>
 
-  <div class="alert alert-green"><strong>✅ Smooth Transfer สรุป:</strong> Elite Income Prestige ทำให้การส่งต่อความมั่งคั่งเป็นเรื่อง <b>เรียบง่าย รวดเร็ว ปราศจากข้อพิพาท</b> — กำหนดผู้รับได้ชัดเจน ไม่ผ่านศาล ไม่เสียภาษีมรดก มูลค่าเพิ่มตามเวลา เป็นเครื่องมือวางแผนมรดกที่ครบถ้วนในตัว</div>
+  <!-- อ้างอิงกฎหมาย -->
+  <div class="card" style="background:linear-gradient(135deg,#f7fafc,#edf2f7);border-left:4px solid #805ad5">
+    <h2>⚖️ หลักกฎหมาย — ป.พ.พ. มาตรา 897 และมาตรา 1646</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:16px">
+      <div style="background:#fff;border-radius:10px;padding:16px;border:1px solid #e2e8f0">
+        <div style="font-weight:800;color:#805ad5;margin-bottom:6px">📜 มาตรา 897 — เงินประกันชีวิตไม่ใช่มรดก</div>
+        <p style="font-size:.88em;color:#4a5568;margin:0;line-height:1.6">เงินประกันชีวิตเกิดจากสัญญาระหว่างผู้เอาประกันกับบริษัท โดยเงื่อนไขการจ่ายอาศัยเหตุ "ความตาย" — จำนวนเงินจึงตกเป็นของผู้รับประโยชน์ที่ระบุในกรมธรรม์ทันทีที่ผู้เอาประกันถึงแก่ความตาย</p>
+      </div>
+      <div style="background:#fff;border-radius:10px;padding:16px;border:1px solid #e2e8f0">
+        <div style="font-weight:800;color:#805ad5;margin-bottom:6px">📜 มาตรา 1646 — ทรัพย์มรดกต้องผ่านศาล</div>
+        <p style="font-size:.88em;color:#4a5568;margin:0;line-height:1.6">ทรัพย์สินที่มีอยู่ก่อนหรือขณะถึงแก่ความตายจัดเป็นทรัพย์มรดก ต้องผ่านกระบวนการศาลและอาจถูกเจ้าหนี้เรียกร้อง — แต่เงินประกันชีวิตไม่อยู่ในหมวดนี้</p>
+      </div>
+    </div>
+    <div style="background:#805ad5;color:#fff;border-radius:8px;padding:12px 16px;font-size:.88em;line-height:1.5">
+      <strong>📌 อ้างอิง:</strong> คำพิพากษาฎีกาที่ 4714/2542 — เงินประกันชีวิตไม่ใช่ทรัพย์สินของผู้ตายที่มีอยู่ก่อนหรือขณะถึงแก่ความตาย ส่งตรงถึงผู้รับประโยชน์โดยไม่ผ่านกองมรดก ไม่ผ่านศาล ไม่ผ่านเจ้าหนี้
+    </div>
+  </div>
+
+  <div class="alert alert-green"><strong>✅ Smooth Transfer สรุป:</strong> Elite Income Prestige ทำให้การส่งต่อความมั่งคั่งเป็นเรื่อง <b>เรียบง่าย รวดเร็ว ปราศจากข้อพิพาท</b> — กำหนดผู้รับได้ชัดเจน ไม่ผ่านศาล ไม่เสียภาษีมรดก มูลค่าเพิ่มตามเวลา เป็นเครื่องมือวางแผนมรดกที่ครบถ้วนในตัว<br><br>
+  <b>หลักกฎหมาย:</b> ป.พ.พ. มาตรา 897 — เงินประกันชีวิตส่งตรงถึงผู้รับประโยชน์ ไม่ใช่มรดก ไม่ต้องผ่านศาล (ฎีกาที่ 4714/2542)</div>
 </div>
 
 <!-- ======================================== -->
-<!-- PAGE 9: CLIENT REPORT (A4 Printable) -->
+<!-- PAGE 10: SAVINGS RELOCATION -->
+<!-- ======================================== -->
+<div id="savings" class="page">
+  <div class="elite-hero" style="background:linear-gradient(135deg,#2b6cb0,#3182ce,#4299e1)">
+    <h2>🏦 แนวคิดการจัดสรรเงินออม — Savings Relocation</h2>
+    <p>เริ่มต้น 500,000 บาท/ปี × 5 ปี — ย้ายเงินเย็นจากที่ที่แพ้เงินเฟ้อ สู่โอกาสสร้างกระแสเงินสด</p>
+  </div>
+
+  <div class="card">
+    <h2>📍 ทำไมต้องพิจารณาย้ายเงินออม?</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:16px">
+      <div style="background:#fed7d7;border-radius:10px;padding:16px;text-align:center">
+        <div style="font-size:1.8em;font-weight:800;color:#c53030">~1.35%</div>
+        <div style="font-size:.85em;color:#742a2a">ดอกเบี้ยเงินฝากประจำ 12 เดือน</div>
+      </div>
+      <div style="background:#fed7d7;border-radius:10px;padding:16px;text-align:center">
+        <div style="font-size:1.8em;font-weight:800;color:#c53030">2.8%</div>
+        <div style="font-size:.85em;color:#742a2a">เงินเฟ้อคาดการณ์ปี 2569</div>
+      </div>
+      <div style="background:#fed7d7;border-radius:10px;padding:16px;text-align:center">
+        <div style="font-size:1.8em;font-weight:800;color:#c53030">-1.4%</div>
+        <div style="font-size:.85em;color:#742a2a">ผลตอบแทนแท้จริงติดลบ/ปี</div>
+      </div>
+    </div>
+    <p style="color:#4a5568">เงินออมในบัญชีมีผลตอบแทนแท้จริงติดลบ การย้ายเงินเย็นระยะยาวเข้าสู่ AIA Elite Income Prestige จึงเป็นทางเลือกเชิงกลยุทธ์ ภายใต้เงื่อนไข: เบี้ยขั้นต่ำ 500,000 บาท/ปี ชำระ 5 ปี <b>ถือครองถึงปีที่ 10 เพื่อสิทธิถอนโดยไม่มีค่าธรรมเนียมการถอน</b></p>
+  </div>
+
+  <div class="card">
+    <h2>📊 วิเคราะห์ข้อดี-ข้อควรระวัง</h2>
+    <div style="overflow-x:auto"><table>
+      <tr><th style="width:16%">มิติ</th><th style="background:#38a169;color:#fff">✓ ข้อดี</th><th style="background:#e53e3e;color:#fff">⚠ ข้อควรระวัง</th></tr>
+      <tr>
+        <td style="font-weight:700">กระแสเงินสด</td>
+        <td>Auto Redemption จ่ายจริง 6 ครั้ง สะสม ~4.76% เป้า ~3%/ปี คาดรอบจ่ายได้รายไตรมาส</td>
+        <td>ไม่รับประกันการจ่าย — ขึ้นกับดุลยพินิจ บลจ. และสภาวะตลาด</td>
+      </tr>
+      <tr>
+        <td style="font-weight:700">ผลตอบแทน</td>
+        <td>โอกาสเติบโตจากสินทรัพย์โลก พร้อมความคุ้มครองชีวิตในตัวตั้งแต่วันแรก</td>
+        <td>NAV ผันผวนได้ ผลตอบแทนไม่การันตี เงินต้นมีความเสี่ยง</td>
+      </tr>
+      <tr>
+        <td style="font-weight:700">วินัยการออม</td>
+        <td>เบี้ย 5 แสน/ปี × 5 ปี สร้างวินัยแบบทยอยเข้า (เฉลี่ยต้นทุน)</td>
+        <td>ภาระผูกพันชำระเบี้ย 5 ปี — ต้องมั่นใจในสภาพคล่องส่วนตัว</td>
+      </tr>
+      <tr>
+        <td style="font-weight:700">สภาพคล่อง</td>
+        <td>ปีที่ 10 ถอนโดยไม่มีค่าธรรมเนียมการถอน + ค่าบริหาร 0% พร้อมโบนัส 0.25%</td>
+        <td>ถอนก่อนกำหนดมีค่าธรรมเนียม — เหมาะเงินเย็นถือ 10 ปีขึ้นไป</td>
+      </tr>
+      <tr>
+        <td style="font-weight:700">ภาษี &amp; การส่งต่อ</td>
+        <td>Auto Redemption ไม่ถูกหักภาษีแบบเงินปันผลกองทุนรวม + สินไหมส่งตรงผู้รับประโยชน์</td>
+        <td>เงื่อนไขความคุ้มครองและ COI เป็นไปตามกรมธรรม์</td>
+      </tr>
+    </table></div>
+  </div>
+
+  <div class="alert alert-blue" style="border-left:4px solid #3182ce"><strong>💡 หลักคิดสำคัญ:</strong> นี่ไม่ใช่การ "เสี่ยงเพิ่ม" — แต่คือการ<b>ย้ายเงินออมจากที่ที่แพ้เงินเฟ้อแน่นอน ไปยังที่ที่มีกลไกสร้างกระแสเงินสดพร้อมโอกาสเติบโต</b> ภายใต้เงื่อนไขว่าต้องเป็นเงินเย็นที่วางแผนถือครอง 10 ปีขึ้นไป</div>
+  <p style="color:#a0aec0;font-size:.82em;margin-top:8px;font-style:italic">แหล่งข้อมูล: อัตราดอกเบี้ยเงินฝากประจำ มิ.ย. 2569 | ประมาณการเงินเฟ้อ: กนง. ธปท. 24 มิ.ย. 2569 | เงื่อนไขค่าธรรมเนียม: กรมธรรม์ AIA Elite Income Prestige</p>
+</div>
+
+<!-- ======================================== -->
+<!-- PAGE 11: VS CONDO RENTAL -->
+<!-- ======================================== -->
+<div id="vscondo" class="page">
+  <div class="elite-hero" style="background:linear-gradient(135deg,#744210,#975a16,#b7791f)">
+    <h2>🏢 เปรียบเทียบเชิงแนวคิด: Elite Income Prestige vs คอนโดปล่อยเช่า</h2>
+    <p>Passive Income แบบไหนเหมาะกับท่าน? — วิเคราะห์ 7 มิติเปรียบเทียบ</p>
+  </div>
+
+  <div class="card">
+    <h2>📍 คอนโดให้เช่า — ตัวเลขจริงเป็นอย่างไร?</h2>
+    <p style="color:#4a5568;margin-bottom:16px">Gross Rental Yield คอนโดกรุงเทพฯ เฉลี่ย 5–7% ต่อปี แต่ Net Yield จริงหลังหักค่าใช้จ่ายต่ำกว่ามาก: คำนวณค่าเช่าเพียง <b>10 จาก 12 เดือน</b> (เผื่อห้องว่าง) หักค่าส่วนกลาง ค่าซ่อมบำรุง <b>5–10% ของค่าเช่า</b> และค่านายหน้า ~1 เดือนต่อรอบ</p>
+
+    <div style="overflow-x:auto"><table>
+      <tr><th style="width:18%">ประเด็น</th><th style="background:#975a16;color:#fff">🏢 คอนโดปล่อยเช่า</th><th style="background:#2b6cb0;color:#fff">💼 Elite Income Prestige</th></tr>
+      <tr>
+        <td style="font-weight:700">กระแสเงินสด</td>
+        <td>ไม่แน่นอน — ขึ้นกับผู้เช่า (ประเมินเพียง 10/12 เดือน) และการจ่ายตรงเวลา</td>
+        <td class="best">Auto Redemption คาดรอบได้รายไตรมาส จ่ายจริง 6 ครั้งติดต่อกัน</td>
+      </tr>
+      <tr>
+        <td style="font-weight:700">การบริหาร</td>
+        <td>หาผู้เช่า ทำสัญญา ทวงค่าเช่า ซ่อมแซม ลุ้นผู้เช่าดูแลห้อง</td>
+        <td class="best">ไม่ต้องบริหาร — ทีมผู้จัดการกองทุนระดับโลกดูแลให้</td>
+      </tr>
+      <tr>
+        <td style="font-weight:700">ต้นทุนแฝง</td>
+        <td>ส่วนกลาง + ซ่อม 5–10% + นายหน้า + ภาษีที่ดิน + เฟอร์นิเจอร์เสื่อม + ค่าโอน</td>
+        <td class="best">ค่าธรรมเนียมโปร่งใส ปีที่ 10+ ค่าบริหาร 0% โบนัส 0.25%</td>
+      </tr>
+      <tr>
+        <td style="font-weight:700">สภาพคล่อง</td>
+        <td>ขายยาก อาจใช้เวลาหลายเดือน-ปี โดยเฉพาะช่วงตลาดซบเซา</td>
+        <td class="best">ถอนได้ตามเงื่อนไข ครบปีที่ 10 ไม่มีค่าธรรมเนียมการถอน</td>
+      </tr>
+      <tr>
+        <td style="font-weight:700">กระจายความเสี่ยง</td>
+        <td>กระจุก: ทรัพย์ชิ้นเดียว ทำเลเดียว ผู้เช่ารายเดียว</td>
+        <td class="best">กระจายในหลักทรัพย์โลกหลายร้อยตัว ผ่าน Fund of Funds</td>
+      </tr>
+      <tr>
+        <td style="font-weight:700">ส่งต่อมรดก</td>
+        <td>ผ่านกระบวนการมรดก มีภาษี/ค่าโอน แบ่งทายาทหลายคนยาก</td>
+        <td class="best">สินไหมส่งตรงผู้รับประโยชน์ ระบุสัดส่วนได้ ไม่ผ่านศาล</td>
+      </tr>
+      <tr>
+        <td style="font-weight:700">คุ้มครองชีวิต</td>
+        <td>ไม่มี</td>
+        <td class="best">มีตั้งแต่วันแรก (การันตีทุนขั้นต่ำ 110%)</td>
+      </tr>
+    </table></div>
+  </div>
+
+  <div class="alert alert-green"><strong>💡 บทสรุป:</strong> คอนโดให้ Gross Yield ที่ดูดี แต่ Net Yield จริงหลังหักห้องว่าง ค่าส่วนกลาง ค่าซ่อม และ<b>เวลาชีวิตที่ต้องเสียไปกับการบริหาร</b>มักเหลือไม่ถึงครึ่ง — Elite Income Prestige ให้กระแสเงินสดที่คาดการณ์ได้ โดยท่านไม่ต้องเป็น "ผู้จัดการอาคาร" ของตัวเอง</div>
+  <p style="color:#a0aec0;font-size:.82em;margin-top:8px;font-style:italic">แหล่งข้อมูล: Rental Yield คอนโดกรุงเทพฯ 5–7%: LandPro Thailand | ค่าเช่า 10 เดือน/ปี: DDproperty | ค่าซ่อม 5–10%: ThaiCardOnline 2569 — เปรียบเทียบเชิงแนวคิด มิใช่คำแนะนำจำหน่ายอสังหาฯ</p>
+</div>
+
+<!-- ======================================== -->
+<!-- PAGE 12: CLIENT REPORT (A4 Printable) -->
 <!-- ======================================== -->
 <div id="clientreport" class="page">
 
@@ -1075,17 +1344,17 @@ document.addEventListener('DOMContentLoaded',()=>{setTimeout(calcCashflow,300)})
         <div>
           <div class="rpt-box red">
             <b>🔴 ปัญหาที่คนไทยกำลังเผชิญ</b><br>
-            ▸ อัตราดอกเบี้ยเงินฝากออมทรัพย์ต่ำสุดในรอบหลายปี เหลือเพียง <b>0.25%/ปี</b> (ฝากประจำ 12 เดือน ~0.85%)<br>
-            ▸ ธปท. ลดดอกเบี้ยนโยบายลงมาที่ <b>1.25%</b> และมีแนวโน้มลดอีก<br>
-            ▸ เศรษฐกิจไทยชะลอตัว GDP ปี 2026 คาดการณ์ที่ <b>1.5-1.6%</b> เท่านั้น<br>
-            ▸ เงินเฟ้อติดลบ 10 เดือนต่อเนื่อง — กำลังซื้อหดตัว<br>
+            ▸ อัตราดอกเบี้ยเงินฝากออมทรัพย์ต่ำสุดในรอบหลายปี เหลือเพียง <b>0.25%/ปี</b> (ฝากประจำ 12 เดือน ~1.35%)<br>
+            ▸ ธปท. ลดดอกเบี้ยนโยบายลงมาที่ <b>1.00%</b> และมีแนวโน้มคงที่หรือลดอีก<br>
+            ▸ เศรษฐกิจไทยชะลอตัว GDP ปี 2569 คาดการณ์ที่ <b>2.3%</b><br>
+            ▸ เงินเฟ้อเริ่มกลับมาที่ <b>2.8%</b> — กดดันกำลังซื้อ<br>
             ▸ หนี้ครัวเรือนสูง สินเชื่อหดตัว ความไม่แน่นอนทั่วโลกจากสงครามการค้า
           </div>
         </div>
         <div>
           <div class="rpt-box green">
             <b>🟢 โอกาสจาก Elite Income Prestige</b><br>
-            ▸ Auto Redemption <b>~3%/ปี</b> ของมูลค่ากองทุน — สูงกว่าดอกเบี้ยเงินฝากถึง <b>12 เท่า</b><br>
+            ▸ Auto Redemption <b>~3%/ปี</b> ของมูลค่ากองทุน — สูงกว่าดอกเบี้ยเงินฝากออมทรัพย์ถึง <b>12 เท่า</b><br>
             ▸ ลงทุนในสินทรัพย์ต่างประเทศ (USD/EUR) — กระจายความเสี่ยงจากเศรษฐกิจไทย<br>
             ▸ 7 แหล่งรายรับจากกลยุทธ์ระดับโลก ไม่พึ่งพาแหล่งเดียว<br>
             ▸ เบี้ยเข้ากองทุน 100% (ไม่หัก Premium Charge)<br>
@@ -1132,7 +1401,7 @@ document.addEventListener('DOMContentLoaded',()=>{setTimeout(calcCashflow,300)})
     </div>
 
     <div class="rpt-footer">
-      AIA Elite Income Prestige — Smart Income · Smooth Transfer | หน้า 1/3 | เอกสารนี้จัดทำเพื่อให้ข้อมูลเบื้องต้น ไม่ใช่สัญญาประกัน | ก.พ. 2569
+      AIA Elite Income Prestige — Smart Income · Smooth Transfer | หน้า 1/3 | เอกสารนี้จัดทำเพื่อให้ข้อมูลเบื้องต้น ไม่ใช่สัญญาประกัน | ก.ค. 2569
     </div>
   </div>
 
@@ -1185,7 +1454,7 @@ document.addEventListener('DOMContentLoaded',()=>{setTimeout(calcCashflow,300)})
 
     <!-- 7 Sources of Income -->
     <div class="rpt-section">
-      <h2>⭐ 7 แหล่งรายรับที่ทำงานพร้อมกัน (Allianz Income and Growth — 90% ของกองทุน)</h2>
+      <h2>⭐ 7 แหล่งรายรับที่ทำงานพร้อมกัน (Allianz Income and Growth — 62.8% ของพอร์ต)</h2>
       <div class="rpt-2col">
         <div>
           <h3 style="color:#d69e2e">💰 รายได้ประจำ (Income — เงินไหลเข้าสม่ำเสมอ)</h3>
@@ -1235,7 +1504,7 @@ document.addEventListener('DOMContentLoaded',()=>{setTimeout(calcCashflow,300)})
     </div>
 
     <div class="rpt-footer">
-      AIA Elite Income Prestige — Smart Income · Smooth Transfer | หน้า 2/3 | เอกสารนี้จัดทำเพื่อให้ข้อมูลเบื้องต้น ไม่ใช่สัญญาประกัน | ก.พ. 2569
+      AIA Elite Income Prestige — Smart Income · Smooth Transfer | หน้า 2/3 | เอกสารนี้จัดทำเพื่อให้ข้อมูลเบื้องต้น ไม่ใช่สัญญาประกัน | ก.ค. 2569
     </div>
   </div>
 
@@ -1252,7 +1521,7 @@ document.addEventListener('DOMContentLoaded',()=>{setTimeout(calcCashflow,300)})
       <table class="rpt-table">
         <tr><th>ทางเลือก</th><th>ผลตอบแทน/ปี</th><th>ภาษี</th><th>สภาพคล่อง</th><th>มรดก</th></tr>
         <tr><td style="text-align:left">ฝากออมทรัพย์</td><td><b>0.25%</b></td><td>เสีย 15%</td><td>สูง</td><td>ผ่านมรดก/ศาล</td></tr>
-        <tr><td style="text-align:left">ฝากประจำ 12 เดือน</td><td><b>0.85%</b></td><td>เสีย 15%</td><td>ต่ำ</td><td>ผ่านมรดก/ศาล</td></tr>
+        <tr><td style="text-align:left">ฝากประจำ 12 เดือน</td><td><b>~1.35%</b></td><td>เสีย 15%</td><td>ต่ำ</td><td>ผ่านมรดก/ศาล</td></tr>
         <tr><td style="text-align:left">กองทุนปันผล</td><td><b>2-4%</b> (ไม่แน่นอน)</td><td>เสีย 10%</td><td>ปานกลาง</td><td>ผ่านมรดก/ศาล</td></tr>
         <tr style="background:#f0fff4"><td style="text-align:left;font-weight:700;color:#276749">✅ Elite Income Prestige</td><td><b style="color:#276749">~3% Auto Redeem</b><br>+ เติบโตของ NAV</td><td style="color:#276749"><b>0%</b></td><td>ปานกลาง<br>(หลังปีที่ 10 ดีมาก)</td><td style="color:#276749"><b>ส่งตรง ไม่ผ่านศาล</b><br>ไม่เสียภาษีมรดก</td></tr>
       </table>
@@ -1260,20 +1529,20 @@ document.addEventListener('DOMContentLoaded',()=>{setTimeout(calcCashflow,300)})
 
     <!-- Economic Context -->
     <div class="rpt-section">
-      <h2>🌏 สภาพเศรษฐกิจปัจจุบัน (ก.พ. 2569) — ทำไมต้องลงมือตอนนี้</h2>
+      <h2>🌏 สภาพเศรษฐกิจปัจจุบัน (ก.ค. 2569) — ทำไมต้องลงมือตอนนี้</h2>
       <div class="rpt-2col">
         <div class="rpt-box red" style="font-size:.96em">
           <b>🔴 สภาพเศรษฐกิจไทย:</b><br>
-          ▸ GDP ปี 2569 คาดโต <b>1.5-1.6%</b> เท่านั้น (IMF/ธปท.)<br>
-          ▸ เงินเฟ้อติดลบ <b>10 เดือนต่อเนื่อง</b> (ม.ค. 69 = -0.66%)<br>
-          ▸ ดอกเบี้ยนโยบาย <b>1.25%</b> — ต่ำสุดนับจากโควิด<br>
-          ▸ ดอกเบี้ยเงินฝากมีแนวโน้มลดลงอีก<br>
+          ▸ GDP ปี 2569 คาดโต <b>2.3%</b> (ธปท.)<br>
+          ▸ เงินเฟ้อเริ่มกลับมาที่ <b>2.8%</b><br>
+          ▸ ดอกเบี้ยนโยบาย กนง. <b>1.00%</b><br>
+          ▸ เงินฝากประจำ 12 เดือน ~<b>1.35%</b> — ผลตอบแทนแท้จริงติดลบ<br>
           ▸ ค่าเงินบาทแข็ง — กดดันส่งออกและรายได้<br>
           ▸ หนี้ครัวเรือนสูง สินเชื่อหดตัว
         </div>
         <div class="rpt-box green" style="font-size:.96em">
           <b>🟢 จังหวะที่ดีสำหรับ Elite Income:</b><br>
-          ▸ ดอกเบี้ยเงินฝาก 0.25% = <b>เงินเสียโอกาส</b><br>
+          ▸ ดอกเบี้ยเงินฝาก ~1.35% แพ้เงินเฟ้อ 2.8% = <b>ผลตอบแทนจริงติดลบ</b><br>
           ▸ เงินบาทแข็ง = <b>ซื้อ USD ได้ถูก</b> → ลงทุนต่างประเทศคุ้มค่า<br>
           ▸ Fed ยังคงดอกเบี้ยสูง → <b>High Yield Bond ให้ดอกเบี้ยสูง</b><br>
           ▸ ยิ่งเริ่มเร็ว ยิ่งได้ <b>Compounding นาน</b><br>
@@ -1323,7 +1592,7 @@ document.addEventListener('DOMContentLoaded',()=>{setTimeout(calcCashflow,300)})
     </div>
 
     <div class="rpt-footer">
-      AIA Elite Income Prestige — Smart Income · Smooth Transfer | หน้า 3/3 | เอกสารนี้จัดทำเพื่อให้ข้อมูลเบื้องต้น <b>ไม่ใช่สัญญาประกัน</b> ผลตอบแทนไม่รับประกัน ผลการดำเนินงานในอดีตไม่ได้เป็นการรับประกันผลในอนาคต | ก.พ. 2569
+      AIA Elite Income Prestige — Smart Income · Smooth Transfer | หน้า 3/3 | เอกสารนี้จัดทำเพื่อให้ข้อมูลเบื้องต้น <b>ไม่ใช่สัญญาประกัน</b> ผลตอบแทนไม่รับประกัน ผลการดำเนินงานในอดีตไม่ได้เป็นการรับประกันผลในอนาคต | ก.ค. 2569
     </div>
   </div>
 

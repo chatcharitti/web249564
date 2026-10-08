@@ -456,10 +456,46 @@ body{
   .sum-reason,.sum-box,.sum-tbl,.sum-cta,.sum-mini{page-break-inside:avoid;break-inside:avoid;}
   .sum-doc,.sum-doc *{
     -webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
-  .sum-kpi-item b{color:#F5EBC6 !important;}
-  .sum-cta-t,.sum-cta-line{color:#F0E3B2 !important;}
-  .sum-tbl th{color:#F0E3B2 !important;}
-  .sum-tbl-red tr.tot td{color:#F0E3B2 !important;}
+
+  /* ---- INKJET LEGIBILITY: darken text, drop heavy gradient fills ---- */
+  .sum-p,.sum-tbl td,.sum-box,.sum-mini,.sum-reason,.sum-ul{color:#15151F !important;}
+  .sum-tbl td.k,.sum-h,.sum-title,.sum-box b,.sum-mini b,.sum-reason b,.sum-ul b,.sum-p b,.sum-tbl td b{color:#0A1420 !important;}
+  .sum-note,.sum-disc,.sum-foot,.sum-head-right{color:#3D3D52 !important;}
+  .sum-brand,.sum-sub{color:#6B5420 !important;}
+  .sum-box-warn{color:#15151F !important;}
+  .sum-box-warn b{color:#7A1C33 !important;}
+  .sum-box{background:#FAF6EC !important;border-left:4px solid #8B7332 !important;}
+  .sum-box-warn{background:#FCF1F1 !important;border-left:4px solid #8B2240 !important;}
+  .sum-mini{background:#F2F6FB !important;border:1px solid #C8D4E4 !important;}
+
+  /* KPI tiles: white card + navy border instead of dark gradient */
+  .sum-kpi-item{background:#fff !important;border:1.6pt solid #0D1B2A !important;border-radius:5px !important;}
+  .sum-kpi-item b{color:#0A1420 !important;}
+  .sum-kpi-item span{color:#3D3D52 !important;}
+
+  /* Table header: cream-gold band + dark navy bold text */
+  .sum-tbl th{background:#F2E6C4 !important;color:#0A1420 !important;
+    border-bottom:1.4pt solid #8B7332 !important;font-weight:800 !important;}
+  .sum-tbl td{border-bottom:.7pt solid #C9C2B0 !important;}
+  .sum-tbl td.k{background:#F7F4EC !important;}
+  .sum-tbl-red tr.hi td{background:#F8EDCD !important;color:#0A1420 !important;}
+  .sum-tbl-red tr.tot td{background:#F2E6C4 !important;color:#0A1420 !important;
+    border-top:1.4pt solid #8B7332 !important;font-weight:800 !important;}
+
+  /* CTA block: light panel, dark text */
+  .sum-cta{background:#F7F4EC !important;border:1.6pt solid #0D1B2A !important;}
+  .sum-cta-t{color:#0A1420 !important;}
+  .sum-cta p{color:#15151F !important;}
+  .sum-cta-line{color:#5A4618 !important;border-top:1pt solid #C2B48A !important;font-weight:700 !important;}
+
+  /* numbered badges: solid navy prints clean, no gradient */
+  .sum-reason .n{background:#0D1B2A !important;color:#fff !important;}
+
+  /* structural rules darker */
+  .sum-head{border-bottom:2.2pt solid #8B7332 !important;}
+  .sum-h{border-left:4pt solid #8B7332 !important;}
+  .sum-foot{border-top:.7pt solid #C9C2B0 !important;}
+  .sum-disc{border-top:.7pt solid #C9C2B0 !important;}
 }
 
 /* === VIEW SWITCH TABS === */

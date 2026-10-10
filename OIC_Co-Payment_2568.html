@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographic: สรุปเงื่อนไข Co-payment (AIA)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'aia-red': '#D94F5C',
+                        'aia-dark': '#32373B',
+                        'aia-orange': '#F26419',
+                        'aia-yellow': '#F6AE2D',
+                        'aia-cream': '#FEF9F0',
+                    },
+                    fontFamily: {
+                        'sans': ['Sarabun', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 250px;
+            max-height: 300px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 300px;
+                max-height: 350px;
+            }
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: #D94F5C;
+            transform: translateX(-50%);
+            display: none;
+        }
+        @media (min-width: 768px) {
+            .timeline::before {
+                display: block;
+            }
+        }
+        .timeline-item {
+            position: relative;
+            width: 100%;
+            padding-bottom: 2rem;
+        }
+        @media (min-width: 768px) {
+            .timeline-item {
+                width: 50%;
+                padding-bottom: 0;
+            }
+            .timeline-item:nth-child(odd) {
+                padding-right: 2rem;
+                text-align: right;
+            }
+            .timeline-item:nth-child(even) {
+                padding-left: 2rem;
+                text-align: left;
+                align-self: flex-end;
+            }
+            .timeline-item:nth-child(odd)::after {
+                content: '';
+                position: absolute;
+                right: -8px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 20px;
+                height: 20px;
+                background-color: #D94F5C;
+                border: 4px solid #FEF9F0;
+                border-radius: 50%;
+            }
+            .timeline-item:nth-child(even)::after {
+                content: '';
+                position: absolute;
+                left: -12px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 20px;
+                height: 20px;
+                background-color: #D94F5C;
+                border: 4px solid #FEF9F0;
+                border-radius: 50%;
+            }
+        }
+    </style>
+</head>
+<body class="bg-aia-cream text-aia-dark font-sans antialiased">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-5xl">
+
+        <header class="text-center mb-12">
+            <h1 class="text-3xl md:text-5xl font-bold text-aia-red mb-4">Co-payment **เงื่อนไข คปภ. ในปีต่ออายุ</h1>
+            <p class="text-lg md:text-xl text-aia-dark mb-2">เพื่อเบี้ยประกันที่ยั่งยืน และความเป็นธรรมสำหรับทุกคน</p>
+            <p class="text-md text-aia-orange font-semibold mt-2 px-4 py-1 inline-block rounded-full">เริ่มใช้กับกรมธรรม์ใหม่ ตั้งแต่ 20 มีนาคม 2568 เป็นต้นไป</p>
+        </header>
+
+        <main class="flex flex-col gap-8">
+
+            <section class="bg-white rounded-lg shadow-xl p-6 md:p-8 mb-8">
+                <h2 class="text-2xl md:text-3xl font-bold text-aia-red mb-4">หลักเกณฑ์การพิจารณา (The Criteria)</h2>
+                <p class="mb-6 text-lg">บริษัทจะพิจารณาการต่ออายุสัญญาใหม่ทุกรอบปีกรมธรรม์ หากเข้าเงื่อนไขข้อใดข้อหนึ่งต่อไปนี้ ผู้เอาประกันจะต้องร่วมจ่าย (Copayment) ในปีกรมธรรม์ถัดไป</p>
+                
+                <p class="mb-4 text-md">เกณฑ์การพิจารณาจะอิงตาม "อัตราส่วนการเคลม" (Claims Ratio) หรือยอดเคลมรวม เทียบกับเบี้ยประกันที่จ่ายมา โดยมีเกณฑ์ดังนี้</p>
+                <div class="chart-container mb-8">
+                    <canvas id="claimsRatioChart"></canvas>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="border-l-4 border-aia-orange p-4 bg-aia-cream rounded-r-lg shadow-md flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-bold text-aia-dark">กรณีที่ 1: ป่วยเล็กน้อยทั่วไป</h3>
+                            <ul class="list-disc list-inside mt-2 text-aia-dark">
+                                <li>นอน รพ. (IPD) ตั้งแต่ <strong>3 ครั้ง</strong> ขึ้นไป</li>
+                                <li class="font-bold">และ</li>
+                                <li>ยอดเคลมรวม > <strong>200%</strong> ของเบี้ยฯ</li>
+                            </ul>
+                        </div>
+                        <div class="text-center mt-4 p-3 bg-aia-orange text-white text-lg font-bold rounded-lg shadow-inner">
+                            ผลลัพธ์: Co-payment 30%
+                        </div>
+                    </div>
+                    
+                    <div class="border-l-4 border-aia-red p-4 bg-aia-cream rounded-r-lg shadow-md flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-bold text-aia-dark">กรณีที่ 2: ป่วยโรคทั่วไป</h3>
+                            <ul class="list-disc list-inside mt-2 text-aia-dark">
+                                <li>นอน รพ. (IPD) ตั้งแต่ <strong>3 ครั้ง</strong> ขึ้นไป</li>
+                                <li class="font-bold">และ</li>
+                                <li>ยอดเคลมรวม > <strong>400%</strong> ของเบี้ยฯ</li>
+                            </ul>
+                        </div>
+                        <div class="text-center mt-4 p-3 bg-aia-orange text-white text-lg font-bold rounded-lg shadow-inner">
+                            ผลลัพธ์: Co-payment 30%
+                        </div>
+                    </div>
+
+                    <div class="border-l-4 border-aia-red p-4 bg-red-100 rounded-r-lg shadow-md flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-bold text-aia-red">กรณีที่ 3: เข้าทั้ง 2 เงื่อนไข</h3>
+                            <ul class="list-disc list-inside mt-2 text-aia-dark">
+                                <li>เข้าเกณฑ์ทั้งป่วยเล็กน้อย</li>
+                                <li class="font-bold">และ</li>
+                                <li>เข้าเกณฑ์ป่วยโรคทั่วไป</li>
+                            </ul>
+                        </div>
+                        <div class="text-center mt-4 p-3 bg-aia-red text-white text-lg font-bold rounded-lg shadow-inner">
+                            ผลลัพธ์: Co-payment 50%
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-white rounded-lg shadow-xl p-6 md:p-8 mb-8">
+                <h2 class="text-2xl md:text-3xl font-bold text-aia-red mb-4">9 กลุ่มโรคป่วยเล็กน้อยทั่วไป (Simple Diseases)</h2>
+                <p class="mb-6 text-lg">เป็นกลุ่มโรคที่หากไม่มีภาวะแทรกซ้อน และเข้าเกณฑ์ทางการแพทย์ จะถูกนับเป็น "การป่วยเล็กน้อย" ในกรณีที่ 1</p>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                    <div class="bg-aia-cream rounded-lg p-4 text-center shadow-inner"><span class="text-4xl block mb-2">😷</span><p class="font-semibold">ติดเชื้อทางเดินหายใจส่วนบน</p></div>
+                    <div class="bg-aia-cream rounded-lg p-4 text-center shadow-inner"><span class="text-4xl block mb-2">🤒</span><p class="font-semibold">ไข้หวัดใหญ่</p></div>
+                    <div class="bg-aia-cream rounded-lg p-4 text-center shadow-inner"><span class="text-4xl block mb-2">🚽</span><p class="font-semibold">ท้องเสีย</p></div>
+                    <div class="bg-aia-cream rounded-lg p-4 text-center shadow-inner"><span class="text-4xl block mb-2">💫</span><p class="font-semibold">เวียนศีรษะ</p></div>
+                    <div class="bg-aia-cream rounded-lg p-4 text-center shadow-inner"><span class="text-4xl block mb-2">🌡️</span><p class="font-semibold">ไข้ไม่ระบุสาเหตุ</p></div>
+                    <div class="bg-aia-cream rounded-lg p-4 text-center shadow-inner"><span class="text-4xl block mb-2">🤕</span><p class="font-semibold">ปวดหัว</p></div>
+                    <div class="bg-aia-cream rounded-lg p-4 text-center shadow-inner"><span class="text-4xl block mb-2">💪</span><p class="font-semibold">กล้ามเนื้ออักเสบ</p></div>
+                    <div class="bg-aia-cream rounded-lg p-4 text-center shadow-inner"><span class="text-4xl block mb-2">🤧</span><p class="font-semibold">ภูมิแพ้</p></div>
+                    <div class="bg-aia-cream rounded-lg p-4 text-center shadow-inner"><span class="text-4xl block mb-2">🤢</span><p class="font-semibold">กระเพาะอาหารอักเสบ / กรดไหลย้อน</p></div>
+                </div>
+            </section>
+
+            <section class="bg-white rounded-lg shadow-xl p-6 md:p-8 mb-8">
+                <h2 class="text-2xl md:text-3xl font-bold text-aia-red mb-4">ข้อยกเว้น (ไม่นับรวมในการคำนวณ)</h2>
+                <p class="mb-6 text-lg">บริษัทจะไม่นำยอดเคลมจาก 3 กลุ่มนี้ มารวมคำนวณเป็น % การเคลม (Claims Ratio) และไม่นับเป็นจำนวนครั้ง</p>
+                <ul class="space-y-4">
+                    <li class="flex items-start p-4 bg-green-50 rounded-lg">
+                        <span class="text-3xl text-green-600 mr-4">✅</span>
+                        <span class="text-lg font-semibold text-aia-dark">การผ่าตัดใหญ่ (Major Surgery)</span>
+                    </li>
+                    <li class="flex items-start p-4 bg-green-50 rounded-lg">
+                        <span class="text-3xl text-green-600 mr-4">✅</span>
+                        <span class="text-lg font-semibold text-aia-dark">50 โรคร้ายแรง (Critical Illnesses)</span>
+                    </li>
+                    <li class="flex items-start p-4 bg-green-50 rounded-lg">
+                        <span class="text-3xl text-green-600 mr-4">✅</span>
+                        <span class="text-lg font-semibold text-aia-dark">อุบัติเหตุ (Accident)</span>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="bg-white rounded-lg shadow-xl p-6 md:p-8 mb-8">
+                <h2 class="text-2xl md:text-3xl font-bold text-aia-red mb-4">ข่าวดี! ไม่ได้ติดตลอดไป (Reset Condition)</h2>
+                <p class="mb-8 text-lg text-center">หากในปีที่มี Co-payment ท่านมีการเคลมลดลง หรือไม่ถึงเกณฑ์ที่กำหนดในปีก่อนหน้า...</p>
+                <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-0">
+                    <div class="border-4 border-aia-orange p-6 rounded-lg text-center shadow-md w-full md:w-2/5">
+                        <p class="text-xl font-bold text-aia-orange">ปีที่ N: มี Co-payment</p>
+                        <p class="text-md text-aia-dark">(30% หรือ 50%)</p>
+                        <p class="text-sm mt-2">หากมีการเคลมลดลง / ไม่ถึงเกณฑ์</p>
+                    </div>
+                    <div class="text-6xl text-aia-red transform rotate-90 md:rotate-0 p-4 md:p-8 font-light">
+                        →
+                    </div>
+                    <div class="border-4 border-green-500 p-6 rounded-lg text-center shadow-md bg-green-50 w-full md:w-2/5">
+                        <p class="text-xl font-bold text-green-600">ปีที่ N+1: Reset</p>
+                        <p class="text-md text-aia-dark">กลับมาคุ้มครอง 100%</p>
+                        <p class="text-sm mt-2">(Copayment 0% เหมือนเดิม)</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="bg-white rounded-lg shadow-xl p-6 md:p-8 mb-8">
+                <h2 class="text-2xl md:text-3xl font-bold text-aia-red mb-4 text-center">ไทม์ไลน์การแจ้งเตือน</h2>
+                <div class="relative flex flex-col timeline py-8">
+                    <div class="timeline-item">
+                        <div class="bg-aia-cream p-4 rounded-lg shadow-md border-l-4 border-aia-orange">
+                            <p class="text-2xl mb-2">📅</p>
+                            <h3 class="font-bold text-lg text-aia-dark">แจ้งครั้งที่ 1</h3>
+                            <p class="text-md">จดหมายแจ้งเตือนล่วงหน้า 60 วัน (ก่อนวันครบรอบปีกรมธรรม์)</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="bg-aia-cream p-4 rounded-lg shadow-md border-l-4 border-aia-orange">
+                            <p class="text-2xl mb-2">📅</p>
+                            <h3 class="font-bold text-lg text-aia-dark">แจ้งครั้งที่ 2</h3>
+                            <p class="text-md">บันทึกสลักหลัง ระบุเงื่อนไขใหม่ (ณ วันครบรอบปีกรมธรรม์)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="text-center mt-8 border-t pt-6">
+            <p class="text-sm text-gray-500">หมายเหตุ: ใช้สำหรับกรมธรรม์ใหม่ที่มีวันเริ่มมีผลคุ้มครองตั้งแต่ 20 มี.ค. 68 เป็นต้นไป และไม่มีผลย้อนหลังกับกรมธรรม์เดิม</p>
+            <p class="text-xs text-gray-400 mt-2">โปรดศึกษารายละเอียดและข้อยกเว้นความคุ้มครองในเล่มกรมธรรม์</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function wrapText(label) {
+                const maxLength = 16;
+                if (typeof label !== 'string' || label.length <= maxLength) {
+                    return label;
+                }
+                const words = label.split(' ');
+                const lines = [];
+                let currentLine = '';
+                for (const word of words) {
+                    if ((currentLine + ' ' + word).trim().length > maxLength && currentLine.length > 0) {
+                        lines.push(currentLine);
+                        currentLine = word;
+                    } else {
+                        currentLine = (currentLine + ' ' + word).trim();
+                    }
+                }
+                if (currentLine.length > 0) {
+                    lines.push(currentLine);
+                }
+                return lines;
+            }
+
+            const ctx = document.getElementById('claimsRatioChart').getContext('2d');
+            const originalLabels = [
+              'เบี้ยประกัน (Premium)', 
+              'เกณฑ์ป่วยเล็กน้อย (Case 1)', 
+              'เกณฑ์ป่วยทั่วไป (Case 2)'
+            ];
+            const wrappedLabels = originalLabels.map(wrapText);
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: wrappedLabels,
+                    datasets: [{
+                        label: 'อัตราส่วนเทียบกับเบี้ย (%)',
+                        data: [100, 200, 400],
+                        backgroundColor: [
+                            '#F6AE2D',
+                            '#F26419',
+                            '#D94F5C'
+                        ],
+                        borderColor: '#32373B',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'ร้อยละของเบี้ยประกัน (%)',
+                                font: {
+                                    family: 'Sarabun',
+                                    weight: '600'
+                                }
+                            },
+                            ticks: {
+                                font: {
+                                    family: 'Sarabun'
+                                }
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                font: {
+                                    family: 'Sarabun',
+                                    size: 14
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            titleFont: {
+                                family: 'Sarabun'
+                            },
+                            bodyFont: {
+                                family: 'Sarabun'
+                            },
+                            callbacks: {
+                                title: function(tooltipItems) {
+                                    const item = tooltipItems[0];
+                                    let label = item.chart.data.labels[item.dataIndex];
+                                    if (Array.isArray(label)) {
+                                        return label.join(' ');
+                                    } else {
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

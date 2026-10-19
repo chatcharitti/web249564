@@ -1973,6 +1973,16 @@
                             <span>มะเร็ง (CFC)<span class="rider-tag">AIA</span></span>
                             <input type="number" id="cfc-1" value="0" min="0" step="100000" class="premium-input" style="font-size:12px;padding:6px 10px;" oninput="app.calculate()" placeholder="ทุน (บาท)">
                         </div>
+                        <div class="rider-row" style="align-items:flex-start; margin-top:6px;">
+                            <span style="padding-top:6px;">Health Cancer<span class="rider-tag" style="background:rgba(5,150,105,0.12);color:#059669;">AIA</span></span>
+                            <div style="display:flex;flex-direction:column;gap:3px;width:130px;">
+                                <input type="number" id="hcan-sum-1" value="0" min="0" step="100000" class="premium-input" style="font-size:0.82em;padding:5px 8px;" oninput="app.calculate()" placeholder="ทุน (บาท)">
+                                <select id="hcan-smoke-1" onchange="app.calculate()" class="premium-select compact" style="width:100%;font-size:0.78em;">
+                                    <option value="0">ไม่สูบบุหรี่</option>
+                                    <option value="1">สูบบุหรี่</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="rider-row">
                             <span>ชดเชย (HB)<span class="rider-tag">AIA</span></span>
                             <input type="number" id="hb-1" value="0" min="0" step="100" class="premium-input" style="font-size:12px;padding:6px 10px;" oninput="app.calculate()" placeholder="ชดเชย (บ./วัน)">
@@ -2058,6 +2068,16 @@
                             <span>มะเร็ง (CFC)<span class="rider-tag">AIA</span></span>
                             <input type="number" id="cfc-2" value="0" min="0" step="100000" class="premium-input" style="font-size:12px;padding:6px 10px;" oninput="app.calculate()" placeholder="ทุน (บาท)">
                         </div>
+                        <div class="rider-row" style="align-items:flex-start; margin-top:6px;">
+                            <span style="padding-top:6px;">Health Cancer<span class="rider-tag" style="background:rgba(5,150,105,0.12);color:#059669;">AIA</span></span>
+                            <div style="display:flex;flex-direction:column;gap:3px;width:130px;">
+                                <input type="number" id="hcan-sum-2" value="0" min="0" step="100000" class="premium-input" style="font-size:0.82em;padding:5px 8px;" oninput="app.calculate()" placeholder="ทุน (บาท)">
+                                <select id="hcan-smoke-2" onchange="app.calculate()" class="premium-select compact" style="width:100%;font-size:0.78em;">
+                                    <option value="0">ไม่สูบบุหรี่</option>
+                                    <option value="1">สูบบุหรี่</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="rider-row">
                             <span>ชดเชย (HB)<span class="rider-tag">AIA</span></span>
                             <input type="number" id="hb-2" value="0" min="0" step="100" class="premium-input" style="font-size:12px;padding:6px 10px;" oninput="app.calculate()" placeholder="ชดเชย (บ./วัน)">
@@ -2142,6 +2162,16 @@
                         <div class="rider-row">
                             <span>มะเร็ง (CFC)<span class="rider-tag">AIA</span></span>
                             <input type="number" id="cfc-3" value="0" min="0" step="100000" class="premium-input" style="font-size:12px;padding:6px 10px;" oninput="app.calculate()" placeholder="ทุน (บาท)">
+                        </div>
+                        <div class="rider-row" style="align-items:flex-start; margin-top:6px;">
+                            <span style="padding-top:6px;">Health Cancer<span class="rider-tag" style="background:rgba(5,150,105,0.12);color:#059669;">AIA</span></span>
+                            <div style="display:flex;flex-direction:column;gap:3px;width:130px;">
+                                <input type="number" id="hcan-sum-3" value="0" min="0" step="100000" class="premium-input" style="font-size:0.82em;padding:5px 8px;" oninput="app.calculate()" placeholder="ทุน (บาท)">
+                                <select id="hcan-smoke-3" onchange="app.calculate()" class="premium-select compact" style="width:100%;font-size:0.78em;">
+                                    <option value="0">ไม่สูบบุหรี่</option>
+                                    <option value="1">สูบบุหรี่</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="rider-row">
                             <span>ชดเชย (HB)<span class="rider-tag">AIA</span></span>
@@ -2257,6 +2287,12 @@
                         <td class="data-cell col-opt-1"><div id="name-cfc-1" style="font-size: 0.72em; color: var(--t-tertiary); margin-bottom: 4px;"></div><span id="sum-cfc-1" style="color: var(--t-primary);">0</span></td>
                         <td class="data-cell col-opt-2"><div id="name-cfc-2" style="font-size: 0.72em; color: var(--t-tertiary); margin-bottom: 4px;"></div><span id="sum-cfc-2" style="color: var(--t-primary);">0</span></td>
                         <td class="data-cell col-opt-3"><div id="name-cfc-3" style="font-size: 0.72em; color: var(--t-tertiary); margin-bottom: 4px;"></div><span id="sum-cfc-3" style="color: var(--t-primary);">0</span></td>
+                    </tr>
+                    <tr id="row-hcan">
+                        <td class="row-header">โรคร้ายแรง (AIA Health Cancer)</td>
+                        <td class="data-cell col-opt-1"><div id="name-hcan-1" style="font-size: 0.72em; color: var(--t-tertiary); margin-bottom: 4px;"></div><span id="sum-hcan-1" style="color: var(--t-primary);">0</span></td>
+                        <td class="data-cell col-opt-2"><div id="name-hcan-2" style="font-size: 0.72em; color: var(--t-tertiary); margin-bottom: 4px;"></div><span id="sum-hcan-2" style="color: var(--t-primary);">0</span></td>
+                        <td class="data-cell col-opt-3"><div id="name-hcan-3" style="font-size: 0.72em; color: var(--t-tertiary); margin-bottom: 4px;"></div><span id="sum-hcan-3" style="color: var(--t-primary);">0</span></td>
                     </tr>
                     <tr id="row-mpci">
                         <td class="row-header">โรคร้ายแรง Multi-Pay (AIA Multi-Pay CI) <span class="badge" style="margin-left:6px;background:rgba(220,38,38,0.12);color:#dc2626;border:1px solid rgba(220,38,38,0.25);">หลายจบ</span></td>
@@ -2377,6 +2413,7 @@
                 <label class="dp-col-toggle"><input type="checkbox" id="dpcol-main" checked onchange="app.toggleDetailCol('main')"> ประกันหลัก</label>
                 <label class="dp-col-toggle"><input type="checkbox" id="dpcol-health" checked onchange="app.toggleDetailCol('health')"> สุขภาพ</label>
                 <label class="dp-col-toggle"><input type="checkbox" id="dpcol-cfc" checked onchange="app.toggleDetailCol('cfc')"> CFC (มะเร็ง)</label>
+                <label class="dp-col-toggle"><input type="checkbox" id="dpcol-hcan" checked onchange="app.toggleDetailCol('hcan')"> Health Cancer</label>
                 <label class="dp-col-toggle"><input type="checkbox" id="dpcol-hb" checked onchange="app.toggleDetailCol('hb')"> HB (ชดเชย)</label>
                 <label class="dp-col-toggle"><input type="checkbox" id="dpcol-mpci" checked onchange="app.toggleDetailCol('mpci')"> Multi-Pay CI</label>
                 <label class="dp-col-toggle"><input type="checkbox" id="dpcol-cihero" checked onchange="app.toggleDetailCol('cihero')"> CI Hero</label>
@@ -3842,7 +3879,7 @@
                 <div class="ab-hero-s">Health Solution Comparison &amp; Presentation Tool</div>
                 <div class="ab-ver">
                     <span class="ab-ver-l">อัปเดตล่าสุด</span>
-                    <span class="ab-ver-v" id="ab-updated">2026-10-15 19:25 น.</span>
+                    <span class="ab-ver-v" id="ab-updated">2026-10-19 16:20 น.</span>
                 </div>
             </div>
 
@@ -3877,6 +3914,7 @@
             <div class="ab-card">
                 <div class="ab-card-t">🗂️ ประวัติการอัปเดต</div>
                 <div class="ab-log" id="ab-log">
+                    <div class="ab-log-row"><div class="ab-log-d">2026-10-19 16:20 น.</div><div class="ab-log-x">เพิ่มสัญญาเพิ่มเติม AIA Health Cancer (มรณกรรม + ชดเชยรายวันผู้ป่วยในเนื่องจากโรคร้ายแรง 7 โรค) ในตารางเปรียบเทียบ — เลือกทุนประกันทีละ 1 แสนบาท (1 หน่วย) ต่อ Option พร้อมตัวเลือกสถานะสูบบุหรี่/ไม่สูบบุหรี่แยกต่อ Option (ส่วนลดไม่สูบบุหรี่ 10% มีผลเฉพาะอายุ 16-65 ปี) เบี้ยคำนวณจากตารางมาตรฐานรายปี (อ้างอิง AIA_Benefit_Plus2025_Full_20250124.pdf) หารด้วย 10 เพื่อแปลงจากเบี้ยตัวอย่าง 10 หน่วยเป็นเบี้ยต่อ 1 หน่วย แสดงรายละเอียดความคุ้มครอง (ผลประโยชน์ 2 รายการ + รายชื่อ 7 โรค + Waiting Period) ในตารางความคุ้มครอง พร้อมเชื่อมเข้าตารางแจกแจงเบี้ยในอนาคตและตารางเบี้ยรวม</div></div>
                     <div class="ab-log-row"><div class="ab-log-d">2026-10-15 19:25 น.</div><div class="ab-log-x">เพิ่มแผนสุขภาพ AIA Health Happy New (HHN) ในตารางเปรียบเทียบ — 4 ทุน (1/5/15/25 ล้าน) x 2 แบบ Begin/Balanced รวม 8 Option เบี้ยอ้างอิงตารางมาตรฐานรายปีฉบับใหม่ ความคุ้มครอง 13 หมวดใช้ชุดเดียวกับ AIA Health Happy เดิม (อ้างอิง AIA_HH_Detail.md) พร้อมกล่องแจ้งเงื่อนไข Copayment โดยละเอียด (เปอร์เซ็นต์ร่วมจ่ายใน/นอกเครือข่าย เพดานบาท การแบ่งหมวด Per Confinement/Per Visit เงื่อนไข Reinstatement และการปรับเบี้ย) เลือกคู่ขนานกับ AIA Health Happy ตัวเดิมได้ในรายการ dropdown</div></div>
                     <div class="ab-log-row"><div class="ab-log-d">2026-09-19 17:05 น.</div><div class="ab-log-x">เพิ่ม hover/active สีให้ปุ่มพิมพ์รายงานหลัก (เดิมไม่มี CSS กำหนดไว้เลย) · เพิ่มข้อความแจ้งเตือนสำหรับ Safari/iPad อธิบายข้อจำกัด "พิมพ์อัตโนมัติได้ครั้งแรกต่อแท็บเท่านั้น" ของเบราว์เซอร์เอง</div></div><div class="ab-log-row"><div class="ab-log-d">2026-09-19 16:35 น.</div><div class="ab-log-x">เปลี่ยนทุน CFC เป็นช่องกรอกอิสระ เพิ่มทีละ 1 แสน · เพิ่ม safePrint() ครอบทุกปุ่มพิมพ์ (blur ช่อง input ค้าง + กันเรียกซ้อน) แก้ปัญหากดปุ่มพิมพ์แล้วไม่มีอะไรเกิดขึ้นบน Opera/iPad บางเครื่อง</div></div><div class="ab-log-row"><div class="ab-log-d">2026-09-19 16:00 น.</div><div class="ab-log-x">เปลี่ยนค่าชดเชย HB Extra จาก dropdown ตายตัว (0-5,000 ทีละ 500) เป็นช่องกรอกตัวเลขอิสระเพิ่มทีละ 100 บาท ทั้ง 3 Option</div></div><div class="ab-log-row"><div class="ab-log-d">2026-09-19 15:35 น.</div><div class="ab-log-x">ตารางรายละเอียดความคุ้มครอง (หมวด 1-13) ซ่อนอัตโนมัติเมื่อไม่มี Option ใดเลือกแผนสุขภาพเลย พร้อมข้อความแจ้งเตือน ให้สอดคล้องกับตารางสรุปเบี้ย</div></div><div class="ab-log-row"><div class="ab-log-d">2026-09-19 15:10 น.</div><div class="ab-log-x">ตารางสรุปเบี้ยประกันภัยปีแรกซ่อนแถวสัญญาที่ไม่มี Option ใดเลือกอัตโนมัติ ทั้งบนหน้าเว็บและตอนพิมพ์ PDF</div></div><div class="ab-log-row"><div class="ab-log-d">2026-09-19 14:40 น.</div><div class="ab-log-x">เพิ่มตารางแจกแจงรายละเอียดเบี้ยในอนาคตแยกตามสัญญา (Tab เปรียบเทียบ) พร้อม checkbox เลือก/ซ่อนประเภทสัญญาข้ามทุก Option และคอลัมน์รวมเฉพาะที่แสดง มีปุ่มพิมพ์แยก A4 แนวนอน ไม่รวมในรายงานหลัก</div></div><div class="ab-log-row"><div class="ab-log-d">2026-09-19 13:50 น.</div><div class="ab-log-x">เพิ่มกล่องเงื่อนไข Copayment ของ AIA Health Starter ในตารางเปรียบเทียบ · เพิ่มสัญญาเพิ่มเติม MTL CI Perfect Care (ทุนเลือกทีละแสน เบี้ยรายปี exact-age) เลือกได้เฉพาะเมื่อแผนสุขภาพเป็น MTL</div></div><div class="ab-log-row"><div class="ab-log-d">2026-09-19 12:35 น.</div><div class="ab-log-x">เพิ่มแผนสุขภาพ AIA Health Starter (5 แผน × Begin/Balanced) พร้อมตารางความคุ้มครองและเบี้ยอนาคต · แก้ไขอัตราเบี้ย MTL D-Health Lite ทั้งหมดให้ตรงกับเอกสารต้นฉบับ (คีย์ใหม่ 396 ค่า)</div></div><div class="ab-log-row"><div class="ab-log-d">2026-09-18 14:05 น.</div><div class="ab-log-x">เปลี่ยนเมนูแท็บเป็น Sidebar ด้านซ้าย พับเก็บได้ · รองรับมือถือ/แท็บเล็ตแบบ overlay · เพิ่มปุ่มพิมพ์รายการโรค 2 แบบ (1 หน้า / ตัวใหญ่ 2 หน้า)</div></div><div class="ab-log-row"><div class="ab-log-d">2026-09-18 13:15 น.</div><div class="ab-log-x">เพิ่มรายการ 62 โรคร้ายแรงที่คุ้มครองในแท็บ CI Hero พร้อมปุ่มพิมพ์ A4 แนวนอน 3 คอลัมน์ 1 หน้า · แก้การดาวน์โหลด PNG ให้รองรับ iPad/iPhone (เปิดแท็บใหม่ให้กดค้างบันทึกรูป)</div></div><div class="ab-log-row"><div class="ab-log-d">2026-09-18 12:42 น.</div><div class="ab-log-x">เพิ่มแท็บ About · ปรับหน้าสรุป 1 หน้าของ All CI เป็นธีม minimal 2 คอลัมน์ (เน้นค่ารักษา / ค่าชดเชย) พร้อม auto-fit ขนาดอักษรให้พอดี 1 หน้าอัตโนมัติ</div></div>
                     <div class="ab-log-row"><div class="ab-log-d">2026-09-18</div><div class="ab-log-x">เพิ่มการ์ดตัวอย่างการเคลมและคุ้มครองต่อเนื่องในหน้าสรุป CI Hero · แก้ปัญหาขนาดอักษรทวีคูณตอนขยาย (two-pass scaling) · ขยายคำโปรยปิดท้าย 25%</div></div>
@@ -4604,6 +4642,20 @@ const APP_DATA = {
         female: { "0-20":325, "21-35":280, "36-40":290, "41-45":320, "46-50":370, "51-55":400, "56-60":460, "61-65":490, "66-70":600, "71-75":710, "76-79":840 }
     },
 
+    // AIA Health Cancer — มรณกรรม+ชดเชยรายวันเนื่องจากโรคร้ายแรง (7 โรค)
+    // อัตราต่อ "1 หน่วย" (ทุนประกัน 100,000 บาท) = ตารางต้นฉบับ (ต่อ 10 หน่วย) ÷ 10
+    // ที่มา: AIA_Benefit_Plus2025_Full_20250124.pdf — ไม่สูบบุหรี่ลด 10% เฉพาะอายุ 16-65 ปี (66 ปีขึ้นไปอัตราเท่ากัน แต่แยกตามเพศแทน)
+    RATE_HCAN: {
+        smoker: {
+            male:   { "0-15":73, "16-35":146, "36-40":244.3, "41-45":361.6, "46-50":525.5, "51-55":776.8, "56-60":1116.7, "61-65":1528, "66-70":3000, "71-75":3900, "76-79":4800 },
+            female: { "0-15":73, "16-35":146, "36-40":244.3, "41-45":361.6, "46-50":525.5, "51-55":776.8, "56-60":1116.7, "61-65":1528, "66-70":1750, "71-75":2300, "76-79":2850 }
+        },
+        nonsmoker: {
+            male:   { "0-15":73, "16-35":131.4, "36-40":219.9, "41-45":325.4, "46-50":472.9, "51-55":699.1, "56-60":1005, "61-65":1375.2, "66-70":3000, "71-75":3900, "76-79":4800 },
+            female: { "0-15":73, "16-35":131.4, "36-40":219.9, "41-45":325.4, "46-50":472.9, "51-55":699.1, "56-60":1005, "61-65":1375.2, "66-70":1750, "71-75":2300, "76-79":2850 }
+        }
+    },
+
     // AIA Multi-Pay CI Plus (Multi-Pay CI + Total Care) — อัตราต่อ 1,000 บาทของทุนประกัน
     RATE_MULTIPAY_CI: {
         male:   {"0-5":6.31,"6-10":4.61,"11-15":4.55,"16-20":4.52,"21-25":5.05,"26-30":5.56,"31-35":6.61,"36-40":8.75,"41-45":16.87,"46-50":27.70,"51-55":49.73,"56-60":83.62,"61-65":130.07,"66-70":163.89,"71-75":235.83,"76-80":326.64,"81-85":381.57,"86-90":621.28,"91-95":909.63,"96-99":1043.30},
@@ -5264,6 +5316,29 @@ const app = {
         return Math.round((sum / 1000) * rate);
     },
 
+    // AIA Health Cancer — สถานะสูบบุหรี่เป็นค่าต่อ Option (ไม่ใช่ global เหมือนเพศ)
+    getHCanRate(age, gender, smoker) {
+        const grp = smoker ? APP_DATA.RATE_HCAN.smoker : APP_DATA.RATE_HCAN.nonsmoker;
+        const table = grp ? grp[gender] : null;
+        if (!table) return 0;
+        for (const [range, rate] of Object.entries(table)) {
+            const parts = range.split('-');
+            const min = parseInt(parts[0]);
+            const max = parts.length > 1 ? parseInt(parts[1]) : 99;
+            if (age >= min && age <= max) return rate;
+        }
+        return 0;
+    },
+    calcHCan(sum, age, gender, smoker) {
+        if (!sum || age > 79) return 0;
+        const rate = this.getHCanRate(age, gender, smoker);
+        return (sum / 100000) * rate;
+    },
+    getHCanSmoker(id) {
+        const el = document.getElementById(`hcan-smoke-${id}`);
+        return !!el && el.value === '1';
+    },
+
     // MTL CI Perfect Care — เบี้ยรายปี exact-age (คุ้มครองถึงอายุ 84 ปี / 85 ปีบริบูรณ์)
     // เลือกได้เฉพาะเมื่อแผนสุขภาพ (HEALTH) ของ Option นั้นเป็น MTL (DHP/DHL)
     calcCIPFC(sum, age, gender) {
@@ -5363,25 +5438,28 @@ const app = {
             
             // Riders
             const sumCFC  = parseInt(document.getElementById(`cfc-${id}`).value) || 0;
+            const sumHCAN = parseInt(document.getElementById(`hcan-sum-${id}`).value) || 0;
+            const smokerHCAN = this.getHCanSmoker(id);
             const sumHB   = parseInt(document.getElementById(`hb-${id}`).value) || 0;
             const sumMPCI = parseInt(document.getElementById(`mpci-sum-${id}`).value) || 0;
             const sumCIPFC = this.isMTL(st.type) ? (parseInt(document.getElementById(`cipfc-sum-${id}`).value) || 0) : 0;
             const cpChecked = document.getElementById(`cp-${id}`).checked;
-            
+
             const pCFC  = (sumCFC / 100000) * this.getRiderRate('CFC', age, gender);
+            const pHCAN = this.calcHCan(sumHCAN, age, gender, smokerHCAN);
             const pHB   = (sumHB / 100) * this.getRiderRate('HB', age, gender);
             const pMPCI = this.calcMultiPayCI(sumMPCI, age, gender);
             const pCIPFC = this.calcCIPFC(sumCIPFC, age, gender);
             const heroSel = this.getCIHeroSel(id);
             const heroPlan = heroSel.plan;
             const pHero = this.calcCIHero(heroPlan, age, gender, heroSel.coType);
-            
+
             let pCP = 0;
             if (cpChecked && this.isMTL(st.type)) {
                 pCP = APP_DATA.rateTable.CP[gender]["5M"][Math.min(99, age)] || 0;
             }
 
-            const pTotal = pMain + pHl + pCFC + pHB + pCP + pMPCI + pCIPFC + pHero;
+            const pTotal = pMain + pHl + pCFC + pHCAN + pHB + pCP + pMPCI + pCIPFC + pHero;
 
             // แสดงเบี้ย CI Perfect Care
             const cipfcPremEl = document.getElementById(`cipfc-prem-${id}`);
@@ -5422,7 +5500,10 @@ const app = {
             document.getElementById(`sum-cihero-${id}`).textContent  = pHero > 0 ? this.formatMoney(pHero) : "–";
             document.getElementById(`name-cfc-${id}`).textContent = sumCFC > 0 ? `ทุน ${this.formatMoney(sumCFC)}` : "-";
             document.getElementById(`sum-cfc-${id}`).textContent = sumCFC > 0 ? this.formatMoney(pCFC) : "-";
-            
+
+            document.getElementById(`name-hcan-${id}`).textContent = sumHCAN > 0 ? `ทุน ${this.formatMoney(sumHCAN)}${smokerHCAN ? ' (สูบบุหรี่)' : ' (ไม่สูบบุหรี่)'}` : "-";
+            document.getElementById(`sum-hcan-${id}`).textContent = sumHCAN > 0 ? this.formatMoney(pHCAN) : "-";
+
             document.getElementById(`name-hb-${id}`).textContent = sumHB > 0 ? `แผน ${sumHB}` : "-";
             document.getElementById(`sum-hb-${id}`).textContent = sumHB > 0 ? this.formatMoney(pHB) : "-";
 
@@ -5462,6 +5543,7 @@ const app = {
                                   && !!(APP_DATA.plans[this.state[id].type]?.options?.[this.state[id].idx]),
             'row-cp':     (id) => document.getElementById(`cp-${id}`).checked && this.isMTL(this.state[id].type),
             'row-cfc':    (id) => (parseInt(document.getElementById(`cfc-${id}`).value) || 0) > 0,
+            'row-hcan':   (id) => (parseInt(document.getElementById(`hcan-sum-${id}`).value) || 0) > 0,
             'row-mpci':   (id) => (parseInt(document.getElementById(`mpci-sum-${id}`).value) || 0) > 0,
             'row-cipfc':  (id) => this.isMTL(this.state[id].type) && (parseInt(document.getElementById(`cipfc-sum-${id}`).value) || 0) > 0,
             'row-cihero': (id) => !!this.getCIHeroSel(id).plan,
@@ -5713,7 +5795,44 @@ const app = {
             });
             html += `</tr>`;
 
-        
+
+        }
+
+        const anyHCAN = [1,2,3].some(id => activeOptions[id-1] && (parseInt(document.getElementById(`hcan-sum-${id}`).value)||0) > 0);
+        if (anyHCAN) {
+    // ── AIA Health Cancer ────────────────────────────────────────────────
+            html += `<tr class="sub-header-row"><td colspan="4">สัญญาเพิ่มเติมโรคร้ายแรง — AIA Health Cancer</td></tr>`;
+            html += `<tr><td class="row-header">ผลประโยชน์มรณกรรมเนื่องจากโรคร้ายแรง (7 โรค)</td>`;
+            [1,2,3].forEach(id => {
+                if (!activeOptions[id-1]) { html += `<td class="data-cell col-opt-${id} hide-col"></td>`; return; }
+                const sum = parseInt(document.getElementById(`hcan-sum-${id}`).value) || 0;
+                html += `<td class="data-cell col-opt-${id}" style="color:#059669;font-weight:600;">${sum>0 ? this.formatMoney(sum)+' บ.' : '—'}</td>`;
+            });
+            html += `</tr>`;
+            html += `<tr><td class="row-header">ชดเชยรายวันผู้ป่วยในเนื่องจากโรคร้ายแรง<div style="font-size:0.72em;color:var(--t-tertiary);margin-top:3px;">ทุน Health Cancer ÷ 100,000 × 1,000 บ./วัน</div></td>`;
+            [1,2,3].forEach(id => {
+                if (!activeOptions[id-1]) { html += `<td class="data-cell col-opt-${id} hide-col"></td>`; return; }
+                const sum = parseInt(document.getElementById(`hcan-sum-${id}`).value) || 0;
+                html += `<td class="data-cell col-opt-${id}" style="color:var(--t-primary);">${sum>0 ? this.formatMoney((sum/100000)*1000)+' บ./วัน' : '—'}</td>`;
+            });
+            html += `</tr>`;
+            html += `<tr><td class="row-header">โรคที่คุ้มครอง (7 โรค)<div style="font-size:0.72em;color:var(--t-tertiary);margin-top:3px;line-height:1.5;">มะเร็งระยะไม่ลุกลาม, มะเร็งระยะลุกลาม, โปลิโอ, ปอดอุดกั้นเรื้อรังชนิดถุงลมโป่งพอง, กล้ามเนื้อเสื่อม, ระบบประสาทมัลติเพิล สะเคลอโรสิส, ตับแข็ง</div></td>`;
+            [1,2,3].forEach(id => {
+                if (!activeOptions[id-1]) { html += `<td class="data-cell col-opt-${id} hide-col"></td>`; return; }
+                const sum = parseInt(document.getElementById(`hcan-sum-${id}`).value) || 0;
+                html += `<td class="data-cell col-opt-${id}" style="color:var(--c-success);font-weight:600;">${sum>0 ? 'คุ้มครอง 7 โรค' : '—'}</td>`;
+            });
+            html += `</tr>`;
+            html += `<tr><td class="row-header">Waiting Period / สถานะสูบบุหรี่ที่เลือก</td>`;
+            [1,2,3].forEach(id => {
+                if (!activeOptions[id-1]) { html += `<td class="data-cell col-opt-${id} hide-col"></td>`; return; }
+                const sum = parseInt(document.getElementById(`hcan-sum-${id}`).value) || 0;
+                const smk = this.getHCanSmoker(id);
+                html += `<td class="data-cell col-opt-${id}" style="color:var(--t-primary);">${sum>0 ? ('30 วัน · '+(smk?'สูบบุหรี่':'ไม่สูบบุหรี่')) : '—'}</td>`;
+            });
+            html += `</tr>`;
+
+
         }
 
         const anyHB = [1,2,3].some(id => activeOptions[id-1] && (parseInt(document.getElementById(`hb-${id}`).value)||0) > 0);
@@ -5797,12 +5916,14 @@ document.getElementById('benefit-body').innerHTML = html;
                 const stOpts = APP_DATA.plans[st.type]?.options;
                 const optName = (stOpts && stOpts[st.idx]) ? stOpts[st.idx].name : '';
                 const cfc = parseInt(document.getElementById(`cfc-${id}`).value) || 0;
+                const hcan = parseInt(document.getElementById(`hcan-sum-${id}`).value) || 0;
                 const hb = parseInt(document.getElementById(`hb-${id}`).value) || 0;
                 const cpChecked = document.getElementById(`cp-${id}`).checked;
-                
+
                 let desc = (st.type !== "NONE" && optName) ? optName : '–';
                 if(cpChecked && this.isMTL(st.type)) desc += ` + CP`;
                 if(cfc>0) desc += ` + CFC`;
+                if(hcan>0) desc += ` + Health Cancer`;
                 if(hb>0) desc += ` + HB`;
                 const mpciSumHdr = parseInt(document.getElementById(`mpci-sum-${id}`).value) || 0;
                 if(mpciSumHdr>0) desc += ` + MPCI`;
@@ -5872,14 +5993,18 @@ document.getElementById('benefit-body').innerHTML = html;
                 }
 
                 const cfcSum = parseInt(document.getElementById(`cfc-${id}`).value) || 0;
+                const hcanSum = parseInt(document.getElementById(`hcan-sum-${id}`).value) || 0;
+                const hcanSmoker = this.getHCanSmoker(id);
                 const hbSum = parseInt(document.getElementById(`hb-${id}`).value) || 0;
                 const mpciSum = parseInt(document.getElementById(`mpci-sum-${id}`).value) || 0;
                 const cipfcSum = this.isMTL(st.type) ? (parseInt(document.getElementById(`cipfc-sum-${id}`).value) || 0) : 0;
-                
+
                 const rateCfc = this.getRiderRate('CFC', evalAge, gender);
+                const rateHcan = this.getHCanRate(evalAge, gender, hcanSmoker);
                 const rateHb = this.getRiderRate('HB', evalAge, gender);
 
                 const pCFC = (cfcSum > 0 && rateCfc > 0) ? (cfcSum / 100000) * rateCfc : 0;
+                const pHCAN = (hcanSum > 0 && rateHcan > 0) ? (hcanSum / 100000) * rateHcan : 0;
                 const pHB = (hbSum > 0 && rateHb > 0) ? (hbSum / 100) * rateHb : 0;
                 // MPCI: yearly renewable — คำนวณตาม evalAge ของแต่ละ band
                 const pMPCI = mpciSum > 0 ? this.calcMultiPayCI(mpciSum, evalAge, gender) : 0;
@@ -5890,11 +6015,12 @@ document.getElementById('benefit-body').innerHTML = html;
 
                 let termDesc = [];
                 if(cfcSum > 0 && rateCfc === 0) termDesc.push("CFC สิ้นสุด");
+                if(hcanSum > 0 && rateHcan === 0) termDesc.push("Health Cancer สิ้นสุด");
                 if(hbSum > 0 && rateHb === 0) termDesc.push("HB สิ้นสุด");
                 if(mpciSum > 0 && evalAge > 99) termDesc.push("MPCI สิ้นสุด");
                 if(cipfcSum > 0 && evalAge > 84) termDesc.push("CI Perfect Care สิ้นสุด");
-                
-                const pTotal = pMain + pHl + pCFC + pHB + pCP + pMPCI + pCIPFC + pHeroP;
+
+                const pTotal = pMain + pHl + pCFC + pHCAN + pHB + pCP + pMPCI + pCIPFC + pHeroP;
                 let termHtml = mainDesc;
                 if(termDesc.length > 0) {
                     termHtml += `<br><span style="font-size: 11px; color: var(--t-tertiary);">(${termDesc.join(', ')})</span>`;
@@ -5912,7 +6038,7 @@ document.getElementById('benefit-body').innerHTML = html;
     },
 
     // สถานะ checkbox เลือกแสดงคอลัมน์ในตารางแจกแจงเบี้ยในอนาคต (ค่าเริ่มต้น: แสดงทุกประเภท)
-    detailProjCols: { main:true, health:true, cfc:true, hb:true, mpci:true, cihero:true, cipfc:true, cp:true },
+    detailProjCols: { main:true, health:true, cfc:true, hcan:true, hb:true, mpci:true, cihero:true, cipfc:true, cp:true },
 
     toggleDetailCol(key) {
         this.detailProjCols[key] = document.getElementById(`dpcol-${key}`).checked;
@@ -5927,6 +6053,7 @@ document.getElementById('benefit-body').innerHTML = html;
             { key:'main',   label:'ประกันหลัก',      color:'var(--t-primary)' },
             { key:'health', label:'สุขภาพ',          color:'var(--c-primary)' },
             { key:'cfc',    label:'CFC (มะเร็ง)',    color:'#be123c' },
+            { key:'hcan',   label:'Health Cancer',   color:'#059669' },
             { key:'hb',     label:'HB (ชดเชย)',      color:'#ea580c' },
             { key:'mpci',   label:'Multi-Pay CI',    color:'#dc2626' },
             { key:'cihero', label:'CI Hero',         color:'#2563eb' },
@@ -5958,6 +6085,8 @@ document.getElementById('benefit-body').innerHTML = html;
                 optAge: parseInt(document.getElementById(`age-${id}`).value) || 0,
                 mainSum, mainType: document.getElementById(`main-type-${id}`) ? document.getElementById(`main-type-${id}`).value : '20PLN',
                 cfcSum: parseInt(document.getElementById(`cfc-${id}`).value) || 0,
+                hcanSum: parseInt(document.getElementById(`hcan-sum-${id}`).value) || 0,
+                hcanSmoker: this.getHCanSmoker(id),
                 hbSum: parseInt(document.getElementById(`hb-${id}`).value) || 0,
                 mpciSum: parseInt(document.getElementById(`mpci-sum-${id}`).value) || 0,
                 cipfcSum: isMtlPlan ? (parseInt(document.getElementById(`cipfc-sum-${id}`).value) || 0) : 0,
@@ -5972,6 +6101,7 @@ document.getElementById('benefit-body').innerHTML = html;
                 main:   info.mainSum > 0,
                 health: st.type !== 'NONE' && !!info.optK,
                 cfc:    info.cfcSum > 0,
+                hcan:   info.hcanSum > 0,
                 hb:     info.hbSum > 0,
                 mpci:   info.mpciSum > 0,
                 cihero: !!info.heroPlan,
@@ -6052,11 +6182,13 @@ document.getElementById('benefit-body').innerHTML = html;
                 // Care Plus
                 vals.cp = (info.cpChecked && info.isMtlPlan) ? (APP_DATA.rateTable.CP[gender]["5M"][Math.min(99, evalAge)] || 0) : 0;
 
-                // CFC / HB
+                // CFC / Health Cancer / HB
                 const rateCfc = this.getRiderRate('CFC', evalAge, gender);
+                const rateHcan = this.getHCanRate(evalAge, gender, info.hcanSmoker);
                 const rateHb  = this.getRiderRate('HB', evalAge, gender);
-                vals.cfc = (info.cfcSum > 0 && rateCfc > 0) ? (info.cfcSum / 100000) * rateCfc : 0;
-                vals.hb  = (info.hbSum  > 0 && rateHb  > 0) ? (info.hbSum  / 100)    * rateHb  : 0;
+                vals.cfc  = (info.cfcSum  > 0 && rateCfc  > 0) ? (info.cfcSum  / 100000) * rateCfc  : 0;
+                vals.hcan = (info.hcanSum > 0 && rateHcan > 0) ? (info.hcanSum / 100000) * rateHcan : 0;
+                vals.hb   = (info.hbSum   > 0 && rateHb   > 0) ? (info.hbSum   / 100)    * rateHb   : 0;
 
                 // Multi-Pay CI / CI Perfect Care / CI Hero
                 vals.mpci  = info.mpciSum  > 0 ? this.calcMultiPayCI(info.mpciSum, evalAge, gender) : 0;
@@ -6942,6 +7074,12 @@ function _sum1PremRows(age, gender, extraLabel, extraVal, excludeKey, onlyKeys){
     var cfc=parseInt(document.getElementById('cfc-1').value)||0;
     if(cfc>0){ var rc=app.getRiderRate('CFC',age,gender); var pc=rc>0?Math.round((cfc/100000)*rc):0;
       if(pc>0){ rows.push(['AIA Care for Cancer · ทุน '+cfc.toLocaleString(), pc]); total+=pc; } }
+  }
+  // Health Cancer
+  if(excludeKey!=='HCAN'&&_inc('HCAN')){
+    var hcan=parseInt(document.getElementById('hcan-sum-1').value)||0;
+    if(hcan>0){ var rhc=app.getHCanRate(age,gender,app.getHCanSmoker(1)); var phc=rhc>0?Math.round((hcan/100000)*rhc):0;
+      if(phc>0){ rows.push(['AIA Health Cancer · ทุน '+hcan.toLocaleString(), phc]); total+=phc; } }
   }
   // CI Hero
   if(excludeKey!=='HERO'&&_inc('HERO')){
@@ -7927,6 +8065,9 @@ function chOtherRiders(evalAge,gender){
   var cfc=parseInt(document.getElementById('cfc-1').value)||0;
   if(cfc>0){ var rc=app.getRiderRate('CFC',evalAge,gender);
     var pc=rc>0?Math.round((cfc/100000)*rc):0; if(pc>0){total+=pc;labels.push('CFC');} }
+  var hcan=parseInt(document.getElementById('hcan-sum-1').value)||0;
+  if(hcan>0){ var rhc=app.getHCanRate(evalAge,gender,app.getHCanSmoker(1));
+    var phc=rhc>0?Math.round((hcan/100000)*rhc):0; if(phc>0){total+=phc;labels.push('Health Cancer');} }
   var hb=parseInt(document.getElementById('hb-1').value)||0;
   if(hb>0){ var rh=app.getRiderRate('HB',evalAge,gender);
     var ph=rh>0?Math.round((hb/100)*rh):0; if(ph>0){total+=ph;labels.push('HB');} }
@@ -8208,6 +8349,13 @@ function ccCalcOtherRiders(evalAge, gender) {
             var pHl  = arr ? (arr[band] || 0) : 0;
             if (pHl > 0) { total += pHl; labels.push('สุขภาพ'); }
         }
+    }
+    // Health Cancer
+    var hcanSum = parseInt(document.getElementById('hcan-sum-1').value) || 0;
+    if (hcanSum > 0) {
+        var rateHcan = app.getHCanRate(evalAge, gender, app.getHCanSmoker(1));
+        var pHCAN = (rateHcan > 0) ? (hcanSum / 100000) * rateHcan : 0;
+        if (pHCAN > 0) { total += Math.round(pHCAN); labels.push('Health Cancer'); }
     }
     // HB
     var hbSum = parseInt(document.getElementById('hb-1').value) || 0;
@@ -9259,6 +9407,8 @@ const EXPORT_FIELDS = [
     { id: 'main-prem-1', type: 'value' },
     { id: 'type-1',      type: 'value' },
     { id: 'cfc-1',       type: 'value' },
+    { id: 'hcan-sum-1',  type: 'value' },
+    { id: 'hcan-smoke-1', type: 'value' },
     { id: 'hb-1',        type: 'value' },
     { id: 'mpci-sum-1',  type: 'value' },
     { id: 'cipfc-sum-1', type: 'value' },
@@ -9274,6 +9424,8 @@ const EXPORT_FIELDS = [
     { id: 'main-prem-2', type: 'value' },
     { id: 'type-2',      type: 'value' },
     { id: 'cfc-2',       type: 'value' },
+    { id: 'hcan-sum-2',  type: 'value' },
+    { id: 'hcan-smoke-2', type: 'value' },
     { id: 'hb-2',        type: 'value' },
     { id: 'mpci-sum-2',  type: 'value' },
     { id: 'cipfc-sum-2', type: 'value' },
@@ -9287,6 +9439,8 @@ const EXPORT_FIELDS = [
     { id: 'main-prem-3', type: 'value' },
     { id: 'type-3',      type: 'value' },
     { id: 'cfc-3',       type: 'value' },
+    { id: 'hcan-sum-3',  type: 'value' },
+    { id: 'hcan-smoke-3', type: 'value' },
     { id: 'hb-3',        type: 'value' },
     { id: 'mpci-sum-3',  type: 'value' },
     { id: 'cipfc-sum-3', type: 'value' },

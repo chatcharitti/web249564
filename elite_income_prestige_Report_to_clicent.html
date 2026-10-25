@@ -534,7 +534,7 @@ body.sb-hidden .sidebar{transform:translateX(-102%);box-shadow:none;}
 }
 .sb-close:hover{background:rgba(201,168,76,.18);}
 .sidebar .view-switch{margin:14px 14px 6px;}
-.sidebar .vs-btn{flex:1;text-align:center;}
+.sidebar .vs-btn{flex:1;text-align:center;padding:6px 4px;font-size:.72rem;}
 .sb-label{font-size:.68rem;letter-spacing:1.5px;color:#7F8AA3;padding:12px 20px 4px;font-weight:700;}
 .sb-links{display:flex;flex-direction:column;gap:2px;padding:4px 10px 16px;}
 .sb-links a{
@@ -555,7 +555,7 @@ body.sb-hidden .sidebar{transform:translateX(-102%);box-shadow:none;}
 .sb-open .ic{font-size:1.15rem;line-height:1;}
 body.sb-hidden .sb-open{display:flex;}
 .sb-overlay{display:none;position:fixed;inset:0;z-index:999;background:rgba(5,9,18,.55);}
-body.summary-mode .sb-links,body.summary-mode .sb-label{display:none !important;}
+body.summary-mode .sb-links,body.summary-mode .sb-label,body.one-mode .sb-links,body.one-mode .sb-label{display:none !important;}
 @media (max-width:768px){html,body{overflow-x:hidden;}.premium-table{display:block;overflow-x:auto;max-width:100%;}.premium-table th,.premium-table td{padding:8px 5px !important;font-size:.82rem !important;}}
 @media (max-width:899px){
   :root{--navh:52px;}
@@ -628,6 +628,20 @@ body.summary-mode .sb-links,body.summary-mode .sb-label{display:none !important;
   body.print-land #eip1page p:not([class*="text-["]):not(.text-xs){font-size:inherit !important;line-height:inherit !important;}
   body.print-land #eip1page .gold-gradient-text{background:none !important;-webkit-text-fill-color:#7a5409 !important;color:#7a5409 !important;}
 }
+
+
+/* one-page view (screen preview) */
+body.one-mode #eip1page{display:block;padding:8px 16px 40px;}
+body.one-mode #oneBar{display:block !important;}
+#oneBar{max-width:1140px;margin:16px auto 8px;padding:0 16px;}
+.one-bar-in{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;background:linear-gradient(135deg,#0A1220,#14213A);border:1px solid rgba(201,168,76,.5);border-radius:12px;padding:14px 18px;color:#E8D9A0;}
+.one-bar-in b{display:block;font-size:1.05rem;}
+.one-bar-in span{display:block;font-size:.82rem;color:#AEB7CB;margin-top:2px;}
+#onePrintBtn{background:linear-gradient(135deg,#C9A84C,#E8D9A0);color:#0A1220;border:none;border-radius:999px;padding:11px 22px;font-weight:800;font-size:.95rem;cursor:pointer;font-family:inherit;box-shadow:0 4px 16px rgba(201,168,76,.3);}
+.one-tip{font-size:.78rem;color:#6B6B7A;margin-top:8px;text-align:center;}
+#eip1scale{transform-origin:top left;width:297mm;margin:0 auto;}
+body.one-mode #eip1page .a4-landscape{box-shadow:0 12px 40px rgba(15,23,42,.25);}
+@media print{body.one-mode #oneBar,#oneBar{display:none !important;} #eip1page{padding:0 !important;height:auto !important;min-height:0 !important;overflow:hidden !important;} #eip1scale{transform:none !important;height:auto !important;width:auto !important;margin:0 !important;}}
 
 /* === MIDNIGHT PRIVATE BANKING — ALTERNATING DARK SECTIONS === */
 .section.dark{
@@ -1135,9 +1149,10 @@ body.summary-mode .sb-links,body.summary-mode .sb-label{display:none !important;
   </div>
   <div class="view-switch">
     <button class="vs-btn active" id="vsFull">📊 ฉบับเต็ม</button>
-    <button class="vs-btn" id="vsSum">🖨️ ฉบับสรุปพิมพ์</button>
+    <button class="vs-btn" id="vsSum">🖨️ สรุปพิมพ์</button>
+    <button class="vs-btn" id="vsOne">📄 1 หน้า</button>
   </div>
-  <button type="button" class="sb-print" id="sbPrint1">🖨️ พิมพ์สรุป 1 หน้า A4 (ย้ายเงิน)</button>
+  <button type="button" class="sb-print" id="sbPrint1">📄 สรุป 1 หน้า A4 (ย้ายเงิน)</button>
   <div class="sb-label">หัวข้อ</div>
   <nav class="sb-links" id="navLinks">
     <a href="#slideDeck">🎞️ สไลด์สรุป</a>
@@ -1210,7 +1225,7 @@ body.summary-mode .sb-links,body.summary-mode .sb-label{display:none !important;
 <button class="sl-arrow sl-prev" id="slPrev" aria-label="ก่อนหน้า">‹</button><button class="sl-arrow sl-next" id="slNext" aria-label="ถัดไป">›</button></div>
 <div class="sl-nav"><div class="sl-dots" id="slDots"></div><div class="sl-count" id="slCount">1 / 15</div></div>
 <div class="sl-cap"><a class="sl-go" id="slGo" href="#nav-insure">อ่านรายละเอียดเรื่องนี้ →</a>
-<button type="button" class="sl-go sl-print" id="slPrint1">🖨️ พิมพ์สรุปแนวคิดย้ายเงิน 1 หน้า A4</button></div>
+<button type="button" class="sl-go sl-print" id="slPrint1">📄 เปิดสรุปแนวคิดย้ายเงิน 1 หน้า A4</button></div>
 </div></section>
 
 <div class="container">
@@ -1910,7 +1925,14 @@ body.summary-mode .sb-links,body.summary-mode .sb-label{display:none !important;
 <!-- ============================================================ -->
 <!-- ===============  VIEW : PRINT SUMMARY (3 x A4)  ============ -->
 <!-- ============================================================ -->
-<div id="eip1page" aria-hidden="true">
+<div id="oneBar" class="print-hidden" style="display:none">
+  <div class="one-bar-in">
+    <div><b>สรุป 1 หน้า A4 แนวนอน</b><span>แนวคิดการย้ายเงินมา AIA Elite Income Prestige — ตั้งค่ากระดาษเป็น A4 แนวนอน พอดี 1 หน้าให้อัตโนมัติ</span></div>
+    <button type="button" id="onePrintBtn">🖨️ สั่งพิมพ์ (A4 แนวนอน · 1 หน้า)</button>
+  </div>
+  <div class="one-tip">เคล็ดลับ: ในหน้าต่างพิมพ์ ให้เปิด "Background graphics / กราฟิกพื้นหลัง" และตั้ง Margins เป็น None เพื่อให้สีและขนาดแสดงครบ</div>
+</div>
+<div id="eip1page" aria-hidden="true"><div id="eip1scale">
 <div class="a4-landscape">
         <!-- Decorative subtle background glow -->
         <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-amber-300/20 blur-3xl pointer-events-none"></div>
@@ -2223,7 +2245,7 @@ body.summary-mode .sb-links,body.summary-mode .sb-label{display:none !important;
             </div>
         </footer>
     </div>
-</div>
+</div></div>
 <div id="viewSummary" style="display:none">
 <div class="sum-doc">
 
@@ -2503,22 +2525,42 @@ body.summary-mode .sb-links,body.summary-mode .sb-label{display:none !important;
   onScroll();
 })();
 
-// === VIEW SWITCH: full report <-> print summary ===
+// === VIEW SWITCH: full report / print summary / one-page A4 landscape ===
 (function(){
-  const bFull=document.getElementById('vsFull'), bSum=document.getElementById('vsSum');
-  const vFull=document.getElementById('viewFull'), vSum=document.getElementById('viewSummary');
+  const bFull=document.getElementById('vsFull'), bSum=document.getElementById('vsSum'), bOne=document.getElementById('vsOne');
+  const vFull=document.getElementById('viewFull'), vSum=document.getElementById('viewSummary'), one=document.getElementById('eip1page'), scale=document.getElementById('eip1scale');
   if(!bFull||!bSum||!vFull||!vSum) return;
-  function show(mode){
-    const sum = mode==='sum';
-    vFull.style.display = sum ? 'none' : '';
-    vSum.style.display  = sum ? '' : 'none';
-    bSum.classList.toggle('active', sum);
-    bFull.classList.toggle('active', !sum);
-    document.body.classList.toggle('summary-mode', sum);
-    window.scrollTo(0,0);
+  function landscapeStyle(on){
+    let st=document.getElementById('land-page-style');
+    if(on && !st){ st=document.createElement('style'); st.id='land-page-style'; st.textContent='@page{size:A4 landscape;margin:0}@page :first{margin:0}'; document.head.appendChild(st); }
+    if(!on && st) st.remove();
   }
-  bFull.addEventListener('click', ()=>show('full'));
-  bSum.addEventListener('click', ()=>show('sum'));
+  function fit(){
+    if(!one||!scale||!document.body.classList.contains('one-mode')) return;
+    const avail=one.clientWidth-32, w=scale.offsetWidth||1123, k=Math.min(1,avail/w);
+    scale.style.transform='scale('+k+')';
+    scale.style.marginLeft=Math.max(0,(one.clientWidth-w*k)/2)+'px';
+    scale.parentElement.style.height=(scale.firstElementChild.offsetHeight*k+60)+'px';
+  }
+  function show(mode){
+    const sum=mode==='sum', o=mode==='one';
+    vFull.style.display=(sum||o)?'none':'';
+    vSum.style.display=sum?'':'none';
+    bSum.classList.toggle('active',sum); bFull.classList.toggle('active',mode==='full');
+    if(bOne) bOne.classList.toggle('active',o);
+    document.body.classList.toggle('summary-mode',sum);
+    document.body.classList.toggle('one-mode',o);
+    document.body.classList.toggle('print-land',o);
+    landscapeStyle(o);
+    window.scrollTo(0,0);
+    if(o) requestAnimationFrame(fit);
+  }
+  bFull.addEventListener('click',()=>show('full'));
+  bSum.addEventListener('click',()=>show('sum'));
+  if(bOne) bOne.addEventListener('click',()=>show('one'));
+  ['sbPrint1','slPrint1'].forEach(id=>{const b=document.getElementById(id); if(b) b.addEventListener('click',()=>show('one'));});
+  const pb=document.getElementById('onePrintBtn'); if(pb) pb.addEventListener('click',()=>window.print());
+  window.addEventListener('resize',fit);
 })();
 
 // === SLIDE DECK ===
@@ -2547,18 +2589,7 @@ body.summary-mode .sb-links,body.summary-mode .sb-label{display:none !important;
   show(0);
 })();
 
-// === PRINT 1-PAGE A4 LANDSCAPE ===
-(function(){
-  function print1(){
-    const st=document.createElement('style'); st.id='land-page-style';
-    st.textContent='@page{size:A4 landscape;margin:0}@page :first{margin:0}';
-    document.head.appendChild(st); document.body.classList.add('print-land');
-    const done=()=>{document.body.classList.remove('print-land'); const x=document.getElementById('land-page-style'); if(x)x.remove(); window.removeEventListener('afterprint',done);};
-    window.addEventListener('afterprint',done);
-    setTimeout(()=>window.print(),80);
-  }
-  ['sbPrint1','slPrint1'].forEach(id=>{const b=document.getElementById(id); if(b) b.addEventListener('click',print1);});
-})();
+
 </script>
 </body>
 </html>

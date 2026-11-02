@@ -1983,6 +1983,19 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="rider-row" style="align-items:flex-start; margin-top:6px;">
+                            <span style="padding-top:6px;">CI Plus<span class="rider-tag" style="background:rgba(14,116,144,0.12);color:#0e7490;">AIA</span></span>
+                            <div style="display:flex;flex-direction:column;gap:3px;width:130px;">
+                                <input type="number" id="cip-sum-1" value="0" min="0" step="100000" class="premium-input" style="font-size:0.82em;padding:5px 8px;" oninput="app.calculate()" placeholder="ทุน (บาท)">
+                            </div>
+                        </div>
+                        <div class="rider-row" style="align-items:flex-start; margin-top:6px;">
+                            <span style="padding-top:2px;">CI Top Up<span class="rider-tag" style="background:rgba(8,145,178,0.12);color:#0891b2;">AIA</span></span>
+                            <label id="citu-wrap-1" style="display:flex;flex-direction:column;gap:2px;width:130px;font-size:0.76em;color:var(--t-secondary);opacity:0.55;cursor:not-allowed;">
+                                <span style="display:flex;align-items:center;gap:5px;"><input type="checkbox" id="citu-1" disabled onchange="app.calculate()"> เลือก Top Up</span>
+                                <span id="citu-hint-1" style="font-size:0.95em;color:var(--t-tertiary);">ต้องเลือก CI Plus ก่อน</span>
+                            </label>
+                        </div>
                         <div class="rider-row">
                             <span>ชดเชย (HB)<span class="rider-tag">AIA</span></span>
                             <input type="number" id="hb-1" value="0" min="0" step="100" class="premium-input" style="font-size:12px;padding:6px 10px;" oninput="app.calculate()" placeholder="ชดเชย (บ./วัน)">
@@ -2078,6 +2091,19 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="rider-row" style="align-items:flex-start; margin-top:6px;">
+                            <span style="padding-top:6px;">CI Plus<span class="rider-tag" style="background:rgba(14,116,144,0.12);color:#0e7490;">AIA</span></span>
+                            <div style="display:flex;flex-direction:column;gap:3px;width:130px;">
+                                <input type="number" id="cip-sum-2" value="0" min="0" step="100000" class="premium-input" style="font-size:0.82em;padding:5px 8px;" oninput="app.calculate()" placeholder="ทุน (บาท)">
+                            </div>
+                        </div>
+                        <div class="rider-row" style="align-items:flex-start; margin-top:6px;">
+                            <span style="padding-top:2px;">CI Top Up<span class="rider-tag" style="background:rgba(8,145,178,0.12);color:#0891b2;">AIA</span></span>
+                            <label id="citu-wrap-2" style="display:flex;flex-direction:column;gap:2px;width:130px;font-size:0.76em;color:var(--t-secondary);opacity:0.55;cursor:not-allowed;">
+                                <span style="display:flex;align-items:center;gap:5px;"><input type="checkbox" id="citu-2" disabled onchange="app.calculate()"> เลือก Top Up</span>
+                                <span id="citu-hint-2" style="font-size:0.95em;color:var(--t-tertiary);">ต้องเลือก CI Plus ก่อน</span>
+                            </label>
+                        </div>
                         <div class="rider-row">
                             <span>ชดเชย (HB)<span class="rider-tag">AIA</span></span>
                             <input type="number" id="hb-2" value="0" min="0" step="100" class="premium-input" style="font-size:12px;padding:6px 10px;" oninput="app.calculate()" placeholder="ชดเชย (บ./วัน)">
@@ -2172,6 +2198,19 @@
                                     <option value="1">สูบบุหรี่</option>
                                 </select>
                             </div>
+                        </div>
+                        <div class="rider-row" style="align-items:flex-start; margin-top:6px;">
+                            <span style="padding-top:6px;">CI Plus<span class="rider-tag" style="background:rgba(14,116,144,0.12);color:#0e7490;">AIA</span></span>
+                            <div style="display:flex;flex-direction:column;gap:3px;width:130px;">
+                                <input type="number" id="cip-sum-3" value="0" min="0" step="100000" class="premium-input" style="font-size:0.82em;padding:5px 8px;" oninput="app.calculate()" placeholder="ทุน (บาท)">
+                            </div>
+                        </div>
+                        <div class="rider-row" style="align-items:flex-start; margin-top:6px;">
+                            <span style="padding-top:2px;">CI Top Up<span class="rider-tag" style="background:rgba(8,145,178,0.12);color:#0891b2;">AIA</span></span>
+                            <label id="citu-wrap-3" style="display:flex;flex-direction:column;gap:2px;width:130px;font-size:0.76em;color:var(--t-secondary);opacity:0.55;cursor:not-allowed;">
+                                <span style="display:flex;align-items:center;gap:5px;"><input type="checkbox" id="citu-3" disabled onchange="app.calculate()"> เลือก Top Up</span>
+                                <span id="citu-hint-3" style="font-size:0.95em;color:var(--t-tertiary);">ต้องเลือก CI Plus ก่อน</span>
+                            </label>
                         </div>
                         <div class="rider-row">
                             <span>ชดเชย (HB)<span class="rider-tag">AIA</span></span>
@@ -2294,6 +2333,18 @@
                         <td class="data-cell col-opt-2"><div id="name-hcan-2" style="font-size: 0.72em; color: var(--t-tertiary); margin-bottom: 4px;"></div><span id="sum-hcan-2" style="color: var(--t-primary);">0</span></td>
                         <td class="data-cell col-opt-3"><div id="name-hcan-3" style="font-size: 0.72em; color: var(--t-tertiary); margin-bottom: 4px;"></div><span id="sum-hcan-3" style="color: var(--t-primary);">0</span></td>
                     </tr>
+                    <tr id="row-cip">
+                        <td class="row-header">โรคร้ายแรง (AIA CI Plus)</td>
+                        <td class="data-cell col-opt-1"><div id="name-cip-1" style="font-size: 0.72em; color: #0e7490; margin-bottom: 4px;"></div><span id="sum-cip-1" style="color: #0e7490; font-weight:600;">–</span></td>
+                        <td class="data-cell col-opt-2"><div id="name-cip-2" style="font-size: 0.72em; color: #0e7490; margin-bottom: 4px;"></div><span id="sum-cip-2" style="color: #0e7490; font-weight:600;">–</span></td>
+                        <td class="data-cell col-opt-3"><div id="name-cip-3" style="font-size: 0.72em; color: #0e7490; margin-bottom: 4px;"></div><span id="sum-cip-3" style="color: #0e7490; font-weight:600;">–</span></td>
+                    </tr>
+                    <tr id="row-citu">
+                        <td class="row-header">โรคร้ายแรงระดับต้น-กลาง (AIA CI Top Up)</td>
+                        <td class="data-cell col-opt-1"><div id="name-citu-1" style="font-size: 0.72em; color: #0891b2; margin-bottom: 4px;"></div><span id="sum-citu-1" style="color: #0891b2; font-weight:600;">–</span></td>
+                        <td class="data-cell col-opt-2"><div id="name-citu-2" style="font-size: 0.72em; color: #0891b2; margin-bottom: 4px;"></div><span id="sum-citu-2" style="color: #0891b2; font-weight:600;">–</span></td>
+                        <td class="data-cell col-opt-3"><div id="name-citu-3" style="font-size: 0.72em; color: #0891b2; margin-bottom: 4px;"></div><span id="sum-citu-3" style="color: #0891b2; font-weight:600;">–</span></td>
+                    </tr>
                     <tr id="row-mpci">
                         <td class="row-header">โรคร้ายแรง Multi-Pay (AIA Multi-Pay CI) <span class="badge" style="margin-left:6px;background:rgba(220,38,38,0.12);color:#dc2626;border:1px solid rgba(220,38,38,0.25);">หลายจบ</span></td>
                         <td class="data-cell col-opt-1"><div id="name-mpci-1" style="font-size: 0.72em; color: #dc2626; margin-bottom: 4px;"></div><span id="sum-mpci-1" style="color: #dc2626; font-weight:600;">–</span></td>
@@ -2414,6 +2465,8 @@
                 <label class="dp-col-toggle"><input type="checkbox" id="dpcol-health" checked onchange="app.toggleDetailCol('health')"> สุขภาพ</label>
                 <label class="dp-col-toggle"><input type="checkbox" id="dpcol-cfc" checked onchange="app.toggleDetailCol('cfc')"> CFC (มะเร็ง)</label>
                 <label class="dp-col-toggle"><input type="checkbox" id="dpcol-hcan" checked onchange="app.toggleDetailCol('hcan')"> Health Cancer</label>
+                <label class="dp-col-toggle"><input type="checkbox" id="dpcol-cip" checked onchange="app.toggleDetailCol('cip')"> CI Plus</label>
+                <label class="dp-col-toggle"><input type="checkbox" id="dpcol-citu" checked onchange="app.toggleDetailCol('citu')"> CI Top Up</label>
                 <label class="dp-col-toggle"><input type="checkbox" id="dpcol-hb" checked onchange="app.toggleDetailCol('hb')"> HB (ชดเชย)</label>
                 <label class="dp-col-toggle"><input type="checkbox" id="dpcol-mpci" checked onchange="app.toggleDetailCol('mpci')"> Multi-Pay CI</label>
                 <label class="dp-col-toggle"><input type="checkbox" id="dpcol-cihero" checked onchange="app.toggleDetailCol('cihero')"> CI Hero</label>
@@ -3879,7 +3932,7 @@
                 <div class="ab-hero-s">Health Solution Comparison &amp; Presentation Tool</div>
                 <div class="ab-ver">
                     <span class="ab-ver-l">อัปเดตล่าสุด</span>
-                    <span class="ab-ver-v" id="ab-updated">2026-10-25 21:30 น.</span>
+                    <span class="ab-ver-v" id="ab-updated">2026-11-02 13:35 น.</span>
                 </div>
             </div>
 
@@ -3914,6 +3967,7 @@
             <div class="ab-card">
                 <div class="ab-card-t">🗂️ ประวัติการอัปเดต</div>
                 <div class="ab-log" id="ab-log">
+                    <div class="ab-log-row"><div class="ab-log-d">2026-11-02 13:35 น.</div><div class="ab-log-x">เพิ่มสัญญาเพิ่มเติม AIA CI Plus (โรคร้ายแรงระดับรุนแรง 44 โรค/การรักษา) และบันทึกสลักหลัง AIA CI Top Up (ระดับต้น-กลาง 18 โรค/การรักษา) ในแท็บเปรียบเทียบ — เลือกได้ในแต่ละ Option, CI Top Up เลือกได้เฉพาะเมื่อเลือก CI Plus แล้ว (ทุน Top Up = 40% ของ CI Plus อัตโนมัติ และล้างค่าเมื่อลบ CI Plus) · เบี้ยตามตาราง Benefits Plus 2025 ต่อทุน 1,000 บาท แยกชาย/หญิง 18 ช่วงอายุ · เพิ่มแถวสรุปเบี้ย ตารางประมาณการเบี้ย คอลัมน์แจกแจงรายสัญญา ตารางความคุ้มครอง (รายชื่อโรค ระยะรอคอย 4 กรณียกเว้น) และบันทึก/โหลดข้อมูล</div></div>
                     <div class="ab-log-row"><div class="ab-log-d">2026-10-25 21:30 น.</div><div class="ab-log-x">แก้ไขผลประโยชน์ผู้ป่วยนอก (OPD) ของ AIA Health Saver ที่สลับกัน — แผน 3 แสนไม่คุ้มครอง · แผน 4 แสน 1,000 บาท/ครั้ง (สูงสุด 30 ครั้ง/ปี) · แผน 5 แสน 1,500 บาท/ครั้ง ตาม Benefits Plus 2025</div></div>
                     <div class="ab-log-row"><div class="ab-log-d">2026-10-24 12:20 น.</div><div class="ab-log-x">เพิ่มแผนสุขภาพ AIA Health Plus (เสริมประกันกลุ่ม) ในตารางเปรียบเทียบ — 3 แผน (1/5/10 ล้านบาท) × ชาย/หญิง เบี้ยมาตรฐานรายปีครบ 17 ช่วงอายุ (รวมเบี้ยเด็ก 1 เดือน–5 ปี และ 6–10 ปี) ถอดจากโบรชัวร์ฉบับ 17 มิ.ย. 2021 และตรวจทานกับตารางรายเดือนครบ 102 ค่า · ความรับผิดส่วนแรก 20,000 บาท/ปีกรมธรรม์ แสดงผันตามอายุ (มีเฉพาะอายุ 1 เดือน–59 ปี) · ความคุ้มครอง 13 หมวด + กล่องเงื่อนไข (Waiting Period 30/120 วัน, ข้อยกเว้น, โรคร้ายแรง 6 โรค, PMCM แผน 10 ล้าน)</div></div>
                     <div class="ab-log-row"><div class="ab-log-d">2026-10-19 16:20 น.</div><div class="ab-log-x">เพิ่มสัญญาเพิ่มเติม AIA Health Cancer (มรณกรรม + ชดเชยรายวันผู้ป่วยในเนื่องจากโรคร้ายแรง 7 โรค) ในตารางเปรียบเทียบ — เลือกทุนประกันทีละ 1 แสนบาท (1 หน่วย) ต่อ Option พร้อมตัวเลือกสถานะสูบบุหรี่/ไม่สูบบุหรี่แยกต่อ Option (ส่วนลดไม่สูบบุหรี่ 10% มีผลเฉพาะอายุ 16-65 ปี) เบี้ยคำนวณจากตารางมาตรฐานรายปี (อ้างอิง AIA_Benefit_Plus2025_Full_20250124.pdf) หารด้วย 10 เพื่อแปลงจากเบี้ยตัวอย่าง 10 หน่วยเป็นเบี้ยต่อ 1 หน่วย แสดงรายละเอียดความคุ้มครอง (ผลประโยชน์ 2 รายการ + รายชื่อ 7 โรค + Waiting Period) ในตารางความคุ้มครอง พร้อมเชื่อมเข้าตารางแจกแจงเบี้ยในอนาคตและตารางเบี้ยรวม</div></div>
@@ -4873,6 +4927,18 @@ const APP_DATA = {
         }
     },
 
+    // AIA CI Plus & บันทึกสลักหลัง AIA CI Top Up — อัตราเบี้ยประกันมาตรฐานรายปี ต่อทุนประกัน 1,000 บาท
+    // ที่มา: AIA_Benefit_Plus2025_Full_20250124.pdf หน้าพิมพ์ 33-36 (หน้า PDF 119-122)
+    // ลำดับ = AGE_BANDS (15 วัน-15, 16-20, ... 96-98) · CI Top Up ใช้ได้เฉพาะแนบกับ CI Plus (ทุน = 40% ของ CI Plus)
+    RATE_CIPLUS: {
+        male:   [2.62,2.76,2.89,3.16,3.84,5.23,10.19,15.92,25.38,42.31,61.04,81.76,112.64,142.38,183.10,261.54,386.58,503.41],
+        female: [2.27,2.06,2.15,2.55,3.53,4.60,6.38,10.17,15.92,26.09,35.81,51.71,73.52,104.55,139.66,240.90,384.25,497.74]
+    },
+    RATE_CITOPUP: {
+        male:   [0.65,0.57,0.66,1.14,1.65,2.52,7.07,12.52,23.25,35.62,44.95,59.23,68.73,70.72,78.68,102.93,137.74,173.51],
+        female: [0.46,1.04,2.02,2.68,3.51,3.26,3.82,5.34,8.25,12.14,14.97,20.5,25.72,28.32,34.04,44.52,59.59,75.05]
+    },
+
     AGE_BANDS: [
         "11-15","16-20","21-25","26-30","31-35",
         "36-40","41-45","46-50","51-55",
@@ -5442,6 +5508,50 @@ const app = {
         return !!el && el.value === '1';
     },
 
+    // ── AIA CI Plus + บันทึกสลักหลัง AIA CI Top Up ─────────────────────────
+    // ช่วงอายุตาม AGE_BANDS: 0-15, 16-20, ... 91-95, 96-98 (ต่ออายุได้ถึง 98 ปี) · เบี้ยต่อทุน 1,000 บาท
+    getCIBand(age) {
+        if (age > 98 || age < 0) return -1;
+        if (age <= 15) return 0;
+        return Math.min(17, Math.floor((age - 16) / 5) + 1);
+    },
+    getCIPlusRate(age, gender) {
+        const b = this.getCIBand(age);
+        const arr = APP_DATA.RATE_CIPLUS[gender];
+        return (b >= 0 && arr) ? (arr[b] || 0) : 0;
+    },
+    getCITopUpRate(age, gender) {
+        const b = this.getCIBand(age);
+        const arr = APP_DATA.RATE_CITOPUP[gender];
+        return (b >= 0 && arr) ? (arr[b] || 0) : 0;
+    },
+    calcCIPlus(sum, age, gender) {
+        if (!sum) return 0;
+        return Math.round((sum / 1000) * this.getCIPlusRate(age, gender));
+    },
+    calcCITopUp(topUpSum, age, gender) {
+        if (!topUpSum) return 0;
+        return Math.round((topUpSum / 1000) * this.getCITopUpRate(age, gender));
+    },
+    // CI Top Up เลือกได้ก็ต่อเมื่อมี CI Plus ใน Option เดียวกัน — ล็อก/ปลดล็อกช่องติ๊กและล้างค่าเมื่อไม่มี CI Plus
+    syncCITopUp(id) {
+        const cip = parseInt(document.getElementById(`cip-sum-${id}`).value) || 0;
+        const chk = document.getElementById(`citu-${id}`);
+        const wrap = document.getElementById(`citu-wrap-${id}`);
+        const hint = document.getElementById(`citu-hint-${id}`);
+        if (!chk) return;
+        if (cip <= 0) { chk.checked = false; chk.disabled = true; }
+        else { chk.disabled = false; }
+        if (wrap) { wrap.style.opacity = chk.disabled ? '0.55' : '1'; wrap.style.cursor = chk.disabled ? 'not-allowed' : 'pointer'; }
+        if (hint) hint.textContent = chk.disabled ? 'ต้องเลือก CI Plus ก่อน' : ('ทุน Top Up = 40% = ' + this.formatMoney(Math.round(cip * 0.4)));
+    },
+    getCITopUpSum(id) {
+        const cip = parseInt(document.getElementById(`cip-sum-${id}`).value) || 0;
+        const chk = document.getElementById(`citu-${id}`);
+        return (cip > 0 && chk && chk.checked) ? Math.round(cip * 0.4) : 0;
+    },
+
+
     // MTL CI Perfect Care — เบี้ยรายปี exact-age (คุ้มครองถึงอายุ 84 ปี / 85 ปีบริบูรณ์)
     // เลือกได้เฉพาะเมื่อแผนสุขภาพ (HEALTH) ของ Option นั้นเป็น MTL (DHP/DHL)
     calcCIPFC(sum, age, gender) {
@@ -5543,6 +5653,9 @@ const app = {
             const sumCFC  = parseInt(document.getElementById(`cfc-${id}`).value) || 0;
             const sumHCAN = parseInt(document.getElementById(`hcan-sum-${id}`).value) || 0;
             const smokerHCAN = this.getHCanSmoker(id);
+            this.syncCITopUp(id);
+            const sumCIP  = parseInt(document.getElementById(`cip-sum-${id}`).value) || 0;
+            const sumCITU = this.getCITopUpSum(id);
             const sumHB   = parseInt(document.getElementById(`hb-${id}`).value) || 0;
             const sumMPCI = parseInt(document.getElementById(`mpci-sum-${id}`).value) || 0;
             const sumCIPFC = this.isMTL(st.type) ? (parseInt(document.getElementById(`cipfc-sum-${id}`).value) || 0) : 0;
@@ -5550,6 +5663,8 @@ const app = {
 
             const pCFC  = (sumCFC / 100000) * this.getRiderRate('CFC', age, gender);
             const pHCAN = this.calcHCan(sumHCAN, age, gender, smokerHCAN);
+            const pCIP  = this.calcCIPlus(sumCIP, age, gender);
+            const pCITU = this.calcCITopUp(sumCITU, age, gender);
             const pHB   = (sumHB / 100) * this.getRiderRate('HB', age, gender);
             const pMPCI = this.calcMultiPayCI(sumMPCI, age, gender);
             const pCIPFC = this.calcCIPFC(sumCIPFC, age, gender);
@@ -5562,7 +5677,7 @@ const app = {
                 pCP = APP_DATA.rateTable.CP[gender]["5M"][Math.min(99, age)] || 0;
             }
 
-            const pTotal = pMain + pHl + pCFC + pHCAN + pHB + pCP + pMPCI + pCIPFC + pHero;
+            const pTotal = pMain + pHl + pCFC + pHCAN + pCIP + pCITU + pHB + pCP + pMPCI + pCIPFC + pHero;
 
             // แสดงเบี้ย CI Perfect Care
             const cipfcPremEl = document.getElementById(`cipfc-prem-${id}`);
@@ -5607,6 +5722,11 @@ const app = {
             document.getElementById(`name-hcan-${id}`).textContent = sumHCAN > 0 ? `ทุน ${this.formatMoney(sumHCAN)}${smokerHCAN ? ' (สูบบุหรี่)' : ' (ไม่สูบบุหรี่)'}` : "-";
             document.getElementById(`sum-hcan-${id}`).textContent = sumHCAN > 0 ? this.formatMoney(pHCAN) : "-";
 
+            document.getElementById(`name-cip-${id}`).textContent = sumCIP > 0 ? `ทุน ${this.formatMoney(sumCIP)}` : "-";
+            document.getElementById(`sum-cip-${id}`).textContent = sumCIP > 0 ? this.formatMoney(pCIP) : "–";
+            document.getElementById(`name-citu-${id}`).textContent = sumCITU > 0 ? `ทุน ${this.formatMoney(sumCITU)} (40% ของ CI Plus)` : "-";
+            document.getElementById(`sum-citu-${id}`).textContent = sumCITU > 0 ? this.formatMoney(pCITU) : "–";
+
             document.getElementById(`name-hb-${id}`).textContent = sumHB > 0 ? `แผน ${sumHB}` : "-";
             document.getElementById(`sum-hb-${id}`).textContent = sumHB > 0 ? this.formatMoney(pHB) : "-";
 
@@ -5647,6 +5767,8 @@ const app = {
             'row-cp':     (id) => document.getElementById(`cp-${id}`).checked && this.isMTL(this.state[id].type),
             'row-cfc':    (id) => (parseInt(document.getElementById(`cfc-${id}`).value) || 0) > 0,
             'row-hcan':   (id) => (parseInt(document.getElementById(`hcan-sum-${id}`).value) || 0) > 0,
+            'row-cip':    (id) => (parseInt(document.getElementById(`cip-sum-${id}`).value) || 0) > 0,
+            'row-citu':   (id) => this.getCITopUpSum(id) > 0,
             'row-mpci':   (id) => (parseInt(document.getElementById(`mpci-sum-${id}`).value) || 0) > 0,
             'row-cipfc':  (id) => this.isMTL(this.state[id].type) && (parseInt(document.getElementById(`cipfc-sum-${id}`).value) || 0) > 0,
             'row-cihero': (id) => !!this.getCIHeroSel(id).plan,
@@ -5974,6 +6096,59 @@ const app = {
 
         }
 
+        const anyCIP = [1,2,3].some(id => activeOptions[id-1] && (parseInt(document.getElementById(`cip-sum-${id}`).value)||0) > 0);
+        if (anyCIP) {
+    // ── AIA CI Plus + CI Top Up ─────────────────────────────────────────
+            const ciRow = (label, fn, sub) => {
+                html += `<tr><td class="row-header">${label}${sub ? `<div style="font-size:0.72em;color:var(--t-tertiary);margin-top:3px;line-height:1.5;font-weight:400;">${sub}</div>` : ''}</td>`;
+                [1,2,3].forEach(id => {
+                    if (!activeOptions[id-1]) { html += `<td class="data-cell col-opt-${id} hide-col"></td>`; return; }
+                    html += fn(id);
+                });
+                html += `</tr>`;
+            };
+            const cipOf  = id => parseInt(document.getElementById(`cip-sum-${id}`).value) || 0;
+            const cituOf = id => this.getCITopUpSum(id);
+            const cell2  = (id, on, txt, color, bold) => `<td class="data-cell col-opt-${id}" style="color:${on ? color : 'var(--t-muted)'};${on && bold ? 'font-weight:600;' : ''}">${on ? txt : '—'}</td>`;
+
+            html += `<tr class="sub-header-row"><td colspan="4">สัญญาเพิ่มเติมโรคร้ายแรงระดับรุนแรง — AIA CI Plus</td></tr>`;
+            ciRow('โรคร้ายแรงระดับรุนแรง 44 โรค/การรักษา', id => cell2(id, cipOf(id)>0, this.formatMoney(cipOf(id))+' บ.', '#0e7490', true),
+                  'จ่าย 100% ของทุนประกัน · จ่ายเพียง 1 โรคตลอดสัญญา และสัญญาสิ้นผลบังคับทันทีเมื่อจ่ายครบทุน');
+            ciRow('ผลประโยชน์กรณีเสียชีวิต', id => cell2(id, cipOf(id)>0, this.formatMoney(cipOf(id))+' บ.', 'var(--t-primary)', false),
+                  '100% ของทุนประกัน · จ่ายอย่างใดอย่างหนึ่ง (โรคร้ายแรงหรือเสียชีวิต) รวมไม่เกิน 100%');
+            ciRow('ระยะเวลาที่ไม่คุ้มครอง (Waiting Period)', id => cell2(id, cipOf(id)>0, '60 วัน', 'var(--t-primary)', false),
+                  'นับจากวันเริ่มคุ้มครอง หรือวันต่ออายุ/Reinstatement ครั้งสุดท้าย แล้วแต่วันใดหลัง');
+            ciRow('ระยะเวลาเอาประกัน / ผลิตภัณฑ์', id => cell2(id, cipOf(id)>0, '1 ปี ต่ออายุได้ถึงอายุ 98 ปี', 'var(--t-primary)', false),
+                  'เบี้ยปรับตามอายุทุกปี · อัลไซเมอร์/พาร์กินสัน/สูญเสียการดำรงชีพอย่างอิสระ/ทุพพลภาพถาวรสิ้นเชิง ต้องวินิจฉัยครั้งแรกก่อนวันครบรอบปีกรมธรรม์ภายหลังอายุครบ 80 ปี');
+            ciRow('โรคที่คุ้มครอง (44 โรค/การรักษา)', id => cell2(id, cipOf(id)>0, 'คุ้มครอง 44 โรค', 'var(--c-success)', true),
+                  '<b>กลุ่ม 1 มะเร็งและเนื้องอก (2):</b> มะเร็งระยะลุกลาม, เนื้องอกในสมองชนิดที่ไม่ใช่มะเร็ง<br>'
+                + '<b>กลุ่ม 2 หัวใจ/ระบบหายใจ/ไหลเวียนโลหิต (8):</b> กล้ามเนื้อหัวใจตายเฉียบพลันจากการขาดเลือด, ผ่าตัดเส้นเลือดเลี้ยงกล้ามเนื้อหัวใจ, โรคกล้ามเนื้อหัวใจ, ผ่าตัดลิ้นหัวใจโดยวิธีเปิดหัวใจ, ผ่าตัดเส้นเลือดแดงใหญ่เอออร์ตา, แรงดันในหลอดเลือดแดงปอดสูงแบบปฐมภูมิ, หลอดลมปอดอุดกั้นเรื้อรังขั้นรุนแรง/ปอดระยะสุดท้าย, โลหิตจางจากไขกระดูกไม่สร้างเม็ดโลหิต<br>'
+                + '<b>กลุ่ม 3 หลอดเลือดสมอง/ระบบประสาท/กล้ามเนื้อ (13):</b> หลอดเลือดสมองแตกหรืออุดตัน, หลอดเลือดสมองโป่งพองที่ต้องผ่าตัด, ภาวะโคมา, สมองเสื่อมชนิดอัลไซเมอร์, เยื่อหุ้มสมองและไขสันหลังอักเสบจากแบคทีเรีย, สมองอักเสบจากไวรัส, พาร์กินสัน, มัลติเพิลสะเคลอโรสิส, เซลล์ประสาทควบคุมการเคลื่อนไหว, ภาวะอะแพลลิก, อัมพาตของกล้ามเนื้อแขนหรือขา, โปลิโอ, กล้ามเนื้อเสื่อม<br>'
+                + '<b>กลุ่ม 4 อวัยวะและระบบการทำงานที่สำคัญ (8):</b> ตับวาย, ไตวายเรื้อรัง, ลำไส้อักเสบเป็นแผลรุนแรง, ผ่าตัดเปลี่ยนอวัยวะ/ปลูกถ่ายไขกระดูก, ไวรัสตับอักเสบขั้นรุนแรง, ตับอ่อนอักเสบที่กลับเป็นซ้ำและเรื้อรัง, ไตอักเสบลูปัสจาก SLE, ข้ออักเสบรูมาตอยด์ชนิดรุนแรง<br>'
+                + '<b>กลุ่ม 5 ติดเชื้อ/บาดเจ็บรายแรง/ทุพพลภาพ (9):</b> แผลไหม้ฉกรรจ์ (ระดับ 3), บาดเจ็บที่ศีรษะอย่างรุนแรง, สูญเสียการดำรงชีพอย่างอิสระ, ทุพพลภาพถาวรสิ้นเชิง, ตาบอด, ฉีกขาดของรากประสาทต้นแขน, สูญเสียความสามารถในการพูด, เนื้อเยื่อพังผืดอักเสบติดเชื้อและเป็นเนื้อตาย, โรคเท้าช้าง<br>'
+                + '<b>กลุ่ม 6 สำหรับผู้เยาว์ (4) คุ้มครองถึงก่อนอายุครบ 17 ปีเท่านั้น:</b> ไข้รูมาติกที่ทำให้หัวใจผิดปกติ, คาวาซากิที่ทำให้เกิดโรคแทรกซ้อนของหัวใจ, เบาหวานชนิดที่ 1, น้ำไขสันหลังคั่งในโพรงสมองที่เกิดภายหลังและต้องใส่ท่อระบาย');
+
+            html += `<tr class="sub-header-row"><td colspan="4">บันทึกสลักหลังโรคร้ายแรงระดับต้นถึงปานกลาง — AIA CI Top Up (แนบกับ CI Plus เท่านั้น)</td></tr>`;
+            ciRow('ทุนประกัน CI Top Up', id => cell2(id, cituOf(id)>0, this.formatMoney(cituOf(id))+' บ.', '#0891b2', true),
+                  'ต้องเท่ากับ 40% ของทุน CI Plus เสมอ และไม่เกินวงเงินโรคร้ายแรงระดับต้นถึงปานกลางสูงสุดต่อรายชีวิตที่บริษัทกำหนด');
+            ciRow('โรคร้ายแรงระดับต้นถึงปานกลาง 18 โรค/การรักษา', id => cell2(id, cituOf(id)>0, this.formatMoney(cituOf(id))+' บ.', 'var(--t-primary)', false),
+                  'จ่าย 100% ของทุน Top Up (= 40% ของ CI Plus) · จำกัดเพียง 1 โรค จ่ายครั้งเดียวตลอดอายุกรมธรรม แล้วบันทึกสลักหลังสิ้นผลบังคับทันที (ขณะที่ CI Plus ยังมีผลบังคับ)');
+            ciRow('ระยะเวลาที่ไม่คุ้มครอง (Waiting Period)', id => cell2(id, cituOf(id)>0, '60 วัน', 'var(--t-primary)', false),
+                  'นับจากวันเริ่มมีผลตามบันทึกสลักหลัง หรือวันต่ออายุ/วันที่อนุมัติเพิ่มทุน แล้วแต่วันใดหลัง');
+            ciRow('โรคที่คุ้มครอง (18 โรค/การรักษา)', id => cell2(id, cituOf(id)>0, 'คุ้มครอง 18 โรค', 'var(--c-success)', true),
+                  '<b>กลุ่ม 1 มะเร็ง/เนื้องอก:</b> มะเร็งระยะไม่ลุกลาม, ผ่าตัดเนื้องอกต่อมใต้สมองออก<br>'
+                + '<b>กลุ่ม 2 หัวใจ/หลอดเลือด:</b> หลอดเลือดหัวใจตีบที่รักษาด้วยการสวนหลอดเลือดหัวใจ, ผ่าตัดลอกเยื่อหุ้มหัวใจ, รักษาโรคลิ้นหัวใจด้วยการสวนหลอดเลือด, รักษาโรคหลอดเลือดแดงใหญ่เอออร์ตาโดยใส่สายสวน/หลอดเลือดแดงใหญ่เอออร์ตาโป่งพองที่ระดับอกหรือท้อง, ใส่เครื่องกรองลิ่มเลือดในหลอดเลือดดำใหญ่<br>'
+                + '<b>กลุ่ม 3 หลอดเลือดสมอง/ระบบประสาท:</b> ผ่าตัดลอกหลอดเลือดแดงคาโรติด, ใส่สายสวนเส้นเลือดแดงบริเวณคอ, หลอดเลือดสมองโป่งพองที่รักษาโดยใช้ขดลวดผ่านสายสวน, ผ่าตัดฝังท่อระบายในโพรงสมอง<br>'
+                + '<b>กลุ่ม 4 อวัยวะสำคัญ:</b> ผ่าตัดตับออกหนึ่งกลีบ, ผ่าตัดไตออกหนึ่งข้าง, ผ่าตัดปอดออกหนึ่งข้าง<br>'
+                + '<b>กลุ่ม 5 บาดเจ็บ/ทุพพลภาพ:</b> แผลไหม้ชนิดรุนแรงน้อย (ระดับ 2), ผ่าตัดเลือดคั่งใต้เยื่อหุ้มสมองจากอุบัติเหตุ, สูญเสียแขนหรือขาหนึ่งข้างหรือตาหนึ่งข้าง, เบาหวานขึ้นจอประสาทตา');
+            ciRow('4 กรณีที่ไม่ได้รับความคุ้มครองจาก Top Up', id => cell2(id, cituOf(id)>0, 'ดูเงื่อนไขด้านซ้าย', 'var(--c-warning)', true),
+                  '1) มะเร็งระยะลุกลาม (CI Plus) กับมะเร็งระยะไม่ลุกลาม (Top Up) ที่อวัยวะเดียวกัน ข้างเดียวกัน รักษา/ผ่าตัดครั้งเดียวกัน<br>'
+                + '2) แผลไหม้ฉกรรจ์ (CI Plus) กับแผลไหม้ชนิดรุนแรงน้อย (Top Up) จากอุบัติเหตุครั้งเดียวกัน<br>'
+                + '3) น้ำไขสันหลังคั่งในโพรงสมองที่ต้องใส่ท่อระบาย (CI Plus) กับผ่าตัดฝังท่อระบายในโพรงสมอง (Top Up) ซึ่งเป็นการรักษาครั้งเดียวกัน<br>'
+                + '4) สูญเสียแขน/ขาหนึ่งข้างหรือตาหนึ่งข้าง (Top Up) แล้วต่อมาวินิจฉัยอัมพาตของกล้ามเนื้อแขนหรือขา, ตาบอด, สูญเสียการดำรงชีพอย่างอิสระ หรือทุพพลภาพถาวรสิ้นเชิง (CI Plus) จากสาเหตุเดียวกัน');
+            html += `<tr><td colspan="4" style="font-size:0.78em;color:var(--t-tertiary);line-height:1.6;padding:8px 12px;">หมายเหตุ: บริษัทพิจารณาวงเงินรวมความคุ้มครองโรคร้ายแรงระดับต้นถึงปานกลางทุกผลิตภัณฑ์ (รวม CI Top Up) สูงสุดไม่เกิน 5 ล้านบาทต่อรายชีวิตสำหรับผู้มีรายได้ และ 3 ล้านบาทสำหรับผู้ไม่มีรายได้ ส่วนระดับรุนแรงสูงสุด 50 ล้านบาท (มีรายได้) / 30 ล้านบาท (ไม่มีรายได้) ทั้งนี้ขึ้นกับการพิจารณารับประกัน — ตัวเลขนี้เป็นข้อมูลประกอบ ไม่ได้ใช้ตรวจสอบในการคำนวณ</td></tr>`;
+        }
+
         const anyHB = [1,2,3].some(id => activeOptions[id-1] && (parseInt(document.getElementById(`hb-${id}`).value)||0) > 0);
         if (anyHB) {
     // ── HB Extra ─────────────────────────────────────────────────────────
@@ -6063,6 +6238,8 @@ document.getElementById('benefit-body').innerHTML = html;
                 if(cpChecked && this.isMTL(st.type)) desc += ` + CP`;
                 if(cfc>0) desc += ` + CFC`;
                 if(hcan>0) desc += ` + Health Cancer`;
+                if((parseInt(document.getElementById(`cip-sum-${id}`).value) || 0) > 0) desc += ` + CI Plus`;
+                if(this.getCITopUpSum(id) > 0) desc += ` + CI Top Up`;
                 if(hb>0) desc += ` + HB`;
                 const mpciSumHdr = parseInt(document.getElementById(`mpci-sum-${id}`).value) || 0;
                 if(mpciSumHdr>0) desc += ` + MPCI`;
@@ -6134,6 +6311,8 @@ document.getElementById('benefit-body').innerHTML = html;
                 const cfcSum = parseInt(document.getElementById(`cfc-${id}`).value) || 0;
                 const hcanSum = parseInt(document.getElementById(`hcan-sum-${id}`).value) || 0;
                 const hcanSmoker = this.getHCanSmoker(id);
+                const cipSum = parseInt(document.getElementById(`cip-sum-${id}`).value) || 0;
+                const cituSum = this.getCITopUpSum(id);
                 const hbSum = parseInt(document.getElementById(`hb-${id}`).value) || 0;
                 const mpciSum = parseInt(document.getElementById(`mpci-sum-${id}`).value) || 0;
                 const cipfcSum = this.isMTL(st.type) ? (parseInt(document.getElementById(`cipfc-sum-${id}`).value) || 0) : 0;
@@ -6145,6 +6324,8 @@ document.getElementById('benefit-body').innerHTML = html;
                 const pCFC = (cfcSum > 0 && rateCfc > 0) ? (cfcSum / 100000) * rateCfc : 0;
                 const pHCAN = (hcanSum > 0 && rateHcan > 0) ? (hcanSum / 100000) * rateHcan : 0;
                 const pHB = (hbSum > 0 && rateHb > 0) ? (hbSum / 100) * rateHb : 0;
+                const pCIP  = cipSum  > 0 ? this.calcCIPlus(cipSum, evalAge, gender) : 0;
+                const pCITU = cituSum > 0 ? this.calcCITopUp(cituSum, evalAge, gender) : 0;
                 // MPCI: yearly renewable — คำนวณตาม evalAge ของแต่ละ band
                 const pMPCI = mpciSum > 0 ? this.calcMultiPayCI(mpciSum, evalAge, gender) : 0;
                 // CI Perfect Care: exact-age, คุ้มครองถึงอายุ 84 ปี
@@ -6156,10 +6337,12 @@ document.getElementById('benefit-body').innerHTML = html;
                 if(cfcSum > 0 && rateCfc === 0) termDesc.push("CFC สิ้นสุด");
                 if(hcanSum > 0 && rateHcan === 0) termDesc.push("Health Cancer สิ้นสุด");
                 if(hbSum > 0 && rateHb === 0) termDesc.push("HB สิ้นสุด");
+                if(cipSum > 0 && evalAge > 98) termDesc.push("CI Plus สิ้นสุด");
+                if(cituSum > 0 && evalAge > 98) termDesc.push("CI Top Up สิ้นสุด");
                 if(mpciSum > 0 && evalAge > 99) termDesc.push("MPCI สิ้นสุด");
                 if(cipfcSum > 0 && evalAge > 84) termDesc.push("CI Perfect Care สิ้นสุด");
 
-                const pTotal = pMain + pHl + pCFC + pHCAN + pHB + pCP + pMPCI + pCIPFC + pHeroP;
+                const pTotal = pMain + pHl + pCFC + pHCAN + pCIP + pCITU + pHB + pCP + pMPCI + pCIPFC + pHeroP;
                 let termHtml = mainDesc;
                 if(termDesc.length > 0) {
                     termHtml += `<br><span style="font-size: 11px; color: var(--t-tertiary);">(${termDesc.join(', ')})</span>`;
@@ -6177,7 +6360,7 @@ document.getElementById('benefit-body').innerHTML = html;
     },
 
     // สถานะ checkbox เลือกแสดงคอลัมน์ในตารางแจกแจงเบี้ยในอนาคต (ค่าเริ่มต้น: แสดงทุกประเภท)
-    detailProjCols: { main:true, health:true, cfc:true, hcan:true, hb:true, mpci:true, cihero:true, cipfc:true, cp:true },
+    detailProjCols: { main:true, health:true, cfc:true, hcan:true, cip:true, citu:true, hb:true, mpci:true, cihero:true, cipfc:true, cp:true },
 
     toggleDetailCol(key) {
         this.detailProjCols[key] = document.getElementById(`dpcol-${key}`).checked;
@@ -6193,6 +6376,8 @@ document.getElementById('benefit-body').innerHTML = html;
             { key:'health', label:'สุขภาพ',          color:'var(--c-primary)' },
             { key:'cfc',    label:'CFC (มะเร็ง)',    color:'#be123c' },
             { key:'hcan',   label:'Health Cancer',   color:'#059669' },
+            { key:'cip',    label:'CI Plus',         color:'#0e7490' },
+            { key:'citu',   label:'CI Top Up',       color:'#0891b2' },
             { key:'hb',     label:'HB (ชดเชย)',      color:'#ea580c' },
             { key:'mpci',   label:'Multi-Pay CI',    color:'#dc2626' },
             { key:'cihero', label:'CI Hero',         color:'#2563eb' },
@@ -6226,6 +6411,8 @@ document.getElementById('benefit-body').innerHTML = html;
                 cfcSum: parseInt(document.getElementById(`cfc-${id}`).value) || 0,
                 hcanSum: parseInt(document.getElementById(`hcan-sum-${id}`).value) || 0,
                 hcanSmoker: this.getHCanSmoker(id),
+                cipSum: parseInt(document.getElementById(`cip-sum-${id}`).value) || 0,
+                cituSum: this.getCITopUpSum(id),
                 hbSum: parseInt(document.getElementById(`hb-${id}`).value) || 0,
                 mpciSum: parseInt(document.getElementById(`mpci-sum-${id}`).value) || 0,
                 cipfcSum: isMtlPlan ? (parseInt(document.getElementById(`cipfc-sum-${id}`).value) || 0) : 0,
@@ -6241,6 +6428,8 @@ document.getElementById('benefit-body').innerHTML = html;
                 health: st.type !== 'NONE' && !!info.optK,
                 cfc:    info.cfcSum > 0,
                 hcan:   info.hcanSum > 0,
+                cip:    info.cipSum > 0,
+                citu:   info.cituSum > 0,
                 hb:     info.hbSum > 0,
                 mpci:   info.mpciSum > 0,
                 cihero: !!info.heroPlan,
@@ -6328,6 +6517,8 @@ document.getElementById('benefit-body').innerHTML = html;
                 vals.cfc  = (info.cfcSum  > 0 && rateCfc  > 0) ? (info.cfcSum  / 100000) * rateCfc  : 0;
                 vals.hcan = (info.hcanSum > 0 && rateHcan > 0) ? (info.hcanSum / 100000) * rateHcan : 0;
                 vals.hb   = (info.hbSum   > 0 && rateHb   > 0) ? (info.hbSum   / 100)    * rateHb   : 0;
+                vals.cip  = info.cipSum  > 0 ? this.calcCIPlus(info.cipSum, evalAge, gender) : 0;
+                vals.citu = info.cituSum > 0 ? this.calcCITopUp(info.cituSum, evalAge, gender) : 0;
 
                 // Multi-Pay CI / CI Perfect Care / CI Hero
                 vals.mpci  = info.mpciSum  > 0 ? this.calcMultiPayCI(info.mpciSum, evalAge, gender) : 0;
@@ -7219,6 +7410,15 @@ function _sum1PremRows(age, gender, extraLabel, extraVal, excludeKey, onlyKeys){
     var hcan=parseInt(document.getElementById('hcan-sum-1').value)||0;
     if(hcan>0){ var rhc=app.getHCanRate(age,gender,app.getHCanSmoker(1)); var phc=rhc>0?Math.round((hcan/100000)*rhc):0;
       if(phc>0){ rows.push(['AIA Health Cancer · ทุน '+hcan.toLocaleString(), phc]); total+=phc; } }
+  }
+  // CI Plus / CI Top Up
+  if(_inc('CIP')){
+    var cip=parseInt(document.getElementById('cip-sum-1').value)||0;
+    if(cip>0){ var pcip=app.calcCIPlus(cip,age,gender);
+      if(pcip>0){ rows.push(['AIA CI Plus · ทุน '+cip.toLocaleString(), pcip]); total+=pcip; } }
+    var citu=app.getCITopUpSum(1);
+    if(citu>0){ var pctu=app.calcCITopUp(citu,age,gender);
+      if(pctu>0){ rows.push(['AIA CI Top Up · ทุน '+citu.toLocaleString(), pctu]); total+=pctu; } }
   }
   // CI Hero
   if(excludeKey!=='HERO'&&_inc('HERO')){
@@ -8207,6 +8407,9 @@ function chOtherRiders(evalAge,gender){
   var hcan=parseInt(document.getElementById('hcan-sum-1').value)||0;
   if(hcan>0){ var rhc=app.getHCanRate(evalAge,gender,app.getHCanSmoker(1));
     var phc=rhc>0?Math.round((hcan/100000)*rhc):0; if(phc>0){total+=phc;labels.push('Health Cancer');} }
+  var cip=parseInt(document.getElementById('cip-sum-1').value)||0;
+  if(cip>0){ var pcip=app.calcCIPlus(cip,evalAge,gender); if(pcip>0){total+=pcip;labels.push('CI Plus');}
+    var citu=app.getCITopUpSum(1); if(citu>0){ var pctu=app.calcCITopUp(citu,evalAge,gender); if(pctu>0){total+=pctu;labels.push('CI Top Up');} } }
   var hb=parseInt(document.getElementById('hb-1').value)||0;
   if(hb>0){ var rh=app.getRiderRate('HB',evalAge,gender);
     var ph=rh>0?Math.round((hb/100)*rh):0; if(ph>0){total+=ph;labels.push('HB');} }
@@ -8495,6 +8698,17 @@ function ccCalcOtherRiders(evalAge, gender) {
         var rateHcan = app.getHCanRate(evalAge, gender, app.getHCanSmoker(1));
         var pHCAN = (rateHcan > 0) ? (hcanSum / 100000) * rateHcan : 0;
         if (pHCAN > 0) { total += Math.round(pHCAN); labels.push('Health Cancer'); }
+    }
+    // CI Plus / CI Top Up
+    var cipSum1 = parseInt(document.getElementById('cip-sum-1').value) || 0;
+    if (cipSum1 > 0) {
+        var pCIP1 = app.calcCIPlus(cipSum1, evalAge, gender);
+        if (pCIP1 > 0) { total += pCIP1; labels.push('CI Plus'); }
+        var cituSum1 = app.getCITopUpSum(1);
+        if (cituSum1 > 0) {
+            var pCITU1 = app.calcCITopUp(cituSum1, evalAge, gender);
+            if (pCITU1 > 0) { total += pCITU1; labels.push('CI Top Up'); }
+        }
     }
     // HB
     var hbSum = parseInt(document.getElementById('hb-1').value) || 0;
@@ -9548,6 +9762,8 @@ const EXPORT_FIELDS = [
     { id: 'cfc-1',       type: 'value' },
     { id: 'hcan-sum-1',  type: 'value' },
     { id: 'hcan-smoke-1', type: 'value' },
+    { id: 'cip-sum-1',  type: 'value' },
+    { id: 'citu-1',     type: 'checked' },
     { id: 'hb-1',        type: 'value' },
     { id: 'mpci-sum-1',  type: 'value' },
     { id: 'cipfc-sum-1', type: 'value' },
@@ -9565,6 +9781,8 @@ const EXPORT_FIELDS = [
     { id: 'cfc-2',       type: 'value' },
     { id: 'hcan-sum-2',  type: 'value' },
     { id: 'hcan-smoke-2', type: 'value' },
+    { id: 'cip-sum-2',  type: 'value' },
+    { id: 'citu-2',     type: 'checked' },
     { id: 'hb-2',        type: 'value' },
     { id: 'mpci-sum-2',  type: 'value' },
     { id: 'cipfc-sum-2', type: 'value' },
@@ -9580,6 +9798,8 @@ const EXPORT_FIELDS = [
     { id: 'cfc-3',       type: 'value' },
     { id: 'hcan-sum-3',  type: 'value' },
     { id: 'hcan-smoke-3', type: 'value' },
+    { id: 'cip-sum-3',  type: 'value' },
+    { id: 'citu-3',     type: 'checked' },
     { id: 'hb-3',        type: 'value' },
     { id: 'mpci-sum-3',  type: 'value' },
     { id: 'cipfc-sum-3', type: 'value' },

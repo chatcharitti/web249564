@@ -157,11 +157,171 @@ tr:hover td{background:var(--tr-hov)}
 .app-footer{position:sticky;bottom:0;z-index:40;background:var(--bg2);border-top:1px solid var(--cb);padding:8px 24px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:calc(var(--fs) - 4px);color:var(--tx3);flex-wrap:wrap;transition:background .3s}
 .app-footer .sep-dot{color:var(--tx3);opacity:.5}
 
+
+/* ===== MODAL / TOAST (Phase B) ===== */
+.modal-bg{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.55);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;padding:16px}
+.modal-box{background:var(--card);color:var(--tx);border:1px solid var(--cb);border-radius:18px;padding:28px 32px;max-width:640px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.4);max-height:92vh;overflow-y:auto}
+.modal-sm{max-width:470px}
+.modal-ic{font-size:calc(var(--fs) + 18px);text-align:center;margin-bottom:4px}
+.modal-box h2{text-align:center;font-size:calc(var(--fs) + 4px);margin-bottom:10px}
+.modal-lead{text-align:center;color:var(--tx2);margin-bottom:14px}
+.modal-list{margin:0 0 18px 1.3em;color:var(--tx2);line-height:1.9;font-size:calc(var(--fs) - 2px)}
+.modal-q{text-align:center;font-weight:600;color:var(--gold);margin-bottom:12px}
+.modal-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.modal-foot{text-align:center;margin-top:16px;font-size:calc(var(--fs) - 4px)}
+.modal-foot a{color:var(--ac);text-decoration:underline;cursor:pointer}
+.modal-hint{font-size:calc(var(--fs) - 5px);color:var(--tx3);margin:6px 0 18px}
+.chk{display:flex;align-items:center;gap:10px;margin:10px 0;cursor:pointer}
+.chk input{width:20px;height:20px;accent-color:var(--ac)}
+.toast-bk{position:fixed;right:20px;bottom:70px;z-index:900;max-width:400px;background:var(--card);border:2px solid var(--gold);border-radius:14px;padding:16px 18px;box-shadow:0 12px 40px rgba(0,0,0,.35);display:none}
+.toast-t{font-weight:700;color:var(--gold);margin-bottom:6px}
+.toast-d{font-size:calc(var(--fs) - 3px);color:var(--tx2);margin-bottom:12px}
+.toast-a{display:flex;gap:8px;flex-wrap:wrap}
+@media print{.modal-bg,.toast-bk{display:none!important}}
+
+/* ===== DASHBOARD CARDS (Phase C) ===== */
+.dash-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch}
+.dash-grid>.card{margin-bottom:0}
+.dc{background:var(--card);border:1px solid var(--cb);border-radius:16px;padding:22px 24px;box-shadow:0 4px 24px rgba(0,0,0,.12);display:flex;flex-direction:column;min-width:0;transition:background .3s,border .3s}
+.dc-hd{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;border-bottom:1px solid var(--cb);padding-bottom:12px;margin-bottom:14px}
+.dc-t{font-size:calc(var(--fs) + 3px);font-weight:600;line-height:1.3}
+.dc-sub{font-size:calc(var(--fs) - 5px);color:var(--tx3);margin-top:2px}
+.dc-arrow{background:none;border:none;color:var(--tx);font-size:calc(var(--fs) + 10px);cursor:pointer;line-height:1;padding:0 4px;transition:.2s;font-family:inherit}
+.dc-arrow:hover{color:var(--ac);transform:translateX(4px)}
+.dc-l{font-size:calc(var(--fs) - 4px);color:var(--tx3)}
+.dc-v{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:calc(var(--fs) + 1px)}
+.dc-trio{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.dc-trio>div{padding-left:10px;border-left:1px solid var(--cb)}
+.dc-trio>div:first-child{border-left:none;padding-left:0}
+.dc-note{font-size:calc(var(--fs) - 4px);color:var(--tx2);margin-top:auto;padding-top:10px}
+.dc-chart{position:relative;height:210px;margin:6px 0}
+.dc-icons{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center;margin-bottom:6px}
+.dc-circle{width:54px;height:54px;border-radius:50%;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;font-size:calc(var(--fs) + 5px)}
+.dc-ilb{font-size:calc(var(--fs) - 4px);color:var(--tx2)}
+.dc-iv{font-family:'JetBrains Mono',monospace;font-size:calc(var(--fs) - 2px)}
+.dc-donut{position:relative;height:230px;margin-top:8px}
+.dc-donut-c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none}
+.dc-donut-v{font-family:'JetBrains Mono',monospace;font-size:calc(var(--fs) + 3px);font-weight:700}
+.dc-gauge{text-align:center}
+.dc-gauge svg{width:100%;max-width:300px;height:auto}
+.dc-score{text-align:center;font-size:calc(var(--fs) + 14px);font-weight:700;line-height:1.2}
+.dc-score small{font-size:calc(var(--fs) - 2px);color:var(--tx3);font-weight:500}
+/* การ์ดสีเข้ม (คงเหลือ) */
+.dc-dark{background:#37393d;border-color:#37393d;color:#fff}
+.dc-dark .dc-hd{border-bottom-color:rgba(255,255,255,.18)}
+.dc-dark .dc-sub,.dc-dark .dc-l{color:#b8bcc4}
+.dc-dark .dc-arrow{color:#fff}.dc-dark .dc-arrow:hover{color:#ffd43b}
+.dc-dark .dc-trio>div{border-left-color:rgba(255,255,255,.2)}
+.dc-big{font-family:'JetBrains Mono',monospace;font-size:calc(var(--fs) + 18px);font-weight:700;color:#ffd43b;margin:4px 0 16px;line-height:1.2}
+.dc-extra{margin-top:auto;border-top:1px solid rgba(255,255,255,.18);padding-top:12px;display:flex;flex-direction:column;gap:6px;font-size:calc(var(--fs) - 3px)}
+.dc-extra>div{display:flex;justify-content:space-between;gap:10px}
+.dc-extra span{color:#b8bcc4}
+.eye-btn{background:rgba(255,255,255,.12);border:none;border-radius:50%;width:34px;height:34px;color:#ffd43b;cursor:pointer;font-size:calc(var(--fs) - 2px);vertical-align:middle;margin-left:6px}
+.dc-dark.mask-on .val-mask{filter:blur(9px);user-select:none}
+/* การ์ดเน้นสีทอง */
+.dc-gold{background:radial-gradient(circle at 12% 18%,rgba(255,255,255,.35) 0 10px,transparent 11px),radial-gradient(circle at 86% 70%,rgba(255,255,255,.3) 0 16px,transparent 17px),radial-gradient(circle at 70% 12%,rgba(255,255,255,.28) 0 7px,transparent 8px),linear-gradient(135deg,#f5c542,#ffe066);border-color:transparent;color:#2b2100}
+.dc-gold .dc-hd{border-bottom-color:rgba(43,33,0,.22)}
+.dc-gold .dc-sub,.dc-gold .dc-note,.dc-gold .dc-l{color:#4d3d05}
+.dc-gold .dc-arrow{color:#2b2100}.dc-gold .dc-arrow:hover{color:#000}
+.pbar{height:22px;border-radius:11px;background:rgba(43,33,0,.16);position:relative;overflow:hidden;margin:12px 0 8px}
+.pbar>i{display:block;height:100%;background:#2b2100;border-radius:11px;transition:width .4s}
+.pbar-t{position:absolute;inset:0;display:flex;align-items:center;padding-left:10px;font-size:calc(var(--fs) - 5px);font-weight:700;color:#fff;mix-blend-mode:normal;text-shadow:0 0 3px rgba(0,0,0,.5)}
+.dc-bud{font-family:'JetBrains Mono',monospace;font-size:calc(var(--fs) + 2px);font-weight:700}
+.dc-bud small{font-weight:400}
+.dc-count{margin:8px 0}
+.dc-count small{font-size:calc(var(--fs) - 4px);color:#4d3d05}
+.dc-count div{font-family:'JetBrains Mono',monospace;font-size:calc(var(--fs) + 14px);font-weight:700;line-height:1.1}
+.dc-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.btn-dk{background:#2b2100;color:#fff}.btn-dk:hover{opacity:.85}
+.btn-dko{background:transparent;border:1px solid #2b2100;color:#2b2100}.btn-dko:hover{background:rgba(43,33,0,.1)}
+.dc-cc-row{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.dc-cc-ic{width:48px;height:48px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:calc(var(--fs) + 4px);flex-shrink:0}
+.dc-cc-bar{height:16px;border-radius:8px;background:rgba(100,116,139,.2);overflow:hidden;margin:6px 0}
+.dc-cc-bar i{display:block;height:100%;background:var(--dng);border-radius:8px}
+
+.dc{container-type:inline-size}
+.dc-trio-l .dc-v{font-size:calc(var(--fs) - 4px);overflow-wrap:anywhere}
+.dc-trio-l .dc-l{font-size:calc(var(--fs) - 5px)}
+@supports (font-size:1cqw){.dc-trio-l .dc-v{font-size:min(calc(var(--fs) - 3px),4.6cqw)}}
+@media(max-width:1200px){.dash-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:900px){.dash-grid{grid-template-columns:1fr}}
+@media print{
+  .dash-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:10px!important}
+  .dc{box-shadow:none!important;border:1px solid #cbd5e1!important;padding:12px!important;break-inside:avoid;page-break-inside:avoid}
+  .dc-dark,.dc-gold{background:#f8fafc!important;color:#000!important}
+  .dc-dark *,.dc-gold *{color:#000!important;text-shadow:none!important}
+  .dc-dark .dc-big{color:#000!important}
+  .dc-arrow,.eye-btn,.dc-actions{display:none!important}
+  .pbar-t{color:#000!important}
+  .pbar>i{background:#555!important}
+}
+
+/* ===== GUIDE + RATIO HELP (Phase D/E) ===== */
+.gd-lead{line-height:1.9;color:var(--tx2);margin-bottom:14px}
+.gd-flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:14px;background:var(--bg3);border:1px dashed var(--cb);border-radius:12px;font-size:calc(var(--fs) - 3px)}
+.gd-chip{background:var(--actbg);border:1px solid var(--cb);border-radius:20px;padding:4px 14px}
+.gd-arr{color:var(--ac);font-weight:700}
+.gd-sep{flex-basis:100%;height:0}
+.gd-steps{display:flex;flex-direction:column;gap:14px}
+.gd-step{display:grid;grid-template-columns:52px 1fr auto;gap:16px;align-items:start;background:var(--bg3);border:1px solid var(--cb);border-radius:14px;padding:16px 20px}
+.gd-no{width:44px;height:44px;border-radius:50%;background:var(--ac);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:calc(var(--fs) + 2px)}
+[data-theme="dark"] .gd-no{color:#0a0e17}
+.gd-step h3{font-size:calc(var(--fs) + 1px);margin-bottom:2px}
+.gd-step ul{margin:6px 0 0 1.2em;color:var(--tx2);font-size:calc(var(--fs) - 2px);line-height:1.8}
+.gd-go{display:flex;flex-direction:column;gap:8px;align-items:stretch;min-width:170px}
+.gd-table td,.gd-table th,.rh-table td,.rh-table th{white-space:normal;vertical-align:top}
+.gd-table td{font-size:calc(var(--fs) - 3px)}
+.gd-tips{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.gd-tip{background:var(--bg3);border:1px solid var(--cb);border-left:4px solid var(--gold);border-radius:10px;padding:14px 16px;font-size:calc(var(--fs) - 2px);color:var(--tx2);line-height:1.7}
+.gd-tip b{color:var(--tx)}
+.gd-check{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.gd-check label{display:flex;gap:10px;align-items:flex-start;cursor:pointer;font-size:calc(var(--fs) - 2px);color:var(--tx2)}
+.gd-check input{width:20px;height:20px;accent-color:var(--ac);flex-shrink:0;margin-top:3px}
+.rh-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-bottom:20px}
+.rh-card{background:var(--card);border:1px solid var(--cb);border-radius:16px;padding:20px 22px;box-shadow:0 4px 24px rgba(0,0,0,.12)}
+.rh-card h3{font-size:calc(var(--fs) + 1px);margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.rh-meta{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:calc(var(--fs) - 3px);margin-bottom:10px}
+.rh-meta dt{color:var(--tx3)}.rh-meta dd{color:var(--tx);font-family:'JetBrains Mono',monospace}
+.rh-card p{font-size:calc(var(--fs) - 2px);color:var(--tx2);line-height:1.8;margin-bottom:8px}
+.rh-card p b{color:var(--tx)}
+.rh-sec{margin:0 0 10px;padding:6px 0;font-weight:700;border-bottom:2px solid currentColor}
+.rh-score{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:14px 18px;border-radius:12px;background:var(--bg3);border:1px solid var(--cb)}
+.rh-score big{font-size:calc(var(--fs) + 16px);font-weight:700;line-height:1}
+@media(max-width:900px){.gd-step{grid-template-columns:44px 1fr}.gd-go{grid-column:1/-1;flex-direction:row;flex-wrap:wrap}.gd-tips,.gd-check,.rh-grid{grid-template-columns:1fr}}
+@media print{
+  .gd-step,.rh-card,.gd-tip{break-inside:avoid;page-break-inside:avoid;box-shadow:none!important}
+  .gd-step{grid-template-columns:36px 1fr}.gd-no{width:32px;height:32px;font-size:12px}
+  .gd-go{display:none!important}
+  .gd-tips{grid-template-columns:repeat(3,1fr)!important}
+  .rh-grid{grid-template-columns:repeat(2,1fr)!important}
+}
+
+/* ===== PRINT FIX (v2.2): พิมพ์เป็นโทนสว่าง/ฟอนต์กะทัดรัดเสมอ ไม่ว่าหน้าจอใช้ธีมไหน ===== */
+@media print{
+  html,html[data-theme="dark"],html[data-theme="light"]{--fs:11px!important;--bg:#fff;--bg2:#f1f5f9;--bg3:#f8fafc;--card:#fff;--cb:#cbd5e1;--tx:#111;--tx2:#333;--tx3:#555;--ac:#0369a1;--ac2:#4f46e5;--ac3:#047857;--dng:#b91c1c;--warn:#b45309;--gold:#8a6508;--hovbg:rgba(0,0,0,.03);--actbg:rgba(0,0,0,.05);--tr-hov:transparent}
+  .app-footer{position:static!important;margin-top:10px;padding:6px 0!important;background:transparent!important;border-top:1px solid #cbd5e1!important;color:#333!important;font-size:10px!important}
+  .app-footer a{color:#0369a1!important}
+  .dash-grid{zoom:1!important}
+  tr:hover td{background:transparent!important}
+  body{line-height:1.45!important}
+  td,th{padding:3px 6px!important}
+  .card:has(table),.card:has(.tw){break-inside:auto!important;page-break-inside:auto!important}
+  tr{break-inside:avoid;page-break-inside:avoid}
+  thead{display:table-header-group}
+  canvas{max-width:100%!important}
+  .g2{grid-template-columns:1fr 1fr!important}.g3{grid-template-columns:repeat(3,1fr)!important}.g4{grid-template-columns:repeat(4,1fr)!important}
+  td button{display:none!important}
+  .card:has(.gd-steps),.card:has(.gd-tips){break-inside:auto!important;page-break-inside:auto!important}
+  .dc-donut{height:185px!important}.dc-chart{height:165px!important}
+  .dc{padding:10px 12px!important}.dc-hd{margin-bottom:8px!important;padding-bottom:6px!important}
+  .dc-big{font-size:22px!important;margin:2px 0 8px!important}
+  .dc-circle{width:40px!important;height:40px!important}
+}
 </style>
 </head>
 <body>
 <nav class="sidebar" id="sidebar">
-<div class="sidebar-hd"><div class="logo">Financial Advisory</div><div class="ttl">แผนการเงินแบบองค์รวม rev.01</div></div>
+<div class="sidebar-hd"><div class="logo">Financial Advisory</div><div class="ttl">แผนการเงินแบบองค์รวม rev.02</div></div>
 <div class="sidebar-nav">
 <div class="nav-i active" data-s="dashboard"><span class="ic">📊</span>Dashboard</div>
 <div class="nav-i" data-s="balance"><span class="ic">📋</span>งบดุลส่วนบุคคล</div>
@@ -171,6 +331,8 @@ tr:hover td{background:var(--tr-hov)}
 <div class="nav-i" data-s="retfund"><span class="ic">📈</span>กองทุนเกษียณที่พึงมี</div>
 <div class="nav-i" data-s="investment"><span class="ic">💎</span>แผนการลงทุน</div>
 <div class="nav-i" data-s="invlist"><span class="ic">📊</span>รายการสินทรัพย์ลงทุน</div>
+<div class="nav-i" data-s="guide"><span class="ic">📝</span>แนะนำการกรอกข้อมูล</div>
+<div class="nav-i" data-s="ratiohelp"><span class="ic">📖</span>อธิบายอัตราส่วนการเงิน</div>
 <div class="nav-i" data-s="about"><span class="ic">ℹ️</span>เกี่ยวกับแอพนี้</div>
 <!-- ลิ้งค์น่าสนใจเพิ่มเติม -->
 <div class="ttl" style="padding:12px 20px 4px;font-size:calc(var(--fs) - 5px);color:var(--tx3)">--- ลิ้งค์น่าสนใจเพิ่มเติม ---</div>
@@ -196,6 +358,7 @@ tr:hover td{background:var(--tr-hov)}
 <div class="io-bar">
 <button class="btn btn-out btn-sm" onclick="exportData()">💾 Export</button>
 <button class="btn btn-out btn-sm" onclick="document.getElementById('impFile').click()">📂 Import</button>
+<button class="btn btn-out btn-sm" onclick="openBackupSettings()" id="bkTopBtn" title="ตั้งเตือนสำรองข้อมูล">⏰ <span id="bkTopLbl">10 นาที</span></button>
 <button class="btn btn-out btn-sm" onclick="printCurrentTab()">🖨️ พิมพ์</button>
 <input type="file" id="impFile" accept=".json" style="display:none" onchange="importData(event)">
 </div>
@@ -206,8 +369,98 @@ tr:hover td{background:var(--tr-hov)}
 <!-- DASHBOARD -->
 <div class="section active" id="sec-dashboard">
 <div class="print-hdr"><h1>แผนการเงินแบบองค์รวม — Dashboard</h1><p id="ph-dash"></p></div>
-<div class="g4" style="margin-bottom:20px" id="dashKPI"></div>
-<div class="g2">
+<div class="dash-grid">
+
+<!-- 1. คงเหลือ (การ์ดเข้ม) -->
+<div class="dc dc-dark" id="dcBal">
+<div class="dc-hd"><div><div class="dc-t">คงเหลือ <button class="eye-btn" onclick="toggleEye()" title="ซ่อน/แสดงตัวเลข" aria-label="ซ่อนหรือแสดงตัวเลข">👁</button></div><div class="dc-sub">ภาพรวมรายปี จากกระแสเงินสด</div></div><button class="dc-arrow" onclick="goTab('cashflow')" aria-label="ไปที่กระแสเงินสด">→</button></div>
+<div class="dc-big val-mask" id="dBal">0</div>
+<div class="dc-trio">
+<div><div class="dc-l">รายได้</div><div class="dc-v val-mask" id="dInc">0</div></div>
+<div><div class="dc-l">ค่าใช้จ่าย</div><div class="dc-v val-mask" id="dExp">0</div></div>
+<div><div class="dc-l">ออม/ลงทุน</div><div class="dc-v val-mask" id="dSave">0</div></div>
+</div>
+<div class="dc-extra">
+<div><span>ความมั่งคั่งสุทธิ</span><b class="val-mask" id="dNW">0</b></div>
+<div><span>อัตราการออม</span><b class="val-mask" id="dSaveR">0%</b></div>
+<div><span>กองทุนเกษียณที่ต้องการ</span><b class="val-mask" id="dRetNeed">—</b></div>
+</div>
+</div>
+
+<!-- 2. สัดส่วนรายได้ -->
+<div class="dc">
+<div class="dc-hd"><div class="dc-t">สัดส่วนรายได้</div><button class="dc-arrow" onclick="goTab('cashflow')" aria-label="ไปที่กระแสเงินสด">→</button></div>
+<div class="dc-icons" id="dIncIcons"></div>
+<div class="dc-donut"><canvas id="cDashInc"></canvas><div class="dc-donut-c"><div class="dc-l">รายได้/ปี</div><div class="dc-donut-v" id="dIncC" style="color:#3b8f82">0</div></div></div>
+</div>
+
+<!-- 3. สัดส่วนค่าใช้จ่าย -->
+<div class="dc">
+<div class="dc-hd"><div class="dc-t">สัดส่วนค่าใช้จ่าย</div><button class="dc-arrow" onclick="goTab('cashflow')" aria-label="ไปที่กระแสเงินสด">→</button></div>
+<div class="dc-icons" id="dExpIcons"></div>
+<div class="dc-donut"><canvas id="cDashExp"></canvas><div class="dc-donut-c"><div class="dc-l">ค่าใช้จ่าย/ปี</div><div class="dc-donut-v" id="dExpC" style="color:#f26b00">0</div></div></div>
+</div>
+
+<!-- 4. สินทรัพย์ - หนี้สิน -->
+<div class="dc">
+<div class="dc-hd"><div><div class="dc-t">สินทรัพย์ – หนี้สิน</div><div class="dc-sub">จากงบดุลส่วนบุคคล</div></div><button class="dc-arrow" onclick="goTab('balance')" aria-label="ไปที่งบดุลส่วนบุคคล">→</button></div>
+<div class="dc-trio dc-trio-l">
+<div><div class="dc-l">สินทรัพย์</div><div class="dc-v" id="dTotA">0</div></div>
+<div><div class="dc-l">หนี้สิน</div><div class="dc-v" id="dTotL">0</div></div>
+<div><div class="dc-l">ความมั่งคั่งสุทธิ</div><div class="dc-v" id="dNW2">0</div></div>
+</div>
+<div class="dc-chart"><canvas id="cDashBS"></canvas></div>
+<div class="dc-note" id="dDebtR"></div>
+</div>
+
+<!-- 5. สุขภาพทางการเงิน -->
+<div class="dc">
+<div class="dc-hd"><div><div class="dc-t">สุขภาพทางการเงิน</div><div class="dc-sub">คะแนนจากอัตราส่วนที่ผ่านเกณฑ์</div></div><button class="dc-arrow" onclick="goTab('ratio')" aria-label="ไปที่อัตราส่วนทางการเงิน">→</button></div>
+<div id="dGauge" class="dc-gauge"></div>
+<div class="dc-score"><span id="dScore">0</span><small> / 10</small> <span class="st" id="dScoreLb">—</span></div>
+<div class="dc-note" id="dWeak"></div>
+</div>
+
+<!-- 6. งบประมาณ (การ์ดเน้นสีทอง) -->
+<div class="dc dc-gold">
+<div class="dc-hd"><div class="dc-t">งบประมาณ</div><button class="dc-arrow" onclick="goTab('cashflow')" aria-label="ไปที่กระแสเงินสด">→</button></div>
+<div class="dc-sub">ค่าใช้จ่ายรวมเทียบกับรายได้รวมต่อปี</div>
+<div class="pbar"><i id="dBudBar" style="width:0%"></i><span class="pbar-t" id="dBudPct">0%</span></div>
+<div class="dc-bud"><span id="dBudUsed">0</span> <small>/</small> <span id="dBudInc">0</span></div>
+<div class="dc-note" id="dBudNote"></div>
+</div>
+
+<!-- 7. เป้าหมาย: เกษียณ (การ์ดเน้นสีทอง) -->
+<div class="dc dc-gold">
+<div class="dc-hd"><div class="dc-t">เป้าหมาย: เกษียณอายุ</div><button class="dc-arrow" onclick="goTab('retirement')" aria-label="ไปที่แผนเกษียณอายุ">→</button></div>
+<div class="dc-sub" id="dGoalSub">—</div>
+<div class="pbar"><i id="dGoalBar" style="width:0%"></i><span class="pbar-t" id="dGoalPct">0%</span></div>
+<div class="dc-bud"><span id="dGoalHave">0</span> <small>/</small> <span id="dGoalNeed">0</span></div>
+<div class="dc-note" id="dGoalNote"></div>
+</div>
+
+<!-- 8. ตั้งเตือนสำรองข้อมูล (การ์ดเน้นสีทอง) -->
+<div class="dc dc-gold" id="bkStatus">
+<div class="dc-hd"><div class="dc-t">ตั้งเตือนสำรองข้อมูล</div><button class="dc-arrow" onclick="openBackupSettings()" aria-label="ตั้งค่าการเตือน">→</button></div>
+<div class="dc-sub" id="bkInterval">เตือนทุก 10 นาที</div>
+<div class="dc-count"><small>เตือนครั้งถัดไปใน</small><div id="bkCountdown">10:00</div></div>
+<div class="dc-note" id="bkDirty">✅ สำรองข้อมูลล่าสุดแล้ว</div>
+<div class="dc-actions"><button class="btn btn-dk btn-sm" onclick="exportData()">💾 Export ตอนนี้</button><button class="btn btn-dko btn-sm" onclick="openBackupSettings()">⚙️ ตั้งค่า</button></div>
+</div>
+
+<!-- 9. ค่าใช้จ่ายบัตรเครดิต -->
+<div class="dc">
+<div class="dc-hd"><div><div class="dc-t">หนี้บัตรเครดิต</div><div class="dc-sub">จากรายการหนี้สิน</div></div><button class="dc-arrow" onclick="goTab('invlist','invG7')" aria-label="ไปที่รายการหนี้สิน">→</button></div>
+<div id="dCC"></div>
+</div>
+
+<!-- 10. แนวโน้มรายได้ - ค่าใช้จ่าย -->
+<div class="dc">
+<div class="dc-hd"><div><div class="dc-t">แนวโน้มรายได้ – ค่าใช้จ่าย</div><div class="dc-sub">รายเดือน (ไม่รวมรายการรายปี)</div></div><button class="dc-arrow" onclick="goTab('cashflow','cfC')" aria-label="ไปที่แผนภูมิกระแสเงินสด">→</button></div>
+<div class="dc-chart"><canvas id="cDashTrend"></canvas></div>
+</div>
+
+<!-- 11-12. ข้อมูลลูกค้า + สมมุติฐาน (คงของเดิม) -->
 <div class="card" id="profileCard">
 <div class="card-h"><div class="bdg b-bl">👤</div><div style="flex:1"><h2>ข้อมูลลูกค้า</h2><div class="sub">Client Profile</div></div>
 <button class="btn btn-out btn-sm" onclick="toggleEdit('profile')">✏️ แก้ไข</button></div>
@@ -236,15 +489,14 @@ tr:hover td{background:var(--tr-hov)}
 <div class="fi-row"><label>เงินลงทุนเพิ่ม (บาท/ปี)</label><input class="fi fi-sm" id="a_addInvest" type="number" step="1000" value="60000"></div>
 <div style="display:flex;gap:8px;margin-top:12px"><button class="btn btn-ac" onclick="saveAssumptions()">💾 บันทึก & คำนวณใหม่</button><button class="btn btn-out" onclick="toggleEdit('assum')">ยกเลิก</button></div>
 </div></div>
+
 </div>
-<div class="card"><div class="card-h"><div class="bdg b-gr">📐</div><div><h2>สรุปอัตราส่วนทางการเงิน</h2></div></div><div class="g3" id="ratioSnap"></div></div>
-<div class="card"><div class="card-h"><div class="bdg b-pu">📊</div><div><h2>โครงสร้างสินทรัพย์ vs หนี้สิน</h2></div></div><div class="g2"><div class="chart-sm"><canvas id="cAssetPie"></canvas></div><div class="chart-sm"><canvas id="cNetWorth"></canvas></div></div></div>
 </div>
 
 <!-- BALANCE SHEET (editable) -->
 <div class="section" id="sec-balance">
 <div class="print-hdr"><h1>งบดุลส่วนบุคคล (Personal Balance Sheet)</h1><p id="ph-bal"></p></div>
-<div style="display:flex;justify-content:flex-end;margin-bottom:12px"><button class="btn btn-go btn-sm" onclick="renderBalanceSheet();renderDashKPI();renderDashCharts();renderRatioSnap();renderRatioTable()">🔄 คำนวณใหม่ทั้งหมด</button></div>
+<div style="display:flex;justify-content:flex-end;margin-bottom:12px"><button class="btn btn-go btn-sm" onclick="renderBalanceSheet();renderDashboard();renderRatioTable()">🔄 คำนวณใหม่ทั้งหมด</button></div>
 <div class="g2">
 <div class="card">
 <div class="card-h"><div class="bdg b-bl">💰</div><div style="flex:1"><h2>สินทรัพย์ (Assets)</h2></div>
@@ -281,9 +533,9 @@ tr:hover td{background:var(--tr-hov)}
 <!-- RATIOS -->
 <div class="section" id="sec-ratio">
 <div class="print-hdr"><h1>อัตราส่วนทางการเงิน (Financial Ratio)</h1><p id="ph-ratio"></p></div>
-<div class="card"><div class="card-h"><div class="bdg b-pu">📐</div><div><h2>อัตราส่วนทางการเงิน (Financial Ratio)</h2><div class="sub">รายละเอียดตัวเลขที่ใช้คำนวณ — ตาม Fin Ratio ใน Excel</div></div></div>
+<div class="card"><div class="card-h"><div class="bdg b-pu">📐</div><div><h2>อัตราส่วนทางการเงิน (Financial Ratio)</h2><div class="sub">รายละเอียดตัวเลขที่ใช้คำนวณ — ตาม Fin Ratio ใน Excel และสูตรมาตรฐาน</div></div><button class="btn btn-out btn-sm" style="margin-left:auto" onclick="goTab('ratiohelp')">📖 อธิบายอัตราส่วน</button></div>
 <div id="ratioDetail"></div></div>
-<div class="card"><div class="card-h"><div class="bdg b-bl">📊</div><div><h2>เปรียบเทียบอัตราส่วน</h2></div></div><div class="chart-box"><canvas id="cRatioBar"></canvas></div></div>
+<div class="card"><div class="card-h"><div class="bdg b-bl">📊</div><div><h2>ผลเทียบเกณฑ์มาตรฐาน</h2><div class="sub">100% = ผ่านเกณฑ์พอดี (แท่งเขียว = ผ่าน, แดง = ยังไม่ผ่าน)</div></div></div><div class="chart-box"><canvas id="cRatioBar"></canvas></div></div>
 </div>
 
 <!-- RETIREMENT -->
@@ -342,7 +594,7 @@ tr:hover td{background:var(--tr-hov)}
 <!-- Summary chart -->
 <div class="card no-print">
 <div class="card-h"><div class="bdg b-pu">🍩</div><div><h2>สัดส่วน Asset Allocation</h2><div class="sub">รวมสินทรัพย์ลงทุนทุกกลุ่ม</div></div>
-<button class="btn btn-go btn-sm" onclick="syncInvToBS();renderBalanceSheet();renderDashKPI();renderRatioTable();renderInvSummary()">🔄 Sync ไปงบดุล</button>
+<button class="btn btn-go btn-sm" onclick="syncInvToBS();renderBalanceSheet();renderDashboard();renderRatioTable();renderInvSummary()">🔄 Sync ไปงบดุล</button>
 </div>
 <div class="chart-sm"><canvas id="cInvPie"></canvas></div>
 </div>
@@ -401,6 +653,160 @@ tr:hover td{background:var(--tr-hov)}
 </div>
 </div>
 
+<!-- GUIDE: แนะนำขั้นตอนการกรอกข้อมูล (Phase D) -->
+<div class="section" id="sec-guide">
+<div class="print-hdr"><h1>แนะนำขั้นตอนการกรอกข้อมูล</h1><p id="ph-guide"></p></div>
+
+<div class="card">
+<div class="card-h"><div class="bdg b-bl">📝</div><div><h2>แนะนำขั้นตอนการกรอกข้อมูล</h2><div class="sub">ทำตามลำดับ 9 ขั้นตอน ใช้เวลาประมาณ 20–30 นาที</div></div></div>
+<p class="gd-lead">เมื่อกรอกข้อมูลครบ ทุกหน้าจะเชื่อมโยงกันและคำนวณใหม่ให้อัตโนมัติ ผลวิเคราะห์จะแม่นยำที่สุดเมื่อใช้ข้อมูล <b>รายรับ–รายจ่ายจริงอย่างน้อย 1 เดือน</b> ส่วนข้อมูลที่เห็นอยู่ในแอพตอนเริ่มต้นเป็นเพียง <b>ตัวอย่าง</b> กรุณาแก้ไขหรือลบก่อนนำไปใช้งานจริง</p>
+<div class="gd-flow" aria-label="การเชื่อมโยงข้อมูลระหว่างหน้า">
+<span class="gd-chip">💵 กระแสเงินสด</span><span class="gd-arr">→</span><span class="gd-chip">📐 อัตราส่วน (ออม / ชำระหนี้ / ความอยู่รอด)</span>
+<span class="gd-sep"></span>
+<span class="gd-chip">📊 รายการสินทรัพย์ลงทุน + หนี้สิน</span><span class="gd-arr">→</span><span class="gd-chip">📋 งบดุล</span><span class="gd-arr">→</span><span class="gd-chip">📊 Dashboard</span>
+</div>
+</div>
+
+<div class="card">
+<div class="card-h"><div class="bdg b-gr">✅</div><div><h2>9 ขั้นตอน</h2></div></div>
+<div class="gd-steps">
+
+<div class="gd-step"><div class="gd-no">1</div><div>
+<h3>เปิดแอพ แล้วเลือกวิธีเริ่มต้น</h3>
+<ul><li>เลือก <b>📂 Import</b> เพื่อนำไฟล์ข้อมูลเดิมกลับมาใช้ต่อ หรือ <b>✨ เริ่มต้นใหม่</b> เพื่อกรอกใหม่</li>
+<li>แอพไม่เก็บข้อมูลของผู้ใช้ หากรีเฟรชหน้าเว็บ ข้อมูลจะกลับเป็นค่าเริ่มต้นทั้งหมด</li></ul></div><div class="gd-go"></div></div>
+
+<div class="gd-step"><div class="gd-no">2</div><div>
+<h3>ข้อมูลลูกค้าและสมมุติฐาน</h3>
+<ul><li>ที่ Dashboard กด <b>✏️ แก้ไข</b> ในการ์ด "ข้อมูลลูกค้า" แล้วใส่ชื่อ อายุ สถานภาพ อาชีพ</li>
+<li>ในการ์ด "สมมุติฐานเบื้องต้น" ตั้งอายุเกษียณ อายุสิ้นสุด เงินเฟ้อ ผลตอบแทนที่คาดหวัง และเงินลงทุนเพิ่มต่อปี แล้วกด <b>บันทึก &amp; คำนวณใหม่</b></li></ul></div>
+<div class="gd-go"><button class="btn btn-out btn-sm" onclick="goTab('dashboard')">ไปที่ Dashboard →</button></div></div>
+
+<div class="gd-step"><div class="gd-no">3</div><div>
+<h3>กรอกกระแสเงินสด (รายรับ–รายจ่าย)</h3>
+<ul><li>กรอกจำนวนเงินรายเดือนในช่อง ม.ค.–ธ.ค. ส่วนรายการที่จ่ายปีละครั้ง (เช่น เบี้ยประกัน ภาษี) ให้ใส่ในช่อง <b>รายปี</b></li>
+<li>จัดรายการให้อยู่ถูกหมวด เพราะอัตราส่วนคำนวณจากหมวด: <b>เงินออมและลงทุน</b> (ใช้คำนวณอัตราการออม), <b>ผ่อนชำระหนี้</b> (ใช้คำนวณความสามารถในการชำระหนี้), <b>เงินได้จากการทำงาน / จากสินทรัพย์</b> (ใช้คำนวณความอยู่รอดและความมั่งคั่ง)</li>
+<li>กดปุ่ม <b>＋ เพิ่มรายการ</b> หากมีรายการที่ยังไม่มีในตาราง</li></ul></div>
+<div class="gd-go"><button class="btn btn-out btn-sm" onclick="goTab('cashflow')">ไปที่กระแสเงินสด →</button></div></div>
+
+<div class="gd-step"><div class="gd-no">4</div><div>
+<h3>กรอกรายการสินทรัพย์ลงทุน</h3>
+<ul><li>ไล่กรอกทีละแท็บ: สภาพคล่อง · เงินฝาก/สลาก · กองทุนรวม · หุ้น · อสังหาฯ · ทางเลือก · PVD โดยแก้หรือลบรายการตัวอย่าง แล้วกด <b>＋ เพิ่มรายการ</b></li>
+<li>มูลค่าหุ้นและกองทุนคำนวณจาก <b>จำนวนหน่วย × ราคาตลาด</b> ส่วนราคา/NAV ล่าสุด ให้เปิดดูจากลิงก์แหล่งข้อมูลใต้ตารางแล้วนำมากรอกเอง</li>
+<li>ยอดรวมแต่ละกลุ่มจะส่งไปงบดุลให้อัตโนมัติ</li></ul></div>
+<div class="gd-go"><button class="btn btn-out btn-sm" onclick="goTab('invlist','invG0')">ไปที่รายการสินทรัพย์ →</button></div></div>
+
+<div class="gd-step"><div class="gd-no">5</div><div>
+<h3>กรอกหนี้สิน</h3>
+<ul><li>ที่แท็บ <b>หนี้สิน</b> ใส่ยอดค้างชำระ ค่างวดต่อเดือน และอัตราดอกเบี้ยของแต่ละรายการ</li>
+<li>แยกตามระยะเวลา: <b>ระยะสั้น</b> (ชำระภายใน 1 ปี เช่น บัตรเครดิต ผ่อนสินค้า) และ <b>ระยะยาว</b> (เกิน 1 ปี เช่น ผ่อนรถ ผ่อนบ้าน)</li></ul></div>
+<div class="gd-go"><button class="btn btn-out btn-sm" onclick="goTab('invlist','invG7')">ไปที่หนี้สิน →</button></div></div>
+
+<div class="gd-step"><div class="gd-no">6</div><div>
+<h3>ตรวจและเติมงบดุลส่วนบุคคล</h3>
+<ul><li>บรรทัดที่มีเครื่องหมาย <b>🔒</b> ดึงมาจากรายการสินทรัพย์ลงทุนโดยอัตโนมัติ ไม่ต้องแก้ที่หน้านี้</li>
+<li>กรอกเองเฉพาะรายการที่ไม่มีเครื่องหมายล็อก เช่น เงินสดเพื่อใช้จ่าย มูลค่าเงินสดประกันชีวิต รถยนต์ บ้านอยู่อาศัย ของใช้ส่วนตัว</li></ul></div>
+<div class="gd-go"><button class="btn btn-out btn-sm" onclick="goTab('balance')">ไปที่งบดุล →</button></div></div>
+
+<div class="gd-step"><div class="gd-no">7</div><div>
+<h3>อ่านผลอัตราส่วนทางการเงิน</h3>
+<ul><li>ดูเครื่องหมาย ✅ ผ่านเกณฑ์ หรือ ⚠️ ไม่ผ่านเกณฑ์ พร้อมตัวเลขที่ใช้คำนวณในแต่ละรายการ</li>
+<li>หากยังไม่เข้าใจความหมาย ให้เปิดหน้า <b>อธิบายอัตราส่วนการเงิน</b> เพื่อดูสูตร เกณฑ์ และแนวทางปรับปรุง</li></ul></div>
+<div class="gd-go"><button class="btn btn-out btn-sm" onclick="goTab('ratio')">ไปที่อัตราส่วน →</button><button class="btn btn-out btn-sm" onclick="goTab('ratiohelp')">อ่านคำอธิบาย →</button></div></div>
+
+<div class="gd-step"><div class="gd-no">8</div><div>
+<h3>วางแผนเกษียณอายุ</h3>
+<ul><li>ที่หน้า "แผนเกษียณอายุ" กด <b>📥 ดึงจาก CF</b> เพื่อนำค่าใช้จ่ายรายปีจากกระแสเงินสดมาใช้ แล้วใส่ "แหล่งเงินสะสม ณ เกษียณ"</li>
+<li>ดูเงินเกษียณที่ต้องการและส่วนที่ต้องลงทุนเพิ่ม จากนั้นต่อด้วยหน้า "กองทุนเกษียณที่พึงมี" และ "แผนการลงทุน"</li></ul></div>
+<div class="gd-go"><button class="btn btn-out btn-sm" onclick="goTab('retirement')">ไปที่แผนเกษียณ →</button></div></div>
+
+<div class="gd-step"><div class="gd-no">9</div><div>
+<h3>สำรองข้อมูลและพิมพ์รายงาน</h3>
+<ul><li>กด <b>💾 Export</b> เพื่อเก็บไฟล์ข้อมูลไว้ใช้ต่อภายหลัง และตั้งเวลาเตือนสำรองข้อมูลได้ที่ปุ่ม <b>⏰</b> (ค่าเริ่มต้นทุก 10 นาที)</li>
+<li>กด <b>🖨️ พิมพ์</b> เพื่อพิมพ์หน้าที่เปิดอยู่เป็นรายงาน A4 แนวนอน (ปุ่มและช่องกรอกจะแสดงเป็นข้อความธรรมดา)</li></ul></div>
+<div class="gd-go"><button class="btn btn-out btn-sm" onclick="openBackupSettings()">⏰ ตั้งเตือน →</button></div></div>
+
+</div>
+</div>
+
+<div class="card">
+<div class="card-h"><div class="bdg b-go">🗂️</div><div><h2>จัดข้อมูลลงหมวดให้ถูกต้อง</h2><div class="sub">การจัดหมวดที่ถูกต้องทำให้อัตราส่วนแม่นยำ</div></div></div>
+<div class="tw"><table class="gd-table">
+<thead><tr><th>ประเภท</th><th>หมวด</th><th>ความหมาย</th><th>ตัวอย่าง</th></tr></thead>
+<tbody>
+<tr><td rowspan="3"><b>สินทรัพย์</b></td><td>สภาพคล่อง</td><td>เป็นเงินสดหรือแปลงเป็นเงินสดได้ทันที ใช้จ่ายและเผื่อฉุกเฉิน</td><td>เงินสด เงินฝากออมทรัพย์</td></tr>
+<tr><td>ออมและลงทุน</td><td>ซื้อไว้เพื่อสร้างรายได้หรือดอกผล หรือถือไว้เพื่อขาย/ให้เช่า</td><td>หุ้น กองทุนรวม พันธบัตร กองทุนสำรองเลี้ยงชีพ ทองคำ บ้านหรือคอนโดให้เช่า</td></tr>
+<tr><td>ส่วนตัว</td><td>ซื้อไว้ใช้ประโยชน์จริง ไม่ได้ซื้อเพื่อขายหรือลงทุน</td><td>บ้านที่อยู่อาศัย รถยนต์ ของสะสม</td></tr>
+<tr><td rowspan="2"><b>หนี้สิน</b></td><td>ระยะสั้น</td><td>ต้องชำระภายใน 1 ปี ดอกเบี้ยมักสูง ควรจัดการก่อน</td><td>บัตรเครดิต ค่าน้ำ-ไฟ-โทรศัพท์ค้างจ่าย ผ่อนสินค้า</td></tr>
+<tr><td>ระยะยาว</td><td>ชำระเกิน 1 ปี</td><td>ผ่อนรถ ผ่อนบ้าน กู้เรียน</td></tr>
+<tr><td rowspan="3"><b>รายได้</b></td><td>จากการทำงาน</td><td>รายได้ที่ต้องลงแรงทำ</td><td>เงินเดือน โบนัส รายได้เสริม</td></tr>
+<tr><td>จากสินทรัพย์</td><td>ดอกผลที่สินทรัพย์สร้างให้ โดยไม่ต้องลงแรง</td><td>ดอกเบี้ย เงินปันผล ค่าเช่า</td></tr>
+<tr><td>อื่นๆ</td><td>รายได้ที่ไม่สม่ำเสมอ</td><td>ของขวัญ เงินพิเศษ รายได้ครั้งเดียว</td></tr>
+<tr><td rowspan="3"><b>ค่าใช้จ่าย</b></td><td>ออมและลงทุน</td><td>เงินที่กันไว้เป็นอันดับแรกทุกเดือน เพื่อเป้าหมายของตนเอง</td><td>สะสมกองทุนสำรองเลี้ยงชีพ ลงทุนเพื่อเกษียณ</td></tr>
+<tr><td>คงที่</td><td>จำนวนแน่นอนเท่ากันทุกงวด</td><td>ผ่อนบ้าน/รถ เบี้ยประกัน ภาษี ประกันสังคม</td></tr>
+<tr><td>ผันแปร</td><td>ไม่เท่ากันทุกเดือน ปรับลดได้ตามไลฟ์สไตล์</td><td>อาหาร เดินทาง สันทนาการ เสื้อผ้า</td></tr>
+</tbody></table></div>
+</div>
+
+<div class="card">
+<div class="card-h"><div class="bdg b-pu">💡</div><div><h2>หลักคิดและข้อควรระวัง</h2></div></div>
+<div class="gd-tips">
+<div class="gd-tip"><b>จ่ายตัวเองก่อน</b><br>กันเงินออมและลงทุนเป็นรายการแรกของทุกเดือน ก่อนนำเงินที่เหลือไปใช้จ่าย</div>
+<div class="gd-tip"><b>เงินเหลือ → ทำอะไรต่อ</b><br>นำไปปลดหนี้ที่ดอกเบี้ยสูงก่อน หรือออม/ลงทุนเพิ่มตามความเสี่ยงที่รับได้</div>
+<div class="gd-tip"><b>เงินไม่พอ → ทำอย่างไร</b><br>ทบทวนและลดค่าใช้จ่ายผันแปรที่ไม่จำเป็น หรือหาทางเพิ่มรายได้</div>
+<div class="gd-tip"><b>อัปเดตเป็นระยะ</b><br>ปรับปรุงสินทรัพย์–หนี้สินทุก 6 เดือนถึง 1 ปี เพื่อติดตามว่าความมั่งคั่งเพิ่มขึ้นเท่าไร</div>
+<div class="gd-tip"><b>สำรองข้อมูล</b><br>แอพไม่เก็บข้อมูลไว้ให้ ควร Export ไฟล์เก็บไว้เสมอ ก่อนรีเฟรชหรือปิดหน้าเว็บ</div>
+<div class="gd-tip"><b>ผลลัพธ์เป็นเครื่องมือช่วยตรวจสุขภาพการเงิน</b><br>ไม่ใช่คำแนะนำการลงทุนเฉพาะบุคคล ควรปรึกษาผู้เชี่ยวชาญก่อนตัดสินใจเรื่องสำคัญ</div>
+</div>
+</div>
+
+<div class="card no-print">
+<div class="card-h"><div class="bdg b-bl">☑️</div><div><h2>เช็กลิสต์ก่อนนำเสนอ</h2><div class="sub">ติ๊กเพื่อช่วยจำระหว่างใช้งาน (ไม่ถูกบันทึกในไฟล์ Export)</div></div></div>
+<div class="gd-check">
+<label><input type="checkbox"> แทนที่ข้อมูลตัวอย่างทั้งหมดด้วยข้อมูลจริงแล้ว</label>
+<label><input type="checkbox"> กรอกกระแสเงินสดครบ และจัดอยู่ในหมวดที่ถูกต้อง</label>
+<label><input type="checkbox"> กรอกสินทรัพย์ลงทุนและหนี้สินครบทุกแท็บ</label>
+<label><input type="checkbox"> ตรวจงบดุลแล้ว (รายการ 🔒 ตรงกับรายการสินทรัพย์ลงทุน)</label>
+<label><input type="checkbox"> อ่านผลอัตราส่วนและแนวทางปรับปรุงแล้ว</label>
+<label><input type="checkbox"> ตั้งอายุเกษียณ/สมมุติฐาน และกด "ดึงจาก CF" ในแผนเกษียณแล้ว</label>
+<label><input type="checkbox"> Export ไฟล์สำรองข้อมูลเก็บไว้แล้ว</label>
+</div>
+</div>
+
+</div>
+
+<!-- RATIO HELP: อธิบายอัตราส่วนการเงิน (Phase E) -->
+<div class="section" id="sec-ratiohelp">
+<div class="print-hdr"><h1>อธิบายอัตราส่วนการเงิน</h1><p id="ph-ratiohelp"></p></div>
+
+<div class="card">
+<div class="card-h"><div class="bdg b-pu">📖</div><div style="flex:1"><h2>อธิบายอัตราส่วนการเงิน</h2><div class="sub">ความหมาย สูตร เกณฑ์มาตรฐาน และแนวทางปรับปรุง พร้อมค่าจริงของคุณ</div></div>
+<button class="btn btn-out btn-sm" onclick="goTab('ratio')">📐 ดูตัวเลขที่ใช้คำนวณ →</button></div>
+<p class="gd-lead">อัตราส่วนทางการเงินช่วยตรวจ "สุขภาพการเงิน" เหมือนการตรวจสุขภาพร่างกาย โดยนำตัวเลขจากกระแสเงินสดและงบดุลมาเทียบกับเกณฑ์มาตรฐาน เพื่อให้เห็นจุดแข็งและจุดอ่อน แล้ววางแผนปรับปรุงได้ตรงจุด ผลจะแม่นยำเมื่อกรอกข้อมูลครบและเป็นข้อมูลจริง (ควรมีรายรับ–รายจ่ายอย่างน้อย 1 เดือน) ค่าที่แสดงในหน้านี้อัปเดตตามข้อมูลที่คุณกรอกอยู่ตลอดเวลา</p>
+<div id="rhScore"></div>
+</div>
+
+<div class="card">
+<div class="card-h"><div class="bdg b-bl">📋</div><div><h2>สรุปสูตรและเกณฑ์ พร้อมค่าของคุณ</h2></div></div>
+<div class="tw"><table class="rh-table" id="rhTable"></table></div>
+</div>
+
+<div class="rh-grid" id="rhDetails"></div>
+
+<div class="card">
+<div class="card-h"><div class="bdg b-go">🧮</div><div><h2>วิธีคิดคะแนนสุขภาพทางการเงิน และข้อควรทราบ</h2></div></div>
+<div class="gd-tips">
+<div class="gd-tip"><b>คะแนน 0–10 คิดอย่างไร</b><br>คะแนน = (จำนวนอัตราส่วนที่ผ่านเกณฑ์ ÷ จำนวนอัตราส่วนทั้งหมด 11 รายการ) × 10 ทุกรายการมีน้ำหนักเท่ากัน</div>
+<div class="gd-tip"><b>ระดับคะแนน</b><br>8.0–10 ดีมาก · 6.0–7.9 ดี · 4.0–5.9 พอใช้ · ต่ำกว่า 4.0 ควรปรับปรุง</div>
+<div class="gd-tip"><b>ข้อควรระวัง</b><br>เป็นตัวชี้วัดคร่าวๆ จากข้อมูลที่กรอก ไม่ใช่คำแนะนำการลงทุนเฉพาะบุคคล เกณฑ์แต่ละข้ออาจต่างกันได้ตามช่วงชีวิตและเป้าหมาย</div>
+<div class="gd-tip"><b>ค่าใช้จ่ายรวมนับอะไรบ้าง</b><br>ในแอพนี้ ค่าใช้จ่ายรวม = เงินออมและลงทุน + ค่าใช้จ่ายคงที่ + ค่าใช้จ่ายผันแปร ดังนั้น "เงินคงเหลือ" คือเงินส่วนที่เหลือหลังจากออมไปแล้ว</div>
+<div class="gd-tip"><b>ข้อมูลรายปี</b><br>ตัวเลขรายได้และค่าใช้จ่ายคำนวณจากยอดรวมทั้งปีในหน้ากระแสเงินสด (รวมช่อง "รายปี")</div>
+<div class="gd-tip"><b>รายได้ "อื่นๆ"</b><br>รายได้ที่ไม่สม่ำเสมอ (รวมแถว "อื่นๆ") จะไม่ถูกนับในอัตราส่วนความอยู่รอดและความมั่งคั่ง แต่ยังนับเป็นรายได้รวม</div>
+</div>
+</div>
+
+</div>
+
 <!-- ABOUT -->
 <div class="section" id="sec-about">
 <div class="print-hdr"><h1>เกี่ยวกับ Web App — FA Plan Tool v.2</h1><p id="ph-about"></p></div>
@@ -409,7 +815,7 @@ tr:hover td{background:var(--tr-hov)}
   <div style="display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:20px;background:rgba(56,189,248,0.15);color:var(--ac);font-size:32px;margin-bottom:16px">ℹ️</div>
   <h2 style="font-size:calc(var(--fs) + 6px);font-weight:700">เกี่ยวกับ Web App — FA Plan Tool v.2</h2>
   <div style="font-size:calc(var(--fs));color:var(--tx2);margin-top:4px">ผู้พัฒนา: ชัฌฤทธินันท์ โชคชวัลพันทวี</div>
-  <div style="display:inline-block;margin-top:16px;padding:4px 16px;border-radius:20px;background:var(--bg2);color:var(--ac);font-weight:600;font-size:calc(var(--fs) - 2px)">อัปเดตข้อมูลล่าสุด: 25 มิถุนายน 2026</div>
+  <div style="display:inline-block;margin-top:16px;padding:4px 16px;border-radius:20px;background:var(--bg2);color:var(--ac);font-weight:600;font-size:calc(var(--fs) - 2px)">อัปเดตข้อมูลล่าสุด: 7 พฤศจิกายน 2026</div>
 </div>
 <div style="max-width:900px;margin:0 auto">
   <div class="about-block ab-blue">
@@ -425,6 +831,7 @@ tr:hover td{background:var(--tr-hov)}
     <p>จุดเปลี่ยนเกิดขึ้นเมื่อได้พูดคุยกับพี่สาวที่น่ารักคนหนึ่ง ซึ่งมักให้คำแนะนำดีๆ อยู่เสมอ มีอยู่ครั้งหนึ่งเป็นเรื่องเกี่ยวกับการวางแผนการเงิน แม้ไม่รู้ว่าพี่เขาจำได้ไหมซึ่งเขาบอกว่าไฟล์ที่ผมใช้งานดูดีขึ้นมากเลย บางคนที่มี CFP ที่เคยพบยังทำไม่ได้เท่านี้ ถึงแม้ผมจะมีเพียงใบอนุญาตตัวแทนประกันและใบอนุญาตขายกองทุน (ทำเอาตัวลอยเลยทีเดียว) ซึ่งนั่นเองคือจุดเริ่มต้นของความตั้งใจที่จะทำโปรแกรมให้ทุกคนเข้าถึงได้ เพื่อใช้วางแผนการเงินส่วนบุคคลที่พัฒนาจากประสบการณ์การทำงานของตัวแทนประกันชีวิต และในที่สุดด้วยพลังของ AI แอพเวอร์ชัน 1 จึงได้เกิดขึ้น </p>
     <p> *--- Version update ---* </p>
     <p> Version 2.1 25 มิถุนายน 2026 - เพิ่มรายการ Investment List และปรับปรุงการเชื่อมโยงข้อมูลต่าง ๆ * </p>
+    <p> Version 2.2 7 พฤศจิกายน 2026 - ปรับหน้า Dashboard เป็นแบบการ์ดพร้อมลูกศรไปยังแต่ละหน้า, เพิ่ม pop-up แจ้งว่าแอพไม่เก็บข้อมูลและให้เลือก Import/เริ่มใหม่, เพิ่มตัวเตือนสำรองข้อมูล (ตั้งเวลาเองได้ ค่าเริ่มต้น 10 นาที), เพิ่มหน้าแนะนำการกรอกข้อมูลและหน้าอธิบายอัตราส่วนการเงิน, ปรับสูตรอัตราส่วนตามเกณฑ์มาตรฐานและเพิ่มอัตราส่วนความอยู่รอด/ความมั่งคั่ง, ปรับ Export/Import ให้ครอบคลุมรายการสินทรัพย์ลงทุน หนี้สิน และค่าตั้งเตือน * </p>
 
 	</div>
   <div class="about-block ab-green">
@@ -455,6 +862,51 @@ tr:hover td{background:var(--tr-hov)}
 </div>
 
 </div></div>
+<!-- ===== WELCOME / BACKUP MODALS (Phase B) ===== -->
+<div class="modal-bg" id="welcomeModal" style="display:flex" role="dialog" aria-modal="true" aria-labelledby="welTitle">
+<div class="modal-box">
+<div class="modal-ic">🔒</div>
+<h2 id="welTitle">ยินดีต้อนรับสู่ FA Plan Tool</h2>
+<p class="modal-lead">แอพนี้ <b>ไม่เก็บข้อมูลของผู้ใช้งาน</b> ข้อมูลที่กรอกอยู่ในหน้าจอนี้เท่านั้น</p>
+<ul class="modal-list">
+<li>หากกด <b>รีเฟรช (Refresh)</b> หรือปิดหน้าเว็บ ข้อมูลที่กรอกจะ <b>เริ่มต้นใหม่ทั้งหมด</b></li>
+<li>หากต้องการใช้ข้อมูลเดิมต่อ ให้กด <b>💾 Export</b> เก็บไฟล์ไว้ แล้วกด <b>📂 Import</b> นำกลับเข้ามาภายหลัง</li>
+<li>ไฟล์ Export เก็บข้อมูลทุกหน้า รวมถึงค่าตั้งเตือนสำรองข้อมูลของคุณด้วย</li>
+</ul>
+<div class="modal-q">ครั้งนี้ต้องการทำอะไร?</div>
+<div class="modal-actions">
+<button class="btn btn-ac" onclick="welcomeImport()">📂 Import ไฟล์ข้อมูลเดิม</button>
+<button class="btn btn-out" onclick="welcomeNew()">✨ เริ่มต้นใหม่</button>
+</div>
+<div class="modal-foot"><a onclick="closeModal('welcomeModal');goTab('guide')">📝 ดูขั้นตอนการกรอกข้อมูลก่อน</a></div>
+</div>
+</div>
+
+<div class="modal-bg" id="bkModal" role="dialog" aria-modal="true" aria-labelledby="bkTitle">
+<div class="modal-box modal-sm">
+<div class="modal-ic">⏰</div>
+<h2 id="bkTitle">ตั้งเตือนสำรองข้อมูล</h2>
+<p class="modal-lead">แอพจะเตือนให้ Export ข้อมูล เมื่อครบเวลาที่ตั้งไว้ และมีการแก้ไขที่ยังไม่ได้สำรอง</p>
+<label class="chk"><input type="checkbox" id="bk_on"> เปิดการเตือน</label>
+<div class="fi-row" style="grid-template-columns:1fr 130px"><label for="bk_min">เตือนทุก (นาที)</label><input class="fi fi-sm" id="bk_min" type="number" min="1" max="240" step="1"></div>
+<div class="modal-hint">ค่าเริ่มต้น 10 นาที · ตั้งได้ 1–240 นาที · ค่านี้จะถูกบันทึกไปกับไฟล์ Export และกลับมาเมื่อ Import</div>
+<div class="modal-actions">
+<button class="btn btn-ac" onclick="saveBackupSettings()">💾 บันทึก</button>
+<button class="btn btn-out" onclick="closeModal('bkModal')">ยกเลิก</button>
+</div>
+</div>
+</div>
+
+<div class="toast-bk" id="bkToast" role="alert">
+<div class="toast-t">⏰ ถึงเวลาสำรองข้อมูลแล้ว</div>
+<div class="toast-d">มีการแก้ไขที่ยังไม่ได้ Export — แอพไม่เก็บข้อมูล หากรีเฟรชหน้าข้อมูลจะหายทั้งหมด</div>
+<div class="toast-a">
+<button class="btn btn-go btn-sm" onclick="bkExportNow()">💾 Export ตอนนี้</button>
+<button class="btn btn-out btn-sm" onclick="bkSnooze()">เตือนทีหลัง</button>
+<button class="btn btn-out btn-sm" onclick="document.getElementById('bkToast').style.display='none';openBackupSettings()">⚙️ ตั้งค่า</button>
+</div>
+</div>
+
 <script>
 // ===== GLOBALS =====
 let APP={
@@ -502,7 +954,7 @@ document.querySelectorAll('.nav-i').forEach(n=>{
     document.querySelectorAll('.nav-i').forEach(x=>x.classList.remove('active'));n.classList.add('active');
     document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));
     document.getElementById('sec-'+s).classList.add('active');
-    const T={dashboard:'Dashboard — ภาพรวมแผนการเงิน',balance:'งบดุลส่วนบุคคล',cashflow:'กระแสเงินสด',ratio:'อัตราส่วนทางการเงิน',retirement:'แผนเกษียณอายุ',retfund:'กองทุนเกษียณที่พึงมี',investment:'แผนการลงทุน',invlist:'รายการสินทรัพย์ลงทุน',about:'เกี่ยวกับแอพนี้'};
+    const T={dashboard:'Dashboard — ภาพรวมแผนการเงิน',balance:'งบดุลส่วนบุคคล',cashflow:'กระแสเงินสด',ratio:'อัตราส่วนทางการเงิน',retirement:'แผนเกษียณอายุ',retfund:'กองทุนเกษียณที่พึงมี',investment:'แผนการลงทุน',invlist:'รายการสินทรัพย์ลงทุน',guide:'แนะนำขั้นตอนการกรอกข้อมูล',ratiohelp:'อธิบายอัตราส่วนการเงิน',about:'เกี่ยวกับแอพนี้'};
     document.getElementById('topT').textContent=T[s]||'';
     document.getElementById('sidebar').classList.remove('open');
     if(s==='invlist')renderInvAll();
@@ -682,7 +1134,7 @@ function removeBSRow(type,i){
 function bsChanged(){
   bsAssets.forEach((item,i)=>{const el=document.getElementById('bs_a_'+i);if(el)item.val=+el.value;});
   bsLiabs.forEach((item,i)=>{const el=document.getElementById('bs_l_'+i);if(el)item.val=+el.value;});
-  renderBSSummary();renderDashKPI();renderDashCharts();renderRatioSnap();renderRatioTable();
+  renderBSSummary();renderDashboard();renderRatioTable();
 }
 function renderBalanceSheet(){
   // Assets table
@@ -752,7 +1204,7 @@ function calcInvChanged(gid){
   const totEl=document.getElementById('inv_tot_'+gid);
   if(totEl)totEl.textContent='฿'+F(tot);
   // Sync → BS → Dashboard
-  syncInvToBS();renderBalanceSheet();renderDashKPI();renderDashCharts();renderRatioSnap();renderRatioTable();
+  syncInvToBS();renderBalanceSheet();renderDashboard();renderRatioTable();
 }
 function renderInvGroup(gid){
   const g=invData.find(x=>x.id===gid);if(!g)return;
@@ -862,24 +1314,71 @@ function navDataLinkBtn(gid){
   return h;
 }
 
+// ===== BACKUP SETTINGS (ค่าตั้งเตือนสำรองข้อมูล — เก็บไปกับไฟล์ Export) =====
+const BK={enabled:true,minutes:10,snap:'',nextAt:0};
+
 // ===== EXPORT / IMPORT =====
-function exportData(){
-  const data={
-    client:APP.client,assum:APP.assum,
-    bsAssets:bsAssets.map(i=>({grp:i.grp,name:i.name,val:i.val})),
+// collectData(): รวบรวมข้อมูลทั้งหมดของแอพเป็น object เดียว (ใช้ทั้ง Export และตรวจว่ามีการแก้ไขที่ยังไม่ได้สำรอง)
+function collectData(){
+  const v=id=>{const el=document.getElementById(id);return el?+el.value:0;};
+  return {
+    app:'FA_Plan_Tool',version:'2.2',
+    client:{...APP.client},assum:{...APP.assum},
+    bsAssets:bsAssets.map(i=>({grp:i.grp,name:i.name,val:i.val,invId:i.invId||null,locked:!!i.locked})),
     bsLiabs:bsLiabs.map(i=>({grp:i.grp,name:i.name,val:i.val})),
+    invData:invData.map(g=>({id:g.id,items:g.items.map(it=>({...it}))})),
+    invLiabs:invLiabs.map(i=>({...i})),
     cfItems:cfItems.map(i=>({cat:i.cat,grp:i.grp,name:i.name,m:[...i.m],a:i.a})),
-    retParams:{curExp:+document.getElementById('r_curExp').value,inf:+document.getElementById('r_inf').value,
-      retAge:+document.getElementById('r_retAge').value,endAge:+document.getElementById('r_endAge').value,
-      retRtn:+document.getElementById('r_retRtn').value,accum:+document.getElementById('r_accum').value},
-    rfParams:{fund:+document.getElementById('rf_fund').value,exp1:+document.getElementById('rf_exp1').value,
-      rtn:+document.getElementById('rf_rtn').value,inf:+document.getElementById('rf_inf').value,
-      startAge:+document.getElementById('rf_startAge').value,years:+document.getElementById('rf_years').value}
+    retParams:{curExp:v('r_curExp'),inf:v('r_inf'),retAge:v('r_retAge'),endAge:v('r_endAge'),retRtn:v('r_retRtn'),accum:v('r_accum')},
+    rfParams:{fund:v('rf_fund'),exp1:v('rf_exp1'),rtn:v('rf_rtn'),inf:v('rf_inf'),startAge:v('rf_startAge'),years:v('rf_years')},
+    settings:{backupEnabled:BK.enabled,backupMinutes:BK.minutes}
   };
+}
+// markSaved(): จดจำสถานะ ณ ตอนที่สำรองแล้ว และเริ่มนับเวลาเตือนรอบใหม่
+function markSaved(){BK.snap=JSON.stringify(collectData());BK.nextAt=Date.now()+BK.minutes*60000;}
+function isDirty(){return JSON.stringify(collectData())!==BK.snap;}
+
+function exportData(){
+  const data=collectData();
   const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);
   a.download='FA_Plan_'+APP.client.name.replace(/\s/g,'_')+'_'+new Date().toISOString().slice(0,10)+'.json';
   a.click();URL.revokeObjectURL(a.href);
+  markSaved();
+  if(typeof renderBackupStatus==='function')renderBackupStatus();
+}
+// applyData(d): นำข้อมูลจากไฟล์ที่อ่านแล้วมาใส่ในแอพ (รองรับไฟล์รุ่นเก่าที่ไม่มี invData/invLiabs/settings)
+function applyData(d){
+  if(d.client)Object.assign(APP.client,d.client);
+  if(d.assum)Object.assign(APP.assum,d.assum);
+  if(Array.isArray(d.bsAssets)){bsAssets.length=0;d.bsAssets.forEach(i=>bsAssets.push(i));}
+  if(Array.isArray(d.bsLiabs)){bsLiabs.length=0;d.bsLiabs.forEach(i=>bsLiabs.push(i));}
+  if(Array.isArray(d.invData)){
+    d.invData.forEach(sg=>{const g=invData.find(x=>x.id===sg.id);if(g&&Array.isArray(sg.items))g.items=sg.items.map(it=>({...it}));});
+  }
+  if(Array.isArray(d.invLiabs)){invLiabs.length=0;d.invLiabs.forEach(i=>invLiabs.push(i));}
+  if(Array.isArray(d.cfItems)){cfItems.length=0;d.cfItems.forEach(i=>cfItems.push(i));}
+  const setv=(id,val)=>{const el=document.getElementById(id);if(el&&val!==undefined&&val!==null)el.value=val;};
+  if(d.retParams){
+    setv('r_curExp',d.retParams.curExp);setv('r_inf',d.retParams.inf);setv('r_retAge',d.retParams.retAge);
+    setv('r_endAge',d.retParams.endAge);setv('r_retRtn',d.retParams.retRtn);setv('r_accum',d.retParams.accum);
+  }
+  if(d.rfParams){
+    setv('rf_fund',d.rfParams.fund);setv('rf_exp1',d.rfParams.exp1);setv('rf_rtn',d.rfParams.rtn);
+    setv('rf_inf',d.rfParams.inf);setv('rf_startAge',d.rfParams.startAge);setv('rf_years',d.rfParams.years);
+  }
+  if(d.settings){
+    if(typeof d.settings.backupEnabled==='boolean')BK.enabled=d.settings.backupEnabled;
+    const m=+d.settings.backupMinutes;if(m>=1&&m<=240)BK.minutes=Math.round(m);
+  }
+  // ซิงค์ช่องสมมุติฐานบน Dashboard
+  setv('a_retAge',APP.assum.retAge);setv('a_endAge',APP.assum.endAge);
+  setv('a_incGrow',(APP.assum.incGrow*100).toFixed(1));setv('a_infGen',(APP.assum.infGen*100).toFixed(1));
+  setv('a_infMed',(APP.assum.infMed*100).toFixed(1));setv('a_retReturn',(APP.assum.retReturn*100).toFixed(1));
+  setv('a_pvdReturn',(APP.assum.pvdReturn*100).toFixed(1));setv('a_addInvest',APP.assum.addInvest);
+  initAll();
+  markSaved();
+  if(typeof renderBackupStatus==='function')renderBackupStatus();
 }
 function importData(ev){
   const file=ev.target.files[0];if(!file)return;
@@ -887,37 +1386,9 @@ function importData(ev){
   reader.onload=function(e){
     try{
       const d=JSON.parse(e.target.result);
-      if(d.client)Object.assign(APP.client,d.client);
-      if(d.assum)Object.assign(APP.assum,d.assum);
-      if(d.bsAssets){bsAssets.length=0;d.bsAssets.forEach(i=>bsAssets.push(i));}
-      if(d.bsLiabs){bsLiabs.length=0;d.bsLiabs.forEach(i=>bsLiabs.push(i));}
-      if(d.cfItems){cfItems.length=0;d.cfItems.forEach(i=>cfItems.push(i));}
-      if(d.retParams){
-        document.getElementById('r_curExp').value=d.retParams.curExp;
-        document.getElementById('r_inf').value=d.retParams.inf;
-        document.getElementById('r_retAge').value=d.retParams.retAge;
-        document.getElementById('r_endAge').value=d.retParams.endAge;
-        document.getElementById('r_retRtn').value=d.retParams.retRtn;
-        document.getElementById('r_accum').value=d.retParams.accum;
-      }
-      if(d.rfParams){
-        document.getElementById('rf_fund').value=d.rfParams.fund;
-        document.getElementById('rf_exp1').value=d.rfParams.exp1;
-        document.getElementById('rf_rtn').value=d.rfParams.rtn;
-        document.getElementById('rf_inf').value=d.rfParams.inf;
-        document.getElementById('rf_startAge').value=d.rfParams.startAge;
-        document.getElementById('rf_years').value=d.rfParams.years;
-      }
-      // Sync assumption inputs
-      document.getElementById('a_retAge').value=APP.assum.retAge;
-      document.getElementById('a_endAge').value=APP.assum.endAge;
-      document.getElementById('a_incGrow').value=(APP.assum.incGrow*100).toFixed(1);
-      document.getElementById('a_infGen').value=(APP.assum.infGen*100).toFixed(1);
-      document.getElementById('a_infMed').value=(APP.assum.infMed*100).toFixed(1);
-      document.getElementById('a_retReturn').value=(APP.assum.retReturn*100).toFixed(1);
-      document.getElementById('a_pvdReturn').value=(APP.assum.pvdReturn*100).toFixed(1);
-      document.getElementById('a_addInvest').value=APP.assum.addInvest;
-      initAll();
+      if(typeof d!=='object'||d===null||Array.isArray(d))throw new Error('โครงสร้างข้อมูลไม่ถูกต้อง');
+      applyData(d);
+      if(typeof closeModal==='function')closeModal('welcomeModal');
       alert('นำเข้าข้อมูลสำเร็จ');
     }catch(err){alert('ไฟล์ไม่ถูกต้อง: '+err.message);}
   };
@@ -987,111 +1458,263 @@ function renderAssumptions(){
   document.getElementById('assumDL').innerHTML=
     '<dt>รายได้เพิ่มขึ้น</dt><dd class="mono">'+(a.incGrow*100).toFixed(1)+'% /ปี</dd><dt>เงินเฟ้อทั่วไป</dt><dd class="mono">'+(a.infGen*100).toFixed(1)+'% /ปี</dd><dt>เงินเฟ้อค่ารักษา</dt><dd class="mono">'+(a.infMed*100).toFixed(1)+'% /ปี</dd><dt>ผลตอบแทนหลังเกษียณ</dt><dd class="mono">'+(a.retReturn*100).toFixed(1)+'% /ปี</dd><dt>กองทุนสำรอง</dt><dd class="mono">'+(a.pvdReturn*100).toFixed(1)+'% /ปี</dd><dt>ลงทุนเพิ่ม/ปี</dt><dd class="mono">'+F(a.addInvest)+' บาท</dd>';
 }
-function renderDashKPI(){
-  const totA=bsAssets.reduce((s,i)=>s+i.val,0);
+// ===== FINANCIAL MODEL: ตัวเลขกลางที่ใช้ร่วมกันทั้ง Dashboard และหน้าอัตราส่วน =====
+// รายได้: จัดกลุ่มตามชื่อหมวดในกระแสเงินสด (การทำงาน / สินทรัพย์ / อื่นๆ)
+function getFin(){
+  const cf=fn=>cfItems.filter(fn).reduce((s,i)=>s+cfTotal(i),0);
+  const incWork=cf(i=>i.cat==='inc'&&i.grp==='เงินได้จากการทำงาน');
+  const incAsset=cf(i=>i.cat==='inc'&&i.grp==='เงินได้จากสินทรัพย์'&&!/^อื่นๆ/.test(i.name));
+  const incAll=cf(i=>i.cat==='inc');
+  const incOther=incAll-incWork-incAsset;
+  const expSave=cf(i=>i.cat==='save'),expFix=cf(i=>i.cat==='fix'),expVar=cf(i=>i.cat==='var');
+  const expAll=expSave+expFix+expVar;
+  const sumA=fn=>bsAssets.filter(fn).reduce((s,i)=>s+i.val,0);
+  const totA=sumA(()=>true),liq=sumA(i=>i.grp==='สินทรัพย์สภาพคล่อง'),invA=sumA(i=>i.grp==='สินทรัพย์ลงทุน');
   const totL=bsLiabs.reduce((s,i)=>s+i.val,0);
-  const nw=totA-totL;
-  document.getElementById('dashKPI').innerHTML=
-    '<div class="kpi"><div class="lb">สินทรัพย์รวม</div><div class="vl" style="color:var(--ac)">'+F(totA)+'</div><div class="ch" style="color:var(--tx3)">บาท</div></div>'+
-    '<div class="kpi"><div class="lb">หนี้สินรวม</div><div class="vl" style="color:var(--dng)">'+F(totL)+'</div><div class="ch" style="color:var(--tx3)">'+(totA>0?P(totL/totA):'0%')+'</div></div>'+
-    '<div class="kpi"><div class="lb">ความมั่งคั่งสุทธิ</div><div class="vl" style="color:var(--ac3)">'+F(nw)+'</div><div class="ch good">'+(totA>0?P(nw/totA):'0%')+'</div></div>'+
-    '<div class="kpi"><div class="lb">กองทุนเกษียณที่ต้องการ</div><div class="vl" style="color:var(--gold)" id="dashRetFund">—</div><div class="ch warn" id="dashRetGap"></div></div>';
-}
-function renderDashCharts(){
-  const names=bsAssets.filter(i=>i.val>0).map(i=>i.name);
-  const vals=bsAssets.filter(i=>i.val>0).map(i=>i.val);
-  const totA=bsAssets.reduce((s,i)=>s+i.val,0);const totL=bsLiabs.reduce((s,i)=>s+i.val,0);
-  uChart('cAssetPie','doughnut',{labels:names,datasets:[{data:vals,backgroundColor:['#38bdf8','#818cf8','#34d399','#fbbf24','#a78bfa','#fb923c'],borderWidth:0}]},{cutout:'65%',plugins:{legend:{position:'bottom',labels:{padding:16,usePointStyle:true}}}});
-  uChart('cNetWorth','bar',{labels:['สินทรัพย์','หนี้สิน','ความมั่งคั่งสุทธิ'],datasets:[{data:[totA,totL,totA-totL],backgroundColor:['#38bdf8','#f87171','#34d399'],borderRadius:6,barThickness:40}]},{indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>F(v)}},y:{grid:{display:false}}}});
+  const stDebt=bsLiabs.filter(i=>i.grp==='หนี้สินระยะสั้น').reduce((s,i)=>s+i.val,0);
+  const ccDebt=bsLiabs.filter(i=>/บัตรเครดิต/.test(i.name)).reduce((s,i)=>s+i.val,0);
+  const ccPay=invLiabs.filter(i=>/บัตรเครดิต/.test(i.name)).reduce((s,i)=>s+(i.payPerMonth||0),0);
+  // ค่างวดผ่อนชำระ/ปี: ใช้ค่าที่สูงกว่าระหว่าง "กระแสเงินสด หมวดผ่อนชำระหนี้" กับ "ผ่อน/เดือน×12 ในรายการหนี้สิน"
+  const debtCF=cf(i=>i.grp==='ผ่อนชำระหนี้');
+  const debtInv=invLiabs.reduce((s,i)=>s+(i.payPerMonth||0),0)*12;
+  return {incWork,incAsset,incOther,incAll,expSave,expFix,expVar,expAll,cash:incAll-expAll,
+    totA,liq,invA,totL,nw:totA-totL,stDebt,ccDebt,ccPay,debtCF,debtInv,debtSvc:Math.max(debtCF,debtInv)};
 }
 
-// ===== RATIO =====
-function renderRatioSnap(){
-  const totA=bsAssets.reduce((s,i)=>s+i.val,0);const totL=bsLiabs.reduce((s,i)=>s+i.val,0);const nw=totA-totL;
-  const liq=bsAssets.filter(i=>i.grp==='สินทรัพย์สภาพคล่อง').reduce((s,i)=>s+i.val,0);
-  const stDebt=bsLiabs.filter(i=>i.grp==='หนี้สินระยะสั้น').reduce((s,i)=>s+i.val,0);
-  const tInc=cfItems.filter(i=>i.cat==='inc').reduce((s,i)=>s+i.m.reduce((a,v)=>a+v,0)+i.a,0);
-  const tExp=cfItems.filter(i=>i.cat!=='inc').reduce((s,i)=>s+i.m.reduce((a,v)=>a+v,0)+i.a,0);
-  const tNet=tInc-tExp;
-  const liqR=stDebt>0?(liq/stDebt).toFixed(2):'∞';
-  const basicLiq=tExp>0?((liq/(tExp/12)).toFixed(2)):'∞';
-  const liqNW=nw>0?P(liq/nw):'0%';
-  const debtR=totA>0?P(totL/totA):'0%';
-  const saveR=tInc>0?P(tNet/tInc):'0%';
-  const R=[
-    {n:'สภาพคล่อง',v:liqR+' เท่า',b:'≥1',ok:stDebt===0||liq/stDebt>=1},
-    {n:'คล่องพื้นฐาน',v:basicLiq+' เดือน',b:'3-6',ok:tExp===0||liq/(tExp/12)>=3},
-    {n:'คล่อง/มั่งคั่ง',v:liqNW,b:'15-20%',ok:nw>0&&liq/nw>=0.15},
-    {n:'หนี้/สินทรัพย์',v:debtR,b:'≤50%',ok:totA===0||totL/totA<=0.5},
-    {n:'ชำระหนี้/รายได้',v:'0%',b:'≤35%',ok:true},
-    {n:'อัตราการออม',v:saveR,b:'≥10%',ok:tInc>0&&tNet/tInc>=0.1},
-    {n:'อัตราการลงทุน',v:'0%',b:'≥50%',ok:false}
-  ];
-  document.getElementById('ratioSnap').innerHTML=R.map(r=>'<div class="kpi"><div class="lb">'+r.n+'</div><div class="vl" style="font-size:calc(var(--fs) + 2px)">'+r.v+'</div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px"><span style="font-size:calc(var(--fs) - 4px);color:var(--tx3)">เกณฑ์: '+r.b+'</span><span class="st '+(r.ok?'st-ok':'st-no')+'">'+(r.ok?'✅':'⚠️')+'</span></div></div>').join('');
+// computeRatios: คำนวณอัตราส่วนทั้ง 11 รายการ พร้อมตัวเลขที่ใช้คำนวณ (ใช้ทั้ง Dashboard, หน้าอัตราส่วน และคะแนนสุขภาพ)
+function computeRatios(f){
+  const INF=Infinity;
+  const fx=(v,u)=>isFinite(v)?v.toFixed(2)+' '+u:'∞';
+  const R=[];
+  const add=o=>{R.push(o);return o;};
+  // --- สภาพคล่อง ---
+  let v=f.stDebt>0?f.liq/f.stDebt:INF;
+  add({k:'liq',sec:'liq',name:'อัตราส่วนสภาพคล่อง',short:'สภาพคล่อง',val:v,disp:fx(v,'เท่า'),bench:'≥ 1 เท่า',ok:v>=1,
+    parts:[['สินทรัพย์ที่มีสภาพคล่อง',f.liq],['หนี้สินระยะสั้น',f.stDebt]],formula:'สินทรัพย์สภาพคล่อง ÷ หนี้สินระยะสั้น = '+F(f.liq)+' ÷ '+F(f.stDebt)});
+  v=f.expAll>0?f.liq/(f.expAll/12):INF;
+  add({k:'basic',sec:'liq',name:'อัตราส่วนสภาพคล่องพื้นฐาน',short:'คล่องพื้นฐาน',val:v,disp:fx(v,'เดือน'),bench:'3–6 เดือน',ok:v>=3,
+    parts:[['สินทรัพย์ที่มีสภาพคล่อง',f.liq],['ค่าใช้จ่ายรวมต่อเดือน',Math.round(f.expAll/12)]],formula:'สินทรัพย์สภาพคล่อง ÷ ค่าใช้จ่ายรวม/เดือน = '+F(f.liq)+' ÷ '+F(Math.round(f.expAll/12))});
+  v=f.nw>0?f.liq/f.nw:0;
+  add({k:'liqnw',sec:'liq',name:'สินทรัพย์สภาพคล่อง ÷ ความมั่งคั่งสุทธิ',short:'คล่อง/มั่งคั่ง',val:v,disp:P(v),bench:'15–20%',ok:v>=0.15,
+    parts:[['สินทรัพย์ที่มีสภาพคล่อง',f.liq],['ความมั่งคั่งสุทธิ',f.nw]],formula:'สินทรัพย์สภาพคล่อง ÷ ความมั่งคั่งสุทธิ = '+F(f.liq)+' ÷ '+F(f.nw)});
+  // --- หนี้สิน ---
+  v=f.totA>0?f.totL/f.totA:0;
+  add({k:'debta',sec:'debt',name:'อัตราส่วนหนี้สินต่อสินทรัพย์',short:'หนี้/สินทรัพย์',val:v,disp:P(v),bench:'≤ 50%',ok:v<=0.5,
+    parts:[['หนี้สินรวม',f.totL],['สินทรัพย์รวม',f.totA]],formula:'หนี้สินรวม ÷ สินทรัพย์รวม = '+F(f.totL)+' ÷ '+F(f.totA)});
+  v=f.incAll>0?f.debtSvc/f.incAll:(f.debtSvc>0?INF:0);
+  add({k:'svc',sec:'debt',name:'อัตราส่วนความสามารถในการชำระหนี้',short:'ชำระหนี้/รายได้',val:v,disp:isFinite(v)?P(v):'∞',bench:'≤ 35%',ok:v<=0.35,
+    parts:[['ค่างวดจากกระแสเงินสด (หมวดผ่อนชำระหนี้)/ปี',f.debtCF],['ค่างวดจากรายการหนี้สิน (ผ่อน/เดือน × 12)',f.debtInv],['ค่างวดที่ใช้คำนวณ (ค่าที่สูงกว่า)',f.debtSvc],['รายได้รวมต่อปี',f.incAll]],
+    formula:'ค่างวดผ่อนชำระหนี้/ปี ÷ รายได้รวม/ปี = '+F(f.debtSvc)+' ÷ '+F(f.incAll)});
+  // --- การออมและการลงทุน ---
+  v=f.incAll>0?f.expSave/f.incAll:0;
+  add({k:'save',sec:'save',name:'อัตราส่วนการออม',short:'การออม',val:v,disp:P(v),bench:'≥ 10%',ok:v>=0.10,
+    parts:[['เงินออมและลงทุน (หมวดเงินออมและลงทุนในกระแสเงินสด)',f.expSave],['รายได้รวมต่อปี',f.incAll]],formula:'ค่าใช้จ่ายเพื่อออมและลงทุน ÷ รายได้รวม = '+F(f.expSave)+' ÷ '+F(f.incAll)});
+  v=f.nw>0?f.invA/f.nw:0;
+  add({k:'inv',sec:'save',name:'อัตราส่วนการลงทุน',short:'การลงทุน',val:v,disp:P(v),bench:'≥ 50%',ok:v>=0.5,
+    parts:[['สินทรัพย์ลงทุน',f.invA],['ความมั่งคั่งสุทธิ',f.nw]],formula:'สินทรัพย์ลงทุน ÷ ความมั่งคั่งสุทธิ = '+F(f.invA)+' ÷ '+F(f.nw)});
+  // --- ความอยู่รอด / ความมั่งคั่ง (ตามตารางสูตรมาตรฐาน) ---
+  const live=f.incWork+f.incAsset;
+  v=f.expAll>0?live/f.expAll:(live>0?INF:0);
+  add({k:'surv',sec:'surv',name:'อัตราส่วนความอยู่รอด',short:'ความอยู่รอด',val:v,disp:fx(v,'เท่า'),bench:'≥ 1 เท่า',ok:v>=1,
+    parts:[['รายได้จากการทำงาน',f.incWork],['รายได้จากสินทรัพย์',f.incAsset],['ค่าใช้จ่ายรวมต่อปี',f.expAll]],formula:'(รายได้จากการทำงาน + รายได้จากสินทรัพย์) ÷ ค่าใช้จ่ายรวม = '+F(live)+' ÷ '+F(f.expAll)});
+  v=f.expAll>0?f.incAsset/f.expAll:(f.incAsset>0?INF:0);
+  add({k:'wealth',sec:'surv',name:'อัตราส่วนความมั่งคั่ง',short:'ความมั่งคั่ง (รายได้จากสินทรัพย์)',val:v,disp:fx(v,'เท่า'),bench:'≥ 1 เท่า',ok:v>=1,
+    parts:[['รายได้จากสินทรัพย์',f.incAsset],['ค่าใช้จ่ายรวมต่อปี',f.expAll]],formula:'รายได้จากสินทรัพย์ ÷ ค่าใช้จ่ายรวม = '+F(f.incAsset)+' ÷ '+F(f.expAll)});
+  // --- เกณฑ์พื้นฐาน (ต้องเป็นบวก) ---
+  add({k:'nwpos',sec:'base',name:'ความมั่งคั่งสุทธิ',short:'ความมั่งคั่งสุทธิ',val:f.nw,disp:F(f.nw)+' บาท',bench:'เป็นบวก',ok:f.nw>0,
+    parts:[['สินทรัพย์รวม',f.totA],['หนี้สินรวม',f.totL]],formula:'สินทรัพย์รวม − หนี้สินรวม = '+F(f.totA)+' − '+F(f.totL)});
+  add({k:'cashpos',sec:'base',name:'กระแสเงินสดสุทธิ',short:'กระแสเงินสด',val:f.cash,disp:F(f.cash)+' บาท',bench:'เป็นบวก',ok:f.cash>0,
+    parts:[['รายได้รวมต่อปี',f.incAll],['ค่าใช้จ่ายรวมต่อปี (รวมเงินออม)',f.expAll]],formula:'รายได้รวม − ค่าใช้จ่ายรวม = '+F(f.incAll)+' − '+F(f.expAll)});
+  return R;
 }
+function healthScore(R){const p=R.filter(r=>r.ok).length;return {pass:p,total:R.length,score:R.length?Math.round(p/R.length*100)/10:0};}
+
+// ===== DASHBOARD (การ์ด) =====
+const FK=v=>Math.abs(v)>=1e6?(v/1e6).toFixed(1)+'M':Math.abs(v)>=1e3?(v/1e3).toFixed(0)+'k':v;
+function toggleEye(){const c=document.getElementById('dcBal');if(c)c.classList.toggle('mask-on');}
+function dashIcons(items){
+  return items.map(x=>'<div><div class="dc-circle" style="background:'+x.c+'">'+x.ic+'</div><div class="dc-ilb">'+x.lb+'</div><div class="dc-iv">'+F(x.v)+'</div></div>').join('');
+}
+function dashDonut(id,labels,vals,colors){
+  const tot=vals.reduce((a,b)=>a+Math.max(0,b),0);
+  const has=tot>0;
+  uChart(id,'doughnut',{labels:has?labels:[''],datasets:[{data:has?vals.map(v=>Math.max(0,v)):[1],backgroundColor:has?colors:['rgba(148,163,184,.25)'],borderWidth:0}]},
+    {cutout:'68%',plugins:{legend:{display:false},tooltip:{enabled:has,callbacks:{label:c=>' '+c.label+': '+F(c.parsed)+' ('+(c.parsed/tot*100).toFixed(0)+'%)'}}}});
+}
+// เกจวัดสุขภาพการเงิน (SVG ครึ่งวงกลม 5 ช่วงสี + เข็ม)
+function gaugeSVG(score){
+  const cx=150,cy=140,r=105,sw=26,cols=['#f87171','#fb923c','#fbbf24','#a3e635','#34d399'];
+  const pt=(deg,rad)=>[cx+rad*Math.cos(deg*Math.PI/180),cy+rad*Math.sin(deg*Math.PI/180)];
+  let h='<svg viewBox="0 0 300 175" role="img" aria-label="คะแนนสุขภาพทางการเงิน '+score+' จาก 10">';
+  for(let i=0;i<5;i++){
+    const a1=180+i*36+1,a2=180+(i+1)*36-1,p1=pt(a1,r),p2=pt(a2,r);
+    h+='<path d="M'+p1[0].toFixed(1)+' '+p1[1].toFixed(1)+' A'+r+' '+r+' 0 0 1 '+p2[0].toFixed(1)+' '+p2[1].toFixed(1)+'" fill="none" stroke="'+cols[i]+'" stroke-width="'+sw+'"/>';
+  }
+  [0,2,4,6,8,10].forEach(n=>{const p=pt(180+n*18,r+sw/2+10);h+='<text x="'+p[0].toFixed(1)+'" y="'+(p[1]+4).toFixed(1)+'" text-anchor="middle" font-size="12" fill="var(--tx3)">'+n+'</text>';});
+  const ang=180+Math.max(0,Math.min(10,score))*18,tip=pt(ang,r-sw/2-6),b1=pt(ang+90,7),b2=pt(ang-90,7);
+  h+='<polygon points="'+tip[0].toFixed(1)+','+tip[1].toFixed(1)+' '+b1[0].toFixed(1)+','+b1[1].toFixed(1)+' '+b2[0].toFixed(1)+','+b2[1].toFixed(1)+'" fill="var(--tx)"/>';
+  h+='<circle cx="'+cx+'" cy="'+cy+'" r="11" fill="var(--tx)"/><circle cx="'+cx+'" cy="'+cy+'" r="4" fill="var(--card)"/></svg>';
+  return h;
+}
+function retSnapshot(){
+  const v=id=>+document.getElementById(id).value;
+  const yrs=v('r_retAge')-APP.client.age,dur=v('r_endAge')-v('r_retAge');
+  const res=calcRetFundNeeded(v('r_curExp'),v('r_inf')/100,v('r_retRtn')/100,yrs,dur);
+  return {need:res.fundNeeded,accum:v('r_accum'),yrs,retAge:v('r_retAge'),gap:res.fundNeeded-v('r_accum')};
+}
+function renderDashboard(){
+  const f=getFin(),R=computeRatios(f),hs=healthScore(R);
+  const S=(id,t)=>{const el=document.getElementById(id);if(el)el.textContent=t;};
+  const H=(id,h)=>{const el=document.getElementById(id);if(el)el.innerHTML=h;};
+  const rs=retSnapshot();
+  // 1) คงเหลือ
+  S('dBal',F(f.cash));const bal=document.getElementById('dBal');if(bal)bal.style.color=f.cash>=0?'#ffd43b':'#ff8a80';
+  S('dInc',F(f.incAll));S('dExp',F(f.expAll));S('dSave',F(f.expSave));
+  S('dNW',F(f.nw));S('dSaveR',P(f.incAll>0?f.expSave/f.incAll:0));S('dRetNeed',FM(rs.need));
+  // 2) สัดส่วนรายได้
+  H('dIncIcons',dashIcons([{ic:'💼',lb:'จากการทำงาน',v:f.incWork,c:'#3b8f82'},{ic:'🏦',lb:'จากสินทรัพย์',v:f.incAsset,c:'#6aaea3'},{ic:'🎁',lb:'อื่นๆ',v:f.incOther,c:'#7fd1c4'}]));
+  S('dIncC',F(f.incAll));
+  dashDonut('cDashInc',['จากการทำงาน','จากสินทรัพย์','อื่นๆ'],[f.incWork,f.incAsset,f.incOther],['#3b8f82','#6aaea3','#7fd1c4']);
+  // 3) สัดส่วนค่าใช้จ่าย
+  H('dExpIcons',dashIcons([{ic:'🐷',lb:'ออมและลงทุน',v:f.expSave,c:'#ff6b00'},{ic:'📌',lb:'คงที่',v:f.expFix,c:'#ff8a00'},{ic:'🛒',lb:'ผันแปร',v:f.expVar,c:'#ffa726'}]));
+  S('dExpC',F(f.expAll));
+  dashDonut('cDashExp',['ออมและลงทุน','คงที่','ผันแปร'],[f.expSave,f.expFix,f.expVar],['#ff6b00','#ff8a00','#ffa726']);
+  // 4) สินทรัพย์ - หนี้สิน
+  S('dTotA',F(f.totA));S('dTotL',F(f.totL));S('dNW2',F(f.nw));
+  S('dDebtR','หนี้สิน/สินทรัพย์ = '+P(f.totA>0?f.totL/f.totA:0)+' (เกณฑ์ไม่เกิน 50%)');
+  uChart('cDashBS','bar',{labels:['สินทรัพย์','หนี้สิน','ความมั่งคั่งสุทธิ'],datasets:[{data:[f.totA,f.totL,f.nw],backgroundColor:['#fbbf24','#fb923c','#5eead4'],borderRadius:6,barThickness:42}]},
+    {plugins:{legend:{display:false}},scales:{y:{ticks:{callback:FK}},x:{grid:{display:false}}}});
+  // 5) สุขภาพทางการเงิน
+  H('dGauge',gaugeSVG(hs.score));S('dScore',hs.score.toFixed(1));
+  const lv=hs.score>=8?['ดีมาก','st-ok']:hs.score>=6?['ดี','st-ok']:hs.score>=4?['พอใช้','st-no']:['ควรปรับปรุง','st-no'];
+  const lb=document.getElementById('dScoreLb');if(lb){lb.textContent=lv[0];lb.className='st '+lv[1];}
+  const weak=R.filter(r=>!r.ok).map(r=>r.short);
+  S('dWeak','ผ่านเกณฑ์ '+hs.pass+' จาก '+hs.total+' รายการ'+(weak.length?' · ควรปรับปรุง: '+weak.slice(0,4).join(', ')+(weak.length>4?' และอื่นๆ':''):' · ผ่านครบทุกรายการ 🎉'));
+  // 6) งบประมาณ (ค่าใช้จ่ายเทียบรายได้)
+  const used=f.incAll>0?f.expAll/f.incAll:(f.expAll>0?Infinity:0);
+  const bar=document.getElementById('dBudBar');
+  if(bar){bar.style.width=Math.min(100,used*100)+'%';bar.style.background=used>1?'#b3261e':'#2b2100';}
+  S('dBudPct',isFinite(used)?(used*100).toFixed(0)+'%':'—');S('dBudUsed',F(f.expAll));S('dBudInc',F(f.incAll));
+  S('dBudNote',f.cash>=0?'เหลือ ฿'+F(f.cash)+' ต่อปี หลังหักค่าใช้จ่ายรวม (รวมเงินออม)':'ใช้จ่ายเกินรายได้ ฿'+F(-f.cash)+' ต่อปี');
+  // 7) เป้าหมาย เกษียณ
+  const pct=rs.need>0?Math.max(0,rs.accum/rs.need):0;
+  const gb=document.getElementById('dGoalBar');if(gb)gb.style.width=Math.min(100,pct*100)+'%';
+  S('dGoalPct',(pct*100).toFixed(0)+'%');S('dGoalHave',F(rs.accum));S('dGoalNeed',F(rs.need));
+  S('dGoalSub','เกษียณอายุ '+rs.retAge+' ปี (อีก '+rs.yrs+' ปี) · เงินสะสมเทียบกับเงินที่ต้องการ');
+  S('dGoalNote',rs.gap>0?'ต้องลงทุนเพิ่มอีก ฿'+F(rs.gap):'เงินสะสมเพียงพอสำหรับเป้าหมายแล้ว 🎉');
+  // 9) หนี้บัตรเครดิต
+  const sharePct=f.totL>0?f.ccDebt/f.totL*100:0;
+  H('dCC',f.ccDebt>0||f.ccPay>0
+    ?'<div class="dc-cc-row"><div class="dc-cc-ic">💳</div><div style="flex:1"><div class="dc-l">ยอดค้างบัตรเครดิต</div><div class="dc-v" style="color:var(--dng)">฿'+F(f.ccDebt)+'</div></div></div><div class="dc-l">สัดส่วนต่อหนี้สินรวม '+sharePct.toFixed(0)+'%</div><div class="dc-cc-bar"><i style="width:'+Math.min(100,sharePct)+'%"></i></div><div class="dc-note">ผ่อนชำระ ฿'+F(f.ccPay)+' ต่อเดือน · หนี้บัตรเครดิตดอกเบี้ยสูง ควรชำระก่อน</div>'
+    :'<div class="dc-cc-row"><div class="dc-cc-ic">💳</div><div style="flex:1"><div class="dc-v" style="color:var(--ac3)">ไม่มียอดค้างบัตรเครดิต</div></div></div><div class="dc-note">หากมียอดค้าง ให้กรอกที่แท็บ "รายการสินทรัพย์ลงทุน" › หนี้สิน (บรรทัด "หนี้บัตรเครดิต")</div>');
+  // 10) แนวโน้มรายได้ - ค่าใช้จ่าย (รายเดือน)
+  const incM=Array(12).fill(0),expM=Array(12).fill(0);
+  cfItems.forEach(i=>{for(let m=0;m<12;m++)(i.cat==='inc'?incM:expM)[m]+=(i.m[m]||0);});
+  uChart('cDashTrend','line',{labels:MO,datasets:[{label:'รายได้',data:incM,borderColor:'#5eead4',backgroundColor:'rgba(94,234,212,.12)',fill:true,tension:.3,pointRadius:3},{label:'ค่าใช้จ่าย',data:expM,borderColor:'#fb923c',tension:.3,pointRadius:3}]},
+    {plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:12}}},scales:{y:{ticks:{callback:FK}},x:{grid:{display:false}}}});
+  if(typeof renderBackupStatus==='function')renderBackupStatus(); // ฟังก์ชันนี้อยู่ใน script ท้ายไฟล์ จึงยังไม่มีตอน initAll() ครั้งแรก
+}
+
+// ===== RATIO PAGE (ใช้ computeRatios() ชุดเดียวกับ Dashboard) =====
+const RATIO_TGT={liq:[1,'min'],basic:[3,'min'],liqnw:[0.15,'min'],debta:[0.5,'max'],svc:[0.35,'max'],save:[0.10,'min'],inv:[0.5,'min'],surv:[1,'min'],wealth:[1,'min']};
+const RATIO_SEC=[
+  ['base','ภาพรวมพื้นฐาน','var(--gold)'],
+  ['liq','การวิเคราะห์อัตราส่วนสภาพคล่อง','var(--ac)'],
+  ['debt','การวิเคราะห์อัตราส่วนหนี้สิน','var(--dng)'],
+  ['save','การวิเคราะห์อัตราส่วนการออมและการลงทุน','var(--ac3)'],
+  ['surv','การวิเคราะห์ความอยู่รอดและความมั่งคั่ง','var(--ac2)']
+];
 function renderRatioTable(){
-  const totA=bsAssets.reduce((s,i)=>s+i.val,0);const totL=bsLiabs.reduce((s,i)=>s+i.val,0);const nw=totA-totL;
-  const liq=bsAssets.filter(i=>i.grp==='สินทรัพย์สภาพคล่อง').reduce((s,i)=>s+i.val,0);
-  const stDebt=bsLiabs.filter(i=>i.grp==='หนี้สินระยะสั้น').reduce((s,i)=>s+i.val,0);
-  const tInc=cfItems.filter(i=>i.cat==='inc').reduce((s,i)=>s+i.m.reduce((a,v)=>a+v,0)+i.a,0);
-  const tExp=cfItems.filter(i=>i.cat!=='inc').reduce((s,i)=>s+i.m.reduce((a,v)=>a+v,0)+i.a,0);
-  const tNet=tInc-tExp;const expPM=tExp/12;
-  const liqR=stDebt>0?(liq/stDebt):999;const basicLiq=tExp>0?(liq/expPM):999;
-  const invAsset=bsAssets.filter(i=>i.grp==='สินทรัพย์ลงทุน').reduce((s,i)=>s+i.val,0);
-  // Build detailed ratio sections matching Excel format
+  const R=computeRatios(getFin());
   let h='';
-  // Section 1: Liquidity
-  h+='<h3 style="font-size:calc(var(--fs) - 1px);font-weight:700;color:var(--ac);margin:16px 0 8px;padding:6px 0;border-bottom:2px solid var(--ac)">การวิเคราะห์อัตราส่วนสภาพคล่อง</h3><table><tbody>';
-  // 1.1
-  const liqVal=stDebt>0?liqR:999;const liqOk=liqVal>=1;
-  h+=ratioRow('• อัตราส่วนสภาพคล่อง',(liqVal>100?'∞':liqVal.toFixed(2))+' เท่า','≥ 1 เท่า',liqOk,liqOk?'✅ เพียงพอ':'⚠️ ไม่เพียงพอ');
-  h+=subRow('สินทรัพย์ที่มีสภาพคล่อง',liq);
-  h+=subRow('หนี้สินระยะสั้น',stDebt);
-  h+=formulaRow('สูตร: สินทรัพย์สภาพคล่อง ÷ หนี้สินระยะสั้น = '+F(liq)+' ÷ '+F(stDebt));
-  // 1.2
-  const blVal=tExp>0?basicLiq:999;const blOk=blVal>=3;
-  h+=ratioRow('• อัตราส่วนสภาพคล่องพื้นฐาน',(blVal>100?'∞':blVal.toFixed(2))+' เดือน','3-6 เดือน',blOk,blOk?(blVal>6?'✅ เกินเกณฑ์':'✅ เพียงพอ'):'⚠️ ไม่เพียงพอ');
-  h+=subRow('สินทรัพย์ที่มีสภาพคล่อง',liq);
-  h+=subRow('กระแสเงินสดจ่ายต่อเดือน',Math.round(expPM));
-  h+=formulaRow('สูตร: สินทรัพย์สภาพคล่อง ÷ ค่าใช้จ่าย/เดือน = '+F(liq)+' ÷ '+F(Math.round(expPM)));
-  // 1.3
-  const lnwVal=nw>0?liq/nw:0;const lnwOk=lnwVal>=0.15;
-  h+=ratioRow('• สินทรัพย์สภาพคล่อง ÷ ความมั่งคั่งสุทธิ',P(lnwVal),'15-20%',lnwOk,lnwOk?'✅ เพียงพอ':'⚠️ ไม่เพียงพอ');
-  h+=subRow('สินทรัพย์ที่มีสภาพคล่อง',liq);
-  h+=subRow('ความมั่งคั่งสุทธิ',nw);
-  h+=formulaRow('สูตร: สินทรัพย์สภาพคล่อง ÷ ความมั่งคั่งสุทธิ = '+F(liq)+' ÷ '+F(nw));
-  h+='</tbody></table>';
-  // Section 2: Debt
-  h+='<h3 style="font-size:calc(var(--fs) - 1px);font-weight:700;color:var(--dng);margin:20px 0 8px;padding:6px 0;border-bottom:2px solid var(--dng)">การวิเคราะห์อัตราส่วนหนี้สิน</h3><table><tbody>';
-  const daVal=totA>0?totL/totA:0;const daOk=daVal<=0.5;
-  h+=ratioRow('• อัตราส่วนหนี้สินต่อสินทรัพย์',P(daVal),'≤ 50%',daOk,daOk?'✅ เพียงพอ':'⚠️ เกินเกณฑ์');
-  h+=subRow('หนี้สินรวม',totL);
-  h+=subRow('สินทรัพย์รวม',totA);
-  h+=formulaRow('สูตร: หนี้สินรวม ÷ สินทรัพย์รวม = '+F(totL)+' ÷ '+F(totA));
-  const drVal=tInc>0?0/tInc:0;
-  h+=ratioRow('• อัตราส่วนการชำระคืนหนี้สินจากรายได้','0%','≤ 35%',true,'✅ ดีมาก — ไม่มีภาระผ่อน');
-  h+=subRow('เงินชำระหนี้ต่อเดือน',0);
-  h+=subRow('รายรับรวมต่อปี',tInc);
-  h+=formulaRow('สูตร: เงินผ่อนชำระหนี้/ปี ÷ รายรับรวม/ปี = 0 ÷ '+F(tInc));
-  h+='</tbody></table>';
-  // Section 3: Saving & Investment
-  h+='<h3 style="font-size:calc(var(--fs) - 1px);font-weight:700;color:var(--ac3);margin:20px 0 8px;padding:6px 0;border-bottom:2px solid var(--ac3)">การวิเคราะห์อัตราส่วนการออมและการลงทุน</h3><table><tbody>';
-  const srVal=tInc>0?tNet/tInc:0;const srOk=srVal>=0.1;
-  h+=ratioRow('• อัตราส่วนการออม',P(srVal),'≥ 10%',srOk,srOk?'✅ เพียงพอ':'⚠️ ไม่เพียงพอ');
-  h+=subRow('เงินออม (รายรับ-รายจ่าย)',tNet);
-  h+=subRow('รายรับรวม',tInc);
-  h+=formulaRow('สูตร: เงินออม ÷ รายรับรวม = '+F(tNet)+' ÷ '+F(tInc));
-  const ivVal=nw>0?invAsset/nw:0;const ivOk=ivVal>=0.5;
-  h+=ratioRow('• อัตราส่วนการลงทุน',P(ivVal),'≥ 50%',ivOk,ivOk?'✅ เพียงพอ':'⚠️ ไม่เพียงพอ');
-  h+=subRow('สินทรัพย์ลงทุน',invAsset);
-  h+=subRow('ความมั่งคั่งสุทธิ',nw);
-  h+=formulaRow('สูตร: สินทรัพย์ลงทุน ÷ ความมั่งคั่งสุทธิ = '+F(invAsset)+' ÷ '+F(nw));
-  h+='</tbody></table>';
+  RATIO_SEC.forEach(([k,t,c],si)=>{
+    h+='<h3 style="font-size:calc(var(--fs) - 1px);font-weight:700;color:'+c+';margin:'+(si?20:16)+'px 0 8px;padding:6px 0;border-bottom:2px solid '+c+'">'+t+'</h3><table><tbody>';
+    R.filter(r=>r.sec===k).forEach(r=>{
+      h+=ratioRow('• '+r.name,r.disp,r.bench,r.ok,r.ok?'✅ ผ่านเกณฑ์':'⚠️ ไม่ผ่านเกณฑ์');
+      r.parts.forEach(p=>{h+=subRow(p[0],p[1]);});
+      h+=formulaRow('สูตร: '+r.formula);
+    });
+    h+='</tbody></table>';
+  });
   document.getElementById('ratioDetail').innerHTML=h;
-  // Chart
-  const cv=[liqVal>20?20:liqVal,blVal>20?20:blVal,lnwVal*100,daVal*100,0,srVal*100,ivVal*100];
-  uChart('cRatioBar','bar',{labels:['สภาพคล่อง(เท่า)','คล่องพื้นฐาน(เดือน)','คล่อง/มั่งคั่ง(%)','หนี้/สินทรัพย์(%)','ชำระหนี้(%)','การออม(%)','การลงทุน(%)'],datasets:[{label:'ค่าจริง',data:cv,backgroundColor:'#38bdf8',borderRadius:3},{label:'เกณฑ์',data:[1,6,15,50,35,10,50],backgroundColor:'rgba(251,191,36,.35)',borderRadius:3}]},{scales:{y:{grid:{color:'rgba(100,116,139,.15)'}},x:{grid:{display:false}}}});
+  // กราฟ: ผลเทียบเกณฑ์ (100% = ผ่านเกณฑ์พอดี, จำกัดสูงสุด 200%)
+  const items=R.filter(r=>RATIO_TGT[r.k]);
+  const pctOf=r=>{
+    const [t,ty]=RATIO_TGT[r.k];
+    if(ty==='min')return isFinite(r.val)?Math.min(200,Math.max(0,r.val/t*100)):200;
+    return r.val<=0?200:(isFinite(r.val)?Math.min(200,t/r.val*100):0);
+  };
+  const vals=items.map(r=>Math.round(pctOf(r)));
+  uChart('cRatioBar','bar',{labels:items.map(r=>r.short),datasets:[
+    {label:'ผลเทียบเกณฑ์ (%)',data:vals,backgroundColor:vals.map(v=>v>=100?'#34d399':'#f87171'),borderRadius:4},
+    {type:'line',label:'เกณฑ์ผ่าน (100%)',data:items.map(()=>100),borderColor:'#fbbf24',borderDash:[6,4],pointRadius:0,borderWidth:2}
+  ]},{scales:{y:{beginAtZero:true,max:200,ticks:{callback:v=>v+'%'},grid:{color:'rgba(100,116,139,.15)'}},x:{grid:{display:false}}}});
+  if(typeof renderRatioHelp==='function')renderRatioHelp();
 }
+
+// ===== คำอธิบายอัตราส่วน (หน้า "อธิบายอัตราส่วนการเงิน") =====
+const RH={
+ nwpos:{fm:'สินทรัพย์รวม − หนี้สินรวม',
+  mean:'เงินที่จะเหลือจริงหากขายสินทรัพย์ทั้งหมดและชำระหนี้ทั้งหมด เป็นภาพรวมฐานะการเงินว่ามั่งคั่งเท่าไร สูตรลัด: "สินทรัพย์เยอะ หนี้สินน้อย ย่อมมั่งคั่ง"',
+  fix:'หากติดลบ แปลว่ามีหนี้มากกว่าสินทรัพย์ ให้เร่งชำระหนี้ที่ดอกเบี้ยสูง หยุดก่อหนี้ใหม่ และค่อยๆ สะสมสินทรัพย์ที่สร้างรายได้'},
+ cashpos:{fm:'รายได้รวม − ค่าใช้จ่ายรวม (รวมเงินออม)',
+  mean:'ใน 1 ปี มีเงินเหลือหรือเงินขาด หลังจากหักค่าใช้จ่ายและเงินออมแล้ว',
+  fix:'หากติดลบ ให้ลดค่าใช้จ่ายผันแปรที่ไม่จำเป็นก่อน (ลดได้ง่ายที่สุด) แล้วหาทางเพิ่มรายได้ หากเป็นบวก ให้นำเงินเหลือไปปลดหนี้ดอกเบี้ยสูงหรือออม/ลงทุนเพิ่ม',
+  note:'ค่าใช้จ่ายรวมในแอพนี้นับเงินออมและลงทุนเป็นค่าใช้จ่ายด้วย'},
+ surv:{fm:'(รายได้จากการทำงาน + รายได้จากสินทรัพย์) ÷ ค่าใช้จ่ายรวม',
+  mean:'รายได้ปกติ (ไม่นับรายได้ไม่สม่ำเสมอ) ครอบคลุมค่าใช้จ่ายทั้งหมดหรือไม่ ถ้าต่ำกว่า 1 เท่า แปลว่าต้องพึ่งเงินออมหรือการก่อหนี้เพื่อใช้จ่าย',
+  fix:'เพิ่มรายได้จากการทำงานหรือรายได้เสริม และทบทวนค่าใช้จ่ายคงที่/ผันแปรที่ลดได้',
+  note:'รายได้ในหมวด "อื่นๆ" ไม่ถูกนับในอัตราส่วนนี้'},
+ wealth:{fm:'รายได้จากสินทรัพย์ ÷ ค่าใช้จ่ายรวม',
+  mean:'ดอกผลที่สินทรัพย์สร้างให้ (ดอกเบี้ย เงินปันผล ค่าเช่า) เลี้ยงชีพได้ด้วยตัวเองหรือยัง ถ้าตั้งแต่ 1 เท่าขึ้นไป หมายถึงมีอิสรภาพทางการเงิน ไม่ต้องพึ่งรายได้จากการทำงาน',
+  fix:'สะสมสินทรัพย์ลงทุนที่สร้างกระแสรายได้อย่างสม่ำเสมอ เช่น กองทุน หุ้นปันผล อสังหาริมทรัพย์ให้เช่า และบันทึกดอกผลในหมวด "เงินได้จากสินทรัพย์" ของกระแสเงินสด',
+  note:'ควรกรอกรายได้ดอกเบี้ย/ปันผล/ค่าเช่าในหมวด "เงินได้จากสินทรัพย์" จึงจะถูกนับ'},
+ liq:{fm:'สินทรัพย์สภาพคล่อง ÷ หนี้สินระยะสั้น',
+  mean:'มีเงินสดหรือเงินฝากพอจ่ายหนี้ที่ครบกำหนดภายใน 1 ปีหรือไม่ ถ้าไม่มีหนี้ระยะสั้น จะแสดง ∞ และถือว่าผ่าน',
+  fix:'เพิ่มเงินสดสำรอง ชะลอการก่อหนี้ระยะสั้น และปิดหนี้บัตรเครดิต/ผ่อนสินค้าที่ดอกเบี้ยสูงก่อน'},
+ basic:{fm:'สินทรัพย์สภาพคล่อง ÷ ค่าใช้จ่ายรวมต่อเดือน',
+  mean:'เงินสำรองฉุกเฉินที่มีอยู่ ใช้จ่ายได้กี่เดือนหากไม่มีรายได้เข้ามาเลย เกณฑ์ที่เหมาะสมคือ 3–6 เดือน',
+  fix:'หากต่ำกว่า 3 เดือน ให้ทยอยเก็บเงินสำรองฉุกเฉินให้ถึงเป้าก่อนไปลงทุนเสี่ยงสูง หากสูงเกิน 6 เดือนมาก อาจแบ่งบางส่วนไปลงทุนเพื่อไม่ให้เงินเสียมูลค่าจากเงินเฟ้อ'},
+ liqnw:{fm:'สินทรัพย์สภาพคล่อง ÷ ความมั่งคั่งสุทธิ',
+  mean:'สัดส่วนของความมั่งคั่งที่อยู่ในรูปเงินสดหรือเงินฝากที่หยิบใช้ได้ทันที เกณฑ์ประมาณ 15–20% (แอพถือว่าผ่านเมื่อตั้งแต่ 15% ขึ้นไป)',
+  fix:'ต่ำเกินไป: เพิ่มสินทรัพย์สภาพคล่องเพื่อรองรับเหตุฉุกเฉิน สูงเกินไป: อาจมีเงินนอนเฉยๆ มากเกินไป ควรพิจารณาแบ่งไปลงทุน'},
+ debta:{fm:'หนี้สินรวม ÷ สินทรัพย์รวม',
+  mean:'ภาระหนี้เทียบกับสินทรัพย์ทั้งหมด หนี้สินรวมไม่ควรเกิน 50% ของสินทรัพย์รวม ยิ่งต่ำยิ่งมั่นคง',
+  fix:'ชำระหนี้ที่ดอกเบี้ยสูงก่อน หลีกเลี่ยงการก่อหนี้เพิ่ม และสะสมสินทรัพย์ให้เติบโตเร็วกว่าหนี้'},
+ svc:{fm:'ค่างวดผ่อนชำระหนี้/ปี ÷ รายได้รวม/ปี',
+  mean:'รายได้ส่วนที่ต้องนำไปผ่อนหนี้ ยิ่งต่ำยิ่งปลอดภัย มาตรฐานอ้างอิงอยู่ในช่วงต่ำกว่า 35–45% (แอพใช้ 35% เป็นเกณฑ์ผ่านเพื่อความระมัดระวัง)',
+  fix:'ปิดหนี้ที่ดอกเบี้ยสูงก่อน พิจารณารีไฟแนนซ์เพื่อลดค่างวด และเลี่ยงการก่อหนี้ใหม่จนกว่าสัดส่วนจะต่ำลง',
+  note:'แอพใช้ค่างวดที่สูงกว่าระหว่าง (ก) หมวด "ผ่อนชำระหนี้" ในกระแสเงินสด และ (ข) ผ่อน/เดือน × 12 ในรายการหนี้สิน'},
+ save:{fm:'ค่าใช้จ่ายเพื่อออมและลงทุน ÷ รายได้รวม',
+  mean:'สัดส่วนรายได้ที่กันไปออมและลงทุน ควรอย่างน้อย 10% ของรายได้ โดยใช้หลัก "จ่ายตัวเองก่อน" คือกันเงินออมเป็นอันดับแรกของทุกเดือน',
+  fix:'ตั้งโอนเงินออมอัตโนมัติทันทีหลังเงินเดือนเข้า แล้วค่อยปรับค่าใช้จ่ายผันแปรให้อยู่ในเงินที่เหลือ',
+  note:'ต้องกรอกเงินออมในหมวด "เงินออมและลงทุน" ของกระแสเงินสด จึงจะถูกนับ'},
+ inv:{fm:'สินทรัพย์ลงทุน ÷ ความมั่งคั่งสุทธิ',
+  mean:'สัดส่วนความมั่งคั่งที่อยู่ในสินทรัพย์ที่งอกเงยได้ ควรมากกว่า 50% เพื่อให้เงินทำงานแทนเรา ไม่ใช่มีแต่เงินสด บ้าน หรือรถ',
+  fix:'ทยอยลงทุนในสินทรัพย์ที่เหมาะกับความเสี่ยงและเป้าหมาย กระจายการลงทุน และลงทุนสม่ำเสมอ'}
+};
+const RH_SECHEAD={base:'ภาพรวมพื้นฐาน',liq:'สภาพคล่อง',debt:'หนี้สิน',save:'การออมและการลงทุน',surv:'ความอยู่รอดและความมั่งคั่ง'};
+function renderRatioHelp(){
+  const tb=document.getElementById('rhTable');if(!tb)return;
+  const R=computeRatios(getFin()),hs=healthScore(R);
+  const lv=hs.score>=8?['ดีมาก','st-ok']:hs.score>=6?['ดี','st-ok']:hs.score>=4?['พอใช้','st-no']:['ควรปรับปรุง','st-no'];
+  document.getElementById('rhScore').innerHTML='<div class="rh-score"><div><div class="dc-l">คะแนนสุขภาพทางการเงินของคุณตอนนี้</div><big>'+hs.score.toFixed(1)+'</big> <span style="color:var(--tx3)">/ 10</span></div><div><span class="st '+lv[1]+'">'+lv[0]+'</span><div class="dc-note" style="padding-top:6px">ผ่านเกณฑ์ '+hs.pass+' จาก '+hs.total+' รายการ'+(hs.pass<hs.total?' · ที่ยังไม่ผ่าน: '+R.filter(r=>!r.ok).map(r=>r.short).join(', '):' · ผ่านครบทุกรายการ 🎉')+'</div></div></div>';
+  let t='<thead><tr><th>อัตราส่วน</th><th>สูตรคำนวณ</th><th class="tr">เกณฑ์มาตรฐาน</th><th class="tr">ค่าของคุณ</th><th class="tc">สถานะ</th></tr></thead><tbody>';
+  let d='';
+  RATIO_SEC.forEach(([k,title,c])=>{
+    t+='<tr><td colspan="5" style="background:var(--hovbg);font-weight:700;color:'+c+'">'+RH_SECHEAD[k]+'</td></tr>';
+    R.filter(r=>r.sec===k).forEach(r=>{
+      const x=RH[r.k]||{fm:'',mean:'',fix:''};
+      t+='<tr><td style="font-weight:600">'+r.name+'</td><td style="font-size:calc(var(--fs) - 3px);color:var(--tx2)">'+x.fm+'</td><td class="tr num">'+r.bench+'</td><td class="tr num" style="font-weight:700;color:'+(r.ok?'var(--ac3)':'var(--dng)')+'">'+r.disp+'</td><td class="tc"><span class="st '+(r.ok?'st-ok':'st-no')+'">'+(r.ok?'✅ ผ่าน':'⚠️ ไม่ผ่าน')+'</span></td></tr>';
+      d+='<div class="rh-card"><div class="rh-sec" style="color:'+c+'">'+RH_SECHEAD[k]+'</div><h3><span>'+r.name+'</span><span class="st '+(r.ok?'st-ok':'st-no')+'">'+(r.ok?'✅ ผ่านเกณฑ์':'⚠️ ไม่ผ่านเกณฑ์')+'</span></h3>'
+        +'<dl class="rh-meta"><dt>สูตร</dt><dd style="font-family:inherit">'+x.fm+'</dd><dt>เกณฑ์</dt><dd>'+r.bench+'</dd><dt>ค่าของคุณ</dt><dd style="color:'+(r.ok?'var(--ac3)':'var(--dng)')+';font-weight:700">'+r.disp+'</dd></dl>'
+        +'<p><b>ความหมาย:</b> '+x.mean+'</p><p><b>หากไม่ผ่านเกณฑ์ ควรทำอย่างไร:</b> '+x.fix+'</p>'+(x.note?'<p><b>หมายเหตุการคำนวณในแอพ:</b> '+x.note+'</p>':'')+'</div>';
+    });
+  });
+  tb.innerHTML=t+'</tbody>';
+  document.getElementById('rhDetails').innerHTML=d;
+}
+
 function ratioRow(name,val,bench,ok,note){
   return '<tr style="background:var(--hovbg)"><td style="font-weight:700;padding:12px 14px">'+name+'</td><td class="tr num" style="font-weight:800;font-size:calc(var(--fs) + 1px);color:'+(ok?'var(--ac3)':'var(--dng)')+'">'+val+'</td><td class="tr num" style="color:var(--tx3)">'+bench+'</td><td class="tc"><span class="st '+(ok?'st-ok':'st-no')+'">'+note+'</span></td></tr>';
 }
@@ -1116,7 +1739,7 @@ function cfChanged(){
     const el2=document.getElementById('cf_'+i+'_a');if(el2)item.a=+el2.value;
     const tot=document.getElementById('cf_tot_'+i);if(tot)tot.textContent=F(cfTotal(item));
   });
-  renderCFSummary();renderDashKPI();renderRatioSnap();renderRatioTable();renderInvestment();
+  renderCFSummary();renderDashboard();renderRatioTable();renderInvestment();
 }
 function renderCashFlow(){
   let h='<thead><tr><th style="min-width:200px">รายการ</th>';
@@ -1241,8 +1864,7 @@ function recalcRetirement(){
   const lb=[],vl=[],ci=[];let pv=0;
   for(let y=0;y<yrs;y++){const r=invRates[y]||0.02;pv=pv*(1+r)+inv;lb.push(2567+y);vl.push(Math.round(pv));ci.push((y+1)*inv);}
   uChart('cRetGrow','line',{labels:lb,datasets:[{label:'มูลค่าพอร์ต',data:vl,borderColor:'#34d399',backgroundColor:'rgba(52,211,153,.1)',fill:true,tension:.3,pointRadius:1},{label:'ลงทุนสะสม',data:ci,borderColor:'#818cf8',borderDash:[5,3],tension:.3,pointRadius:0}]},{scales:{y:{ticks:{callback:v=>FM(v)}},x:{grid:{display:false},ticks:{maxTicksLimit:16}}}});
-  const df=document.getElementById('dashRetFund');if(df)df.textContent=FM(res.fundNeeded);
-  const dg=document.getElementById('dashRetGap');if(dg)dg.textContent='ต้องลงทุนเพิ่ม '+FM(gap);
+  renderDashboard();
   recalcRetFund();
 }
 
@@ -1336,7 +1958,7 @@ function syncInvLiabToBS(){
       if(exist)exist.val=il.val;
     }
   });
-  renderBalanceSheet();renderDashKPI();renderRatioSnap();renderRatioTable();
+  renderBalanceSheet();renderDashboard();renderRatioTable();
 }
 function addInvLiab(){
   invLiabs.push({grp:'หนี้สินระยะยาว',name:'รายการใหม่',val:0,rate:0,payPerMonth:0});
@@ -1351,9 +1973,74 @@ function renderInvAll(){
   syncInvToBS();syncInvLiabToBS();
   renderInvSummary();
 }
-function recalcAll(){renderDashKPI();renderDashCharts();renderRatioSnap();renderRatioTable();recalcRetirement();renderInvestment();}
-function initAll(){renderProfile();renderAssumptions();renderDashKPI();renderRatioSnap();renderDashCharts();renderBalanceSheet();renderCashFlow();renderRatioTable();recalcRetirement();renderInvestment();renderInvAll();}
+function recalcAll(){renderDashboard();renderRatioTable();recalcRetirement();renderInvestment();}
+function initAll(){renderProfile();renderAssumptions();renderDashboard();renderBalanceSheet();renderCashFlow();renderRatioTable();recalcRetirement();renderInvestment();renderInvAll();}
 initAll();
+</script>
+<script>
+// ===== MODAL / NAVIGATION HELPERS (Phase B) =====
+function openModal(id){const m=document.getElementById(id);if(m)m.style.display='flex';}
+function closeModal(id){const m=document.getElementById(id);if(m)m.style.display='none';}
+// goTab(s, sub): ไปยัง tab หลัก (และ tab ย่อย ถ้าระบุ) — ใช้กับลูกศรบนการ์ด Dashboard
+function goTab(s,sub){
+  const n=document.querySelector('.nav-i[data-s="'+s+'"]');if(n)n.click();
+  if(sub){const b=document.querySelector('.tab-b[data-t="'+sub+'"]');if(b)b.click();}
+  window.scrollTo({top:0});
+}
+
+// ===== WELCOME POP-UP =====
+function welcomeImport(){document.getElementById('impFile').click();}
+function welcomeNew(){closeModal('welcomeModal');markSaved();renderBackupStatus();}
+
+// ===== BACKUP REMINDER =====
+function fmtMMSS(ms){const t=Math.max(0,Math.ceil(ms/1000));return Math.floor(t/60)+':'+String(t%60).padStart(2,'0');}
+function renderBackupStatus(){
+  const lbl=document.getElementById('bkTopLbl');
+  if(lbl)lbl.textContent=BK.enabled?(BK.minutes+' นาที'):'ปิด';
+  const st=document.getElementById('bkStatus');
+  if(st){
+    const dirty=isDirty();
+    const cd=document.getElementById('bkCountdown');
+    const ds=document.getElementById('bkDirty');
+    const iv=document.getElementById('bkInterval');
+    if(iv)iv.textContent=BK.enabled?('เตือนทุก '+BK.minutes+' นาที'):'ปิดการเตือน';
+    if(cd)cd.textContent=BK.enabled?fmtMMSS(BK.nextAt-Date.now()):'—';
+    if(ds){ds.textContent=dirty?'⚠️ มีการแก้ไขที่ยังไม่ได้สำรอง':'✅ สำรองข้อมูลล่าสุดแล้ว';}
+  }
+}
+function showBkToast(){document.getElementById('bkToast').style.display='block';}
+function bkExportNow(){document.getElementById('bkToast').style.display='none';exportData();}
+function bkSnooze(){document.getElementById('bkToast').style.display='none';BK.nextAt=Date.now()+BK.minutes*60000;renderBackupStatus();}
+function bkTick(){
+  if(BK.enabled&&Date.now()>=BK.nextAt){
+    if(isDirty())showBkToast();
+    BK.nextAt=Date.now()+BK.minutes*60000;
+  }
+  renderBackupStatus();
+}
+function openBackupSettings(){
+  document.getElementById('bk_on').checked=BK.enabled;
+  document.getElementById('bk_min').value=BK.minutes;
+  openModal('bkModal');
+}
+function saveBackupSettings(){
+  const m=Math.round(+document.getElementById('bk_min').value);
+  if(!(m>=1&&m<=240)){alert('กรุณาระบุเวลาระหว่าง 1–240 นาที');return;}
+  BK.enabled=document.getElementById('bk_on').checked;BK.minutes=m;
+  BK.nextAt=Date.now()+BK.minutes*60000;
+  closeModal('bkModal');renderBackupStatus();
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal('bkModal');});
+window.addEventListener('beforeunload',e=>{if(isDirty()){e.preventDefault();e.returnValue='';}});
+
+// ===== ปรับขนาดกราฟตอนพิมพ์ =====
+function resizeCharts(){Object.values(APP.charts).forEach(c=>{try{c.resize()}catch(e){}});}
+window.addEventListener('beforeprint',resizeCharts);
+window.addEventListener('afterprint',()=>setTimeout(resizeCharts,150));
+if(window.matchMedia){const mq=matchMedia('print');if(mq.addEventListener)mq.addEventListener('change',resizeCharts);else if(mq.addListener)mq.addListener(resizeCharts);}
+
+// ===== START =====
+markSaved();renderBackupStatus();setInterval(bkTick,1000);
 </script>
 </body>
 </html>

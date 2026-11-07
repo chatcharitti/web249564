@@ -317,6 +317,45 @@ tr:hover td{background:var(--tr-hov)}
   .dc-big{font-size:22px!important;margin:2px 0 8px!important}
   .dc-circle{width:40px!important;height:40px!important}
 }
+
+/* ===== TAX TAB ===== */
+.tx-tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.tx-tools label{font-size:calc(var(--fs) - 3px);color:var(--tx2)}
+.tx-year{width:auto!important;min-width:130px}
+.tx-notice{display:flex;flex-direction:column;gap:8px;font-size:calc(var(--fs) - 2px);color:var(--tx2);line-height:1.7;background:var(--bg3);border:1px dashed var(--cb);border-radius:12px;padding:14px 16px}
+.tx-notice b{color:var(--tx)}
+.tx-row{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap}
+.tx-row label{flex:1;min-width:200px;font-size:calc(var(--fs) - 2px);color:var(--tx);font-weight:500;padding-top:6px}
+.tx-ctl{display:flex;align-items:center;gap:8px}
+.tx-in{width:170px!important;text-align:right;font-weight:600}
+.tx-sel{width:250px!important;text-align:left;font-size:calc(var(--fs) - 4px)!important;padding-left:8px!important;padding-right:4px!important}
+.tx-unit{font-size:calc(var(--fs) - 4px);color:var(--tx3);min-width:34px}
+.tx-hint{display:block;font-size:calc(var(--fs) - 6px);color:var(--tx3);margin-top:2px;font-weight:400;line-height:1.5}
+.tx-warn{display:block;font-size:calc(var(--fs) - 6px);color:var(--warn);font-weight:600;margin-top:2px}
+.tx-link{display:inline-block;font-size:calc(var(--fs) - 7px);background:rgba(56,189,248,.15);color:var(--ac);border-radius:10px;padding:0 8px;margin-left:8px;font-weight:600;vertical-align:middle}
+.tx-in.capped{border-color:var(--warn);background:rgba(251,191,36,.08);color:var(--warn)}
+.tx-comp{min-width:170px;padding:8px 12px;border:1px solid var(--cb);border-radius:8px;background:var(--bg);text-align:right;font-weight:600;color:var(--ac);font-family:'JetBrains Mono',monospace;font-size:calc(var(--fs) - 2px)}
+.tx-div{height:1px;background:var(--cb);margin:14px 0}
+.tx-m{margin-bottom:14px}
+.tx-mh{display:flex;justify-content:space-between;gap:10px;font-size:calc(var(--fs) - 3px);margin-bottom:4px}
+.tx-meter{height:14px;border-radius:7px;background:rgba(100,116,139,.2);overflow:hidden}
+.tx-meter i{display:block;height:100%;border-radius:7px;transition:width .3s}
+.tx-pay{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px;padding:14px 18px;border-radius:12px;background:var(--bg3);border:1px solid var(--cb);font-size:calc(var(--fs) - 1px)}
+.tx-pay b{font-size:calc(var(--fs) + 6px);font-family:'JetBrains Mono',monospace}
+.tx-sum{display:grid;grid-template-columns:1fr 1fr;gap:4px 28px}
+.tx-sum .comp-row{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid rgba(100,116,139,.15);font-size:calc(var(--fs) - 2px)}
+.tx-sumtot{display:flex;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:2px solid var(--cb);font-weight:700;font-size:calc(var(--fs) + 1px)}
+.tx-notes{margin:0 0 0 1.3em;color:var(--tx2);line-height:1.9;font-size:calc(var(--fs) - 2px)}
+.tx-notes li{margin-bottom:6px}
+.tx-notes b{color:var(--tx)}
+@media(max-width:900px){.tx-sum{grid-template-columns:1fr}.tx-in,.tx-sel{width:100%!important}}
+@media print{
+  .tx-tools,.tx-link{display:none!important}
+  .tx-sum{grid-template-columns:1fr 1fr!important}
+  .tx-row{margin-bottom:6px!important}
+  .tx-notice{padding:8px 10px!important}
+  #tx_notes{break-inside:auto!important}
+}
 </style>
 </head>
 <body>
@@ -331,12 +370,13 @@ tr:hover td{background:var(--tr-hov)}
 <div class="nav-i" data-s="retfund"><span class="ic">📈</span>กองทุนเกษียณที่พึงมี</div>
 <div class="nav-i" data-s="investment"><span class="ic">💎</span>แผนการลงทุน</div>
 <div class="nav-i" data-s="invlist"><span class="ic">📊</span>รายการสินทรัพย์ลงทุน</div>
+<div class="nav-i" data-s="tax"><span class="ic">🧾</span>ช่วยคำนวณภาษีบุคคล</div>
 <div class="nav-i" data-s="guide"><span class="ic">📝</span>แนะนำการกรอกข้อมูล</div>
 <div class="nav-i" data-s="ratiohelp"><span class="ic">📖</span>อธิบายอัตราส่วนการเงิน</div>
 <div class="nav-i" data-s="about"><span class="ic">ℹ️</span>เกี่ยวกับแอพนี้</div>
 <!-- ลิ้งค์น่าสนใจเพิ่มเติม -->
 <div class="ttl" style="padding:12px 20px 4px;font-size:calc(var(--fs) - 5px);color:var(--tx3)">--- ลิ้งค์น่าสนใจเพิ่มเติม ---</div>
-<div style="padding:6px 20px"><span>💲</span><a href="Tax_Calculate_Mar2569.html" title="ตัวอย่างการคำนวณภาษี" target="_blank" style="text-decoration:underline;color:rgba(59,43,252,0.82);font-size:calc(var(--fs) - 4px)">ตัวอย่างคำนวณภาษีบุคคล</a></div>
+<div style="padding:6px 20px"><span>💲</span><a href="#" onclick="goTab('tax');return false" title="เปิดหน้าช่วยคำนวณภาษีบุคคล" style="text-decoration:underline;color:rgba(59,43,252,0.82);font-size:calc(var(--fs) - 4px)">ช่วยคำนวณภาษีบุคคล</a></div>
 <!-- <div class="sidebar-ft">วันที่ใช้งาน: 22 พ.ย. 2567</div> -->
 </nav>
 <div class="main">
@@ -653,6 +693,46 @@ tr:hover td{background:var(--tr-hov)}
 </div>
 </div>
 
+<!-- TAX: ช่วยคำนวณภาษีบุคคล -->
+<div class="section" id="sec-tax">
+<div class="print-hdr"><h1>ช่วยคำนวณภาษีเงินได้บุคคลธรรมดา</h1><p id="ph-tax"></p></div>
+
+<div class="card">
+<div class="card-h"><div class="bdg b-go">🧾</div><div style="flex:1"><h2>ช่วยคำนวณภาษีเงินได้บุคคลธรรมดา</h2><div class="sub" id="tx_sub"></div></div>
+<div class="tx-tools">
+<label for="tx_year">ปีภาษี</label><select class="fi tx-year" id="tx_year" onchange="txSetYear(this.value)"></select>
+<button class="btn btn-go btn-sm" onclick="txPull()">📥 ดึงข้อมูลจากกระแสเงินสด</button>
+</div></div>
+<div id="tx_notice"></div>
+</div>
+
+<div id="tx_form"></div>
+
+<div class="card">
+<div class="card-h"><div class="bdg b-pu">📏</div><div><h2>สถานะเพดานสิทธิลดหย่อนแบบกลุ่ม</h2><div class="sub">ยอดที่ใช้สิทธิได้จริง เทียบกับเพดานรวมของกลุ่ม</div></div></div>
+<div id="tx_meters"></div>
+</div>
+
+<div class="card">
+<div class="card-h"><div class="bdg b-bl">📊</div><div><h2>บทสรุปการคำนวณภาษี</h2></div></div>
+<div class="g3" id="tx_result"></div>
+<div id="tx_pay"></div>
+</div>
+
+<div class="card">
+<div class="card-h"><div class="bdg b-pu">📐</div><div><h2>ตารางวิเคราะห์อัตราภาษีแบบขั้นบันได</h2></div></div>
+<div class="tw"><table id="tx_table"></table></div>
+</div>
+
+<div class="card">
+<div class="card-h"><div class="bdg b-gr">📝</div><div><h2>รายละเอียดรายการค่าใช้จ่ายและลดหย่อนที่ใช้สิทธิ์</h2></div></div>
+<div id="tx_summary"></div>
+</div>
+
+<div class="card" id="tx_notes"></div>
+
+</div>
+
 <!-- GUIDE: แนะนำขั้นตอนการกรอกข้อมูล (Phase D) -->
 <div class="section" id="sec-guide">
 <div class="print-hdr"><h1>แนะนำขั้นตอนการกรอกข้อมูล</h1><p id="ph-guide"></p></div>
@@ -727,6 +807,15 @@ tr:hover td{background:var(--tr-hov)}
 <div class="gd-go"><button class="btn btn-out btn-sm" onclick="openBackupSettings()">⏰ ตั้งเตือน →</button></div></div>
 
 </div>
+</div>
+
+<div class="card">
+<div class="card-h"><div class="bdg b-go">🧾</div><div style="flex:1"><h2>ขั้นตอนเสริม: วางแผนภาษี</h2></div><button class="btn btn-out btn-sm" onclick="goTab('tax')">ไปที่ช่วยคำนวณภาษี →</button></div>
+<ul style="margin:0 0 4px 1.3em;color:var(--tx2);line-height:1.9;font-size:calc(var(--fs) - 2px)">
+<li>เปิดหน้า <b>ช่วยคำนวณภาษีบุคคล</b> แล้วเลือกปีภาษี (2569 หรือ 2568 สำหรับตรวจสอบย้อนหลัง)</li>
+<li>กด <b>📥 ดึงข้อมูลจากกระแสเงินสด</b> เพื่อนำเงินได้จากงาน ประกันสังคม PVD เบี้ยประกันชีวิต และภาษีที่หักไว้มาใส่ให้ จากนั้นกรอกค่าลดหย่อนอื่นๆ เพิ่มเอง</li>
+<li>รายได้จากสินทรัพย์ (ดอกเบี้ย ปันผล ค่าเช่า) ไม่ถูกรวมในการคำนวณนี้ เพราะมีหลักเกณฑ์ภาษีแยกต่างหาก</li>
+</ul>
 </div>
 
 <div class="card">
@@ -832,6 +921,7 @@ tr:hover td{background:var(--tr-hov)}
     <p> *--- Version update ---* </p>
     <p> Version 2.1 25 มิถุนายน 2026 - เพิ่มรายการ Investment List และปรับปรุงการเชื่อมโยงข้อมูลต่าง ๆ * </p>
     <p> Version 2.2 7 พฤศจิกายน 2026 - ปรับหน้า Dashboard เป็นแบบการ์ดพร้อมลูกศรไปยังแต่ละหน้า, เพิ่ม pop-up แจ้งว่าแอพไม่เก็บข้อมูลและให้เลือก Import/เริ่มใหม่, เพิ่มตัวเตือนสำรองข้อมูล (ตั้งเวลาเองได้ ค่าเริ่มต้น 10 นาที), เพิ่มหน้าแนะนำการกรอกข้อมูลและหน้าอธิบายอัตราส่วนการเงิน, ปรับสูตรอัตราส่วนตามเกณฑ์มาตรฐานและเพิ่มอัตราส่วนความอยู่รอด/ความมั่งคั่ง, ปรับ Export/Import ให้ครอบคลุมรายการสินทรัพย์ลงทุน หนี้สิน และค่าตั้งเตือน * </p>
+    <p> Version 2.3 7 พฤศจิกายน 2026 - เพิ่มหน้าช่วยคำนวณภาษีบุคคล (เลือกปีภาษี 2568/2569) พร้อมปุ่มดึงข้อมูลจากกระแสเงินสด และปรับ Export/Import ให้เก็บข้อมูลภาษีด้วย * </p>
 
 	</div>
   <div class="about-block ab-green">
@@ -954,10 +1044,11 @@ document.querySelectorAll('.nav-i').forEach(n=>{
     document.querySelectorAll('.nav-i').forEach(x=>x.classList.remove('active'));n.classList.add('active');
     document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));
     document.getElementById('sec-'+s).classList.add('active');
-    const T={dashboard:'Dashboard — ภาพรวมแผนการเงิน',balance:'งบดุลส่วนบุคคล',cashflow:'กระแสเงินสด',ratio:'อัตราส่วนทางการเงิน',retirement:'แผนเกษียณอายุ',retfund:'กองทุนเกษียณที่พึงมี',investment:'แผนการลงทุน',invlist:'รายการสินทรัพย์ลงทุน',guide:'แนะนำขั้นตอนการกรอกข้อมูล',ratiohelp:'อธิบายอัตราส่วนการเงิน',about:'เกี่ยวกับแอพนี้'};
+    const T={dashboard:'Dashboard — ภาพรวมแผนการเงิน',balance:'งบดุลส่วนบุคคล',cashflow:'กระแสเงินสด',ratio:'อัตราส่วนทางการเงิน',retirement:'แผนเกษียณอายุ',retfund:'กองทุนเกษียณที่พึงมี',investment:'แผนการลงทุน',invlist:'รายการสินทรัพย์ลงทุน',tax:'ช่วยคำนวณภาษีบุคคล',guide:'แนะนำขั้นตอนการกรอกข้อมูล',ratiohelp:'อธิบายอัตราส่วนการเงิน',about:'เกี่ยวกับแอพนี้'};
     document.getElementById('topT').textContent=T[s]||'';
     document.getElementById('sidebar').classList.remove('open');
     if(s==='invlist')renderInvAll();
+    if(s==='tax')txRecalc();
   });
 });
 document.querySelectorAll('.tab-b').forEach(b=>{
@@ -1331,7 +1422,8 @@ function collectData(){
     cfItems:cfItems.map(i=>({cat:i.cat,grp:i.grp,name:i.name,m:[...i.m],a:i.a})),
     retParams:{curExp:v('r_curExp'),inf:v('r_inf'),retAge:v('r_retAge'),endAge:v('r_endAge'),retRtn:v('r_retRtn'),accum:v('r_accum')},
     rfParams:{fund:v('rf_fund'),exp1:v('rf_exp1'),rtn:v('rf_rtn'),inf:v('rf_inf'),startAge:v('rf_startAge'),years:v('rf_years')},
-    settings:{backupEnabled:BK.enabled,backupMinutes:BK.minutes}
+    settings:{backupEnabled:BK.enabled,backupMinutes:BK.minutes},
+    tax:(typeof txCollect==='function')?txCollect():undefined
   };
 }
 // markSaved(): จดจำสถานะ ณ ตอนที่สำรองแล้ว และเริ่มนับเวลาเตือนรอบใหม่
@@ -1376,6 +1468,7 @@ function applyData(d){
   setv('a_incGrow',(APP.assum.incGrow*100).toFixed(1));setv('a_infGen',(APP.assum.infGen*100).toFixed(1));
   setv('a_infMed',(APP.assum.infMed*100).toFixed(1));setv('a_retReturn',(APP.assum.retReturn*100).toFixed(1));
   setv('a_pvdReturn',(APP.assum.pvdReturn*100).toFixed(1));setv('a_addInvest',APP.assum.addInvest);
+  if(typeof txApply==='function')txApply(d.tax);
   initAll();
   markSaved();
   if(typeof renderBackupStatus==='function')renderBackupStatus();
@@ -1973,8 +2066,344 @@ function renderInvAll(){
   syncInvToBS();syncInvLiabToBS();
   renderInvSummary();
 }
+// ===== TAX: ช่วยคำนวณภาษีเงินได้บุคคลธรรมดา (เลือกปีภาษี 2568 / 2569) =====
+// หลักการ: กฎของแต่ละปีเก็บเป็นตาราง TAX_RULES — ปีถัดไปเพิ่มตารางใหม่ ไม่ต้องแก้ตัวคำนวณ
+const TAX_BRACKETS=[
+  {from:0,to:150000,rate:0},{from:150000,to:300000,rate:0.05},{from:300000,to:500000,rate:0.10},
+  {from:500000,to:750000,rate:0.15},{from:750000,to:1000000,rate:0.20},{from:1000000,to:2000000,rate:0.25},
+  {from:2000000,to:5000000,rate:0.30},{from:5000000,to:Infinity,rate:0.35}
+];
+function txBracket(net){
+  let tax=0;const details=[];
+  for(const b of TAX_BRACKETS){
+    if(net<=b.from){details.push({...b,taxable:0,taxAmt:0});continue;}
+    const taxable=Math.min(net,b.to)-b.from,amt=taxable*b.rate;tax+=amt;details.push({...b,taxable,taxAmt:amt});
+  }
+  return {tax:Math.max(0,tax),details};
+}
+
+// t: s=ตัวเลือก, n=จำนวนคน, a=จำนวนเงิน, c=ค่าที่ระบบคำนวณให้ (แสดงอย่างเดียว)
+const TX_ITEMS={
+  status:{t:'s',def:1,label:'สถานภาพ',opts:[[1,'1 - โสด'],[2,'2 - หม้าย/หย่า'],[3,'3 - คู่สมรสมีเงินได้ แยกยื่น'],[4,'4 - คู่สมรสมีเงินได้ รวมยื่น'],[5,'5 - คู่สมรสไม่มีเงินได้']]},
+  children:{t:'n',label:'บุตร (ไม่จำกัดจำนวน)',hint:'บุตรคนที่ 2+ เกิดตั้งแต่ปี 2561 ลดหย่อน 60,000 บาท/คน',unit:'คน'},
+  children2561:{t:'n',label:'บุตรที่เกิดตั้งแต่ปี 2561 (คนที่ 2 ขึ้นไป)',unit:'คน'},
+  parentSelf:{t:'n',label:'บิดา/มารดาผู้มีเงินได้ (อายุ 60+ ปี, รายได้ไม่เกิน 30,000)',unit:'คน',max:2},
+  parentSpouse:{t:'n',label:'บิดา/มารดาคู่สมรส',hint:'ใช้สิทธิเมื่อสถานภาพเป็น 4 หรือ 5',unit:'คน',max:2},
+  disabled:{t:'n',label:'อุปการะผู้พิการ/ทุพพลภาพ',hint:'คนละ 60,000 บาท',unit:'คน'},
+  incomeMode:{t:'s',def:'monthly',label:'รูปแบบการระบุรายได้',opts:[['monthly','รายเดือน (คำนวณเป็นรายปีให้)'],['yearly','รายปี (ระบุยอดรวม)']]},
+  salaryMonth:{t:'a',label:'เงินเดือน (ต่อเดือน)',im:'monthly'},
+  bonusYear:{t:'a',label:'โบนัสและรายได้อื่น (รวมทั้งปี)',im:'monthly'},
+  incomeYearTotal:{t:'a',label:'รายได้รวมทั้งปี (เงินเดือน + โบนัส + อื่นๆ)',hint:'โหมดรายปี: เพดาน PVD คิดจากยอดรวมนี้',im:'yearly'},
+  withheld:{t:'a',label:'ภาษีที่ถูกหัก ณ ที่จ่าย/ชำระล่วงหน้าแล้ว (ทั้งปี)',hint:'ใช้เทียบกับภาษีที่คำนวณได้ เพื่อประมาณว่าต้องชำระเพิ่มหรือขอคืน'},
+  totalIncome:{t:'c',label:'รวมเงินได้ทั้งปี'},
+  expense:{t:'c',label:'หักค่าใช้จ่ายตามกฎหมาย',hint:'(50% แต่ไม่เกิน 100,000 บาท)'},
+  dedSelf:{t:'c',label:'ลดหย่อนส่วนตัว'},dedSpouse:{t:'c',label:'ลดหย่อนคู่สมรส'},dedChildren:{t:'c',label:'ลดหย่อนบุตร'},
+  dedParent:{t:'c',label:'ลดหย่อนบิดา/มารดา'},dedDisabled:{t:'c',label:'ลดหย่อนผู้พิการ/ทุพพลภาพ'},
+  maternity:{t:'a',label:'ค่าฝากครรภ์และคลอดบุตร',hint:'ตามจ่ายจริง ไม่เกิน 60,000 บาท/ครรภ์'},
+  lifeIns:{t:'a',label:'เบี้ยประกันชีวิตทั่วไป',hint:'กรมธรรม์ 10 ปีขึ้นไป ไม่เกิน 100,000 บาท'},
+  healthIns:{t:'a',label:'เบี้ยประกันสุขภาพ',hint:'ไม่เกิน 25,000 บาท (รวมประกันชีวิตไม่เกิน 100,000)'},
+  annuityIns:{t:'a',label:'ประกันชีวิตแบบบำนาญ',hint:'15% ของรายได้ ไม่เกิน 200,000'},
+  spouseLifeIns:{t:'a',label:'เบี้ยประกันชีวิตคู่สมรส',hint:'ไม่เกิน 10,000 บาท'},
+  parentHealthIns:{t:'a',label:'เบี้ยประกันสุขภาพ บิดา/มารดา',hint:'ไม่เกิน 15,000 บาท'},
+  pvd:{t:'a',label:'เงินสะสมกองทุนสำรองเลี้ยงชีพ (PVD)',hint:'ไม่เกิน 15% ของค่าจ้าง'},
+  socialSec:{t:'a',label:'เงินสมทบประกันสังคม',hint:'ไม่เกิน 9,000 บาท'},
+  gpf:{t:'a',label:'กบข. / กองทุนสงเคราะห์ครูโรงเรียนเอกชน',hint:'ตามหลักเกณฑ์ที่กำหนด (นับรวมในกลุ่มเกษียณ ไม่เกิน 500,000)'},
+  nsf:{t:'a',label:'กองทุนการออมแห่งชาติ (กอช.)',hint:'ตามจ่ายจริง ไม่เกิน 30,000 บาท'},
+  rmf:{t:'a',label:'กองทุน RMF',hint:'30% ของเงินได้ (กลุ่มเกษียณรวมไม่เกิน 500,000)'},
+  homeLoan:{t:'a',label:'ดอกเบี้ยเงินกู้ที่อยู่อาศัย',hint:'ตามจ่ายจริง ไม่เกิน 100,000 บาท'},
+  newHome:{t:'a',label:'ค่าสร้างบ้านใหม่ 2567-2568',hint:'10,000/ล้านบาท สูงสุด 100,000 บาท'},
+  socialEnt:{t:'a',label:'เงินลงทุนธุรกิจ Social Enterprise',hint:'ไม่เกิน 100,000 บาท'},
+  eduDonate:{t:'a',label:'เงินบริจาคเพื่อการศึกษา/กีฬา/สาธารณสุข',hint:'ลดหย่อน 2 เท่า ไม่เกิน 10% ของเงินได้สุทธิ'},
+  donate:{t:'a',label:'เงินบริจาคทั่วไป',hint:'ไม่เกิน 10% ของเงินได้หลังหักลดหย่อนอื่น'},
+  politicalDonate:{t:'a',label:'เงินบริจาคพรรคการเมือง',hint:'ไม่เกิน 10,000 บาท'},
+  thaiESG:{t:'a',label:'กองทุน Thai ESG',hint:'30% ของเงินได้ ไม่เกิน 300,000 (แยกเพดานต่างหาก)'},
+  thaiESGX:{t:'a',label:'กองทุน Thai ESGX (สับเปลี่ยน LTF)',hint:'30% ของเงินได้ ไม่เกิน 300,000 บาท'},
+  esgxLtf:{t:'a',label:'Thai ESGX สับเปลี่ยนจาก LTF (ทยอยลดหย่อน)',hint:'ใช้สิทธิตามเงื่อนไขมาตรการเดิม ปี 2569–2572 ปีละไม่เกิน 50,000 บาท · กรอกยอดที่ใช้สิทธิในปีนี้'},
+  eReceipt:{t:'a',label:'Easy E-Receipt 2.0',hint:'16 ม.ค. - 28 ก.พ. 68 สูงสุด 50,000 บาท'},
+  travelDeduct:{t:'a',label:'เที่ยวดี มีคืน',hint:'29 ต.ค. - 15 ธ.ค. 68 สูงสุด 30,000 บาท'},
+  solar:{t:'a',label:'ติดตั้งโซลาร์เซลล์',hint:'ปี 2568 ไม่เกิน 200,000 บาท'},
+  art:{t:'a',label:'ค่าซื้องานศิลปะ',hint:'ปี 68-70 ไม่เกิน 100,000 บาท'}
+};
+
+const TX_CARD_FAM={t:'สถานภาพส่วนตัวและครอบครัว',i:'👤',ids:['status','children','children2561','parentSelf','parentSpouse','disabled']};
+const TX_CARD_INC={t:'เงินได้',i:'💰',ids:['incomeMode','salaryMonth','bonusYear','incomeYearTotal','-','totalIncome','expense','withheld']};
+const TX_CARD_DED={t:'ค่าลดหย่อนส่วนตัวและครอบครัว',i:'📋',ids:['dedSelf','dedSpouse','dedChildren','dedParent','dedDisabled','maternity']};
+
+const TAX_RULES={
+  2569:{
+    name:'ปีภาษี 2569',sub:'เงินได้ปี 2569 · ยื่นภาษีต้นปี 2570',deadline:'2026-12-31',deadlineTxt:'31 ธ.ค. 2569',
+    src:'อ้างอิง: ภาพสรุปรายการลดหย่อนภาษีปี 2569 (ข้อมูล ณ ก.ย. 2569) และข้อความสรุปเงื่อนไข RMF / Thai ESG (ข้อมูล ณ 16 ก.ย. 2569) ซึ่งอ้างอิงกรมสรรพากร ก.ล.ต. และ SET Investnow',
+    p:{socialSec:10500,esgShared:true},
+    over:{
+      socialSec:{hint:'ไม่เกิน 10,500 บาท'},
+      solar:{label:'Solar Rooftop สำหรับบ้านอยู่อาศัย',hint:'ลดหย่อนได้ตามจ่ายจริง สูงสุด 200,000 บาท'},
+      eduDonate:{label:'บริจาคเพื่อการศึกษา กีฬา (e-Donation) และ สว.รัฐ',hint:'หักได้ 2 เท่าของที่จ่ายจริง ไม่เกิน 10% ของเงินได้หลังหักค่าลดหย่อนอื่น'},
+      rmf:{hint:'30% ของเงินได้ ไม่เกิน 500,000 · ถือจนอายุ 55 ปี และไม่น้อยกว่า 5 ปี'},
+      thaiESG:{hint:'30% ของเงินได้ ไม่เกิน 300,000 (รวม ESGX) · ถือครอง ≥ 5 ปี · แยกจากกลุ่มเกษียณ'},
+      thaiESGX:{label:'กองทุน Thai ESGX (เงินใหม่)',hint:'ใช้วงเงินรวมกับ Thai ESG (รวมไม่เกิน 300,000 บาท)'}
+    },
+    cards:[TX_CARD_FAM,TX_CARD_INC,TX_CARD_DED,
+      {t:'ประกันและประกันสังคม',i:'🛡️',ids:['lifeIns','healthIns','spouseLifeIns','parentHealthIns','socialSec']},
+      {t:'ลงทุนเพื่อเกษียณ (กลุ่มรวมไม่เกิน 500,000)',i:'🏖️',ids:['annuityIns','rmf','pvd','gpf','nsf']},
+      {t:'บ้าน พลังงาน และเงินบริจาค',i:'🏠',ids:['homeLoan','solar','socialEnt','eduDonate','donate','politicalDonate']},
+      {t:'กองทุน Thai ESG (วงเงินแยกจากกลุ่มเกษียณ)',i:'🌱',ids:['thaiESG','thaiESGX','esgxLtf']}],
+    notes:[
+      '<b>RMF:</b> ลดหย่อนตามจ่ายจริง ไม่เกิน 30% ของเงินได้พึงประเมิน และไม่เกิน 500,000 บาท · ต้องถือหน่วยลงทุนจนอายุ 55 ปีบริบูรณ์ และถือมาแล้วไม่น้อยกว่า 5 ปี (นับจากการซื้อครั้งแรก) · ต้องลงทุนสม่ำเสมอตามเงื่อนไขที่กฎหมายกำหนด',
+      '<b>กลุ่มเกษียณ</b> (RMF, PVD, กบข., กองทุนสงเคราะห์ครูโรงเรียนเอกชน, ประกันชีวิตแบบบำนาญ, กอช.): เมื่อรวมกันต้องไม่เกิน 500,000 บาทต่อปี',
+      '<b>Thai ESG:</b> ลดหย่อนตามจำนวนที่ลงทุนจริง ไม่เกิน 30% ของเงินได้พึงประเมิน และไม่เกิน 300,000 บาท · เป็นวงเงินแยกจากกลุ่มเกษียณ · ต้องถือครองไม่น้อยกว่า 5 ปี นับแบบวันชนวัน · ไม่จำเป็นต้องลงทุนต่อเนื่องทุกปี (ลงทุนปีใด ใช้สิทธิปีนั้น) · มาตรการปัจจุบันครอบคลุมการลงทุนถึง 31 ธ.ค. 2569 และหลักเกณฑ์อาจเปลี่ยนแปลงได้',
+      '<b>Thai ESGX สับเปลี่ยนจาก LTF:</b> สิทธิจากการสับเปลี่ยนในปี 2568 ทยอยใช้ได้ในปี 2569–2572 ส่วนที่เหลือจากปีแรกลดหย่อนเป็นจำนวนเท่าๆ กัน และไม่เกิน 50,000 บาทต่อปี — ตัวคำนวณนี้นับยอดดังกล่าวรวมอยู่ในวงเงิน ESG 300,000 เพื่อความระมัดระวัง',
+      'หากไม่ปฏิบัติตามเงื่อนไขของกองทุน อาจต้องคืนสิทธิประโยชน์ทางภาษีตามหลักเกณฑ์ของกรมสรรพากร'
+    ]
+  },
+  2568:{
+    name:'ปีภาษี 2568',sub:'เงินได้ปี 2568 · ใช้สำหรับตรวจสอบย้อนหลัง',deadline:'2025-12-31',deadlineTxt:'31 ธ.ค. 2568',
+    src:'อ้างอิง: ตัวคำนวณภาษีปี 2568 เดิมของ FA Plan Tool (Tax_Calculate_Mar2569) อ้างอิงประมวลรัษฎากรและมาตรการปี 2568',
+    p:{socialSec:9000,esgShared:false},
+    over:{},
+    cards:[TX_CARD_FAM,TX_CARD_INC,TX_CARD_DED,
+      {t:'ค่าลดหย่อนประกันและเงินออม',i:'🛡️',ids:['lifeIns','healthIns','annuityIns','spouseLifeIns','parentHealthIns','pvd','socialSec']},
+      {t:'ค่าลดหย่อนที่อยู่อาศัยและเงินบริจาค',i:'🏠',ids:['homeLoan','newHome','eduDonate','donate','politicalDonate']},
+      {t:'กองทุนและมาตรการพิเศษ ปี 2568',i:'🆕',ids:['rmf','thaiESG','thaiESGX','-','eReceipt','travelDeduct','solar','art']}],
+    notes:[
+      'กลุ่มเกษียณ (PVD + ประกันชีวิตแบบบำนาญ + RMF) เมื่อรวมกันไม่เกิน 500,000 บาทต่อปี',
+      'Thai ESG และ Thai ESGX ในปี 2568 คิดเพดานแยกกัน กองละไม่เกิน 30% ของเงินได้และไม่เกิน 300,000 บาท (ตัวคำนวณนี้ใช้เพดาน 30% ของเงินได้ด้วย ตามที่คำอธิบายในไฟล์เดิมระบุ)',
+      'มาตรการพิเศษปี 2568 (Easy E-Receipt 2.0, เที่ยวดี มีคืน, ค่าสร้างบ้านใหม่, ค่าซื้องานศิลปะ) ไม่ปรากฏในรายการปี 2569'
+    ]
+  }
+};
+Object.values(TAX_RULES).forEach(R=>{R.has={};R.cards.forEach(c=>c.ids.forEach(id=>{if(id!=='-')R.has[id]=1;}));});
+
+// สถานะข้อมูลของแท็บภาษี (ไม่เก็บในเบราว์เซอร์ — ไปกับไฟล์ Export/Import เท่านั้น)
+const TX={year:2569,vals:{},linked:{},autoPull:true,msg:'',last:null};
+
+// txCalc: ตัวคำนวณหลัก — อ่านค่าจาก TX.vals และกฎของปีที่เลือก
+function txCalc(){
+  const R=TAX_RULES[TX.year],V=TX.vals,has=R.has;
+  const g=id=>has[id]?(+V[id]||0):0;
+  const o={cap:{},grp:{}};
+  const lim=(id,max)=>{const raw=g(id);if(raw>max)o.cap[id]=max;return Math.min(raw,max);};
+  const status=+V.status||1,joint=(status===4||status===5);
+  let total,salaryBase;
+  if((V.incomeMode||'monthly')==='monthly'){salaryBase=g('salaryMonth')*12;total=salaryBase+g('bonusYear');}
+  else{total=g('incomeYearTotal');salaryBase=total;}
+  const expense=Math.min(total*0.5,100000);
+  const dedSelf=60000,dedSpouse=joint?60000:0;
+  const ch=g('children'),ch61=g('children2561');
+  const dedChildren=Math.max(0,ch-ch61)*30000+ch61*60000;
+  const dedParent=g('parentSelf')*30000+(joint?g('parentSpouse')*30000:0);
+  const dedDisabled=g('disabled')*60000;
+  const maternity=lim('maternity',60000);
+  // ประกันชีวิต + สุขภาพ รวมไม่เกิน 100,000
+  const lifeIns=lim('lifeIns',100000),healthIns=lim('healthIns',25000);
+  let lifeHealth=lifeIns+healthIns;
+  o.grp.lifeHealth={used:Math.min(lifeHealth,100000),raw:lifeHealth,cap:100000};
+  if(lifeHealth>100000)lifeHealth=100000;
+  const spouseLife=lim('spouseLifeIns',10000),parentHealth=lim('parentHealthIns',15000);
+  const socialSec=lim('socialSec',R.p.socialSec);
+  const homeLoan=lim('homeLoan',100000),newHome=lim('newHome',100000),socialEnt=lim('socialEnt',100000);
+  const political=lim('politicalDonate',10000);
+  const solar=lim('solar',200000),eRec=lim('eReceipt',50000),travel=lim('travelDeduct',30000),art=lim('art',100000);
+  // กลุ่มเกษียณ รวมไม่เกิน 500,000 (PVD, ประกันบำนาญ, RMF, กบข./ครูเอกชน, กอช.)
+  const ret=[['pvd',lim('pvd',Math.min(salaryBase*0.15,500000))],['annuityIns',lim('annuityIns',Math.min(total*0.15,200000))],
+             ['rmf',lim('rmf',Math.min(total*0.30,500000))],['gpf',g('gpf')],['nsf',lim('nsf',30000)]];
+  const alloc=(items,allowed)=>{
+    const raw=items.reduce((s,x)=>s+x[1],0),a={};let sum=0,maxId=null,maxV=-1;
+    items.forEach(([id,v])=>{a[id]=raw>0?Math.round(v*allowed/raw):0;sum+=a[id];if(v>maxV){maxV=v;maxId=id;}});
+    if(maxId&&sum!==allowed)a[maxId]+=allowed-sum;return a;
+  };
+  const retRaw=ret.reduce((s,x)=>s+x[1],0),retAllowed=Math.min(retRaw,500000);
+  o.grp.ret={used:retAllowed,raw:retRaw,cap:500000};
+  const ra=alloc(ret,retAllowed);
+  // Thai ESG
+  const cap30=total*0.30;let esgAllowed,ea;
+  if(R.p.esgShared){
+    const e1=g('thaiESG'),e2=g('thaiESGX'),e3=lim('esgxLtf',50000);
+    const raw=e1+e2+e3,cap=Math.min(300000,cap30);
+    esgAllowed=Math.min(raw,cap);o.grp.esg={used:esgAllowed,raw,cap};
+    ea=alloc([['thaiESG',e1],['thaiESGX',e2],['esgxLtf',e3]],esgAllowed);
+  }else{
+    const e1=lim('thaiESG',Math.min(300000,cap30)),e2=lim('thaiESGX',Math.min(300000,cap30));
+    esgAllowed=e1+e2;ea={thaiESG:e1,thaiESGX:e2,esgxLtf:0};
+    o.grp.esg={used:esgAllowed,raw:esgAllowed,cap:Math.min(300000,cap30)*2,sep:true};
+  }
+  const base=expense+dedSelf+dedSpouse+dedChildren+dedParent+dedDisabled+maternity+socialSec+homeLoan+newHome+socialEnt+political+eRec+travel+solar+art;
+  const dedBeforeDonate=base+lifeHealth+retAllowed+spouseLife+parentHealth+esgAllowed;
+  // เงินบริจาค
+  const netBefore=total-dedBeforeDonate,edu=g('eduDonate'),don=g('donate');
+  const eduAllowed=Math.min(edu*2,Math.max(0,netBefore*0.10));
+  const donAllowed=Math.min(don,Math.max(0,(netBefore-eduAllowed)*0.10));
+  if(edu*2>eduAllowed)o.grp.eduOver=eduAllowed;
+  if(don>donAllowed)o.grp.donOver=donAllowed;
+  const totalDed=dedBeforeDonate+eduAllowed+donAllowed;
+  const net=Math.max(0,total-totalDed);
+  const baseNet=Math.max(0,total-base);
+  const insNet=Math.max(0,total-(base+lifeHealth+ra.annuityIns+spouseLife+parentHealth));
+  const tB=txBracket(baseNet),tI=txBracket(insNet),tF=txBracket(net);
+  const withheld=g('withheld');
+  const items=[['ค่าใช้จ่าย (50% ไม่เกิน 100,000)',expense],['ลดหย่อนส่วนตัว',dedSelf],['ลดหย่อนคู่สมรส',dedSpouse],['ลดหย่อนบุตร',dedChildren],['ลดหย่อนบิดา/มารดา',dedParent],['ลดหย่อนผู้พิการ',dedDisabled],['ค่าฝากครรภ์/คลอดบุตร',maternity],
+    ['เบี้ยประกันชีวิต+สุขภาพ',lifeHealth],['ประกันชีวิตแบบบำนาญ',ra.annuityIns],['ประกันชีวิตคู่สมรส',spouseLife],['ประกันสุขภาพบิดา/มารดา',parentHealth],
+    ['กองทุนสำรองเลี้ยงชีพ (PVD)',ra.pvd],['กองทุน RMF',ra.rmf],['กบข./กองทุนสงเคราะห์ครูเอกชน',ra.gpf],['กองทุนการออมแห่งชาติ (กอช.)',ra.nsf],['ประกันสังคม',socialSec],
+    ['ดอกเบี้ยกู้ที่อยู่อาศัย',homeLoan],['ค่าสร้างบ้านใหม่',newHome],['Social Enterprise',socialEnt],['Thai ESG',ea.thaiESG],['Thai ESGX',ea.thaiESGX],['Thai ESGX สับเปลี่ยนจาก LTF',ea.esgxLtf],
+    ['Easy E-Receipt 2.0',eRec],['เที่ยวดี มีคืน',travel],['ติดตั้งโซลาร์เซลล์ / Solar Rooftop',solar],['ค่าซื้องานศิลปะ',art],['เงินบริจาคพรรคการเมือง',political],
+    ['เงินบริจาคเพื่อการศึกษา (2 เท่า)',eduAllowed],['เงินบริจาคทั่วไป',donAllowed]];
+  Object.assign(o,{total,expense,dedSelf,dedSpouse,dedChildren,dedParent,dedDisabled,totalDed,net,baseNet,insNet,tB,tI,tF,withheld,items,
+    eff:total>0?tF.tax/total:0,savings:tB.tax-tF.tax,retAllowed,esgAllowed,lifeHealth});
+  return o;
+}
+
+// ===== TAX: หน้าจอ =====
+function txRowHtml(id,R){
+  if(id==='-')return '<div class="tx-div"></div>';
+  const it=TX_ITEMS[id],o=(R.over&&R.over[id])||{},V=TX.vals;
+  const label=o.label||it.label,hint=o.hint!==undefined?o.hint:it.hint;
+  const im=it.im?' data-incmode="'+it.im+'"':'';
+  let ctl;
+  if(it.t==='c')ctl='<div class="tx-comp" data-txc="'+id+'">0</div>';
+  else if(it.t==='s'){
+    const cur=V[id]!==undefined?V[id]:it.def;
+    ctl='<select class="fi tx-in tx-sel" id="tx_'+id+'" data-tx="'+id+'" onchange="txIn(this)">'+it.opts.map(([v,l])=>'<option value="'+v+'"'+(String(cur)===String(v)?' selected':'')+'>'+l+'</option>').join('')+'</select>';
+  }else if(it.t==='n'){
+    ctl='<input class="fi tx-in" id="tx_'+id+'" data-tx="'+id+'" type="number" min="0"'+(it.max!==undefined?' max="'+it.max+'"':'')+' value="'+(+V[id]||0)+'" oninput="txIn(this)"> <span class="tx-unit">'+(it.unit||'')+'</span>';
+  }else{
+    ctl='<input class="fi tx-in tx-cur" id="tx_'+id+'" data-tx="'+id+'" type="text" inputmode="numeric" value="'+(+V[id]||0).toLocaleString('th-TH')+'" oninput="txIn(this)"> <span class="tx-unit">บาท</span>';
+  }
+  return '<div class="tx-row"'+im+'><label for="tx_'+id+'">'+label+'<span class="tx-link" id="tx_lk_'+id+'"'+(TX.linked[id]?'':' style="display:none"')+'>🔗 จากกระแสเงินสด</span>'+(hint?'<span class="tx-hint">'+hint+'</span>':'')+'<span class="tx-warn" id="tx_w_'+id+'"></span></label><div class="tx-ctl">'+ctl+'</div></div>';
+}
+function txBuild(){
+  const R=TAX_RULES[TX.year];
+  let h='<div class="g2">';
+  R.cards.forEach(c=>{h+='<div class="card"><div class="card-h"><div class="bdg b-bl">'+c.i+'</div><div><h2>'+c.t+'</h2></div></div>'+c.ids.map(id=>txRowHtml(id,R)).join('')+'</div>';});
+  h+='</div>';
+  document.getElementById('tx_form').innerHTML=h;
+  const sub=document.getElementById('tx_sub');if(sub)sub.textContent=R.name+' · '+R.sub;
+  txToggleIncome();
+}
+function txToggleIncome(){
+  const m=TX.vals.incomeMode||'monthly';
+  document.querySelectorAll('#tx_form [data-incmode]').forEach(r=>{r.style.display=(r.dataset.incmode===m)?'':'none';});
+}
+function txIn(el){
+  const id=el.dataset.tx;
+  if(el.tagName==='SELECT')TX.vals[id]=(id==='incomeMode')?el.value:+el.value;
+  else if(el.classList.contains('tx-cur')){
+    // จัดรูปแบบจุลภาคโดยคงตำแหน่งเคอร์เซอร์ไว้ที่เดิม (นับจากจำนวนหลักทางซ้าย)
+    const pos=el.selectionStart,left=el.value.slice(0,pos==null?el.value.length:pos).replace(/[^\d]/g,'').length;
+    const raw=el.value.replace(/[^\d]/g,'');el.value=raw?(+raw).toLocaleString('th-TH'):'';TX.vals[id]=+raw||0;
+    if(document.activeElement===el){let c=0,i=0;for(;i<el.value.length&&c<left;i++){if(/\d/.test(el.value[i]))c++;}el.setSelectionRange(i,i);}
+  }else TX.vals[id]=Math.max(0,+el.value||0);
+  if(TX.linked[id]){delete TX.linked[id];const lk=document.getElementById('tx_lk_'+id);if(lk)lk.style.display='none';}
+  if(id==='incomeMode')txToggleIncome();
+  txRecalc();
+}
+function txSetYear(y){TX.year=+y;txBuild();txRecalc();}
+
+function txMeter(lb,used,cap,raw){
+  const pct=cap>0?Math.min(100,used/cap*100):0,over=raw>cap;
+  return '<div class="tx-m"><div class="tx-mh"><span>'+lb+'</span><b>'+F(used)+' / '+F(cap)+' บาท</b></div><div class="tx-meter"><i style="width:'+pct+'%;background:'+(over?'var(--warn)':'var(--ac3)')+'"></i></div>'
+    +(over?'<div class="tx-warn">กรอกรวม '+F(raw)+' บาท เกินเพดาน ส่วนที่เกิน '+F(raw-cap)+' บาท ไม่ได้ลดหย่อน</div>':'')+'</div>';
+}
+function txNotice(){
+  const R=TAX_RULES[TX.year],f=getFin();
+  const today=new Date();today.setHours(0,0,0,0);
+  const days=Math.ceil((new Date(R.deadline+'T00:00:00')-today)/86400000);
+  let h='<div class="tx-notice">';
+  h+=days>=0?'<div>⏳ <b>'+R.name+'</b> เหลือเวลาอีก <b>'+days+' วัน</b> (ถึง '+R.deadlineTxt+') สำหรับการลงทุน/ซื้อกรมธรรม์ที่ต้องการใช้สิทธิลดหย่อนของปีนี้ ควรตรวจสอบเงื่อนไขของแต่ละผลิตภัณฑ์ด้วย</div>'
+    :'<div>🗂️ <b>'+R.name+'</b> สิ้นสุดแล้ว — ใช้สำหรับตรวจสอบย้อนหลัง</div>';
+  if(TX.msg)h+='<div>🔗 '+TX.msg+'</div>';
+  const other=f.incAsset+f.incOther;
+  h+='<div>💡 รายได้จากสินทรัพย์/อื่นๆ ในกระแสเงินสด <b>'+F(other)+' บาท/ปี</b> ไม่ถูกรวมในการคำนวณนี้ (ดอกเบี้ย เงินปันผล ค่าเช่า มีหลักเกณฑ์ภาษีแยกต่างหาก ควรตรวจสอบก่อนยื่นจริง)</div>';
+  h+='<div class="tx-hint">'+R.src+'</div>';
+  h+='<div class="tx-hint">⚠️ เป็นเครื่องมือประมาณการเบื้องต้น ไม่ใช่คำแนะนำด้านภาษีหรือการลงทุน กรุณาตรวจสอบเงื่อนไขล่าสุดกับกรมสรรพากรก่อนยื่นจริง</div></div>';
+  document.getElementById('tx_notice').innerHTML=h;
+  document.getElementById('tx_notes').innerHTML='<div class="card-h"><div class="bdg b-go">📌</div><div><h2>เงื่อนไขสำคัญ '+R.name+'</h2></div></div><ul class="tx-notes">'+R.notes.map(n=>'<li>'+n+'</li>').join('')+'</ul>';
+}
+function txRecalc(){
+  const o=txCalc();TX.last=o;
+  const R=TAX_RULES[TX.year];
+  const map={totalIncome:o.total,expense:o.expense,dedSelf:o.dedSelf,dedSpouse:o.dedSpouse,dedChildren:o.dedChildren,dedParent:o.dedParent,dedDisabled:o.dedDisabled};
+  Object.keys(map).forEach(k=>document.querySelectorAll('[data-txc="'+k+'"]').forEach(e=>{e.textContent=F(map[k]);}));
+  document.querySelectorAll('#tx_form .tx-cur').forEach(el=>{
+    const id=el.dataset.tx,w=document.getElementById('tx_w_'+id),cap=o.cap[id];
+    if(cap!==undefined){el.classList.add('capped');if(w)w.textContent='*ระบบจำกัดเพดานที่ '+F(cap)+' บาท';}
+    else{el.classList.remove('capped');if(w)w.textContent='';}
+  });
+  const lw=document.getElementById('tx_w_lifeIns'),le=document.getElementById('tx_lifeIns');
+  if(lw&&le&&o.grp.lifeHealth.raw>100000&&o.cap.lifeIns===undefined){lw.textContent='*รวมประกันชีวิต+สุขภาพเกิน 100,000 บ. ระบบจำกัดที่ 100,000';le.classList.add('capped');}
+  // สรุปผล
+  const box=(lb,v,c)=>'<div class="kpi"><div class="lb">'+lb+'</div><div class="vl" style="color:'+c+'">'+v+'</div></div>';
+  document.getElementById('tx_result').innerHTML=box('รวมเงินได้ทั้งปี',F(o.total),'var(--gold)')+box('รวมค่าใช้จ่ายและลดหย่อน',F(o.totalDed),'var(--ac)')+box('เงินได้สุทธิ',F(o.net),'var(--warn)')
+    +box('ภาษีพื้นฐาน (ก่อนลดหย่อนประกัน/กองทุน)',F(o.tB.tax),'var(--dng)')+box('ภาษีหลังลดหย่อนทั้งหมด',F(o.tF.tax),'var(--ac3)')+box('อัตราภาษีเฉลี่ย (Effective Rate)',(o.eff*100).toFixed(1)+'%','var(--ac)');
+  let pay='<div class="tx-pay"><span class="dc-l">ภาษีที่ประหยัดได้เพิ่มจากการลงทุน/ประกัน/บริจาค</span><b style="color:var(--ac3)">'+F(o.savings)+' บาท</b></div>';
+  if(o.withheld>0){
+    const d=o.tF.tax-o.withheld;
+    pay+='<div class="tx-pay"><span class="dc-l">ภาษีที่ถูกหักไว้แล้ว '+F(o.withheld)+' บาท → '+(d>0?'ต้องชำระเพิ่ม (ประมาณการ)':d<0?'อาจขอคืนได้ (ประมาณการ)':'เท่ากับภาษีที่คำนวณได้')+'</span><b style="color:'+(d>0?'var(--dng)':'var(--ac3)')+'">'+(d===0?'0':F(Math.abs(d)))+' บาท</b></div>';
+  }else pay+='<div class="tx-hint" style="margin-top:8px">กรอก "ภาษีที่ถูกหัก ณ ที่จ่าย" ในการ์ดเงินได้ หรือกดดึงจากกระแสเงินสด เพื่อเทียบว่าต้องชำระเพิ่มหรือขอคืน</div>';
+  document.getElementById('tx_pay').innerHTML=pay;
+  // ตารางขั้นบันได
+  let t='<thead><tr><th>ฐานเงินได้สุทธิ (บาท)</th><th class="tr">อัตราภาษี</th><th class="tr">ภาษี (พื้นฐาน)</th><th class="tr">ภาษี (เฉพาะประกัน)</th><th class="tr">ภาษี (ลดหย่อนทั้งหมด)</th></tr></thead><tbody>';
+  TAX_BRACKETS.forEach((b,i)=>{
+    t+='<tr'+(o.net>b.from?' style="background:var(--hovbg)"':'')+'><td>'+F(b.from+(i>0?1:0))+' - '+(b.to===Infinity?'ขึ้นไป':F(b.to))+'</td><td class="tr num">'+(b.rate*100)+'%</td><td class="tr num">'+F(o.tB.details[i].taxAmt)+'</td><td class="tr num">'+F(o.tI.details[i].taxAmt)+'</td><td class="tr num">'+F(o.tF.details[i].taxAmt)+'</td></tr>';
+  });
+  t+='<tr style="font-weight:700;border-top:2px solid var(--cb)"><td>รวมภาษี</td><td></td><td class="tr num">'+F(o.tB.tax)+'</td><td class="tr num">'+F(o.tI.tax)+'</td><td class="tr num">'+F(o.tF.tax)+'</td></tr></tbody>';
+  document.getElementById('tx_table').innerHTML=t;
+  // เพดานกลุ่ม
+  let m=txMeter('ประกันชีวิต + ประกันสุขภาพ (รวมไม่เกิน 100,000)',o.grp.lifeHealth.used,100000,o.grp.lifeHealth.raw)
+    +txMeter('กลุ่มลดหย่อนเพื่อเกษียณ (รวมไม่เกิน 500,000)',o.grp.ret.used,500000,o.grp.ret.raw);
+  if(R.p.esgShared)m+=txMeter('Thai ESG + ESGX (ไม่เกิน 30% ของเงินได้ และไม่เกิน 300,000)',o.grp.esg.used,o.grp.esg.cap,o.grp.esg.raw);
+  if(o.grp.eduOver!==undefined)m+='<div class="tx-warn">เงินบริจาคเพื่อการศึกษา: ใช้สิทธิได้เพียง '+F(o.grp.eduOver)+' บาท (ไม่เกิน 10% ของเงินได้หลังหักลดหย่อนอื่น)</div>';
+  if(o.grp.donOver!==undefined)m+='<div class="tx-warn">เงินบริจาคทั่วไป: ใช้สิทธิได้เพียง '+F(o.grp.donOver)+' บาท (ไม่เกิน 10% ของเงินได้หลังหักลดหย่อนอื่น)</div>';
+  document.getElementById('tx_meters').innerHTML=m;
+  // รายละเอียดรายการที่ใช้สิทธิ
+  let s='<div class="tx-sum">';let tot=0;
+  o.items.forEach(([lb,v])=>{if(v>0){tot+=v;s+='<div class="comp-row"><span>'+lb+'</span><b>'+F(v)+'</b></div>';}});
+  s+='</div><div class="tx-sumtot"><span>รวมค่าใช้จ่ายและค่าลดหย่อนทั้งหมด</span><b style="color:var(--ac)">'+F(tot)+' บาท</b></div>';
+  document.getElementById('tx_summary').innerHTML=s;
+  txNotice();
+}
+
+// ===== TAX: ดึงข้อมูลจากกระแสเงินสด =====
+function txPull(silent){
+  const f=getFin(),V=TX.vals,got=[];
+  const setv=(id,val,lb)=>{V[id]=val;TX.linked[id]=1;got.push(lb+' '+F(val));};
+  const sumBy=(re,cats)=>{const m=cfItems.filter(i=>cats.includes(i.cat)&&re.test(i.name));return {n:m.length,v:m.reduce((s,i)=>s+cfTotal(i),0)};};
+  const work=cfItems.filter(i=>i.cat==='inc'&&i.grp==='เงินได้จากการทำงาน');
+  if(work.length){
+    const salaryA=work.filter(i=>/เงินเดือน|ค่าจ้าง/.test(i.name)).reduce((s,i)=>s+cfTotal(i),0);
+    if(salaryA>0&&salaryA%12===0){
+      V.incomeMode='monthly';setv('salaryMonth',salaryA/12,'เงินเดือน/เดือน');setv('bonusYear',f.incWork-salaryA,'โบนัส/รายได้อื่นจากงาน');
+    }else{V.incomeMode='yearly';setv('incomeYearTotal',f.incWork,'เงินได้จากการทำงานรวม');}
+    TX.linked.incomeMode=1;
+  }
+  const ss=sumBy(/ประกันสังคม/,['fix','var','save']);if(ss.n)setv('socialSec',ss.v,'ประกันสังคม');
+  const pv=sumBy(/สำรองเลี้ยงชีพ|PVD/i,['save','fix']);if(pv.n)setv('pvd',pv.v,'PVD');
+  const li=sumBy(/เบี้ยประกันชีวิต/,['fix','var']);if(li.n)setv('lifeIns',li.v,'เบี้ยประกันชีวิต');
+  const wh=sumBy(/ภาษีเงินได้|หัก ณ ที่จ่าย/,['fix']);if(wh.n)setv('withheld',wh.v,'ภาษีที่หักไว้');
+  const st=APP.client.status;let stNote='';
+  if(st==='โสด'){V.status=1;TX.linked.status=1;got.push('สถานภาพ: โสด');}
+  else if(st==='หย่า'){V.status=2;TX.linked.status=1;got.push('สถานภาพ: หย่า');}
+  else if(st==='สมรส')stNote=' · สถานภาพสมรส: กรุณาเลือกเองว่าเป็นแบบ 3, 4 หรือ 5';
+  TX.msg=got.length?('ดึงข้อมูลจากกระแสเงินสดแล้ว: '+got.join(' · ')+stNote+' — ตัวเลขที่มีป้าย 🔗 แก้ไขได้ และจะไม่อัปเดตเองอีกจนกว่าจะกดดึงอีกครั้ง'):'ไม่พบรายการที่ตรงกันในกระแสเงินสด';
+  TX.autoPull=false;
+  if(!silent){txBuild();txRecalc();}
+}
+
+// ===== TAX: เก็บ/นำเข้าไปกับไฟล์ Export/Import =====
+function txCollect(){return {year:TX.year,vals:{...TX.vals}};}
+function txApply(t){
+  TX.linked={};TX.msg='';
+  if(t&&t.year&&TAX_RULES[t.year]){TX.year=+t.year;TX.vals={...(t.vals||{})};TX.autoPull=false;}
+  else{TX.vals={};TX.autoPull=true;} // ไฟล์รุ่นเก่า: ดึงจากกระแสเงินสดที่นำเข้าให้ใหม่
+}
+function txInit(){
+  const sel=document.getElementById('tx_year');
+  if(sel&&!sel.options.length)sel.innerHTML=Object.keys(TAX_RULES).sort((a,b)=>b-a).map(y=>'<option value="'+y+'">'+TAX_RULES[y].name+'</option>').join('');
+  if(TX.autoPull)txPull(true);
+  if(sel)sel.value=TX.year;
+  txBuild();txRecalc();
+}
+
 function recalcAll(){renderDashboard();renderRatioTable();recalcRetirement();renderInvestment();}
-function initAll(){renderProfile();renderAssumptions();renderDashboard();renderBalanceSheet();renderCashFlow();renderRatioTable();recalcRetirement();renderInvestment();renderInvAll();}
+function initAll(){renderProfile();renderAssumptions();renderDashboard();renderBalanceSheet();renderCashFlow();renderRatioTable();recalcRetirement();renderInvestment();renderInvAll();txInit();}
 initAll();
 </script>
 <script>

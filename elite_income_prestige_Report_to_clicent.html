@@ -616,8 +616,9 @@ body.summary-mode .sb-links,body.summary-mode .sb-label,body.one-mode .sb-links,
 #eip1page .card-panel.border-2{border-width:2px;}
 @media print{
   body.print-land{overflow:hidden !important;height:209.5mm !important;background:#fff !important;font-size:16px !important;}
-  body.print-land > *:not(#eip1page){display:none !important;}
-  body.print-land #eip1page{display:block !important;}
+  body.print-land > *:not(#eip1page):not(#prem1page):not(#kfEpage):not(#kfPpage){display:none !important;}
+  body.one-mode #eip1page,body.prem-mode #prem1page{display:block !important;}
+  body.kfE-mode #kfEpage,body.kfP-mode #kfPpage{display:block !important;}
   body.print-land #eip1page{line-height:1.5 !important;}
   body.print-land #eip1page p{margin:0 !important;}
   body.print-land #eip1page .a4-landscape{padding:18px 30px 10px 30px !important;}
@@ -655,6 +656,133 @@ body.one-mode #eip1page .a4-landscape{box-shadow:0 12px 40px rgba(15,23,42,.25);
 #eip1page header .flex.items-center.gap-2{flex-wrap:nowrap;white-space:nowrap;}
 #eip1page header .flex.items-center.gap-2 > span{white-space:nowrap;}
 #eip1page .gio-land i{font-style:normal;color:#b4861e;}
+
+
+/* === PREMIER INCOME 1-PAGE (client intro) === */
+#prem1page{display:none;font-family:'Prompt','Noto Sans Thai',sans-serif;color:#1e293b;line-height:1.45;}
+#prem1page *{box-sizing:border-box;margin:0;padding:0;}
+#prem1page .pm{width:297mm;height:209.5mm;background:linear-gradient(135deg,#fdfbf7 0%,#f8f5ee 55%,#f3efe4 100%);border:1px solid #d4af37;padding:16px 28px 10px;display:flex;flex-direction:column;gap:9px;position:relative;overflow:hidden;}
+#prem1page .pm-hd{display:flex;align-items:center;gap:14px;border-bottom:1px solid rgba(138,100,15,.3);padding-bottom:8px;}
+#prem1page .pm-badge{background:linear-gradient(135deg,#d31145,#a30b33);color:#fff;border-radius:8px;padding:7px 12px;text-align:center;line-height:1;flex-shrink:0;}
+#prem1page .pm-badge b{display:block;font-size:20px;letter-spacing:2px;}
+#prem1page .pm-badge span{font-size:8px;letter-spacing:2px;color:#ffd9e2;}
+#prem1page .pm-tag{font-size:10.5px;letter-spacing:2.4px;font-weight:700;color:#8a640f;text-transform:uppercase;}
+#prem1page .pm-title{font-size:25px;font-weight:700;color:#7a5409;line-height:1.2;}
+#prem1page .pm-title small{font-size:15px;font-weight:500;color:#1e293b;margin-left:6px;}
+#prem1page .pm-pills{display:flex;gap:8px;margin-top:3px;white-space:nowrap;}
+#prem1page .pm-pill{font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;border:1.5px solid #c59b27;background:#fff8e1;color:#5a3d03;}
+#prem1page .pm-hd-r{margin-left:auto;text-align:center;background:#fff;border:1.5px solid #c59b27;border-radius:12px;padding:6px 14px;flex-shrink:0;}
+#prem1page .pm-hd-r small{display:block;font-size:10px;color:#64748b;}
+#prem1page .pm-hd-r b{display:block;font-size:19px;color:#7a5409;line-height:1.2;}
+#prem1page .pm-hd-r em{display:block;font-style:normal;font-size:10px;color:#047857;font-weight:600;}
+#prem1page .pm-main{display:grid;grid-template-columns:3.4fr 4.2fr 3.4fr;gap:11px;flex:1;min-height:0;}
+#prem1page .pm-card{background:rgba(255,255,255,.94);border:1px solid #e2d9c5;border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:6px;min-height:0;}
+#prem1page .pm-card.c1{border-top:4px solid #d31145;}
+#prem1page .pm-card.c2{border:2px solid #c59b27;background:linear-gradient(145deg,#fff,#fcf9f2 60%,#f7f0df);}
+#prem1page .pm-card.c3{border-top:4px solid #059669;}
+#prem1page .pm-step{align-self:flex-start;font-size:10.5px;font-weight:800;letter-spacing:.5px;padding:2px 9px;border-radius:5px;}
+#prem1page .c1 .pm-step{color:#d31145;background:#fff1f4;border:1px solid #fbc4d1;}
+#prem1page .c2 .pm-step{color:#fff;background:linear-gradient(90deg,#b4861e,#8a640f);}
+#prem1page .c3 .pm-step{color:#065f46;background:#ecfdf5;border:1px solid #a7f3d0;}
+#prem1page h3{font-size:14.5px;font-weight:700;color:#0f172a;line-height:1.3;}
+#prem1page .pm-big{display:flex;align-items:baseline;gap:6px;background:#faf8f5;border:1px solid #e7e0d0;border-radius:10px;padding:6px 10px;}
+#prem1page .pm-big b{font-size:26px;color:#7a5409;line-height:1;}
+#prem1page .pm-big span{font-size:11.5px;color:#334155;font-weight:600;}
+#prem1page ul{list-style:none;font-size:11.5px;color:#1e293b;}
+#prem1page li{padding-left:13px;position:relative;margin-bottom:2px;}
+#prem1page li:before{content:'•';position:absolute;left:2px;color:#b4861e;font-weight:900;}
+#prem1page table{border-collapse:collapse;width:100%;font-size:10.5px;}
+#prem1page th{background:#f3e7c6;color:#3d2b04;font-weight:700;padding:3px 5px;border:1px solid #e2d9c5;text-align:center;}
+#prem1page td{padding:3px 5px;border:1px solid #e7e0d0;text-align:center;color:#1e293b;}
+#prem1page td:first-child{text-align:left;font-weight:600;background:#fffdf7;}
+#prem1page .hl{background:#fff4d6;font-weight:800;color:#5a3d03;}
+#prem1page .pm-flow{display:flex;align-items:stretch;gap:4px;font-size:10.5px;text-align:center;}
+#prem1page .pm-flow div{flex:1;background:#fff;border:1px solid #e0c97a;border-radius:8px;padding:5px 3px;font-weight:600;line-height:1.3;}
+#prem1page .pm-flow i{align-self:center;font-style:normal;color:#b4861e;font-weight:900;}
+#prem1page .pm-funds{display:grid;grid-template-columns:1fr 1fr;gap:5px;}
+#prem1page .pm-fund{background:#fff;border:1px solid #e0c97a;border-radius:8px;padding:4px 7px;font-size:10.5px;line-height:1.3;}
+#prem1page .pm-fund b{display:block;font-size:11px;color:#3d2b04;}
+#prem1page .pm-fund span{color:#475569;}
+#prem1page .pm-fund em{font-style:normal;color:#7a5409;font-weight:700;}
+#prem1page .pm-proof{background:#ecfdf5;border:1px solid #6ee7b7;border-radius:8px;padding:5px 9px;font-size:11px;color:#064e3b;line-height:1.35;}
+#prem1page .pm-proof b{color:#047857;}
+#prem1page .pm-ex{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:6px 9px;font-size:10.5px;line-height:1.4;color:#14532d;}
+#prem1page .pm-ex b{color:#065f46;}
+#prem1page .pm-cta{background:linear-gradient(135deg,#fff8e1,#fdeeb8);border:1.5px solid #c59b27;border-radius:10px;padding:6px 10px;font-size:11.5px;color:#3d2b04;line-height:1.4;}
+#prem1page .pm-ft{display:flex;justify-content:space-between;gap:16px;border-top:1px solid rgba(138,100,15,.25);padding-top:4px;font-size:8.6px;line-height:1.3;color:#475569;}
+#prem1page .pm-ft b{color:#7a5409;}
+#prem1page .pm-ft .r{text-align:right;flex-shrink:0;white-space:nowrap;}
+body.prem-mode #prem1page{display:block;padding:8px 16px 40px;}
+body.prem-mode #premBar{display:block !important;}
+body.prem-mode #prem1page .pm{box-shadow:0 12px 40px rgba(15,23,42,.25);}
+#prem1scale{transform-origin:top left;width:297mm;margin:0 auto;}
+#premBar{max-width:1140px;margin:16px auto 8px;padding:0 16px;}
+#premPrintBtn{background:linear-gradient(135deg,#C9A84C,#E8D9A0);color:#0A1220;border:none;border-radius:999px;padding:11px 22px;font-weight:800;font-size:.95rem;cursor:pointer;font-family:inherit;box-shadow:0 4px 16px rgba(201,168,76,.3);}
+.sidebar .sb-prem{margin:6px 14px 0;width:calc(100% - 28px);font-size:.82rem;padding:9px 10px;cursor:pointer;font-family:inherit;border-radius:8px;background:linear-gradient(135deg,rgba(211,17,69,.22),rgba(201,168,76,.18));color:#FFE9B0;border:1px solid rgba(232,217,160,.6);font-weight:700;}
+.sidebar .sb-prem:hover{background:linear-gradient(135deg,rgba(211,17,69,.35),rgba(201,168,76,.3));}
+.sidebar .sb-prem.active{background:linear-gradient(135deg,#C9A84C,#E8D9A0);color:#0A1220;}
+body.prem-mode .sb-links,body.prem-mode .sb-label{display:none !important;}
+@media print{
+  body.prem-mode #premBar,#premBar{display:none !important;}
+  #prem1page{padding:0 !important;height:auto !important;min-height:0 !important;overflow:hidden !important;}
+  #prem1scale{transform:none !important;height:auto !important;width:auto !important;margin:0 !important;}
+  body.print-land #prem1page{line-height:1.45 !important;}
+  body.print-land #prem1page p{margin:0 !important;font-size:inherit !important;}
+  body.print-land #prem1page .pm{box-shadow:none !important;}
+}
+
+
+/* === KEY FEATURE 1-PAGE (Elite / Premier) — font follows A−/A+ via --kfs === */
+.kfpage{display:none;font-family:'Prompt','Noto Sans Thai',sans-serif;color:#1e293b;line-height:1.45;}
+.kfpage *{box-sizing:border-box;margin:0;padding:0;}
+.kfpage .kf{--kfs:1;font-size:calc(var(--kfs) * 13px);width:297mm;min-height:209.5mm;background:linear-gradient(135deg,#fdfbf7,#f6f1e4);border:1px solid #d4af37;padding:1.4em 2.4em .8em;display:flex;flex-direction:column;gap:.8em;position:relative;overflow:hidden;}
+.kfpage .kf-hd{display:flex;align-items:center;gap:1.2em;border-bottom:1px solid rgba(138,100,15,.3);padding-bottom:.6em;}
+.kfpage .kf-badge{background:linear-gradient(135deg,#d31145,#a30b33);color:#fff;border-radius:.7em;padding:.6em 1em;text-align:center;line-height:1;flex-shrink:0;}
+.kfpage .kf-badge b{display:block;font-size:1.7em;letter-spacing:2px;}.kfpage .kf-badge span{font-size:.7em;letter-spacing:2px;color:#ffd9e2;}
+.kfpage .kf-tag{font-size:.9em;letter-spacing:2px;font-weight:700;color:#8a640f;}
+.kfpage .kf-title{font-size:2.1em;font-weight:700;color:#7a5409;line-height:1.2;}
+.kfpage .kf-title small{font-size:.58em;font-weight:500;color:#1e293b;margin-left:.4em;}
+.kfpage .kf-pills{display:flex;gap:.6em;margin-top:.25em;}
+.kfpage .kf-pill{font-size:.95em;font-weight:700;padding:.15em .8em;border-radius:999px;border:1.5px solid #c59b27;background:#fff8e1;color:#5a3d03;white-space:nowrap;}
+.kfpage .kf-main{display:grid;grid-template-columns:1fr 1fr 1.05fr;gap:.9em;flex:1;}
+.kfpage .kf-col{background:rgba(255,255,255,.95);border:1px solid #e2d9c5;border-radius:1em;padding:.8em 1em;display:flex;flex-direction:column;gap:.5em;}
+.kfpage .kf-col.c1{border-top:.35em solid #d31145;}.kfpage .kf-col.c2{border-top:.35em solid #c59b27;}.kfpage .kf-col.c3{border:2px solid #c59b27;background:linear-gradient(145deg,#fff,#fcf9f2 60%,#f7f0df);}
+.kfpage .kf-step{align-self:flex-start;font-size:.92em;font-weight:800;padding:.15em .8em;border-radius:.4em;color:#fff;background:linear-gradient(90deg,#b4861e,#8a640f);}
+.kfpage .c1 .kf-step{background:#d31145;}
+.kfpage h3{font-size:1.3em;font-weight:700;color:#0f172a;line-height:1.3;}
+.kfpage table{border-collapse:collapse;width:100%;font-size:1em;}
+.kfpage td{padding:.3em .45em;border:1px solid #e7e0d0;vertical-align:top;}
+.kfpage td:first-child{font-weight:700;background:#fff8e1;width:36%;color:#3d2b04;}
+.kfpage ul{list-style:none;font-size:1em;}.kfpage li{padding-left:1.1em;position:relative;margin-bottom:.35em;}
+.kfpage li:before{content:'✔';position:absolute;left:0;color:#059669;font-weight:900;font-size:.9em;}
+.kfpage li b{color:#7a5409;}
+.kfpage .kf-flow{display:flex;gap:.3em;align-items:stretch;text-align:center;font-size:.92em;}
+.kfpage .kf-flow div{flex:1;background:#fff;border:1px solid #e0c97a;border-radius:.6em;padding:.4em .25em;font-weight:600;line-height:1.3;}
+.kfpage .kf-flow i{align-self:center;font-style:normal;color:#b4861e;font-weight:900;}
+.kfpage .kf-def{background:#fff4d6;border:1px solid #e0c97a;border-radius:.7em;padding:.5em .7em;font-size:1em;color:#3d2b04;}
+.kfpage .kf-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.4em;text-align:center;}
+.kfpage .kf-stats div{background:#ecfdf5;border:1px solid #6ee7b7;border-radius:.6em;padding:.3em .2em;font-size:.88em;color:#064e3b;line-height:1.25;}
+.kfpage .kf-stats b{display:block;font-size:1.5em;color:#047857;}
+.kfpage .kf-not{background:#fff1f2;border:1px solid #fecdd3;border-radius:.7em;padding:.4em .7em;font-size:.95em;color:#7f1d1d;}
+.kfpage .kf-not b{color:#be123c;}
+.kfpage .kf-ft{display:flex;justify-content:space-between;gap:1.4em;border-top:1px solid rgba(138,100,15,.25);padding-top:.35em;font-size:.72em;line-height:1.3;color:#475569;}
+.kfpage .kf-ft .r{text-align:right;flex-shrink:0;white-space:nowrap;}
+body.kfE-mode #kfEpage,body.kfP-mode #kfPpage{display:block;padding:8px 16px 40px;}
+body.kfE-mode #kfBar,body.kfP-mode #kfBar{display:block !important;}
+body.kfE-mode .kfpage .kf,body.kfP-mode .kfpage .kf{box-shadow:0 12px 40px rgba(15,23,42,.25);}
+.kfscale{transform-origin:top left;width:297mm;margin:0 auto;}
+#kfBar{display:none;max-width:1140px;margin:16px auto 8px;padding:0 16px;}
+#kfPrintBtn{background:linear-gradient(135deg,#C9A84C,#E8D9A0);color:#0A1220;border:none;border-radius:999px;padding:11px 22px;font-weight:800;font-size:.95rem;cursor:pointer;font-family:inherit;box-shadow:0 4px 16px rgba(201,168,76,.3);}
+.sidebar .sb-kf{margin:6px 14px 0;width:calc(100% - 28px);font-size:.82rem;padding:9px 10px;cursor:pointer;font-family:inherit;border-radius:8px;background:rgba(201,168,76,.12);color:#FFE9B0;border:1px solid rgba(232,217,160,.5);font-weight:700;}
+.sidebar .sb-kf:hover{background:rgba(201,168,76,.28);}.sidebar .sb-kf.active{background:linear-gradient(135deg,#C9A84C,#E8D9A0);color:#0A1220;}
+body.kfE-mode .sb-links,body.kfE-mode .sb-label,body.kfP-mode .sb-links,body.kfP-mode .sb-label{display:none !important;}
+@media print{
+  #kfBar{display:none !important;}
+  .kfpage{padding:0 !important;height:auto !important;min-height:0 !important;overflow:hidden !important;}
+  .kfscale{transform:none !important;height:auto !important;width:auto !important;margin:0 !important;}
+  .kfpage .kf{height:209.5mm !important;min-height:0 !important;box-shadow:none !important;}
+  body.print-land .kfpage p{margin:0 !important;font-size:inherit !important;}
+}
 
 /* === MIDNIGHT PRIVATE BANKING — ALTERNATING DARK SECTIONS === */
 .section.dark{
@@ -1166,6 +1294,9 @@ body.one-mode #eip1page .a4-landscape{box-shadow:0 12px 40px rgba(15,23,42,.25);
     <button class="vs-btn" id="vsOne">📄 1 หน้า</button>
   </div>
   <button type="button" class="sb-print" id="sbPrint1">📄 สรุป 1 หน้า A4 (ย้ายเงิน)</button>
+  <button type="button" class="sb-kf" id="sbKfE">📘 Elite Income Prestige · Key Feature 1 หน้า</button>
+  <button type="button" class="sb-kf" id="sbKfP">📗 Premier Income · Key Feature 1 หน้า</button>
+  <button type="button" class="sb-prem" id="sbPrem">✨ AIA Premier Income (เริ่ม 2 แสน)</button>
   <div class="sb-label">หัวข้อ</div>
   <nav class="sb-links" id="navLinks">
     <a href="#slideDeck">🎞️ สไลด์สรุป</a>
@@ -2261,6 +2392,106 @@ body.one-mode #eip1page .a4-landscape{box-shadow:0 12px 40px rgba(15,23,42,.25);
         </footer>
     </div>
 </div></div>
+<div id="premBar" class="print-hidden" style="display:none">
+  <div class="one-bar-in">
+    <div><b>AIA Premier Income · สรุป 1 หน้า A4 แนวนอน</b><span>แนะนำทางเลือกเริ่มต้นสำหรับผู้ที่ยังไม่พร้อมเริ่มที่เบี้ย 500,000 บาท — ตั้งค่ากระดาษเป็น A4 แนวนอน พอดี 1 หน้าให้อัตโนมัติ</span></div>
+    <button type="button" id="premPrintBtn">🖨️ สั่งพิมพ์ (A4 แนวนอน · 1 หน้า)</button>
+  </div>
+  <div class="one-tip">เคล็ดลับ: ในหน้าต่างพิมพ์ ให้เปิด "Background graphics" ตั้ง Scale 100% และ Margins เป็น None · เอกสารฉบับร่าง ต้องผ่านการตรวจสอบโดย AIA Compliance ก่อนแจกจ่ายลูกค้า</div>
+</div>
+<div id="prem1page" aria-hidden="true"><div id="prem1scale"><div class="pm">
+  <div class="pm-hd">
+    <div class="pm-badge"><b>AIA</b><span>PREMIER</span></div>
+    <div>
+      <div class="pm-tag">Start Building · Smart Income · Smooth Transfer</div>
+      <div class="pm-title">AIA PREMIER INCOME <small>— เริ่มย้ายเงินบางส่วน เพื่อโอกาสเติบโตและรายได้</small></div>
+      <div class="pm-pills"><span class="pm-pill">Unit-Linked · ชำระเบี้ย 10 ปี</span><span class="pm-pill">✔ พิจารณารับประกันแบบ GIO ไม่ต้องตอบคำถามสุขภาพ</span></div>
+    </div>
+    <div class="pm-hd-r"><small>เริ่มต้นเบี้ยประกันภัยหลัก</small><b>200,000 บาท/ปี</b><em>เริ่มเปิดขาย 26 พ.ย. 2569</em></div>
+  </div>
+
+  <div class="pm-main">
+    <div class="pm-card c1">
+      <span class="pm-step">STEP 1 · เริ่มต้นจากส่วนเล็ก</span>
+      <h3>ยังไม่ต้องย้ายเงินก้อนใหญ่ — เริ่มจากส่วนที่ "เงินเย็น" ก่อน</h3>
+      <div class="pm-big"><b>200,000</b><span>บาท/ปี × 10 ปี = เบี้ยหลักรวม 2.0 ล้านบาท</span></div>
+      <ul>
+        <li>เงินฝากประจำ 12 เดือนสูงสุด ~1.35%/ปี แต่เงินเฟ้อคาดการณ์ปี 2569 อยู่ที่ 2.8% — เงินที่นอนนิ่งหดค่าลงเงียบๆ</li>
+        <li>เริ่มจากส่วนเล็ก แล้วทยอยสร้างเงินก้อนในกองทุนระดับโลกผ่านกรมธรรม์เดียว</li>
+        <li>ไม่ต้องตรวจสุขภาพ ไม่ต้องตอบคำถามสุขภาพ (GIO เฉพาะสุขภาพ ส่วนการพิจารณาด้านการเงินเป็นแบบปกติ)</li>
+      </ul>
+      <table>
+        <tr><th></th><th>Premier Income</th><th>Elite Income Prestige</th></tr>
+        <tr><td>ชำระเบี้ยหลัก</td><td class="hl">10 ปี</td><td>5 ปี</td></tr>
+        <tr><td>เบี้ยหลักขั้นต่ำ/ปี</td><td class="hl">200,000</td><td>500,000</td></tr>
+        <tr><td>ความคุ้มครองชีวิต</td><td>110%</td><td>110%</td></tr>
+        <tr><td>Auto Redemption</td><td>มี</td><td>มี</td></tr>
+        <tr><td>Performance Bonus</td><td>0.15%/ปี*</td><td>0.25%/ปี*</td></tr>
+      </table>
+      <div style="font-size:9px;color:#64748b">* เป็นไปตามเงื่อนไขของกรมธรรม์ (Premier: ชำระเบี้ยครบทุกงวด ไม่ลดเบี้ย และกรมธรรม์มีผลบังคับอย่างน้อย 14 ปี)</div>
+    </div>
+
+    <div class="pm-card c2">
+      <span class="pm-step">STEP 2 · SMART INCOME</span>
+      <h3>โอกาสรับรายได้จาก Auto Redemption ผ่านกองทุน AIA-GAIF</h3>
+      <div class="pm-flow"><div>ชำระเบี้ย<br>10 ปี</div><i>›</i><div>หักค่าธรรมเนียม<br>และค่าประกันภัย</div><i>›</i><div>ลงทุนผ่าน<br>AIA-GAIF</div><i>›</i><div>โอกาสรับเงินจาก<br>Auto Redemption</div></div>
+      <div style="font-size:11px;font-weight:700;color:#3d2b04">กองทุนปลายทางที่ AIA-GAIF สามารถเข้าลงทุนได้ (4 กอง)*</div>
+      <div class="pm-funds">
+        <div class="pm-fund"><b>Allianz Income and Growth</b><span>Allianz Global Investors<br>ขนาดกองทุน <em>$57 พันล้าน</em></span></div>
+        <div class="pm-fund"><b>AIA Equity Income</b><span>Wellington Management<br>ขนาดกองทุน <em>$1.7 พันล้าน</em></span></div>
+        <div class="pm-fund"><b>Franklin Income</b><span>Franklin Templeton<br>ขนาดกองทุน <em>$14 พันล้าน</em></span></div>
+        <div class="pm-fund"><b>Amundi Income Opportunities</b><span>Pioneer Investments<br>ขนาดกองทุน <em>$8.4 พันล้าน</em></span></div>
+      </div>
+      <div class="pm-proof">🏆 <b>AIA-GAIF จ่าย Auto Redemption แล้ว 7 ครั้งต่อเนื่อง</b> สะสม ~6.02% ตั้งแต่จัดตั้ง · ปี 2569 (9 เดือนแรก) ~3.76% — เป้าหมาย ~3% ต่อปี ไม่ถูกหักภาษี ณ ที่จ่าย</div>
+      <ul>
+        <li>ผู้จัดการกองทุนปรับสัดส่วนกองทุนปลายทางได้ตามสภาวะตลาด โดยไม่ถูกจำกัดเพดานการลงทุน</li>
+        <li>รับโบนัส 0.15%/ปี ของมูลค่ารับซื้อคืนหน่วยลงทุนของเบี้ยหลัก เมื่อเข้าเงื่อนไข</li>
+      </ul>
+    </div>
+
+    <div class="pm-card c3">
+      <span class="pm-step">STEP 3 · SMOOTH TRANSFER</span>
+      <h3>ส่งต่อให้ผู้รับประโยชน์ได้อย่างเป็นระบบ</h3>
+      <ul>
+        <li><b>คุ้มครองชีวิต 110%</b> ของเบี้ยประกันภัยหลักที่ชำระมาแล้วทั้งหมด</li>
+        <li>สินไหมส่งตรงถึงผู้รับประโยชน์ที่ระบุชื่อ ไม่ต้องรอกระบวนการจัดการมรดก</li>
+        <li>จ่ายผลประโยชน์ตามจำนวนที่มากกว่า ระหว่าง (1) 110% ของเบี้ยหลักที่ชำระแล้ว หักเงินที่ถอน หรือ (2) มูลค่ารับซื้อคืนหน่วยลงทุน + 10% ของเบี้ยหลักที่ชำระแล้ว</li>
+      </ul>
+      <div class="pm-ex"><b>ตัวอย่าง (ตามเอกสารผลิตภัณฑ์):</b> ชำระเบี้ย 200,000 บาท/ปี รวม 2.2 ล้านบาท ถอนไปแล้ว 1 ล้านบาท<br>• หน่วยลงทุนมีมูลค่า 4,000,000 → ได้รับ <b>4,200,000 บาท</b><br>• หน่วยลงทุนมีมูลค่า 800,000 → ได้รับ <b>1,200,000 บาท</b></div>
+      <div class="pm-cta"><b>💡 แนวคิด:</b> เริ่มย้ายเงินบางส่วนมาสร้างโอกาสเติบโตและรายได้ก่อน เมื่อพร้อมเพิ่มเงินออม สามารถปรึกษาแผน <b>AIA Elite Income Prestige</b> (เบี้ยขั้นต่ำ 500,000 บาท ชำระ 5 ปี)</div>
+    </div>
+  </div>
+
+  <div class="pm-ft">
+    <div><b>ข้อควรระวัง:</b> การลงทุนมีความเสี่ยง ผลตอบแทนอาจต่ำกว่าเงินลงทุน | เงินจาก Auto Redemption ไม่ใช่เงินปันผล เป็นดุลยพินิจของ บลจ. และเอไอเอไม่รับรองการจ่าย การรับซื้อคืนทำให้จำนวนหน่วยลงทุนลดลง | AIA-GAIF ไม่ป้องกันความเสี่ยงอัตราแลกเปลี่ยน | * กองทุนปลายทางอาจเปลี่ยนแปลงได้ ขนาดกองทุนจาก Bloomberg, AIAIMT ณ ก.ย. 2569 | ตัวอย่างเป็นการอธิบายเงื่อนไข มิใช่การรับประกันผลตอบแทน ผู้ขอเอาประกันภัยควรศึกษาเงื่อนไข ความคุ้มครอง และความเสี่ยงก่อนตัดสินใจ</div>
+    <div class="r"><b>ข้อมูล ณ ตุลาคม–พฤศจิกายน 2569</b><br>ที่มา: เอกสารผลิตภัณฑ์ AIA Premier Income · AIAIMT · ธปท.<br>ฉบับร่าง รอตรวจสอบโดย AIA Compliance</div>
+  </div>
+</div></div></div>
+<div id="kfBar" class="print-hidden">
+  <div class="one-bar-in">
+    <div><b id="kfBarT">Key Feature · สรุป 1 หน้า A4 แนวนอน</b><span>ปรับขนาดอักษรด้วยปุ่ม A−/A+ ด้านบนได้ — ตอนพิมพ์ระบบลดขนาดให้อัตโนมัติหากไม่พอดี 1 หน้า</span></div>
+    <button type="button" id="kfPrintBtn">🖨️ สั่งพิมพ์ (A4 แนวนอน · 1 หน้า)</button>
+  </div>
+  <div class="one-tip">เคล็ดลับ: เปิด "Background graphics" ตั้ง Scale 100% และ Margins เป็น None</div>
+</div>
+<div id="kfEpage" class="kfpage" aria-hidden="true"><div id="kfEscale" class="kfscale"><div class="kf">
+<div class="kf-hd"><div class="kf-badge"><b>AIA</b><span>ELITE</span></div><div><div class="kf-tag">KEY FEATURE · เงื่อนไขสำคัญ · จุดเด่น</div><div class="kf-title">AIA ELITE INCOME PRESTIGE<small>— Key Feature · Elite Income คืออะไร</small></div><div class="kf-pills"><span class="kf-pill">Unit-Linked · ชำระเบี้ย 5 ปี</span><span class="kf-pill">✔ พิจารณารับประกันแบบ GIO ไม่ต้องตอบคำถามสุขภาพ</span></div></div></div>
+<div class="kf-main">
+<div class="kf-col c1"><span class="kf-step">เงื่อนไขสำคัญ</span><h3>รู้ก่อนตัดสินใจ</h3><table><tr><td>ระยะชำระเบี้ย</td><td>5 ปี</td></tr><tr><td>เบี้ยหลักขั้นต่ำ</td><td>500,000 บาท/ปี</td></tr><tr><td>ความคุ้มครองชีวิต</td><td>110% ของเบี้ยหลักที่ชำระแล้ว</td></tr><tr><td>การรับประกัน</td><td>GIO เฉพาะสุขภาพ (การเงินพิจารณาปกติ)</td></tr><tr><td>ค่าบริหารกรมธรรม์</td><td>ปีที่ 1–9: 2.4%/ปี · ปีที่ 10+: 0%</td></tr><tr><td>Performance Bonus</td><td>0.25%/ปี ของมูลค่ารับซื้อคืนหน่วยลงทุนของเบี้ยหลัก ตามเงื่อนไขกรมธรรม์</td></tr><tr><td>การถอนเงิน</td><td>ถือครบปีที่ 10 ถอนได้โดยไม่มีค่าธรรมเนียมถอน · ก่อนนั้นมีค่าธรรมเนียมตามตารางกรมธรรม์</td></tr><tr><td>วงเงินสูงสุด</td><td>50 ล้านบาท/ชีวิต (รวมกับ Premier Income)</td></tr></table></div>
+<div class="kf-col c2"><span class="kf-step">KEY FEATURE · จุดเด่น</span><h3>ทำไมต้องแผนนี้</h3><ul><li><b>Smart Income</b> — โอกาสรับ Income จาก Auto Redemption ผ่านกองทุน AIA-GAIF</li><li><b>Smooth Transfer</b> — คุ้มครอง 110% ส่งต่อถึงผู้รับประโยชน์ที่ระบุชื่อ</li><li><b>ไม่ต้องตอบคำถามสุขภาพ</b> — เหมาะกับผู้ที่ประวัติสุขภาพเป็นอุปสรรคต่อประกันทั่วไป</li><li><b>โบนัส 0.25%/ปี</b> ปีที่ 10 เป็นต้นไป พร้อมค่าบริหาร 0%</li><li><b>กองทุนปลายทางระดับโลก</b> 4 กอง ผู้จัดการปรับสัดส่วนได้ตามสภาวะตลาด</li><li><b>จ่ายเบี้ยเพียง 5 ปี</b> แล้วถือยาวเพื่อให้เงินทำงานต่อ</li><li>เหมาะกับ <b>เงินเย็น</b> ที่วางแผนถือ 10 ปีขึ้นไป</li></ul></div>
+<div class="kf-col c3"><span class="kf-step">ELITE INCOME</span><h3>Income คืออะไร?</h3><div class="kf-def"><b>Elite Income</b> คือ <b>โอกาสรับกระแสเงินสด</b> จากการที่กองทุน AIA-GAIF ประกาศ <b>รับซื้อคืนหน่วยลงทุนอัตโนมัติ (Auto Redemption)</b> เป็นรอบ ๆ — ไม่ต้องสั่งขายเอง</div><div class="kf-flow"><div>ชำระเบี้ย<br>เบี้ยหลัก</div><i>›</i><div>หักค่าธรรมเนียม<br>และค่าประกันภัย</div><i>›</i><div>ลงทุนผ่าน<br>AIA-GAIF</div><i>›</i><div>บลจ. ประกาศ<br>Auto Redemption</div><i>›</i><div>รับเงินเข้า<br>ตามเงื่อนไข</div></div><div class="kf-stats"><div><b>7 ครั้ง</b>Auto Redemption ต่อเนื่อง</div><div><b>~6.02%</b>สะสมตั้งแต่จัดตั้ง</div><div><b>~3%/ปี</b>เป้าหมาย (ไม่รับรอง)</div></div><div class="kf-not"><b>ข้อควรเข้าใจ:</b> เงินจาก Auto Redemption <b>ไม่ใช่เงินปันผล</b> · เอไอเอไม่รับรองการจ่าย อาจไม่มีการจ่ายในบางปี · ทำให้จำนวนหน่วยลงทุนลดลง · ผลตอบแทนเป็น USD แปลงเป็นบาท ไม่มีการป้องกันความเสี่ยงอัตราแลกเปลี่ยน</div></div>
+</div>
+<div class="kf-ft"><div><b>ข้อควรระวัง:</b> การลงทุนมีความเสี่ยง ผู้ลงทุนอาจไม่ได้รับเงินลงทุนคืนเต็มจำนวน | กรมธรรม์ไม่รับประกันเงินส่วนลงทุน | ผลการดำเนินงานในอดีตไม่ได้รับประกันผลตอบแทนในอนาคต | เป้าหมาย ~3% ต่อปีเป็นดุลยพินิจของ บลจ. ไม่ใช่การรับประกัน | ผู้ขอเอาประกันภัยควรศึกษาเงื่อนไข ความคุ้มครอง และความเสี่ยงก่อนตัดสินใจ</div><div class="r"><b>ข้อมูล ณ ก.ย. 2569</b><br>ที่มา: เอกสารผลิตภัณฑ์ AIA · AIAIMT</div></div>
+</div></div></div>
+<div id="kfPpage" class="kfpage" aria-hidden="true"><div id="kfPscale" class="kfscale"><div class="kf">
+<div class="kf-hd"><div class="kf-badge"><b>AIA</b><span>PREMIER</span></div><div><div class="kf-tag">KEY FEATURE · เงื่อนไขสำคัญ · จุดเด่น</div><div class="kf-title">AIA PREMIER INCOME<small>— Key Feature · Elite Income คืออะไร</small></div><div class="kf-pills"><span class="kf-pill">Unit-Linked · ชำระเบี้ย 10 ปี</span><span class="kf-pill">✔ พิจารณารับประกันแบบ GIO ไม่ต้องตอบคำถามสุขภาพ</span></div></div></div>
+<div class="kf-main">
+<div class="kf-col c1"><span class="kf-step">เงื่อนไขสำคัญ</span><h3>รู้ก่อนตัดสินใจ</h3><table><tr><td>ระยะชำระเบี้ย</td><td>10 ปี</td></tr><tr><td>เบี้ยหลักขั้นต่ำ</td><td>200,000 บาท/ปี</td></tr><tr><td>ความคุ้มครองชีวิต</td><td>110% ของเบี้ยหลักที่ชำระแล้ว</td></tr><tr><td>การรับประกัน</td><td>GIO เฉพาะสุขภาพ (การเงินพิจารณาปกติ)</td></tr><tr><td>ค่าบริหารกรมธรรม์</td><td>ปีที่ 1–14: 2.3%/ปี · ปีที่ 15+: ไม่มี</td></tr><tr><td>Performance Bonus</td><td>0.15%/ปี ของมูลค่ารับซื้อคืนหน่วยลงทุนของเบี้ยหลัก เมื่อชำระครบ ไม่ลดเบี้ย และกรมธรรม์มีผลอย่างน้อย 14 ปี</td></tr><tr><td>การถอนเงิน</td><td>มีค่าธรรมเนียมตามตาราง: ปี 1 = 85% ลดลงจนเป็น 0% ตั้งแต่ปีที่ 15</td></tr><tr><td>วงเงินสูงสุด</td><td>50 ล้านบาท/ชีวิต (รวมกับ Elite Income Prestige)</td></tr></table></div>
+<div class="kf-col c2"><span class="kf-step">KEY FEATURE · จุดเด่น</span><h3>ทำไมต้องแผนนี้</h3><ul><li><b>Start Building</b> — เริ่มย้ายเงินบางส่วนได้ที่เบี้ยหลัก 200,000 บาท/ปี</li><li><b>Smart Income</b> — โอกาสรับ Income จาก Auto Redemption ผ่านกองทุน AIA-GAIF</li><li><b>Smooth Transfer</b> — คุ้มครอง 110% ส่งต่อถึงผู้รับประโยชน์ที่ระบุชื่อ</li><li><b>ไม่ต้องตอบคำถามสุขภาพ</b> (GIO เฉพาะสุขภาพ)</li><li><b>กองทุนปลายทางระดับโลก</b> 4 กอง ผู้จัดการปรับสัดส่วนได้</li><li><b>ต่อยอดสู่ Elite Income Prestige</b> เมื่อพร้อมเพิ่มเงินออม</li><li>เหมาะกับ <b>เงินเย็น</b> ที่วางแผนถือระยะยาว (ค่าถอนสูงในปีแรก ๆ)</li></ul></div>
+<div class="kf-col c3"><span class="kf-step">ELITE INCOME</span><h3>Income คืออะไร?</h3><div class="kf-def"><b>Elite Income</b> คือ <b>โอกาสรับกระแสเงินสด</b> จากการที่กองทุน AIA-GAIF ประกาศ <b>รับซื้อคืนหน่วยลงทุนอัตโนมัติ (Auto Redemption)</b> เป็นรอบ ๆ — ไม่ต้องสั่งขายเอง</div><div class="kf-flow"><div>ชำระเบี้ย<br>เบี้ยหลัก</div><i>›</i><div>หักค่าธรรมเนียม<br>และค่าประกันภัย</div><i>›</i><div>ลงทุนผ่าน<br>AIA-GAIF</div><i>›</i><div>บลจ. ประกาศ<br>Auto Redemption</div><i>›</i><div>รับเงินเข้า<br>ตามเงื่อนไข</div></div><div class="kf-stats"><div><b>7 ครั้ง</b>Auto Redemption ต่อเนื่อง</div><div><b>~6.02%</b>สะสมตั้งแต่จัดตั้ง</div><div><b>~3%/ปี</b>เป้าหมาย (ไม่รับรอง)</div></div><div class="kf-not"><b>ข้อควรเข้าใจ:</b> เงินจาก Auto Redemption <b>ไม่ใช่เงินปันผล</b> · เอไอเอไม่รับรองการจ่าย อาจไม่มีการจ่ายในบางปี · ทำให้จำนวนหน่วยลงทุนลดลง · ผลตอบแทนเป็น USD แปลงเป็นบาท ไม่มีการป้องกันความเสี่ยงอัตราแลกเปลี่ยน</div></div>
+</div>
+<div class="kf-ft"><div><b>ข้อควรระวัง:</b> การลงทุนมีความเสี่ยง ผู้ลงทุนอาจไม่ได้รับเงินลงทุนคืนเต็มจำนวน | กรมธรรม์ไม่รับประกันเงินส่วนลงทุน | ผลการดำเนินงานในอดีตไม่ได้รับประกันผลตอบแทนในอนาคต | เป้าหมาย ~3% ต่อปีเป็นดุลยพินิจของ บลจ. ไม่ใช่การรับประกัน | ผู้ขอเอาประกันภัยควรศึกษาเงื่อนไข ความคุ้มครอง และความเสี่ยงก่อนตัดสินใจ</div><div class="r"><b>ข้อมูล ณ ก.ย.–พ.ย. 2569</b><br>ที่มา: เอกสารผลิตภัณฑ์ AIA Premier Income<br>ฉบับร่าง รอตรวจสอบโดย AIA Compliance</div></div>
+</div></div></div>
 <div id="viewSummary" style="display:none">
 <div class="sum-doc">
 
@@ -2427,6 +2658,7 @@ body.one-mode #eip1page .a4-landscape{box-shadow:0 12px 40px rgba(15,23,42,.25);
     fzDown.style.pointerEvents = sizeIdx === 0 ? 'none' : 'auto';
     fzUp.style.opacity   = sizeIdx === SIZES.length - 1 ? '.3' : '1';
     fzUp.style.pointerEvents = sizeIdx === SIZES.length - 1 ? 'none' : 'auto';
+    window.kfWant = SIZES[sizeIdx]/16; document.querySelectorAll('.kfpage .kf').forEach(k=>k.style.setProperty('--kfs',window.kfWant)); if(window.dispatchEvent) window.dispatchEvent(new Event('resize'));
     try { localStorage.setItem('eip_fz', sizeIdx); } catch(e) {}
   }
 
@@ -2541,41 +2773,54 @@ body.one-mode #eip1page .a4-landscape{box-shadow:0 12px 40px rgba(15,23,42,.25);
   onScroll();
 })();
 
-// === VIEW SWITCH: full report / print summary / one-page A4 landscape ===
+// === VIEW SWITCH: full / print summary / one-page A4 / Premier one-page ===
 (function(){
-  const bFull=document.getElementById('vsFull'), bSum=document.getElementById('vsSum'), bOne=document.getElementById('vsOne');
-  const vFull=document.getElementById('viewFull'), vSum=document.getElementById('viewSummary'), one=document.getElementById('eip1page'), scale=document.getElementById('eip1scale');
+  const bFull=document.getElementById('vsFull'), bSum=document.getElementById('vsSum'), bOne=document.getElementById('vsOne'), bPrem=document.getElementById('sbPrem');
+  const vFull=document.getElementById('viewFull'), vSum=document.getElementById('viewSummary');
+  const pages={one:['eip1page','eip1scale'],prem:['prem1page','prem1scale'],kfE:['kfEpage','kfEscale'],kfP:['kfPpage','kfPscale']};
   if(!bFull||!bSum||!vFull||!vSum) return;
   function landscapeStyle(on){
     let st=document.getElementById('land-page-style');
     if(on && !st){ st=document.createElement('style'); st.id='land-page-style'; st.textContent='@page{size:A4 landscape;margin:0}@page :first{margin:0}'; document.head.appendChild(st); }
     if(!on && st) st.remove();
   }
+  let current='full';
   function fit(){
-    if(!one||!scale||!document.body.classList.contains('one-mode')) return;
+    const pg=pages[current]; if(!pg) return;
+    const one=document.getElementById(pg[0]), scale=document.getElementById(pg[1]); if(!one||!scale) return;
     const avail=one.clientWidth-32, w=scale.offsetWidth||1123, k=Math.min(1,avail/w);
     scale.style.transform='scale('+k+')';
     scale.style.marginLeft=Math.max(0,(one.clientWidth-w*k)/2)+'px';
     scale.parentElement.style.height=(scale.firstElementChild.offsetHeight*k+60)+'px';
   }
   function show(mode){
-    const sum=mode==='sum', o=mode==='one';
-    vFull.style.display=(sum||o)?'none':'';
+    current=mode;
+    const sum=mode==='sum', o=mode==='one', pr=mode==='prem', ke=mode==='kfE', kp=mode==='kfP', land=o||pr||ke||kp;
+    vFull.style.display=(sum||land)?'none':'';
     vSum.style.display=sum?'':'none';
     bSum.classList.toggle('active',sum); bFull.classList.toggle('active',mode==='full');
     if(bOne) bOne.classList.toggle('active',o);
-    document.body.classList.toggle('summary-mode',sum);
-    document.body.classList.toggle('one-mode',o);
-    document.body.classList.toggle('print-land',o);
-    landscapeStyle(o);
+    if(bPrem) bPrem.classList.toggle('active',pr);
+    const B=document.body.classList;
+    B.toggle('summary-mode',sum); B.toggle('one-mode',o); B.toggle('prem-mode',pr); B.toggle('kfE-mode',ke); B.toggle('kfP-mode',kp);
+    ['sbKfE','sbKfP'].forEach(id=>{const b=document.getElementById(id); if(b) b.classList.toggle('active',(id==='sbKfE')?ke:kp);});
+    const kt=document.getElementById('kfBarT'); if(kt) kt.textContent=ke?'AIA Elite Income Prestige · Key Feature สรุป 1 หน้า A4 แนวนอน':'AIA Premier Income · Key Feature สรุป 1 หน้า A4 แนวนอน'; B.toggle('print-land',land);
+    landscapeStyle(land);
     window.scrollTo(0,0);
-    if(o) requestAnimationFrame(fit);
+    if(land) requestAnimationFrame(fit);
   }
   bFull.addEventListener('click',()=>show('full'));
   bSum.addEventListener('click',()=>show('sum'));
   if(bOne) bOne.addEventListener('click',()=>show('one'));
+  if(bPrem) bPrem.addEventListener('click',()=>show('prem'));
+  const kE=document.getElementById('sbKfE'), kP=document.getElementById('sbKfP');
+  if(kE) kE.addEventListener('click',()=>show('kfE')); if(kP) kP.addEventListener('click',()=>show('kfP'));
+  window.kfFitFont=function(){ /* shrink only if the 1-page layout overflows */
+    document.querySelectorAll('.kfpage .kf').forEach(k=>{ const want=window.kfWant||1; let v=want; k.style.setProperty('--kfs',v); const saveH=k.style.height; k.style.height='209.5mm'; k.style.minHeight='0'; let n=0; while(n++<25 && v>0.6 && (k.scrollHeight>k.clientHeight+1 || [...k.querySelectorAll('.kf-col')].some(c=>c.scrollHeight>c.clientHeight+1))){ v-=0.03; k.style.setProperty('--kfs',v.toFixed(2)); } k.style.height=saveH; k.style.minHeight=''; }); };
+  window.addEventListener('beforeprint',()=>{ if(window.kfFitFont) window.kfFitFont(); });
+  window.addEventListener('afterprint',()=>{ document.querySelectorAll('.kfpage .kf').forEach(k=>k.style.setProperty('--kfs',window.kfWant||1)); });
   ['sbPrint1','slPrint1'].forEach(id=>{const b=document.getElementById(id); if(b) b.addEventListener('click',()=>show('one'));});
-  const pb=document.getElementById('onePrintBtn'); if(pb) pb.addEventListener('click',()=>window.print());
+  ['onePrintBtn','premPrintBtn','kfPrintBtn'].forEach(id=>{const pb=document.getElementById(id); if(pb) pb.addEventListener('click',()=>window.print());});
   window.addEventListener('resize',fit);
 })();
 
